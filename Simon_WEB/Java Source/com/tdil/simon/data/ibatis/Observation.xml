@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Observation">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Observation" type="com.tdil.simon.data.model.Observation"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllObservationsForParagraph" parameterClass="int" resultClass="Observation">
+    select *
+    from Observation
+    where paragraphId = #id#
+    AND privateObservation = 0
+    order by creationDate
+  </select>
+  
+  <select id="selectAllObservationsForParagraphNotDeleted" parameterClass="int" resultClass="Observation">
+    select *
+   	from Observation 
+   	WHERE DELETED = 0
+   	AND paragraphId = #id#
+   	AND privateObservation = 0
+   	order by creationDate
+  </select>
+  
+  <select id="selectAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	Observation.*,
+    	SystemUser.username,
+    	SystemUser.name,
+    	Country.name as countryName
+   	from Paragraph, Observation, SystemUser, Country 
+   	WHERE Paragraph.versionId = #id#
+   	AND Paragraph.id = Observation.paragraphId
+   	AND Observation.userId = SystemUser.id
+   	AND Observation.privateObservation = 0
+   	AND SystemUser.countryId = Country.id
+   	AND Observation.DELETED = 0
+   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+  </select>
+  
+  <select id="searchObservations" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	Observation.*,
+    	SystemUser.username,
+    	SystemUser.name,
+    	Country.name as countryName
+   	from Paragraph, Observation, SystemUser, Country
+   	WHERE Paragraph.id = Observation.paragraphId
+   	AND Observation.userId = SystemUser.id
+   	AND Observation.privateObservation = 0
+   	AND SystemUser.countryId = Country.id
+   	AND Observation.DELETED = 0
+   	<isNotNull prepend="AND" property="countryId">
+    	(Country.id = #countryId#)
+    </isNotNull>
+    <isNotNull prepend="AND" property="dateMin">
+    	(Observation.creationDate &gt;= #dateMin#)
+    </isNotNull>
+    <isNotNull prepend="AND" property="dateMax">
+    	(Observation.creationDate &lt;= #dateMax#)
+    </isNotNull>
+   	<isNotNull prepend="AND" property="paragraphNumber">
+    	(Paragraph.paragraphNumber = #paragraphNumber#)
+    </isNotNull>
+   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+  </select>
+  
+  <select id="selectObservationById" parameterClass="int" resultClass="Observation">
+    select
+      *
+    from Observation
+    where id = #id#
+  </select>
+  
+  <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="Integer">
+    select
+      count(1)
+    from Observation, Paragraph, Version
+    where Version.status = 'IN_NEGOTIATION'
+    and Paragraph.versionId = Version.id
+    and Observation.paragraphId = Paragraph.id
+    and Observation.privateObservation = 1
+    and Observation.deleted = 0
+  </select>
+  
+  <select id="countPrivateObservationsForParagrapth" parameterClass="int" resultClass="Integer">
+    select
+      count(1)
+    from Observation
+    where Observation.paragraphId = #id#
+    and Observation.privateObservation = 1
+    and Observation.deleted = 0
+  </select>
+ 
+   <insert id="insertObservation" parameterClass="Observation">
+    insert into Observation (
+      ID, paragraphId, userId, addNewParagraph, privateObservation, creationDate, observationText, DELETED
+    ) values (
+      #id#, #paragraphId#, #userId#, #addNewParagraph#, #privateObservation#, #creationDate#, #observationText#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+  <update id="logDeleteObservation" parameterClass="Observation">
+    update Observation set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
+
+</sqlMap>
