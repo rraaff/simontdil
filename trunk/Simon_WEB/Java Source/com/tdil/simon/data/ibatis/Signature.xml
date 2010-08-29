@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Signature">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Signature" type="com.tdil.simon.data.model.Signature"/>
+
+  <!-- Select with no parameters. -->
+ 
+	<resultMap class="Signature" id="SignatureResult">
+    <result column="id" property="id" />
+    <result column="versionId" property="versionId" />
+    <result column="userId" property="userId" />
+    <result column="image" property="image" jdbcType="BLOB"/>
+    <result column="video" property="video" jdbcType="BLOB"/>
+    </resultMap>
+ 
+    <select id="getSignatureByVersionIdAndUserId" parameterClass="Signature" resultMap="SignatureResult">
+    SELECT * FROM SIGNATURE 
+    WHERE versionId = #versionId#
+    AND userId = #userId#
+    </select>
+ 
+ 
+  <insert id="insertSignature" parameterClass="Signature">
+    INSERT INTO SIGNATURE (
+		id, versionId, userId, image, video
+    )
+    values (
+    	#id#, #versionId#, #userId#, #image#, #video#
+    )
+  </insert>
+
+
+</sqlMap>

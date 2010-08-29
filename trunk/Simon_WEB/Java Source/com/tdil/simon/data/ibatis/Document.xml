@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Document">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Document" type="com.tdil.simon.data.model.Document"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllDocuments" resultClass="Document">
+    select *
+    from Document
+    order by title
+  </select>
+  
+  <select id="selectAllDocumentsNotDeleted" resultClass="Document">
+    select *
+   	from Document 
+   	WHERE DELETED = 0
+   	order by title
+  </select>
+  
+  
+  <select id="selectNotDeletedDocumentWithConsolidatedVersions" resultClass="Document">
+    select *
+   	from Document 
+   	WHERE DELETED = 0
+   	and EXISTS (SELECT * 
+   				FROM VERSION 
+   				WHERE VERSION.documentId = Document.id 
+   				AND VERSION.deleted = 0
+   				AND VERSION.status = 'CONSOLIDATED')
+   	order by title
+  </select>
+  <select id="selectDocumentById" parameterClass="int" resultClass="Document">
+    select
+      *
+    from Document
+    where id = #id#
+  </select>
+
+    <select id="selectPrincipalDocument" parameterClass="java.util.Map" resultClass="Document">
+    select
+      Document.*
+    from Document
+    where Document.PRINCIPAL = 1
+    and Document.deleted = 0
+    and Document.typeOne = #typeOne#
+    and Document.typeTwo = #typeTwo#
+  </select>
+   
+    <select id="selectDocumentForNegotiation" resultClass="Document">
+    select
+      Document.*
+    from Document
+    where Document.PRINCIPAL = 1
+    and Document.deleted = 0
+    and EXISTS (select * 
+    			from version  
+    			where Version.documentId = Document.ID
+    			and Version.STATUS = 'CONSOLIDATED'
+			    and Version.deleted = 0)
+  </select>
+  
+  <insert id="insertDocument" parameterClass="Document">
+    insert into DOCUMENT (
+      ID, TITLE, INTRODUCTION, PRINCIPAL, typeOne, typeTwo, DELETED
+    ) values (
+      #id#, #title#, #introduction#,#principal#,#typeOne#, #typeTwo#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+<update id="updateDocument" parameterClass="Document">
+    update DOCUMENT set
+      title= #title#, 
+	introduction = #introduction#,
+	principal= #principal#,
+	typeOne = #typeOne#, 
+	typeTwo = #typeTwo#, 
+	deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="removeAllPrincipal">
+    update DOCUMENT set
+      principal = 0
+    where
+      principal = 1
+  </update>
+  
+  <update id="updateAllAsNotPrincipal" parameterClass="java.util.Map">
+    update DOCUMENT set
+      principal = 0
+    where principal = 1
+    and typeOne = #typeOne#
+    and typeTwo = #typeTwo#
+  </update>
+
+  <update id="logDeleteDocument" parameterClass="Document">
+    update DOCUMENT set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
+
+</sqlMap>
