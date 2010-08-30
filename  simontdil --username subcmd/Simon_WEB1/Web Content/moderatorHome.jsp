@@ -22,28 +22,25 @@
 #content #centrador{
 	padding-left:130px;
 }
-
-.rowODD { background-color:#E5E5E5; }
-.rowEVEN { background-color:#F2F2F2; }
 -->
 </style>
-MOD:<%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%><br><br>
-DEL:<%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%><br><br>
-PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
+<div id="content">
+Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%><br>
+Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%><br>
+Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%>
 
 <% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
 	<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		<html:link action="/initSign" >Iniciar firmas</html:link><br><br>
+		<html:link action="/initSign" >Iniciar firmas</html:link>
 		<span id="privCount"><%=com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion()%></span>
 	<% } %>
 	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
 		En firmas, Debería haber un botón.
 	<% } %>
 	<% 	if(com.tdil.simon.data.model.Site.NORMAL.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		<html:link action="/initNegotiation" >Iniciar negociacion</html:link><br><br>
+		<html:link action="/initNegotiation" >Iniciar negociacion</html:link>
 	<% } %>
 <% } %>
-<div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
@@ -62,9 +59,7 @@ PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
 					<td width="274" height="82"><!-- corte tabla template -->
 						<div id="contentDocumentoPrincipal">
 							<logic:equal name="ModeratorHome" property="hasTypeOne" value="true"> 
-							<div><a href="vistaDocumento.html" class="titleDocInModule">
-							<!-- New code -->
-								<html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeOne.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeOne.documentTitle" /></html:link></div>
+								<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeOne.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeOne.documentTitle" /></html:link></div>
 								Versi&oacute;n: <bean:write name="ModeratorHome" property="typeOne.number" /> - <bean:write name="ModeratorHome" property="typeOne.name" /><br>
 								L&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeOne.limitObservationsString" />
 							</logic:equal>
@@ -81,7 +76,7 @@ PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
 			</table>
 		<!-- fin tabla template -->
 		<!-- separador -->
-		<div id="separador1Home"><img src="images/null.gif" width="1" height="66"><div>
+		<div id="separador1Home"><img src="images/null.gif" width="1" height="80"><div>
 		<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
@@ -91,15 +86,17 @@ PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDocB.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td width="274" height="82"><!-- corte tabla template -->
+					<td width="274" height="82">
+						<!-- corte tabla template -->
 						<div id="contentDocumentoPrincipal">
-						<logic:equal name="ModeratorHome" property="hasTypeTwo" value="true"> 
-							<html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeTwo.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeTwo.documentTitle" /></html:link><br>
+						<logic:equal name="ModeratorHome" property="hasTypeTwo" value="true">
+							<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeTwo.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeTwo.documentTitle" /></html:link></div>
 							Versi&oacute;n: <bean:write name="ModeratorHome" property="typeTwo.number" /> - <bean:write name="ModeratorHome" property="typeTwo.name" /><br>
 							L&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeTwo.limitObservationsString" />
 						</logic:equal>
 						</div>
-						<!-- corte tabla template --></td>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -123,17 +120,24 @@ PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="82"><!-- corte tabla template -->
+					<td width="274" height="280" valign="top"><!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
-							<logic:iterate name="ModeratorHome" property="otherDocumentsList" id="doc" indexId="referenceListIndex"> 
-							<table>
+							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
-									<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="doc" property="title" /></td>
-								</tr> 
+									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
+								</tr>
+								<logic:iterate name="ModeratorHome" property="otherDocumentsList" id="doc" indexId="referenceListIndex"> 
+									<tr> 
+										<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="doc" property="title" /></td>
+									</tr> 
+								</logic:iterate>
+								<tr> 
+									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
+								</tr>
 							</table>
-							</logic:iterate>
 						</div>
-						<!-- corte tabla template --></td>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -157,17 +161,24 @@ PUB:<%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%><br><br>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="82"><!-- corte tabla template -->
+					<td width="274" height="280" valign="top"><!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
-							<logic:iterate name="ModeratorHome" property="referenceList" id="ref" indexId="referenceListIndex"> 
-							<table>
-							<tr> 
-								<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
-							</tr> 
+							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
+								<tr> 
+									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
+								</tr>
+								<logic:iterate name="ModeratorHome" property="referenceList" id="ref" indexId="referenceListIndex"> 
+									<tr> 
+										<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
+									</tr> 
+								</logic:iterate>
+								<tr> 
+									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
+								</tr>
 							</table>
-							</logic:iterate>
-							</div>
-						<!-- corte tabla template --></td>
+						</div>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>

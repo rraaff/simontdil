@@ -536,3 +536,10 @@ tr.d0 td {
 tr.d1 td {
 	background-color: #F2F2F2;
 }
+
+.rowODD {
+	background-color:#E5E5E5;
+}
+.rowEVEN {
+	background-color:#F2F2F2;
+}
