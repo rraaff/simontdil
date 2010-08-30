@@ -2,6 +2,7 @@ package com.tdil.simon.pdf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -21,9 +22,13 @@ import org.xml.sax.SAXException;
 
 import com.lowagie.text.DocumentException;
 import com.tdil.simon.data.ibatis.ObservationDAO;
+import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
+import com.tdil.simon.data.model.Signature;
+import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
+import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 
 public class ExportVersionAsPDF {
@@ -46,27 +51,46 @@ public class ExportVersionAsPDF {
 		for (Paragraph p : version.getParagraphs()) {
 			buf.append("<p>").append(p.getParagraphNumber()).append(". ").append(p.getParagraphText()).append("</p>");
 		}
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-		buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
-		List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
-		buf.append("<table border=\"1\">");
-		for (Observation o : observations) {
-			ObservationVO vo = (ObservationVO)o;
-			buf.append("<TR><TD><TABLE><TR>");
-			buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
-			buf.append("</TR><TR>");
-			buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
-			buf.append("</TR><TR>");
-			buf.append("<TD>Delegado: ").append(vo.getName()).append("</TD>");
-			buf.append("</TR><TR>");
-			buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
-			buf.append("</TR></TABLE></TD>");
-			buf.append("<TD valign=\"top\">").append(vo.getObservationText()).append("</TD>");
+		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
+				Version.FINAL.equals(version.getVersion().getStatus())) {
+			List signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
+			buf.append("<table border=\"1\">");
+			for (Object signObj : signatures) {
+				SignatureVO signatureVO = (SignatureVO)signObj;
+				buf.append("<TR><TD><TABLE><TR>");
+				buf.append("<TD>Delegado: ").append(signatureVO.getDelegateName()).append("</TD>");
+				buf.append("</TR><TR>");
+				buf.append("<TD>Delegación: ").append(signatureVO.getCountryDescription()).append("</TD>");
+				buf.append("</TR><TR>");
+				buf.append("<TD>Posición: ").append(signatureVO.getJob()).append("</TD>");
+				buf.append("</TR></TABLE></TD>");
+				System.out.println(new File(".").getAbsolutePath()); 
+				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getUserId()).append("_").append(signatureVO.getVersionId()).append(".png\"></TD>");
+			}
+			buf.append("</table>");
+		} else {
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+			buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
+			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
+			buf.append("<table border=\"1\">");
+			for (Observation o : observations) {
+				ObservationVO vo = (ObservationVO)o;
+				buf.append("<TR><TD><TABLE><TR>");
+				buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
+				buf.append("</TR><TR>");
+				buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
+				buf.append("</TR><TR>");
+				buf.append("<TD>Delegado: ").append(vo.getName()).append("</TD>");
+				buf.append("</TR><TR>");
+				buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
+				buf.append("</TR></TABLE></TD>");
+				buf.append("<TD valign=\"top\">").append(vo.getObservationText()).append("</TD>");
+			}
+			buf.append("</table>");
 		}
-		buf.append("</table>");
 		buf.append("</body>");
 		buf.append("</html>");
-		
+		System.out.println(buf.toString());
 		ByteArrayOutputStream tidyOut = new ByteArrayOutputStream();
 		Tidy tidy = new Tidy(); 
 		tidy.setXHTML(true); 

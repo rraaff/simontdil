@@ -94,7 +94,13 @@
 			</div>
 			<input type="button" value="Mensaje al delegado" onclick="document.getElementById('addCommentLayer').style.display = '';">
 		</div>
-		<div id="signArea" style="display: none; width:100px; height: 100px;">Sign here</div>
+		<div id="signArea" style="display: none; width:100px; height: 100px;">
+			<embed src="swf/signaturator.swf" quality="high" width="800" height="600"
+		   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+		   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+		   pluginspage="http://www.adobe.com/go/getflashplayer">
+			</embed>
+		</div>
 	</body>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

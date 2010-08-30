@@ -40,6 +40,17 @@
     <url-pattern>*.st</url-pattern>
   </servlet-mapping>
 
+  <servlet>
+    <servlet-name>SignServlet</servlet-name>
+    <servlet-class>com.tdil.simon.web.SignServlet</servlet-class>
+    <load-on-startup>2</load-on-startup>
+  </servlet>
+  
+    <servlet-mapping>
+    <servlet-name>SignServlet</servlet-name>
+    <url-pattern>/sign.do</url-pattern>
+  </servlet-mapping>
+
   <taglib>
     <taglib-uri>/tags/struts-bean</taglib-uri>
     <taglib-location>/WEB-INF/struts-bean.tld</taglib-location>
