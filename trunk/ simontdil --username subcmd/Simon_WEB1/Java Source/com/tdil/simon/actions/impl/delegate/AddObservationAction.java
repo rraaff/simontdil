@@ -39,7 +39,7 @@ public class AddObservationAction extends AbstractAction implements Transactiona
 	
 	private SystemUser user;
 	
-	
+	 
 	public ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {
 		TransactionProvider.executeInTransaction(this);
 		return ActionResponse.newOKResponse();
