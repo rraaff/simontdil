@@ -3,33 +3,100 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
+<%@ include file="includes/header.jsp" %>
+<%@ include file="includes/menu.jsp" %>
 
 <html:html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=Cp1252"/>
-		<title></title>
-	</head>
-	<body>
-	
-		<a href="moderatorHome.jsp">Home</a><br>
-	
 		<html:errors property="general" />
 		<html:form method="POST" action="/createDocumentActionStep2">
-			title<html:text name="CreateDocumentForm" property="title"/><br>
-			<html:errors property="title" /><br>
-			Version: <bean:write name="CreateDocumentForm" property="versionNumber" />
-			Nombre version: <html:text name="CreateDocumentForm" property="versionName"/><br>
-			<html:errors property="versionName" /><br>
-			Is principal<html:checkbox name="CreateDocumentForm" property="principal"/><br>
-			dia<html:text name="CreateDocumentForm" property="limitObservationsDay"/><br>
-			mes<html:text name="CreateDocumentForm" property="limitObservationsMonth"/><br>
-			prop decl<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/>
-			plan de accion<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/><br>
-			
-			<html:submit property="operation">
-				<bean:message key="createDocument.next"/>
-			</html:submit>
+<div id="content">
+<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
+	</tr>
+	<tr>
+		<td width="960">
+			<table border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="500" height="19" align="left"><div id="blockTitle">Edición de documentos (Paso 1 de 4)</div></td>
+					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="500" height="144"><!-- corte tabla template -->
+						<table width="500" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td height="25" colspan="3"><p align="left">&nbsp;</p></td>
+							</tr>
+							<tr>
+								<td align="right" width="192">Titulo:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="301" align="left"><html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><html:errors property="title" /><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="192">Versi&oacute;n:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="301" align="left"><bean:write name="CreateDocumentForm" property="versionNumber" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right">Nombre de la versi&oacute;n:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="versionName" styleClass="textfield_effect"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><html:errors property="versionName" /><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right">L&iacute;mite para observaciones:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="limitObservationsDay" styleClass="textfield_effect_day"/> de <html:text name="CreateDocumentForm" property="limitObservationsMonth" styleClass="textfield_effect_month"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right">Tipo de documento:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td colspan="3"><div id="centrador" style="padding-left:120px;">
+									<html:submit property="operation">
+										<bean:message key="createDocument.next"/>
+									</html:submit>
+									<a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Introducci&oacute;n)</span></a>
+									<a class="button" href="moderatorHome.jsp"><span>Cancelar</span></a></div>
+								</td>
+							</tr>
+						</table>					
+						<!-- corte tabla template --></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
+	</tr>
+</table>
+</div>
 		</html:form>
-	</body>
 </html:html>
-
+<%@ include file="includes/footer.jsp" %>
