@@ -48,7 +48,7 @@
 									<html:submit property="operation">
 										<bean:message key="login.enter"/>
 									</html:submit>
-									<a class="button" href="am_home.html"><span>Ingresar</span></a>
+									<!--  a class="button" href="am_home.html"><span>Ingresar</span></a -->
 								</td>
 							</tr>
 						</table>
@@ -78,11 +78,10 @@
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="385" height="144"><!-- corte tabla template -->
 					<p>En caso de no recordar su contrase&ntilde;a, le sugerimos pedir un blanqu&eacute;o de la misma, haciendo clic  en el bot&oacute;n &ldquo;solicitar contrase&ntilde;a&rdquo;.</p><p>Si no recuerda su Usuario o la direcci&oacute;n de E-Mail utilizada para su registraci&oacute;n, comun&iacute;quese con ......</p>
-					<div id="centrador">
 						<html:submit property="operation">
 							<bean:message key="login.requestPassword"/>
 						</html:submit>
-						<a class="button" href="pedirnuevaclave.html"><span>Solicitar contase&ntilde;a</span></a></div>
+						<!--<div id="centrador"> a class="button" href="pedirnuevaclave.html"><span>Solicitar contase&ntilde;a</span></a </div>-->
 					<!-- corte tabla template -->
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>

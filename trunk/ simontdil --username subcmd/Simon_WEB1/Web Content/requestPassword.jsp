@@ -45,12 +45,11 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td colspan="2">
+								<td colspan="3">
 									<html:submit>
 										<bean:message key="requestPassword.request"/>
 									</html:submit>
-									<a class="button" href="pedirnuevaclave_error.html"><span>Solicitar contase&ntilde;a</span></a>
+									<!--  a class="button" href="pedirnuevaclave_error.html"><span>Solicitar contase&ntilde;a</span></a -->
 								</td>
 							</tr>
 							<tr>
