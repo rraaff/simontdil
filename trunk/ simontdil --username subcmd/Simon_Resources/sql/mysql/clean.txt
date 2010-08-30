@@ -1,0 +1,9 @@
+delete from `simon`.`COUNTRY`;
+delete from `simon`.`SYSTEMUSER`;
+delete from `simon`.`SITE`;
+delete from `simon`.`DOCUMENT`;
+delete from `simon`.`VERSION`;
+delete from `simon`.`PARAGRAPH`;
+delete from `simon`.`OBSERVATION`;
+update site set status = 'NORMAL';
+COMMIT;
