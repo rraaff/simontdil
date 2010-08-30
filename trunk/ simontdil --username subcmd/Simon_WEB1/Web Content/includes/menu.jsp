@@ -13,8 +13,8 @@
 			<li><a class="trigger" href="#">Administrador Moderador</a>
 				<ul>
 				<!--  Rsto no iria en la final  -->
-					<!-- li><html:link action="/goToSelectPrincipalDocument" >Seleccionar documento principal</html:link></li  -->
-					<li><a href="moderatorHome.jsp">Home de Moderador</a></li>
+					<li><html:link action="/goToSelectPrincipalDocument" >Seleccionar documento principal</html:link></li>
+					<li>Home de Moderador</li>
 					<li><html:link action="/createDocument" >Crear documento</html:link></li>
 					<li><html:link action="/goToListDocument" >Lista de documentos</html:link></li>
 					<li><a href="am_abmLibRef.html">ABM de Librer&eacute;a de Referencia</a></li>
