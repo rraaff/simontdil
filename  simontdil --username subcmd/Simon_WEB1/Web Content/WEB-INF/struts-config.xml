@@ -107,10 +107,12 @@
     </action>
     <action path="/addObservation" type="com.tdil.simon.struts.actions.moderator.AddObservationAction" scope="request">
     </action>
-    <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="request">
+    <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="session">
       <forward name="continue" path="/delegateNegotiation.jsp"/>
     </action>
     <action path="/getDelegateSiteStatus" type="com.tdil.simon.struts.actions.delegate.GetDelegateSiteStatus" scope="request">
+    </action>
+    <action path="/signVersion" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.SignVersionAction" scope="session">
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
