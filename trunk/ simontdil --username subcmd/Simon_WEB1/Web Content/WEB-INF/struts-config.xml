@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="LoginForm" type="com.tdil.simon.struts.forms.LoginForm"/>
+    <form-bean name="InitNegotiationForm" type="com.tdil.simon.struts.forms.InitNegotiationForm"/>
+    <form-bean name="NegotiateParagraphForm" type="com.tdil.simon.struts.forms.NegotiateParagraphForm"/>
+    <form-bean name="CreateDocumentForm" type="com.tdil.simon.struts.forms.CreateDocumentForm"/>
+    <form-bean name="ListDocument" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="RequestPaswwordForm" type="com.tdil.simon.struts.forms.RequestPasswordForm"/>
+    <form-bean name="ModeratorSite" type="com.tdil.simon.struts.forms.ModeratorSiteForm"/>
+    <form-bean name="SelectPrincipalDocument" type="com.tdil.simon.struts.forms.SelectPrincipalDocumentForm"/>
+    <form-bean name="ModeratorHome" type="com.tdil.simon.struts.forms.ModeratorHome"/>
+    <form-bean name="ViewVersion" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="ListObservations" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="DelegateNegotiation" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="DelegateNegotiationForm" type="com.tdil.simon.struts.forms.DelegateNegotiationForm"/>
+  </form-beans>
+  <global-forwards>
+    <forward name="ajaxReturn" path="/empty.jsp"/>
+  </global-forwards>
+  <action-mappings>
+    <action path="/login" name="LoginForm" type="com.tdil.simon.struts.actions.LoginAction" scope="session" input="/login.jsp">
+      <forward name="success" path="/success.jsp"/>
+      <forward name="failure" path="/login.jsp"/>
+      <forward name="admin" path="/adminHome.jsp"/>
+      <forward name="moderator" path="/goToModeratorHome.st"/>
+      <forward name="delegate" path="/goToDelegateHome.st"/>
+      <forward name="requestPassword" path="/requestPassword.jsp"/>
+    </action>
+    <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
+      <forward name="failure" path="/moderatorHome.jsp"/>
+      <forward name="success" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/readNegotiatedParagraph" name="NegotiateParagraphForm" type="com.tdil.simon.struts.actions.moderator.ReadParagraphUnderNegotiation" scope="request">
+      <forward name="success" path="/paragraphNegotiation.jsp"/>
+    </action>
+    <action path="/saveNegotiatedParagraph" name="NegotiateParagraphForm" type="com.tdil.simon.struts.actions.moderator.SaveNegotiatedParagraphAction" scope="request">
+      <forward name="stay" path="/paragraphNegotiation.jsp"/>
+    </action>
+    <action path="/createDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/createDocumentActionStep2" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionStep2" scope="session">
+      <forward name="continue" path="/createDocumentStep2.jsp"/>
+      <forward name="failure" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
+      <forward name="back" path="/createDocumentStep1.jsp"/>
+      <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
+    </action>
+    <action path="/paragraphNavigation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ParagraphsNavigationAction" scope="session">
+      <forward name="previous" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="next" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="preview" path="/previewDocument.jsp"/>
+      <forward name="stay" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="modifyIntroduction" path="/createDocumentStep2.jsp"/>
+    </action>
+    <action path="/countPrivateMessagesForVersion" type="com.tdil.simon.struts.actions.moderator.CountPrivateMessagesForVersion" scope="request">
+    </action>
+    <action path="/addPrivateMessage" type="com.tdil.simon.struts.actions.delegate.AddPrivateMessageForVersion" scope="request">
+    </action>
+    <action path="/previewDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.PreviewDocumentAction" scope="session">
+      <forward name="consolidate" path="/consolidateDocument.jsp"/>
+      <forward name="save" path="/previewDocument.jsp"/>
+      <forward name="editParagraphs" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="goHome" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
+      <forward name="save" path="/goToModeratorHome.st"/>
+    </action>
+    <action path="/goToListDocument" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.GoToListDocument" scope="session">
+      <forward name="continue" path="/listDocumentsForModerator.jsp"/>
+    </action>
+    <action path="/editVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.EditVersionAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/requestPassword" name="RequestPaswwordForm" type="com.tdil.simon.struts.actions.RequestPasswordAction" scope="request">
+    </action>
+    <action path="/setModSiteNormal" name="ModeratorSite" type="com.tdil.simon.struts.actions.admin.SetModeratorSiteNormal" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/setModSiteEvent" name="ModeratorSite" type="com.tdil.simon.struts.actions.admin.SetModeratorSiteEvent" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/selectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.SelectPrincipalDocumentAction" scope="request">
+      <forward name="home" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToSelectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.GoToSelectPrincipalDocument" scope="request">
+      <forward name="continue" path="/selectPrincipalDocument.jsp"/>
+    </action>
+    <action path="/initSign" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction">
+      <forward name="continue" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToModeratorHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
+      <forward name="continue" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToViewVersion" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+    </action>
+    <action path="/viewVersionAction" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
+    </action>
+    <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
+      <forward name="continue" path="/delegateHome.jsp"/>
+    </action>
+    <action path="/addObservation" type="com.tdil.simon.struts.actions.moderator.AddObservationAction" scope="request">
+    </action>
+    <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="request">
+      <forward name="continue" path="/delegateNegotiation.jsp"/>
+    </action>
+    <action path="/getDelegateSiteStatus" type="com.tdil.simon.struts.actions.delegate.GetDelegateSiteStatus" scope="request">
+    </action>
+  </action-mappings>
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+  <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+    <set-property property="moduleAware" value="true"/>
+  </plug-in>
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+  </plug-in>
+</struts-config>

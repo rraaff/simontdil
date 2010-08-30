@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Category">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Category" type="com.tdil.simon.data.model.Category"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllCategories" resultClass="Category">
+    select *
+    from Category
+    order by name
+  </select>
+  
+  <select id="selectAllCategoriesNotDeleted" resultClass="Category">
+    select *
+   	from Category
+   	WHERE DELETED = 0
+   	order by name
+  </select>
+  
+  <select id="selectAllCategoriesNotDeletedVO" resultClass="com.tdil.simon.data.valueobjects.CategoryVO">
+    select *
+   	from Category
+   	WHERE DELETED = 0
+   	order by name
+  </select>
+
+  <select id="selectCategoryById" parameterClass="int" resultClass="Category">
+    select
+      *
+    from Category
+    where id = #id#
+  </select>
+
+  <select id="selectCategoryByName" parameterClass="java.lang.String" resultClass="Site">
+    select
+      *
+    from Category
+    where name = #name#
+  </select>
+  
+  <insert id="insertCategory" parameterClass="Category">
+    insert into Category (
+      ID, NAME, DELETED
+    ) values (
+      #id#, #name#, #deleted#
+    )
+  </insert>
+
+  <update id="updateCategory" parameterClass="Category">
+    update Category set
+      NAME = #name#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteCategory" parameterClass="Category">
+    update Category set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
+  
+</sqlMap>
