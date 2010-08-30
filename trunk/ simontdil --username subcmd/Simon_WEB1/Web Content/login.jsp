@@ -11,7 +11,7 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="45"><img src="images/null.gif" width="1" height="45"></td>
+		<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
 	</tr>
 	<tr>
 		<td width="340">
