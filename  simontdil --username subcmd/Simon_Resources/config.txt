@@ -1,0 +1,4 @@
+Configuracion de tomcat con datasource
+
+Configuracion de mysql con max_allowed_packet = 5M
+Ver con nico

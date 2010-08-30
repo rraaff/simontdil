@@ -1,0 +1,7 @@
+Usar mysql (version, bajar y freezar)
+Bajar version de tomcat limpia, configurar (deshabilitar todo lo que haga falta) y freezar
+Generar war usando ant?
+Crear certificado (pedirle los datos a pablo).
+Export to pdf (que pasa con los estilos?).
+
+Quieren apache arriba del tomcat???
