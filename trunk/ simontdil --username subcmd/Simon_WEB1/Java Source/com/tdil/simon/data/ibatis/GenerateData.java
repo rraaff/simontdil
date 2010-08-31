@@ -14,7 +14,7 @@ public class GenerateData {
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException {
 		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml");
 		IBatisManager.sqlMapper.startTransaction();
-		
+
 		Country argentina = CountryDAO.getCountry("Argentina");
 		int countryId = 0;
 		if (argentina == null) {
@@ -39,7 +39,7 @@ public class GenerateData {
 			admin.setCountryDesc("REPUBLICA ARGENTINA");
 			SystemUserDAO.insertUser(admin);
 		}
-		
+
 		SystemUser mod = SystemUserDAO.getUser("Mod");
 		if (mod == null) {
 			mod = new SystemUser();
@@ -54,7 +54,7 @@ public class GenerateData {
 			mod.setCountryDesc("");
 			SystemUserDAO.insertUser(mod);
 		}
-		
+
 		SystemUser dele1 = SystemUserDAO.getUser("Dele1");
 		if (dele1 == null) {
 			dele1 = new SystemUser();
@@ -89,38 +89,49 @@ public class GenerateData {
 			dele2.setCountryDesc("");
 			SystemUserDAO.insertUser(dele2);
 		}
-		SystemUser dele12 = SystemUserDAO.getUser("Dele12");
-		if (dele12 == null) {
-			dele12 = new SystemUser();
-			dele12.setName("Dele12");
-			dele12.setUsername("Dele12");
-			dele12.setPassword("Dele12");
-			dele12.setAdministrator(false);
-			dele12.setModerator(false);
-			dele12.setDelegate(true);
-			dele12.setTypeOne(true);
-			dele12.setTypeTwo(true);
-			dele12.setCountryId(countryId);
-			dele12.setEmail("mod@tdil.com");
-			dele12.setJob("");
-			dele12.setCountryDesc("");
-			SystemUserDAO.insertUser(dele12);
+
+		for (int i = 0; i < 10; i++) {
+			SystemUser dele12 = SystemUserDAO.getUser("Dele-" + i + "-XY");
+			if (dele12 == null) {
+				dele12 = new SystemUser();
+				dele12.setName("Dele-" + i + "-XY");
+				dele12.setUsername("Dele-" + i + "-XY");
+				dele12.setPassword("Dele-" + i + "-XY");
+				dele12.setAdministrator(false);
+				dele12.setModerator(false);
+				dele12.setDelegate(true);
+				dele12.setCanSign(true);
+				dele12.setTypeOne(true);
+				dele12.setTypeTwo(true);
+				dele12.setCountryId(countryId);
+				dele12.setEmail("mod@tdil.com");
+				dele12.setJob("Jefe de distrito " + i);
+				dele12.setCountryDesc("Republica del Congo Belga");
+				SystemUserDAO.insertUser(dele12);
+			}
 		}
-		Site site = new Site();
-		site.setName(Site.DELEGATE);
-		site.setStatus(Site.NORMAL);
-		SiteDAO.insertSite(site);
-		
-		Site moderator = new Site();
-		moderator.setName(Site.MODERATOR);
-		moderator.setStatus(Site.NORMAL);
-		SiteDAO.insertSite(moderator);
-		
-		Site publicSite = new Site();
-		publicSite.setName(Site.PUBLIC);
-		publicSite.setStatus(Site.NORMAL);
-		SiteDAO.insertSite(publicSite);
-		
+		Site del = Site.getDELEGATE_SITE();
+		if (del == null) {
+			Site site = new Site();
+			site.setName(Site.DELEGATE);
+			site.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(site);
+		}
+
+		if (Site.getMODERATOR_SITE() == null) {
+			Site moderator = new Site();
+			moderator.setName(Site.MODERATOR);
+			moderator.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(moderator);
+		}
+
+		if (Site.getPUBLIC_SITE() == null) {
+			Site publicSite = new Site();
+			publicSite.setName(Site.PUBLIC);
+			publicSite.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(publicSite);
+		}
+
 		for (int i = 0; i < 15; i++) {
 			ReferenceDocument refDoc = new ReferenceDocument();
 			refDoc.setTitle("Cumbre + " + i);

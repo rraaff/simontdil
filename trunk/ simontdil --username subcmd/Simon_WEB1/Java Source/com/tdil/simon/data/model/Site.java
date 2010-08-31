@@ -19,6 +19,7 @@ public class Site extends PersistentObject {
 	
 	public static final String IN_NEGOTIATION = "IN_NEGOTIATION";
 	public static final String IN_SIGN = "IN_SIGN";
+	public static final String SIGN_SHOW = "SIGN_SHOW";
 	public static final String NORMAL = "NORMAL";
 	public static final String EVENT = "EVENT";
 	

@@ -114,6 +114,9 @@
     </action>
     <action path="/signVersion" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.SignVersionAction" scope="session">
     </action>
+    <action path="/goToSignShow" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToSignShowAction" scope="session">
+      <forward name="continue" path="/signatureShow.jsp"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>
