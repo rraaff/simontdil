@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.tdil.simon.data.model.Observation;
+import com.tdil.simon.data.valueobjects.ObservationSummaryVO;
 
 public class ObservationDAO {
 
@@ -39,8 +40,8 @@ public class ObservationDAO {
 	}
 	
 	/*******/
-	public static Integer countPrivateObservationsForVersionInNegotiation() throws SQLException {
-		return (Integer) IBatisManager.sqlMapper.queryForObject(
+	public static ObservationSummaryVO countPrivateObservationsForVersionInNegotiation() throws SQLException {
+		return (ObservationSummaryVO) IBatisManager.sqlMapper.queryForObject(
 				"countPrivateObservationsForVersionInNegotiation");
 	}
 	public static Integer countPrivateObservationsForParagrapth(int paragraphdId) throws SQLException {

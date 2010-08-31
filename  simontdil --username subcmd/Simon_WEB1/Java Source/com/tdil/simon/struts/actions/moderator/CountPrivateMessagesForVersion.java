@@ -15,6 +15,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.valueobjects.ObservationSummaryVO;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.ObservationUtils;
 
@@ -22,16 +23,19 @@ public class CountPrivateMessagesForVersion extends Action implements Transactio
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		HashMap hm = (HashMap)TransactionProvider.executeInTransaction(this, form);
+		Object hm = (Object)TransactionProvider.executeInTransaction(this, form);
 		JSONObject json = JSONObject.fromObject(hm);
 		response.setHeader("X-JSON", json.toString());
-		return mapping.findForward("ajaxReturn");
+		response.getOutputStream().write(json.toString().getBytes());
+		return null;
+//		return mapping.findForward("ajaxReturn");
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		HashMap hm = new HashMap();
-		String result = String.valueOf(ObservationUtils.countPrivateObservationsForNegotiatedVersion());
-		hm.put("count",result);
+		ObservationSummaryVO observationSummaryVO = ObservationUtils.countPrivateObservationsForNegotiatedVersion();
+		hm.put("count",String.valueOf(observationSummaryVO.getCount()));
+		hm.put("maxId",String.valueOf(observationSummaryVO.getMaxId()));
 		return hm;
 	}
 }
