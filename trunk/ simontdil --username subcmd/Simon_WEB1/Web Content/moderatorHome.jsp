@@ -76,7 +76,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 			</table>
 		<!-- fin tabla template -->
 		<!-- separador -->
-		<div id="separador1Home"><img src="images/null.gif" width="1" height="80"><div>
+		<div id="separador1Home"><img src="images/null.gif" width="1" height="87"><div>
 		<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
@@ -120,7 +120,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="280" valign="top"><!-- corte tabla template -->
+					<td width="274" height="280" valign="middle"><!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
 							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
@@ -128,7 +128,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 								</tr>
 								<logic:iterate name="ModeratorHome" property="otherDocumentsList" id="doc" indexId="referenceListIndex"> 
 									<tr> 
-										<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="doc" property="title" /></td>
+										<td height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="doc" property="title" /></td>
 									</tr> 
 								</logic:iterate>
 								<tr> 
