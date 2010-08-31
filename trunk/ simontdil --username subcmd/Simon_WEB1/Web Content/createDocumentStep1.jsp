@@ -54,6 +54,7 @@
 							<tr>
 								<td colspan="3" height="11"><html:errors property="versionName" /><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
+							Is principal<html:checkbox name="CreateDocumentForm" property="principal"/><br>
 							<tr>
 								<td align="right">L&iacute;mite para observaciones:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
