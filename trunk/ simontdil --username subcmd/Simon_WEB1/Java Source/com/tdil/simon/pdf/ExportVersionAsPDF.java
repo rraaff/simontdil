@@ -65,7 +65,7 @@ public class ExportVersionAsPDF {
 				buf.append("<TD>Posición: ").append(signatureVO.getJob()).append("</TD>");
 				buf.append("</TR></TABLE></TD>");
 				System.out.println(new File(".").getAbsolutePath()); 
-				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getUserId()).append("_").append(signatureVO.getVersionId()).append(".png\"></TD>");
+				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
 			}
 			buf.append("</table>");
 		} else {
