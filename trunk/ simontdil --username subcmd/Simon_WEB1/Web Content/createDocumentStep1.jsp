@@ -71,12 +71,12 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3"><div id="centrador" style="padding-left:120px;">
+								<td colspan="3">
 									<html:submit property="operation">
 										<bean:message key="createDocument.next"/>
 									</html:submit>
-									<a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Introducci&oacute;n)</span></a>
-									<a class="button" href="moderatorHome.jsp"><span>Cancelar</span></a></div>
+									<!--  div id="centrador" style="padding-left:120px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Introducci&oacute;n)</span></a>
+									<a class="button" href="moderatorHome.jsp"><span>Cancelar</span></a></div -->
 								</td>
 							</tr>
 						</table>					

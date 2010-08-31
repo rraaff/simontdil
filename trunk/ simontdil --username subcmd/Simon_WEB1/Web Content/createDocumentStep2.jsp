@@ -71,15 +71,10 @@
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td colspan="2">
-								<a class="button" href="pedirnuevaclave_error.html"><span>Anterior (Datos del Documento)</span></a>
-								
-		<html:submit property="operation">
-			<bean:message key="createDocument.back"/>
-		</html:submit>
-								
-								</td>
+								<td colspan="3"><!--<a class="button" href="pedirnuevaclave_error.html"><span>Anterior (Datos del Documento)</span></a> -->
+									<html:submit property="operation">
+										<bean:message key="createDocument.back"/>
+									</html:submit></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
@@ -126,7 +121,7 @@
 									<html:submit property="operation">
 										<bean:message key="createDocument.addParagraphs"/>
 									</html:submit>
-								<div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div></td>
+								<!--  div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div --></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>

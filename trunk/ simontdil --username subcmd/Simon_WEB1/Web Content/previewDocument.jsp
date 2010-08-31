@@ -36,9 +36,9 @@
 							<tr>
 								<td height="290" align="left" valign="top"><div id="previewDocumento">
 								<logic:iterate name="CreateDocumentForm" property="previewParagraphs" id="paragraph"> 
-								<pre> 
-									<%=paragraph%>
-								</pre> 
+								<!--  pre --> 
+									<p><%=paragraph%></p>
+								<!--  pre -->
 								</logic:iterate></div>
 								</td>
 							</tr>

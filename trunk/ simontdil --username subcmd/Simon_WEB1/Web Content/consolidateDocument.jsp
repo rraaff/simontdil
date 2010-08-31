@@ -63,7 +63,7 @@
 								<td colspan="3" align="center"><html:submit property="operation">
 													<bean:message key="createDocument.consolidate.save"/>
 												</html:submit>
-									<a class="button" href="moderatorHome.jsp"><span>Consolidar</span></a></td>
+									<!-- a class="button" href="moderatorHome.jsp"><span>Consolidar</span></a --></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
