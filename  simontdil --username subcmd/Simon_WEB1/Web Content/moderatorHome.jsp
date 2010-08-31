@@ -25,8 +25,8 @@
 -->
 </style>
 <div id="content">
-Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%><br>
-Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%><br>
+Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%> 
+Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%> 
 Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%>
 
 <% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
@@ -43,7 +43,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 <% } %>
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
+		<td colspan="5" height="5"><img src="images/null.gif" width="1" height="5"></td>
 	</tr>
 	<tr>
 		<td width="294">
@@ -161,7 +161,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="280" valign="top"><!-- corte tabla template -->
+					<td width="274" height="280" valign="middle"><!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
 							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
@@ -169,7 +169,7 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 								</tr>
 								<logic:iterate name="ModeratorHome" property="referenceList" id="ref" indexId="referenceListIndex"> 
 									<tr> 
-										<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
+										<td height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
 									</tr> 
 								</logic:iterate>
 								<tr> 
