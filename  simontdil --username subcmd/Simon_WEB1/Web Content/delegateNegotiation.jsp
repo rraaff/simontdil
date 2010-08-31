@@ -42,28 +42,33 @@
 			        if (sitestatus == 'NORMAL') {
 			        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
 			        } else {
-			        	if (sitestatus == 'IN_NEGOTIATION') {
-			        		var paragraphNumber = json.paragraphNumber;
-			        		var paragraphText = json.paragraphText;
-			        		if (paragraphNumber == "0") {
-			        			lastNumber = paragraphNumber;
-				        		lastText = paragraphText;
-				        		var divObj = document.getElementById("lastParagraphText");
-			        			divObj.innerHTML = "-";
-			        		} else {
-				        		if (lastNumber != paragraphNumber || lastText != paragraphText) {
-				        			var divObj = document.getElementById("lastParagraphText");
-				        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+				        if (sitestatus == 'SIGN_SHOW') {
+				        	window.location='<html:rewrite page="/goToSignShow.st"/>';
+				        } else {
+				        	if (sitestatus == 'IN_NEGOTIATION') {
+				        		var paragraphNumber = json.paragraphNumber;
+				        		var paragraphText = json.paragraphText;
+				        		if (paragraphNumber == "0") {
 				        			lastNumber = paragraphNumber;
-				        			lastText = paragraphText;
-				        		}
+					        		lastText = paragraphText;
+					        		var divObj = document.getElementById("lastParagraphText");
+				        			divObj.innerHTML = "-";
+				        		} else {
+				        			document.getElementById("addPrivateComment").disabled = false;
+					        		if (lastNumber != paragraphNumber || lastText != paragraphText) {
+					        			var divObj = document.getElementById("lastParagraphText");
+					        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+					        			lastNumber = paragraphNumber;
+					        			lastText = paragraphText;
+					        		}
+					        	}
+				        	} else {
+				        		var divObj = document.getElementById("negotiationArea");
+				        		divObj.style.display = 'none';
+				        		var divObj = document.getElementById("signArea");
+				        		divObj.style.display = '';
 				        	}
-			        	} else {
-			        		var divObj = document.getElementById("negotiationArea");
-			        		divObj.style.display = 'none';
-			        		var divObj = document.getElementById("signArea");
-			        		divObj.style.display = '';
-			        	}
+				        }
 			        }
 			      }
 			   });
@@ -89,16 +94,16 @@
 				<table>
 					<tr><td id="error"></td><tr>
 					<tr><td>observation<textarea id="pText"></textarea></td><tr>
-					<tr><td><input type="button" onclick="doAdd()" value="Agregar observacion"><input type="button" onclick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td><tr>
+					<tr><td><input type="button" onclick="doAdd()" value="Agregar observacion" ><input type="button" onclick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td><tr>
 				</table>
 			</div>
-			<input type="button" value="Mensaje al delegado" onclick="document.getElementById('addCommentLayer').style.display = '';">
+			<input type="button" value="Mensaje al delegado" id="addPrivateComment" disabled="true" onclick="document.getElementById('addCommentLayer').style.display = '';">
 		</div>
 		<div id="signArea" style="display: none; width:100px; height: 100px;">
 			<embed src="swf/signaturator.swf" quality="high" width="800" height="600"
-		   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
-		   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
-		   pluginspage="http://www.adobe.com/go/getflashplayer">
+			   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+			   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+			   pluginspage="http://www.adobe.com/go/getflashplayer">
 			</embed>
 		</div>
 	</body>

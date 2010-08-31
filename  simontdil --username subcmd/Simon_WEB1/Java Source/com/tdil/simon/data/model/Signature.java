@@ -32,5 +32,8 @@ public class Signature extends PersistentObject {
 	public void setVideo(byte[] video) {
 		this.video = video;
 	}
-	
+
+	public String getSignatureFileName() {
+		return this.getVersionId() + "_" + this.getUserId() + ".png";
+	}
 }

@@ -1,9 +1,12 @@
 package com.tdil.simon.struts.forms;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -17,6 +20,7 @@ import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 
 public class DelegateNegotiationForm extends ActionForm {
@@ -26,6 +30,7 @@ public class DelegateNegotiationForm extends ActionForm {
 	private SystemUser user;
 	private VersionVO versionVO;
 	private HttpServletRequest request;
+	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 
 	public SystemUser getUser() {
 		return user;
@@ -70,14 +75,43 @@ public class DelegateNegotiationForm extends ActionForm {
 		SignatureDAO.insertSignature(signature);
 		InputStream input = request.getInputStream();
 		// TODO deshardcodear
-		FileOutputStream fout = new FileOutputStream(signature.getUserId() + "_" + signature.getVersionId() +".png");
+		FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
+		FileOutputStream fout2 = new FileOutputStream("C:/icarus/workspace/simon/Simon_WEB/Web Content/signatures/" + signature.getSignatureFileName());
 		try {
 			IOUtils.copy(input, fout);
-		} catch (Exception e) {
 			fout.close();
-			e.printStackTrace();
+			FileInputStream finput = new FileInputStream(signature.getSignatureFileName());
+			IOUtils.copy(finput, fout2);
+		} finally {
+			try {
+				fout2.close();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		
+	}
+
+	public List<SignatureVO> getSignatures() {
+		return signatures;
+	}
+
+	public void setSignatures(List<SignatureVO> signatures) {
+		this.signatures = signatures;
+	}
+
+	public void searchSignatures() throws SQLException {
+		setSignatures(SignatureDAO.selectSignaturesFor(this.getVersionVO().getVersion().getId()));
+	}
+
+	public boolean contains(SignatureVO signatureVO) {
+		for (SignatureVO signatureVO2 : getSignatures()) {
+			if (signatureVO2.getUserId() == signatureVO.getUserId()) {
+				return true;
+			}
+		}
+		return false;
 	}
 	
 }

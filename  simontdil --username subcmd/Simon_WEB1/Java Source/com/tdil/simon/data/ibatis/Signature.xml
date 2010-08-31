@@ -23,6 +23,12 @@
     WHERE versionId = #versionId#
     AND userId = #userId#
     </select>
+    
+    <select id="getSignatureBy" parameterClass="java.util.Map" resultClass="Signature">
+    SELECT * FROM SIGNATURE 
+    WHERE versionId = #versionId#
+    AND userId = #userId#
+    </select>
  
  
   <insert id="insertSignature" parameterClass="Signature">
