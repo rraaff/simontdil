@@ -4,7 +4,6 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
-<%@ include file="includes/menu.jsp" %>
 <style type="text/css">
 /* hide from incapable browsers */
 div#sizer { display:none; }  
@@ -35,6 +34,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 
  -->
 	<%if (isModerator) { %>
+		<%@ include file="includes/menu.jsp" %>
 		<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
 			<html:submit property="operation">
 				<bean:message key="viewVersion.initNegotiation"/>
@@ -44,7 +44,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
+		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20" id="imgReferencia" name="imgReferencia"></td>
 	</tr>
 	<tr>
 		<td width="294" valign="top">
@@ -136,16 +136,33 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					});
 				}
 			</script>
-			<div id="addCommentLayer" style="display: none;">
-				<table>
-					<tr><td id="error"></td><tr>
-					<tr><td>parrafo<input type="text" id="pNumber"></td><tr>
-					<tr><td>new par<input type="checkbox" id="pNewParagraph"></td><tr>
-					<tr><td>observation<textarea id="pText"></textarea></td><tr>
-					<tr><td><input type="button" onclick="doAdd()" value="Agregar observacion"><input type="button" onclick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td><tr>
-				</table>
-			</div>
-			<input type="button" value="Añadir observacion" onclick="document.getElementById('addCommentLayer').style.display = '';">
+			
+			<!--div id="addCommentLayer" name="addCommentLayer" style="display: none;">
+			<table width="1000" height="1000" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center" valign="middle">
+						<table width="300" height="180" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+							<tr>
+								<td id="error"></td>
+							<tr>
+							<tr>
+								<td>parrafo<input type="text" id="pNumber"></td>
+							<tr>
+							<tr>
+								<td>new par<input type="checkbox" id="pNewParagraph"></td>
+							<tr>
+							<tr>
+								<td>observation<textarea id="pText"></textarea></td>
+							<tr>
+							<tr>
+								<td><input type="button" onclick="doAdd()" value="Agregar observacion"><input type="button" onclick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
+							<tr>
+						</table>
+					</td>
+				<tr>
+			</table>
+			</div-->
+			<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
 		</logic:equal>
 		<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
 			<html:submit property="operation" disabled="true">
@@ -238,6 +255,90 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	</tr>
 </table>
 </div>
-</html:form >
+</html:form>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
+<!--div id="linksBottom">
+	<div id="outerdiv">
+		<div id="text"></div>
+		<div id="contetTableComment">Mapa de Cobertura</div>
+	</div>
+</div-->
+<div id="outerdiv" style="display: none;">
+	<!-- div id="innerdiv" -->
+		<div id="innerdiv"></div>
+		<div id="contetTableComment">
+		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="center" valign="middle">
+					<table width="440" height="285" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td width="440" align="center" valign="top">
+								<!-- inicio tabla template -->
+								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+									<tr>
+										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
+										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+									</tr>
+									<tr>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="400">
+										<!-- corte tabla template -->
+											<table width="400" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
+												<tr>
+													<td colspan="3" id="error"></td>
+												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td width="150" align="right">Párrafo:</td>
+													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+													<td width="243" align="left"><input type="text" id="pNumber"></td>
+												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td align="right"><input type="checkbox" id="pNewParagraph"></td>
+													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+													<td align="left">Solicitar como nuevo párrafo</td>
+												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td align="right" valign="top">Observación: </td>
+													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+													<td align="left"><textarea id="pText" class="textfield_effect_area"></textarea></td>
+												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td colspan="3" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="document.getElementById('outerdiv').style.display = 'none';" value="Cancelar"></td>
+												<tr>
+											</table>
+										<!-- corte tabla template -->
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+									</tr>
+								</table>
+								<!-- fin tabla template -->
+							</td>
+						</tr>
+					</table>
+				</td>
+			<tr>
+		</table>
+		<!--/div -->
+	</div>
+</div>

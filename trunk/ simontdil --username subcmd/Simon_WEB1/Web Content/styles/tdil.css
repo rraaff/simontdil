@@ -274,7 +274,7 @@ h3 {
 	position: relative;
 }
 
-#content  #blockTitle {
+#blockTitle {
 	background-color: #FFFFFF;
 	width: auto;
 	padding-right: 4px;
@@ -570,4 +570,40 @@ tr.d1 td {
 }
 .rowEVEN {
 	background-color:#F2F2F2;
+}
+
+/* ### Tooltips ### */
+#outerdiv {
+	position:relative;
+	overflow:show;
+	z-index:100000;
+	margin-right: auto;
+	margin-left: auto;
+	height: 684px;
+	width: 980px;
+	margin-top: -584px;
+}
+/* Fading Tooltips */
+/*div#addCommentLayer {
+	position:absolute;
+	width:980px;
+	height: 390px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	float: none;
+
+	text-align:left;
+	z-index:100000;
+	background-color:#006699;
+}*/
+#innerdiv {position:absolute; width:980px; height:582px; background:#006699; }
+#innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
+#contetTableComment {
+	position:relative;
+	background:transparent;
+	clip: rect(0px,0px,0px,0px);
+	margin-right: auto;
+	margin-left: auto;
 }
