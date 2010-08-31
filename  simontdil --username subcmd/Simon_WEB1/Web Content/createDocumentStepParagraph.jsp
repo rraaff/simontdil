@@ -113,7 +113,7 @@
 					<td width="420" height="144"><!-- corte tabla template -->
 						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="7" height="27"><html:errors property="general" /><img src="images/null.gif" width="1" height="27"></td>
+								<td colspan="7" height="11"><html:errors property="general" /><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td width="70" align="right" valign="top">Párrafo:</td>
@@ -197,7 +197,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="7" height="27"><img src="images/null.gif" width="1" height="27"></td>
+								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template --></td>
