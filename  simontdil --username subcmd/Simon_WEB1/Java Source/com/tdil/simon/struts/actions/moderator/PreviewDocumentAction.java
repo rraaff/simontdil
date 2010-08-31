@@ -23,6 +23,7 @@ public class PreviewDocumentAction extends SimonAction {
 			return mapping.findForward("editParagraphs");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.save"))) {
+			createDocumentForm.setVersionStatus(Version.DRAFT);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
