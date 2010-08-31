@@ -50,7 +50,7 @@
 		<script type="text/javascript">
 			function alreadyDisplayed(signName) {
 				var index = 0;
-				while(index < lastSignatureIndex) {
+				while(index <= lastSignatureIndex) {
 					if (signatureArray[index] == signName) {
 						return true;
 					}
@@ -69,7 +69,6 @@
 			        	// TODO manejar variable de bloqueo
 			        	var i = 0;
 			        	while(i < json.delegates.length) {
-			        		alert(json.fileNames[i]);
 			        		if (!alreadyDisplayed(json.fileNames[i])) {
 				        		var myTable = document.getElementById("signTable");
 								var tBody = myTable.getElementsByTagName("TBODY")[0];
@@ -100,7 +99,7 @@
 			      }
 			   });
 			}
-			//timer = setInterval("getSignatures()",10000);
+			timer = setInterval("getSignatures()",10000);
 		</script>
 	</body>
 </html:html>
