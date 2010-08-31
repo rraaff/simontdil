@@ -126,6 +126,16 @@ h3 {
 	border-bottom-color: #4f7c94;
 	border-left-color: #4f7c94;
 }
+
+#header #blockinHeaderDelegate {
+	background-color: #FFFFFF;
+	height: 76px;
+	width: 500px;
+	float: right;
+	position: relative;
+}
+
+
 /* ### Buttons ###*/
 #header #blockinHeader .clear { /* generic container (i.e. div) for floating buttons */
     overflow: hidden;
