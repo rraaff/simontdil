@@ -7,13 +7,23 @@
 <%@ include file="includes/menu.jsp" %>
 
 <html:html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=Cp1252"/>
-		<title></title>
-	</head>
-	<body>
-	
-	</body>
+<div id="content">
+<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
+	</tr>
+	<tr>
+		<td width="294" height="300">
+			<!-- inicio tabla template -->
+			Usuario T&eacute;cnico: seleccione una actividad del men&uacute;.
+			<!-- fin tabla template -->
+		</td>
+	</tr>
+	<tr>
+		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
+	</tr>
+</table>
+</div>
 </html:html>
 
 <%@ include file="includes/footer.jsp" %>
