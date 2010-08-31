@@ -79,9 +79,9 @@
     where id = #id#
   </select>
   
-  <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="Integer">
+  <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
     select
-      count(1)
+      count(1) as count, max(Observation.id) as maxId
     from Observation, Paragraph, Version
     where Version.status = 'IN_NEGOTIATION'
     and Paragraph.versionId = Version.id

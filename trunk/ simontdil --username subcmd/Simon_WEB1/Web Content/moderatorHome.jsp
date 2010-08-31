@@ -6,17 +6,6 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 <html:html>
-<script type="text/javascript">
-	function refreshPrivateMessages() {
-		new Ajax.Request('<html:rewrite page="/countPrivateMessagesForVersion.st"/>', {
-		onComplete: function(transport, json) {
-			var value = json.count;
-			 document.getElementById('privCount').innerHTML = value;
-		  }
-	   });
-	}
-	timer = setInterval("refreshPrivateMessages()",1000);
-</script>
 <style type="text/css">
 <!--
 #content #centrador{

@@ -8,7 +8,6 @@
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
-<script type="text/javascript" src="./scripts/prototype.js" ></script>
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
 <!--[if lte IE 7]>
@@ -27,6 +26,7 @@ a:active {width: auto;}
 
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="./scripts/prototype.js" ></script>
 <style type="text/css">
 <!--
 #content #centrador{
@@ -34,6 +34,8 @@ a:active {width: auto;}
 }
 -->
 </style>
+<link href="styles/notimoo-v1.css" rel="stylesheet" type="text/css"/>
+
 </head>
 <body onLoad="P7_ExpMenu();">
 <div id="header">
@@ -49,7 +51,7 @@ a:active {width: auto;}
 					<div id="userLogued">
 						<table width="320" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td width="280" align="left">[insertar nombre de usuario]</td>
+								<td width="280" align="left"><%= user.getName() %></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 								<td>[Insertar bandera de la delegación]<!-- img src="images/others/banderaArgentina.png" width="30" height="30"> --></td>
 							</tr>
@@ -58,7 +60,7 @@ a:active {width: auto;}
 				</td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="150" align="right">Estado de la negociaci&oacute;n<br>
-				<span class="remarcado">Mensajes Privados: 1</span></td>
+				<span class="remarcado">Mensajes Privados: </span><span class="remarcado" id="privateMessagesCount">-</span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
@@ -70,6 +72,35 @@ a:active {width: auto;}
 			</tr>
 		</table>
 	</div>
+	
 	<div id="siteSeccion"><img src="images/null.gif" alt="Zona Restringida" width="187" height="60"></div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
 </div>
+<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+	<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+		<% if (isModerator) {
+				com.tdil.simon.data.valueobjects.ObservationSummaryVO summary = com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion(); 
+		%>
+		<script type="text/javascript">
+		var notimooManager = new Notimoo();
+		
+			var maxId = <%= summary.getMaxId()%>;
+			
+			function refreshPrivateMessages() {
+				var jsonRequest = new Request.JSON({url: '<html:rewrite page="/countPrivateMessagesForVersion.st"/>', onSuccess: function(privMessages, responseText){
+				    document.getElementById('privateMessagesCount').innerHTML = privMessages.count;
+				    if(privMessages.maxId != maxId) {
+				    	maxId = privMessages.maxId;
+				    	notimooManager.show({
+							title: 'Mensajes Privados',
+							message: 'Usted ha recibido nuevo/s mensajes privados.'
+						});
+				    }
+				}}).get();
+			}
+			timer = setInterval("refreshPrivateMessages()",1000);
+			
+		</script>
+		<% } %>
+	<% } %>
+<% } %>
