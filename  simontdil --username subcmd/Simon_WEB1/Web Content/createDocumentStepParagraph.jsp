@@ -79,12 +79,11 @@
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td colspan="2">
+								<td colspan="3">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
 								</html:submit>
-								<a class="button" href="#"><span>Anterior (Editar Introducción)</span></a></td>
+								<!-- a class="button" href="#"><span>Anterior (Editar Introducción)</span></a --></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
@@ -191,7 +190,7 @@
 								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="7"><div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div>
+								<td colspan="7"><!-- div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div -->
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.preview"/>
 								</html:submit>								
