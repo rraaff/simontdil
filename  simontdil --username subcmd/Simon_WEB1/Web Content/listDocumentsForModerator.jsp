@@ -33,9 +33,9 @@
 							</tr>
 							<tr>
 								<td height="20">Documento</td>
-								<td>Version</td>
+								<td>Versión</td>
 								<td>Estado</td>
-								<td>Nombre de version</td>
+								<td>Nombre de Versión</td>
 								<td>Observaciones</td>
 								<td>Cantidad de observaciones</td>
 								<td>Editar</td>
