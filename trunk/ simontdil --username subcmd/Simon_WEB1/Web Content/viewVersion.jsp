@@ -5,7 +5,30 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
+<style type="text/css">
+/* hide from incapable browsers */
+div#sizer { display:none; }  
+/* breathing room between images in sizer */
+div#sizer img { margin-right:3px; }
+
+div#main { background-color:#eee; }  
+</style>
+<script src="scripts/dw_event.js" type="text/javascript"></script>
+<script src="scripts/dw_cookies.js" type="text/javascript"></script>
+<script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
+<script type="text/javascript">
+// setDefaults arguments: size unit, default size, minimum, maximum
+// optional array of elements or selectors to apply these defaults to
+dw_fontSizerDX.setDefaults("px", 13, 9, 26, ['div#main p.article'] );
+
+// set arguments: default size, minimum, maximum
+// array of elements or selectors to apply these settings to
+dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
+
+dw_Event.add( window, 'load', dw_fontSizerDX.init );
+</script>
 <html:html>
+
 <html:form action="/viewVersionAction">
 <!-- 	<a href="./goToModeratorHome.st">Home</a><br>
 	<a href="./goToDelegateHome.st">Home</a><br>
@@ -56,7 +79,7 @@
 			</table>
 		<!-- fin tabla template -->
 		<!-- separador -->
-		<div id="separador1Home"><img src="images/null.gif" width="1" height="10"><div>
+		<div id="separador1Home"><img src="images/null.gif" width="1" height="16"><div>
 <!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
@@ -70,17 +93,17 @@
 					<td width="274"><!-- corte tabla template -->
 						<table width="274" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td align="right" width="130" height="30"><span style="font-size: 10px;">Versiones anteriores:</span></td>
+								<td align="right" width="50" height="30"><span style="font-size: 10px;">Anteriores:</span></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="137" valign="middle"><div id="portaVersiones">
+								<td width="217" align="left" valign="middle"><div id="portaVersiones"><!--
 									<table border="0">
 										<tr>
-											<logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion"> 
-												<td><html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link></td>
-											</logic:iterate>
+											--><logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion"><!--
+												<td --><html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>&nbsp;<!-- </td>
+											--></logic:iterate><!--
 										</tr>
 									</table>
-								</div></td>
+								--></div></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
@@ -183,11 +206,13 @@
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="608" height="284" align="left" valign="top">
 					<!-- corte tabla template -->
+					<div id="main">
 						<div id="documentoCompleto">
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-							<p><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p> 
+							<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p> 
 							</logic:iterate>
 						</div>
+					</div>
 					<!-- corte tabla template --></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
@@ -195,7 +220,7 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="608" height="30"><div align="right"><input type="button" onclick="document.body.style.fontSize = '16px'" value="Incrementar tamaño"><img src="images/null.gif" width="10" height="20"><input type="button" onclick="document.body.style.fontSize='10px'" value="Tamaño original"></div></td>
+					<td width="608" height="30"><div id="sizer" align="right"><a class="increase" href="#" title="Increase text size"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Decrease text size"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Restore default font-sizes"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
