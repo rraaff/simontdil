@@ -91,7 +91,8 @@
     select VERSION.*, Document.title as documentTitle,
     (SELECT count(1) 
     	FROM Observation 
-    	WHERE Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount
+    	WHERE Observation.privateObservation = 0 
+    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount
    	from VERSION, Document
    	WHERE VERSION.DELETED = 0
    	AND VERSION.documentId = Document.id

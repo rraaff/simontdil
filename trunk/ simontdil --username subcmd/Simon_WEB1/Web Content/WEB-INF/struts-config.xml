@@ -72,6 +72,7 @@
     </action>
     <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
       <forward name="save" path="/goToModeratorHome.st"/>
+      <forward name="cancel" path="/createDocumentStepParagraph.jsp"/>
     </action>
     <action path="/goToListDocument" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.GoToListDocument" scope="session">
       <forward name="continue" path="/listDocumentsForModerator.jsp"/>

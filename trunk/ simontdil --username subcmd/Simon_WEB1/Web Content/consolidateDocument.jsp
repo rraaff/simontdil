@@ -29,7 +29,10 @@
 </head>
 <body>
 <html:form method="POST" action="/consolidateDocument">
-<!-- Necesitaría un cancel, que vuelva al paso anterior -->
+<!-- Necesitaría un cancel, que vuelva al paso anterior LO_TENES  -->
+<html:submit property="operation">
+	<bean:message key="createDocument.consolidate.cancel"/>
+</html:submit>
 <div id="content">
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#40708C">
 	<tr>
