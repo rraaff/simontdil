@@ -270,4 +270,4 @@ var signHTML = '<embed src="swf/SimonSignaturator.swf" quality="high" width="300
 </table>
 </div>
 </html:html>
-<%@ include file="includes/footer.jsp" %>
+<!-- %@ include file="includes/footer.jsp" %  -->
