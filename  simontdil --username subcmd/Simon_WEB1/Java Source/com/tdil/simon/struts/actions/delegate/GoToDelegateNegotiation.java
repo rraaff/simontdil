@@ -27,7 +27,10 @@ public class GoToDelegateNegotiation extends SimonAction {
 				negotiationForm.init();
 			}
 		});
-		
-		return mapping.findForward("continue");
+		if (negotiationForm.isGoToSignShow()) {
+			return mapping.findForward("signShow");
+		} else {
+			return mapping.findForward("continue");
+		}
 	}
 }

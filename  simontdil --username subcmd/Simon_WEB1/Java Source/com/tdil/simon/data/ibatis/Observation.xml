@@ -27,6 +27,23 @@
    	order by creationDate
   </select>
   
+  <select id="selectNotDeletedPrivateObservationsForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	Observation.*,
+    	SystemUser.username,
+    	SystemUser.name,
+    	Country.name as countryName,
+    	Paragraph.paragraphNumber as paragraphNumber
+   	from Paragraph, Observation, SystemUser, Country 
+   	WHERE Paragraph.versionId = #id#
+   	AND Paragraph.id = Observation.paragraphId
+   	AND Observation.userId = SystemUser.id
+   	AND Observation.privateObservation = 1
+   	AND SystemUser.countryId = Country.id
+   	AND Observation.DELETED = 0
+   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+  </select>
+  
   <select id="selectAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
     select 
     	Observation.*,
@@ -109,6 +126,13 @@
      SELECT LAST_INSERT_ID() AS id
    </selectKey>
   </insert>
+  
+  <update id="logDeleteObservationById" parameterClass="int">
+    update Observation set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
 
   <update id="logDeleteObservation" parameterClass="Observation">
     update Observation set

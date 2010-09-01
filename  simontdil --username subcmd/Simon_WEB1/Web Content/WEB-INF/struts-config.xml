@@ -15,6 +15,8 @@
     <form-bean name="ListObservations" type="com.tdil.simon.struts.forms.ListForm"/>
     <form-bean name="DelegateNegotiation" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
     <form-bean name="DelegateNegotiationForm" type="com.tdil.simon.struts.forms.DelegateNegotiationForm"/>
+    <form-bean name="ListPrivate" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="DeleteObservation" type="com.tdil.simon.struts.forms.DeleteObservationForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -27,6 +29,8 @@
       <forward name="moderator" path="/goToModeratorHome.st"/>
       <forward name="delegate" path="/goToDelegateHome.st"/>
       <forward name="requestPassword" path="/requestPassword.jsp"/>
+      <forward name="negotiation" path="/goToDelegateNegotiation.st"/>
+      <forward name="signShow" path="/goToSignShow.st"/>
     </action>
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
@@ -109,6 +113,7 @@
     </action>
     <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="session">
       <forward name="continue" path="/delegateNegotiation.jsp"/>
+      <forward name="signShow" path="/goToSignShow.st"/>
     </action>
     <action path="/getDelegateSiteStatus" type="com.tdil.simon.struts.actions.delegate.GetDelegateSiteStatus" scope="request">
     </action>
@@ -116,6 +121,12 @@
     </action>
     <action path="/goToSignShow" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToSignShowAction" scope="session">
       <forward name="continue" path="/signatureShow.jsp"/>
+    </action>
+    <action path="/goToListPrivateObservations" name="ListPrivate" type="com.tdil.simon.struts.actions.moderator.GoToListPrivateObservations" scope="request">
+      <forward name="continue" path="/listPrivateObservationsForVersion.jsp"/>
+    </action>
+    <action path="/deletePrivateObservation" name="DeleteObservation" type="com.tdil.simon.struts.actions.moderator.DeletePrivateObservationAction" scope="request">
+      <forward name="continue" path="/goToListPrivateObservations.st"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

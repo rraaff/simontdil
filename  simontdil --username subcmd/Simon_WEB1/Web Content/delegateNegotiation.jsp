@@ -55,6 +55,30 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	}
 </script>
 <script type="text/javascript">
+var signAreaShowed = false;
+var signHTML = '<embed src="swf/signaturator.swf" quality="high" width="300" height="200"' + 
+   'flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"' + 
+   'play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"' + 
+   'pluginspage="http://www.adobe.com/go/getflashplayer">' + 
+'</embed>'
+	function showSignArea() {
+		if (!signAreaShowed) {
+			signAreaShowed = true;
+			var myTable = document.getElementById("workTable");
+			var tBody = myTable.getElementsByTagName("TBODY")[0];
+			var newTR = document.createElement('tr');
+			var dateTD = document.createElement('td');
+			dateTD.innerHTML = signHTML;
+			dateTD.className = "BorderRigth";
+			dateTD.width = "300";
+			dateTD.height = "200";
+			dateTD.align="center";
+			newTR.appendChild (dateTD);
+			tBody.appendChild(newTR);
+		}
+	}
+</script>
+<script type="text/javascript">
 	var lastNumber = "";
 	var lastText = "";
 	function getDelegateSiteStatus() {
@@ -87,8 +111,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		        	} else {
 		        		var divObj = document.getElementById("negotiationArea");
 		        		divObj.style.display = 'none';
-		        		var divObj = document.getElementById("signArea");
-		        		divObj.style.display = '';
+		        		//var divObj = document.getElementById("signArea");
+		        		//divObj.style.display = '';
+		        		showSignArea();
 		        	}
 		        }
 	        }
@@ -184,7 +209,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="274">
 						<!-- corte tabla template -->
-						<table width="274" border="0" cellspacing="0" cellpadding="0">
+						<table width="274" border="0" cellspacing="0" cellpadding="0" id="workTable">
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
@@ -210,18 +235,20 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 								<td colspan="3" height="25" align="center"><input type="button" value="Mensaje al delegado" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11">
-								<div id="signArea">
-									<embed src="swf/signaturator.swf" quality="high" width="800" height="600"
-									   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
-									   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
-									   pluginspage="http://www.adobe.com/go/getflashplayer">
-									</embed>
-								</div></td>
-							</tr>
-							<tr>
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
 							</tr>
+							<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+								<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+								<tr>
+									<td colspan="3" height="11">
+										<script type="text/javascript">
+											signAreaShowed = true;
+											document.write(signHTML);
+										</script>
+									</td>
+								</tr>
+								<% } %>
+							<% } %>
 						</table>					
 						<!-- corte tabla template -->
 					</td>
