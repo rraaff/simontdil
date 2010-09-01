@@ -34,7 +34,9 @@ public class AddPrivateMessageForVersion extends SimonAction implements Transact
 		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, new PrivateMessageForm(null, null, message));
 		JSONObject json = JSONObject.fromObject(result);
 		response.setHeader("X-JSON", json.toString());
-		return mapping.findForward("ajaxReturn");
+		response.getOutputStream().write(json.toString().getBytes());
+		return null;
+//		return mapping.findForward("ajaxReturn");
 
 	}
 	

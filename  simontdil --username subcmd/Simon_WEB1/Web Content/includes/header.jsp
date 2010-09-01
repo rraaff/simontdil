@@ -26,7 +26,8 @@ a:active {width: auto;}
 
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="./scripts/prototype.js" ></script>
+<script type="text/javascript" src="./scripts/mootools-1.js" ></script>
+<script type="text/javascript" src="./scripts/notimoo-v1.js" ></script>
 <style type="text/css">
 <!--
 #content #centrador{
@@ -83,10 +84,8 @@ a:active {width: auto;}
 		%>
 		<script type="text/javascript">
 		var notimooManager = new Notimoo();
-		
 			var maxId = <%= summary.getMaxId()%>;
-			
-			function refreshPrivateMessages() {
+			function refreshPrivateMessages() {		
 				var jsonRequest = new Request.JSON({url: '<html:rewrite page="/countPrivateMessagesForVersion.st"/>', onSuccess: function(privMessages, responseText){
 				    document.getElementById('privateMessagesCount').innerHTML = privMessages.count;
 				    if(privMessages.maxId != maxId) {
@@ -99,7 +98,6 @@ a:active {width: auto;}
 				}}).get();
 			}
 			timer = setInterval("refreshPrivateMessages()",1000);
-			
 		</script>
 		<% } %>
 	<% } %>

@@ -43,8 +43,10 @@ public class AddObservationAction extends SimonAction implements TransactionalAc
 		// TODO Try catch y devolver error
 		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, observationForm);
 		JSONObject json = JSONObject.fromObject(result);
-		response.setHeader("X-JSON", json.toString());
-		return mapping.findForward("ajaxReturn");
+		response.getOutputStream().write(json.toString().getBytes());
+		return null;
+//		response.setHeader("X-JSON", json.toString());
+//		return mapping.findForward("ajaxReturn");
 
 	}
 	
