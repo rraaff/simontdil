@@ -29,10 +29,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <html:html>
 
 <html:form action="/viewVersionAction">
-<!-- 	<a href="./goToModeratorHome.st">Home</a><br>
-	<a href="./goToDelegateHome.st">Home</a><br>
-
- -->
 	<%if (isModerator) { %>
 		<%@ include file="includes/menu.jsp" %>
 		<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
@@ -215,7 +211,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 			<table width="608" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><img src="images/titles/documentosSecundarios.gif" alt="Ingreso al Sitio" width="154" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><div id="blockTitle">Documento</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
