@@ -56,7 +56,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </script>
 <script type="text/javascript">
 var signAreaShowed = false;
-var signHTML = '<embed src="swf/signaturator.swf" quality="high" width="300" height="200"' + 
+var signHTML = '<embed src="swf/SimonSignaturator.swf" quality="high" width="300" height="200"' + 
    'flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"' + 
    'play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"' + 
    'pluginspage="http://www.adobe.com/go/getflashplayer">' + 
