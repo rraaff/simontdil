@@ -289,7 +289,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 												<tr>
 													<td width="150" align="right">Párrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="243" align="left"><input type="text" id="pNumber"></td>
+													<td width="243" align="left">acá debería levantar un combo con los párrafos del doc.<input type="text" id="pNumber"></td>
 												<tr>
 												<tr>
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
