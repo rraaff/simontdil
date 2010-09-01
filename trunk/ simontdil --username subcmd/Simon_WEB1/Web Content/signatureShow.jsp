@@ -19,7 +19,6 @@
 		</script>
 	</head>
 	<body>
-	<input type="button" onclick="getSignatures()" value="get signature">
 	Signature showwwww
 		<table>
 		<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
@@ -70,7 +69,6 @@
 			        	var i = 0;
 			        	while(i < json.delegates.length) {
 			        		if (!alreadyDisplayed(json.fileNames[i])) {
-			        			alert(json.fileNames[i]);
 				        		var myTable = document.getElementById("signTable");
 								var tBody = myTable.getElementsByTagName("TBODY")[0];
 								

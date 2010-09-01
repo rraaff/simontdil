@@ -30,8 +30,8 @@ public class AddPrivateMessageForVersion extends SimonAction implements Transact
 			HttpServletResponse response) throws Exception {
 		// TODO validaciones
 		String message=request.getParameter("message");
-		
-		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, new PrivateMessageForm(null, null, message));
+		PrivateMessageForm privateMessageForm = (PrivateMessageForm)form;
+		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, new PrivateMessageForm(null, null, message, this.getLoggedUser(request).getId()));
 		JSONObject json = JSONObject.fromObject(result);
 		response.setHeader("X-JSON", json.toString());
 		response.getOutputStream().write(json.toString().getBytes());
@@ -50,6 +50,7 @@ public class AddPrivateMessageForVersion extends SimonAction implements Transact
 			Observation observation = new Observation();
 			observation.setParagraphId(paragraph.getId());
 			observation.setPrivateObservation(true);
+			observation.setUserId(privateMessageForm.getUserId());
 			observation.setObservationText(privateMessageForm.getMessage());
 			observation.setDeleted(false);
 			ObservationDAO.insertObservation(observation);

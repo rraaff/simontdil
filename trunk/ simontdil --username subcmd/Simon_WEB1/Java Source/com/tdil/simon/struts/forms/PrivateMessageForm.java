@@ -10,14 +10,16 @@ public class PrivateMessageForm extends ActionForm {
 	private static final long serialVersionUID = -5643314040628424340L;
 	
 	private String versionID;
+	private int userId;
 	private String paragraphNumber;
 	private String message;
 	
-	public PrivateMessageForm(String versionID, String paragraphNumber, String message) {
+	public PrivateMessageForm(String versionID, String paragraphNumber, String message, int userId) {
 		super();
 		this.versionID = versionID;
 		this.paragraphNumber = paragraphNumber;
 		this.message = message;
+		this.userId = userId;
 	}
 	
 	public String getVersionID() {
@@ -38,7 +40,16 @@ public class PrivateMessageForm extends ActionForm {
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	
+
+	public int getUserId() {
+		return userId;
+	}
+
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+
+
 	
 
 }

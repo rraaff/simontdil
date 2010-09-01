@@ -31,6 +31,7 @@ public class DelegateNegotiationForm extends ActionForm {
 	private VersionVO versionVO;
 	private HttpServletRequest request;
 	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
+	private boolean goToSignShow;
 
 	public SystemUser getUser() {
 		return user;
@@ -49,6 +50,16 @@ public class DelegateNegotiationForm extends ActionForm {
 			versionVO.setParagraphs(ParagraphDAO.selectAllParagraphsFor(version.getId()));
 		}
 		setVersionVO(versionVO);
+		if (Version.IN_SIGN.equals(version.getStatus())) {
+			if (!user.isCanSign()) {
+				goToSignShow = true;
+				return;
+			}
+			if (SignatureDAO.exist(version.getId(), user.getId())) {
+				goToSignShow = true;
+				return;
+			} 
+		} 
 	}
 
 	public VersionVO getVersionVO() {
@@ -112,6 +123,14 @@ public class DelegateNegotiationForm extends ActionForm {
 			}
 		}
 		return false;
+	}
+
+	public boolean isGoToSignShow() {
+		return goToSignShow;
+	}
+
+	public void setGoToSignShow(boolean goToSignShow) {
+		this.goToSignShow = goToSignShow;
 	}
 	
 }

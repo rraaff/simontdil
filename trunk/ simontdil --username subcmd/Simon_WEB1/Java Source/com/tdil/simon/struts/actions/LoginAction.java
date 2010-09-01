@@ -36,6 +36,9 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				user.setPassword(null);
 				request.getSession().setAttribute("user", user);
+				if (login.isRedirectToNegotiation()) {
+					return mapping.findForward("negotiation");
+				}
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
 				}
@@ -71,6 +74,7 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 		if (exists.isDelegate()) {
 			DelegateAuditDAO.registerAction(exists.getId(), exists.getCountryId(), exists.getId(), DelegateAudit.LOGIN);
 		}
+		loginform.init(exists);
 		return exists;
 	}
 }

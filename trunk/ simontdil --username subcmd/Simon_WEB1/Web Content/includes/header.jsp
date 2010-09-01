@@ -61,7 +61,7 @@ a:active {width: auto;}
 				</td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="150" align="right">Estado de la negociaci&oacute;n<br>
-				<span class="remarcado">Mensajes Privados: </span><span class="remarcado" id="privateMessagesCount">-</span></td>
+				<span class="remarcado">Mensajes Privados: </span><span class="remarcado" id="privateMessagesCount">-</span><html:link  action="goToListPrivateObservations.st" >IRRRRR</html:link></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
@@ -83,6 +83,7 @@ a:active {width: auto;}
 				com.tdil.simon.data.valueobjects.ObservationSummaryVO summary = com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion(); 
 		%>
 		<script type="text/javascript">
+		document.getElementById('privateMessagesCount').innerHTML = <%=summary.getCount()%>;
 		var notimooManager = new Notimoo();
 			var maxId = <%= summary.getMaxId()%>;
 			function refreshPrivateMessages() {		
