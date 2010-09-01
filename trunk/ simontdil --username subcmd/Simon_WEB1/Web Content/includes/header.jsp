@@ -48,33 +48,31 @@ a:active {width: auto;}
 			</tr>
 			<tr>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="320">
+				<td width="220" valign="middle">
 					<div id="userLogued">
-						<table width="320" border="0" cellspacing="0" cellpadding="0">
+						<table width="320" height="30" border="0" cellspacing="0" cellpadding="0">
+							<!-- Meter un if user logged acá con un else -->
 							<tr>
-								<td width="280" align="left"><%= user.getName() %></td>
+								<td width="280" align="right">Bienvenido: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td>[Insertar bandera de la delegación]<!-- img src="images/others/banderaArgentina.png" width="30" height="30"> --></td>
+								<td width="30"><img src="images/others/banderaArgentina.png" width="30" height="30"></td>
 							</tr>
 						</table>
 					</div>
 				</td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="150" align="right">Estado de la negociaci&oacute;n<br>
-				<span class="remarcado">Mensajes Privados: </span><span class="remarcado" id="privateMessagesCount">-</span><html:link  action="goToListPrivateObservations.st" >IRRRRR</html:link></td>
+				<td width="250" align="right" class="remarcado">Mensajes Privados: <span class="remarcado" id="privateMessagesCount"><html:link  action="goToListPrivateObservations.st" >Ver</html:link></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
-				<td colspan="5" height="9"><img src="images/null.gif" width="1" height="9"></td>
-			</tr>
-			<tr>
-				<td colspan="2"><div id="centrador" style="padding-left:14px;"><a class="button" href="#"><span>Activar pantalla p&uacute;blica</span></a></div></td>
-				<td colspan="3"><a class="button" href="am_home.html"><span>Iniciar Negociaci&oacute;n</span></a></td>
+				<td colspan="5" height="10"><img src="images/null.gif" width="1" height="10"></td>
 			</tr>
 		</table>
 	</div>
-	
-	<div id="siteSeccion"><img src="images/null.gif" alt="Zona Restringida" width="187" height="60"></div>
+	<div id="siteSeccion">
+	<!-- acá me gustaría cargar una imagen dependiendo del estado del site -->
+	<img src="images/null.gif" width="187" height="60">
+	</div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
 </div>
 <% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
