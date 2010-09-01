@@ -95,7 +95,14 @@
 								<tr>
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-									<td height="30" align="center" valign="middle"><!-- meterle el botón para volver al doc --></td>
+									<td height="30" align="center" valign="middle">
+									<!-- meterle el botón para volver al doc LO_TENES -->
+									<html:form action="/viewVersionAction">
+										<html:submit property="operation">
+											<bean:message key="listObservations.back"/>
+										</html:submit>
+									</html:form >
+									</td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 								</tr>

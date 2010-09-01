@@ -16,8 +16,11 @@ public class ConsolidateDocumentAction extends SimonAction {
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		// TODO Auto-generated method stub
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+		
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.consolidate.cancel"))) {
+			return mapping.findForward("cancel");
+		}
 		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.consolidate.save"))) {
 			createDocumentForm.setConsolidated(true);
