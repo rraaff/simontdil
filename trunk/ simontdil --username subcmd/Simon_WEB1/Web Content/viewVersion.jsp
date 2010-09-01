@@ -114,22 +114,19 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
 					var pText = document.getElementById('pText').value;
 					var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
-					new Ajax.Request('<html:rewrite page="/addObservation.st"/>', {
-					    parameters: { pNumber:paragraphNumber, newPar:newPar, pText:pText, pVersion:pVersion},
-					    onComplete: 
-							function(transport, json) {
-							   var result = json.result;
-							   if ('OK' == result) {
-							   document.getElementById('pNumber').value = "";
-							   document.getElementById('pNewParagraph').checked = false;
-							   document.getElementById('pText').value = "";
-							   	document.getElementById('addCommentLayer').style.display = 'none';
-							   } else {
-							   	var error = json.error;
-							   	document.getElementById('error').innertHTML= error;
-							   }
-							 }
-					});
+					var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
+					    var result = json.result;
+					   if ('OK' == result) {
+					   document.getElementById('pNumber').value = "";
+					   document.getElementById('pNewParagraph').checked = false;
+					   document.getElementById('pText').value = "";
+					   	document.getElementById('addCommentLayer').style.display = 'none';
+					   } else {
+					   	var error = json.error;
+					   	document.getElementById('error').innertHTML= error;
+					   }
+					}}).get({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
+
 				}
 			</script>
 			

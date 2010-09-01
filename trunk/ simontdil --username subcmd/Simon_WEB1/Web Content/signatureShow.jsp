@@ -60,8 +60,8 @@
 			}
 			
 			function getSignatures() {
-				new Ajax.Request('<html:rewrite page="/getDelegateSiteStatus.st"/>', {
-			    onComplete: function(transport, json) {
+				var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: 
+					function(json, responseText){
 			        var sitestatus = json.sitestatus;
 			        if (sitestatus == 'NORMAL') {
 			        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
@@ -70,9 +70,20 @@
 			        	var i = 0;
 			        	while(i < json.delegates.length) {
 			        		if (!alreadyDisplayed(json.fileNames[i])) {
+			        			alert(json.fileNames[i]);
 				        		var myTable = document.getElementById("signTable");
 								var tBody = myTable.getElementsByTagName("TBODY")[0];
+								
 								var newTR = document.createElement('tr');
+								var dateTD = document.createElement('td');
+								dateTD.innerHTML = '<img width="200" height="200" alt="xxx" src="./signatures/' + json.fileNames[i] + '">';
+								dateTD.className = "BorderRigth";
+								dateTD.width = "100";
+								dateTD.align="center";
+								newTR.appendChild (dateTD);
+								tBody.appendChild(newTR);
+								
+								newTR = document.createElement('tr');
 								var operatorTD = document.createElement('td');
 								operatorTD.align="center";
 								operatorTD.innerHTML = '<b>' + json.delegates[i] + '</b>';
@@ -81,25 +92,16 @@
 								newTR.appendChild (operatorTD);
 								tBody.appendChild(newTR);
 								
-								newTR = document.createElement('tr');
-								var dateTD = document.createElement('td');
-								dateTD.innerHTML = '<img width="200" height="200" alt="xxx" src="./signatures/' + json.fileNames[i] + '">';
-								dateTD.className = "BorderRigth";
-								dateTD.width = "100";
-								dateTD.align="center";
-								newTR.appendChild (dateTD);
-								tBody.appendChild(newTR);
-								signatureArray[lastSignatureIndex] = json.fileNames[i];
 								lastSignatureIndex = lastSignatureIndex + 1;
+								signatureArray[lastSignatureIndex] = json.fileNames[i];
 							}
 							i = i + 1;
 			        	}
-			        	
 			        }
 			      }
-			   });
+			   }).get();
 			}
-			timer = setInterval("getSignatures()",10000);
+			timer = setInterval("getSignatures()",1000);
 		</script>
 	</body>
 </html:html>

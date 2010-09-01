@@ -8,7 +8,8 @@
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
-<script type="text/javascript" src="./scripts/prototype.js" ></script>
+<script type="text/javascript" src="./scripts/mootools-1.js" ></script>
+<script type="text/javascript" src="./scripts/notimoo-v1.js" ></script>
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
 <!--[if lte IE 7]>

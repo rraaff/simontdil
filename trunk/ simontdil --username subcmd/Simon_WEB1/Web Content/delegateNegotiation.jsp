@@ -42,62 +42,58 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <script type="text/javascript">
 	function doAdd() {
 		var pText = document.getElementById('pText').value;
-		new Ajax.Request('<html:rewrite page="/addPrivateMessage.st"/>', {
-			parameters: { pText:pText},
-			onComplete: 
-				function(transport, json) {
-				   var result = json.result;
-				   if ('OK' == result) {
-				   document.getElementById('pText').value = "";
-					document.getElementById('addCommentLayer').style.display = 'none';
-				   } else {
-					var error = json.error;
-					document.getElementById('error').innertHTML= error;
-				   }
-				 }
-		});
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addPrivateMessage.st"/>', onSuccess: function(json, responseText){
+	    var result = json.result;
+		   if ('OK' == result) {
+		   document.getElementById('pText').value = "";
+		   	document.getElementById('addCommentLayer').style.display = 'none';
+		   } else {
+		   	var error = json.error;
+		   	document.getElementById('error').innertHTML= error;
+		   }
+		}}).get({'message': pText});
 	}
 </script>
 <script type="text/javascript">
 	var lastNumber = "";
 	var lastText = "";
 	function getDelegateSiteStatus() {
-		new Ajax.Request('<html:rewrite page="/getDelegateSiteStatus.st"/>', {
-		onComplete: function(transport, json) {
-			var sitestatus = json.sitestatus;
-			if (sitestatus == 'NORMAL') {
-				window.location='<html:rewrite page="/goToDelegateHome.st"/>';
-			} else {
-				if (sitestatus == 'SIGN_SHOW') {
-					window.location='<html:rewrite page="/goToSignShow.st"/>';
-				} else {
-					if (sitestatus == 'IN_NEGOTIATION') {
-						var paragraphNumber = json.paragraphNumber;
-						var paragraphText = json.paragraphText;
-						if (paragraphNumber == "0") {
-							lastNumber = paragraphNumber;
-							lastText = paragraphText;
-							var divObj = document.getElementById("lastParagraphText");
-							divObj.innerHTML = "-";
-						} else {
-							document.getElementById("addPrivateComment").disabled = false;
-							if (lastNumber != paragraphNumber || lastText != paragraphText) {
-								var divObj = document.getElementById("lastParagraphText");
-								divObj.innerHTML = paragraphNumber + ". " + paragraphText;
-								lastNumber = paragraphNumber;
-								lastText = paragraphText;
-							}
-						}
-					} else {
-						var divObj = document.getElementById("negotiationArea");
-						divObj.style.display = 'none';
-						var divObj = document.getElementById("signArea");
-						divObj.style.display = '';
-					}
-				}
-			}
-		  }
-	   });
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: 
+			function(json, responseText){
+	        var sitestatus = json.sitestatus;
+	        if (sitestatus == 'NORMAL') {
+	        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
+	        } else {
+		        if (sitestatus == 'SIGN_SHOW') {
+		        	window.location='<html:rewrite page="/goToSignShow.st"/>';
+		        } else {
+		        	if (sitestatus == 'IN_NEGOTIATION') {
+		        		var paragraphNumber = json.paragraphNumber;
+		        		var paragraphText = json.paragraphText;
+		        		if (paragraphNumber == "0") {
+		        			lastNumber = paragraphNumber;
+			        		lastText = paragraphText;
+			        		var divObj = document.getElementById("lastParagraphText");
+		        			divObj.innerHTML = "-";
+		        		} else {
+		        			document.getElementById("addPrivateComment").disabled = false;
+			        		if (lastNumber != paragraphNumber || lastText != paragraphText) {
+			        			var divObj = document.getElementById("lastParagraphText");
+			        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+			        			lastNumber = paragraphNumber;
+			        			lastText = paragraphText;
+			        		}
+			        	}
+		        	} else {
+		        		var divObj = document.getElementById("negotiationArea");
+		        		divObj.style.display = 'none';
+		        		var divObj = document.getElementById("signArea");
+		        		divObj.style.display = '';
+		        	}
+		        }
+	        }
+	      }
+	   }).get();
 	}
 	timer = setInterval("getDelegateSiteStatus()",1000);
 </script>

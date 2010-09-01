@@ -39,8 +39,10 @@ public class GetDelegateSiteStatus extends SimonAction implements TransactionalA
 		HashMap<String, String> result = (HashMap<String, String>) TransactionProvider.executeInTransaction(this,
 				loggedUserForm);
 		JSONObject json = JSONObject.fromObject(result);
-		response.setHeader("X-JSON", json.toString());
-		return mapping.findForward("ajaxReturn");
+//		response.setHeader("X-JSON", json.toString());
+		response.getOutputStream().write(json.toString().getBytes());
+		return null;
+//		return mapping.findForward("ajaxReturn");
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
