@@ -62,16 +62,16 @@
 											<tr>
 												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="280" valign="top"><p style="font-size: 11px; line-height:20px; color:#333333;">Párrafo: <bean:write name="observation" property="paragraphNumber" /><br>
-												Fecha de Observación: <bean:write name="observation" property="creationDate" /><br>
-												Delegado: <bean:write name="observation" property="name" /><br>
-												Delegación: <bean:write name="observation" property="countryName" /></p></td>
+												<td width="280" valign="top">Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
+												Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
+												Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>
+												Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span></td>
 												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 												<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
 												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="560" valign="top"><p><bean:write name="observation" property="observationText" /></p></td>
+												<td width="560" valign="top"><p class="dataDinamica"><bean:write name="observation" property="observationText" /></p></td>
 												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 											</tr>
@@ -96,7 +96,6 @@
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td height="30" align="center" valign="middle">
-									<!-- meterle el botón para volver al doc LO_TENES -->
 									<html:form action="/viewVersionAction">
 										<html:submit property="operation">
 											<bean:message key="listObservations.back"/>

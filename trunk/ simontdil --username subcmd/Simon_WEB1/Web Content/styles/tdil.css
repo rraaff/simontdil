@@ -338,6 +338,11 @@ h3 {
 	color: #333333;
 	text-decoration: none;	
 }
+.dataDinamica{
+	font-size: 11px;
+	line-height:15px;
+	color:#333333;
+}
 .address{
 	font-size: 11px;
 	color: #848484;
