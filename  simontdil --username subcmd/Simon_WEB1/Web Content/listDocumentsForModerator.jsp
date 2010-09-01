@@ -39,9 +39,10 @@
 								<td>Observaciones</td>
 								<td>Cantidad de observaciones</td>
 								<td>Editar</td>
+								<td>Borrar</td>
 							</tr>
-							<logic:iterate name="ListDocument" property="list" id="version"> 
-							<tr class="d0"><!-- En el iterador cambiar el style por d1 --> 
+							<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
+							<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 								<td height="28"><bean:write name="version" property="documentTitle" /></td>
 								<td><bean:write name="version" property="versionWithSubversion" /></td>
 								<td><bean:write name="version" property="status" /></td> 
@@ -53,6 +54,7 @@
 								<% } else { %>  
 									<td>-</td>
 								<% } %> 
+								<td></td>
 							</tr> 
 							</logic:iterate>
 							<tr>

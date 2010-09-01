@@ -265,8 +265,7 @@ h3 {
 	position: relative;
 	background-color: #EEEEEE;
 }
-
-#content #portaTabla {
+#portaTabla  {
 	height: 290px;
 	margin-right: auto;
 	margin-left: auto;
@@ -333,6 +332,11 @@ h3 {
 	height: 15px;
 	width: 10px;
 	float: left;
+}
+.userLogged{
+	font-size: 10px;
+	color: #333333;
+	text-decoration: none;	
 }
 .address{
 	font-size: 11px;

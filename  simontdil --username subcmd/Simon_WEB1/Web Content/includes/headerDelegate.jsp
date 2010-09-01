@@ -45,13 +45,14 @@ a:active {width: auto;}
 			</tr>
 			<tr>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="320">
+				<td width="320" align="right">
 					<div id="userLogued">
 						<table width="320" border="0" cellspacing="0" cellpadding="0">
+							<!-- Meter un if user logged acá con un else -->
 							<tr>
-								<td width="280" align="left">[insertar nombre de usuario]</td>
+								<td width="280" align="right">Bienvenido: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td>[Insertar bandera de la delegación]<!-- img src="images/others/banderaArgentina.png" width="30" height="30"> --></td>
+								<td width="30"><img src="images/others/banderaArgentina.png" width="30" height="30"></td>
 							</tr>
 						</table>
 					</div>
