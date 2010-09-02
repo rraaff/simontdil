@@ -14,21 +14,22 @@
 -->
 </style>
 <div id="content">
-<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
-	<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		<html:link action="/initSign" >Iniciar firmas</html:link>
-		<span id="privCount"><%=com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion()%></span>
-	<% } %>
-	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		En firmas, Debería haber un botón.
-	<% } %>
-	<% 	if(com.tdil.simon.data.model.Site.NORMAL.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		<html:link action="/initNegotiation" >Iniciar negociacion</html:link>
-	<% } %>
-<% } %>
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="5"><img src="images/null.gif" width="1" height="5"></td>
+		<td colspan="5" height="20" align="center" valign="middle" class="remarcado">
+			<!--% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+				<!--% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+					<html:link action="/initSign" >Iniciar firmas</html:link>
+					<span id="privCount"><!-- %=com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion()%></span>
+				<!--% } %>
+				<!--% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+					En firmas, Debería haber un botón.
+				<!--% } %>
+				<!--% 	if(com.tdil.simon.data.model.Site.NORMAL.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+					<html:link action="/initNegotiation" >Iniciar negociacion</html:link>
+				<!--% } %>
+			<!--% } % -->
+		</td>
 	</tr>
 	<tr>
 		<td width="294">
