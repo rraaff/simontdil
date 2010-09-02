@@ -3,8 +3,8 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
-<!--%@ include file="includes/header.jsp" % -->
-<!--%@ include file="includes/menu.jsp" % -->
+<%@ include file="includes/header.jsp" %>
+<%@ include file="includes/menu.jsp" %>
 
 <html:html>
 <html:form method="POST" action="/delegateABM">
@@ -143,16 +143,16 @@
 			<td>Habilitado</td>
 			<td>Editar</td>
 		</tr> 
-		<logic:iterate name="DelegateABM" property="allUsers" id="user" indexId="iterIndex"> 
+		<logic:iterate name="DelegateABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 			<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-				<td height="28"><bean:write name="user" property="name" /></td>
-				<td><bean:write name="user" property="countryName" /></td>
-				<td><bean:write name="user" property="permissionsString" /></td>
-				<td><logic:equal name="user" property="canSign" value="true">Si</logic:equal>
-				<logic:equal name="user" property="canSign" value="false">No</logic:equal></td>
-				<td><logic:equal name="user" property="deleted" value="true">No</logic:equal>
-				<logic:equal name="user" property="deleted" value="false">Si</logic:equal></td>
-				<td><html:link  action="editDelegate.st?" paramName="user" paramProperty="id" paramId="id">
+				<td height="28"><bean:write name="iterUser" property="name" /></td>
+				<td><bean:write name="iterUser" property="countryName" /></td>
+				<td><bean:write name="iterUser" property="permissionsString" /></td>
+				<td><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
+				<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
+				<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
+				<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
+				<td><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
 					<img src="images/buttons/editar.png" width="50" height="24" border="0">
 				</html:link>
 			</tr> 
