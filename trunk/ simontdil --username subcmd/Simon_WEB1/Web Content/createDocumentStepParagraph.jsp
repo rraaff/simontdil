@@ -77,7 +77,7 @@
 							<tr>
 								<td align="right">Tipo de documento:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción</td>
+								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de dec.&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -88,7 +88,7 @@
 								<td align="left"><html:textarea name="CreateDocumentForm" property="introduction" disabled="true" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
 							</tr>
 							<tr>
 								<td colspan="3">
@@ -188,21 +188,26 @@
 								<html:submit property="operation">
 									<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
 								</html:submit>
-
-								<%if (isModerator) { %>
-								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
-									<html:submit property="operation">
-										<bean:message key="createDocument.paragraphs.pushData"/>
-									</html:submit>
-								</logic:equal>
-								<% } %>
 								</td>
 							</tr>
 							<tr>
 								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="7"><!-- div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div -->
+								<td colspan="7" height="25">
+								<%if (isModerator) { %>
+								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
+									<html:submit property="operation">
+										<bean:message key="createDocument.paragraphs.pushData"/>
+									</html:submit>
+								</logic:equal>
+								<% } %></td>
+							</tr>
+							<tr>
+								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td colspan="7" height="25">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.preview"/>
 								</html:submit>								
