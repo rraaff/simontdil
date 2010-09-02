@@ -248,66 +248,62 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	</tr>
 </table>
 </div>
-<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
-	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-	<tr>
-		<td colspan="3" height="11">
-			<script type="text/javascript">
-				signAreaShowed = true;
-				//document.write(signHTML); PABLO: Aca tendria que mostrarse el area de firma de una
-			</script>
-		</td>
-	</tr>
-	<% } %>
-<% } %>
-<div id="outerdiv" style="display: none;">
-		<div id="innerdiv"></div>
-		<div id="contetTableComment">
-		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td align="center" valign="middle">
-					<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-						<tr>
-							<td width="440" align="center" valign="top">
-								<!-- inicio tabla template -->
-								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-									<tr>
-										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
-										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-									</tr>
-									<tr>
-										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-										<td width="400">
-										<!-- corte tabla template -->
-											<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
-											   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
-											   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
-											   pluginspage="http://www.adobe.com/go/getflashplayer">
-											</embed>
-	<!-- corte tabla template -->
-										</td>
-										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-									</tr>
-									<tr>
-										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
-										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-									</tr>
-								</table>
-								<!-- fin tabla template -->
-							</td>
-						</tr>
-					</table>
-				</td>
-			<tr>
-		</table>
-	</div>
-</div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
+<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+	<script type="text/javascript">
+		signAreaShowed = true;
+		document.write(signHTML);
+	</script>
+	<div id="outerdiv">
+		<div id="innerdiv"></div>
+		<div id="contetTableComment">
+			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td align="center" valign="middle">
+						<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+							<tr>
+								<td width="440" align="center" valign="top">
+									<!-- inicio tabla template -->
+									<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+										<tr>
+											<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+											<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+											<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+										</tr>
+										<tr>
+											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+											<td width="400">
+											<!-- corte tabla template -->
+												<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
+												   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+												   pluginspage="http://www.adobe.com/go/getflashplayer">
+												</embed>
+											<!-- corte tabla template -->
+											</td>
+											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										</tr>
+										<tr>
+											<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+											<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+											<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										</tr>
+									</table>
+									<!-- fin tabla template -->
+								</td>
+							</tr>
+						</table>
+					</td>
+				<tr>
+			</table>
+		</div>
+	</div>
+	<% } %>
+<% } %>
 <!-- div id="outerdiv" style="display: none;" -->
 <div id="addCommentLayer" style="display: none;">
 	<!-- div id="innerdiv" -->

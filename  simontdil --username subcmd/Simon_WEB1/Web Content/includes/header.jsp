@@ -121,7 +121,7 @@ a:active {width: auto;}
 						}
 					}}).get();
 				}
-				timer = setInterval("refreshPrivateMessages()",1000);
+				timer = setInterval("refreshPrivateMessages()",10000);
 			</script>
 			<% } %>
 		<% } %>
