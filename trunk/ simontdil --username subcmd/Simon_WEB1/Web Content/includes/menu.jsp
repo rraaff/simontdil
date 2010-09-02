@@ -5,23 +5,26 @@
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Usuario t&eacute;cnico</a>
 				<ul>
-					<!-- li><a href="am_abm_country.html">ABM de Delegaciones</a></li -->
+					<li><a href="adminHome.jsp">Home de Admin</a></li>
+					<li>* ABM de Delegaciones</li>
 					<li><html:link action="/goToDelegateABM" >ABM de Delegados</html:link></li>
-					<!-- li><a href="am_abm_sistemUsers.html">ABM de Usuarios del sistema</a></li>
-					<li><a href="am_amb_passwords.html">Banqu&eacute;o de Contrase&ntilde;as</a></li -->
+					<li>* ABM de Usuarios del sistema</li>
+					<li>* Banqu&eacute;o de Contrase&ntilde;as</li>
 				</ul>
 			</li>
 			<% } %>
 			<li><a class="trigger" href="#">Administrador Moderador</a>
 				<ul>
-				<!--  Rsto no iria en la final  -->
-					<!-- li><html:link action="/goToSelectPrincipalDocument" >Seleccionar documento principal</html:link></li  -->
 					<li><html:link action="/goToModeratorHome" >Home de Moderador</html:link></li>
 					<li><html:link action="/createDocument" >Crear documento</html:link></li>
 					<li><html:link action="/goToListDocument" >Lista de documentos</html:link></li>
-					<!--li><a href="am_abmLibRef.html">ABM de Librer&eacute;a de Referencia</a></li>
-					<li><a href="am_abmCatLibRef.html">ABM de Categor&iacute;as de Librer&iacute;a</a></li>
-					<li><a href="am_panel.html">Panel de Control</a></li -->
+					<li>* ABM de Librer&eacute;a de Referencia</li>
+					<li>* ABM de Categor&iacute;as de Librer&iacute;a</li>
+					<li>* Panel de Control</li>
+				</ul>
+			</li>
+			<li><a class="trigger" href="#">Evento</a>
+				<ul>
 					<li><html:link action="setModSiteNormal" >Desactivar Modo Negociación</html:link></li>
 					<li><html:link action="setModSiteEvent" >Activar Modo Negociación</html:link></li>
 				</ul>
