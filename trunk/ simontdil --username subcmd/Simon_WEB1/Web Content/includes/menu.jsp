@@ -5,10 +5,10 @@
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Usuario t&eacute;cnico</a>
 				<ul>
-					<li><a href="am_abm_country.html">ABM de Delegaciones</a></li>
+					<!-- li><a href="am_abm_country.html">ABM de Delegaciones</a></li -->
 					<li><html:link action="/goToDelegateABM" >ABM de Delegados</html:link></li>
-					<li><a href="am_abm_sistemUsers.html">ABM de Usuarios del sistema</a></li>
-					<li><a href="am_amb_passwords.html">Banqu&eacute;o de Contrase&ntilde;as</a></li>
+					<!-- li><a href="am_abm_sistemUsers.html">ABM de Usuarios del sistema</a></li>
+					<li><a href="am_amb_passwords.html">Banqu&eacute;o de Contrase&ntilde;as</a></li -->
 				</ul>
 			</li>
 			<% } %>
