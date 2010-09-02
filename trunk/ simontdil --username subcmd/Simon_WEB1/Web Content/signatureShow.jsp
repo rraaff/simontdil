@@ -110,7 +110,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 												
 												var newTR = document.createElement('tr');
 												var dateTD = document.createElement('td');
-												dateTD.innerHTML = '<img width="200" height="200" alt="xxx" src="./signatures/' + json.fileNames[i] + '">';
+												dateTD.innerHTML = '<img width="200" height="110" src="./signatures/' + json.fileNames[i] + '">';
 												dateTD.className = "BorderRigth";
 												dateTD.width = "100";
 												dateTD.align="center";
