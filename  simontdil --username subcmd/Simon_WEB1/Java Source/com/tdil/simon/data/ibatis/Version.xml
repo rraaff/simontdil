@@ -40,12 +40,12 @@
     from VERSION, Document
     where VERSION.documentId = Document.id
     and VERSION.deleted = 0
-    and VERSION.status = 'CONSOLIDATED'
+    and VERSION.status != 'DRAFT'
     and Document.PRINCIPAL = 1
     and Document.deleted = 0
     and Document.typeOne = #typeOne#
     and Document.typeTwo = #typeTwo#
-    and number = (select max(number) from version where deleted = 0 and status = 'CONSOLIDATED' and documentId = Document.id)
+    and number = (select max(number) from version where deleted = 0 and status != 'DRAFT' and documentId = Document.id)
   </select>
   
  <select id="selectVersionUnderNegotiation" resultClass="Version">
@@ -69,6 +69,7 @@
     from VERSION
     where documentId = #id#
     and deleted = 0
+    and status != 'DRAFT'
     order by number
   </select>
   

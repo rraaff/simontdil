@@ -21,6 +21,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.pdf.ExportVersionAsPDF;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.struts.forms.ViewVersionForm;
 
 public class ViewVersionAction extends SimonAction implements TransactionalActionWithValue {
@@ -32,6 +33,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		ViewVersionForm viewForm = (ViewVersionForm)form;
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.initNegotiation"))) {
 			TransactionProvider.executeInTransaction(this, form);
+			viewForm.init(viewForm.getVersion().getVersion().getId());
 			return mapping.findForward("continue");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
@@ -56,8 +58,10 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		ViewVersionForm viewVersionForm = (ViewVersionForm)form;
 		Version version = viewVersionForm.getVersion().getVersion();
-		version.setStatus(Version.IN_NEGOTIATION);
-		VersionDAO.updateVersionStatus(version);
+		CreateDocumentForm createDocumentForm = new CreateDocumentForm();
+		createDocumentForm.initWith(version.getId());
+		createDocumentForm.setVersionStatus(Version.IN_NEGOTIATION);
+		createDocumentForm.executeInTransaction(createDocumentForm);
 		Site site = Site.getDELEGATE_SITE();
 		site.setStatus(Site.IN_NEGOTIATION);
 		site.setDataId(0);
