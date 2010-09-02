@@ -14,10 +14,6 @@
 -->
 </style>
 <div id="content">
-Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%> 
-Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%> 
-Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%>
-
 <% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
 	<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
 		<html:link action="/initSign" >Iniciar firmas</html:link>
@@ -187,4 +183,3 @@ Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()
 </div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
-

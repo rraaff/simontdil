@@ -47,6 +47,7 @@ public class VersionDAO {
 		return IBatisManager.sqlMapper.queryForList("selectVersionsVOForList");
 	}
 	
+	/*com.tdil.simon.data.valueobjects.VersionNumberVO*/
 	public static List getAllVersionNumbersFor(int documentID) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllVersionNumbersForDocument", documentID);
 	}

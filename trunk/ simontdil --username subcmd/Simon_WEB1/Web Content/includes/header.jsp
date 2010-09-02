@@ -70,7 +70,20 @@ a:active {width: auto;}
 		</table>
 	</div>
 	<div id="siteSeccion">
-	<!-- acá me gustaría cargar una imagen dependiendo del estado del site -->
+	<!-- acá me gustaría cargar una imagen dependiendo del estado del site LO_TENES -->
+	<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+		<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+			Modo evento y negociando
+		<% } else { %>
+			<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+				Modo evento firmando
+			<% } else { %>
+				Modo evento aun no negociando
+			<% } %>
+		<% } %>
+	<% } else { %>
+		Modo normal
+	<% } %>
 	<img src="images/null.gif" width="187" height="60">
 	</div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
@@ -101,3 +114,6 @@ a:active {width: auto;}
 		<% } %>
 	<% } %>
 <% } %>
+Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%> 
+Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%> 
+Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%>

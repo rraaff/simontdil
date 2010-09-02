@@ -70,6 +70,30 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private boolean consolidated = false;
 	private String consolidateText;
 	
+	private static List<MonthOption> allMonths;
+	private static List<DayOption> allDays;
+	
+	static {
+		allMonths = new ArrayList<MonthOption>();
+		allMonths.add(new MonthOption("1", "Enero"));
+		allMonths.add(new MonthOption("2", "Febrero"));
+		allMonths.add(new MonthOption("3", "Marzo"));
+		allMonths.add(new MonthOption("4", "Abril"));
+		allMonths.add(new MonthOption("5", "Mayo"));
+		allMonths.add(new MonthOption("6", "Junio"));
+		allMonths.add(new MonthOption("7", "Julio"));
+		allMonths.add(new MonthOption("8", "Agosto"));
+		allMonths.add(new MonthOption("9", "Septiembre"));
+		allMonths.add(new MonthOption("10", "Octubre"));
+		allMonths.add(new MonthOption("11", "Noviembre"));
+		allMonths.add(new MonthOption("12", "Diciembre"));
+		
+		allDays = new ArrayList<DayOption>(31);
+		for (int i = 1; i <= 31; i++) {
+			allDays.add(new DayOption(String.valueOf(i)));
+		}
+	}
+	
 	public void reset() {
 		this.operation = null;
 		this.step = 0;
@@ -91,6 +115,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.principal = false;
 		this.versionStatus = Version.DRAFT;
 		this.isInNegotiation = false;
+	}
+	
+	public List<MonthOption> getMonths() {
+		return allMonths;
+	}
+	
+	public List<DayOption> getDays() {
+		return allDays;
 	}
 	
 	public String getTitle() {

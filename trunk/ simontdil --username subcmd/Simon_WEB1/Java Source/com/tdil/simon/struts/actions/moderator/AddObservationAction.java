@@ -33,7 +33,6 @@ public class AddObservationAction extends SimonAction implements TransactionalAc
 		String newPar=request.getParameter("newPar");
 		String pText=request.getParameter("pText");
 		String pVersion=request.getParameter("pVersion");
-		System.out.println(pText);
 		ObservationForm observationForm = new ObservationForm();
 		observationForm.setParagraphNumber(pNumber);
 		observationForm.setNewParagraph(newPar);

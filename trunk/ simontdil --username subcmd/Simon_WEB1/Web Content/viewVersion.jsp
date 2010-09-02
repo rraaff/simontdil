@@ -36,6 +36,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 				<bean:message key="viewVersion.initNegotiation"/>
 			</html:submit>
 		</logic:equal>
+		<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
+			<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+		</logic:equal> 
 	<% } %>
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
@@ -117,7 +120,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
 					    var result = json.result;
 					   if ('OK' == result) {
-					   document.getElementById('pNumber').value = "";
+					   document.getElementById('pNumber').selectedIndex = 0;
 					   document.getElementById('pNewParagraph').checked = false;
 					   document.getElementById('pText').value = "";
 					   	document.getElementById('addCommentLayer').style.display = 'none';
@@ -289,7 +292,13 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 												<tr>
 													<td width="150" align="right">Párrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="243" align="left">acá debería levantar un combo con los párrafos del doc.<input type="text" id="pNumber"></td>
+													<td width="243" align="left">
+													<select id="pNumber">
+														<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
+															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumber" /></option>
+														</logic:iterate>
+													</select>
+													</td>
 												<tr>
 												<tr>
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

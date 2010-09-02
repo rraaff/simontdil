@@ -73,4 +73,16 @@ public class Version extends PersistentObject {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		return simpleDateFormat.format(this.getUpToCommentDate());
 	}
+	public boolean canBeEdited() {
+		return !this.isHasDraft() && !this.isInFinalStatus();
+	}
+	private boolean isInFinalStatus() {
+		if (IN_SIGN.equals(this.getStatus())) {
+			return true;
+		}
+		if (FINAL.equals(this.getStatus())) {
+			return true;
+		}
+		return false;
+	}
 }
