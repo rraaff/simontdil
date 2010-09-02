@@ -18,6 +18,22 @@ public class UserVO extends SystemUser {
 		this.countryName = countryName;
 	}
 	
+	public String getPermissionsString() {
+		if (this.isTypeOne() && this.isTypeTwo()) {
+			return "A, B";
+		} else {
+			if (this.isTypeOne()) {
+				return "A";
+			} else {
+				if (this.isTypeTwo()) {
+					return "B";
+				} else {
+					return "";
+				}
+			}
+		}
+	}
+	
 	@Override
 	public void setPassword(String password) {
 		super.setPassword(password);

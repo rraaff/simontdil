@@ -44,19 +44,23 @@ public class SystemConfig {
 	}
 	
 	public static String getMailServer() {
-		return properties.getProperty("mail.server");
+		return "localhost";
+//		return properties.getProperty("mail.server");
 	}
 	
 	public static String getMailFromForNewPassword() {
-		return properties.getProperty("newpassword.from");
+		return "no-reply@simon.com";
+//		return properties.getProperty("newpassword.from");
 	}
 	
 	public static String getMailSubjectForNewPassword() {
-		return properties.getProperty("newpassword.subject");
+		return "Your new temporary password";
+//		return properties.getProperty("newpassword.subject");
 	}
 	
 	public static String getMailBodyForNewPassword() {
-		return properties.getProperty("newpassword.body");
+		return "Hola {FULLNAME}, tu usuario de acceso a simon es {USERNAME} y tu clave es {PASSWORD}.";
+//		return properties.getProperty("newpassword.body");
 	}
 	
 	public static String getMailFromForPasswordReset() {

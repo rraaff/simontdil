@@ -17,6 +17,8 @@
     <form-bean name="DelegateNegotiationForm" type="com.tdil.simon.struts.forms.DelegateNegotiationForm"/>
     <form-bean name="ListPrivate" type="com.tdil.simon.struts.forms.ListForm"/>
     <form-bean name="DeleteObservation" type="com.tdil.simon.struts.forms.DeleteObservationForm"/>
+    <form-bean name="DelegateABM" type="com.tdil.simon.struts.forms.DelegateABMForm"/>
+    <form-bean name="ChangePassword" type="com.tdil.simon.struts.forms.ChangePasswordForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -128,6 +130,19 @@
     </action>
     <action path="/deletePrivateObservation" name="DeleteObservation" type="com.tdil.simon.struts.actions.moderator.DeletePrivateObservationAction" scope="request">
       <forward name="continue" path="/goToListPrivateObservations.st"/>
+    </action>
+    <action path="/goToDelegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.GoToDelegateABMAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp"/>
+    </action>
+    <action path="/delegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.DelegateABMAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp"/>
+    </action>
+    <action path="/editDelegate" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.EditDelegateAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp"/>
+    </action>
+    <action path="/changePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.ChangePasswordAction" scope="request">
+      <forward name="goToLogin" path="/login.jsp"/>
+      <forward name="stay" path="/changePassword.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

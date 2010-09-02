@@ -36,11 +36,11 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				user.setPassword(null);
 				request.getSession().setAttribute("user", user);
-				if (login.isRedirectToNegotiation()) {
-					return mapping.findForward("negotiation");
-				}
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
+				}
+				if (login.isRedirectToNegotiation()) {
+					return mapping.findForward("negotiation");
 				}
 				if (user.isModerator()) {
 					return mapping.findForward("moderator");
