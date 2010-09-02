@@ -47,6 +47,11 @@ public class ViewVersionForm extends ActionForm {
 		return this.getVersion().getVersion().canBeEdited();
 	}
 	
+	
+	public boolean getVersionIsInSign() {
+		return Version.IN_SIGN.equals(this.getVersion().getVersion());
+	}
+	
 	public boolean getVersionCanBeNegotiated() {
 		if (this.getVersion().getDocument().isDeleted()) {
 			return false;

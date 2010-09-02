@@ -36,6 +36,11 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 				<bean:message key="viewVersion.initNegotiation"/>
 			</html:submit>
 		</logic:equal>
+		<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
+			<html:submit property="operation">
+				<bean:message key="viewVersion.finishSign"/>
+			</html:submit>
+		</logic:equal>
 		<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
 			<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
 		</logic:equal> 
