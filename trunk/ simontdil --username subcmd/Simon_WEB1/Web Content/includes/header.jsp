@@ -67,53 +67,64 @@ a:active {width: auto;}
 			<tr>
 				<td colspan="5" height="10"><img src="images/null.gif" width="1" height="10"></td>
 			</tr>
+			<tr>
+				<td colspan="5" height="10">
+					<div id="dataSites">
+						<table width="500" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td>Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%></td>
+								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+								<td>Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%></td>
+								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+								<td>Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%></td>
+							</tr>
+						</table>
+					</div>
+				</td>
+			</tr>
 		</table>
 	</div>
 	<div id="siteSeccion">
 	<!-- acá me gustaría cargar una imagen dependiendo del estado del site LO_TENES -->
 	<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
 		<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-			Modo evento y negociando
+			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento y negociando
 		<% } else { %>
 			<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-				Modo evento firmando
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento firmando
 			<% } else { %>
-				Modo evento aun no negociando
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento aun no negociando
 			<% } %>
 		<% } %>
 	<% } else { %>
-		Modo normal
+		<img src="images/header/administradorModerador.gif" width="187" height="60">
 	<% } %>
-	<img src="images/null.gif" width="187" height="60">
 	</div>
-	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
-</div>
-<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
-	<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-		<% if (isModerator) {
-				com.tdil.simon.data.valueobjects.ObservationSummaryVO summary = com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion(); 
-		%>
-		<script type="text/javascript">
-		document.getElementById('privateMessagesCount').innerHTML = <%=summary.getCount()%>;
-		var notimooManager = new Notimoo();
-			var maxId = <%= summary.getMaxId()%>;
-			function refreshPrivateMessages() {		
-				var jsonRequest = new Request.JSON({url: '<html:rewrite page="/countPrivateMessagesForVersion.st"/>', onSuccess: function(privMessages, responseText){
-				    document.getElementById('privateMessagesCount').innerHTML = privMessages.count;
-				    if(privMessages.maxId != maxId) {
-				    	maxId = privMessages.maxId;
-				    	notimooManager.show({
-							title: 'Mensajes Privados',
-							message: 'Usted ha recibido nuevo/s mensajes privados.'
-						});
-				    }
-				}}).get();
-			}
-			timer = setInterval("refreshPrivateMessages()",1000);
-		</script>
+	<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+		<% 	if(com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+			<% if (isModerator) {
+					com.tdil.simon.data.valueobjects.ObservationSummaryVO summary = com.tdil.simon.utils.ObservationUtils.countPrivateObservationsForNegotiatedVersion(); 
+			%>
+			<script type="text/javascript">
+			document.getElementById('privateMessagesCount').innerHTML = <%=summary.getCount()%>;
+			var notimooManager = new Notimoo();
+				var maxId = <%= summary.getMaxId()%>;
+				function refreshPrivateMessages() {		
+					var jsonRequest = new Request.JSON({url: '<html:rewrite page="/countPrivateMessagesForVersion.st"/>', onSuccess: function(privMessages, responseText){
+						document.getElementById('privateMessagesCount').innerHTML = privMessages.count;
+						if(privMessages.maxId != maxId) {
+							maxId = privMessages.maxId;
+							notimooManager.show({
+								title: 'Mensajes Privados',
+								message: 'Usted ha recibido nuevo/s mensajes privados.'
+							});
+						}
+					}}).get();
+				}
+				timer = setInterval("refreshPrivateMessages()",1000);
+			</script>
+			<% } %>
 		<% } %>
 	<% } %>
-<% } %>
-Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%> 
-Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%> 
-Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%>
+	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
+</div>

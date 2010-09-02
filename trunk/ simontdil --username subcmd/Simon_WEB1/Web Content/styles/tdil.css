@@ -592,6 +592,16 @@ tr.d1 td {
 	width: 980px;
 	margin-top: -584px;
 }
+#addCommentLayer {
+	position:relative;
+	overflow:show;
+	z-index:100000;
+	margin-right: auto;
+	margin-left: auto;
+	height: 684px;
+	width: 980px;
+	margin-top: -584px;
+}
 /* Fading Tooltips */
 /*div#addCommentLayer {
 	position:absolute;

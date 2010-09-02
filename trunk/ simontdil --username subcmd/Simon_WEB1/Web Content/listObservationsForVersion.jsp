@@ -50,67 +50,67 @@
 									<div id="portaTabla">
 										<table width="900" border="0" cellspacing="0" cellpadding="0" align="center">
 											<logic:iterate name="ViewVersion" property="observations" id="observation" indexId="iterIndex"> 
-											<tr>
-												<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-												<td width="280" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-												<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-												<td width="20" background="images/interfaces/topListSeparator<%= (iterIndex % 2 == 0) ? "1" : "2" %>.gif"><img src="images/null.gif" width="20" height="19"></td>
-												<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-												<td width="560" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-												<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-											</tr>
-											<tr>
-												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="280" valign="top">Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
-												Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
-												Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>
-												Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span></td>
-												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-												<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
-												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="560" valign="top"><p class="dataDinamica"><bean:write name="observation" property="observationText" /></p></td>
-												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-											</tr>
-											<tr>
-												<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-												<td width="280" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-												<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
-												<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="10"></td>
-												<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-												<td width="600" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-												<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
-											</tr>
-											</logic:iterate>
-										</table>	
-									<!-- corte tabla template -->
-									</div>
-									</td>
-									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-								</tr>
-								<tr>
-									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-									<td height="30" align="center" valign="middle">
-									<html:form action="/viewVersionAction">
-										<html:submit property="operation">
-											<bean:message key="listObservations.back"/>
-										</html:submit>
-									</html:form >
-									</td>
-									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-								</tr>
-								<tr>
-									<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-									<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
-									<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-								</tr>
-							</table>
+												<tr>
+													<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													<td width="280" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													<td width="20" background="images/interfaces/topListSeparator<%= (iterIndex % 2 == 0) ? "1" : "2" %>.gif"><img src="images/null.gif" width="20" height="19"></td>
+													<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													<td width="560" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+												</tr>
+												<tr>
+													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+													<td width="280" valign="top">Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
+													Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
+													Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>
+													Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span></td>
+													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+													<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
+													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+													<td width="560" valign="top"><p class="dataDinamica"><bean:write name="observation" property="observationText" /></p></td>
+													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+												</tr>
+												<tr>
+													<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+													<td width="280" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+													<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+													<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="10"></td>
+													<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+													<td width="600" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+													<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+												</tr>
+												</logic:iterate>
+											</table>
+										<!-- corte tabla template -->
+										</div>
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td height="30" align="center" valign="middle">
+										<html:form action="/viewVersionAction">
+											<html:submit property="operation">
+												<bean:message key="listObservations.back"/>
+											</html:submit>
+										</html:form >
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+									</tr>
+								</table>
 							<!-- fin tabla template -->
 							</td>
 						</tr>

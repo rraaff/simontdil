@@ -32,9 +32,9 @@
 		<table height="582" align="center" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center" valign="middle">
-					<table width="470" height="285" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="490" height="265" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
-							<td width="470" align="center" valign="top">
+							<td width="490" align="center" valign="top">
 								<!-- inicio tabla template -->
 								<table width="470" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 									<tr>
