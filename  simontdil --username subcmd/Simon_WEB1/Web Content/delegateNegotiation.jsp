@@ -55,26 +55,11 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	}
 </script>
 <script type="text/javascript">
-var signAreaShowed = false;
-var signHTML = '<embed src="swf/SimonSignaturator.swf" quality="high" width="300" height="200"' + 
-   'flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"' + 
-   'play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"' + 
-   'pluginspage="http://www.adobe.com/go/getflashplayer">' + 
-'</embed>'
+	var signAreaShowed = false;
 	function showSignArea() {
 		if (!signAreaShowed) {
 			signAreaShowed = true;
-			var myTable = document.getElementById("workTable");
-			var tBody = myTable.getElementsByTagName("TBODY")[0];
-			var newTR = document.createElement('tr');
-			var dateTD = document.createElement('td');
-			dateTD.innerHTML = signHTML;
-			dateTD.className = "BorderRigth";
-			dateTD.width = "300";
-			dateTD.height = "200";
-			dateTD.align="center";
-			newTR.appendChild (dateTD);
-			tBody.appendChild(newTR);
+			// PABLO: Aca tendria que ir codigo javascript que muestre el panel de firma
 		}
 	}
 </script>
@@ -237,18 +222,6 @@ var signHTML = '<embed src="swf/SimonSignaturator.swf" quality="high" width="300
 							<tr>
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
 							</tr>
-							<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
-								<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
-								<tr>
-									<td colspan="3" height="11">
-										<script type="text/javascript">
-											signAreaShowed = true;
-											document.write(signHTML);
-										</script>
-									</td>
-								</tr>
-								<% } %>
-							<% } %>
 						</table>					
 						<!-- corte tabla template -->
 					</td>
@@ -268,6 +241,25 @@ var signHTML = '<embed src="swf/SimonSignaturator.swf" quality="high" width="300
 		<td colspan="5" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
+</div>
+<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
+	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+	<tr>
+		<td colspan="3" height="11">
+			<script type="text/javascript">
+				signAreaShowed = true;
+				//document.write(signHTML); PABLO: Aca tendria que mostrarse el area de firma de una
+			</script>
+		</td>
+	</tr>
+	<% } %>
+<% } %>
+<div id="outerdiv" style="display: none;">
+	<embed src="swf/SimonSignaturator.swf" quality="high" width="300" height="200"
+	   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+	   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+	   pluginspage="http://www.adobe.com/go/getflashplayer">
+	</embed>
 </div>
 </html:html>
 <!-- %@ include file="includes/footer.jsp" %  -->
