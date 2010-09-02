@@ -149,7 +149,8 @@
 							</tr>
 							<tr>
 								<td width="70"><img src="images/null.gif" width="70" height="1"></td>
-								<td colspan="6" align="center">
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td colspan="5" align="left">
 								<!-- Boton prev -->
 								<logic:notEqual name="CreateDocumentForm" property="backDisabled" value="true">
 									<html:submit property="operation">

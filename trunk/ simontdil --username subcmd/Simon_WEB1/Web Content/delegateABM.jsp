@@ -3,48 +3,137 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
+<!--%@ include file="includes/header.jsp" % -->
+<!--%@ include file="includes/menu.jsp" % -->
 
 <html:html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=Cp1252"/>
-		<title></title>
-	</head>
-	<body>
-		<html:form method="POST" action="/delegateABM">
-		nombere<html:text name="DelegateABM" property="name" /><br>
-		usuario
-			<logic:equal name="DelegateABM" property="id" value="0">
-				<html:text name="DelegateABM" property="username"/>
-			</logic:equal>
-			<logic:notEqual name="DelegateABM" property="id" value="0">
-				<html:text name="DelegateABM" property="username" disabled="true"/>
-			</logic:notEqual>
-		<br>
-		pais<html:select name="DelegateABM" property="countryId" styleClass="textfield_effect_month">
-	        <html:optionsCollection name="DelegateABM" property="allCountries" value="id" label="name"/>
-	      </html:select><br>
-		email<html:text name="DelegateABM" property="email"/><br>
-		A<html:checkbox name="DelegateABM" property="typeOne"/><br>
-		B<html:checkbox name="DelegateABM" property="typeTwo"/><br>
-		Firma<html:checkbox name="DelegateABM" property="canSign"/><br>
-		Cargo<html:text name="DelegateABM" property="job"/><br>
-		
-		<logic:equal name="DelegateABM" property="id" value="0">
-			<html:submit property="operation">
-				<bean:message key="delegateABM.create"/>
-			</html:submit>
-		</logic:equal>
-		
-		<logic:notEqual name="DelegateABM" property="id" value="0">
-			<html:submit property="operation">
-				<bean:message key="delegateABM.modify"/>
-			</html:submit>
-		</logic:notEqual>
-		
-		<html:submit property="operation">
-			<bean:message key="delegateABM.cancel"/>
-		</html:submit><br>
-		<br>
+<html:form method="POST" action="/delegateABM">
+<div id="content">
+<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
+	</tr>
+	<tr>
+		<td width="470">
+			<!-- inicio tabla template -->
+			<table width="450" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="450" height="19" align="left"><div id="blockTitle">Editar usuarios</div></td>
+					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="450" height="144"><!-- corte tabla template -->
+						<table width="450" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129">Nombre completo:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><html:text name="DelegateABM" property="name" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">Nombre de Usuario:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><logic:equal name="DelegateABM" property="id" value="0">
+																<html:text name="DelegateABM" property="username"/>
+															</logic:equal>
+															<logic:notEqual name="DelegateABM" property="id" value="0">
+																<html:text name="DelegateABM" property="username" disabled="true"/>
+															</logic:notEqual></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">País:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><html:select name="DelegateABM" property="countryId" styleClass="textfield_effect_month">
+																<html:optionsCollection name="DelegateABM" property="allCountries" value="id" label="name"/>
+															</html:select></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">E-Mail:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><html:text name="DelegateABM" property="email"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">Accesos:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><html:checkbox name="DelegateABM" property="typeOne"/> A - <html:checkbox name="DelegateABM" property="typeTwo"/> B - <html:checkbox name="DelegateABM" property="canSign"/> es firmante</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">Cargo:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><html:text name="DelegateABM" property="job"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right" width="129" height="24">País:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="264" align="left"><logic:equal name="DelegateABM" property="id" value="0">
+																<html:submit property="operation">
+																	<bean:message key="delegateABM.create"/>
+																</html:submit>
+															</logic:equal>
+																
+																<logic:notEqual name="DelegateABM" property="id" value="0">
+																	<html:submit property="operation">
+																	<bean:message key="delegateABM.modify"/>
+																	</html:submit>
+																</logic:notEqual>
+																
+																<html:submit property="operation">
+																	<bean:message key="delegateABM.cancel"/>
+																</html:submit></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+						</table>					
+						<!-- corte tabla template -->
+					</td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+				</tr>
+			</table>
+		<!-- fin tabla template -->
+		</td>
+		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+		<td width="440">
+			<!-- inicio tabla template -->
+			<table width="440" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="420" height="19" align="left"><div id="blockTitle">Listado de delegados</div></td>
+					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="420" height="144"><!-- corte tabla template -->
 		<table border="1">
 		<tr>
 			<td height="28">Nombre</td>
@@ -69,7 +158,24 @@
 			</tr> 
 		</logic:iterate>
 		</table>
-		</html:form>
-	</body>
+<!-- corte tabla template --></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+				</tr>
+			</table>
+		<!-- fin tabla template -->
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
+	</tr>
+</table>
+</div>
+</html:form>
 </html:html>
-
+<%@ include file="includes/footer.jsp" %>

@@ -80,16 +80,19 @@
 							<tr>
 								<td align="right">Tipo de documento:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción</td>
+								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de dec.&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3"><!--<a class="button" href="pedirnuevaclave_error.html"><span>Anterior (Datos del Documento)</span></a> -->
+								<td colspan="3" height="25">
 									<html:submit property="operation">
 										<bean:message key="createDocument.back"/>
 									</html:submit></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
@@ -119,7 +122,7 @@
 					<td width="420" height="144"><!-- corte tabla template -->
 						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="27"><html:errors property="general" /><img src="images/null.gif" width="1" height="27"></td>
+								<td colspan="3" height="50"><html:errors property="general" /><img src="images/null.gif" width="1" height="50"></td>
 							</tr>
 							<tr>
 								<td width="74" align="right" valign="top">Texto:</td>
@@ -129,7 +132,7 @@
 									<html:textarea name="CreateDocumentForm" property="introduction" styleClass="textfield_effect_area"/></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="40"><img src="images/null.gif" width="1" height="40"></td>
+								<td colspan="3" height="48"><img src="images/null.gif" width="1" height="48"></td>
 							</tr>
 							<tr>
 								<td colspan="3">
@@ -137,6 +140,9 @@
 										<bean:message key="createDocument.addParagraphs"/>
 									</html:submit>
 								<!--  div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div --></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
