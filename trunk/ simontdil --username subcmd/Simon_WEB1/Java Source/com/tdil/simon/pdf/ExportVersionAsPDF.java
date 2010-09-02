@@ -54,7 +54,7 @@ public class ExportVersionAsPDF {
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
 			List signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
-			buf.append("<table border=\"1\">");
+			buf.append("<table border=\"0\">");
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;
 				buf.append("<TR><TD><TABLE><TR>");
@@ -72,7 +72,7 @@ public class ExportVersionAsPDF {
 			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 			buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
-			buf.append("<table border=\"1\">");
+			buf.append("<table border=\"0\">");
 			for (Observation o : observations) {
 				ObservationVO vo = (ObservationVO)o;
 				buf.append("<TR><TD><TABLE><TR>");
