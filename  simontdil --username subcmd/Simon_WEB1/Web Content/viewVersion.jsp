@@ -48,7 +48,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20" id="imgReferencia" name="imgReferencia"></td>
+		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
 	</tr>
 	<tr>
 		<td width="294" valign="top">
@@ -84,7 +84,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		<!-- fin tabla template -->
 		<!-- separador -->
 		<div id="separador1Home"><img src="images/null.gif" width="1" height="16"><div>
-<!-- inicio tabla template -->
+		<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
@@ -252,19 +252,13 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		</td>
 	</tr>
 	<tr>
-		<td colspan="5" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
+		<td colspan="3" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
 </div>
 </html:form>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
-<!--div id="linksBottom">
-	<div id="outerdiv">
-		<div id="text"></div>
-		<div id="contetTableComment">Mapa de Cobertura</div>
-	</div>
-</div-->
 <div id="outerdiv" style="display: none;">
 	<!-- div id="innerdiv" -->
 		<div id="innerdiv"></div>
