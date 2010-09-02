@@ -29,22 +29,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <html:html>
 
 <html:form action="/viewVersionAction">
-	<%if (isModerator) { %>
-		<%@ include file="includes/menu.jsp" %>
-		<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
-			<html:submit property="operation">
-				<bean:message key="viewVersion.initNegotiation"/>
-			</html:submit>
-		</logic:equal>
-		<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
-			<html:submit property="operation">
-				<bean:message key="viewVersion.finishSign"/>
-			</html:submit>
-		</logic:equal>
-		<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
-			<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
-		</logic:equal> 
-	<% } %>
+<%if (isModerator) { %>
+	<%@ include file="includes/menu.jsp" %>
+<% } %>
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -61,7 +48,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td width="274" height="165"><!-- corte tabla template -->
+					<td width="274" height="80" valign="middle"><!-- corte tabla template -->
 						<div id="contentDocumentoPrincipal">
 							<div class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></div><br>
 							<p style="line-height: 12px;">Versi&oacute;n: <bean:write name="ViewVersion" property="version.version.number" /> - <bean:write name="ViewVersion" property="version.version.name" /><br>
@@ -99,15 +86,30 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 							<tr>
 								<td align="right" width="50" height="30"><span style="font-size: 10px;">Anteriores:</span></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="217" align="left" valign="middle"><div id="portaVersiones"><!--
-									<table border="0">
-										<tr>
-											--><logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion"><!--
-												<td --><html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>&nbsp;<!-- </td>
-											--></logic:iterate><!--
-										</tr>
-									</table>
-								--></div></td>
+								<td width="217" align="left" valign="middle"><div id="portaVersiones">
+									<logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion">
+										<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+									</logic:iterate></div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" align="center" valign="middle">
+								<%if (isModerator) { %>
+									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
+										<html:submit property="operation">
+											<bean:message key="viewVersion.initNegotiation"/>
+										</html:submit>
+									</logic:equal>
+									<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
+										<html:submit property="operation">
+											<bean:message key="viewVersion.finishSign"/>
+										</html:submit>
+									</logic:equal>
+									<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
+										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+									</logic:equal> 
+								<% } %>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>

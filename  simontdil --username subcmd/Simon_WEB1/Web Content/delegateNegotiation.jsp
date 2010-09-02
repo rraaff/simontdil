@@ -201,16 +201,22 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 							<tr>
 								<td width="50" align="right" valign="top">Texto: </td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="217" align="left" valign="middle">
+								<td width="217" height="157" align="left" valign="top">
 								<div id="negotiationArea">
 									<div id="lastParagraphText">  -  </div>
-									<div id="addCommentLayer" style="display: none;">
+									<!--div id="addCommentLayer" style="display: none;">
 										<table>
-											<tr><td id="error"></td><tr>
-											<tr><td>Observación: <textarea id="pText"></textarea></td><tr>
-											<tr><td><input type="button" onClick="doAdd()" value="Agregar observacion" ><input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td><tr>
+											<tr>
+												<td id="error"></td>
+											<tr>
+											<tr>
+												<td>Mensaje del párrafo: <textarea id="pText"></textarea></td>
+											<tr>
+											<tr>
+												<td><input type="button" onClick="doAdd()" value="Agregar observacion" ><input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
+											<tr>
 										</table>
-									</div>
+									</div-->
 								</div></td>
 							</tr>
 							<tr>
@@ -255,11 +261,112 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	<% } %>
 <% } %>
 <div id="outerdiv" style="display: none;">
-	<embed src="swf/SimonSignaturator.swf" quality="high" width="300" height="200"
-	   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
-	   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
-	   pluginspage="http://www.adobe.com/go/getflashplayer">
-	</embed>
+		<div id="innerdiv"></div>
+		<div id="contetTableComment">
+		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="center" valign="middle">
+					<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td width="440" align="center" valign="top">
+								<!-- inicio tabla template -->
+								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+									<tr>
+										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+									</tr>
+									<tr>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="400">
+										<!-- corte tabla template -->
+											<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
+											   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+											   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+											   pluginspage="http://www.adobe.com/go/getflashplayer">
+											</embed>
+	<!-- corte tabla template -->
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+									</tr>
+								</table>
+								<!-- fin tabla template -->
+							</td>
+						</tr>
+					</table>
+				</td>
+			<tr>
+		</table>
+	</div>
 </div>
 </html:html>
-<!-- %@ include file="includes/footer.jsp" %  -->
+<%@ include file="includes/footer.jsp" %>
+<!-- div id="outerdiv" style="display: none;" -->
+<div id="addCommentLayer" style="display: none;">
+	<!-- div id="innerdiv" -->
+		<div id="innerdiv"></div>
+		<div id="contetTableComment">
+		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+			<tr>
+				<td align="center" valign="middle">
+					<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td width="440" align="center" valign="top">
+								<!-- inicio tabla template -->
+								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+									<tr>
+										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+									</tr>
+									<tr>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="400">
+										<!-- corte tabla template -->
+											<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td colspan="3" id="error"></td>
+												<tr>
+												<tr>
+													<td width="150" valign="top">Mensaje del párrafo:</td>
+													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+													<td width="243"><textarea id="pText" class="textfield_effect_area"></textarea></td>
+												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td colspan="3" align="center"><input type="button" onClick="doAdd()" value="Agregar observacion" ><input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
+												<tr>
+											</table>
+											<!-- corte tabla template -->
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+									</tr>
+								</table>
+								<!-- fin tabla template -->
+							</td>
+						</tr>
+					</table>
+				</td>
+			<tr>
+		</table>
+	</div>
+</div>

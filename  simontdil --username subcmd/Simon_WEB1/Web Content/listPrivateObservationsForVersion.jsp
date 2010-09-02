@@ -66,7 +66,7 @@
 												Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
 												Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>
 												Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span>
-												<div><a class="button" href="login_error.html"><span><html:link  action="deletePrivateObservation.st?" paramName="observation" paramProperty="id" paramId="id">Borrar</html:link></span></a></div></td>
+												<div style="height:25px; margin-top:10px;"><html:link  action="deletePrivateObservation.st?" paramName="observation" paramProperty="id" paramId="id"><img src="images/buttons/borrar.png" width="50" height="24" border="0"></html:link></div></td>
 												<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 												<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 												<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
@@ -98,6 +98,8 @@
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td height="30" align="center" valign="middle">
 									<!-- botón volver -->
+									BOTÓN VOLVER
+
 									</td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
