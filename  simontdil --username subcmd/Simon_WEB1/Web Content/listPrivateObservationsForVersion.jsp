@@ -1,3 +1,4 @@
+<%@ page info="listPrivateObservationsForVersion"%>
 <%@ page contentType="text/html; charset=Cp1252" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -27,6 +28,7 @@
 </html:html>
 <%@ include file="includes/footer.jsp" %>
 <div id="outerdiv">
+
 	<div id="innerdiv"></div>
 	<div id="contetTableComment">
 	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
@@ -97,9 +99,20 @@
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td height="30" align="center" valign="middle">
-									<!-- botón volver -->
-									BOTÓN VOLVER
-
+									<logic:equal name="ListPrivate" property="param(paragraphNegotiated)" value="true">
+										<html:form action="/paragraphNavigation">
+											<html:submit property="operation">
+												<bean:message key="listPrivateObservations.back"/>
+											</html:submit>
+										</html:form >
+									</logic:equal>
+									<logic:notEqual name="ListPrivate" property="param(paragraphNegotiated)" value="true">
+										<html:form action="/createDocumentActionStep2">
+											<html:submit property="operation">
+												<bean:message key="listPrivateObservations.back"/>
+											</html:submit>
+										</html:form >
+									</logic:notEqual>
 									</td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
