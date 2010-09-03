@@ -59,6 +59,9 @@ public class LoginForm extends ActionForm {
 				return;
 			}
 			Document doc = DocumentDAO.getDocumentUnderWork();
+			if (doc == null) {
+				return;
+			}
 			if (doc.isTypeOne() && !user.isTypeOne()) {
 				return;
 			}

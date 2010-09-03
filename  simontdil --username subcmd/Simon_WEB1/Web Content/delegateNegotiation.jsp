@@ -75,7 +75,8 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
 	        } else {
 		        if (sitestatus == 'SIGN_SHOW') {
-		        	window.location='<html:rewrite page="/goToSignShow.st"/>';
+		        	clearTimer();
+		        	// PABLO: Aca tendria que ir codigo javascript que muestre el boton de ir a ver el doc final
 		        } else {
 		        	if (sitestatus == 'IN_NEGOTIATION') {
 		        		var paragraphNumber = json.paragraphNumber;
@@ -97,8 +98,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		        	} else {
 		        		var divObj = document.getElementById("negotiationArea");
 		        		divObj.style.display = 'none';
-		        		//var divObj = document.getElementById("signArea");
-		        		//divObj.style.display = '';
 		        		showSignArea();
 		        	}
 		        }
@@ -106,7 +105,11 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	      }
 	   }).get();
 	}
-	timer = setInterval("getDelegateSiteStatus()",1000);
+	var timer = setInterval("getDelegateSiteStatus()",1000);
+	
+	function clearTimer() {
+		timer = clearInterval(timer);
+	}
 </script>
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
@@ -255,7 +258,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
 	<script type="text/javascript">
 		signAreaShowed = true;
-		document.write(signHTML);
 	</script>
 	<div id="outerdiv">
 		<div id="innerdiv"></div>
@@ -283,6 +285,11 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 												   pluginspage="http://www.adobe.com/go/getflashplayer">
 												</embed>
+												<html:form action="/goToSignShow">
+													<html:submit property="operation">
+														<bean:message key="delegateNegotiation.signShow"/>
+													</html:submit>
+												</html:form>
 											<!-- corte tabla template -->
 											</td>
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
