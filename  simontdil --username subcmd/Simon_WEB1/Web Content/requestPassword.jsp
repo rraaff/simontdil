@@ -5,7 +5,11 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
-
+<style type="text/css">
+#centrador {
+	padding-left:80px;
+}  
+</style>
 <html:html>
 <html:form method="POST" action="/requestPassword">
 <div id="content">
@@ -57,8 +61,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td></td>
-								<td colspan="2"><a class="button" href="login.jsp"><span>Volver al inicio</span></a></td>
+								<td colspan="3"><div id="centrador"><a class="button" href="login.jsp"><span>Volver al inicio</span></a></div></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
