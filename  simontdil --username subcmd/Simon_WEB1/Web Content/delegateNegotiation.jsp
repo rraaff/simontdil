@@ -60,7 +60,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	function showSignArea() {
 		if (!signAreaShowed) {
 			signAreaShowed = true;
-			// PABLO: Aca tendria que ir codigo javascript que muestre el panel de firma
+			document.getElementById('outerdiv').style.display = 'block';
 		}
 	}
 </script>
@@ -76,6 +76,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	        } else {
 		        if (sitestatus == 'SIGN_SHOW') {
 		        	clearTimer();
+		        	showSignArea();
 		        	// PABLO: Aca tendria que ir codigo javascript que muestre el boton de ir a ver el doc final
 		        } else {
 		        	if (sitestatus == 'IN_NEGOTIATION') {
@@ -254,12 +255,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
-<% 	if(com.tdil.simon.data.model.Site.EVENT.equals(com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus())) { %>
-	<% 	if(com.tdil.simon.data.model.Site.IN_SIGN.equals(com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus())) { %>
+	<% 	if(isDelegate && isSign && user.isCanSign()) { %>
 	<script type="text/javascript">
 		signAreaShowed = true;
 	</script>
-	<div id="outerdiv">
+	<% } %>
+	<div id="outerdiv" style="display: <%=(isDelegate && isSign && user.isCanSign()) ? "block" : "none"%>;">
 		<div id="innerdiv"></div>
 		<div id="contetTableComment">
 			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
@@ -280,11 +281,13 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td width="400">
 											<!-- corte tabla template -->
+												<%if (isDelegate && user.isCanSign()) { %>
 												<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
 												   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
 												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 												   pluginspage="http://www.adobe.com/go/getflashplayer">
 												</embed>
+												<% } %>
 												<html:form action="/goToSignShow">
 													<html:submit property="operation">
 														<bean:message key="delegateNegotiation.signShow"/>
@@ -310,8 +313,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 			</table>
 		</div>
 	</div>
-	<% } %>
-<% } %>
 <!-- div id="outerdiv" style="display: none;" -->
 <div id="addCommentLayer" style="display: none;">
 	<!-- div id="innerdiv" -->
