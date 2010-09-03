@@ -1,1 +1,1 @@
-Fail
+<%@ page info="failure"%>

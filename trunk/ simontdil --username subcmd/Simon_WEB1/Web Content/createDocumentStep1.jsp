@@ -1,3 +1,4 @@
+<%@ page info="createDocumentStep1"%>
 <%@ page contentType="text/html; charset=Cp1252" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
