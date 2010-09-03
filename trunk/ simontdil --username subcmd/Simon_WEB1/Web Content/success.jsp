@@ -1,1 +1,2 @@
+<%@ page info="success"%>
 Sucess
