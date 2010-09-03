@@ -6,7 +6,6 @@
 <%@ include file="includes/headerLogoff.jsp" %>
 
 <html:html>
-<!-- html:errors property="general" / -->
 <html:form method="POST" action="/login">
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
