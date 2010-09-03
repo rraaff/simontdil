@@ -120,6 +120,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
+							<!-- Acá había tocado pero solo HTML -->
 								<td colspan="3" height="25" align="center" valign="middle">
 								<%if (isModerator) { %>
 									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
