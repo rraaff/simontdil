@@ -27,6 +27,21 @@ dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
 
 dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </script>
+<% if (isDelegate) { %>
+<script type="text/javascript">
+	
+	function getDelegateSiteStatus() {
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+		    var sitestatus = json.sitestatus;
+			if (sitestatus != 'NORMAL') {
+				window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
+			}
+		}}).get();
+	}
+	timer = setInterval("getDelegateSiteStatus()",1000);
+
+</script>
+<% } %>
 <html:html>
 
 <html:form action="/viewVersionAction">
