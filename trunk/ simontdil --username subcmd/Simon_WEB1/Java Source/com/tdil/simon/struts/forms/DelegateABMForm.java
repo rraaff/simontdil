@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.List;
 
 import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
@@ -224,5 +226,13 @@ public class DelegateABMForm extends ActionForm {
 			this.job = systemUser.getJob();
 		}
 		
+	}
+	
+	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+//		super.reset(mapping, request);
+		this.typeOne = false;
+		this.typeTwo = false;
+		this.canSign = false;
 	}
 }
