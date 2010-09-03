@@ -64,16 +64,16 @@ a:active {width: auto;}
 					</div>
 				</td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="250" align="right" class="remarcado">Mensajes Privados: 
+				<td width="250" align="right" class="remarcado">
 					<% 	if(eventMode && inNegotiation && isModerator) { 
 							if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 							%>
-							<html:link  action="/goToListPrivateObservations.st"><span class="remarcado" id="privateMessagesCount"></span></html:link></span>
+							Mensajes Privados: <html:link  action="/goToListPrivateObservations.st"><span class="remarcado" id="privateMessagesCount"></span></html:link></span>
 							<% } else { %>
-								NO_LO_TENES
+							Negociación en curso
 							<% } %>
 					<% } else { %>
-						NO_LO_TENES
+						
 					<% } %>
 				</td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
