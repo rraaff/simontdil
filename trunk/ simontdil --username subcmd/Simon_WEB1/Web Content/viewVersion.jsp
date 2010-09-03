@@ -48,6 +48,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
+					<td height="11"><img src="images/null.gif" width="1" height="11"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
 					<td width="274" height="80" valign="middle"><!-- corte tabla template -->
 						<div id="contentDocumentoPrincipal">
 							<div class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></div><br>
@@ -93,7 +99,10 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center" valign="middle">
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="25" align="center" valign="middle">
 								<%if (isModerator) { %>
 									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
 										<html:submit property="operation">

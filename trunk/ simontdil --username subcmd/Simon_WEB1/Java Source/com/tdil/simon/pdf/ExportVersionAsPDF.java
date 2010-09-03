@@ -17,6 +17,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.tidy.Tidy;
+import org.xhtmlrenderer.css.parser.property.PrimitivePropertyBuilders.FontSize;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.SAXException;
 
@@ -39,6 +40,19 @@ public class ExportVersionAsPDF {
 
 		// put in some style
 		buf.append("<head>");
+		buf.append("<style type=\"text/css\">");
+		buf.append("<!--");
+		buf.append("body {");
+		buf.append("	color:#000000;");
+		buf.append("	font-family: Verdana, Arial, Helvetica, sans-serif;");
+		buf.append("	font-size: 10px;");
+		buf.append("	line-height: normal;");
+		buf.append("	letter-spacing: normal;");
+		buf.append("	word-spacing: normal;");
+		buf.append("	white-space: normal;");
+		buf.append("}");
+		buf.append("-->");
+		buf.append("</style>");
 		buf.append("<title>").append(version.getDocument().getTitle()).append("</title>");
 		buf.append("</head>");
 
@@ -84,7 +98,7 @@ public class ExportVersionAsPDF {
 				buf.append("</TR><TR>");
 				buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
 				buf.append("</TR></TABLE></TD>");
-				buf.append("<TD valign=\"top\">").append(vo.getObservationText()).append("</TD>");
+				buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
 			}
 			buf.append("</table>");
 		}
