@@ -17,13 +17,26 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.valueobjects.ObservationSummaryVO;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.forms.CountPrivMesagesForm;
 import com.tdil.simon.utils.ObservationUtils;
 
 public class CountPrivateMessagesForVersion extends Action implements TransactionalActionWithValue {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		Object hm = (Object)TransactionProvider.executeInTransaction(this, form);
+		CountPrivMesagesForm countPrivMesagesForm = new CountPrivMesagesForm();
+		countPrivMesagesForm.setFull(request.getParameter("full"));
+		countPrivMesagesForm.setDocNegotiation((String)request.getSession().getAttribute("docNegotiated"));
+		countPrivMesagesForm.setParagraphNegotiation((String)request.getSession().getAttribute("paragraphNegotiated"));
+		Object hm = null;
+		if (countPrivMesagesForm.mustAnswer()) {
+			hm = (Object)TransactionProvider.executeInTransaction(this, countPrivMesagesForm);
+		} else {
+			HashMap result = new HashMap();
+			result.put("count","0");
+			result.put("maxId","0");
+			hm = result;
+		}
 		JSONObject json = JSONObject.fromObject(hm);
 		response.setHeader("X-JSON", json.toString());
 		response.getOutputStream().write(json.toString().getBytes());
@@ -32,10 +45,19 @@ public class CountPrivateMessagesForVersion extends Action implements Transactio
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-		HashMap hm = new HashMap();
-		ObservationSummaryVO observationSummaryVO = ObservationUtils.countPrivateObservationsForNegotiatedVersion();
-		hm.put("count",String.valueOf(observationSummaryVO.getCount()));
-		hm.put("maxId",String.valueOf(observationSummaryVO.getMaxId()));
-		return hm;
+		CountPrivMesagesForm countPrivMesagesForm = (CountPrivMesagesForm)form;
+		if ("true".equals(countPrivMesagesForm.getFull())) {
+			HashMap hm = new HashMap();
+			ObservationSummaryVO observationSummaryVO = ObservationUtils.countPrivateObservationsForNegotiatedVersion();
+			hm.put("count",String.valueOf(observationSummaryVO.getCount()));
+			hm.put("maxId",String.valueOf(observationSummaryVO.getMaxId()));
+			return hm;
+		} else {
+			HashMap hm = new HashMap();
+			ObservationSummaryVO observationSummaryVO = ObservationUtils.countPrivateObservationsForNegotiatedParagraph();
+			hm.put("count",String.valueOf(observationSummaryVO.getCount()));
+			hm.put("maxId",String.valueOf(observationSummaryVO.getMaxId()));
+			return hm;
+		}
 	}
 }

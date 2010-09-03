@@ -81,6 +81,10 @@ public class ViewVersionForm extends ActionForm {
 		}
 	}
 	
+	public boolean getConsolidated() {
+		return Version.CONSOLIDATED.equals(this.getVersion().getVersion());
+	}
+	
 	public boolean getVersionCanBeCommented() {
 		if (this.getVersion().getDocument().isDeleted()) {
 			return false;

@@ -24,6 +24,10 @@ public class ObservationDAO {
 	public static List selectNotDeletedPrivateObservationsForVersion(int versionID) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedPrivateObservationsForVersion", versionID);
 	}
+	
+	public static List selectNotDeletedPrivateObservationsForParagraph(int paragraphId) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedPrivateObservationsForParagraph", paragraphId);
+	}
 
 	public static List searchObservations(HashMap parameters) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("searchObservations", parameters);
@@ -49,6 +53,11 @@ public class ObservationDAO {
 	public static ObservationSummaryVO countPrivateObservationsForVersionInNegotiation() throws SQLException {
 		return (ObservationSummaryVO) IBatisManager.sqlMapper
 				.queryForObject("countPrivateObservationsForVersionInNegotiation");
+	}
+	
+	public static ObservationSummaryVO countPrivateObservationsForNegotiatedParagraph(int paragraph) throws SQLException {
+		return (ObservationSummaryVO) IBatisManager.sqlMapper
+				.queryForObject("countPrivateObservationsForNegotiatedParagraph", paragraph);
 	}
 
 	public static Integer countPrivateObservationsForParagrapth(int paragraphdId) throws SQLException {

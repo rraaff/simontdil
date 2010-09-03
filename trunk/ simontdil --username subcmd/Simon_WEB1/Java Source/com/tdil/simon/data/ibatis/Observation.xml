@@ -27,6 +27,23 @@
    	order by creationDate
   </select>
   
+   <select id="selectNotDeletedPrivateObservationsForParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	Observation.*,
+    	SystemUser.username,
+    	SystemUser.name,
+    	Country.name as countryName,
+    	Paragraph.paragraphNumber as paragraphNumber
+   	from Paragraph, Observation, SystemUser, Country 
+   	WHERE Paragraph.id = #id#
+   	AND Paragraph.id = Observation.paragraphId
+   	AND Observation.userId = SystemUser.id
+   	AND Observation.privateObservation = 1
+   	AND SystemUser.countryId = Country.id
+   	AND Observation.DELETED = 0
+   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+  </select>
+  
   <select id="selectNotDeletedPrivateObservationsForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
     select 
     	Observation.*,
@@ -106,6 +123,16 @@
     and Observation.privateObservation = 1
     and Observation.deleted = 0
   </select>
+  
+    <select id="countPrivateObservationsForNegotiatedParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
+    select
+      count(1) as count, max(Observation.id) as maxId
+    from Observation
+    where Observation.paragraphId = #id#
+    and Observation.privateObservation = 1
+    and Observation.deleted = 0
+  </select>
+  
   
   <select id="countPrivateObservationsForParagrapth" parameterClass="int" resultClass="Integer">
     select

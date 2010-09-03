@@ -15,6 +15,7 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.database.TransactionProvider;
@@ -25,15 +26,23 @@ public class GoToListPrivateObservations extends Action implements Transactional
 	@Override
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		ListForm listForm = (ListForm)form;
+		listForm.addParam("paragraphNegotiated", (String)request.getSession().getAttribute("paragraphNegotiated"));
 		TransactionProvider.executeInTransaction(this, form);
 		return mapping.findForward("continue");
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		ListForm listForm = (ListForm)form;
-		Version version = VersionDAO.getVersionUnderWork();
-		List<ObservationVO> result = ObservationDAO.selectNotDeletedPrivateObservationsForVersion(version.getId());
-		listForm.setList(result);
-		return null;
+		if ("true".equals(listForm.getParam("paragraphNegotiated"))) {
+			List<ObservationVO> result = ObservationDAO.selectNotDeletedPrivateObservationsForParagraph(Site.getDELEGATE_SITE().getDataId());
+			listForm.setList(result);
+			return null;
+		} else {
+			Version version = VersionDAO.getVersionUnderWork();
+			List<ObservationVO> result = ObservationDAO.selectNotDeletedPrivateObservationsForVersion(version.getId());
+			listForm.setList(result);
+			return null;
+		}
 	}
 }

@@ -25,10 +25,13 @@ public class ParagraphsNavigationAction extends SimonAction {
 			HttpServletResponse response) throws Exception {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
 
+		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.back"))) {
 			if (createDocumentForm.getParagraph() > 0) {
 				createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
-				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+				if (inNegotiation) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
 							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
@@ -40,7 +43,9 @@ public class ParagraphsNavigationAction extends SimonAction {
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.next"))) {
 			createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
-			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+			request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+			if (inNegotiation) {
 				TransactionProvider.executeInTransaction(new TransactionalAction() {
 					public void executeInTransaction() throws SQLException, ValidationException {
 						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
@@ -80,11 +85,12 @@ public class ParagraphsNavigationAction extends SimonAction {
 		}
 		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.modifyIntroduction"))) {
+			request.getSession().setAttribute("paragraphNegotiated", "false");
 			return mapping.findForward("modifyIntroduction");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.preview"))) {
 			return mapping.findForward("preview");
 		}
-		return null;
+		return mapping.findForward("stay");
 	}
 }
