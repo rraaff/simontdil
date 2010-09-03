@@ -93,10 +93,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 							<tr>
 								<td align="right" width="50" height="30"><span style="font-size: 10px;">Anteriores:</span></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="217" align="left" valign="middle"><div id="portaVersiones">
+								<td width="217" align="left" valign="middle">
+									<div id="portaVersiones">
 									<logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion">
 										<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
-									</logic:iterate></div>
+									</logic:iterate>
+									</div>
 								</td>
 							</tr>
 							<tr>
