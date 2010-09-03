@@ -28,11 +28,13 @@ public class CreateDocumentActionParagraph extends SimonAction {
 			return mapping.findForward("back");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.addParagraphs"))) {
-			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
-				TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
-					}
+			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+			request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+				if (inNegotiation) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+						}
 				});
 			}
 			return mapping.findForward("addParagraphs");

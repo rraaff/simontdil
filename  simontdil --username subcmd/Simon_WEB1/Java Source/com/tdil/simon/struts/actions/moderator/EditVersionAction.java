@@ -14,6 +14,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.NegotiationUtils;
 
 public class EditVersionAction extends SimonAction implements TransactionalActionWithValue {
 
@@ -24,6 +25,9 @@ public class EditVersionAction extends SimonAction implements TransactionalActio
 		 int versionID = Integer.parseInt(request.getParameter("id"));
 		createDocumentForm.setTemporaryVersionId(versionID);
 		TransactionProvider.executeInTransaction(this, form);
+		boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+		request.getSession().setAttribute("docNegotiated", inNegotiation ? "true" : "false");
+		request.getSession().setAttribute("paragraphNegotiated", "false");
 		 return mapping.findForward("continue");
 	}
 	
