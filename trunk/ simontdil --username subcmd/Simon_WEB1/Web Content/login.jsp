@@ -6,7 +6,6 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
 
-<html:html>
 <html:form method="POST" action="/login">
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -94,5 +93,4 @@
 </table>
 </div>
 </html:form>
-</html:html>
 <%@ include file="includes/footer.jsp" %>
