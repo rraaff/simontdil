@@ -32,9 +32,15 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	
 	function getDelegateSiteStatus() {
 		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+			var errorResult = json.error;
+			if ('notLogged' == errorResult) {
+				window.location='<html:rewrite page="/login.jsp"/>';
+				return;
+			}
 		    var sitestatus = json.sitestatus;
 			if (sitestatus != 'NORMAL') {
 				window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
+				return;
 			}
 		}}).get();
 	}
@@ -42,7 +48,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 
 </script>
 <% } %>
-<html:html>
 
 <html:form action="/viewVersionAction">
 <%if (isModerator) { %>
@@ -153,12 +158,17 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					var pText = document.getElementById('pText').value;
 					var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
 					var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
+						var errorResult = json.error;
+						if ('notLogged' == errorResult) {
+							window.location='<html:rewrite page="/login.jsp"/>';
+							return;
+						}
 					    var result = json.result;
 					   if ('OK' == result) {
 					   document.getElementById('pNumber').selectedIndex = 0;
 					   document.getElementById('pNewParagraph').checked = false;
 					   document.getElementById('pText').value = "";
-					   	document.getElementById('addCommentLayer').style.display = 'none';
+					   	document.getElementById('outerdiv').style.display = 'none';
 					   } else {
 					   	var error = json.error;
 					   	document.getElementById('error').innertHTML= error;
@@ -287,7 +297,6 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </table>
 </div>
 </html:form>
-</html:html>
 <%@ include file="includes/footer.jsp" %>
 <div id="outerdiv" style="display: none;">
 	<!-- div id="innerdiv" -->

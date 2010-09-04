@@ -37,7 +37,6 @@ dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
 
 dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </script>
-<html:html>
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -96,8 +95,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 							}
 							
 							function getSignatures() {
-								var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: 
-									function(json, responseText){
+								var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+									var errorResult = json.error;
+									if ('notLogged' == errorResult) {
+										window.location='<html:rewrite page="/login.jsp"/>';
+										return;
+									}
 									var sitestatus = json.sitestatus;
 									if (sitestatus == 'NORMAL') {
 										window.location='<html:rewrite page="/goToDelegateHome.st"/>';
@@ -165,5 +168,4 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	</tr>
 </table>
 </div>
-</html:html>
 <%@ include file="includes/footer.jsp" %>
