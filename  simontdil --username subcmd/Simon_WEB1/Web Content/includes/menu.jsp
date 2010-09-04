@@ -9,7 +9,7 @@
 					<li>* ABM de Delegaciones</li>
 					<li><html:link action="/goToDelegateABM" >ABM de Delegados</html:link></li>
 					<li>* ABM de Usuarios del sistema</li>
-					<li>* Banqu&eacute;o de Contrase&ntilde;as</li>
+					<li><html:link action="/goToResetPassword" >Blanqueo de contraseñas</html:link></li>
 				</ul>
 			</li>
 			<% } %>

@@ -19,9 +19,12 @@
     <form-bean name="DeleteObservation" type="com.tdil.simon.struts.forms.DeleteObservationForm"/>
     <form-bean name="DelegateABM" type="com.tdil.simon.struts.forms.DelegateABMForm"/>
     <form-bean name="ChangePassword" type="com.tdil.simon.struts.forms.ChangePasswordForm"/>
+    <form-bean name="ResetPassword" type="com.tdil.simon.struts.forms.ResetPasswordForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
+    <forward name="notLogged" path="/login.jsp"/>
+    <forward name="invalidAction" path="/login.jsp"/>
   </global-forwards>
   <action-mappings>
     <action path="/login" name="LoginForm" type="com.tdil.simon.struts.actions.LoginAction" scope="session" input="/login.jsp">
@@ -37,12 +40,6 @@
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
       <forward name="success" path="/createDocumentStep1.jsp"/>
-    </action>
-    <action path="/readNegotiatedParagraph" name="NegotiateParagraphForm" type="com.tdil.simon.struts.actions.moderator.ReadParagraphUnderNegotiation" scope="request">
-      <forward name="success" path="/paragraphNegotiation.jsp"/>
-    </action>
-    <action path="/saveNegotiatedParagraph" name="NegotiateParagraphForm" type="com.tdil.simon.struts.actions.moderator.SaveNegotiatedParagraphAction" scope="request">
-      <forward name="stay" path="/paragraphNegotiation.jsp"/>
     </action>
     <action path="/createDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentAction" scope="session">
       <forward name="continue" path="/createDocumentStep1.jsp"/>
@@ -112,7 +109,7 @@
     <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
       <forward name="continue" path="/delegateHome.jsp"/>
     </action>
-    <action path="/addObservation" type="com.tdil.simon.struts.actions.moderator.AddObservationAction" scope="request">
+    <action path="/addObservation" type="com.tdil.simon.struts.actions.delegate.AddObservationAction" scope="request">
     </action>
     <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="session">
       <forward name="continue" path="/delegateNegotiation.jsp"/>
@@ -143,6 +140,12 @@
     <action path="/changePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.ChangePasswordAction" scope="request">
       <forward name="goToLogin" path="/login.jsp"/>
       <forward name="stay" path="/changePassword.jsp"/>
+    </action>
+    <action path="/goToResetPassword" name="ResetPassword" type="com.tdil.simon.struts.actions.admin.GoToResetPasswordAction" scope="request">
+      <forward name="continue" path="/resetPassword.jsp"/>
+    </action>
+    <action path="/resetPasswordAction" name="ResetPassword" type="com.tdil.simon.struts.actions.admin.ResetPasswordAction" scope="request">
+      <forward name="stay" path="/resetPassword.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

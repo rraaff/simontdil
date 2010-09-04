@@ -18,14 +18,7 @@
 a:active {width: auto;}
 </style>
 <![endif]-->
-<% 
-	com.tdil.simon.data.model.SystemUser user = (com.tdil.simon.data.model.SystemUser)session.getAttribute("user");
-	boolean isAdministrator = user.isAdministrator();
-	boolean isModerator = user.isModerator();
-	boolean isDelegate = user.isDelegate();
-%>
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
-
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
