@@ -10,9 +10,6 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
