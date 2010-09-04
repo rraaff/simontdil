@@ -7,6 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
@@ -14,10 +15,17 @@ import com.tdil.simon.struts.forms.CreateDocumentForm;
 
 public class PreviewDocumentAction extends SimonAction {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.editParagraphs"))) {
 			return mapping.findForward("editParagraphs");
@@ -27,7 +35,7 @@ public class PreviewDocumentAction extends SimonAction {
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
-		
+
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndContinue"))) {
 			createDocumentForm.setVersionStatus(Version.IN_NEGOTIATION);
 			createDocumentForm.save();

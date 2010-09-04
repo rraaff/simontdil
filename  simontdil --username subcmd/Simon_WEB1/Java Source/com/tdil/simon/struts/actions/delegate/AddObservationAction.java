@@ -1,4 +1,4 @@
-package com.tdil.simon.struts.actions.moderator;
+package com.tdil.simon.struts.actions.delegate;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -6,27 +6,32 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.ObservationForm;
-import com.tdil.simon.struts.forms.PrivateMessageForm;
 
-public class AddObservationAction extends SimonAction implements TransactionalActionWithValue {
+public class AddObservationAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE};
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	@Override
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+	
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		// TODO validaciones
 		String pNumber=request.getParameter("pNumber");
@@ -38,15 +43,11 @@ public class AddObservationAction extends SimonAction implements TransactionalAc
 		observationForm.setNewParagraph(newPar);
 		observationForm.setParagraphText(pText);
 		observationForm.setVersionId(pVersion);
-		observationForm.setUserId(this.getLoggedUser(request).getId());
+		observationForm.setUser(this.getLoggedUser(request));
 		// TODO Try catch y devolver error
 		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, observationForm);
-		JSONObject json = JSONObject.fromObject(result);
-		response.getOutputStream().write(json.toString().getBytes());
+		this.writeJsonResponse(result, response);
 		return null;
-//		response.setHeader("X-JSON", json.toString());
-//		return mapping.findForward("ajaxReturn");
-
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
@@ -61,10 +62,12 @@ public class AddObservationAction extends SimonAction implements TransactionalAc
 		observation.setParagraphId(paragraph.getId());
 		observation.setPrivateObservation(false);
 		observation.setAddNewParagraph(newParagraph);
-		observation.setUserId(observationForm.getUserId());
+		observation.setUserId(observationForm.getUser().getId());
 		observation.setObservationText(text);
 		observation.setDeleted(false);
-		ObservationDAO.insertObservation(observation);
+		int id = ObservationDAO.insertObservation(observation);
+		observation.setId(id);
+		DelegateAuditDAO.registerViewObservation(observationForm.getUser(), observation);
 		HashMap result = new HashMap();
 		result.put("result", "OK");
 		return result;

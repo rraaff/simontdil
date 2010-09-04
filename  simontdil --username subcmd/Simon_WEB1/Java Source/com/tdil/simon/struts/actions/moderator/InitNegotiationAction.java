@@ -5,7 +5,6 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -13,6 +12,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.ValidationErrors;
@@ -23,17 +23,25 @@ import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 
-public class InitNegotiationAction extends Action implements TransactionalActionWithValue {
+public class InitNegotiationAction extends SimonAction implements TransactionalActionWithValue {
 
-	public ActionForward execute(ActionMapping mapping, final ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+
+	@Override
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+
+	public ActionForward basicExecute(ActionMapping mapping, final ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		try {
-			final Integer id = (Integer)TransactionProvider.executeInTransaction(this, form);
+			final Integer id = (Integer) TransactionProvider.executeInTransaction(this, form);
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
-					CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+					CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 					createDocumentForm.initWith(id);
 				}
 			});
@@ -45,7 +53,7 @@ public class InitNegotiationAction extends Action implements TransactionalAction
 			return mapping.findForward("failure");
 		}
 	}
-	
+
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		Document principal = DocumentDAO.getDocumentForNegotiation();
 		if (principal == null) {
@@ -63,5 +71,5 @@ public class InitNegotiationAction extends Action implements TransactionalAction
 		SiteDAO.updateSite(site);
 		return version.getId();
 	}
-	
+
 }

@@ -16,17 +16,26 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.DelegateNegotiationForm;
 
 // TODO HACERLO
-public class GetSignatures extends Action implements TransactionalActionWithValue {
+public class GetSignatures extends AjaxSimonAction implements TransactionalActionWithValue {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE};
+	
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+	
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		final DelegateNegotiationForm negotiationForm = (DelegateNegotiationForm) form;
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, negotiationForm);
