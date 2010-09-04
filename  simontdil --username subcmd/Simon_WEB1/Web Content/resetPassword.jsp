@@ -32,8 +32,8 @@
 			<td><bean:write name="userForReset" property="name" /></td> 
 			<td><bean:write name="userForReset" property="email" /></td>
 			<td><bean:write name="userForReset" property="countryName" /></td>
-			<td><logic:equal name="userForReset" property="temporaryPassword" value="true">SI</logic:equal>
-			<logic:notEqual name="userForReset" property="temporaryPassword" value="true">NO</logic:notEqual>
+			<td><logic:equal name="userForReset" property="passwordResetRequest" value="true">SI</logic:equal>
+			<logic:notEqual name="userForReset" property="passwordResetRequest" value="true">NO</logic:notEqual>
 			</td>
 			<td><bean:write name="userForReset" property="password" /></td>
 		</tr> 
