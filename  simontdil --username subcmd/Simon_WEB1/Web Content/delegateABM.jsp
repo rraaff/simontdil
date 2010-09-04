@@ -7,7 +7,6 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 
-<html:html>
 <html:form method="POST" action="/delegateABM">
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -189,5 +188,4 @@
 </table>
 </div>
 </html:form>
-</html:html>
 <%@ include file="includes/footer.jsp" %>

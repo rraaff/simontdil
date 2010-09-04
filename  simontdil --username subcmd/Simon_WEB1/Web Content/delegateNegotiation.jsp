@@ -44,7 +44,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	function doAdd() {
 		var pText = document.getElementById('pText').value;
 		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addPrivateMessage.st"/>', onSuccess: function(json, responseText){
-	    var result = json.result;
+			var errorResult = json.error;
+			if ('notLogged' == errorResult) {
+				window.location='<html:rewrite page="/login.jsp"/>';
+				return;
+			}
+	    	var result = json.result;
 		   if ('OK' == result) {
 		   document.getElementById('pText').value = "";
 		   	document.getElementById('addCommentLayer').style.display = 'none';
@@ -68,8 +73,12 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	var lastNumber = "";
 	var lastText = "";
 	function getDelegateSiteStatus() {
-		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: 
-			function(json, responseText){
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+			var errorResult = json.error;
+			if ('notLogged' == errorResult) {
+				window.location='<html:rewrite page="/login.jsp"/>';
+				return;
+			}
 	        var sitestatus = json.sitestatus;
 	        if (sitestatus == 'NORMAL') {
 	        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
