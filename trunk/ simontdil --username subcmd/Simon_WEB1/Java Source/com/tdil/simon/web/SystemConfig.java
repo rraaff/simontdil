@@ -4,12 +4,17 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
 import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 import com.tdil.simon.utils.LoggerProvider;
 
-public class SystemConfig {
+public class SystemConfig implements ServletContextListener {
 
+	private static final Logger Log = LoggerProvider.getLogger(SystemConfig.class);
 	public static final String propertyLocation = "simon.properties";
 	
 	public static Properties properties;
@@ -19,6 +24,16 @@ public class SystemConfig {
 	private static String referencedDocPath;
 	private static String privateTemporaryPath;
 	
+	public void contextInitialized(ServletContextEvent sce) {
+		try {
+			SystemConfig.init();
+		} catch (IOException e) {
+			Log.error(e.getMessage(), e);
+		}
+	}
+
+	public void contextDestroyed(ServletContextEvent sce) {
+	}
 	
 	public static void init() throws IOException {
 		loadProperties();
@@ -44,23 +59,19 @@ public class SystemConfig {
 	}
 	
 	public static String getMailServer() {
-		return "localhost";
-//		return properties.getProperty("mail.server");
+		return properties.getProperty("mail.server");
 	}
 	
 	public static String getMailFromForNewPassword() {
-		return "no-reply@simon.com";
-//		return properties.getProperty("newpassword.from");
+		return properties.getProperty("newpassword.from");
 	}
 	
 	public static String getMailSubjectForNewPassword() {
-		return "Your new temporary password";
-//		return properties.getProperty("newpassword.subject");
+		return properties.getProperty("newpassword.subject");
 	}
 	
 	public static String getMailBodyForNewPassword() {
 		return "Hola {FULLNAME}, tu usuario de acceso a simon es {USERNAME} y tu clave es {PASSWORD}.";
-//		return properties.getProperty("newpassword.body");
 	}
 	
 	public static String getMailFromForPasswordReset() {
