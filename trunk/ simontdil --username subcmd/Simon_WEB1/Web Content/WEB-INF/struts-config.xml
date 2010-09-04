@@ -82,6 +82,8 @@
       <forward name="continue" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/requestPassword" name="RequestPaswwordForm" type="com.tdil.simon.struts.actions.RequestPasswordAction" scope="request">
+      <forward name="continue" path="/requestPassword.jsp"/>
+      <forward name="stay" path="/requestPassword.jsp"/>
     </action>
     <action path="/setModSiteNormal" name="ModeratorSite" type="com.tdil.simon.struts.actions.admin.SetModeratorSiteNormal" scope="request">
       <forward name="home" path="/adminHome.jsp"/>
