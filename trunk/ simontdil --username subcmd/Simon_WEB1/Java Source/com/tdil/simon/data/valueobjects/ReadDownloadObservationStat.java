@@ -1,6 +1,5 @@
 package com.tdil.simon.data.valueobjects;
 
-import com.tdil.simon.data.model.DelegateAudit;
 
 public class ReadDownloadObservationStat {
 
@@ -20,18 +19,6 @@ public class ReadDownloadObservationStat {
 	}
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
-	}
-	
-	public void setMinAction(int minAction) {
-		if (minAction == DelegateAudit.VIEW_VERSION) {
-			setRead(true);
-		}
-	}
-	
-	public void setMaxAction(int maxAction) {
-		if (maxAction == DelegateAudit.DOWNLOAD_VERSION) {
-			setDownload(true);
-		}
 	}
 	
 	public boolean isRead() {

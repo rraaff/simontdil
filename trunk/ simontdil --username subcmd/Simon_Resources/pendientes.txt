@@ -1,6 +1,16 @@
-Inciar firmando no va el el header
+Sabado:
 
-Tema redirecciones, nadie debe ir a la home, debe pasar por la accion asi setea los datos bien
+Headers deben chequear usuario logueado y redireccionar al login
+Jerarquia de acciones con chequeo de usuario
+Properties
+Parrafos borrados
+Insertar parrafos?
+Ver como vamos a manejar el delete/undelete en delegate
+
+
+
+
+Inciar firmando no va el el header
 
 Sitio publico: normal, splash
 negociacion muestra parrafo + original

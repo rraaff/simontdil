@@ -20,6 +20,7 @@
     <form-bean name="DelegateABM" type="com.tdil.simon.struts.forms.DelegateABMForm"/>
     <form-bean name="ChangePassword" type="com.tdil.simon.struts.forms.ChangePasswordForm"/>
     <form-bean name="ResetPassword" type="com.tdil.simon.struts.forms.ResetPasswordForm"/>
+    <form-bean name="StatisticsForm" type="com.tdil.simon.struts.forms.StatisticsForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -146,6 +147,9 @@
     </action>
     <action path="/resetPasswordAction" name="ResetPassword" type="com.tdil.simon.struts.actions.admin.ResetPasswordAction" scope="request">
       <forward name="stay" path="/resetPassword.jsp"/>
+    </action>
+    <action path="/goToDelegateStats" name="StatisticsForm" type="com.tdil.simon.struts.actions.admin.GoToDelegateStats" scope="request">
+      <forward name="continue" path="/delegateStatistics.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
