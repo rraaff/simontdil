@@ -60,7 +60,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
 			final OutputStream outputStream = response.getOutputStream();
-			response.setContentType("application/pdf");
+//			response.setContentType("application/pdf");
 			VersionVO version = viewForm.getVersion();
 			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "_" + version.getVersion().getNumber() + ".pdf");
 			TransactionProvider.executeInTransaction(new TransactionalAction() {

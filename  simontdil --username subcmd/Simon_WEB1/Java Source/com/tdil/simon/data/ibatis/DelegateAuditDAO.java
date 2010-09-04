@@ -8,6 +8,8 @@ import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.data.valueobjects.ObservationStatisticsRaw;
+import com.tdil.simon.data.valueobjects.ReadDownloadVersionStat;
 
 public class DelegateAuditDAO {
 
@@ -22,7 +24,15 @@ public class DelegateAuditDAO {
 	public static List getLastLogins() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectLastLogins");
 	}
+	
+	public static List<ReadDownloadVersionStat> selectVersionStats(int versionId) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectVersionStats", versionId);
+	}
 
+	public static List<ObservationStatisticsRaw> selectObservationStats(int versionId) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectObservationStats", versionId);
+	}
+	
 	/**
 	 * 
 	 * @deprecated

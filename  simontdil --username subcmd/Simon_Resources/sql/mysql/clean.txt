@@ -3,5 +3,10 @@ delete from `simon`.`VERSION`;
 delete from `simon`.`PARAGRAPH`;
 delete from `simon`.`OBSERVATION`;
 delete from `simon`.`SIGNATURE`;
+delete from `simon`.`DELEGATEAUDIT`;
 update site set status = 'NORMAL';
+update systemuser set
+password = '123',
+temporaryPassword = 0
+where delegate = 1;
 COMMIT;

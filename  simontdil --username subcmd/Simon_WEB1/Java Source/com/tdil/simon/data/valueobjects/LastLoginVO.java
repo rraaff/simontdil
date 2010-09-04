@@ -6,6 +6,7 @@ import com.tdil.simon.web.XMLUtils;
 
 public class LastLoginVO {
 
+	private int countryId;
 	private String country;
 	private Date lastLogin;
 	
@@ -25,5 +26,11 @@ public class LastLoginVO {
 	@Override
 	public String toString() {
 		return XMLUtils.asAXML(this);
+	}
+	public int getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(int countryId) {
+		this.countryId = countryId;
 	}
 }

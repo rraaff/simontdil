@@ -17,6 +17,7 @@
   
   <select id="selectLastLogins" resultClass="com.tdil.simon.data.valueobjects.LastLoginVO">
     select MAX(creationDate) as lastLogin,
+    DelegateAudit.countryId as countryId,
     (SELECT Name from Country WHERE ID = DelegateAudit.countryId) as country
     from DelegateAudit
  	where actionId = 0
@@ -25,12 +26,26 @@
   
   <select id="selectVersionStats" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ReadDownloadVersionStat">
   	 SELECT delegateaudit.countryId as countryId, country.name as countryName,
+	    min(delegateaudit.actionId) as minAction, max(delegateaudit.actionId) as maxAction
+		FROM delegateaudit, country
+		WHERE delegateaudit.objectId = #id#
+		AND delegateaudit.countryId = country.id
+		AND (delegateaudit.actionId = 1 OR delegateaudit.actionId = 3)
+		GROUP BY delegateaudit.countryId, country.name
+	</select>
+	
+	<select id="selectObservationStats" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationStatisticsRaw">
+	select observation.id as observationId, observation.creationDate as creationDate, country.id as countryId, country.name as countryName, 
     min(delegateaudit.actionId) as minAction, max(delegateaudit.actionId) as maxAction
-	FROM delegateaudit, country
-	WHERE delegateaudit.objectId = #id#
-	AND delegateaudit.countryId = country.id
-	AND (delegateaudit.actionId = 1 OR delegateaudit.actionId = 3)
-	GROUP BY delegateaudit.countryId, country.name
+	from paragraph, observation, delegateaudit, country
+	where paragraph.versionId = #id#
+	and paragraph.id = observation.paragraphId
+	and observation.id = delegateaudit.objectId
+	and delegateaudit.countryId = country.id
+	AND (delegateaudit.actionId = 2 OR delegateaudit.actionId = 4)
+	and observation.deleted = 0
+	group by observation.id, observation.creationDate, country.id, country.name
+	order by observation.id
 	</select>
 	
 
