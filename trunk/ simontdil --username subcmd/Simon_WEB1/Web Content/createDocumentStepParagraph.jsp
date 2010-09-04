@@ -4,9 +4,6 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
-<%
-	
-%>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 

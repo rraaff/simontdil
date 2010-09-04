@@ -4,7 +4,7 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
-<%@ include file="includes/headerDelegate.jsp" %>
+<%@ include file="includes/header.jsp" %>
 <style type="text/css">
 /* hide from incapable browsers */
 #portaTabla {

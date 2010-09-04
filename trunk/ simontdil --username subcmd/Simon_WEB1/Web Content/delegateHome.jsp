@@ -4,12 +4,17 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
-<%@ include file="includes/headerDelegate.jsp" %>
+<%@ include file="includes/header.jsp" %>
 <html:html>
 <script type="text/javascript">
 	
 	function getDelegateSiteStatus() {
 		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+			var errorResult = json.error;
+			if ('notLogged' == errorResult) {
+				window.location='<html:rewrite page="/login.jsp"/>';
+				return;
+			}
 		    var sitestatus = json.sitestatus;
 			if (sitestatus != 'NORMAL') {
 				window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
