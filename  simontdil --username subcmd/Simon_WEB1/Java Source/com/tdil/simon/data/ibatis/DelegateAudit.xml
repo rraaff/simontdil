@@ -23,6 +23,17 @@
  	group by countryId
   </select>
   
+  <select id="selectVersionStats" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ReadDownloadVersionStat">
+  	 SELECT delegateaudit.countryId as countryId, country.name as countryName,
+    min(delegateaudit.actionId) as minAction, max(delegateaudit.actionId) as maxAction
+	FROM delegateaudit, country
+	WHERE delegateaudit.objectId = #id#
+	AND delegateaudit.countryId = country.id
+	AND (delegateaudit.actionId = 1 OR delegateaudit.actionId = 3)
+	GROUP BY delegateaudit.countryId, country.name
+	</select>
+	
+
   <insert id="insertAudit" parameterClass="DelegateAudit">
     insert into DelegateAudit (
       ID, delegateId, countryId, objectId, creationDate, actionId, DELETED

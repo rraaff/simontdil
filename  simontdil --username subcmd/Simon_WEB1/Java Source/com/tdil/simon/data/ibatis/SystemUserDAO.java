@@ -15,6 +15,11 @@ public class SystemUserDAO {
 		return IBatisManager.sqlMapper.queryForList("selectDelegateUsers");
 	}
 	
+	/*List UserVO*/
+	public static List selectNotDeletedUsers() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedUsers");
+	}
+	
 	public static List selectNotDeletedDelegateUsersForCountry(int countryId) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersForCountry", countryId);
 	}
