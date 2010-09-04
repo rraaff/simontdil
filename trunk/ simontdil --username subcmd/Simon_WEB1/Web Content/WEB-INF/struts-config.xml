@@ -21,6 +21,7 @@
     <form-bean name="ChangePassword" type="com.tdil.simon.struts.forms.ChangePasswordForm"/>
     <form-bean name="ResetPassword" type="com.tdil.simon.struts.forms.ResetPasswordForm"/>
     <form-bean name="StatisticsForm" type="com.tdil.simon.struts.forms.StatisticsForm"/>
+    <form-bean name="CountryABMForm" type="com.tdil.simon.struts.forms.CountryABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -150,6 +151,15 @@
     </action>
     <action path="/goToDelegateStats" name="StatisticsForm" type="com.tdil.simon.struts.actions.admin.GoToDelegateStats" scope="request">
       <forward name="continue" path="/delegateStatistics.jsp"/>
+    </action>
+    <action path="/goToCountryABM" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.GoToCountryABMAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
+    </action>
+    <action path="/countryABM" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.CountryABMAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
+    </action>
+    <action path="/editCountry" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.EditCountryAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

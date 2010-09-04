@@ -6,7 +6,7 @@
 			<li><a class="trigger" href="#">Usuario t&eacute;cnico</a>
 				<ul>
 					<li><a href="adminHome.jsp">Home de Admin</a></li>
-					<li>* ABM de Delegaciones</li>
+					<li><html:link action="/goToCountryABM" >ABM de Delegaciones</html:link></li>
 					<li><html:link action="/goToDelegateABM" >ABM de Delegados</html:link></li>
 					<li>* ABM de Usuarios del sistema</li>
 					<li><html:link action="/goToResetPassword" >Blanqueo de contraseñas</html:link></li>
