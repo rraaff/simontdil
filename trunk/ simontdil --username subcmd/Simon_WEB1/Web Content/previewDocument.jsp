@@ -7,7 +7,6 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 
-<html:html>
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -95,5 +94,4 @@
 </table>
 </div>
 <div id="footer">
-</html:html>
 <%@ include file="includes/footer.jsp" %>

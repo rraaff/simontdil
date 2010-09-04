@@ -6,7 +6,6 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-<html:html>
 <style type="text/css">
 <!--
 #content #centrador{
@@ -183,5 +182,4 @@
 	</tr>
 </table>
 </div>
-</html:html>
 <%@ include file="includes/footer.jsp" %>
