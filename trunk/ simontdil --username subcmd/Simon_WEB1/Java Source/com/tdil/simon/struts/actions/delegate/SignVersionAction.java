@@ -14,23 +14,29 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.DelegateNegotiationForm;
 
-public class SignVersionAction extends SimonAction implements TransactionalActionWithValue {
+public class SignVersionAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE_AND_SIGN};
+	
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+	
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		DelegateNegotiationForm negotiationForm = (DelegateNegotiationForm)form;
 		negotiationForm.setUser(this.getLoggedUser(request));
 		negotiationForm.setRequest(request);
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, negotiationForm);	
-		JSONObject json = JSONObject.fromObject(result);
-//		response.setHeader("X-JSON", json.toString());
-		response.getOutputStream().write(json.toString().getBytes());
+		this.writeJsonResponse(result, response);
 		return null;
 	}
 

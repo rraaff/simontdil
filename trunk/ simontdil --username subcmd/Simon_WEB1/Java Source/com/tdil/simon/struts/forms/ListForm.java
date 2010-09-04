@@ -12,6 +12,8 @@ public class ListForm extends ActionForm {
 
 	private Map<String, String> params = new HashMap<String, String>();
 	private List list;
+	
+	private String operation;
 
 	public List getList() {
 		return list;
@@ -31,5 +33,13 @@ public class ListForm extends ActionForm {
 	
 	public void setParam(String key, String o) {
 		params.put(key, o);
+	}
+
+	public String getOperation() {
+		return operation;
+	}
+
+	public void setOperation(String operation) {
+		this.operation = operation;
 	}
 }

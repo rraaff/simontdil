@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import net.sf.json.JSONObject;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SiteDAO;
@@ -22,10 +22,22 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.actions.AjaxSimonAction;
 
-public class SetNegotiationParagraph extends Action {
+/**
+ * @deprecated
+ * @author mgodoy
+ *
+ */
+public class SetNegotiationParagraph extends AjaxSimonAction {
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	@Override
+	protected UserTypeValidation[] getPermissions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		
 		String paragraphNumber = request.getParameter("paragraphNumber");

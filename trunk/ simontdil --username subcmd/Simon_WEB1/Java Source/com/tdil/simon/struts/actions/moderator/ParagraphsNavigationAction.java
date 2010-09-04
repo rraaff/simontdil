@@ -5,12 +5,12 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
@@ -20,12 +20,18 @@ import com.tdil.simon.utils.NegotiationUtils;
 
 public class ParagraphsNavigationAction extends SimonAction {
 
-	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		final CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
 
-		
+	@Override
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
+
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.back"))) {
 			if (createDocumentForm.getParagraph() > 0) {
 				createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
@@ -58,7 +64,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			createDocumentForm.save();
 			return mapping.findForward("stay");
 		}
-		
+
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.pushData"))) {
 			createDocumentForm.save();
 			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
@@ -70,7 +76,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 			return mapping.findForward("stay");
 		}
-		
+
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.add"))) {
 			createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
 			return mapping.findForward("stay");
@@ -83,7 +89,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = false;
 			return mapping.findForward("stay");
 		}
-		
+
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.modifyIntroduction"))) {
 			request.getSession().setAttribute("paragraphNegotiated", "false");
 			return mapping.findForward("modifyIntroduction");

@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.database.TransactionProvider;
@@ -18,9 +19,16 @@ import com.tdil.simon.struts.forms.DeleteObservationForm;
 
 public class DeletePrivateObservationAction extends SimonAction implements TransactionalActionWithValue {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
 		DeleteObservationForm deleteForm = (DeleteObservationForm) form;
 		deleteForm.setId(request.getParameter("id"));
 		TransactionProvider.executeInTransaction(this, form);

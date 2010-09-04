@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
@@ -19,10 +20,17 @@ import com.tdil.simon.utils.NegotiationUtils;
 
 public class CreateDocumentActionParagraph extends SimonAction {
 
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+
 	@Override
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
-			HttpServletResponse response) throws Exception {
-		final CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+
+	@Override
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.back"))) {
 			return mapping.findForward("back");
@@ -30,11 +38,11 @@ public class CreateDocumentActionParagraph extends SimonAction {
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.addParagraphs"))) {
 			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 			request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
-				if (inNegotiation) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
-						}
+			if (inNegotiation) {
+				TransactionProvider.executeInTransaction(new TransactionalAction() {
+					public void executeInTransaction() throws SQLException, ValidationException {
+						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+					}
 				});
 			}
 			return mapping.findForward("addParagraphs");

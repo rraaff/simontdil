@@ -10,6 +10,7 @@ import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Site;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.VersionNumberVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
@@ -21,6 +22,7 @@ public class ViewVersionForm extends ActionForm {
 	 */
 	private static final long serialVersionUID = 4101468206992176127L;
 	
+	private SystemUser user;
 	private String operation;
 	private VersionVO version;
 	private List observations;
@@ -130,6 +132,14 @@ public class ViewVersionForm extends ActionForm {
 
 	public void setObservations(List observations) {
 		this.observations = observations;
+	}
+
+	public SystemUser getUser() {
+		return user;
+	}
+
+	public void setUser(SystemUser user) {
+		this.user = user;
 	}
 
 }

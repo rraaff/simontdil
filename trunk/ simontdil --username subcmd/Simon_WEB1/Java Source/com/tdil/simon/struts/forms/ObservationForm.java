@@ -2,6 +2,8 @@ package com.tdil.simon.struts.forms;
 
 import org.apache.struts.action.ActionForm;
 
+import com.tdil.simon.data.model.SystemUser;
+
 public class ObservationForm extends ActionForm {
 
 	
@@ -11,7 +13,7 @@ public class ObservationForm extends ActionForm {
 	private String newParagraph;
 	private String paragraphText;
 	private String versionId;
-	private int userId;
+	private SystemUser user;
 	
 	public String getParagraphNumber() {
 		return paragraphNumber;
@@ -37,10 +39,10 @@ public class ObservationForm extends ActionForm {
 	public void setVersionId(String versionId) {
 		this.versionId = versionId;
 	}
-	public int getUserId() {
-		return userId;
+	public SystemUser getUser() {
+		return user;
 	}
-	public void setUserId(int userId) {
-		this.userId = userId;
+	public void setUser(SystemUser user) {
+		this.user = user;
 	}
 }

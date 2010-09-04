@@ -16,6 +16,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
@@ -27,22 +28,27 @@ import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.LoggedUserForm;
 
-public class GetDelegateSiteStatus extends SimonAction implements TransactionalActionWithValue {
+public class GetDelegateSiteStatus extends AjaxSimonAction implements TransactionalActionWithValue {
 
-	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE};
+	
+	@Override
+	protected UserTypeValidation[] getPermissions() {
+		return permissions;
+	}
+	
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		LoggedUserForm loggedUserForm = new LoggedUserForm();
 		loggedUserForm.setUser(this.getLoggedUser(request));
 		HashMap<String, String> result = (HashMap<String, String>) TransactionProvider.executeInTransaction(this,
 				loggedUserForm);
-		JSONObject json = JSONObject.fromObject(result);
-//		response.setHeader("X-JSON", json.toString());
-		response.getOutputStream().write(json.toString().getBytes());
+		this.writeJsonResponse(result, response);
 		return null;
-//		return mapping.findForward("ajaxReturn");
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
