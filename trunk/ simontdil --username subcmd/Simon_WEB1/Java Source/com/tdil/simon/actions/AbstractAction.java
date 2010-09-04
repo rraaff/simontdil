@@ -51,10 +51,10 @@ public abstract class AbstractAction implements Cloneable {
 	}
 	
 	private final void validate(HttpServletRequest req, ValidationError validation) {
-		this.getUserTypeValidation().validate(req, validation);
-		if (!validation.hasError()) {
-			this.basicValidate(req, validation);
-		}
+//		TODO deprecated this.getUserTypeValidation().validate(req, validation);
+//		if (!validation.hasError()) {
+//			this.basicValidate(req, validation);
+//		}
 	}
 
 	protected abstract UserTypeValidation getUserTypeValidation();

@@ -1,8 +1,5 @@
 package com.tdil.simon.data.model;
 
-import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.actions.validations.ValidationErrors;
 
 public class Document extends PersistentObject {
 

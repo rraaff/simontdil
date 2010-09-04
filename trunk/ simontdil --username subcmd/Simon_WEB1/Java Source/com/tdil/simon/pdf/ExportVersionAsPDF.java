@@ -22,11 +22,14 @@ import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.SAXException;
 
 import com.lowagie.text.DocumentException;
+import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
+import com.tdil.simon.data.model.DelegateAudit;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Signature;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
@@ -34,7 +37,8 @@ import com.tdil.simon.data.valueobjects.VersionVO;
 
 public class ExportVersionAsPDF {
 
-	public static void exportDocument(VersionVO version, OutputStream output) throws SQLException, IOException, ParserConfigurationException, DocumentException, SAXException {
+	public static void exportDocument(SystemUser user, VersionVO version, OutputStream output) throws SQLException, IOException, ParserConfigurationException, DocumentException, SAXException {
+		DelegateAuditDAO.registerDownloadVersion(user, version.getVersion());
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
 
@@ -88,6 +92,7 @@ public class ExportVersionAsPDF {
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
 			buf.append("<table border=\"0\">");
 			for (Observation o : observations) {
+				DelegateAuditDAO.registerDownloadObservation(user, o);
 				ObservationVO vo = (ObservationVO)o;
 				buf.append("<TR><TD><TABLE><TR>");
 				buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
