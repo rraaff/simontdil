@@ -23,6 +23,8 @@
     <form-bean name="StatisticsForm" type="com.tdil.simon.struts.forms.StatisticsForm"/>
     <form-bean name="CountryABMForm" type="com.tdil.simon.struts.forms.CountryABMForm"/>
     <form-bean name="CategoryABMForm" type="com.tdil.simon.struts.forms.CategoryABMForm"/>
+    <form-bean name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.forms.ReferenceDocumentABMForm"/>
+    <form-bean name="ReferenceDocumentList" type="com.tdil.simon.struts.forms.ListForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -172,6 +174,18 @@
     </action>
     <action path="/editCategory" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.EditCategoryAction" scope="session">
       <forward name="continue" path="/categoryABM.jsp"/>
+    </action>
+    <action path="/goToReferenceDocumentABM" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.GoToReferenceDocumentABMAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/referenceDocumentABM" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.ReferenceDocumentABMAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/editReferenceDocument" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.EditReferenceDocumentAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/goToReferenceDocLibrary" name="ReferenceDocumentList" type="com.tdil.simon.struts.actions.delegate.GoToReferenceDocumentList" scope="request">
+      <forward name="continue" path="/referenceDocumentLibrary.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

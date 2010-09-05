@@ -62,6 +62,10 @@ public class SystemConfig implements ServletContextListener {
 		return properties.getProperty("mail.server");
 	}
 	
+	public static String getServerUrl() {
+		return properties.getProperty("server.url");
+	}
+	
 	public static String getMailFromForNewPassword() {
 		return properties.getProperty("newpassword.from");
 	}

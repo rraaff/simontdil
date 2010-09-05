@@ -1,4 +1,4 @@
-package com.tdil.simon.struts.actions.admin;
+package com.tdil.simon.struts.actions.moderator;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,33 +17,32 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
-import com.tdil.simon.struts.forms.CountryABMForm;
-import com.tdil.simon.struts.forms.DelegateABMForm;
+import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
 
-public class CountryABMAction extends SimonAction {
+public class ReferenceDocumentABMAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
 		return permissions;
 	}
-	
+
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		final CountryABMForm countryABMForm = (CountryABMForm) form;
+		final ReferenceDocumentABMForm referenceDocumentABMForm = (ReferenceDocumentABMForm) form;
 
-		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.cancel"))) {
-			countryABMForm.reset();
+		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.cancel"))) {
+			referenceDocumentABMForm.reset();
 		}
-		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.create"))
-				|| countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.modify"))) {
+		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.create"))
+				|| referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.modify"))) {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					// TODO Auto-generated method stub
 					try {
-						countryABMForm.save();
+						referenceDocumentABMForm.save();
 					} catch (FileNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -56,8 +55,8 @@ public class CountryABMAction extends SimonAction {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					// TODO Auto-generated method stub
-					countryABMForm.reset();
-					countryABMForm.init();
+					referenceDocumentABMForm.reset();
+					referenceDocumentABMForm.init();
 				}
 			});
 		}

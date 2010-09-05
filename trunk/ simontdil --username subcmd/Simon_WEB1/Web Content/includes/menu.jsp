@@ -18,7 +18,7 @@
 					<li><html:link action="/goToModeratorHome" >Home de Moderador</html:link></li>
 					<li><html:link action="/createDocument" >Crear documento</html:link></li>
 					<li><html:link action="/goToListDocument" >Lista de documentos</html:link></li>
-					<li>* ABM de Librer&eacute;a de Referencia</li>
+					<li><html:link action="/goToReferenceDocumentABM" >ABM de Librer&iacute;a de Referencia</html:link></li>
 					<li><html:link action="/goToCategoryABM" >ABM de Categor&iacute;as de Librer&iacute;a</html:link></li>
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>

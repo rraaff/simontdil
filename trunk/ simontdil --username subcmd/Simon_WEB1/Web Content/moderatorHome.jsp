@@ -161,6 +161,9 @@
 								<tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
 								</tr>
+								<tr> 
+									<td height="15"><html:link  action="/goToReferenceDocLibrary.st">PABLO: ir a ver la libreria</html:link></td>
+								</tr>
 							</table>
 						</div>
 						<!-- corte tabla template -->

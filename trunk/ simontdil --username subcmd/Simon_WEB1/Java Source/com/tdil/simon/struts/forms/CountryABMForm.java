@@ -1,14 +1,22 @@
 package com.tdil.simon.struts.forms;
 
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.CountryVO;
+import com.tdil.simon.utils.UploadUtils;
+import com.tdil.simon.web.SystemConfig;
 
 public class CountryABMForm extends ActionForm {
 
@@ -70,21 +78,23 @@ public class CountryABMForm extends ActionForm {
 		}
 	}
 	
-	public void save() throws SQLException {
+	public void save() throws SQLException, FileNotFoundException, IOException {
 		if (id == 0) {
 			this.addCountry();
 		} else {
 			this.modifyCountry();
 		}
 	}
-	private void modifyCountry() throws SQLException {
+	private void modifyCountry() throws SQLException, FileNotFoundException, IOException {
 		Country country = CountryDAO.getCountry(this.getId());
 		country.setName(this.getName());
 		CountryDAO.updateCountry(country);
+		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + this.getId() + ".png");
 	}
-	private void addCountry() throws SQLException {
+	private void addCountry() throws SQLException, FileNotFoundException, IOException {
 		Country country = new Country();
 		country.setName(this.getName());
-		CountryDAO.insertCountry(country);
+		int countryId = CountryDAO.insertCountry(country);
+		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + countryId + ".png");
 	}
 }

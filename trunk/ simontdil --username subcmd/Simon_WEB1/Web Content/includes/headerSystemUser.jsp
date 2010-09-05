@@ -49,7 +49,7 @@ a:active {width: auto;}
 							<tr>
 								<td width="280" align="right">Bienvenido: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="30"><img src="images/others/banderaArgentina.png" width="30" height="30"></td>
+								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
 							</tr>
 						</table>
 					</div>
