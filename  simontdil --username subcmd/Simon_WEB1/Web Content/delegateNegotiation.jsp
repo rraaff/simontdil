@@ -292,7 +292,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 											<!-- corte tabla template -->
 												<%if (isDelegate && user.isCanSign()) { %>
 												<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
-												   flashvars="saveUrl=http://localhost:8180/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+												   flashvars="saveUrl=http://<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
 												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 												   pluginspage="http://www.adobe.com/go/getflashplayer">
 												</embed>

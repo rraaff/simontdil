@@ -95,6 +95,7 @@ CREATE  TABLE `simon`.`REFERENCEDOCUMENT` (
   `title` VARCHAR(100) NULL ,
   `fileName` VARCHAR(100) NULL ,
   `extension` VARCHAR(10) NULL ,
+  `contentType` VARCHAR(100) NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 

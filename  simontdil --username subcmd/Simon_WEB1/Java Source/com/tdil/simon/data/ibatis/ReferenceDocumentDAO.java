@@ -4,15 +4,16 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.tdil.simon.data.model.Category;
-import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
 
 public class ReferenceDocumentDAO {
 
+	/*List<ReferenceDocumentVO>*/
 	public static List selectAllReferenceDocument() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocuments");
 	}
 	
+	/*List<ReferenceDocumentVO>*/
 	public static List selectNotDeletedReferenceDocument() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocumentsNotDeleted");
 	}

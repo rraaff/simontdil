@@ -6,6 +6,7 @@ public class ReferenceDocument extends PersistentObject {
 	private String title;
 	private String fileName;
 	private String extension;
+	private String contentType;
 
 	public String getFileName() {
 		return fileName;
@@ -30,5 +31,11 @@ public class ReferenceDocument extends PersistentObject {
 	}
 	public void setExtension(String extension) {
 		this.extension = extension;
+	}
+	public String getContentType() {
+		return contentType;
+	}
+	public void setContentType(String contentType) {
+		this.contentType = contentType;
 	}
 }
