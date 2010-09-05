@@ -1,12 +1,12 @@
-Sabado:
+Categorias
+Documentos de referencia (download)
 
-Headers deben chequear usuario logueado y redireccionar al login
-Jerarquia de acciones con chequeo de usuario
 Properties
 Parrafos borrados
 Insertar parrafos?
 Ver como vamos a manejar el delete/undelete en delegate
-
+Sitio publico
+Firma loca con video
 
 
 

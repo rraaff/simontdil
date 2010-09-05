@@ -7,9 +7,7 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.data.ibatis.CountryDAO;
-import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
-import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.valueobjects.CountryVO;
 
 public class CountryABMForm extends ActionForm {
@@ -88,6 +86,5 @@ public class CountryABMForm extends ActionForm {
 		Country country = new Country();
 		country.setName(this.getName());
 		CountryDAO.insertCountry(country);
-		
 	}
 }
