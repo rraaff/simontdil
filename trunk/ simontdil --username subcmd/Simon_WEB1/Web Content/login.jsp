@@ -52,29 +52,25 @@
 								</td>
 							</tr>
 							<tr>
+								<td colspan="3" height="25"><span class="errorText"><html:errors property="general" /></span><img src="images/null.gif" width="1" height="25"></td>
+							</tr>
+							<tr>
+								<td colspan="3">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
+							</tr>
+							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
-									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-										<tr>
-											<td colspan="2" height="11"><img src="images/null.gif" width="1" height="11"></td>
-										</tr>
-										<tr>
-											<td height="30">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
-											<td valign="middle"><html:submit property="operation">
-													<bean:message key="login.requestPassword"/>
-												</html:submit>
-											</td>
-										</tr>
-										<tr>
-											<td colspan="2" height="11"><img src="images/null.gif" width="1" height="11"></td>
-										</tr>
-									</table>
+								<td colspan="3" align="center">
+								<html:submit property="operation">
+									<bean:message key="login.requestPassword"/>
+								</html:submit>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
 						</table>
-						<!-- corte tabla template --><span class="errorText"><html:errors property="general" /></span>
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
