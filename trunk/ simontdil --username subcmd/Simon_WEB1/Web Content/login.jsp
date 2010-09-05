@@ -61,11 +61,10 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center">
+								<td colspan="3" align="center" valign="middle">
 								<html:submit property="operation">
 									<bean:message key="login.requestPassword"/>
-								</html:submit>
-								</td>
+								</html:submit></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
