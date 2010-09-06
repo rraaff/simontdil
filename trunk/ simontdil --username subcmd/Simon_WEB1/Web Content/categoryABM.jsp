@@ -31,9 +31,9 @@
 								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="123" align="right">Nombre:</td>
+								<td width="93" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="220" align="left"><html:text name="CategoryABMForm" property="name"/></td>
+								<td width="250" align="left"><html:text name="CategoryABMForm" property="name" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -79,7 +79,7 @@
 			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de delegados</div></td>
+					<td background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de categor&iacute;as</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -94,8 +94,8 @@
 								</tr>
 								<tr>
 									<td width="70%" height="20" align="left">Nombre</td>
-									<td>Editar</td>
-									<td>Borrar/Reactivar</td>
+									<td width="60">Editar</td>
+									<td width="60">Borrar/Reactivar</td>
 								</tr> 
 								<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
