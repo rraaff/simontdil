@@ -18,7 +18,7 @@ import com.tdil.simon.struts.forms.StatisticsForm;
 
 public class GoToDelegateStats extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
