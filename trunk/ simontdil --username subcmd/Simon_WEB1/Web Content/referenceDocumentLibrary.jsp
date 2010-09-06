@@ -15,7 +15,7 @@
 		<td height="20" align="left">Categoria</td>
 		<td align="left">Titulo</td>
 		<td align="left">Archivo</td>
-		<td>Bajar</td>
+		<td width="30">Bajar</td>
 	</tr> 
 	<logic:iterate name="ReferenceDocumentList" property="list" id="iterRefDoc" indexId="iterIndex"> 
 		<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
