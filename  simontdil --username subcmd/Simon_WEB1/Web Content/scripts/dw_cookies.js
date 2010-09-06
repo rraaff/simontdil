@@ -1,8 +1,3 @@
-/*********************************************************************************
-  dw_cookies.js - cookie functions for dyn-web.com
-  version date: Nov 2009
-**********************************************************************************/
-
 var dw_Cookie = {
 
     set: function(name, value, days, path, domain, secure) {
