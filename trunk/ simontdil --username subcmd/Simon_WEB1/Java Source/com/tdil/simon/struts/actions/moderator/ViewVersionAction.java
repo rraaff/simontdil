@@ -58,6 +58,10 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 				return mapping.findForward("invalidAction");
 			}
 		}
+		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.searchObservations"))) {
+			request.setAttribute("versionId", String.valueOf(viewForm.getVersion().getVersion().getId()));
+			return mapping.findForward("goToSearchObservations");
+		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
 			final OutputStream outputStream = response.getOutputStream();
 //			response.setContentType("application/pdf");
