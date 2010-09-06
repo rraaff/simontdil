@@ -25,6 +25,7 @@
     <form-bean name="CategoryABMForm" type="com.tdil.simon.struts.forms.CategoryABMForm"/>
     <form-bean name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.forms.ReferenceDocumentABMForm"/>
     <form-bean name="ReferenceDocumentList" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="SearchObservationsForm" type="com.tdil.simon.struts.forms.SearchObservationsForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -112,6 +113,7 @@
     <action path="/viewVersionAction" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
       <forward name="continue" path="/viewVersion.jsp"/>
       <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
+      <forward name="goToSearchObservations" path="/goToSearchObservations.st"/>
     </action>
     <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
       <forward name="continue" path="/delegateHome.jsp"/>
@@ -186,6 +188,16 @@
     </action>
     <action path="/goToReferenceDocLibrary" name="ReferenceDocumentList" type="com.tdil.simon.struts.actions.delegate.GoToReferenceDocumentList" scope="request">
       <forward name="continue" path="/referenceDocumentLibrary.jsp"/>
+    </action>
+    <action path="/goToSearchObservations" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.GoToSearchObservations" scope="session">
+      <forward name="continue" path="/searchObservations.jsp"/>
+    </action>
+    <action path="/searchObservations" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.SearchObservationsAction" scope="session">
+      <forward name="continue" path="/listObservationsSearchResult.jsp"/>
+      <forward name="back" path="/viewVersion.jsp"/>
+    </action>
+    <action path="/listObservationsSearchResult" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.ListObservationsSearchResult" scope="session">
+      <forward name="goToSearch" path="/searchObservations.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

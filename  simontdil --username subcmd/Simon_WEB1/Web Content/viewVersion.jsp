@@ -222,7 +222,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 							</tr>
 							<tr>
 								<td colspan="3">
-	<html:submit property="operation" disabled="true">
+	<html:submit property="operation">
 		<bean:message key="viewVersion.searchObservations"/>
 	</html:submit>
 								</td>
