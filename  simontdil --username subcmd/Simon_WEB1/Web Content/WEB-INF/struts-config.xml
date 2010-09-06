@@ -26,6 +26,7 @@
     <form-bean name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.forms.ReferenceDocumentABMForm"/>
     <form-bean name="ReferenceDocumentList" type="com.tdil.simon.struts.forms.ListForm"/>
     <form-bean name="SearchObservationsForm" type="com.tdil.simon.struts.forms.SearchObservationsForm"/>
+    <form-bean name="SystemUserABM" type="com.tdil.simon.struts.forms.SystemUserABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -198,6 +199,15 @@
     </action>
     <action path="/listObservationsSearchResult" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.ListObservationsSearchResult" scope="session">
       <forward name="goToSearch" path="/searchObservations.jsp"/>
+    </action>
+    <action path="/goToSystemUserABM" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.GoToSystemUserABMAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
+    </action>
+    <action path="/systemUserABM" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.SystemUserABMAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
+    </action>
+    <action path="/editSystemUser" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.EditSystemUserAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

@@ -8,7 +8,7 @@
 					<li><a href="adminHome.jsp">Home de Admin</a></li>
 					<li><html:link action="/goToCountryABM" >ABM de Delegaciones</html:link></li>
 					<li><html:link action="/goToDelegateABM" >ABM de Delegados</html:link></li>
-					<li>* ABM de Usuarios del sistema</li>
+					<li><html:link action="/goToSystemUserABM" >ABM de Usuarios del sistema</html:link></li>
 					<li><html:link action="/goToResetPassword" >Blanqueo de contraseñas</html:link></li>
 				</ul>
 			</li>

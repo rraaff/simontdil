@@ -10,8 +10,10 @@ import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
+import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Category;
 import com.tdil.simon.data.model.ReferenceDocument;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.valueobjects.ReferenceDocumentVO;
 import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
@@ -136,5 +138,17 @@ public class ReferenceDocumentABMForm extends ActionForm {
 	}
 	public void setAllCategories(List<Category> allCategories) {
 		this.allCategories = allCategories;
+	}
+	
+	public void delete(int position) throws SQLException {
+		ReferenceDocument document = this.getAllReferenceDocuments().get(position);
+		document.setDeleted(true);
+		ReferenceDocumentDAO.logicallyDeleteReferenceDocument(document);
+	}
+	public void reactivate(int position) throws SQLException {
+		ReferenceDocument document = this.getAllReferenceDocuments().get(position);
+		document.setDeleted(false);
+		ReferenceDocumentDAO.updateReferenceDocument(document);
+		
 	}
 }

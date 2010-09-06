@@ -1,6 +1,7 @@
 package com.tdil.simon.data.valueobjects;
 
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.struts.ApplicationResources;
 
 public class UserVO extends SystemUser {
 
@@ -32,6 +33,30 @@ public class UserVO extends SystemUser {
 				}
 			}
 		}
+	}
+	
+	public String getSystemPermissionsString() {
+		StringBuffer result = new StringBuffer();
+		boolean insertSeparator = false;
+		if (this.isAdministrator()) {
+			result.append(ApplicationResources.getMessage("admnistrator"));
+			insertSeparator = true;
+		}
+		if (this.isModerator()) {
+			if (insertSeparator) {
+				result.append(", ");
+			}
+			result.append(ApplicationResources.getMessage("moderator"));
+			insertSeparator = true;
+		}
+		if (this.isDesigner()) {
+			if (insertSeparator) {
+				result.append(", ");
+			}
+			result.append(ApplicationResources.getMessage("designer"));
+			insertSeparator = true;
+		}
+		return result.toString();
 	}
 	
 	@Override

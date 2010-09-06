@@ -46,6 +46,10 @@ public class DownloadController extends HttpServlet {
 		if (action.equals("refdoc")) {
 			downloadRefDoc(req, res);
 		}
+		if (action.equals("signature")) {
+			// TODO seguir por aca
+			downloadSignature(req, res);
+		}
 	}
 
 	private void downloadFlag(HttpServletRequest req, HttpServletResponse res) throws IOException {
@@ -84,7 +88,7 @@ public class DownloadController extends HttpServlet {
 			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
 			if (!StringUtils.isEmptyOrWhitespaceOnly(fileName)) {
-				res.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(getDocumentAction.getReferenceDocument().getFileName()));
+				res.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(getDocumentAction.getReferenceDocument().getFileName(), "UTF-8"));
 				FileInputStream inputStream = null;
 				try {
 					inputStream = new FileInputStream(new File(fileName));
@@ -97,6 +101,25 @@ public class DownloadController extends HttpServlet {
 			}
 		}
 	}
+	
+	private void downloadSignature(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		String fileName = getServerSignatureFileNameFor(req.getParameter("signature"));
+		res.setHeader("Cache-Control", "no-store");
+		res.setHeader("Pragma", "no-cache");
+		res.setDateHeader("Expires", 0);
+		if (!StringUtils.isEmptyOrWhitespaceOnly(fileName)) {
+			res.setContentType("image/png");
+			FileInputStream inputStream = null;
+			try {
+				inputStream = new FileInputStream(new File(fileName));
+				IOUtils.copy(inputStream, res.getOutputStream());
+			} finally {
+				if (inputStream != null) {
+					inputStream.close();
+				}
+			}
+		}
+	}
 
 	private String getServerFlagFileNameFor(String action, Integer id) {
 		return SystemConfig.getFlagStore() + "/" + String.valueOf(id) + ".png";
@@ -104,6 +127,10 @@ public class DownloadController extends HttpServlet {
 
 	private String getServerRefDocFileNameFor(String action, Integer id) {
 		return SystemConfig.getReferenceDocumentStore() + "/" + String.valueOf(id);
+	}
+	
+	private String getServerSignatureFileNameFor(String fileName) {
+		return SystemConfig.getSignatureStore() + "/" + fileName;
 	}
 
 

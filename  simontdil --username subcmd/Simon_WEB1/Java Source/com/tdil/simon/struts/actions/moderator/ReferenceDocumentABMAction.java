@@ -18,6 +18,8 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
+import com.tdil.simon.utils.ImageSubmitData;
+import com.tdil.simon.utils.ImageTagUtil;
 
 public class ReferenceDocumentABMAction extends SimonAction {
 
@@ -33,6 +35,29 @@ public class ReferenceDocumentABMAction extends SimonAction {
 			throws Exception {
 		final ReferenceDocumentABMForm referenceDocumentABMForm = (ReferenceDocumentABMForm) form;
 
+		String image = ImageTagUtil.getName(request);
+		if (image != null) {
+			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
+			if (imageSubmitData.isParsed())  {
+				if ("deleteImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							referenceDocumentABMForm.delete(imageSubmitData.getPosition());
+							referenceDocumentABMForm.init();
+						}
+					});
+				}
+				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							referenceDocumentABMForm.reactivate(imageSubmitData.getPosition());
+							referenceDocumentABMForm.init();
+						}
+					});
+				}
+				return mapping.findForward("continue");
+			}
+		}
 		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.cancel"))) {
 			referenceDocumentABMForm.reset();
 		}

@@ -65,8 +65,7 @@ public class ResetPasswordForm extends ListForm {
 			toClean.setPassword(newPassword);
 			toClean.setTemporaryPassword(true);
 			toClean.setPasswordResetRequest(false);
-			toClean.setDeleted(false);
-			SystemUserDAO.updateUser(toClean);
+			SystemUserDAO.updatePassword(toClean);
 			try {
 				EmailUtils.sendPasswordEmail(toClean.getEmail(), toClean.getName(), toClean.getUsername(), newPassword);
 			} catch (MessagingException e) {

@@ -101,4 +101,8 @@ public class SystemConfig implements ServletContextListener {
 	public static String getReferenceDocumentStore() {
 		return properties.getProperty("store.reference");
 	}
+	
+	public static String getSignatureStore() {
+		return properties.getProperty("store.signatures");
+	}
 }
