@@ -95,7 +95,7 @@
 								<tr>
 									<td width="70%" height="20" align="left">Nombre</td>
 									<td>Editar</td>
-									<td>Borrar</td>
+									<td>Borrar/Reactivar</td>
 								</tr> 
 								<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
@@ -103,7 +103,13 @@
 										<td><html:link  action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
 											<img src="images/buttons/editar.png" width="50" height="24" border="0">
 										</html:link>
-										<td> - </td>
+										<td><logic:equal name="iterCategory" property="deleted" value="false">
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+											</logic:equal>
+											<logic:equal name="iterCategory" property="deleted" value="true">
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+											</logic:equal>
+										</td>
 									</tr> 
 								</logic:iterate>
 								<tr>

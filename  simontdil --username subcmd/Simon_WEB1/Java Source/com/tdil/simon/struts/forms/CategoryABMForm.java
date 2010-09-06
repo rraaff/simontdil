@@ -78,4 +78,14 @@ public class CategoryABMForm extends ActionForm {
 		category.setName(this.getName());
 		CategoryDAO.insertCategory(category);
 	}
+	public void delete(int position) throws SQLException {
+		Category category = this.getAllCategories().get(position);
+		category.setDeleted(true);
+		CategoryDAO.logicallyDeleteCategory(category);
+	}
+	public void reactivate(int position) throws SQLException {
+		Category category = this.getAllCategories().get(position);
+		category.setDeleted(false);
+		CategoryDAO.updateCategory(category);
+	}
 }
