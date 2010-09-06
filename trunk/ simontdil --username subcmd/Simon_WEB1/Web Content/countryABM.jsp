@@ -114,7 +114,12 @@
 										<td><html:link  action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
 											<img src="images/buttons/editar.png" width="50" height="24" border="0">
 										</html:link>
-										<td> - </td>
+										<td><logic:equal name="iterCountry" property="deleted" value="false">
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+											</logic:equal>
+											<logic:equal name="iterCountry" property="deleted" value="true">
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+											</logic:equal></td>
 									</tr> 
 								</logic:iterate>
 								<tr>

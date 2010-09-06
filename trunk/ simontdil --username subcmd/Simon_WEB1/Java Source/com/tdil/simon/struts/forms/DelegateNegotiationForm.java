@@ -22,6 +22,7 @@ import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.web.SystemConfig;
 
 public class DelegateNegotiationForm extends ActionForm {
 
@@ -85,9 +86,9 @@ public class DelegateNegotiationForm extends ActionForm {
 		signature.setDeleted(false);
 		SignatureDAO.insertSignature(signature);
 		InputStream input = request.getInputStream();
-		// TODO deshardcodear
+		// TODO error handling
 		FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
-		FileOutputStream fout2 = new FileOutputStream("C:/icarus/workspace/simon/Simon_WEB/Web Content/signatures/" + signature.getSignatureFileName());
+		FileOutputStream fout2 = new FileOutputStream(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
 		try {
 			IOUtils.copy(input, fout);
 			fout.close();

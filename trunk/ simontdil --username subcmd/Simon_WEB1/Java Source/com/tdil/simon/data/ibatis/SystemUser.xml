@@ -167,29 +167,39 @@
 	<update id="updateUser" parameterClass="SystemUser">
 		update SYSTEMUSER set
 		username = #username#,
-		password = #password#,
-		name =
-		#name#,
+		name = #name#,
 		email = #email#,
 		job = #job#,
 		countryDesc = #countryDesc#,
 		countryId = #countryId#,
 		administrator = #administrator#,
-		moderator =
-		#moderator#,
+		moderator =	#moderator#,
 		delegate = #delegate#,
 		typeOne = #typeOne#,
-		typeTwo =
-		#typeTwo#,
+		typeTwo = #typeTwo#,
 		canSign = #canSign#,
 		designer = #designer#,
 		passwordResetRequest = #passwordResetRequest#,
-		temporaryPassword =
-		#temporaryPassword#,
 		deleted = #deleted#
 		where
 		ID = #id#
   </update>
+
+	<update id="updatePassword" parameterClass="SystemUser">
+			update SYSTEMUSER set
+			password = #password#,
+			passwordResetRequest = #passwordResetRequest#,
+			temporaryPassword = #temporaryPassword#
+			where
+			ID = #id#
+	  </update>
+
+	<update id="reactivateUser" parameterClass="SystemUser">
+			update SYSTEMUSER set
+			deleted = 0
+			where
+			ID = #id#
+	  </update>
 
 	<update id="logDeleteUser" parameterClass="SystemUser">
 		update SYSTEMUSER set

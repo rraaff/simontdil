@@ -12,7 +12,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
+import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.CountryDAO;
+import com.tdil.simon.data.model.Category;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.CountryVO;
 import com.tdil.simon.utils.UploadUtils;
@@ -96,5 +98,15 @@ public class CountryABMForm extends ActionForm {
 		country.setName(this.getName());
 		int countryId = CountryDAO.insertCountry(country);
 		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + countryId + ".png");
+	}
+	public void reactivate(int position) throws SQLException {
+		Country country = this.getAllCountries().get(position);
+		country.setDeleted(false);
+		CountryDAO.updateCountry(country);
+	}
+	public void delete(int position) throws SQLException {
+		Country country = this.getAllCountries().get(position);
+		country.setDeleted(true);
+		CountryDAO.logicallyDeleteCountry(country);
 	}
 }

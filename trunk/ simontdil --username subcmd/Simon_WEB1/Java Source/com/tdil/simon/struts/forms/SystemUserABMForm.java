@@ -18,24 +18,22 @@ import com.tdil.simon.data.valueobjects.UserVO;
 import com.tdil.simon.utils.EmailUtils;
 import com.tdil.simon.utils.LoggerProvider;
 
-public class DelegateABMForm extends ActionForm {
+public class SystemUserABMForm extends ActionForm {
 
 	private static final long serialVersionUID = 4257776435738129693L;
-	private static final Logger Log = LoggerProvider.getLogger(DelegateABMForm.class);
+	private static final Logger Log = LoggerProvider.getLogger(SystemUserABMForm.class);
 	private String operation;
 
 	private int id;
 	private String name;
 	private String username;
-	private String countryId;
 	private String email;
-	private boolean typeOne;
-	private boolean typeTwo;
-	private boolean canSign;
-	private String job;
+	private boolean administrator;
+	private boolean moderator;
+	private boolean designer;
 	
 	private List<UserVO> allUsers;
-	private List<Country> allCountries;
+	private Country host;
 	
 	public int getId() {
 		return id;
@@ -55,42 +53,13 @@ public class DelegateABMForm extends ActionForm {
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	public String getCountryId() {
-		return countryId;
-	}
-	public void setCountryId(String countryId) {
-		this.countryId = countryId;
-	}
 	public String getEmail() {
 		return email;
 	}
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isTypeOne() {
-		return typeOne;
-	}
-	public void setTypeOne(boolean typeOne) {
-		this.typeOne = typeOne;
-	}
-	public boolean isTypeTwo() {
-		return typeTwo;
-	}
-	public void setTypeTwo(boolean typeTwo) {
-		this.typeTwo = typeTwo;
-	}
-	public boolean isCanSign() {
-		return canSign;
-	}
-	public void setCanSign(boolean canSign) {
-		this.canSign = canSign;
-	}
-	public String getJob() {
-		return job;
-	}
-	public void setJob(String job) {
-		this.job = job;
-	}
+
 	public List<UserVO> getAllUsers() {
 		return allUsers;
 	}
@@ -99,7 +68,7 @@ public class DelegateABMForm extends ActionForm {
 	}
 	
 	public void refreshUserList() throws SQLException {
-		setAllUsers(SystemUserDAO.selectDelegateUsers());
+		setAllUsers(SystemUserDAO.selectSystemUsers());
 	}
 	
 	public void save() throws SQLException {
@@ -118,7 +87,6 @@ public class DelegateABMForm extends ActionForm {
 //		if (!toModify.isDelegate()) {
 //			throw new ValidationException(new ValidationError(ValidationErrors.USER_DOES_NOT_EXISTS));
 //		}
-		Country country = CountryDAO.getCountry(Integer.valueOf(this.countryId));
 //		if (country == null) {
 //			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
 //		}
@@ -130,13 +98,9 @@ public class DelegateABMForm extends ActionForm {
 //		}
 		toModify.setName(this.name);
 		toModify.setEmail(this.email);
-		toModify.setCountryId(country.getId());
-		toModify.setTypeOne(this.isTypeOne());
-		toModify.setTypeTwo(this.isTypeTwo());
-		toModify.setCanSign(this.isCanSign());
-		toModify.setJob(this.job);
-//		toModify.setCountryDesc(this.countryDesc);
-//		toModify.setDeleted(false);
+		toModify.setAdministrator(this.isAdministrator());
+		toModify.setModerator(this.isModerator());
+		toModify.setDesigner(this.isDesigner());
 		SystemUserDAO.updateUser(toModify);
 	}
 	private void addUser() throws SQLException {
@@ -144,7 +108,6 @@ public class DelegateABMForm extends ActionForm {
 //		if (exists != null) {
 //			throw new ValidationException(new ValidationError(ValidationErrors.USER_ALREADY_EXISTS));
 //		}
-		Country country = CountryDAO.getCountry(Integer.valueOf(this.countryId));
 //		if (country == null) {
 //			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
 //		}
@@ -160,15 +123,15 @@ public class DelegateABMForm extends ActionForm {
 		user.setPassword(generatedPassword);
 		user.setName(this.name);
 		user.setEmail(this.email);
-		user.setCountryId(country.getId());
-		user.setDelegate(true);
-		user.setTypeOne(this.isTypeOne());
-		user.setTypeTwo(this.isTypeTwo());
-		user.setAdministrator(false);
-		user.setModerator(false);
-		user.setDesigner(false);
-		user.setCanSign(this.isCanSign());
-		user.setJob(this.job);
+		user.setCountryId(this.getHost().getId());
+		user.setDelegate(false);
+		user.setTypeOne(false);
+		user.setTypeTwo(false);
+		user.setAdministrator(this.isAdministrator());
+		user.setModerator(this.isModerator());
+		user.setDesigner(this.isDesigner());
+		user.setCanSign(false);
+		user.setJob("");
 //		user.setCountryDesc(this.); TODO hablar con pablo
 		user.setPasswordResetRequest(false);
 		user.setTemporaryPassword(true);
@@ -185,24 +148,17 @@ public class DelegateABMForm extends ActionForm {
 		this.id = 0;
 		this.name = null;
 		this.username = null;
-		this.countryId = null;
 		this.email = null;
-		this.typeOne = false;
-		this.typeTwo = false;
-		this.canSign = false;
-		this.job = null;
+		this.administrator = false;
+		this.moderator = false;
+		this.designer = false;
+		
 	}
 	public void init() throws SQLException {
-		this.setAllCountries(CountryDAO.selectAllCountries());
+		this.setHost(CountryDAO.getCountryHost());
 		this.refreshUserList();
 	}
 	
-	public List<Country> getAllCountries() {
-		return allCountries;
-	}
-	public void setAllCountries(List<Country> allCountries) {
-		this.allCountries = allCountries;
-	}
 	public String getOperation() {
 		return operation;
 	}
@@ -215,12 +171,10 @@ public class DelegateABMForm extends ActionForm {
 			this.id = userId;
 			this.name = systemUser.getName();
 			this.username = systemUser.getUsername();
-			this.countryId = String.valueOf(systemUser.getCountryId());
 			this.email = systemUser.getEmail();
-			this.typeOne = systemUser.isTypeOne();
-			this.typeTwo = systemUser.isTypeTwo();
-			this.canSign = systemUser.isCanSign();
-			this.job = systemUser.getJob();
+			this.administrator = systemUser.isAdministrator();
+			this.moderator = systemUser.isModerator();
+			this.designer = systemUser.isDesigner();
 		}
 		
 	}
@@ -228,9 +182,9 @@ public class DelegateABMForm extends ActionForm {
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 //		super.reset(mapping, request);
-		this.typeOne = false;
-		this.typeTwo = false;
-		this.canSign = false;
+		this.administrator = false;
+		this.moderator = false;
+		this.designer = false;
 	}
 	public void delete(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
@@ -242,5 +196,29 @@ public class DelegateABMForm extends ActionForm {
 		systemUser.setDeleted(false);
 		SystemUserDAO.reactivateUser(systemUser);
 		
+	}
+	public boolean isAdministrator() {
+		return administrator;
+	}
+	public void setAdministrator(boolean administrator) {
+		this.administrator = administrator;
+	}
+	public boolean isModerator() {
+		return moderator;
+	}
+	public void setModerator(boolean moderator) {
+		this.moderator = moderator;
+	}
+	public boolean isDesigner() {
+		return designer;
+	}
+	public void setDesigner(boolean designer) {
+		this.designer = designer;
+	}
+	public Country getHost() {
+		return host;
+	}
+	public void setHost(Country host) {
+		this.host = host;
 	}
 }

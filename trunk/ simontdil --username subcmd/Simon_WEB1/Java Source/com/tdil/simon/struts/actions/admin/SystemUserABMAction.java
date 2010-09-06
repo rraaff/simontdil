@@ -15,11 +15,11 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
-import com.tdil.simon.struts.forms.DelegateABMForm;
+import com.tdil.simon.struts.forms.SystemUserABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
-public class DelegateABMAction extends SimonAction {
+public class SystemUserABMAction extends SimonAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
@@ -31,7 +31,7 @@ public class DelegateABMAction extends SimonAction {
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		final DelegateABMForm delegateABMForm = (DelegateABMForm) form;
+		final SystemUserABMForm systemUserABMForm = (SystemUserABMForm) form;
 
 		String image = ImageTagUtil.getName(request);
 		if (image != null) {
@@ -40,38 +40,38 @@ public class DelegateABMAction extends SimonAction {
 				if ("deleteImages".equals(imageSubmitData.getProperty())) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
-							delegateABMForm.delete(imageSubmitData.getPosition());
-							delegateABMForm.init();
+							systemUserABMForm.delete(imageSubmitData.getPosition());
+							systemUserABMForm.init();
 						}
 					});
 				}
 				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
-							delegateABMForm.reactivate(imageSubmitData.getPosition());
-							delegateABMForm.init();
+							systemUserABMForm.reactivate(imageSubmitData.getPosition());
+							systemUserABMForm.init();
 						}
 					});
 				}
 				return mapping.findForward("continue");
 			}
 		}
-		if (delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.cancel"))) {
-			delegateABMForm.reset();
+		if (systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.cancel"))) {
+			systemUserABMForm.reset();
 		}
-		if (delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.create"))
-				|| delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.modify"))) {
+		if (systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.create"))
+				|| systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.modify"))) {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					// TODO Auto-generated method stub
-					delegateABMForm.save();
+					systemUserABMForm.save();
 				}
 			});
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					// TODO Auto-generated method stub
-					delegateABMForm.reset();
-					delegateABMForm.refreshUserList();
+					systemUserABMForm.reset();
+					systemUserABMForm.refreshUserList();
 				}
 			});
 		}

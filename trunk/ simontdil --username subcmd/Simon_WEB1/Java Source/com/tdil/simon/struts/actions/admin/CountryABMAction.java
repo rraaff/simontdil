@@ -19,6 +19,8 @@ import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.struts.forms.DelegateABMForm;
+import com.tdil.simon.utils.ImageSubmitData;
+import com.tdil.simon.utils.ImageTagUtil;
 
 public class CountryABMAction extends SimonAction {
 
@@ -34,6 +36,29 @@ public class CountryABMAction extends SimonAction {
 			throws Exception {
 		final CountryABMForm countryABMForm = (CountryABMForm) form;
 
+		String image = ImageTagUtil.getName(request);
+		if (image != null) {
+			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
+			if (imageSubmitData.isParsed())  {
+				if ("deleteImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							countryABMForm.delete(imageSubmitData.getPosition());
+							countryABMForm.init();
+						}
+					});
+				}
+				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							countryABMForm.reactivate(imageSubmitData.getPosition());
+							countryABMForm.init();
+						}
+					});
+				}
+				return mapping.findForward("continue");
+			}
+		}
 		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.cancel"))) {
 			countryABMForm.reset();
 		}
