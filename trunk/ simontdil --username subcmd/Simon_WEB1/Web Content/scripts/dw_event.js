@@ -1,6 +1,3 @@
-//  dw_event.js version date Oct 2009
-//  basic event handling file from dyn-web.com
-
 var dw_Event = {
   
     add: function(obj, etype, fp, cap) {
