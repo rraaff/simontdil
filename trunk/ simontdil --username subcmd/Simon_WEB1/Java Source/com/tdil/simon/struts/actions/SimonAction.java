@@ -8,8 +8,10 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessages;
 
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 
@@ -47,4 +49,17 @@ public abstract class SimonAction extends Action {
 	protected abstract UserTypeValidation[] getPermissions();
 	
 	protected abstract ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response) throws Exception;
+
+	protected ActionForward redirectToFailure(ValidationError error, HttpServletRequest request, ActionMapping mapping) {
+		ActionMessages msg = error.asMessages();
+		if (msg != null) {
+			request.setAttribute("hasError", "true");
+			addMessages(request, msg);
+		}
+		ActionMessages errors = error.asActionsErrors();
+		if (errors != null) {
+			addErrors(request, errors);	
+		}
+		return mapping.findForward("failure");
+	}
 }

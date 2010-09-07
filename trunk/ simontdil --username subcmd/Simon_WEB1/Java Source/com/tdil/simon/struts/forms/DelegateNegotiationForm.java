@@ -43,6 +43,8 @@ public class DelegateNegotiationForm extends ActionForm {
 	}
 
 	public void init() throws SQLException {
+		this.goToSignShow = false;
+		this.signatures = new ArrayList<SignatureVO>();
 		VersionVO versionVO = new VersionVO();
 		Version version = VersionDAO.getVersionUnderWork();
 		versionVO.setVersion(version);

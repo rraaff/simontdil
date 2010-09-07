@@ -32,6 +32,7 @@
     <forward name="ajaxReturn" path="/empty.jsp"/>
     <forward name="notLogged" path="/login.jsp"/>
     <forward name="invalidAction" path="/login.jsp"/>
+    <forward name="goToDelegateNegotiation" path="/goToDelegateNegotiation.st"/>
   </global-forwards>
   <action-mappings>
     <action path="/login" name="LoginForm" type="com.tdil.simon.struts.actions.LoginAction" scope="session" input="/login.jsp">
@@ -58,6 +59,7 @@
     <action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
       <forward name="back" path="/createDocumentStep1.jsp"/>
       <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="failure" path="/createDocumentStep2.jsp"/>
     </action>
     <action path="/paragraphNavigation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ParagraphsNavigationAction" scope="session">
       <forward name="previous" path="/createDocumentStepParagraph.jsp"/>

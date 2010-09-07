@@ -65,7 +65,7 @@ public class ChangePasswordForm extends ActionForm {
 		}
 		exists.setPassword(this.newPassword);
 		exists.setTemporaryPassword(false);
-		SystemUserDAO.updateUser(exists);
+		SystemUserDAO.updatePassword(exists);
 		return true;
 		
 	}
