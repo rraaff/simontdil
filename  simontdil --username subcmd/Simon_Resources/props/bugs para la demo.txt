@@ -1,0 +1,17 @@
+LOGUEADO COMO ADMIN/MODERADOR
+
+1) editDelegate.jsp
+E) No guarda los cambios en los 3 checks
+
+2) moderatorHome.jsp
+E) Me aparece un link debajo del menú que dice "iniciar firmas" y tiene un link a initSign.st, creo que no debería estar porque tengo los 3 sitios en NORMAL.
+
+3) header.jsp
+E) Me muestra el link "ver" de los mensajes privados. Debería hacerlo solamente en modo negociación.
+
+LOGUEADO COMO DELEGADO
+4) header.jsp
+E) Me muestra el link "ver" de los mensajes privados. Debería hacerlo solamente en modo negociación.
+
+5) vista del documento
+E) Me muestra los párrafos marcados como ocultos. No debería.
