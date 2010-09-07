@@ -30,7 +30,7 @@ a:active {width: auto;}
 </head>
 <body>
 <div id="header">
-	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136"></div>
+	<div id="logo"><a href="delegateHome.jsp"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></a></div>
 	<div id="blockinHeaderDelegate">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
