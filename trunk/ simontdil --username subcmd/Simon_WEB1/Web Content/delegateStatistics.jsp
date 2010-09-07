@@ -56,21 +56,24 @@
 										<td align="left" bgcolor="#CCCCCC"><bean:write name="lastLogin"/></td>
 									</logic:iterate>
 								</tr>
+								<% int bgColor = 0; %>
 								<logic:iterate name="StatisticsForm" property="statisticsVO.versionStats" id="versionStat"> 
 									<tr>
-									<td height="20" align="left"><bean:write name="versionStat" property="formattedDate"/></td>
-									<td height="20" align="left"><bean:write name="versionStat" property="docName"/></td>
+									<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" height="20" align="left"><bean:write name="versionStat" property="formattedDate"/></td>
+									<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" height="20" align="left"><bean:write name="versionStat" property="docName"/></td>
 									<logic:iterate name="versionStat" property="stats" id="rdStat"> 
-										<td width="150" valign="bottom"><logic:equal name="rdStat" property="read" value="true"><img src="images/icons/leido.gif" width="16" height="16" border="0"></logic:equal> / <logic:equal name="rdStat" property="download" value="true"><img src="images/icons/descargado.gif" width="16" height="16" border="0"></logic:equal></td>
+										<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" width="150" valign="bottom"><logic:equal name="rdStat" property="read" value="true"><img src="images/icons/leido.gif" width="16" height="16" border="0"></logic:equal> / <logic:equal name="rdStat" property="download" value="true"><img src="images/icons/descargado.gif" width="16" height="16" border="0"></logic:equal></td>
 									</logic:iterate>
+									<% bgColor = bgColor + 1; %>
 									</tr>
 									<logic:iterate name="versionStat" property="observationsStats" id="rdObservationStat" indexId="rdObservationStatIndex">
 										<tr>
-											<td height="20" align="left"><bean:write name="rdObservationStat" property="formattedDate"/></td>
-											<td height="20" align="left">Observación #<bean:write name="rdObservationStat" property="observationNumber"/></td>
+											<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" height="20" align="left"><bean:write name="rdObservationStat" property="formattedDate"/></td>
+											<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" height="20" align="left">Observación #<bean:write name="rdObservationStat" property="observationNumber"/></td>
 											<logic:iterate name="rdObservationStat" property="stats" id="rdObsStat"> 
-												<td valign="bottom"><logic:equal name="rdObsStat" property="read" value="true"><img src="images/icons/leido.gif" width="16" height="16" border="0"></logic:equal> / <logic:equal name="rdObsStat" property="download" value="true"><img src="images/icons/descargado.gif" width="16" height="16" border="0"></logic:equal></td>
+												<td bgcolor="<%= (bgColor % 2 == 0) ? "#E6E6E6" : "#CCCCCC" %>" valign="bottom"><logic:equal name="rdObsStat" property="read" value="true"><img src="images/icons/leido.gif" width="16" height="16" border="0"></logic:equal> / <logic:equal name="rdObsStat" property="download" value="true"><img src="images/icons/descargado.gif" width="16" height="16" border="0"></logic:equal></td>
 											</logic:iterate>
+											<% bgColor = bgColor + 1; %>
 										</tr>
 									 </logic:iterate>
 								</logic:iterate>

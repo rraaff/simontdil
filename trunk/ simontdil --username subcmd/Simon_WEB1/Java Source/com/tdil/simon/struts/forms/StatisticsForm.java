@@ -39,7 +39,7 @@ public class StatisticsForm extends ActionForm {
 	}
 	
 	public List<String> getLastLogins() {
-		DateFormat lastLoginFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+		DateFormat lastLoginFormat = new SimpleDateFormat("dd/MM HH:mm");
 		List<String> result = new ArrayList<String>();
 		for (Country country : statisticsVO.getAllCountries()) {
 			Date date = this.getLastLoginFor(country.getId());
