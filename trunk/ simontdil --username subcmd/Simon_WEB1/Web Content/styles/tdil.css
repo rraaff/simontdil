@@ -31,10 +31,10 @@ a {
 	text-decoration:none;
 }
 a:link, a:visited {
-	color: #CCCCCC;
+	color: #666666;
 }
 a:hover {
-	color: #CCCCCC;
+	color: #333333;
 	text-decoration: underline;
 }
 p a:link, p a:visited {
@@ -319,6 +319,7 @@ div#main {
 	list-style-type: circle;
 	padding: 0px;
 	margin: 0px;
+	height: 260px;
 }
 
 #content .titleDocInModule {

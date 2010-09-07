@@ -106,7 +106,7 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="280" valign="middle"><!-- corte tabla template -->
+					<td width="274" height="280" valign="top"><!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
 							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
@@ -147,7 +147,8 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274" height="280" valign="middle"><!-- corte tabla template -->
+					<td width="274" height="260" valign="top">
+						<!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
 							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
@@ -159,10 +160,7 @@
 									</tr> 
 								</logic:iterate>
 								<tr> 
-									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
-								</tr>
-								<tr> 
-									<td height="15"><html:link  action="/goToReferenceDocLibrary.st">PABLO: ir a ver la libreria</html:link></td>
+									<td height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>
 							</table>
 						</div>
@@ -170,6 +168,13 @@
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td><img src="images/null.gif" width="9" height="1"></td>
+					<td height="20" valign="right"><html:link  action="/goToReferenceDocLibrary.st">Ver libreria de referencia</html:link></td>
+					<td><img src="images/null.gif" width="9" height="1"></td>
+					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
