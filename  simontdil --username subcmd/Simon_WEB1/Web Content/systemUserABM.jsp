@@ -8,70 +8,177 @@
 <%@ include file="includes/menu.jsp" %>
 
 <html:form method="POST" action="/systemUserABM">
-
-Nombre<html:text name="SystemUserABM" property="name" /><br>
-Usuario<logic:equal name="SystemUserABM" property="id" value="0">
-	<html:text name="SystemUserABM" property="username"/>
-</logic:equal>
-<logic:notEqual name="SystemUserABM" property="id" value="0">
-	<html:text name="SystemUserABM" property="username" disabled="true"/>
-</logic:notEqual><br>
-
-Email<html:text name="SystemUserABM" property="email"/><br>
-<html:checkbox name="SystemUserABM" property="administrator"/> Administrador<br>
-<html:checkbox name="SystemUserABM" property="moderator"/> Moderador<br>
-<html:checkbox name="SystemUserABM" property="designer"/> Diseñador<br>
-
-<logic:equal name="SystemUserABM" property="id" value="0">
-	<html:submit property="operation">
-		<bean:message key="systemUserABM.create"/>
-	</html:submit>
-</logic:equal>
-	
-	<logic:notEqual name="SystemUserABM" property="id" value="0">
-		<html:submit property="operation">
-		<bean:message key="systemUserABM.modify"/>
-		</html:submit>
-	</logic:notEqual>
-	
-	<html:submit property="operation">
-		<bean:message key="systemUserABM.cancel"/>
-	</html:submit><br>
-	
-<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<div id="content">
+<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 	<tr>
-		<td height="20" align="left">Username</td>
-		<td align="left">Nombre</td>
-		<td>Permisos</td>
-		<td>Habilitado</td>
-		<td>Editar</td>
-		<td>Borrar/Reactivar</td>
-	</tr> 
-	<logic:iterate name="SystemUserABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
-		<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-			<td height="28" align="left"><bean:write name="iterUser" property="username" /></td>
-			<td height="28" align="left"><bean:write name="iterUser" property="name" /></td>
-			<td><bean:write name="iterUser" property="systemPermissionsString" /></td>
-			<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
-			<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
-			<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
-				<img src="images/buttons/editar.png" width="50" height="24" border="0">
-			</html:link>
-			<td><logic:equal name="iterUser" property="deleted" value="false">
-					<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
-				</logic:equal>
-				<logic:equal name="iterUser" property="deleted" value="true">
-					<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
-				</logic:equal></td>
-		</tr> 
-	</logic:iterate>
-	<tr>
-		<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+		<td width="370">
+			<!-- inicio tabla template -->
+			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="350" height="19" align="left"><div id="blockTitle">Editar usuarios del sistema</div></td>
+					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="350" height="144"><!-- corte tabla template -->
+						<table width="350" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td colspan="3" height="40"><img src="images/null.gif" width="1" height="40"></td>
+							</tr>
+							<tr>
+								<td width="143" align="right">Nombre:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="200" align="left"><html:text name="SystemUserABM" property="name" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td height="24" align="right">Nombre de Usuario:</td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">
+									<logic:equal name="SystemUserABM" property="id" value="0">
+										<html:text name="SystemUserABM" property="username"/>
+									</logic:equal>
+									<logic:notEqual name="SystemUserABM" property="id" value="0">
+										<html:text name="SystemUserABM" property="username" disabled="true"/>
+									</logic:notEqual></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td height="24" align="right">E-Mail:</td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="SystemUserABM" property="email"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">Administrador</td>
+							</tr>
+							<tr>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="moderator"/></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">Moderador</td>
+							</tr>
+							<tr>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="designer"/></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">Diseñador</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="23"><img src="images/null.gif" width="1" height="23"></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="24" align="center">
+									<logic:equal name="SystemUserABM" property="id" value="0">
+										<html:submit property="operation">
+											<bean:message key="systemUserABM.create"/>
+										</html:submit>
+									</logic:equal>
+									<logic:notEqual name="SystemUserABM" property="id" value="0">
+										<html:submit property="operation">
+										<bean:message key="systemUserABM.modify"/>
+										</html:submit>
+									</logic:notEqual>
+									<html:submit property="operation">
+										<bean:message key="systemUserABM.cancel"/>
+									</html:submit></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
+							</tr>
+						</table>					
+						<!-- corte tabla template -->
+					</td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+				</tr>
+			</table>
+		<!-- fin tabla template -->
+		</td>
+		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+		<td width="550">
+			<!-- inicio tabla template -->
+			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de usuarios del sistema</div></td>
+					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="530" height="144">
+					<!-- corte tabla template -->
+						<div id="portaTabla">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+								<tr>
+									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								</tr>
+								<tr>
+									<td height="20" align="left">Username</td>
+									<td align="left">Nombre</td>
+									<td>Permisos</td>
+									<td>Habilitado</td>
+									<td>Editar</td>
+									<td>Borrar/Reactivar</td>
+								</tr> 
+								<logic:iterate name="SystemUserABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
+									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
+										<td height="28" align="left"><bean:write name="iterUser" property="username" /></td>
+										<td height="28" align="left"><bean:write name="iterUser" property="name" /></td>
+										<td><bean:write name="iterUser" property="systemPermissionsString" /></td>
+										<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
+										<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
+										<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
+											<img src="images/buttons/editar.png" width="50" height="24" border="0">
+										</html:link>
+										<td><logic:equal name="iterUser" property="deleted" value="false">
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+											</logic:equal>
+											<logic:equal name="iterUser" property="deleted" value="true">
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+											</logic:equal></td>
+									</tr> 
+								</logic:iterate>
+								<tr>
+									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								</tr>
+							</table>	
+						<!-- corte tabla template -->
+						</div>
+					</td>
+					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+				</tr>
+			</table>
+		<!-- fin tabla template -->
+		</td>
 	</tr>
-</table>	
-	
+	<tr>
+		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
+	</tr>
+</table>
+</div>
 </html:form>
 <%@ include file="includes/footer.jsp" %>

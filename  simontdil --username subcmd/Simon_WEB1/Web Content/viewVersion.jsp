@@ -17,6 +17,9 @@ div#scrollbar {
 lyr1{
 	
 }
+#content #portaVersiones a {
+	color: #FFFFFF;
+}
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
@@ -148,71 +151,88 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
+							<%if (isModerator) { %>
 							<tr>
-							<!-- Acá había tocado pero solo HTML -->
 								<td colspan="3" height="25" align="center" valign="middle">
-								<%if (isModerator) { %>
 									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
 										<html:submit property="operation">
 											<bean:message key="viewVersion.initNegotiation"/>
 										</html:submit>
-									</logic:equal>
+									</logic:equal></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="25" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
 										<html:submit property="operation">
 											<bean:message key="viewVersion.finishSign"/>
 										</html:submit>
-									</logic:equal>
+									</logic:equal></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="25" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
 										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
 									</logic:equal> 
-								<% } %>
 								</td>
 							</tr>
+							<% } %>
 							<tr>
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
 							</tr>
+							<% if (isDelegate) { %>
+							<tr>
+								<td colspan="3" align="center">
+								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
+									<script type="text/javascript">
+										function doAdd() {
+											var paragraphNumber = document.getElementById('pNumber').value;
+											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
+											var pText = document.getElementById('pText').value;
+											var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
+											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
+												var errorResult = json.error;
+												if ('notLogged' == errorResult) {
+													window.location='<html:rewrite page="/login.jsp"/>';
+													return;
+												}
+												var result = json.result;
+											   if ('OK' == result) {
+											   document.getElementById('pNumber').selectedIndex = 0;
+											   document.getElementById('pNewParagraph').checked = false;
+											   document.getElementById('pText').value = "";
+												document.getElementById('outerdiv').style.display = 'none';
+											   } else {
+												var error = json.error;
+												document.getElementById('error').innertHTML= error;
+											   }
+											}}).get({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
+						
+										}
+									</script>
+									<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
+								</logic:equal></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="center">
+								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
+									<html:submit property="operation" disabled="true">
+										<bean:message key="viewVersion.addObservation"/>
+									</html:submit>
+								</logic:notEqual></td>
+							</tr>
+							<% } else { %>
+							<tr>
+								<td colspan="3" align="center"><img src="images/null.gif" width="1" height="24"></td>
+							</tr>
+							<% } %>
+							<tr>
+								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
+							</tr>
 							<tr>
 								<td colspan="3">
-	<% if (isDelegate) { %>
-		<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
-			<script type="text/javascript">
-				function doAdd() {
-					var paragraphNumber = document.getElementById('pNumber').value;
-					var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
-					var pText = document.getElementById('pText').value;
-					var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
-					var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
-						var errorResult = json.error;
-						if ('notLogged' == errorResult) {
-							window.location='<html:rewrite page="/login.jsp"/>';
-							return;
-						}
-					    var result = json.result;
-					   if ('OK' == result) {
-					   document.getElementById('pNumber').selectedIndex = 0;
-					   document.getElementById('pNewParagraph').checked = false;
-					   document.getElementById('pText').value = "";
-					   	document.getElementById('outerdiv').style.display = 'none';
-					   } else {
-					   	var error = json.error;
-					   	document.getElementById('error').innertHTML= error;
-					   }
-					}}).get({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
-
-				}
-			</script>
-			<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
-		</logic:equal>
-		<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
-			<html:submit property="operation" disabled="true">
-				<bean:message key="viewVersion.addObservation"/>
-			</html:submit>
-		</logic:notEqual>
-	<% } else { %>
-		<html:submit property="operation" disabled="true">
-			<bean:message key="viewVersion.addObservation"/>
-		</html:submit>
-	<% } %>
+									<html:submit property="operation">
+										<bean:message key="viewVersion.searchObservations"/>
+									</html:submit>
 								</td>
 							</tr>
 							<tr>
@@ -220,20 +240,10 @@ if ( dw_scrollObj.isSupported() ) {
 							</tr>
 							<tr>
 								<td colspan="3">
-	<html:submit property="operation">
-		<bean:message key="viewVersion.searchObservations"/>
-	</html:submit>
+									<html:submit property="operation">
+										<bean:message key="viewVersion.listObservations"/>
+									</html:submit>
 								</td>
-							</tr>
-							<tr>
-								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
-							</tr>
-							<tr>
-								<td colspan="3">
-	<html:submit property="operation">
-		<bean:message key="viewVersion.listObservations"/>
-	</html:submit>
-</td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
