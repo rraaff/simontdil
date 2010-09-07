@@ -18,11 +18,11 @@ public class FieldValidation {
 	public static String validateText(String text, String field, int length, ValidationError validation) {
 		String result = text;
 		if (StringUtils.isEmptyOrWhitespaceOnly(text)) {
-			validation.setFieldError(field, ValidationErrors.CANNOT_BE_EMPTY);
+			validation.setFieldError(field, field + "." + ValidationErrors.CANNOT_BE_EMPTY);
 		} else {
 			result = text.trim();
 			if (result.length() > length) {
-				validation.setFieldError(field, ValidationErrors.TEXT_TOO_LONG+String.valueOf(length));
+				validation.setFieldError(field, field + "." + ValidationErrors.TEXT_TOO_LONG+String.valueOf(length));
 			}
 		}
 		return result;

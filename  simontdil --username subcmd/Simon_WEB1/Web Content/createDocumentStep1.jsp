@@ -6,10 +6,10 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-
 <html:html>
 		<html:errors property="general" />
 		<html:form method="POST" action="/createDocumentActionStep2">
+		
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -17,6 +17,8 @@
 	</tr>
 	<tr>
 		<td width="960">
+		
+		<p><a href="#" onclick="Sexy.alert('<h1>SexyAlertBox</h1><em>versión 1.2</em><br/><p>No te olvides de visitar <a href=\'http://www.coders.me/\'>www.coders.me</a> está lleno de artículos de programación.</p>');return false;">Mostrar alerta</a></p>
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
@@ -34,10 +36,10 @@
 							<tr>
 								<td align="right" width="192">Titulo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="301" align="left"><html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/></td>
+								<td width="301" align="left"><html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><html:errors property="title" /><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td align="right" width="192">Versi&oacute;n:</td>
@@ -50,10 +52,10 @@
 							<tr>
 								<td align="right">Nombre de la versi&oacute;n:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="CreateDocumentForm" property="versionName" styleClass="textfield_effect"/></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="versionName" styleClass="textfield_effect"/><html:errors property="versionName" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><html:errors property="versionName" /><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td width="192" align="right"><html:checkbox name="CreateDocumentForm" property="principal"/></td>
@@ -78,7 +80,7 @@
 							<tr>
 								<td align="right">Tipo de documento:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción</td>
+								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

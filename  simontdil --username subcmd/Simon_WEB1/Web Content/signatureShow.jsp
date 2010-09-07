@@ -71,7 +71,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 						<table id="signTable">
 							<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex"> 
 							<tr> 
-								<td><img width="200" height="200" src="./signatures/<bean:write name="signature" property="signatureFileName" />"></td>
+								<td><img width="200" height="200" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
 								<script>
 									signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
 									lastSignatureIndex = <%=signatureIndex%>;
@@ -114,7 +114,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 												
 												var newTR = document.createElement('tr');
 												var dateTD = document.createElement('td');
-												dateTD.innerHTML = '<img width="200" height="110" src="./signatures/' + json.fileNames[i] + '">';
+												dateTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
 												dateTD.className = "BorderRigth";
 												dateTD.width = "100";
 												dateTD.align="center";

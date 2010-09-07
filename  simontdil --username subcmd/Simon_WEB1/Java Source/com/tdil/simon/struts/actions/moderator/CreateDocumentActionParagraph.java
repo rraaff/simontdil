@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
@@ -36,16 +37,21 @@ public class CreateDocumentActionParagraph extends SimonAction {
 			return mapping.findForward("back");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.addParagraphs"))) {
-			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
-			request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
-			if (inNegotiation) {
-				TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
-					}
-				});
+			ValidationError error = createDocumentForm.validateStep2(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else {
+				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+				if (inNegotiation) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+						}
+					});
+				}
+				return mapping.findForward("addParagraphs");
 			}
-			return mapping.findForward("addParagraphs");
 		}
 		return null;
 	}

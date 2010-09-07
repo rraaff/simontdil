@@ -12,6 +12,8 @@ import org.apache.struts.action.ActionMapping;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.model.Site;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.DelegateNegotiationForm;
@@ -25,6 +27,18 @@ public class GoToDelegateNegotiation extends SimonAction {
 		return permissions;
 	}
 
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		SystemUser user = getLoggedUser(request);
+		if (user == null) {
+			return mapping.findForward("notLogged");
+		}
+		if (!UserTypeValidation.isValid(user, this.getPermissions())) {
+			return mapping.findForward("invalidAction");
+		}
+		return this.basicExecute(mapping, form, request, response);
+	}
+	
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {

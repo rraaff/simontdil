@@ -13,12 +13,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessages;
 
 import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.DocumentValidation;
+import com.tdil.simon.actions.validations.FieldValidation;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
@@ -383,31 +386,37 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		// TODO lanzar errores
 	}
 	
-	@Override
-	public ActionErrors validate(ActionMapping mapping, HttpServletRequest request) {
-//		if (this.getStep() == 1) {
-//			ValidationError validation = new ValidationError();
-//			DocumentValidation.validateTitle(this.title, validation);
-//			VersionValidation.validateName(this.versionName, validation);
-//			DocumentValidation.validateIntroduction(this.introduction, validation);
-//			//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
-//			boolean typeOneBoolean = FieldValidation.validateBoolean(this.typeOne, validation);
-//			boolean typeTwoBoolean = FieldValidation.validateBoolean(this.typeTwo, validation);
-//			if (!typeOneBoolean && !typeTwoBoolean) {
-//				validation.setFieldError("typeOne", ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
-//			}
-//			return validation.asActionsErrors();
-//		}
-		return null;
+	public ValidationError validateStep1(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		DocumentValidation.validateTitle(this.title, validation);
+		VersionValidation.validateName(this.versionName, validation);
+		//DocumentValidation.validateIntroduction(this.introduction, validation);
+		//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
+		boolean typeOneBoolean = this.isDocumentTypeOne();
+		boolean typeTwoBoolean = this.isDocumentTypeTwo();
+		if (!typeOneBoolean && !typeTwoBoolean) {
+			validation.setFieldError("typeOne", "typeOne" + "." + ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
+		}
+		return validation;
+	}
+	public ValidationError validateStep2(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		DocumentValidation.validateIntroduction(this.introduction, validation);
+		return validation;
 	}
 	
-	public ActionErrors validateStep1() {
-			ValidationError validation = new ValidationError();
-			DocumentValidation.validateTitle(this.title, validation);
-			VersionValidation.validateName(this.versionName, validation);
-			DocumentValidation.validateIntroduction(this.introduction, validation);
-			//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
-			return validation.asActionsErrors();
+	public ActionMessages validateStep1() {
+		ValidationError validation = new ValidationError();
+		DocumentValidation.validateTitle(this.title, validation);
+		VersionValidation.validateName(this.versionName, validation);
+		DocumentValidation.validateIntroduction(this.introduction, validation);
+		//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
+		boolean typeOneBoolean = this.isDocumentTypeOne();
+		boolean typeTwoBoolean = this.isDocumentTypeTwo();
+		if (!typeOneBoolean && !typeTwoBoolean) {
+			validation.setFieldError("typeOne", ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
+		}
+		return validation.asMessages();
 		}
 	public String getConsolidateText() {
 		return consolidateText;

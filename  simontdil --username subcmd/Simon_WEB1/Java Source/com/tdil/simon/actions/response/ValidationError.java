@@ -52,6 +52,9 @@ public class ValidationError {
 
 	
 	public ActionMessages asMessages() {
+		if (!this.hasError()) {
+			return null;
+		}
 		ActionMessages messages = new ActionMessages();
 		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getGeneralError())) {
 			messages.add("general", new ActionMessage(this.getGeneralError()));
@@ -71,7 +74,7 @@ public class ValidationError {
 			errors.add("general", new ActionMessage(this.getGeneralError()));
 		}
 		for (Map.Entry<String, String> error : this.getFieldErrors().entrySet()) {
-			errors.add(error.getKey(), new ActionMessage(error.getValue()));
+			errors.add(error.getKey(), new ActionMessage("*"));
 		}
 		return errors;
 	}

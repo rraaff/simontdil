@@ -20,8 +20,8 @@ a:active {width: auto;}
 
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="./scripts/mootools-1.js" ></script>
-<script type="text/javascript" src="./scripts/notimoo-v1.js" ></script>
+<script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
+<script type="text/javascript" src="./scripts/notimoo.js" ></script>
 <style type="text/css">
 <!--
 #content #centrador{
@@ -29,7 +29,7 @@ a:active {width: auto;}
 }
 -->
 </style>
-<link href="styles/notimoo-v1.css" rel="stylesheet" type="text/css"/>
+<link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 
 </head>
 <body onLoad="P7_ExpMenu();">
