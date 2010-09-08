@@ -8,6 +8,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
@@ -31,9 +32,14 @@ public class ConsolidateDocumentAction extends SimonAction {
 		}
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.consolidate.save"))) {
-			createDocumentForm.setConsolidated(true);
-			createDocumentForm.save();
-			return mapping.findForward("save");
+			ValidationError error = createDocumentForm.validateConsolidation(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else {
+				createDocumentForm.setConsolidated(true);
+				createDocumentForm.save();
+				return mapping.findForward("save");
+			}
 		}
 		return null;
 	}

@@ -49,7 +49,7 @@ public class ViewLastVersionForDocumentAction extends AbstractAction implements 
 		VersionVO versionVO = new VersionVO();
 		versionVO.setVersion(version);
 		versionVO.setAllVersions(VersionDAO.getAllVersionNumbersFor(version.getDocumentId()));
-		versionVO.setParagraphs(ParagraphDAO.selectAllParagraphsFor(this.oid));
+		versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(this.oid));
 		if (this.user.isDelegate()) {
 			DelegateAuditDAO.registerAction(this.user.getId(), this.user.getCountryId(), version.getId(), DelegateAudit.VIEW_OBSERVATION);
 		}

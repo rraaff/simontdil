@@ -21,6 +21,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.DocumentValidation;
 import com.tdil.simon.actions.validations.FieldValidation;
+import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
 import com.tdil.simon.data.ibatis.DocumentDAO;
@@ -544,5 +545,28 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setInNegotiation(boolean isInNegotiation) {
 		this.isInNegotiation = isInNegotiation;
+	}
+
+	public ValidationError validateCurrentParagraph(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		ParagraphValidation.validateParagraphText(this.getParagraphText(), "paragraphText", validation);
+		return validation;
+	}
+	
+	public ValidationError validateCurrentParagraphForBack(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph + 1])) {
+			if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph])) {
+				return validation;
+			}
+		}
+		ParagraphValidation.validateParagraphText(this.getParagraphText(), "paragraphText", validation);
+		return validation;
+	}
+
+	public ValidationError validateConsolidation(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		DocumentValidation.validateConsolidation(this.getConsolidateText(), validation);
+		return validation;
 	}
 }

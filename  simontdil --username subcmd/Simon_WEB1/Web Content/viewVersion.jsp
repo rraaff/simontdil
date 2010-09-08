@@ -184,6 +184,18 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" align="center">
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
 									<script type="text/javascript">
+										var notimooAddManager = new Notimoo();
+										function addObservationFor(pNumber) {
+											var pNumberObj = document.getElementById('pNumber');
+											var opts = pNumberObj.options;
+											var index = 0;
+											while(opts[index].value != pNumber) {
+												index = index + 1;
+											}
+											opts[index].selected = true;
+											document.getElementById('outerdiv').style.display = '';
+										}
+									
 										function doAdd() {
 											var paragraphNumber = document.getElementById('pNumber').value;
 											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
@@ -201,12 +213,29 @@ if ( dw_scrollObj.isSupported() ) {
 											   document.getElementById('pNewParagraph').checked = false;
 											   document.getElementById('pText').value = "";
 												document.getElementById('outerdiv').style.display = 'none';
+												showOKMessage();
 											   } else {
 												var error = json.error;
-												document.getElementById('error').innertHTML= error;
-											   }
+												showErrorMessage();
+											}
 											}}).get({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
 						
+										}
+										var notimooObservationManager = new Notimoo();
+										function showOKMessage() {
+											notimooObservationManager.show({
+												title: 'Observacion',
+												message: 'Su observacion ha sido agregada exitosamente.'
+											});
+										}
+										
+										function showErrorMessage() {
+											notimooObservationManager.show({
+												title: 'Error',
+												message: 'Su observacion no ha podido sr agregada.',
+												customClass:'alert_error',
+												 sticky: true
+											});
 										}
 									</script>
 									<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
@@ -278,7 +307,17 @@ if ( dw_scrollObj.isSupported() ) {
 						<div id="lyr1">
 						<!-- div id="documentoCompleto" -->
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-							<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p> 
+								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
+									<% if (isDelegate) { %>
+										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p>
+									<% } else { %>
+										<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p>
+									<% } %>
+								</logic:equal>
+								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
+									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p>
+								</logic:notEqual>
+								 
 							</logic:iterate>
 						</div>
 					</div>

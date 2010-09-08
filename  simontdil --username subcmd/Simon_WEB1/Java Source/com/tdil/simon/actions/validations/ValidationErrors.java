@@ -8,7 +8,7 @@ public interface ValidationErrors {
 	String INVALID_NUMBER = "INVALID_NUMBER";
 	String INVALID_EMAIL = "INVALID_EMAIL";
 	String INVALID_DATE = "INVALID_DATE";
-	String TEXT_TOO_LONG = "TEXT_TOO_LONG_"; // this one has the length appended at last
+	String TEXT_TOO_LONG = "TEXT_TOO_LONG";
 	
 	String USER_ALREADY_EXISTS = "USER_ALREADY_EXISTS";
 	String USER_DOES_NOT_EXISTS = "USER_DOES_NOT_EXISTS";

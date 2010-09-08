@@ -40,7 +40,7 @@ public class ViewVersionForm extends ActionForm {
 		VersionVO versionVO = new VersionVO();
 		versionVO.setVersion(version);
 		versionVO.setAllVersions(VersionDAO.getAllVersionNumbersFor(version.getDocumentId()));
-		versionVO.setParagraphs(ParagraphDAO.selectAllParagraphsFor(versionID));
+		versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(versionID));
 		versionVO.setDocument(DocumentDAO.getDocument(version.getDocumentId()));
 		setVersion(versionVO);
 	}

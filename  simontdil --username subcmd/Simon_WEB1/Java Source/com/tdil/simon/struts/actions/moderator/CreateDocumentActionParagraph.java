@@ -29,7 +29,7 @@ public class CreateDocumentActionParagraph extends SimonAction {
 	}
 
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
@@ -41,12 +41,14 @@ public class CreateDocumentActionParagraph extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else {
-				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
-				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+				final boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 				if (inNegotiation) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
-							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							if (!createDocumentForm.getParagraphHidden()) {
+								request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							}
 						}
 					});
 				}

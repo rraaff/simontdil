@@ -11,4 +11,9 @@ public class DocumentValidation {
 	public static String validateIntroduction(String introduction, ValidationError validation) {
 		return FieldValidation.validateText(introduction, "introduction", 5000, validation);
 	}
+
+	public static String validateConsolidation(String consolidateText, ValidationError validation) {
+		return FieldValidation.validateText(consolidateText, "consolidateText", 5000, validation);
+		
+	}
 }

@@ -20,6 +20,7 @@ a:active {width: auto;}
 <![endif]-->
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
+<link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
 #content #centrador{
