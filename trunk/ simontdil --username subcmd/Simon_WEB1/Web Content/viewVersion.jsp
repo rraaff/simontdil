@@ -153,7 +153,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</tr>
 							<%if (isModerator) { %>
 							<tr>
-								<td colspan="3" height="25" align="center" valign="middle">
+								<td colspan="3" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
 										<html:submit property="operation">
 											<bean:message key="viewVersion.initNegotiation"/>
@@ -161,7 +161,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</logic:equal></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25" align="center" valign="middle">
+								<td colspan="3" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
 										<html:submit property="operation">
 											<bean:message key="viewVersion.finishSign"/>
@@ -169,7 +169,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</logic:equal></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25" align="center" valign="middle">
+								<td colspan="3" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
 										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
 									</logic:equal> 
@@ -275,7 +275,8 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 						</table>					
-						<!-- corte tabla template --></td>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
