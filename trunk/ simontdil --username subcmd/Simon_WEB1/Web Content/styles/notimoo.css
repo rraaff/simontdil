@@ -18,11 +18,11 @@
 
     /* Change this to fit your needs*/
     padding:10px;
-    border: 3px;
+    border: 2px;
     border-style: solid;
-    border-color: #B2B2B2;
-    background: #333333;
-    color: #FFFFFF;
+    border-color: #737373;
+    background: #e1e1e1;
+    color: #737373;
 }
 
 .notimoo .title {
