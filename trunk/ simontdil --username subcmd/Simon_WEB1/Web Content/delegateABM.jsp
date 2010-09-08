@@ -145,8 +145,8 @@
 									<td>Permisos</td>
 									<td>Firmante</td>
 									<td>Habilitado</td>
-									<td>Editar</td>
-									<td>Borrar</td>
+									<td></td>
+									<td></td>
 								</tr> 
 								<logic:iterate name="DelegateABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
@@ -161,10 +161,10 @@
 											<img src="images/buttons/editar.png" width="50" height="24" border="0">
 										</html:link>
 										<td><logic:equal name="iterUser" property="deleted" value="false">
-												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
 											</logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="true">
-												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
 											</logic:equal></td>
 									</tr> 
 								</logic:iterate>
