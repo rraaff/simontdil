@@ -25,8 +25,8 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="320" height="144"><!-- corte tabla template -->
-						<table width="320" border="0" cellspacing="0" cellpadding="0">
+					<td width="420" height="144"><!-- corte tabla template -->
+						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
@@ -37,17 +37,17 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" width="82">Usuario: </td>
+								<td align="right" width="162">Usuario:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="231" align="left"><html:text name="ChangePassword" property="username" styleClass="textfield_effect"/></td>
+								<td width="251" align="left"><html:text name="ChangePassword" property="username" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">E-Mail: </td>
+								<td align="right">E-Mail:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="231" align="left"><html:text name="ChangePassword" property="email" styleClass="textfield_effect"/></td>
+								<td align="left"><html:text name="ChangePassword" property="email" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -61,7 +61,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Nueva contraseña: </td>
+								<td align="right">Nueva contraseña:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="newPassword" styleClass="textfield_effect"/></td>
 							</tr>
@@ -69,7 +69,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Repetir contraseña: </td>
+								<td align="right">Repetir contraseña:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="retypeNewPassword" styleClass="textfield_effect"/></td>
 							</tr>

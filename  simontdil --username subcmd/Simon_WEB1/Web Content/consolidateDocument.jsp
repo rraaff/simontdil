@@ -40,7 +40,7 @@
 								<table width="470" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="450" height="19" align="left"><div id="blockTitle">Agregar comentario de versión</div></td>
+										<td background="images/interfaces/topTitle.gif" width="450" height="19" align="left"><div id="blockTitle">Agregar descripci&oacute;n de versión</div></td>
 										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -52,7 +52,7 @@
 													<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 												</tr>
 												<tr>
-													<td align="right" width="82" height="140" valign="top">Comentario:</td>
+													<td align="right" width="82" height="140" valign="top">Descripci&oacute;n:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="303" align="left"><html:textarea name="CreateDocumentForm" property="consolidateText" styleClass="textfield_effect_area"/></td>
 												</tr>
