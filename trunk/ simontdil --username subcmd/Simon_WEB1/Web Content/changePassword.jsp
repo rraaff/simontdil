@@ -55,7 +55,7 @@
 							<tr>
 								<td align="right">Clave provisoria:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="ChangePassword" property="password" styleClass="textfield_effect"/></td>
+								<td align="left"><html:password name="ChangePassword" property="password" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -63,7 +63,7 @@
 							<tr>
 								<td align="right">Nueva contraseña: </td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="ChangePassword" property="newPassword" styleClass="textfield_effect"/></td>
+								<td align="left"><html:password name="ChangePassword" property="newPassword" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -71,7 +71,7 @@
 							<tr>
 								<td align="right">Repetir contraseña: </td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="ChangePassword" property="retypeNewPassword" styleClass="textfield_effect"/></td>
+								<td align="left"><html:password name="ChangePassword" property="retypeNewPassword" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
