@@ -41,12 +41,18 @@ a:active {width: auto;}
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="320" align="right">
 					<div id="userLogued">
-						<table width="320" border="0" cellspacing="0" cellpadding="0">
+						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<!-- Meter un if user logged acá con un else -->
 							<tr>
-								<td width="280" align="right">Bienvenido: <span class="userLogged"><%= user.getName() %></span></td>
+								<td width="380" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td colspan="3" width="30" align="right"><a href="#">Salir</a></td>
 							</tr>
 						</table>
 					</div>

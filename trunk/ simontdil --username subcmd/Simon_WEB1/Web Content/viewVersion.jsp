@@ -309,9 +309,9 @@ if ( dw_scrollObj.isSupported() ) {
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
 									<% if (isDelegate) { %>
-										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p>
+										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
 									<% } else { %>
-										<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write name="paragraph" property="paragraphText" /></p>
+										<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
 									<% } %>
 								</logic:equal>
 								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
