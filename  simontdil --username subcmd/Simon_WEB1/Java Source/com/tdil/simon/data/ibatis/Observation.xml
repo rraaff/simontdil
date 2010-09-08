@@ -91,6 +91,9 @@
    	AND Observation.privateObservation = 0
    	AND SystemUser.countryId = Country.id
    	AND Observation.DELETED = 0
+   	<isNotNull prepend="AND" property="versionId">
+    	(Paragraph.versionId = #versionId#)
+    </isNotNull>
    	<isNotNull prepend="AND" property="countryId">
     	(Country.id = #countryId#)
     </isNotNull>

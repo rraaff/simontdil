@@ -64,7 +64,7 @@
 													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 													<td width="280" valign="top">Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
-													Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
+													Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
 													Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>
 													Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span></td>
 													<td width="9"><img src="images/null.gif" width="9" height="1"></td>

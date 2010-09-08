@@ -196,6 +196,11 @@ public class SearchObservationsForm extends ActionForm {
 	}
 
 	public void init() throws SQLException {
+		Calendar calendar = Calendar.getInstance();
+		this.setExactDay(String.valueOf(calendar.get(Calendar.DATE)));
+		this.setExactMonth(String.valueOf(calendar.get(Calendar.MONTH) + 1));
+		this.setUpperDay(this.getExactDay());
+		this.setUpperMonth(this.getExactMonth());
 		setAllCountries(CountryDAO.selectAllCountries());
 		List pars = ParagraphDAO.selectNotDeletedParagraphsFor(this.getVersionId());
 		List<String> numbers = new ArrayList<String>();
@@ -208,10 +213,15 @@ public class SearchObservationsForm extends ActionForm {
 
 	public void search() throws SQLException {
 		HashMap params = new HashMap();
-		params.put("countryId", new Integer(this.getCountryId()));
+		params.put("versionId", new Integer(this.getVersionId()));
+		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getCountryId())) {
+			params.put("countryId", new Integer(this.getCountryId()));
+		}
 		params.put("dateMin", getDateMin());
 		params.put("dateMax", getDateMax());
-		params.put("paragraphNumber", new Integer(this.getParagraphNumber()));
+		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getParagraphNumber())) {
+			params.put("paragraphNumber", new Integer(this.getParagraphNumber()));
+		}
 		List observations = ObservationDAO.searchObservations(params);
 		
 		List result = new ArrayList();
