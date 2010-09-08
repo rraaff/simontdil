@@ -31,7 +31,7 @@ a:active {width: auto;}
 </head>
 <body>
 <div id="header">
-	<div id="logo"><a href="delegateHome.jsp"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></a></div>
+	<div id="logo"><html:link action="/goToDelegateHome" ><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></html:link></div>
 	<div id="blockinHeaderDelegate">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
@@ -52,7 +52,7 @@ a:active {width: auto;}
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3" width="30" align="right"><a href="#">Salir</a></td>
+								<td colspan="3" width="30" align="right"><html:link action="/logout" >Salir</html:link></td>
 							</tr>
 						</table>
 					</div>

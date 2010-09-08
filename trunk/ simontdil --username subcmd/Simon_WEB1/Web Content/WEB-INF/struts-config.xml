@@ -213,6 +213,8 @@
     <action path="/editSystemUser" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.EditSystemUserAction" scope="session">
       <forward name="continue" path="/systemUserABM.jsp"/>
     </action>
+    <action path="/logout" type="com.tdil.simon.struts.actions.LogoutAction">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>

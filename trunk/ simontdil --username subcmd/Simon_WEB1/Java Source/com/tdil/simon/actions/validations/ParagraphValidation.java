@@ -14,7 +14,7 @@ public class ParagraphValidation {
 			return;
 		}
 		for (Map.Entry<Integer, String> entry : paragraphs.entrySet()) {
-			FieldValidation.validateText(entry.getValue(), "paragraph" + entry.getKey(), 20000, validation);
+			FieldValidation.validateText(entry.getValue(), "paragraph" + entry.getKey(), 4000000, validation);
 		}
 	}
 	
@@ -33,10 +33,10 @@ public class ParagraphValidation {
 	}
 	
 	public static String validateParagraphText(String text, String fieldName, ValidationError validation) {
-		return FieldValidation.validateText(text, fieldName, 20000, validation);
+		return FieldValidation.validateText(text, fieldName, 4000000, validation);
 	}
 	
 	public static String validateObservation(String text, String fieldName, ValidationError validation) {
-		return FieldValidation.validateText(text, fieldName, 20000, validation);
+		return FieldValidation.validateText(text, fieldName, 4000000, validation);
 	}
 }

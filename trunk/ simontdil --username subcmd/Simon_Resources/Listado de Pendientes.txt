@@ -1,4 +1,4 @@
-- LogOut
+X LogOut
 Dejé en headerDelegate.jsp y headerSystemUser.jsp un link trucho para que me lo actives
 
 - Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
@@ -9,7 +9,7 @@ Dejé en headerDelegate.jsp y headerSystemUser.jsp un link trucho para que me lo 
   - Revisar los títulos
   - Los mensajes de aprobación o error entre acción y acción o pantalla y pantalla.
 
-- Grabar Documentos
+X Grabar Documentos
   - Sigue el problema de cantidad de caracteres con la introducción. Ver la solución de ampliar el límite y limitar el campo para que no pueda explotar. Lo mismo aplica a los párrafos y el campo de comentario de consolidación.
 
 - Consolidación De docs

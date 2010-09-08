@@ -40,7 +40,7 @@ CREATE  TABLE `simon`.`SYSTEMUSER` (
 CREATE  TABLE `simon`.`DOCUMENT` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(100) NOT NULL ,
-  `introduction` VARCHAR(250) NOT NULL ,
+  `introduction` MEDIUMTEXT NOT NULL ,
   `principal` INT NULL ,
   `typeOne` INT NULL ,
   `typeTwo` INT NULL ,
@@ -52,7 +52,7 @@ CREATE  TABLE `simon`.`VERSION` (
   `documentId` INT NULL ,
   `number` INT NULL ,
   `name` VARCHAR(100) NULL ,
-  `description` VARCHAR(500) NULL ,
+  `description` MEDIUMTEXT NULL ,
   `creationDate` DATETIME NULL ,
   `upToCommentDate` DATETIME NULL ,
   `status` VARCHAR(50) NULL ,
