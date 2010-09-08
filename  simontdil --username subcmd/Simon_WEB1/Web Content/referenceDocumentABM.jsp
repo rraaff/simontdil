@@ -118,25 +118,25 @@
 									<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>
 								<tr>
-									<td height="20" align="left">Titulo</td>
+									<td height="20" align="left">T&iacute;tulo</td>
 									<td align="left">Archivo</td>
-									<td align="left">Categoria</td>
+									<td align="left">Categor&iacute;a</td>
 									<td width="60">Editar</td>
 									<td width="60">Borrar</td>
 								</tr> 
 								<logic:iterate name="ReferenceDocumentABMForm" property="allReferenceDocuments" id="iterRefDoc" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-										<td height="28"><bean:write name="iterRefDoc" property="title" /></td>
-										<td><bean:write name="iterRefDoc" property="fileName" /></td>
-										<td><bean:write name="iterRefDoc" property="categoryName" /></td>
+										<td height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
+										<td align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
+										<td align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 										<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
 											<img src="images/buttons/editar.png" width="50" height="24" border="0">
 										</html:link>
 										<td><logic:equal name="iterRefDoc" property="deleted" value="false">
-											<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+											<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
 										</logic:equal>
 										<logic:equal name="iterRefDoc" property="deleted" value="true">
-											<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+											<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
 										</logic:equal></td>
 									</tr> 
 								</logic:iterate>

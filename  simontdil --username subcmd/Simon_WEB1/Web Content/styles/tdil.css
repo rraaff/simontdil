@@ -351,6 +351,10 @@ div#main {
 .errorText{
 	color: #be1e2d;
 }
+.notActive{
+	color: #CCCCCC;
+	text-decoration: line-through;
+}
 /* ### Fields and Forms ### */
 input, textarea {	border:1px solid #ccc; }
 label {color:#999;}

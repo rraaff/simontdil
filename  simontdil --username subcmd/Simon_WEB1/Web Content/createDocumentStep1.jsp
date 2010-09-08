@@ -17,8 +17,6 @@
 	</tr>
 	<tr>
 		<td width="960">
-		
-		<p><a href="#" onclick="Sexy.alert('<h1>SexyAlertBox</h1><em>versión 1.2</em><br/><p>No te olvides de visitar <a href=\'http://www.coders.me/\'>www.coders.me</a> está lleno de artículos de programación.</p>');return false;">Mostrar alerta</a></p>
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
