@@ -119,20 +119,11 @@ div#main {
 
 }
 #header #blockinHeader {
-	background-color: #dcebf4;
-	height: 76px;
+	background-color: #edf4f8;
+	height: 77px;
 	width: 500px;
 	float: right;
 	position: relative;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-right-color: #4f7c94;
-	border-bottom-color: #4f7c94;
-	border-left-color: #4f7c94;
 }
 
 #header #blockinHeaderDelegate {

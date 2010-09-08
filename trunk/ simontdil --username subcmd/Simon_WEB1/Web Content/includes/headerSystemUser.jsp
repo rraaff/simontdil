@@ -27,6 +27,9 @@ a:active {width: auto;}
 #content #centrador{
 	padding-left:130px;
 }
+#header #blockinHeader #userLogued {
+	width: 460px;
+}
 -->
 </style>
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
@@ -38,24 +41,29 @@ a:active {width: auto;}
 	<div id="blockinHeader">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td colspan="5" height="10"><img src="images/null.gif" width="1" height="10"></td>
+				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
+				<td width="30" align="right"><a href="#">Salir</a></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="220" valign="middle">
+				<td width="460" align="right" valign="middle">
 					<div id="userLogued">
-						<table width="320" height="30" border="0" cellspacing="0" cellpadding="0">
-							<!-- Meter un if user logged acá con un else -->
+						<table width="460" height="30" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td width="280" align="right">Bienvenido: <span class="userLogged"><%= user.getName() %></span></td>
+								<td width="410" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
+								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 							</tr>
 						</table>
 					</div>
 				</td>
-				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="250" align="right" class="remarcado">
+			</tr>
+			<tr>
+				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
+			</tr>
+			<tr>
+				<td colspan="3" align="right" class="remarcado">
 					<% 	if(eventMode && inNegotiation && isModerator) { 
 							if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 							%>
@@ -67,21 +75,22 @@ a:active {width: auto;}
 						
 					<% } %>
 				</td>
-				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
-				<td colspan="5" height="10"><img src="images/null.gif" width="1" height="10"></td>
+				<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 			</tr>
 			<tr>
-				<td colspan="5" height="10">
+				<td colspan="3" height="10" align="center">
 					<div id="dataSites">
 						<table width="500" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td>Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td>Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%></td>
+								<td width="153">Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td>Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%></td>
+								<td width="153" align="center">Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%></td>
+								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+								<td width="154" align="right">Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%></td>
+								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 							</tr>
 						</table>
 					</div>
