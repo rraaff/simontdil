@@ -6,7 +6,6 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 
-
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -49,6 +48,7 @@
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" width="223" align="left">
 													<html:select name="SearchObservationsForm" property="countryId" styleClass="textfield_effect">
+														<option value="">Todos</option>
 														<html:optionsCollection name="SearchObservationsForm" property="allCountries" value="id" label="name"/>
 													</html:select></td>
 												</tr>
@@ -56,7 +56,7 @@
 													<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="exact"/></td>
+													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="exact" onclick="configureSearchBy();"/></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left">Buscar por fecha exacta</td>
 												</tr>
@@ -81,7 +81,7 @@
 													<td colspan="4" height="30"><img src="images/null.gif" width="1" height="30"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="range"/></td>
+													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="range" onclick="configureSearchBy();"/></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left">Buscar por rango de fechas</td>
 												</tr>
@@ -128,6 +128,7 @@
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left">
 													<html:select name="SearchObservationsForm" property="paragraphNumber" styleClass="textfield_effect_day">
+														<option value="">Todos</option>
 														<html:options name="SearchObservationsForm" property="allParagraphs"/>
 													</html:select></td>
 												</tr>
@@ -175,4 +176,37 @@
 		</table>
 	</div>
 </div>
+<script type="text/javascript">
+	function configureSearchBy() {
+		var exactRadios = document.SearchObservationsForm.exactDate;
+		var exactObj;
+		var rangeObj;
+		if ("exact" == exactRadios[0].value) {
+			exactObj = exactRadios[0];
+			rangeObj = exactRadios[1];
+		} else {
+			exactObj = exactRadios[1];
+			rangeObj = exactRadios[0];
+		}
+		if (!exactObj.checked && !rangeObj.checked) {
+			exactObj.checked = true;
+		}
+		if(exactObj.checked) {
+			document.SearchObservationsForm.exactDay.disabled = false;
+			document.SearchObservationsForm.exactMonth.disabled = false;
+			document.SearchObservationsForm.lowerDay.disabled = true;
+			document.SearchObservationsForm.lowerMonth.disabled = true;
+			document.SearchObservationsForm.upperDay.disabled = true;
+			document.SearchObservationsForm.upperMonth.disabled = true;
+		} else {
+			document.SearchObservationsForm.exactDay.disabled = true;
+			document.SearchObservationsForm.exactMonth.disabled = true;
+			document.SearchObservationsForm.lowerDay.disabled = false
+			document.SearchObservationsForm.lowerMonth.disabled = false;
+			document.SearchObservationsForm.upperDay.disabled = false;
+			document.SearchObservationsForm.upperMonth.disabled = false;
+		}
+	}
+	configureSearchBy();
+</script>
 </html:form>

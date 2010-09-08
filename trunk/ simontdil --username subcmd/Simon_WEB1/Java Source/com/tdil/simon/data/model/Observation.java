@@ -1,5 +1,7 @@
  package com.tdil.simon.data.model;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Observation extends PersistentObject {
@@ -46,6 +48,11 @@ public class Observation extends PersistentObject {
 	}
 	public void setPrivateObservation(boolean privateObservation) {
 		this.privateObservation = privateObservation;
+	}
+	
+	public String getCreationDateFormatted() {
+		DateFormat lastLoginFormat = new SimpleDateFormat("dd/MM HH:mm");
+		return lastLoginFormat.format(this.getCreationDate());
 	}
 	
 }
