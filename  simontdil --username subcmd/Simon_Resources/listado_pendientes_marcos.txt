@@ -1,0 +1,19 @@
+validacion documento con mismo nombre
+validaciondocumento sin parrafos
+
+resto de validaciones
+
+layer de todas las versiones
+
+limitar versiones a 7 en la vista
+
+link a la home de delegado no anda
+
+imagen null mismo ancho en stadisticas
+
+centrar mensajes de error
+
+observaciones agrupadas por parrafo, con texto original
+
+che... eso que me consultaste en el mail del salvado durante la negociación, será aquello de que no 
+existan draft de un archivo en negociación... que el hecho de estar en negociación es un draft en si mismo?
