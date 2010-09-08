@@ -1,0 +1,48 @@
+- LogOut
+Dejé en headerDelegate.jsp y headerSystemUser.jsp un link trucho para que me lo actives
+
+- Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
+
+- Generales
+  - Necesito cambiar todas las palabras en inglés tales como Draft o Consolidated bla bla.. 
+  - Mejorar la visibilidad de los scrolls.
+  - Revisar los títulos
+  - Los mensajes de aprobación o error entre acción y acción o pantalla y pantalla.
+
+- Grabar Documentos
+  - Sigue el problema de cantidad de caracteres con la introducción. Ver la solución de ampliar el límite y limitar el campo para que no pueda explotar. Lo mismo aplica a los párrafos y el campo de comentario de consolidación.
+
+- Consolidación De docs
+  - Cambiar “Comentario de versión” por “Descripción de versión”. Una huevada de html.
+  - Si existe algún lugar a nivel de modelo o jsp o lo que sea que se vea como Comentario, hay que cambiarlo a Descripción.
+
+- Vista HOME
+  - Lo más probable es que no haya docs secundarios, tengo que rediseñar la puta home para que no se vea con un agujero!
+  - Ponerle link a los docs directo en los elementos de la lista de docs secundarios.
+
+- Vista docs
+  - Que se note más en qué versión estás
+  - Reacomodar los datos en las obs según el PDF de Lara
+    - Sacar delegado
+    - Poner la delegación primero con la banderita
+    - Listado de observaciones.
+    - Ordenar por número de párrafo
+    - Antes de cada grupo de observaciones poner el texto original del párrafo.
+
+- Negociación
+  - Panel de edición de texto para los párrafos en negociación
+    - Negrita
+    - Itálica
+    - Subrayado
+    - Resaltado
+    - Tachado
+    - Colores (con 5 se dan por felices)
+
+- Lista de Docs
+  - Botón Borrar
+
+- Alta/edición de Docs
+  - Si se puede, agregar el combo de párrafos para poder switchear del 1 al 74 sin tener que pasar por todos.
+
+- General en los listados
+  - Si se puede, cambiarle el estilo de texto a los contenidos de los TRs que estén desactivados. usar este class: notActive
