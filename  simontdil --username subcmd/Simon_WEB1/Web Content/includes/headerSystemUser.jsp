@@ -44,7 +44,7 @@ a:active {width: auto;}
 				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
-				<td width="30" align="right"><a href="#">Salir</a></td>
+				<td width="30" align="right"><html:link action="/logout" >Salir</html:link></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="460" align="right" valign="middle">
 					<div id="userLogued">

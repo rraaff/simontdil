@@ -162,6 +162,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public String getIntroduction() {
 		return introduction;
 	}
+	
+	public String getLimitedIntro() {
+		if (this.introduction.length() > 100) {
+			return this.getIntroduction().substring(0, 100) + "...";
+		} else {
+			return this.getIntroduction();
+		}
+	}
 	public void setIntroduction(String introduction) {
 		this.introduction = introduction;
 	}

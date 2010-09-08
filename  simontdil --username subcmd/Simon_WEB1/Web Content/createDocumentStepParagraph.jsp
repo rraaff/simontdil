@@ -86,7 +86,7 @@
 							<tr>
 								<td align="right">Introducción:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:textarea name="CreateDocumentForm" property="introduction" disabled="true" styleClass="textfield_effect"/></td>
+								<td align="left"><html:textarea name="CreateDocumentForm" property="limitedIntro" disabled="true" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
