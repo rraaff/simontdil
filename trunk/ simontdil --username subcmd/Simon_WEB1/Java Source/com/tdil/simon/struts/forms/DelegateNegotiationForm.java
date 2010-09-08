@@ -50,7 +50,7 @@ public class DelegateNegotiationForm extends ActionForm {
 		versionVO.setVersion(version);
 		if (version != null) {
 			versionVO.setDocument(DocumentDAO.getDocument(version.getDocumentId()));
-			versionVO.setParagraphs(ParagraphDAO.selectAllParagraphsFor(version.getId()));
+			versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(version.getId()));
 		}
 		setVersionVO(versionVO);
 		if (Version.IN_SIGN.equals(version.getStatus())) {

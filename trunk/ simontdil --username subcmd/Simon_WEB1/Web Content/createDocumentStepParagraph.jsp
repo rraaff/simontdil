@@ -143,7 +143,7 @@
 							<tr>
 								<td width="70" align="right" valign="top">Párrafo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td colspan="5" width="343" align="left"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/></td>
+								<td colspan="5" width="343" align="left"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
 							</tr>
 							<tr>
 								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>

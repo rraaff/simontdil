@@ -67,6 +67,7 @@
       <forward name="preview" path="/previewDocument.jsp"/>
       <forward name="stay" path="/createDocumentStepParagraph.jsp"/>
       <forward name="modifyIntroduction" path="/createDocumentStep2.jsp"/>
+      <forward name="failure" path="/createDocumentStepParagraph.jsp"/>
     </action>
     <action path="/countPrivateMessagesForVersion" type="com.tdil.simon.struts.actions.moderator.CountPrivateMessagesForVersion" scope="request">
     </action>
@@ -81,6 +82,7 @@
     <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
       <forward name="save" path="/goToModeratorHome.st"/>
       <forward name="cancel" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="failure" path="/consolidateDocument.jsp"/>
     </action>
     <action path="/goToListDocument" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.GoToListDocument" scope="session">
       <forward name="continue" path="/listDocumentsForModerator.jsp"/>

@@ -22,7 +22,7 @@ public class FieldValidation {
 		} else {
 			result = text.trim();
 			if (result.length() > length) {
-				validation.setFieldError(field, field + "." + ValidationErrors.TEXT_TOO_LONG+String.valueOf(length));
+				validation.setFieldError(field, field + "." + ValidationErrors.TEXT_TOO_LONG);
 			}
 		}
 		return result;
@@ -35,7 +35,7 @@ public class FieldValidation {
 		} else {
 			result = email.trim();
 			if (result.length() > 100) {
-				validation.setFieldError(field, ValidationErrors.TEXT_TOO_LONG + 100);
+				validation.setFieldError(field, ValidationErrors.TEXT_TOO_LONG);
 			}
 			if (!EMAIL_RE.isMatch(result)) {
 				validation.setFieldError(field, ValidationErrors.INVALID_EMAIL);

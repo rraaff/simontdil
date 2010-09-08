@@ -11,7 +11,7 @@
 
     /* Don't touch here */
     position: absolute;
-    z-index: 999; /* There are some cases where you'll need to change this if you're currently using a greater one in your project*/
+    z-index: 100001; /* There are some cases where you'll need to change this if you're currently using a greater one in your project*/
     cursor: pointer;
     -moz-border-radius: 10px;
     -webkit-border-radius: 10px;

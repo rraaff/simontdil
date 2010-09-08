@@ -130,7 +130,7 @@
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="339" align="left">
 								<!--  textarea cols="" rows="" class="textfield_effect_area"></textarea -->
-									<html:textarea name="CreateDocumentForm" property="introduction" styleClass="textfield_effect_area"/><html:errors property="title" /></td>
+									<html:textarea name="CreateDocumentForm" property="introduction" styleClass="textfield_effect_area"/><html:errors property="introduction" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="48"><img src="images/null.gif" width="1" height="48"></td>

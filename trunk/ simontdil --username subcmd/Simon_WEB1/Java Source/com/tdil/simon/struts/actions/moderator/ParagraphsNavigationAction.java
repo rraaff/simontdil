@@ -9,8 +9,10 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
@@ -33,30 +35,44 @@ public class ParagraphsNavigationAction extends SimonAction {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.back"))) {
-			if (createDocumentForm.getParagraph() > 0) {
-				createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
-				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
-				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
-				if (inNegotiation) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				if (createDocumentForm.getParagraph() > 0) {
+					createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
+					boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+					if (!createDocumentForm.getParagraphHidden()) {
+						request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+						if (inNegotiation) {
+							TransactionProvider.executeInTransaction(new TransactionalAction() {
+								public void executeInTransaction() throws SQLException, ValidationException {
+									NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+								}
+							});
 						}
-					});
+					}
 				}
 			}
 			return mapping.findForward("previous");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.next"))) {
-			createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
-			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
-			request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
-			if (inNegotiation) {
-				TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
+				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+				if (!createDocumentForm.getParagraphHidden()) {
+					request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+					if (inNegotiation) {
+						TransactionProvider.executeInTransaction(new TransactionalAction() {
+							public void executeInTransaction() throws SQLException, ValidationException {
+								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							}
+						});
 					}
-				});
+				}
 			}
 			return mapping.findForward("next");
 		}
@@ -68,18 +84,25 @@ public class ParagraphsNavigationAction extends SimonAction {
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.pushData"))) {
 			createDocumentForm.save();
 			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
-				TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
-					}
-				});
+				if (!createDocumentForm.getParagraphHidden()) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+						}
+					});
+				}
 			}
 			return mapping.findForward("stay");
 		}
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.add"))) {
-			createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
-			return mapping.findForward("stay");
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
+				return mapping.findForward("stay");
+			}
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.hide"))) {
 			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = true;
@@ -91,8 +114,13 @@ public class ParagraphsNavigationAction extends SimonAction {
 		}
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.modifyIntroduction"))) {
-			request.getSession().setAttribute("paragraphNegotiated", "false");
-			return mapping.findForward("modifyIntroduction");
+			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				request.getSession().setAttribute("paragraphNegotiated", "false");
+				return mapping.findForward("modifyIntroduction");
+			}
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.preview"))) {
 			return mapping.findForward("preview");
