@@ -11,16 +11,25 @@ div#sizer { display:none; }
 /* breathing room between images in sizer */
 div#sizer img { margin-right:3px; }
 
-div#main { background-color:#eee; }  
+div#main { 
+	background-color:#eee;
+	width:480px;
+}
+
 #content #negotiationArea #lastParagraphText {
 	font-size: 11px;
-	color: #333366;
+	color: #000000;
 	background-color: #F3F3F3;
-	width: 214px;
-	height: 146px;
+	width: 342px;
 	display: block;
-	overflow: scroll;
+	text-align: left;
+	height: 500px;
 }
+
+div#scrollbar {
+	display:none;
+}
+
 #content #signArea {
 	display: none;
 }
@@ -28,6 +37,10 @@ div#main { background-color:#eee; }
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
 <script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
+
+<script src="scripts/dw_scroll.js" type="text/javascript"></script>
+<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
+<script src="scripts/scroll_controls.js" type="text/javascript"></script>
 <script type="text/javascript">
 // setDefaults arguments: size unit, default size, minimum, maximum
 // optional array of elements or selectors to apply these defaults to
@@ -38,6 +51,22 @@ dw_fontSizerDX.setDefaults("px", 13, 9, 26, ['div#main p.article'] );
 dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
 
 dw_Event.add( window, 'load', dw_fontSizerDX.init );
+
+function init_dw_Scroll() {
+	var wndo = new dw_scrollObj('main', 'lyr1');
+	wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
+	wndo.setUpScrollControls('scrollbar');
+	
+	var wndo = new dw_scrollObj('negotiationArea', 'lastParagraphText');
+	wndo.setUpScrollbar("dragBar2", "track2", "v", 1, 1);
+	wndo.setUpScrollControls('scrollbar2');
+}
+
+// if code supported, link in the style sheet and call the init function onload
+if ( dw_scrollObj.isSupported() ) {
+    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
+    dw_Event.add( window, 'load', init_dw_Scroll);
+}
 </script>
 <html:html>
 <script type="text/javascript">
@@ -127,57 +156,65 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20" id="imgReferencia" name="imgReferencia"></td>
 	</tr>
 	<tr>
-		<td width="608" valign="top">
+		<td width="528" valign="top">
 			<!-- inicio tabla template -->
-			<table width="608" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="528" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
+					<td colspan="2" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="608" height="284" align="left" valign="top">
+					<td width="478" height="284" align="left" valign="top">
 					<!-- corte tabla template -->
-					<div id="main">
-						<div id="documentoCompleto">
-						<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
-							<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
-						</logic:iterate>
+						<div id="main">
+							<div id="lyr1">
+								<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
+									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
+								</logic:iterate>
+							</div>
 						</div>
-					</div>
 					<!-- corte tabla template --></td>
+					<td width="30" align="right">
+					<div id="scrollbar" align="right">
+						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+						<div id="track">
+							<div id="dragBar"></div>
+						</div>
+						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
+					</div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="608" height="30"><div id="sizer" align="right"><a class="increase" href="#" title="Increase text size"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Decrease text size"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Restore default font-sizes"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div></td>
+					<td colspan="2" width="508" height="30"><div id="sizer" align="right"><a class="increase" href="#" title="Increase text size"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Decrease text size"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Restore default font-sizes"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="294" valign="top">
+		<td width="392" valign="top">
 			<!-- inicio tabla template -->
-			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="392" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><div id="blockTitle">Documento en Negociación</div></td>
+					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Documento en Negociación</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td width="274" height="50" valign="middle">
+					<td height="40" valign="middle">
 					<!-- corte tabla template -->
 						<div id="contentDocumentoPrincipal">
 							<div class="titleDocInModule"><br><bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /></div>
@@ -188,59 +225,47 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomLeftDoc.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		<!-- separador -->
 		<div id="separador1Home"><img src="images/null.gif" width="1" height="16"><div>
-<!-- inicio tabla template -->
-			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
+		<!-- inicio tabla template -->
+			<table width="392" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><div id="blockTitle">Draft del párrafo</div></td>
+					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Borrador del párrafo</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="274">
+					<td>
 						<!-- corte tabla template -->
-						<table width="274" border="0" cellspacing="0" cellpadding="0" id="workTable">
+						<table width="372" border="0" cellspacing="0" cellpadding="0" id="workTable">
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="2" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
 							<tr>
-								<td width="50" align="right" valign="top">Texto: </td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="217" height="157" align="left" valign="top">
-								<div id="negotiationArea">
+								<td width="342" height="157" valign="top">
+								<div id="negotiationArea" style="width:342px; height:157px; text-align:left;">
 									<div id="lastParagraphText">  -  </div>
-									<!--div id="addCommentLayer" style="display: none;">
-										<table>
-											<tr>
-												<td id="error"></td>
-											<tr>
-											<tr>
-												<td>Mensaje del párrafo: <textarea id="pText"></textarea></td>
-											<tr>
-											<tr>
-												<td><input type="button" onClick="doAdd()" value="Agregar observacion" ><input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
-											<tr>
-										</table>
-									</div-->
+								</div>
+								</td>
+								<td width="30" align="right">
+								<div id="scrollbar2" align="right">
+									<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+									<div id="track2">
+										<div id="dragBar2"></div>
+									</div>
+									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
 								</div></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="25" align="center"><input type="button" value="Mensaje al delegado" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
+								<td colspan="2" height="25" align="center"><input type="button" value="Mensaje al delegado" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->

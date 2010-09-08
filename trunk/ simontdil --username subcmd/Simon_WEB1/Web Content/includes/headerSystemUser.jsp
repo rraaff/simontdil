@@ -85,9 +85,9 @@ a:active {width: auto;}
 						<table width="500" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="153">Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%></td>
+								<td width="118">Moderador: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getStatus()%></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="153" align="center">Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%></td>
+								<td width="188" align="center">Delegados: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getStatus()%></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 								<td width="154" align="right">Pantalla Pública: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getStatus()%></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
