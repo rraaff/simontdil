@@ -104,10 +104,10 @@
 											<img src="images/buttons/editar.png" width="50" height="24" border="0">
 										</html:link>
 										<td><logic:equal name="iterCategory" property="deleted" value="false">
-												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/minus.gif"></html:image>
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
 											</logic:equal>
 											<logic:equal name="iterCategory" property="deleted" value="true">
-												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/plus.gif"></html:image>
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
 											</logic:equal>
 										</td>
 									</tr> 
