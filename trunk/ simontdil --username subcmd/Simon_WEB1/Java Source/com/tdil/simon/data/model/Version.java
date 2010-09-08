@@ -3,6 +3,8 @@ package com.tdil.simon.data.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.tdil.simon.struts.ApplicationResources;
+
 public class Version extends PersistentObject {
 
 	private int documentId;
@@ -44,6 +46,11 @@ public class Version extends PersistentObject {
 	public void setUpToCommentDate(Date upToCommentDate) {
 		this.upToCommentDate = upToCommentDate;
 	}
+	
+	public String getTranslatedStatus() {
+		return ApplicationResources.getMessage("version." + this.getStatus());
+	}
+	
 	public String getStatus() {
 		return status;
 	}

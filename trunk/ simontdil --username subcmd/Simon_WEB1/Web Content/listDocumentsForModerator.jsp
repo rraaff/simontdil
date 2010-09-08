@@ -75,7 +75,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 										<td height="28"><bean:write name="version" property="documentTitle" /></td>
 										<td><bean:write name="version" property="versionWithSubversion" /></td>
-										<td><bean:write name="version" property="status" /></td> 
+										<td><bean:write name="version" property="translatedStatus" /></td> 
 										<td><bean:write name="version" property="name" /></td>
 										<td><bean:write name="version" property="hasObservationText" /></td>
 										<td><bean:write name="version" property="observationCountText" /></td>

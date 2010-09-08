@@ -215,6 +215,9 @@
     </action>
     <action path="/logout" type="com.tdil.simon.struts.actions.LogoutAction">
     </action>
+    <action path="/goToViewLastVersionOfDocument" name="ViewVersion" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>

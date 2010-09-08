@@ -1,12 +1,13 @@
-- Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
+X Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
+Los estados de los sitios y documentos deberian funcionarte bien, si queres tocar estan en ApplicationResourcse
 
 - Generales
-  - Necesito cambiar todas las palabras en inglés tales como Draft o Consolidated bla bla.. 
+  X Necesito cambiar todas las palabras en inglés tales como Draft o Consolidated bla bla.. mismo caso que el anterior
   - Los mensajes de aprobación o error entre acción y acción o pantalla y pantalla.
 
 - Vista HOME
   - Lo más probable es que no haya docs secundarios, tengo que rediseñar la puta home para que no se vea con un agujero!
-  - Ponerle link a los docs directo en los elementos de la lista de docs secundarios.
+  X Ponerle link a los docs directo en los elementos de la lista de docs secundarios.
 
 - Ver obsercaciones
   - Poner la delegación primero con la banderita
@@ -37,5 +38,7 @@
   - Header
     - El la última prueba que hice, no me actualizó el numerito de mensajes privados en el header. pero el link me anduvo bien.
 
-- Firma
+X Firma
   - Parece que sigue hardcodeada y desde una máquina que no es la que tiene el server, no anda el grabar.
+  Pablo, esto funciona con una property, esta simon.properties y es la que se llama server.url, esta tendria que tener
+  una direccion que vean todos.
