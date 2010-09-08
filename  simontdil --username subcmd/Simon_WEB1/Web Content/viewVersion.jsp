@@ -20,6 +20,14 @@ lyr1{
 #content #portaVersiones a {
 	color: #FFFFFF;
 }
+#versionStrong {
+	font-size: 14px;
+	color: #FFFFFF;
+	background-color: #EF8A1B;
+	height: 20px;
+	width: 20px;
+	text-align: center;
+}
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
@@ -102,15 +110,37 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td width="274" height="80" valign="middle"><!-- corte tabla template -->
-						<div id="contentDocumentoPrincipal">
-							<div class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></div><br>
-							<p style="line-height: 12px;">Versi&oacute;n: <bean:write name="ViewVersion" property="version.version.number" /> - <bean:write name="ViewVersion" property="version.version.name" /><br>
-							L&iacute;mite para observaciones: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></p><br>
-						</div>
-						<html:submit property="operation">
-							<bean:message key="viewVersion.downloadPdf"/>
-						</html:submit>
+					<td width="274" height="80" align="center" valign="middle">
+						<table width="254" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td colspan="3" height="30"><div class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></div></td>
+							</tr>
+							<tr>
+								<td colspan="3">
+									<table width="254" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="50" height="30" align="left">Versi&oacute;n:</td>
+											<td width="8"><img src="images/null.gif" width="7" height="1"></td>
+											<td width="20"><div id="versionStrong"><bean:write name="ViewVersion" property="version.version.number" /></div></td>
+											<td width="8"><img src="images/null.gif" width="7" height="1"></td>
+											<td width="156" align="left"><bean:write name="ViewVersion" property="version.version.name" /></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td width="163" height="30" align="left">L&iacute;mite para observaciones:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="84" align="left"><bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="center">
+								<html:submit property="operation">
+									<bean:message key="viewVersion.downloadPdf"/>
+								</html:submit>
+								</td>
+							</tr>
+						</table>
 						<!-- corte tabla template -->
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
@@ -302,8 +332,6 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="578" height="284" align="left" valign="top">
 					<!-- corte tabla template -->
-					<!-- div id="wn"
-					    <div id="lyr1" -->
 					<div id="main">
 						<div id="lyr1">
 						<!-- div id="documentoCompleto" -->
