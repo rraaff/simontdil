@@ -73,7 +73,15 @@ if ( dw_scrollObj.isSupported() ) {
 									<div id="main">
 										<div id="lyr1">
 											<table width="900" border="0" cellspacing="0" cellpadding="0" align="center">
+												<% int lastParagraph = -1; %>
 												<logic:iterate name="ViewVersion" property="observations" id="observation" indexId="iterIndex"> 
+													<% com.tdil.simon.data.valueobjects.ObservationVO tmpObservation = (com.tdil.simon.data.valueobjects.ObservationVO)observation;
+														if (lastParagraph != tmpObservation.getParagraphId()) { %>
+														<tr><td colspan="11"><%=tmpObservation.getParagraphText()%></td></tr>
+													<% 
+														lastParagraph = tmpObservation.getParagraphId();
+													 	} 
+													 %>
 													<tr>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 														<td width="280" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -86,7 +94,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="280" valign="top"><p>INSERTAR BANDERITA</p>
+														<td width="280" valign="top"><p><img src="./download.do?action=flag&fileId=<bean:write name="observation" property="countryId" />" width="30" height="30"></p>
 														Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
 														Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
 														Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>

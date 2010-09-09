@@ -6,12 +6,16 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
+import sun.jdbc.odbc.OdbcDef;
+
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.VersionNumberVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 
@@ -43,6 +47,35 @@ public class ViewVersionForm extends ActionForm {
 		versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(versionID));
 		versionVO.setDocument(DocumentDAO.getDocument(version.getDocumentId()));
 		setVersion(versionVO);
+	}
+	
+	public String getParagraphText(int observationId) {
+		ObservationVO observationVO = (ObservationVO)this.getObservations().get(observationId);
+		for (Paragraph p : this.getVersion().getParagraphs()) {
+			if (p.getParagraphNumber() == observationVO.getParagraphNumber()) {
+				return p.getParagraphText();
+			}
+		}
+		return "";
+	}
+	
+	public Paragraph getParagraph(int paragraphId) {
+		for (Paragraph p : this.getVersion().getParagraphs()) {
+			if (p.getId() == paragraphId) {
+				return p;
+			}
+		}
+		return null;
+	}
+	
+	public String getParagraphText(Object object) {
+		ObservationVO observationVO = (ObservationVO)object;
+		for (Paragraph p : this.getVersion().getParagraphs()) {
+			if (p.getParagraphNumber() == observationVO.getParagraphNumber()) {
+				return p.getParagraphText();
+			}
+		}
+		return "";
 	}
 	
 	public boolean getVersionCanBeEdited() {
@@ -131,6 +164,10 @@ public class ViewVersionForm extends ActionForm {
 	}
 
 	public void setObservations(List observations) {
+		for (Object observationVO : observations) {
+			ObservationVO observationVO2 = (ObservationVO)observationVO;
+			observationVO2.setParagraph(this.getParagraph(observationVO2.getParagraphId()));
+		}
 		this.observations = observations;
 	}
 
