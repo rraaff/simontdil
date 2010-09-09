@@ -303,7 +303,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td align="center" valign="middle">
-						<table width="640" height="400" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<table width="640" height="370" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 							<tr>
 								<td width="640" align="center" valign="top">
 									<!-- inicio tabla template -->
@@ -320,7 +320,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<!-- corte tabla template -->
 												<%if (isDelegate && user.isCanSign()) { %>
 												<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
-												   flashvars="saveUrl=http://<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
+												   flashvars="saveUrl=http://<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
 												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 												   pluginspage="http://www.adobe.com/go/getflashplayer">
 												</embed>
@@ -330,7 +330,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 										</tr>
-										<tr>
+										<!-- tr>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td height="30" align="center">
@@ -342,7 +342,7 @@ if ( dw_scrollObj.isSupported() ) {
 											</td>
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-										</tr>
+										</tr -->
 										<tr>
 											<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 											<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
