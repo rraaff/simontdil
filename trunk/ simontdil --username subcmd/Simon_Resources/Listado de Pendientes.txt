@@ -9,10 +9,10 @@ Los estados de los sitios y documentos deberian funcionarte bien, si queres toca
   - Lo más probable es que no haya docs secundarios, tengo que rediseñar la puta home para que no se vea con un agujero!
   X Ponerle link a los docs directo en los elementos de la lista de docs secundarios.
 
-- Ver obsercaciones
-  - Poner la delegación primero con la banderita
-  - Ordenar por número de párrafo
-  - Antes de cada grupo de observaciones poner el texto original del párrafo.
+X Ver obsercaciones
+  X Poner la delegación primero con la banderita
+  X Ordenar por número de párrafo (y despues??? porque)
+  X Antes de cada grupo de observaciones poner el texto original del párrafo.
 
 - Negociación
   - Panel de edición de texto para los párrafos en negociación
@@ -33,12 +33,17 @@ Los estados de los sitios y documentos deberian funcionarte bien, si queres toca
   - Si se puede, cambiarle el estilo de texto a los contenidos de los TRs que estén desactivados. usar este class: notActive
 
 
-- Lista de Observaciones o mensajes privados
-  - Hay 3 archivos que tiene <p>INSERTAR BANDERITA</p>, buscalos y reemplazamelo por la banderita de la delegación que hizo el comentario.
-  - Header
-    - El la última prueba que hice, no me actualizó el numerito de mensajes privados en el header. pero el link me anduvo bien.
+X Lista de Observaciones o mensajes privados
+  X Hay 3 archivos que tiene <p>INSERTAR BANDERITA</p>, buscalos y reemplazamelo por la banderita de la delegación que hizo el comentario.
+  X Header
+    X El la última prueba que hice, no me actualizó el numerito de mensajes privados en el header. pero el link me anduvo bien.
 
 X Firma
-  - Parece que sigue hardcodeada y desde una máquina que no es la que tiene el server, no anda el grabar.
+  X Parece que sigue hardcodeada y desde una máquina que no es la que tiene el server, no anda el grabar.
   Pablo, esto funciona con una property, esta simon.properties y es la que se llama server.url, esta tendria que tener
   una direccion que vean todos.
+  
+  
+- Validaciones por todos lados
+
+- Email al momento del agregado de observacion para el resto?

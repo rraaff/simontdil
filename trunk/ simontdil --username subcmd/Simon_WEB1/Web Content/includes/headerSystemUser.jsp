@@ -130,7 +130,7 @@ a:active {width: auto;}
 					var maxId = <%= summary.getMaxId()%>;
 					function refreshPrivateMessages() {		
 						var jsonRequest = new Request.JSON({url: '<html:rewrite page="/countPrivateMessagesForVersion.st"/>', onSuccess: function(privMessages, responseText){
-							var errorResult = json.error;
+							var errorResult = privMessages.error;
 							if ('notLogged' == errorResult) {
 								window.location='<html:rewrite page="/login.jsp"/>';
 								return;

@@ -21,7 +21,7 @@ import com.tdil.simon.utils.ObservationUtils;
 
 public class CountPrivateMessagesForVersion extends AjaxSimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR, UserTypeValidation.MODERATOR};
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

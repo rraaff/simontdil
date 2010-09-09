@@ -32,6 +32,7 @@
     	Observation.*,
     	SystemUser.username,
     	SystemUser.name,
+    	Country.id as countryId,
     	Country.name as countryName,
     	Paragraph.paragraphNumber as paragraphNumber
    	from Paragraph, Observation, SystemUser, Country 
@@ -41,7 +42,7 @@
    	AND Observation.privateObservation = 1
    	AND SystemUser.countryId = Country.id
    	AND Observation.DELETED = 0
-   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+   	order by Paragraph.paragraphNumber, Observation.creationDate, Country.name, SystemUser.name
   </select>
   
   <select id="selectNotDeletedPrivateObservationsForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
@@ -49,6 +50,7 @@
     	Observation.*,
     	SystemUser.username,
     	SystemUser.name,
+    	Country.id as countryId,
     	Country.name as countryName,
     	Paragraph.paragraphNumber as paragraphNumber
    	from Paragraph, Observation, SystemUser, Country 
@@ -58,7 +60,7 @@
    	AND Observation.privateObservation = 1
    	AND SystemUser.countryId = Country.id
    	AND Observation.DELETED = 0
-   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+   	order by Paragraph.paragraphNumber, Observation.creationDate, Country.name, SystemUser.name
   </select>
   
   <select id="selectAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
@@ -66,6 +68,7 @@
     	Observation.*,
     	SystemUser.username,
     	SystemUser.name,
+    	Country.id as countryId,
     	Country.name as countryName,
     	Paragraph.paragraphNumber as paragraphNumber
    	from Paragraph, Observation, SystemUser, Country 
@@ -75,7 +78,7 @@
    	AND Observation.privateObservation = 0
    	AND SystemUser.countryId = Country.id
    	AND Observation.DELETED = 0
-   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+   	order by Paragraph.paragraphNumber, Observation.creationDate, Country.name, SystemUser.name
   </select>
   
   <select id="searchObservations" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
@@ -83,6 +86,7 @@
     	Observation.*,
     	SystemUser.username,
     	SystemUser.name,
+    	Country.id as countryId,
     	Country.name as countryName,
     	Paragraph.paragraphNumber as paragraphNumber
    	from Paragraph, Observation, SystemUser, Country
@@ -106,7 +110,7 @@
    	<isNotNull prepend="AND" property="paragraphNumber">
     	(Paragraph.paragraphNumber = #paragraphNumber#)
     </isNotNull>
-   	order by Observation.creationDate, Country.name, Paragraph.paragraphNumber, SystemUser.name
+   	order by Paragraph.paragraphNumber, Observation.creationDate, Country.name, SystemUser.name
   </select>
   
   <select id="selectObservationById" parameterClass="int" resultClass="Observation">
@@ -118,7 +122,7 @@
   
   <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
     select
-      count(1) as count, max(Observation.id) as maxId
+      count(1) as count, IFNULL(max(Observation.id),0) as maxId
     from Observation, Paragraph, Version
     where Version.status = 'IN_NEGOTIATION'
     and Paragraph.versionId = Version.id
@@ -129,7 +133,7 @@
   
     <select id="countPrivateObservationsForNegotiatedParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
     select
-      count(1) as count, max(Observation.id) as maxId
+      count(1) as count, IFNULL(max(Observation.id),0) as maxId
     from Observation
     where Observation.paragraphId = #id#
     and Observation.privateObservation = 1
