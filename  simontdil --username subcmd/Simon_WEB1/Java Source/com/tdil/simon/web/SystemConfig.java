@@ -58,6 +58,18 @@ public class SystemConfig implements ServletContextListener {
 		}
 	}
 	
+	public static String getClientStatusRefreshTime() {
+		return properties.getProperty("client.refreshTime.status");
+	}
+	
+	public static String getClientParagrahRefreshTime() {
+		return properties.getProperty("client.refreshTime.paragrah");
+	}
+	
+	public static String getClientSignaturesRefreshTime() {
+		return properties.getProperty("client.refreshTime.signatures");
+	}
+	
 	public static String getMailServer() {
 		return properties.getProperty("mail.server");
 	}

@@ -66,6 +66,7 @@ CREATE  TABLE `simon`.`PARAGRAPH` (
   `versionId` INT NULL ,
   `paragraphNumber` INT NULL ,
   `paragraphText` MEDIUMTEXT NULL ,
+  `versionNumber` INT NULL,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 

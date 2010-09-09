@@ -1,10 +1,14 @@
 package com.tdil.simon.struts.forms;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.struts.action.ActionForm;
+
+import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Version;
 
 public class ListForm extends ActionForm {
 
@@ -41,5 +45,17 @@ public class ListForm extends ActionForm {
 
 	public void setOperation(String operation) {
 		this.operation = operation;
+	}
+
+	public void deleteVersion(int position) throws SQLException {
+		Version version = (Version)this.getList().get(position);
+		version.setDeleted(true);
+		VersionDAO.logicallyDeleteVersion(version);
+	}
+
+	public void reactivateVersion(int position) throws SQLException {
+		Version version = (Version)this.getList().get(position);
+		version.setDeleted(false);
+		VersionDAO.reactivateVersion(version);
 	}
 }

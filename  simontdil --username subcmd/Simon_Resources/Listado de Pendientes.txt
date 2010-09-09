@@ -23,8 +23,8 @@ X Ver obsercaciones
     - Tachado
     - Colores (con 5 se dan por felices)
 
-- Lista de Docs
-  - Botón Borrar
+X Lista de Docs
+  X Botón Borrar
 
 - Alta/edición de Docs
   - Si se puede, agregar el combo de párrafos para poder switchear del 1 al 74 sin tener que pasar por todos.
@@ -43,7 +43,13 @@ X Firma
   Pablo, esto funciona con una property, esta simon.properties y es la que se llama server.url, esta tendria que tener
   una direccion que vean todos.
   
-  
+X No devolver el texto del parrafo si es el mismo que el delegado esta viendo
+	X Campo en la base de version, que pase el delegado
+
+X Property que maneje el tiempo de refresco
+
+- Logout de moderador si se loguea otro moderador (si tienen un cluster, fuimos)
+
 - Validaciones por todos lados
 
 - Email al momento del agregado de observacion para el resto?

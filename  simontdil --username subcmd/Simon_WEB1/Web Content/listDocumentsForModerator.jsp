@@ -35,6 +35,7 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
+<html:form method="POST" action="/documentABM">
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -84,7 +85,12 @@ if ( dw_scrollObj.isSupported() ) {
 										<% } else { %>  
 											<td>-</td>
 										<% } %> 
-										<td></td>
+										<td><logic:equal name="version" property="deleted" value="false">
+													<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+												</logic:equal>
+												<logic:equal name="version" property="deleted" value="true">
+													<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+												</logic:equal></td>
 										<td width="5"> </td>
 									</tr> 
 									</logic:iterate>
@@ -121,4 +127,5 @@ if ( dw_scrollObj.isSupported() ) {
 	</tr>
 </table>
 </div>
+</html:form>
 <%@ include file="includes/footer.jsp" %>
