@@ -300,34 +300,42 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td align="center" valign="middle">
-						<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<table width="640" height="400" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 							<tr>
-								<td width="440" align="center" valign="top">
+								<td width="640" align="center" valign="top">
 									<!-- inicio tabla template -->
-									<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+									<table width="620" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 										<tr>
-											<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-											<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
-											<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+											<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+											<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+											<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 										</tr>
 										<tr>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-											<td width="400">
+											<td width="600">
 											<!-- corte tabla template -->
 												<%if (isDelegate && user.isCanSign()) { %>
-												<embed src="swf/SimonSignaturator.swf" quality="high" width="400" height="220"
+												<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
 												   flashvars="saveUrl=http://<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st" scale="noscale" salign="l" name="testClass" align="middle"
 												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 												   pluginspage="http://www.adobe.com/go/getflashplayer">
 												</embed>
 												<% } %>
+											<!-- corte tabla template -->
+											</td>
+											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										</tr>
+										<tr>
+											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+											<td height="30" align="center">
 												<html:form action="/goToSignShow">
 													<html:submit property="operation">
 														<bean:message key="delegateNegotiation.signShow"/>
 													</html:submit>
 												</html:form>
-											<!-- corte tabla template -->
 											</td>
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
