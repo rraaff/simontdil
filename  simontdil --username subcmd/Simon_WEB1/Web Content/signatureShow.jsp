@@ -90,23 +90,26 @@ if ( dw_scrollObj.isSupported() ) {
 					</script>
 					<br>
 					<div id="main">
-						<div id="lyr1">
+						<div id="lyr1" style="background-color:#FFFFFF">
 							<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
 								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
-							<table id="signTable">
-								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex"> 
+							<table id="signTable" border="0" cellspacing="0" cellpadding="0">
+								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
+								<tr>
+									<td>INSERTAR BANDERITA</td>
+								</tr>
 								<tr> 
-									<td><img width="200" height="200" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
+									<td align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
 									<script>
 										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
 										lastSignatureIndex = <%=signatureIndex%>;
 									</script>
 								</tr>
 								<tr> 
-									<td><bean:write name="signature" property="delegateName" /></td>
+									<td height="50" align="center"><bean:write name="signature" property="delegateName" /></td>
 								</tr>
 								</logic:iterate>
 							</table>
