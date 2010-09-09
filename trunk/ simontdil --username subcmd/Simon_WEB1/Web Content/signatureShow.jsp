@@ -142,7 +142,7 @@ if ( dw_scrollObj.isSupported() ) {
 												if (!alreadyDisplayed(json.fileNames[i])) {
 													var myTable = document.getElementById("signTable");
 													var tBody = myTable.getElementsByTagName("TBODY")[0];
-													
+													alert("adding " + json.fileNames[i]);
 													var newTR = document.createElement('tr');
 													var dateTD = document.createElement('td');
 													dateTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';

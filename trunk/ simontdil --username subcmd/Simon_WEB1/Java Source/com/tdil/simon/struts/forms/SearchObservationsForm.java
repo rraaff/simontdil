@@ -46,6 +46,8 @@ public class SearchObservationsForm extends ActionForm {
 
 	private List observations;
 
+	private List<Paragraph> paragraphs;
+	
 	private List<Country> allCountries;
 	private List<String> allParagraphs;
 
@@ -73,6 +75,16 @@ public class SearchObservationsForm extends ActionForm {
 		for (int i = 1; i <= 31; i++) {
 			allDays.add(new DayOption(String.valueOf(i)));
 		}
+	}
+	
+	
+	public Paragraph getParagraph(int paragraphId) {
+		for (Paragraph p : getParagraphs()) {
+			if (p.getId() == paragraphId) {
+				return p;
+			}
+		}
+		return null;
 	}
 
 	public List<MonthOption> getMonths() {
@@ -168,6 +180,10 @@ public class SearchObservationsForm extends ActionForm {
 	}
 
 	public void setObservations(List observations) {
+		for (Object observationVO : observations) {
+			ObservationVO observationVO2 = (ObservationVO)observationVO;
+			observationVO2.setParagraph(this.getParagraph(observationVO2.getParagraphId()));
+		}
 		this.observations = observations;
 	}
 
@@ -203,6 +219,7 @@ public class SearchObservationsForm extends ActionForm {
 		this.setUpperMonth(this.getExactMonth());
 		setAllCountries(CountryDAO.selectAllCountries());
 		List pars = ParagraphDAO.selectNotDeletedParagraphsFor(this.getVersionId());
+		setParagraphs(pars);
 		List<String> numbers = new ArrayList<String>();
 		for (Object o : pars) {
 			numbers.add(String.valueOf(((Paragraph) o).getParagraphNumber()));
@@ -315,5 +332,13 @@ public class SearchObservationsForm extends ActionForm {
 
 	public void setOperation(String operation) {
 		this.operation = operation;
+	}
+
+	public List<Paragraph> getParagraphs() {
+		return paragraphs;
+	}
+
+	public void setParagraphs(List<Paragraph> paragraphs) {
+		this.paragraphs = paragraphs;
 	}
 }
