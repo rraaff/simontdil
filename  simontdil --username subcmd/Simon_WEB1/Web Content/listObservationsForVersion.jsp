@@ -77,7 +77,23 @@ if ( dw_scrollObj.isSupported() ) {
 												<logic:iterate name="ViewVersion" property="observations" id="observation" indexId="iterIndex"> 
 													<% com.tdil.simon.data.valueobjects.ObservationVO tmpObservation = (com.tdil.simon.data.valueobjects.ObservationVO)observation;
 														if (lastParagraph != tmpObservation.getParagraphId()) { %>
-														<tr><td colspan="11"><%=tmpObservation.getParagraphText()%></td></tr>
+													<tr>
+														<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+														<td colspan="7" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+														<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+													</tr>
+													<tr>
+														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+														<td colspan="7">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumber()%> . <%=tmpObservation.getParagraphText()%></td>
+														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+													</tr>
+													<tr>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+														<td colspan="7" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+													</tr>
 													<% 
 														lastParagraph = tmpObservation.getParagraphId();
 													 	} 
