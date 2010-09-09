@@ -6,6 +6,8 @@ public class Paragraph extends PersistentObject {
 	private int paragraphNumber;
 	private String paragraphText;
 	
+	private int versionNumber = 1;
+	
 	public int getVersionId() {
 		return versionId;
 	}
@@ -23,6 +25,12 @@ public class Paragraph extends PersistentObject {
 	}
 	public void setParagraphText(String paragraphText) {
 		this.paragraphText = paragraphText;
+	}
+	public int getVersionNumber() {
+		return versionNumber;
+	}
+	public void setVersionNumber(int versionNumber) {
+		this.versionNumber = versionNumber;
 	}
 
 	

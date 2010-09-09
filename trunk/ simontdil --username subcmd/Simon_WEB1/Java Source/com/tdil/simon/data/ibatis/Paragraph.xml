@@ -42,9 +42,9 @@
  
    <insert id="insertParagraph" parameterClass="Paragraph">
     insert into Paragraph (
-      ID, versionId, paragraphNumber, paragraphText, DELETED
+      ID, versionId, paragraphNumber, paragraphText, versionNumber, DELETED
     ) values (
-      #id#, #versionId#, #paragraphNumber#, #paragraphText#, #deleted#
+      #id#, #versionId#, #paragraphNumber#, #paragraphText#, #versionNumber#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -54,7 +54,8 @@
   <update id="updateParagraph" parameterClass="Paragraph">
     update PARAGRAPH set
       paragraphText = #paragraphText#,
-      deleted = #deleted#
+      deleted = #deleted#,
+      versionNumber = versionNumber + 1
     where
       ID = #id#
   </update>

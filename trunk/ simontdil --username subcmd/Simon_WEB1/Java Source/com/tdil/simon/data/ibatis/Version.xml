@@ -95,8 +95,7 @@
     	WHERE Observation.privateObservation = 0 
     	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount
    	from VERSION, Document
-   	WHERE VERSION.DELETED = 0
-   	AND VERSION.documentId = Document.id
+   	WHERE VERSION.documentId = Document.id
    	order by Document.title, Version.number DESC
   </select>
   
@@ -153,7 +152,13 @@
     where documentId = #id#
     and status = 'IN_NEGOTIATION'
   </update>  
- 
+
+	<update id="reactivateVersion" parameterClass="Version">
+    update VERSION set
+      deleted = 0
+    where
+      ID = #id#
+  </update> 
 
   <update id="logDeleteVersion" parameterClass="Version">
     update VERSION set

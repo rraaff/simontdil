@@ -218,6 +218,9 @@
     <action path="/goToViewLastVersionOfDocument" name="ViewVersion" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="session">
       <forward name="continue" path="/viewVersion.jsp"/>
     </action>
+    <action path="/documentABM" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.DocumentABMAction" scope="session">
+      <forward name="continue" path="/goToListDocument.st"/>
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>

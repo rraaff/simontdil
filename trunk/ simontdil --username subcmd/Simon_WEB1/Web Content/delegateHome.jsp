@@ -21,7 +21,7 @@
 			}
 		}}).get();
 	}
-	timer = setInterval("getDelegateSiteStatus()",1000);
+	timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientStatusRefreshTime()%>);
 
 </script>
 <style type="text/css">

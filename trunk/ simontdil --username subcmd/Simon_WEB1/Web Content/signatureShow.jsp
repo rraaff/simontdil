@@ -170,7 +170,7 @@ if ( dw_scrollObj.isSupported() ) {
 									  }
 								   }).get();
 								}
-								timer = setInterval("getSignatures()",1000);
+								timer = setInterval("getSignatures()",<%=com.tdil.simon.web.SystemConfig.getClientSignaturesRefreshTime()%>);
 							</script>
 						</div>
 					</div>

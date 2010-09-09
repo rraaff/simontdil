@@ -99,8 +99,9 @@ if ( dw_scrollObj.isSupported() ) {
 	}
 </script>
 <script type="text/javascript">
-	var lastNumber = "";
+	var lastNumber = "0";
 	var lastText = "";
+	var lastParagraphVersion = "0";
 	function getDelegateSiteStatus() {
 		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
 			var errorResult = json.error;
@@ -115,11 +116,11 @@ if ( dw_scrollObj.isSupported() ) {
 		        if (sitestatus == 'SIGN_SHOW') {
 		        	clearTimer();
 		        	showSignArea();
-		        	// PABLO: Aca tendria que ir codigo javascript que muestre el boton de ir a ver el doc final
 		        } else {
 		        	if (sitestatus == 'IN_NEGOTIATION') {
 		        		var paragraphNumber = json.paragraphNumber;
 		        		var paragraphText = json.paragraphText;
+		        		var paragraphVersion = json.paragraphVersion;
 		        		if (paragraphNumber == "0") {
 		        			lastNumber = paragraphNumber;
 			        		lastText = paragraphText;
@@ -127,11 +128,13 @@ if ( dw_scrollObj.isSupported() ) {
 		        			divObj.innerHTML = "-";
 		        		} else {
 		        			document.getElementById("addPrivateComment").disabled = false;
-			        		if (lastNumber != paragraphNumber || lastText != paragraphText) {
+		        			// le saque || lastText != paragraphText 
+			        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 			        			var divObj = document.getElementById("lastParagraphText");
 			        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
 			        			lastNumber = paragraphNumber;
 			        			lastText = paragraphText;
+			        			lastParagraphVersion = paragraphVersion;
 			        		}
 			        	}
 		        	} else {
@@ -142,9 +145,9 @@ if ( dw_scrollObj.isSupported() ) {
 		        }
 	        }
 	      }
-	   }).get();
+	   }).get({'paragraphVersion': lastParagraphVersion, 'paragraphNumber': lastNumber});
 	}
-	var timer = setInterval("getDelegateSiteStatus()",1000);
+	var timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
 	
 	function clearTimer() {
 		timer = clearInterval(timer);

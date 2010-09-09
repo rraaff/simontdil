@@ -78,6 +78,11 @@ public class VersionDAO {
 			throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteVersion", version);
 	}
+	
+	public static void reactivateVersion(Version version)
+	throws SQLException {
+		IBatisManager.sqlMapper.update("reactivateVersion", version);
+	}
 
 	public static Version getVersionUnderWork() throws SQLException {
 		return (Version) IBatisManager.sqlMapper.queryForObject("selectVersionForWork");

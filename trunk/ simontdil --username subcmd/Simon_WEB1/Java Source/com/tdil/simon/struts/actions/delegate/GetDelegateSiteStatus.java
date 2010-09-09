@@ -45,6 +45,8 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			HttpServletResponse response) throws Exception {
 		LoggedUserForm loggedUserForm = new LoggedUserForm();
 		loggedUserForm.setUser(this.getLoggedUser(request));
+		loggedUserForm.setParagraphVersion(request.getParameter("paragraphVersion"));
+		loggedUserForm.setParagraphNumber(request.getParameter("paragraphNumber"));
 		HashMap<String, String> result = (HashMap<String, String>) TransactionProvider.executeInTransaction(this,
 				loggedUserForm);
 		this.writeJsonResponse(result, response);
@@ -73,8 +75,17 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			result.put("sitestatus", Site.IN_NEGOTIATION);
 			Paragraph paragraph = ParagraphDAO.getParagraph(delegateSite.getDataId());
 			if (paragraph != null) {
-				result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
-				result.put("paragraphText", String.valueOf(paragraph.getParagraphText()));
+				int pVersion = Integer.valueOf(loggedUserForm.getParagraphVersion());
+				int pNumber = Integer.valueOf(loggedUserForm.getParagraphNumber());
+				if (paragraph.getParagraphNumber() == pNumber && paragraph.getVersionNumber() == pVersion) {
+					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
+					result.put("paragraphText", "");
+					result.put("paragraphVersion", loggedUserForm.getParagraphVersion());
+				} else {
+					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
+					result.put("paragraphText", String.valueOf(paragraph.getParagraphText()));
+					result.put("paragraphVersion", String.valueOf(paragraph.getVersionNumber()));
+				}
 			} else {
 				result.put("paragraphNumber", "0");
 			}

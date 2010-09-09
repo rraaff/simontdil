@@ -1,20 +1,14 @@
 package com.tdil.simon.struts.forms;
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.commons.io.IOUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
-import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.CountryDAO;
-import com.tdil.simon.data.model.Category;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.CountryVO;
 import com.tdil.simon.utils.UploadUtils;
