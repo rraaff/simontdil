@@ -1,3 +1,5 @@
+- El scroll en la pagina signatureShow rompio la actualizacion automatica
+
 X Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
 Los estados de los sitios y documentos deberian funcionarte bien, si queres tocar estan en ApplicationResourcse
 
@@ -53,3 +55,7 @@ X Property que maneje el tiempo de refresco
 - Validaciones por todos lados
 
 - Email al momento del agregado de observacion para el resto?
+
+X che... eso que me consultaste en el mail del salvado durante la negociación, será aquello de que no 
+existan draft de un archivo en negociación... que el hecho de estar en negociación es un draft en si mismo?
+En principio parece que anda bien

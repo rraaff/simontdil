@@ -119,6 +119,7 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			delegates.add(signatureVO.getDelegateName());
 			fileNames.add(signatureVO.getSignatureFileName());
 		}
+		System.out.println(fileNames);
 		result.put("delegates", delegates.toArray(new String[0]));
 		result.put("fileNames", fileNames.toArray(new String[0]));
 	}
