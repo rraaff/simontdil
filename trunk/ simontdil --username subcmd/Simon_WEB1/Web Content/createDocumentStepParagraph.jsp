@@ -29,7 +29,7 @@
 					<td width="450" height="144"><!-- corte tabla template -->
 						<table width="450" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" height="40"><img src="images/null.gif" width="1" height="40"></td>
 							</tr>
 							<tr>
 								<td align="right" width="129">Titulo:</td>
@@ -89,14 +89,16 @@
 								<td align="left"><html:textarea name="CreateDocumentForm" property="limitedIntro" disabled="true" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
+								<td colspan="3" height="35"><img src="images/null.gif" width="1" height="35"></td>
 							</tr>
 							<tr>
 								<td colspan="3">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
-								</html:submit>
-								<!-- a class="button" href="#"><span>Anterior (Editar Introducción)</span></a --></td>
+								</html:submit></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
@@ -126,42 +128,36 @@
 					<td width="420" height="144"><!-- corte tabla template -->
 						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="7" height="11"><html:errors property="general" /><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td width="70" align="right" valign="top">Párrafo:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="50" align="left"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
-								<td width="70" align="right">
+								<td width="65" align="right">Párrafo:</td>
+								<td width="10"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="21" align="left"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
+								<td width="88" align="center">
 									<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="true">
 										<bean:message key="createDocument.paragraphs.hidden"/>
 									</logic:equal>
 									<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="false">
 										<bean:message key="createDocument.paragraphs.visible"/>
 									</logic:equal></td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<!-- PABLO ACA TE ROMPI los colspan  -->
-								<td  align="left">
+								<td width="136" align="right">Cambiar al párrafo:</td>
+								<td width="10"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="31" align="right">
 									<html:select name="CreateDocumentForm" property="goToParagraph">
 										<html:options name="CreateDocumentForm" property="allParagraphNumbers"/>
 									</html:select></td>
-								<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/desactivar.png"></html:image></td>
-							</tr>
-							<tr>
-								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td width="70" align="right" valign="top">Párrafo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td colspan="5" width="343" align="left"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
+								<td width="32" align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
 							</tr>
 							<tr>
-								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
-								<td width="70"><img src="images/null.gif" width="70" height="1"></td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td colspan="5" align="left">
+								<td colspan="9" align="center"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
+							</tr>
+							<tr>
+								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
+							</tr>
+							<tr>
+								<td colspan="9" align="center">
 								<!-- Boton prev -->
 								<logic:notEqual name="CreateDocumentForm" property="backDisabled" value="true">
 									<html:submit property="operation">
@@ -203,10 +199,10 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
-								<td colspan="7" height="25">
+								<td colspan="9" height="25">
 								<%if (isModerator) { %>
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
 									<html:submit property="operation">
@@ -216,17 +212,14 @@
 								<% } %></td>
 							</tr>
 							<tr>
-								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
-								<td colspan="7" height="25">
+								<td colspan="9" height="25">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.preview"/>
 								</html:submit>								
 								</td>
-							</tr>
-							<tr>
-								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template --></td>

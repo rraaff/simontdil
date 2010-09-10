@@ -42,7 +42,7 @@ a:active {width: auto;}
 	<div id="blockinHeader">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
+				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
 				<td width="30" align="right"><html:link action="/logout" >Salir</html:link></td>
@@ -54,14 +54,14 @@ a:active {width: auto;}
 								<td width="410" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 							</tr>
 						</table>
 					</div>
 				</td>
+				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
+				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right" class="remarcado">
@@ -76,12 +76,13 @@ a:active {width: auto;}
 						
 					<% } %>
 				</td>
+				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+				<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="10" align="center">
+				<td colspan="4" height="10" align="center">
 					<div id="dataSites">
 						<table width="500" border="0" cellspacing="0" cellpadding="0">
 							<tr>
