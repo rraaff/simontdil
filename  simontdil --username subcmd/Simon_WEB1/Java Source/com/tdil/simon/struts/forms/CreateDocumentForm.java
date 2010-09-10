@@ -10,7 +10,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
@@ -20,7 +19,6 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.DocumentValidation;
-import com.tdil.simon.actions.validations.FieldValidation;
 import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
@@ -69,6 +67,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String paragraphTexts[] = new String[100];
 	private boolean paragraphStatus[] = new boolean[100];
 	private int paragraphIds[] = new int[100];
+	
+	private String goToParagraph;
 	
 	// Consolidation
 	private boolean consolidated = false;
@@ -123,6 +123,16 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public List<MonthOption> getMonths() {
 		return allMonths;
+	}
+	
+	public List<String> getAllParagraphNumbers() {
+		List<String> result = new ArrayList<String>();
+		int index = 0;
+		while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
+			index = index + 1;
+			result.add(String.valueOf(index));
+		}
+		return result;
 	}
 	
 	public List<DayOption> getDays() {
@@ -576,5 +586,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		ValidationError validation = new ValidationError();
 		DocumentValidation.validateConsolidation(this.getConsolidateText(), validation);
 		return validation;
+	}
+
+	public String getGoToParagraph() {
+		return goToParagraph;
+	}
+
+	public void setGoToParagraph(String goToParagraph) {
+		this.goToParagraph = goToParagraph;
 	}
 }

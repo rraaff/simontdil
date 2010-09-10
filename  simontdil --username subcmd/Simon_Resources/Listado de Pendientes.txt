@@ -16,20 +16,21 @@ X Ver obsercaciones
   X Ordenar por número de párrafo (y despues??? porque)
   X Antes de cada grupo de observaciones poner el texto original del párrafo.
 
-- Negociación
-  - Panel de edición de texto para los párrafos en negociación
-    - Negrita
-    - Itálica
-    - Subrayado
-    - Resaltado
-    - Tachado
-    - Colores (con 5 se dan por felices)
+X Negociación
+  X Panel de edición de texto para los párrafos en negociación
+    X Negrita
+    X Itálica
+    X Subrayado
+    X Resaltado
+    X Tachado
+    X Colores (con 5 se dan por felices)
+- Me parece que el area de edicion es muy chiquita
 
 X Lista de Docs
   X Botón Borrar
 
-- Alta/edición de Docs
-  - Si se puede, agregar el combo de párrafos para poder switchear del 1 al 74 sin tener que pasar por todos.
+X Alta/edición de Docs
+  X Si se puede, agregar el combo de párrafos para poder switchear del 1 al 74 sin tener que pasar por todos.
 
 - General en los listados
   - Si se puede, cambiarle el estilo de texto a los contenidos de los TRs que estén desactivados. usar este class: notActive

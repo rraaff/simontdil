@@ -179,4 +179,9 @@ public class ViewVersionForm extends ActionForm {
 		this.user = user;
 	}
 
+	public void finishSign(int id) {
+		// TODO Auto-generated method stub
+		// TODO TODO TODO
+	}
+
 }
