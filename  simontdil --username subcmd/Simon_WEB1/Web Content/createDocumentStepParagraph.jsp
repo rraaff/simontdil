@@ -237,6 +237,18 @@
 	</tr>
 </table>
 </div>
+<script type="text/javascript">
+		//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor = CKEDITOR.replace( 'paragraphText',
+				{
+					// Defines a simpler toolbar to be used in this sample.
+					// Note that we have added out "MyButton" button here.
+					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+					height:"140", width:"380"
+					
+				});
+</script>
 </html:form>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

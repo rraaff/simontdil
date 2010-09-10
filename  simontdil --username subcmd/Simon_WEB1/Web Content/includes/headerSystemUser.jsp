@@ -22,6 +22,7 @@ a:active {width: auto;}
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
 <script type="text/javascript" src="./scripts/notimoo.js" ></script>
+<script type="text/javascript" src="ckeditor.js"></script>
 <style type="text/css">
 <!--
 #content #centrador{
