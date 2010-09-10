@@ -1,5 +1,5 @@
 <%@ page info="categoryABM"%>
-<%@ page contentType="text/html; charset=Cp1252" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>

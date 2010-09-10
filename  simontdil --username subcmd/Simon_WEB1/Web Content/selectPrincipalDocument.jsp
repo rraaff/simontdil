@@ -1,5 +1,5 @@
 <%@ page info="selectPrincipalDocument"%>
-<%@ page contentType="text/html; charset=Cp1252" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
@@ -7,7 +7,7 @@
 
 <html:html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=Cp1252"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"/>
     <title>
       Seleccionar documento principal
     </title>
