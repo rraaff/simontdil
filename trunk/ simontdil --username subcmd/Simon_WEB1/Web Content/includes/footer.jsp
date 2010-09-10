@@ -1,6 +1,12 @@
 <% if ("true".equals((String)request.getAttribute("hasError"))) { %>
 <script type="text/javascript">
-	var notimooErrorManager = new Notimoo();
+	var absolute_center = Array(window.getSize().x / 2,window.getSize().y / 2);
+	var notimooErrorManager = new Notimoo({
+		locationVType: 'top',
+		locationHType: 'right',
+		locationHBase: absolute_center[0] - 150,
+		locationVBase: absolute_center[1] - 50
+	});
 	notimooErrorManager.show({
 							title: 'Error',
 							message: '<html:messages id="msg" message="true"><% if (!"*".equals(msg)) {%><%=msg%><br><% } %></html:messages>',

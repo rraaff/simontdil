@@ -63,9 +63,9 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<tr>
 										<td height="20">Documento</td>
-										<td>VersiÃ³n</td>
+										<td>Versión</td>
 										<td>Estado</td>
-										<td>Nombre de VersiÃ³n</td>
+										<td>Nombre de Versión</td>
 										<td>Observaciones</td>
 										<td>Cantidad de observaciones</td>
 										<td> </td>

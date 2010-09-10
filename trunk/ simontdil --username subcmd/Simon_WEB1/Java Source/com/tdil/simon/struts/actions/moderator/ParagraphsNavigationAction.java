@@ -9,7 +9,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
@@ -18,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.utils.NegotiationUtils;
 
 public class ParagraphsNavigationAction extends SimonAction {
@@ -34,6 +34,23 @@ public class ParagraphsNavigationAction extends SimonAction {
 			throws Exception {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
+		String image = ImageTagUtil.getName(request);
+		if (image != null && "jumpTo".equals(image)) {
+			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()) - 1);
+			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
+			if (!createDocumentForm.getParagraphHidden()) {
+				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
+				if (inNegotiation) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+						}
+					});
+				}
+			}
+			return mapping.findForward("next");
+		}
+		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.back"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
 			if(error.hasError()) {

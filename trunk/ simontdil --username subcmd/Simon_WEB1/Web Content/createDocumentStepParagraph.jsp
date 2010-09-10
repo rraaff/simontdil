@@ -132,10 +132,20 @@
 								<td width="70" align="right" valign="top">Párrafo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="50" align="left"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
-								<td width="20"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="70" align="right">Oculto:</td>
+								<td width="70" align="right">
+									<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="true">
+										<bean:message key="createDocument.paragraphs.hidden"/>
+									</logic:equal>
+									<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="false">
+										<bean:message key="createDocument.paragraphs.visible"/>
+									</logic:equal></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="196" align="left"><bean:write name="CreateDocumentForm" property="paragraphHidden" /></td>
+								<!-- PABLO ACA TE ROMPI los colspan  -->
+								<td  align="left">
+									<html:select name="CreateDocumentForm" property="goToParagraph">
+										<html:options name="CreateDocumentForm" property="allParagraphNumbers"/>
+									</html:select></td>
+								<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/desactivar.png"></html:image></td>
 							</tr>
 							<tr>
 								<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
