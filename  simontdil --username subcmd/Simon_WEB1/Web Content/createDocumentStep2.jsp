@@ -123,30 +123,30 @@
 					<td width="420" height="144"><!-- corte tabla template -->
 						<table width="420" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="50"><html:errors property="general" /><img src="images/null.gif" width="1" height="50"></td>
+								<td colspan="4" height="50"><html:errors property="general" /><img src="images/null.gif" width="1" height="50"></td>
 							</tr>
 							<tr>
 								<td width="74" align="right" valign="top">Texto:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="339" align="left">
-								<!--  textarea cols="" rows="" class="textfield_effect_area"></textarea -->
-									<html:textarea name="CreateDocumentForm" property="introduction" styleClass="textfield_effect_area"/><html:errors property="introduction" /></td>
+								<td width="300" align="left" valign="top">
+									<html:textarea name="CreateDocumentForm" property="introduction" styleClass="textfield_effect_area"/></td>
+								<td width="39" align="left" valign="top"><html:errors property="introduction" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="48"><img src="images/null.gif" width="1" height="48"></td>
+								<td colspan="4" height="48"><img src="images/null.gif" width="1" height="48"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="4">
 									<html:submit property="operation">
 										<bean:message key="createDocument.addParagraphs"/>
-									</html:submit>
-								<!--  div id="centrador" style="padding-left:110px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Agregar p&aacute;rrafos)</span></a></div --></td>
+									</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
-						<!-- corte tabla template --></td>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
