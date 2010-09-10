@@ -1,5 +1,5 @@
 <%@ page info="listDocumentsForModerator"%>
-<%@ page contentType="text/html; charset=Cp1252" %>
+<%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
@@ -63,9 +63,9 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<tr>
 										<td height="20">Documento</td>
-										<td>Versión</td>
+										<td>VersiÃ³n</td>
 										<td>Estado</td>
-										<td>Nombre de Versión</td>
+										<td>Nombre de VersiÃ³n</td>
 										<td>Observaciones</td>
 										<td>Cantidad de observaciones</td>
 										<td> </td>
