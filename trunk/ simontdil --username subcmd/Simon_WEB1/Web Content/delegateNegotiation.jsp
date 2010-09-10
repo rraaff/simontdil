@@ -175,7 +175,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<div id="main">
 							<div id="lyr1">
 								<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
-									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
+									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 								</logic:iterate>
 							</div>
 						</div>
