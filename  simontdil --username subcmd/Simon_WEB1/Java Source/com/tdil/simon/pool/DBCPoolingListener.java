@@ -9,13 +9,11 @@ import javax.sql.DataSource;
 
 import org.apache.log4j.Logger;
 
-import com.tdil.simon.actions.AbstractAction;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.utils.LoggerProvider;
 
 public class DBCPoolingListener implements ServletContextListener {
 	
-	private static final Logger Log = LoggerProvider.getLogger(DBCPoolingListener.class);
 	
 	public void contextInitialized(ServletContextEvent sce) {
 
@@ -27,8 +25,12 @@ public class DBCPoolingListener implements ServletContextListener {
 			DatasourceManager.setDatasource(ds);
 			IBatisManager.init("SqlMapConfig-JNDI.xml");
 		} catch (NamingException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 		}
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(DBCPoolingListener.class);
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {

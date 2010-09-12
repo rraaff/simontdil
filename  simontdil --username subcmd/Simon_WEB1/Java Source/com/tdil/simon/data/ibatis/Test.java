@@ -20,6 +20,7 @@ import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.web.SystemConfig;
 
 public class Test {
 
@@ -96,11 +97,13 @@ public class Test {
 //		ref.setTitle("EEE DDDD");
 //		ref.setDeleted(false);
 //		ReferenceDocumentDAO.insertReferenceDocument(ref);
-		HashMap params = new HashMap();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		params.put("countryId", 1);
-		params.put("dateMax", simpleDateFormat.parseObject("24/08/2010"));
-		System.out.println(ObservationDAO.searchObservations(params));
+//		HashMap params = new HashMap();
+//		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+//		params.put("countryId", 1);
+//		params.put("dateMax", simpleDateFormat.parseObject("24/08/2010"));
+//		System.out.println(ObservationDAO.searchObservations(params));
+		
+		System.out.println(SystemConfig.getDateFormatWithMinutes().format(new Date()));
 		IBatisManager.sqlMapper.commitTransaction();
 	}
 }

@@ -5,13 +5,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.log4j.Logger;
 
-import com.tdil.simon.actions.impl.InitDelegateNegotiationAction;
-import com.tdil.simon.actions.impl.InitDelegateSignAction;
 import com.tdil.simon.actions.impl.LoginAction;
 import com.tdil.simon.actions.impl.LoginWithTemporaryAction;
 import com.tdil.simon.actions.impl.LogoutAction;
 import com.tdil.simon.actions.impl.RequestPasswordResetAction;
-import com.tdil.simon.actions.impl.SetDelegateNormalAction;
 import com.tdil.simon.actions.impl.admin.AddCountryAction;
 import com.tdil.simon.actions.impl.admin.AddDelegateAction;
 import com.tdil.simon.actions.impl.admin.AddSystemUserAction;
@@ -51,7 +48,6 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class ActionRegistry {
 
-	private static final Logger Log = LoggerProvider.getLogger(ActionRegistry.class);
 	private static Map<String, AbstractAction> actions;
 	
 	static {
@@ -125,13 +121,17 @@ public class ActionRegistry {
 		actions.put("requesPasswordReset", new RequestPasswordResetAction());
 	}
 	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ActionRegistry.class);
+	}
+	
 	public static AbstractAction getActionFor(String key) {
 		AbstractAction result = actions.get(key);
 		if (result != null) {
 			try {
 				return (AbstractAction)result.clone();
 			} catch (CloneNotSupportedException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				return null;
 			}
 		}

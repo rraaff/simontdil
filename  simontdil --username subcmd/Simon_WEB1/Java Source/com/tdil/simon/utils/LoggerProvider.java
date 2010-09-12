@@ -30,7 +30,7 @@ public class LoggerProvider {
 	 * 
 	 * @return
 	 */
-	public static HashMap<String, Logger> getLoggers() {
+	private static HashMap<String, Logger> getLoggers() {
 		if (loggers == null) {
 			setLoggers(new HashMap<String, Logger>());
 		}
@@ -46,6 +46,11 @@ public class LoggerProvider {
 		loggers = newLoggers;
 	}
 	
+	public static void destroy() {
+		initialized = false;
+		loggers = null;
+	}
+	
 	/**
 	 * Initialize the base logger with the given enumeration
 	 * 
@@ -53,7 +58,8 @@ public class LoggerProvider {
 	 */
 	public static synchronized void initialize(final String logFilePath, final Enumeration<Logger> loggersEnum) {
 		if (!initialized) {
-			DOMConfigurator.configureAndWatch(logFilePath);
+//			DOMConfigurator.configureAndWatch(logFilePath);
+			DOMConfigurator.configure(logFilePath);
 			Logger logger;
 			while (loggersEnum.hasMoreElements()) {
 				logger = (Logger) loggersEnum.nextElement();
@@ -91,7 +97,7 @@ public class LoggerProvider {
 	 * @param loggerName
 	 * @return Logger
 	 */
-	public static Logger getLogger(String loggerName) {
+	private static Logger getLogger(String loggerName) {
 		Logger logger = (Logger) getLoggers().get(loggerName);
 		//In the case that the loggerName represents a new logger
 		//we create it and put it in the map

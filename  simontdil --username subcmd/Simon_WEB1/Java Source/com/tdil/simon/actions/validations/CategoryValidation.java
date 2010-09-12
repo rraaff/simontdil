@@ -7,7 +7,9 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class CategoryValidation {
 
-	private static final Logger Log = LoggerProvider.getLogger(CategoryValidation.class);
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(CategoryValidation.class);
+	}
 	
 	public static String validateName(String text, String fieldName, ValidationError validation) {
 		return FieldValidation.validateText(text, fieldName, 100, validation);

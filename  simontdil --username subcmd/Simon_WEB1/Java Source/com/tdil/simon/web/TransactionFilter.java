@@ -21,7 +21,10 @@ import com.tdil.simon.utils.LoggerProvider;
  */
 public class TransactionFilter implements Filter {
 
-	private static final Logger Log = LoggerProvider.getLogger(TransactionFilter.class);
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(TransactionFilter.class);
+	}
 	
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		
@@ -32,14 +35,14 @@ public class TransactionFilter implements Filter {
             IBatisManager.commitTransaction();
             commited = true;
 		} catch (SQLException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			throw new ServletException(e);
 		} finally {
 			if (!commited) {
 				try {
 					IBatisManager.rollbackTransaction();
 				} catch (SQLException e) {
-					Log.error(e.getMessage(), e);
+					getLog().error(e.getMessage(), e);
 				}
 			}
 		}

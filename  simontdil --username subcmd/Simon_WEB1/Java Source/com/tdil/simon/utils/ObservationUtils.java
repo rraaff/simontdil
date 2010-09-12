@@ -10,13 +10,15 @@ import com.tdil.simon.data.valueobjects.ObservationSummaryVO;
 
 public class ObservationUtils {
 	
-	private static final Logger Log = LoggerProvider.getLogger(ObservationUtils.class);
-
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ObservationUtils.class);
+	}
+	
 	public static ObservationSummaryVO countPrivateObservationsForNegotiatedVersion() {
 		try {
 			return ObservationDAO.countPrivateObservationsForVersionInNegotiation();
 		} catch (SQLException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			return new ObservationSummaryVO();
 		}
 	}
@@ -26,7 +28,7 @@ public class ObservationUtils {
 			Site site = Site.getDELEGATE_SITE();
 			return ObservationDAO.countPrivateObservationsForNegotiatedParagraph(site.getDataId());
 		} catch (SQLException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			return new ObservationSummaryVO();
 		}
 	}

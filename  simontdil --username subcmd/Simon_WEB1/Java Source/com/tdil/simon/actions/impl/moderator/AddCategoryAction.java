@@ -21,10 +21,13 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class AddCategoryAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(AddCategoryAction.class);
 
 	private String name;
 
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AddCategoryAction.class);
+	}
+	
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {
 		return UserTypeValidation.MODERATOR;

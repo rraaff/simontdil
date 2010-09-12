@@ -51,8 +51,11 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.finishSign"))) {
 			// Custom check for shared page and action
 			if (UserTypeValidation.isValid(this.getLoggedUser(request), new UserTypeValidation[] { UserTypeValidation.MODERATOR})) {
-				TransactionProvider.executeInTransaction(this, form);
-				viewForm.finishSign(viewForm.getVersion().getVersion().getId());
+				TransactionProvider.executeInTransaction(new TransactionalAction() {
+					public void executeInTransaction() throws SQLException, ValidationException {
+						viewForm.finishSign(viewForm.getVersion().getVersion().getId());
+					}
+				});
 				return mapping.findForward("continue");
 			} else {
 				return mapping.findForward("invalidAction");

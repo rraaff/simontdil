@@ -17,9 +17,12 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public abstract class AbstractAction implements Cloneable {
 	
-	private static final Logger Log = LoggerProvider.getLogger(AbstractAction.class);
 	
 	private Object responseData;
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AbstractAction.class);
+	}
 	
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
@@ -39,10 +42,10 @@ public abstract class AbstractAction implements Cloneable {
 			try {
 				return this.basicExecute(req);
 			} catch (SQLException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				return new ActionResponse(ResponseType.ERROR, new Error(e.getMessage()));
 			} catch (ValidationException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				return new ActionResponse(ResponseType.VALIDATION_ERROR, e.getError());
 			}
 		} else {

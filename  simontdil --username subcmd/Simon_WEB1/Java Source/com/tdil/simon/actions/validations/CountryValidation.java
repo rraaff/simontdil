@@ -9,10 +9,13 @@ import org.apache.log4j.Logger;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.DownloadController;
 
 public class CountryValidation {
 
-	private static final Logger Log = LoggerProvider.getLogger(CountryValidation.class);
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(CountryValidation.class);
+	}
 	
 	public static String validateName(String text, String fieldName, ValidationError validation) {
 		return FieldValidation.validateText(text, fieldName, 100, validation);
@@ -32,14 +35,14 @@ public class CountryValidation {
 			io = fileItem.getInputStream();
 			return IOUtils.toByteArray(io);
 		} catch (IOException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			validation.setGeneralError(e.getMessage());
 		} finally {
 			if (io != null) {
 				try {
 					io.close();
 				} catch (IOException e) {
-					Log.error(e.getMessage(), e);
+					getLog().error(e.getMessage(), e);
 					validation.setGeneralError(e.getMessage());
 				}
 			}

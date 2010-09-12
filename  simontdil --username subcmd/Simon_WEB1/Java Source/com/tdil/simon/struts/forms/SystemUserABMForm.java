@@ -21,7 +21,6 @@ import com.tdil.simon.utils.LoggerProvider;
 public class SystemUserABMForm extends ActionForm {
 
 	private static final long serialVersionUID = 4257776435738129693L;
-	private static final Logger Log = LoggerProvider.getLogger(SystemUserABMForm.class);
 	private String operation;
 
 	private int id;
@@ -34,6 +33,10 @@ public class SystemUserABMForm extends ActionForm {
 	
 	private List<UserVO> allUsers;
 	private Country host;
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(SystemUserABMForm.class);
+	}
 	
 	public int getId() {
 		return id;
@@ -140,7 +143,7 @@ public class SystemUserABMForm extends ActionForm {
 		try {
 			EmailUtils.sendPasswordEmail(this.email, this.name, this.username, generatedPassword);
 		} catch (MessagingException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			// setResponseData(new Warning(ValidationErrors.EMAIL_FAILED)); TODO
 		}
 	}

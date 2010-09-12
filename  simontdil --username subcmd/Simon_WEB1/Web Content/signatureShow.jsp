@@ -113,6 +113,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</tr>
 								</logic:iterate>
 							</table>
+							<% if (isSign) { %>
 							<script type="text/javascript">
 								function alreadyDisplayed(signName) {
 									var index = 0;
@@ -142,7 +143,6 @@ if ( dw_scrollObj.isSupported() ) {
 												if (!alreadyDisplayed(json.fileNames[i])) {
 													var myTable = document.getElementById("signTable");
 													var tBody = myTable.getElementsByTagName("TBODY")[0];
-													alert("adding " + json.fileNames[i]);
 													var newTR = document.createElement('tr');
 													var dateTD = document.createElement('td');
 													dateTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
@@ -172,6 +172,7 @@ if ( dw_scrollObj.isSupported() ) {
 								}
 								timer = setInterval("getSignatures()",<%=com.tdil.simon.web.SystemConfig.getClientSignaturesRefreshTime()%>);
 							</script>
+							<% } %>
 						</div>
 					</div>
 					<!-- corte tabla template --></td>

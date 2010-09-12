@@ -179,10 +179,10 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr> 
 									<logic:iterate name="DelegateABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-											<td height="28" align="left"><bean:write name="iterUser" property="name" /></td>
-											<td align="left"><bean:write name="iterUser" property="countryName" /></td>
-											<td><bean:write name="iterUser" property="permissionsString" /></td>
-											<td><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUser" property="countryName" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="permissionsString" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
 											<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>

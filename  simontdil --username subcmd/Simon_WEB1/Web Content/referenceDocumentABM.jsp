@@ -147,9 +147,9 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr> 
 									<logic:iterate name="ReferenceDocumentABMForm" property="allReferenceDocuments" id="iterRefDoc" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-											<td height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
-											<td align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
-											<td align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>
