@@ -14,7 +14,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
-import com.tdil.simon.struts.forms.CategoryABMForm;
+import com.tdil.simon.struts.forms.ABMForm;
 
 public class GoToCategoryABMAction extends SimonAction {
 
@@ -28,7 +28,7 @@ public class GoToCategoryABMAction extends SimonAction {
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		final CategoryABMForm categoryABMForm = (CategoryABMForm) form;
+		final ABMForm categoryABMForm = (ABMForm) form;
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
 				categoryABMForm.reset();

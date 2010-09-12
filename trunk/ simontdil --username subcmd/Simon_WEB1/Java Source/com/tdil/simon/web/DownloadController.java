@@ -25,8 +25,11 @@ public class DownloadController extends HttpServlet {
 
 	private static final long serialVersionUID = -8356531321540585903L;
 
-	private static final Logger Log = LoggerProvider.getLogger(DownloadController.class);
 
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(DownloadController.class);
+	}
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		HttpSession session = req.getSession(false);
 		if (session == null) {
@@ -79,9 +82,9 @@ public class DownloadController extends HttpServlet {
 		try {
 			TransactionProvider.executeInTransaction(getDocumentAction);
 		} catch (SQLException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 		} catch (ValidationException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 		}
 		if (getDocumentAction.getReferenceDocument() != null) {
 			res.setHeader("Cache-Control", "no-store");

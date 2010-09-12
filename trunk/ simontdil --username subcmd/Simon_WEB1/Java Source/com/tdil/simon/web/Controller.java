@@ -26,9 +26,11 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class Controller extends HttpServlet {
 
-	private static final Logger Log = LoggerProvider.getLogger(Controller.class);
-	
 	private static final long serialVersionUID = -8356531321540585903L;
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(Controller.class);
+	}
 	
 	@Override
 	public void init(ServletConfig config) throws ServletException {
@@ -36,7 +38,7 @@ public class Controller extends HttpServlet {
 		try {
 			SystemConfig.init();
 		} catch (IOException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			throw new ServletException(e);
 		}
 	}
@@ -98,7 +100,7 @@ public class Controller extends HttpServlet {
 			upload.setSizeMax(5000000);
 			return upload.parseRequest(req);
 		} catch (FileUploadException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			writeResponse(res, new ActionResponse(ResponseType.ERROR, new Error(e.getMessage())));
 			return null;
 		}

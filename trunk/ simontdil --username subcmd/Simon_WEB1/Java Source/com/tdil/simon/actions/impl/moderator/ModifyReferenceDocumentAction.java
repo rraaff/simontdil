@@ -19,10 +19,8 @@ import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ReferenceDocumentValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
-import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
 import com.tdil.simon.data.model.Category;
-import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
@@ -31,8 +29,6 @@ import com.tdil.simon.web.Controller;
 
 public class ModifyReferenceDocumentAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(ModifyReferenceDocumentAction.class);
-	
 	private String id;
 	private int oid;
 	protected String categoryId;
@@ -40,6 +36,10 @@ public class ModifyReferenceDocumentAction extends AbstractAction implements Tra
 	private String title;
 	private FileItem fileItem;
 	private String docNameAndType[];
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ModifyReferenceDocumentAction.class);
+	}
 	
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {

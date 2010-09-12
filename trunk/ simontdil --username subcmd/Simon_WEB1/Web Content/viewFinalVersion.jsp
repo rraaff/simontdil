@@ -88,6 +88,7 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isModerator) { %>
 	<%@ include file="includes/menu.jsp" %>
 <% } %>
+FInal final final
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -179,139 +180,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<%if (isModerator) { %>
-							<tr>
-								<td colspan="3" align="center" valign="middle">
-									<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
-										<html:submit property="operation">
-											<bean:message key="viewVersion.initNegotiation"/>
-										</html:submit>
-									</logic:equal></td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center" valign="middle">
-									<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
-										<html:submit property="operation">
-											<bean:message key="viewVersion.finishSign"/>
-										</html:submit>
-									</logic:equal></td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center" valign="middle">
-									<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
-										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
-									</logic:equal> 
-								</td>
-							</tr>
-							<% } %>
-							<tr>
-								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
-							</tr>
-							<% if (isDelegate) { %>
-							<tr>
-								<td colspan="3" align="center">
-								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
-									<script type="text/javascript">
-										var notimooAddManager = new Notimoo();
-										function addObservationFor(pNumber) {
-											var pNumberObj = document.getElementById('pNumber');
-											var opts = pNumberObj.options;
-											var index = 0;
-											while(opts[index].value != pNumber) {
-												index = index + 1;
-											}
-											opts[index].selected = true;
-											document.getElementById('outerdiv').style.display = '';
-										}
-									
-										function doAdd() {
-											var paragraphNumber = document.getElementById('pNumber').value;
-											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
-											var pText = document.getElementById('pText').value;
-											if (pText.length == 0) {
-												notimooErrorManager.show({
-													title: 'Error',
-													message: 'Debe ingresar el mensaje',
-													 customClass:'alert_error',
-													 sticky: true
-												});
-												return;
-											}
-											var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
-											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
-												var errorResult = json.error;
-												if ('notLogged' == errorResult) {
-													window.location='<html:rewrite page="/login.jsp"/>';
-													return;
-												}
-												var result = json.result;
-											   if ('OK' == result) {
-											   document.getElementById('pNumber').selectedIndex = 0;
-											   document.getElementById('pNewParagraph').checked = false;
-											   document.getElementById('pText').value = "";
-												document.getElementById('outerdiv').style.display = 'none';
-												showOKMessage();
-											   } else {
-												var error = json.error;
-												showErrorMessage();
-											}
-											}}).post({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
-						
-										}
-										var notimooObservationManager = new Notimoo();
-										function showOKMessage() {
-											notimooObservationManager.show({
-												title: 'Observación',
-												message: 'Su observación ha sido agregada exitosamente.'
-											});
-										}
-										
-										function showErrorMessage() {
-											notimooObservationManager.show({
-												title: 'Error',
-												message: 'Su observación no ha podido ser agregada.',
-												customClass:'alert_error',
-												 sticky: true
-											});
-										}
-									</script>
-									<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
-								</logic:equal></td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center">
-								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
-									<html:submit property="operation" disabled="true">
-										<bean:message key="viewVersion.addObservation"/>
-									</html:submit>
-								</logic:notEqual></td>
-							</tr>
-							<% } else { %>
-							<tr>
-								<td colspan="3" align="center"><img src="images/null.gif" width="1" height="24"></td>
-							</tr>
-							<% } %>
-							<tr>
 								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<html:submit property="operation">
-										<bean:message key="viewVersion.searchObservations"/>
-									</html:submit>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
-							</tr>
-							<tr>
-								<td colspan="3">
-									<html:submit property="operation">
-										<bean:message key="viewVersion.listObservations"/>
-									</html:submit>
-								</td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -345,17 +214,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<div id="lyr1">
 						<!-- div id="documentoCompleto" -->
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
-									<% if (isDelegate) { %>
-										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
-									<% } else { %>
-										<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
-									<% } %>
-								</logic:equal>
-								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
-									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
-								</logic:notEqual>
-								 
+								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 						</div>
 					</div>
@@ -391,90 +250,23 @@ if ( dw_scrollObj.isSupported() ) {
 		<td colspan="3" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
+							<table id="signTable" border="0" cellspacing="0" cellpadding="0">
+								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
+								<tr>
+									<td>INSERTAR BANDERITA</td>
+								</tr>
+								<tr> 
+									<td align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
+									<script>
+										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
+										lastSignatureIndex = <%=signatureIndex%>;
+									</script>
+								</tr>
+								<tr> 
+									<td height="50" align="center"><bean:write name="signature" property="delegateName" /></td>
+								</tr>
+								</logic:iterate>
+							</table>
 </div>
 </html:form>
 <%@ include file="includes/footer.jsp" %>
-<div id="outerdiv" style="display: none;">
-	<!-- div id="innerdiv" -->
-		<div id="innerdiv"></div>
-		<div id="contetTableComment">
-		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td align="center" valign="middle">
-					<table width="440" height="285" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-						<tr>
-							<td width="440" align="center" valign="top">
-								<!-- inicio tabla template -->
-								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-									<tr>
-										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
-										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-									</tr>
-									<tr>
-										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-										<td width="400">
-										<!-- corte tabla template -->
-											<table width="400" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
-												<tr>
-													<td colspan="3" id="error"></td>
-												<tr>
-												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-												</tr>
-												<tr>
-													<td width="150" align="right">Párrafo:</td>
-													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="243" align="left">
-													<select id="pNumber">
-														<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumber" /></option>
-														</logic:iterate>
-													</select>
-													</td>
-												<tr>
-												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-												</tr>
-												<tr>
-													<td align="right"><input type="checkbox" id="pNewParagraph"></td>
-													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td align="left">Solicitar como nuevo párrafo</td>
-												<tr>
-												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-												</tr>
-												<tr>
-													<td align="right" valign="top">Observación: </td>
-													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td align="left"><textarea id="pText" class="textfield_effect_area"></textarea></td>
-												<tr>
-												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-												</tr>
-												<tr>
-													<td colspan="3" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="document.getElementById('outerdiv').style.display = 'none';" value="Cancelar"></td>
-												<tr>
-											</table>
-										<!-- corte tabla template -->
-										</td>
-										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-									</tr>
-									<tr>
-										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
-										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-									</tr>
-								</table>
-								<!-- fin tabla template -->
-							</td>
-						</tr>
-					</table>
-				</td>
-			<tr>
-		</table>
-		<!--/div -->
-	</div>
-</div>

@@ -29,13 +29,15 @@ import com.tdil.simon.web.Controller;
 
 public class AddReferenceDocumentAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(AddReferenceDocumentAction.class);
-	
 	protected String categoryId;
 	protected int categoryIdInt;
 	private String title;
 	private FileItem fileItem;
 	private String docNameAndType[];
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AddReferenceDocumentAction.class);
+	}
 	
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {

@@ -74,13 +74,13 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-										<td height="28"><bean:write name="version" property="documentTitle" /></td>
-										<td><bean:write name="version" property="versionWithSubversion" /></td>
-										<td><bean:write name="version" property="translatedStatus" /></td> 
-										<td><bean:write name="version" property="name" /></td>
-										<td><bean:write name="version" property="hasObservationText" /></td>
-										<td><bean:write name="version" property="observationCountText" /></td>
-										<% if (!((com.tdil.simon.data.model.Version)version).isHasDraft()) { %>  
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> height="28"><bean:write name="version" property="documentTitle" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="versionWithSubversion" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="translatedStatus" /></td> 
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="name" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="hasObservationText" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
+										<% if (((com.tdil.simon.data.model.Version)version).canBeEdited()) { %>  
 											<td><html:link  action="editVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
 										<% } else { %>  
 											<td>-</td>

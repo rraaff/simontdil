@@ -12,7 +12,6 @@ import org.apache.struts.action.ActionMapping;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;

@@ -8,8 +8,6 @@ import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
 
-import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.response.Warning;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
@@ -19,7 +17,6 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class ResetPasswordForm extends ListForm {
 
-	private static final Logger Log = LoggerProvider.getLogger(ResetPasswordForm.class);
 	
 	private static final long serialVersionUID = 2554139424680999558L;
 	
@@ -27,6 +24,10 @@ public class ResetPasswordForm extends ListForm {
 	
 	private String selectedIds[];
 
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ResetPasswordForm.class);
+	}
+	
 	public void init() throws SQLException {
 		setList(SystemUserDAO.selectNotDeletedUsers());
 		List ids = new ArrayList(this.getList().size());
@@ -69,7 +70,7 @@ public class ResetPasswordForm extends ListForm {
 			try {
 				EmailUtils.sendPasswordEmail(toClean.getEmail(), toClean.getName(), toClean.getUsername(), newPassword);
 			} catch (MessagingException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				warning.setFieldWarning(String.valueOf(id), ValidationErrors.EMAIL_FAILED);
 			}
 		}

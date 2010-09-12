@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.web.SystemConfig;
 
 public class ExportVersionAsPDF {
 
@@ -87,25 +89,27 @@ public class ExportVersionAsPDF {
 			}
 			buf.append("</table>");
 		} else {
-			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-			buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
-			buf.append("<table border=\"0\">");
-			for (Observation o : observations) {
-				DelegateAuditDAO.registerDownloadObservation(user, o);
-				ObservationVO vo = (ObservationVO)o;
-				buf.append("<TR><TD><TABLE><TR>");
-				buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
-				buf.append("</TR><TR>");
-				buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
-				buf.append("</TR><TR>");
-				buf.append("<TD>Delegado: ").append(vo.getName()).append("</TD>");
-				buf.append("</TR><TR>");
-				buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
-				buf.append("</TR></TABLE></TD>");
-				buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
+			if (!observations.isEmpty()) {
+				DateFormat simpleDateFormat = SystemConfig.getDateFormatWithMinutes();
+				buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
+				buf.append("<table border=\"0\">");
+				for (Observation o : observations) {
+					DelegateAuditDAO.registerDownloadObservation(user, o);
+					ObservationVO vo = (ObservationVO)o;
+					buf.append("<TR><TD><TABLE><TR>");
+					buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
+					buf.append("</TR><TR>");
+					buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
+					buf.append("</TR><TR>");
+					buf.append("<TD>Delegado: ").append(vo.getName()).append("</TD>");
+					buf.append("</TR><TR>");
+					buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
+					buf.append("</TR></TABLE></TD>");
+					buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
+				}
+				buf.append("</table>");
 			}
-			buf.append("</table>");
 		}
 		buf.append("</body>");
 		buf.append("</html>");

@@ -14,14 +14,16 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class RequestPasswordForm extends ActionForm {
 
-	private static final Logger Log = LoggerProvider.getLogger(RequestPasswordForm.class);
-	
 	private static final long serialVersionUID = 7880259578780441517L;
 
 	private String username;
 	
 	private String email;
 
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(RequestPasswordForm.class);
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -46,7 +48,7 @@ public class RequestPasswordForm extends ActionForm {
 			try {
 				EmailUtils.sendAdminEmailUserRequestPasswordReset(systemUser.getName(), systemUser.getPassword());
 			} catch (MessagingException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 			} 
 			setUsername("");
 			setEmail("");

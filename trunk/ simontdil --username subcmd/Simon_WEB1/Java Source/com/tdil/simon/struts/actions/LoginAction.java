@@ -22,6 +22,7 @@ import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.LoginForm;
+import com.tdil.simon.web.LogOnceListener;
 
 public class LoginAction extends Action implements TransactionalActionWithValue {
 
@@ -36,6 +37,7 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				user.setPassword(null);
 				request.getSession().setAttribute("user", user);
+				LogOnceListener.userHasLogged(user.getUsername(), user.isModerator(), request.getSession());
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
 				}

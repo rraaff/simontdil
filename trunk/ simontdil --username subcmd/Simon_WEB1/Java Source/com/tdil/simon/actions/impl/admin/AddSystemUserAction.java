@@ -23,11 +23,13 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class AddSystemUserAction extends SystemUserAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(AddSystemUserAction.class);
-	
 	@Override
 	protected boolean isAdd() {
 		return true;
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AddSystemUserAction.class);
 	}
 	
 	public ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {
@@ -67,7 +69,7 @@ public class AddSystemUserAction extends SystemUserAction implements Transaction
 		try {
 			EmailUtils.sendPasswordEmail(this.email, this.name, this.username, generatedPassword);
 		} catch (MessagingException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			setResponseData(new Warning(ValidationErrors.EMAIL_FAILED));
 		}
 	}

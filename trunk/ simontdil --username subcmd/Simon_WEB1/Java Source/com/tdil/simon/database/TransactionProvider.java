@@ -5,15 +5,19 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 
+import sun.security.action.GetLongAction;
+
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.IBatisManager;
+import com.tdil.simon.struts.forms.TransactionalValidationForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.DownloadController;
 
 public class TransactionProvider {
 
-	private static final Logger Log = LoggerProvider.getLogger(TransactionProvider.class);
 	
 	public static void executeInTransaction(TransactionalAction transactionalAction) throws SQLException, ValidationException {
 		boolean commited = false;
@@ -27,10 +31,14 @@ public class TransactionProvider {
 				try {
 					IBatisManager.rollbackTransaction();
 				} catch (SQLException e) {
-					Log.error(e.getMessage(), e);
+					getLog().error(e.getMessage(), e);
 				}
 			}
 		}
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(TransactionProvider.class);
 	}
 	
 	public static Object executeInTransaction(TransactionalActionWithValue transactionalAction, ActionForm form) throws SQLException, ValidationException {
@@ -46,10 +54,28 @@ public class TransactionProvider {
 				try {
 					IBatisManager.rollbackTransaction();
 				} catch (SQLException e) {
-					Log.error(e.getMessage(), e);
+					getLog().error(e.getMessage(), e);
 				}
 			}
 		}
 		return result;
+	}
+	
+	public static void validateInTransaction(TransactionalValidationForm form, ValidationError validationError) throws SQLException {
+		boolean commited = false;
+		try {
+			IBatisManager.beginTransaction();
+			form.validateInTransaction(validationError);
+            IBatisManager.commitTransaction();
+            commited = true;
+		} finally {
+			if (!commited) {
+				try {
+					IBatisManager.rollbackTransaction();
+				} catch (SQLException e) {
+					getLog().error(e.getMessage(), e);
+				}
+			}
+		}
 	}
 }

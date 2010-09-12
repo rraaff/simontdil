@@ -5,13 +5,16 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
@@ -19,8 +22,9 @@ import com.tdil.simon.struts.forms.CategoryABMForm;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
+import com.tdil.simon.utils.LoggerProvider;
 
-public class CategoryABMAction extends SimonAction {
+public class CategoryABMAction extends ABMAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
 
@@ -62,22 +66,13 @@ public class CategoryABMAction extends SimonAction {
 		}
 		if (categoryABMForm.getOperation().equals(ApplicationResources.getMessage("categoryABM.create"))
 				|| categoryABMForm.getOperation().equals(ApplicationResources.getMessage("categoryABM.modify"))) {
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					categoryABMForm.save();
-				}
-			});
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					categoryABMForm.reset();
-					categoryABMForm.init();
-				}
-			});
-		}
+			return this.validateAndSave(categoryABMForm, request, mapping);
+		} 
 		return mapping.findForward("continue");
 	}
 
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(CategoryABMAction.class);
+	}
 
 }

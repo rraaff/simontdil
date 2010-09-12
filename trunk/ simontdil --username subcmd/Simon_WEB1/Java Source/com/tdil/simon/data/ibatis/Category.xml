@@ -37,7 +37,7 @@
     where id = #id#
   </select>
 
-  <select id="selectCategoryByName" parameterClass="java.lang.String" resultClass="Site">
+  <select id="selectCategoryByName" parameterClass="java.lang.String" resultClass="Category">
     select
       *
     from Category

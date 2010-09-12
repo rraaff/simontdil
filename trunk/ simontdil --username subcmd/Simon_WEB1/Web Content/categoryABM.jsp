@@ -61,7 +61,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td width="93" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="250" align="left"><html:text name="CategoryABMForm" property="name" styleClass="textfield_effect"/></td>
+								<td width="250" align="left"><html:text name="CategoryABMForm" property="name" styleClass="textfield_effect"/><html:errors property="category.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -128,7 +128,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr> 
 									<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-											<td align="left"><bean:write name="iterCategory" property="name" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="name" /></td>
 											<td><html:link  action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>

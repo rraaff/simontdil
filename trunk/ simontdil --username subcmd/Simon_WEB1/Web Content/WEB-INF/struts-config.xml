@@ -114,6 +114,7 @@
     </action>
     <action path="/goToViewVersion" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionAction" scope="session">
       <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="goToFinalVersion" path="/viewFinalVersion.jsp"/>
     </action>
     <action path="/viewVersionAction" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
       <forward name="continue" path="/viewVersion.jsp"/>
@@ -147,6 +148,7 @@
     </action>
     <action path="/delegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.DelegateABMAction" scope="session">
       <forward name="continue" path="/delegateABM.jsp"/>
+      <forward name="failure" path="/delegateABM.jsp"/>
     </action>
     <action path="/editDelegate" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.EditDelegateAction" scope="session">
       <forward name="continue" path="/delegateABM.jsp"/>
@@ -169,6 +171,7 @@
     </action>
     <action path="/countryABM" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.CountryABMAction" scope="session">
       <forward name="continue" path="/countryABM.jsp"/>
+      <forward name="failure" path="/countryABM.jsp"/>
     </action>
     <action path="/editCountry" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.EditCountryAction" scope="session">
       <forward name="continue" path="/countryABM.jsp"/>
@@ -178,6 +181,7 @@
     </action>
     <action path="/categoryABM" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.CategoryABMAction" scope="session">
       <forward name="continue" path="/categoryABM.jsp"/>
+      <forward name="failure" path="/categoryABM.jsp"/>
     </action>
     <action path="/editCategory" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.EditCategoryAction" scope="session">
       <forward name="continue" path="/categoryABM.jsp"/>
@@ -187,6 +191,7 @@
     </action>
     <action path="/referenceDocumentABM" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.ReferenceDocumentABMAction" scope="session">
       <forward name="continue" path="/referenceDocumentABM.jsp"/>
+      <forward name="failure" path="/referenceDocumentABM.jsp"/>
     </action>
     <action path="/editReferenceDocument" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.EditReferenceDocumentAction" scope="session">
       <forward name="continue" path="/referenceDocumentABM.jsp"/>
@@ -209,6 +214,7 @@
     </action>
     <action path="/systemUserABM" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.SystemUserABMAction" scope="session">
       <forward name="continue" path="/systemUserABM.jsp"/>
+      <forward name="failure" path="/systemUserABM.jsp"/>
     </action>
     <action path="/editSystemUser" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.EditSystemUserAction" scope="session">
       <forward name="continue" path="/systemUserABM.jsp"/>

@@ -26,39 +26,41 @@ import com.tdil.simon.web.Controller;
 
 public class AddCountryAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(AddCountryAction.class);
-	
 	private String name;
 	private FileItem fileItem;
 	private byte[] flag;
-	
+
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AddCountryAction.class);
+	}
+
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {
 		return UserTypeValidation.ADMINISTRATOR;
 	}
-	
+
 	@Override
 	public void takeValuesFrom(HttpServletRequest req) {
 		// Nothing todo
 	}
-	
+
 	@Override
 	public void takeValuesFrom(List<FileItem> fileItems) {
 		this.name = Controller.getParameter(fileItems, "name");
 		this.fileItem = Controller.getFileItem(fileItems, "flag");
 	}
-	
+
 	@Override
 	protected void basicValidate(HttpServletRequest req, ValidationError validation) {
 		this.name = CountryValidation.validateName(this.name, "name", validation);
 		this.flag = CountryValidation.validateFlag(this.fileItem, "flag", true, validation);
 	}
-	
+
 	public ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {
 		TransactionProvider.executeInTransaction(this);
 		return ActionResponse.newOKResponse();
 	}
-	
+
 	public void executeInTransaction() throws SQLException, ValidationException {
 		Country exists = CountryDAO.getCountry(this.name);
 		if (exists != null) {
@@ -72,9 +74,9 @@ public class AddCountryAction extends AbstractAction implements TransactionalAct
 		try {
 			CountryUtils.writeFlagToDisk(countryOid, this.flag);
 		} catch (IOException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_FLAG_CANNOT_BE_WRITTEN));
 		}
 	}
-	
+
 }

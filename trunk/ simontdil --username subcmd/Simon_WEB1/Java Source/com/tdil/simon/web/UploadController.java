@@ -28,8 +28,10 @@ public class UploadController extends HttpServlet {
 
 	private static final long serialVersionUID = -8356531321540585903L;
 	
-	private static final Logger Log = LoggerProvider.getLogger(UploadController.class);
-
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(UploadController.class);
+	}
+	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		writeResponse(res, new ActionResponse(ResponseType.ERROR, new Error("Solo se admite POST")));
 	}
@@ -62,7 +64,7 @@ public class UploadController extends HttpServlet {
 			}
 			writeResponse(res, ActionResponse.newOKResponse());
 		} catch (FileUploadException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 		}
 
 	}

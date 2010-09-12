@@ -26,7 +26,9 @@ public class ModifyCategoryAction extends AbstractAction implements Transactiona
 	private int oid;
 	private String name;
 	
-	private static final Logger Log = LoggerProvider.getLogger(ModifyCategoryAction.class);
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ModifyCategoryAction.class);
+	}
 	
 	@Override
 	protected ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {

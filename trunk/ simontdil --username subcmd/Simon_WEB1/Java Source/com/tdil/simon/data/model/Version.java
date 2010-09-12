@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.web.SystemConfig;
 
 public class Version extends PersistentObject {
 
@@ -77,8 +78,7 @@ public class Version extends PersistentObject {
 	}
 	
 	public String getLimitObservationsString() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
-		return simpleDateFormat.format(this.getUpToCommentDate());
+		return SystemConfig.getDateFormat().format(this.getUpToCommentDate());
 	}
 	public boolean canBeEdited() {
 		return !this.isHasDraft() && !this.isInFinalStatus();
@@ -91,5 +91,8 @@ public class Version extends PersistentObject {
 			return true;
 		}
 		return false;
+	}
+	public boolean isFinal() {
+		return FINAL.equals(this.getStatus());
 	}
 }

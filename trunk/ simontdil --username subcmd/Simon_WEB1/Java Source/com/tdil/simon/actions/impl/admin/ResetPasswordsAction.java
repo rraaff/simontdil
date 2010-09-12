@@ -27,10 +27,12 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class ResetPasswordsAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(ResetPasswordsAction.class);
-	
 	private String[] ids;
 	private List<Integer> oids = new ArrayList<Integer>();
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ResetPasswordsAction.class);
+	}
 	
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {
@@ -72,7 +74,7 @@ public class ResetPasswordsAction extends AbstractAction implements Transactiona
 			try {
 				EmailUtils.sendPasswordEmail(toClean.getEmail(), toClean.getName(), toClean.getUsername(), newPassword);
 			} catch (MessagingException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				warning.setFieldWarning(String.valueOf(oid), ValidationErrors.EMAIL_FAILED);
 			}
 		}

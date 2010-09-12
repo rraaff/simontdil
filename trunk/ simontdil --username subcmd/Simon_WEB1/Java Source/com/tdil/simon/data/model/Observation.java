@@ -1,8 +1,8 @@
  package com.tdil.simon.data.model;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
+
+import com.tdil.simon.web.SystemConfig;
 
 public class Observation extends PersistentObject {
 
@@ -51,8 +51,7 @@ public class Observation extends PersistentObject {
 	}
 	
 	public String getCreationDateFormatted() {
-		DateFormat lastLoginFormat = new SimpleDateFormat("dd/MM HH:mm");
-		return lastLoginFormat.format(this.getCreationDate());
+		return SystemConfig.getDateFormatWithMinutes().format(this.getCreationDate());
 	}
 	
 }

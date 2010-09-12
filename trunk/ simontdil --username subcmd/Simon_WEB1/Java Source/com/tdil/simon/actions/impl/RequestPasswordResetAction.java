@@ -23,7 +23,9 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class RequestPasswordResetAction extends UserAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(RequestPasswordResetAction.class);
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(RequestPasswordResetAction.class);
+	}
 	
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {
@@ -60,7 +62,7 @@ public class RequestPasswordResetAction extends UserAction implements Transactio
 			try {
 				EmailUtils.sendAdminEmailUserRequestPasswordReset(systemUser.getName(), systemUser.getPassword());
 			} catch (MessagingException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 			} 
 		} else {
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));

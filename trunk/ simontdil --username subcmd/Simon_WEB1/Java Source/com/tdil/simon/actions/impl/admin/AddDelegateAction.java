@@ -23,13 +23,15 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class AddDelegateAction extends DelegateAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(AddDelegateAction.class);
-	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AddDelegateAction.class);
+	}
+
 	@Override
 	protected boolean isAdd() {
 		return true;
 	}
-	
+
 	public ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {
 		TransactionProvider.executeInTransaction(this);
 		return ActionResponse.newOKResponse(this.getResponseData());
@@ -73,7 +75,7 @@ public class AddDelegateAction extends DelegateAction implements TransactionalAc
 		try {
 			EmailUtils.sendPasswordEmail(this.email, this.name, this.username, generatedPassword);
 		} catch (MessagingException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			setResponseData(new Warning(ValidationErrors.EMAIL_FAILED));
 		}
 	}

@@ -72,6 +72,15 @@ if ( dw_scrollObj.isSupported() ) {
 <script type="text/javascript">
 	function doAdd() {
 		var pText = document.getElementById('pText').value;
+		if (pText.length == 0) {
+			notimooErrorManager.show({
+				title: 'Error',
+				message: 'Debe ingresar el mensaje',
+				 customClass:'alert_error',
+				 sticky: true
+			});
+			return;
+		}
 		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addPrivateMessage.st"/>', onSuccess: function(json, responseText){
 			var errorResult = json.error;
 			if ('notLogged' == errorResult) {
@@ -82,11 +91,27 @@ if ( dw_scrollObj.isSupported() ) {
 		   if ('OK' == result) {
 		   document.getElementById('pText').value = "";
 		   	document.getElementById('addCommentLayer').style.display = 'none';
+		   	showOKMessage();
 		   } else {
 		   	var error = json.error;
-		   	document.getElementById('error').innertHTML= error;
+		   	showErrorMessage();
 		   }
-		}}).get({'message': pText});
+		}}).post({'message': pText});
+	}
+	
+	function showOKMessage() {
+		notimooNormalManager.show({
+			title: 'Mensaje',
+			message: 'Su mensaje ha sido enviado exitosamente.'
+		});
+	}
+	function showErrorMessage() {
+		notimooErrorManager.show({
+			title: 'Error',
+			message: 'Su mensaje no ha podido ser agregado.',
+			customClass:'alert_error',
+			 sticky: true
+		});
 	}
 </script>
 <script type="text/javascript">

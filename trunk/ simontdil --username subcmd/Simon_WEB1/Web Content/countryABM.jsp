@@ -138,8 +138,8 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr> 
 									<logic:iterate name="CountryABMForm" property="allCountries" id="iterCountry" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-											<td align="left"><bean:write name="iterCountry" property="name" /></td>
-											<td align="left"><bean:write name="iterCountry" property="userCount" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="name" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="userCount" /></td>
 											<td><html:link  action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>

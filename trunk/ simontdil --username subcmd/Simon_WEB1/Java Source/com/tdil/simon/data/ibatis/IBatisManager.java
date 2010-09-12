@@ -10,7 +10,6 @@ import org.apache.log4j.Logger;
 import com.ibatis.common.resources.Resources;
 import com.ibatis.sqlmap.client.SqlMapClient;
 import com.ibatis.sqlmap.client.SqlMapClientBuilder;
-import com.tdil.simon.actions.AbstractAction;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.utils.LoggerProvider;
 
@@ -21,7 +20,10 @@ public class IBatisManager {
 	 */
 	static SqlMapClient sqlMapper;
 
-	private static final Logger Log = LoggerProvider.getLogger(IBatisManager.class);
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(IBatisManager.class);
+	}
 	
 	public synchronized static void init(String configName) {
 		try {
@@ -29,7 +31,7 @@ public class IBatisManager {
 			sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
 			reader.close();
 		} catch (IOException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 			throw new RuntimeException("Something bad happened while building the SqlMapClient instance." + e, e);
 		}
 	}

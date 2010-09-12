@@ -90,7 +90,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="280" valign="top"><p><img src="./download.do?action=flag&fileId=<bean:write name="observation" property="countryId" />" width="30" height="30"></p>
 													Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
 													Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumber" /></span><br>
-													Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDate" /></span><br>
+													Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
 													<!-- Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>-->
 													
 													<div style="height:25px; margin-top:10px;"><html:link  action="deletePrivateObservation.st?" paramName="observation" paramProperty="id" paramId="id"><img src="images/buttons/borrar.png" width="50" height="24" border="0"></html:link></div></td>

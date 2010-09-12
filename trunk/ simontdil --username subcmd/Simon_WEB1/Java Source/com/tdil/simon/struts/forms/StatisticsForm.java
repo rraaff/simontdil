@@ -12,6 +12,7 @@ import org.apache.struts.action.ActionForm;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.LastLoginVO;
 import com.tdil.simon.data.valueobjects.StatisticsVO;
+import com.tdil.simon.web.SystemConfig;
 
 public class StatisticsForm extends ActionForm {
 
@@ -39,7 +40,7 @@ public class StatisticsForm extends ActionForm {
 	}
 	
 	public List<String> getLastLogins() {
-		DateFormat lastLoginFormat = new SimpleDateFormat("dd/MM HH:mm");
+		DateFormat lastLoginFormat = SystemConfig.getDateFormatWithMinutes();
 		List<String> result = new ArrayList<String>();
 		for (Country country : statisticsVO.getAllCountries()) {
 			Date date = this.getLastLoginFor(country.getId());

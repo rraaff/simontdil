@@ -39,7 +39,10 @@ public class GoToViewVersionAction extends SimonAction {
 				DelegateAuditDAO.registerViewVersion(viewVersionForm.getUser(), viewVersionForm.getVersion().getVersion());
 			}
 		});
-
-		return mapping.findForward("continue");
+		if (viewVersionForm.isFinal()) {
+			return mapping.findForward("goToFinalVersion");
+		} else {
+			return mapping.findForward("continue");
+		}
 	}
 }

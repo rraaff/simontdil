@@ -27,47 +27,50 @@ import com.tdil.simon.web.Controller;
 
 public class ModifyCountryAction extends AbstractAction implements TransactionalAction {
 
-	private static final Logger Log = LoggerProvider.getLogger(ModifyCountryAction.class);
-	
 	private String id;
 	private int oid;
 	private String name;
 	private FileItem fileItem;
 	private byte[] flag;
-//	protected String deleted;
-//	protected boolean deletedBoolean;
-	
+
+	// protected String deleted;
+	// protected boolean deletedBoolean;
+
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ModifyCountryAction.class);
+	}
+
 	@Override
 	protected UserTypeValidation getUserTypeValidation() {
 		return UserTypeValidation.ADMINISTRATOR;
 	}
-	
+
 	@Override
 	public void takeValuesFrom(HttpServletRequest req) {
 	}
-	
+
 	@Override
 	public void takeValuesFrom(List<FileItem> fileItems) {
 		this.id = Controller.getParameter(fileItems, "id");
 		this.name = Controller.getParameter(fileItems, "name");
 		this.fileItem = Controller.getFileItem(fileItems, "flag");
-//		this.deleted = Controller.getParameter(fileItems, "deleted");
+		// this.deleted = Controller.getParameter(fileItems, "deleted");
 	}
 
-	
 	@Override
 	protected void basicValidate(HttpServletRequest req, ValidationError validation) {
 		this.name = CountryValidation.validateName(this.name, "name", validation);
 		this.flag = CountryValidation.validateFlag(this.fileItem, "flag", false, validation);
 		this.oid = IdValidation.validate(this.id, "id", validation);
-//		this.deletedBoolean = FieldValidation.validateBoolean(this.deleted, validation);
+		// this.deletedBoolean = FieldValidation.validateBoolean(this.deleted,
+		// validation);
 	}
-	
+
 	public ActionResponse basicExecute(HttpServletRequest req) throws ValidationException, SQLException {
 		TransactionProvider.executeInTransaction(this);
 		return ActionResponse.newOKResponse();
 	}
-	
+
 	public void executeInTransaction() throws SQLException, ValidationException {
 		Country toModify = CountryDAO.getCountry(oid);
 		if (toModify == null) {
@@ -83,7 +86,7 @@ public class ModifyCountryAction extends AbstractAction implements Transactional
 			try {
 				CountryUtils.writeFlagToDisk(toModify.getId(), flag);
 			} catch (IOException e) {
-				Log.error(e.getMessage(), e);
+				getLog().error(e.getMessage(), e);
 				throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_FLAG_CANNOT_BE_WRITTEN));
 			}
 		}

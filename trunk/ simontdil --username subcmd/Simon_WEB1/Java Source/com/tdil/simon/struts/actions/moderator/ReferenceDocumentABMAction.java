@@ -16,12 +16,11 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
-import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
-public class ReferenceDocumentABMAction extends SimonAction {
+public class ReferenceDocumentABMAction extends ABMAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
 
@@ -63,27 +62,7 @@ public class ReferenceDocumentABMAction extends SimonAction {
 		}
 		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.create"))
 				|| referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.modify"))) {
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					try {
-						referenceDocumentABMForm.save();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			});
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					referenceDocumentABMForm.reset();
-					referenceDocumentABMForm.init();
-				}
-			});
+			return this.validateAndSave(referenceDocumentABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");
 	}

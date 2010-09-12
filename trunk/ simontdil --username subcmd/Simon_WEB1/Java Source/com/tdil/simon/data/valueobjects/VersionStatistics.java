@@ -1,7 +1,7 @@
 package com.tdil.simon.data.valueobjects;
 
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -9,10 +9,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
-import org.xhtmlrenderer.css.style.CalculatedStyle;
-
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.model.Country;
+import com.tdil.simon.web.SystemConfig;
 
 public class VersionStatistics {
 
@@ -28,8 +27,7 @@ public class VersionStatistics {
 	}
 	
 	public String getFormattedDate() {
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM");
-		return simpleDateFormat.format(this.getCreationDate());
+		return SystemConfig.getDateFormat().format(this.getCreationDate());
 	}
 
 	public void setVersionId(int versionId) {
@@ -107,7 +105,7 @@ public class VersionStatistics {
 		}
 		int index = 1;
 		Date lastdate = this.getCreationDate();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM");
+		DateFormat simpleDateFormat = SystemConfig.getDateFormat();
 		for (ObservationStatistics observationStatistics : this.getObservationsStats()) {
 			observationStatistics.setObservationNumber(index);
 			if (dayEquals(lastdate, observationStatistics.getCreationDate())) {

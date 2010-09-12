@@ -1,6 +1,7 @@
 package com.tdil.simon.struts.forms;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -10,12 +11,15 @@ import sun.jdbc.odbc.OdbcDef;
 
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
+import com.tdil.simon.data.ibatis.SignatureDAO;
+import com.tdil.simon.data.ibatis.SiteDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
+import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionNumberVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 
@@ -30,6 +34,7 @@ public class ViewVersionForm extends ActionForm {
 	private String operation;
 	private VersionVO version;
 	private List observations;
+	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 
 	public VersionVO getVersion() {
 		return version;
@@ -39,6 +44,14 @@ public class ViewVersionForm extends ActionForm {
 		this.version = version;
 	}
 
+	public List<SignatureVO> getSignatures() {
+		return signatures;
+	}
+
+	public void setSignatures(List<SignatureVO> signatures) {
+		this.signatures = signatures;
+	}
+	
 	public void init(int versionID) throws SQLException {
 		Version version = VersionDAO.getVersion(versionID);
 		VersionVO versionVO = new VersionVO();
@@ -47,6 +60,9 @@ public class ViewVersionForm extends ActionForm {
 		versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(versionID));
 		versionVO.setDocument(DocumentDAO.getDocument(version.getDocumentId()));
 		setVersion(versionVO);
+		if (version.isFinal()) {
+			setSignatures(SignatureDAO.selectSignaturesFor(version.getId()));
+		}
 	}
 	
 	public String getParagraphText(int observationId) {
@@ -84,7 +100,7 @@ public class ViewVersionForm extends ActionForm {
 	
 	
 	public boolean getVersionIsInSign() {
-		return Version.IN_SIGN.equals(this.getVersion().getVersion());
+		return Version.IN_SIGN.equals(this.getVersion().getVersion().getStatus());
 	}
 	
 	public boolean getVersionCanBeNegotiated() {
@@ -179,9 +195,18 @@ public class ViewVersionForm extends ActionForm {
 		this.user = user;
 	}
 
-	public void finishSign(int id) {
-		// TODO Auto-generated method stub
-		// TODO TODO TODO
+	public void finishSign(int id) throws SQLException {
+		Version version = VersionDAO.getVersion(id);
+		version.setStatus(Version.FINAL);
+		VersionDAO.updateVersionStatus(version);
+		Site site = SiteDAO.getSite(Site.DELEGATE);
+		site.setStatus(Site.NORMAL);
+		site.setDataId(0);
+		SiteDAO.updateSite(site);
+	}
+
+	public boolean isFinal() {
+		return this.getVersion().getVersion().isFinal();
 	}
 
 }

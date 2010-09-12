@@ -2,6 +2,8 @@ package com.tdil.simon.web;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Properties;
 
 import javax.servlet.ServletContextEvent;
@@ -14,7 +16,6 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class SystemConfig implements ServletContextListener {
 
-	private static final Logger Log = LoggerProvider.getLogger(SystemConfig.class);
 	public static final String propertyLocation = "simon.properties";
 	
 	public static Properties properties;
@@ -24,20 +25,34 @@ public class SystemConfig implements ServletContextListener {
 	private static String referencedDocPath;
 	private static String privateTemporaryPath;
 	
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(SystemConfig.class);
+	}
+	
 	public void contextInitialized(ServletContextEvent sce) {
 		try {
 			SystemConfig.init();
 		} catch (IOException e) {
-			Log.error(e.getMessage(), e);
+			getLog().error(e.getMessage(), e);
 		}
 	}
 
 	public void contextDestroyed(ServletContextEvent sce) {
+		LoggerProvider.destroy();
+	}
+	
+	public static DateFormat getDateFormat() {
+		return new SimpleDateFormat("dd MMM yyyy");
+	}
+	
+	public static DateFormat getDateFormatWithMinutes() {
+		return new SimpleDateFormat("dd MMM yyyy HH:mm");
 	}
 	
 	public static void init() throws IOException {
 		loadProperties();
-		initLogger();
+//		initLogger();
 	}
 	
 	private static void initLogger() {
