@@ -50,12 +50,12 @@ div#negotiationArea {
 
 div#scrollbar2 { 
 	position:relative;
-	width:11px; height:168px;
+	width:11px; height:278px;
 	font-size:1px;  /* so no gap or misplacement due to image vertical alignment */
 }
 div#track2 { 
 	position:absolute; left:0; top:12px;
-	width:11px; height:144px;
+	width:11px; height:254px;
 	background: #40708C;
 }
 div#dragBar2 {

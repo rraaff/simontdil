@@ -424,14 +424,14 @@ a.button span {
 }
 
 #copyright{
+	width: 350px;
 	height: 40px;
 	position: relative;
 	margin-top: 0px;
 	margin-right: auto;
 	margin-bottom: 0px;
 	margin-left: auto;
-	width: 350px;
-	float: none;
+	float: both;
 	padding-top: 5px;
 	padding-right: 0px;
 	padding-bottom: 0px;
@@ -507,11 +507,29 @@ a.button span {
 	background-repeat: repeat-x;
 	/*I am going to add some text formatting of my own*/
 	font-family: Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 13px;
 	color: #333333;
 	width: 300px;
 	height: 140px;
-	line-height:23px;
+	line-height:20px;
+	padding: 0px; margin: 0px
+}
+
+.textfield_effect_area_big{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_area300.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+	width: 400px;
+	height: 140px;
+	line-height:20px;
 	padding: 0px; margin: 0px
 }
 

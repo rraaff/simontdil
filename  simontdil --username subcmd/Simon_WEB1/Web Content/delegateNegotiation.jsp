@@ -236,36 +236,8 @@ if ( dw_scrollObj.isSupported() ) {
 			<!-- inicio tabla template -->
 			<table width="392" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Documento en Negociación</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-				</tr>
-				<tr>
-					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td height="40" valign="middle">
-					<!-- corte tabla template -->
-						<div id="contentDocumentoPrincipal">
-							<div class="titleDocInModule"><br><bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /></div>
-							<p style="line-height: 12px;">Versi&oacute;n: <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></p>
-						</div>
-					</td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td height="10" background="images/interfaces/bottomLeftDoc.gif"><img src="images/null.gif" width="10" height="10"></td>
-					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
-				</tr>
-			</table>
-		<!-- fin tabla template -->
-		<!-- separador -->
-		<div id="separador1Home"><img src="images/null.gif" width="1" height="16"><div>
-		<!-- inicio tabla template -->
-			<table width="392" border="0" cellspacing="0" cellpadding="0" align="center">
-				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Borrador del párrafo</div></td>
+					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - V <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -279,7 +251,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</tr>
 							<tr>
 								<td width="342" height="157" valign="top">
-								<div id="negotiationArea" style="width:342px; height:157px; text-align:left;">
+								<div id="negotiationArea" style="width:342px; height:281px; text-align:left;">
 									<div id="lastParagraphText">  -  </div>
 								</div>
 								</td>
@@ -335,7 +307,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<table width="620" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 										<tr>
 											<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-											<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+											<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Firma en el documento</div></td>
 											<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 										</tr>
 										<tr>
@@ -355,19 +327,6 @@ if ( dw_scrollObj.isSupported() ) {
 											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 										</tr>
-										<!-- tr>
-											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-											<td height="30" align="center">
-												<html:form action="/goToSignShow">
-													<html:submit property="operation">
-														<bean:message key="delegateNegotiation.signShow"/>
-													</html:submit>
-												</html:form>
-											</td>
-											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-										</tr -->
 										<tr>
 											<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 											<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
@@ -398,7 +357,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Enviar mensaje privado al Moderador</div></td>
+										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Propuesta de Párrafo</div></td>
 										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -408,21 +367,19 @@ if ( dw_scrollObj.isSupported() ) {
 										<!-- corte tabla template -->
 											<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
 												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="3" id="error"></td>
+													<td id="error"></td>
 												<tr>
 												<tr>
-													<td width="150" valign="top">Mensaje del párrafo:</td>
-													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="243"><textarea id="pText" class="textfield_effect_area"></textarea></td>
+													<td><textarea id="pText" class="textfield_effect_area_big"></textarea></td>
 												<tr>
 												<tr>
-													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="3" align="center"><input type="button" onClick="doAdd()" value="Agregar observacion" ><input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
+													<td align="center"><input type="button" onClick="doAdd()" value="Enviar" > <input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
 												<tr>
 											</table>
 											<!-- corte tabla template -->
