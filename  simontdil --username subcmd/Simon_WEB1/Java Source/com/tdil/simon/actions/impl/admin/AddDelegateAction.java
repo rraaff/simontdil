@@ -21,6 +21,11 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.EmailUtils;
 import com.tdil.simon.utils.LoggerProvider;
 
+/**
+ * @deprecated
+ * @author mgodoy
+ *
+ */
 public class AddDelegateAction extends DelegateAction implements TransactionalAction {
 
 	private static Logger getLog() {
@@ -46,12 +51,12 @@ public class AddDelegateAction extends DelegateAction implements TransactionalAc
 		if (country == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
 		}
-		if (this.canSignBoolean) {
-			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-			if (canSignCount != 0) {
-				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-			}
-		}
+//		if (this.canSignBoolean) {
+//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
+//			if (canSignCount != 0) {
+//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
+//			}
+//		}
 		String generatedPassword = SystemUser.generateRandomPassword();
 		SystemUser user = new SystemUser();
 		user.setUsername(this.username);

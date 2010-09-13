@@ -61,7 +61,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td width="143" align="right">Nombre completo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="200" align="left"><html:text name="DelegateABM" property="name" /></td>
+								<td width="200" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -74,7 +74,7 @@ if ( dw_scrollObj.isSupported() ) {
 															</logic:equal>
 															<logic:notEqual name="DelegateABM" property="id" value="0">
 																<html:text name="DelegateABM" property="username" disabled="true"/>
-															</logic:notEqual></td>
+															</logic:notEqual><html:errors property="delegate.username" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -84,7 +84,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:select name="DelegateABM" property="countryId" styleClass="textfield_effect_month">
 																<html:optionsCollection name="DelegateABM" property="allCountries" value="id" label="name"/>
-															</html:select></td>
+															</html:select><html:errors property="xxx" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -92,7 +92,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">E-Mail:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="DelegateABM" property="email"/></td>
+								<td align="left"><html:text name="DelegateABM" property="email"/><html:errors property="delegate.email" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -100,7 +100,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">Accesos:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:checkbox name="DelegateABM" property="typeOne"/> A - <html:checkbox name="DelegateABM" property="typeTwo"/> B - <html:checkbox name="DelegateABM" property="canSign"/> es firmante</td>
+								<td align="left"><html:checkbox name="DelegateABM" property="typeOne"/> A - <html:checkbox name="DelegateABM" property="typeTwo"/> B  <html:errors property="delegate.typeOne" />- <html:checkbox name="DelegateABM" property="canSign"/> es firmante<html:errors property="delegate.canSign" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -108,7 +108,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">Cargo:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="DelegateABM" property="job"/></td>
+								<td align="left"><html:text name="DelegateABM" property="job"/><html:errors property="delegate.job" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>

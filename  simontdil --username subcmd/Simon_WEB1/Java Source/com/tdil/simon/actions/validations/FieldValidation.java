@@ -31,14 +31,14 @@ public class FieldValidation {
 	public static String validateEmail(String email, String field, ValidationError validation) {
 		String result = email;
 		if (StringUtils.isEmptyOrWhitespaceOnly(email)) {
-			validation.setFieldError(field, ValidationErrors.CANNOT_BE_EMPTY);
+			validation.setFieldError(field, field + "." + ValidationErrors.CANNOT_BE_EMPTY);
 		} else {
 			result = email.trim();
 			if (result.length() > 100) {
-				validation.setFieldError(field, ValidationErrors.TEXT_TOO_LONG);
+				validation.setFieldError(field, field + "." + ValidationErrors.TEXT_TOO_LONG);
 			}
 			if (!EMAIL_RE.isMatch(result)) {
-				validation.setFieldError(field, ValidationErrors.INVALID_EMAIL);
+				validation.setFieldError(field, field + "." + ValidationErrors.INVALID_EMAIL);
 			}
 		}
 		return result;

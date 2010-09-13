@@ -10,6 +10,11 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.CategoryValidation;
+import com.tdil.simon.actions.validations.SystemUserValidation;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
@@ -18,7 +23,7 @@ import com.tdil.simon.data.valueobjects.UserVO;
 import com.tdil.simon.utils.EmailUtils;
 import com.tdil.simon.utils.LoggerProvider;
 
-public class DelegateABMForm extends ActionForm {
+public class DelegateABMForm extends TransactionalValidationForm implements ABMForm {
 
 	private static final long serialVersionUID = 4257776435738129693L;
 	private String operation;
@@ -225,7 +230,34 @@ public class DelegateABMForm extends ActionForm {
 			this.canSign = systemUser.isCanSign();
 			this.job = systemUser.getJob();
 		}
-		
+	}
+	
+	@Override
+	public ValidationError basicValidate() {
+		ValidationError validation = new ValidationError();
+		SystemUserValidation.validateUsername(this.username, "delegate.username", validation);
+		SystemUserValidation.validateName(this.name, "delegate.name", validation);
+		SystemUserValidation.validateEmail(this.email, "delegate.email", validation);
+		SystemUserValidation.validateJob(this.job, "delegate.job", validation);
+		if (!this.isTypeOne() && !this.isTypeTwo()) {
+			validation.setFieldError("delegate.typeOne", "delegate.typeOne." + ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
+		}
+		return validation;
+	}
+	
+	@Override
+	public void validateInTransaction(ValidationError validationError) throws SQLException {
+		SystemUser exists = SystemUserDAO.getUser(this.username);
+		if (exists != null && exists.getId() != this.getId()) {
+			validationError.setFieldError("delegate.username", "delegate.username." + ValidationErrors.USER_ALREADY_EXISTS);
+		}
+		if (this.isCanSign()) {
+			// TODO esto deberia ser por tipo
+			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()), this.isTypeOne(), this.isTypeTwo());
+			if (canSignCount != 0) {
+				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);
+			}
+		}
 	}
 	
 	@Override
@@ -240,10 +272,22 @@ public class DelegateABMForm extends ActionForm {
 		systemUser.setDeleted(true);
 		SystemUserDAO.logicallyDeleteUser(systemUser);
 	}
-	public void reactivate(int position) throws SQLException {
+	public ValidationError reactivate(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
-		systemUser.setDeleted(false);
-		SystemUserDAO.reactivateUser(systemUser);
-		
+		if (systemUser.isCanSign()) {
+			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(systemUser.getCountryId()), systemUser.isTypeOne(), systemUser.isTypeTwo());
+			if (canSignCount != 0) {
+				ValidationError validationError = new ValidationError();
+				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);
+				return validationError;
+			} else {
+				systemUser.setDeleted(false);
+				SystemUserDAO.reactivateUser(systemUser);
+			}
+		} else {
+			systemUser.setDeleted(false);
+			SystemUserDAO.reactivateUser(systemUser);
+		}
+		return null;
 	}
 }
