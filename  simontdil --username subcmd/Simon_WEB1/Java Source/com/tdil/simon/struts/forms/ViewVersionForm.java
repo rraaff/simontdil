@@ -7,8 +7,6 @@ import java.util.List;
 
 import org.apache.struts.action.ActionForm;
 
-import sun.jdbc.odbc.OdbcDef;
-
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
