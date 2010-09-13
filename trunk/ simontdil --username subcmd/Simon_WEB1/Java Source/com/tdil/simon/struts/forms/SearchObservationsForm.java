@@ -77,6 +77,9 @@ public class SearchObservationsForm extends ActionForm {
 		}
 	}
 	
+	public boolean getHasObservations() {
+		return this.getObservations() != null && this.getObservations().size() > 0;
+	}
 	
 	public Paragraph getParagraph(int paragraphId) {
 		for (Paragraph p : getParagraphs()) {
