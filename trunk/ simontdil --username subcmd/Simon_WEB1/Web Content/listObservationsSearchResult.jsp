@@ -53,6 +53,7 @@ if ( dw_scrollObj.isSupported() ) {
 	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
+			<logic:equal name="SearchObservationsForm" property="hasObservations" value="true">
 				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 					<tr>
 						<td width="960" align="center" valign="top">
@@ -138,9 +139,6 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													</logic:iterate>
-												<% if (lastParagraph == -1) { %>
-													<tr><td><bean:message key="searchObservations.empty"/></td></tr>
-												<% } %>
 												</table>
 											<!-- corte tabla template -->
 											</div>
@@ -180,6 +178,23 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
+				</logic:equal>
+				<logic:equal name="SearchObservationsForm" property="hasObservations" value="false">
+					<table width="400" height="120" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<html:form action="/viewVersionAction">
+									<html:submit property="operation">
+										<bean:message key="listObservations.back"/>
+									</html:submit>
+								</html:form >
+							</td>
+						</tr>
+					</table>
+				</logic:equal>
 				</td>
 			<tr>
 		</table>
