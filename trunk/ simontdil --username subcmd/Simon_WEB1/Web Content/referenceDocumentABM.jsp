@@ -58,7 +58,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td width="103" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="240" align="left"><html:text name="ReferenceDocumentABMForm" property="title" styleClass="textfield_effect"/></td>
+								<td width="240" align="left"><html:text name="ReferenceDocumentABMForm" property="title" styleClass="textfield_effect"/><html:errors property="refDoc.title" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -66,7 +66,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td width="103" align="right">Elegir archivo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="240" align="left"><html:file property="document" styleClass="textfield_effect"/></td>
+								<td width="240" align="left"><html:file property="document" styleClass="textfield_effect"/><html:errors property="refDoc.document" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -77,7 +77,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td width="240" align="left">
 									<html:select name="ReferenceDocumentABMForm" property="categoryId" styleClass="textfield_effect">
 										<html:optionsCollection name="ReferenceDocumentABMForm" property="allCategories" value="id" label="name"/>
-									</html:select></td>
+									</html:select><html:errors property="refDoc.category" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>

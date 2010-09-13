@@ -41,7 +41,7 @@ public class ReferenceDocumentValidation {
 	public static void validateDocument(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
 		boolean isEmpty = fileItem.getFileSize() == 0;
 		if (isEmpty && add) {
-			validation.setFieldError(fieldName, ValidationErrors.CANNOT_BE_EMPTY);
+			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.CANNOT_BE_EMPTY);
 			return;
 		}
 		if (isEmpty) {
@@ -51,10 +51,9 @@ public class ReferenceDocumentValidation {
 		if (!documentName.toUpperCase().endsWith(".DOC") &&
 				!documentName.toUpperCase().endsWith(".PDF") &&
 				!documentName.toUpperCase().endsWith(".PPT")) {
-			validation.setFieldError(fieldName, ValidationErrors.INVALID_DOC_TYPE);
+			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.INVALID_DOC_TYPE);
 			return;
 		}
-		String extension = documentName.substring(documentName.length() - 3).toUpperCase();
 		return;
 	}
 }

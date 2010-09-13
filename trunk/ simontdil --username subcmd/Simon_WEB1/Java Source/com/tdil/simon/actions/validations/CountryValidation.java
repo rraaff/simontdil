@@ -6,6 +6,7 @@ import java.io.InputStream;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.utils.LoggerProvider;
@@ -49,5 +50,22 @@ public class CountryValidation {
 			fileItem.delete();
 		}
 		return null;
+	}
+	
+	public static void validateFlag(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
+		boolean isEmpty = fileItem.getFileSize() == 0;
+		if (isEmpty && add) {
+			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.CANNOT_BE_EMPTY);
+			return;
+		}
+		if (isEmpty) {
+			return;
+		}
+		String fileName = fileItem.getFileName();
+		if (!fileName.toUpperCase().endsWith(".PNG")) {
+			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.FLAG_MUST_BE_PNG);
+			return;
+		}
+		return;
 	}
 }

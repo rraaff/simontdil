@@ -6,12 +6,10 @@ import java.sql.SQLException;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ReferenceDocumentValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
@@ -23,7 +21,7 @@ import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
 
-public class ReferenceDocumentABMForm extends ActionForm implements ABMForm {
+public class ReferenceDocumentABMForm extends TransactionalValidationForm implements ABMForm {
 
 	private static final long serialVersionUID = -8744930020582842123L;
 	
@@ -170,13 +168,23 @@ public class ReferenceDocumentABMForm extends ActionForm implements ABMForm {
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(ReferenceDocumentABMForm.class);
 	}
-	public ValidationError validate() {
+	
+	@Override
+	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		ReferenceDocumentValidation.validateTitle(this.title, "refDoc.title", validation);
-		ReferenceDocumentValidation.validateDocument(this.document, "refDoc.document", true, validation);
+		ReferenceDocumentValidation.validateDocument(this.document, "refDoc.document", this.id == 0, validation);
 		if (this.categoryId == 0){
 			validation.setFieldError("refDoc.category", ValidationErrors.CANNOT_BE_EMPTY);
 		}
 		return validation;
+	}
+	
+	@Override
+	public void validateInTransaction(ValidationError validationError) throws SQLException {
+		ReferenceDocument exists = ReferenceDocumentDAO.getReferenceDocument(this.title);
+		if (exists != null && exists.getId() != this.getId()) {
+			validationError.setFieldError("refDoc.title", "refDoc.title." + ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS);
+		}
 	}
 }

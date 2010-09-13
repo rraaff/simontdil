@@ -5,16 +5,21 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.apache.struts.action.ActionForm;
+import org.apache.log4j.Logger;
 import org.apache.struts.upload.FormFile;
 
+import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.CountryValidation;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.CountryVO;
+import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
 
-public class CountryABMForm extends ActionForm {
+public class CountryABMForm extends TransactionalValidationForm implements ABMForm {
 
 	private static final long serialVersionUID = -8744930020582842123L;
 	
@@ -74,11 +79,37 @@ public class CountryABMForm extends ActionForm {
 		}
 	}
 	
-	public void save() throws SQLException, FileNotFoundException, IOException {
-		if (id == 0) {
-			this.addCountry();
-		} else {
-			this.modifyCountry();
+	@Override
+	public ValidationError basicValidate() {
+		ValidationError validation = new ValidationError();
+		CountryValidation.validateName(this.name, "country.name", validation);
+		CountryValidation.validateFlag(this.flag, "country.flag", this.id == 0, validation);
+		return validation;
+	}
+	
+	@Override
+	public void validateInTransaction(ValidationError validationError) throws SQLException {
+		Country exists = CountryDAO.getCountry(this.name);
+		if (exists != null && exists.getId() != this.getId()) {
+			validationError.setFieldError("country.name", "country.name." + ValidationErrors.COUNTRY_ALREADY_EXISTS);
+		}
+	}
+	
+	public void save() throws SQLException, ValidationException{
+		try {
+			if (id == 0) {
+				this.addCountry();
+			} else {
+				this.modifyCountry();
+			}
+		} catch (FileNotFoundException e) {
+			getLog().error(e.getMessage(), e);
+			ValidationError exError = new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN);
+			throw new ValidationException(exError);
+		} catch (IOException e) {
+			getLog().error(e.getMessage(), e);
+			ValidationError exError = new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN);
+			throw new ValidationException(exError);
 		}
 	}
 	private void modifyCountry() throws SQLException, FileNotFoundException, IOException {
@@ -98,9 +129,19 @@ public class CountryABMForm extends ActionForm {
 		country.setDeleted(false);
 		CountryDAO.updateCountry(country);
 	}
-	public void delete(int position) throws SQLException {
+	public ValidationError delete(int position) throws SQLException {
 		Country country = this.getAllCountries().get(position);
+		if (country.isHost()) {
+			ValidationError validationError = new ValidationError();
+			validationError.setFieldError("country", "country." + ValidationErrors.HOST_COUNTRY_CANNOT_BE_DELETED);
+			return validationError;
+		}
 		country.setDeleted(true);
 		CountryDAO.logicallyDeleteCountry(country);
+		return null;
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(CountryABMForm.class);
 	}
 }

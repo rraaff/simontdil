@@ -12,17 +12,20 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
-public class CountryABMAction extends SimonAction {
+public class CountryABMAction extends ABMAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
@@ -32,7 +35,7 @@ public class CountryABMAction extends SimonAction {
 	}
 	
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(final ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final CountryABMForm countryABMForm = (CountryABMForm) form;
 
@@ -41,12 +44,21 @@ public class CountryABMAction extends SimonAction {
 			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
 			if (imageSubmitData.isParsed())  {
 				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							countryABMForm.delete(imageSubmitData.getPosition());
-							countryABMForm.init();
+					ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
+						public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
+							CountryABMForm countryABMForm = (CountryABMForm)form;
+							ValidationError error = countryABMForm.delete(imageSubmitData.getPosition());
+							if (error != null && error.hasError()) {
+								return error;
+							} else {
+								countryABMForm.init();
+								return null;
+							}
 						}
-					});
+					}, countryABMForm);
+					if (error != null && error.hasError()) {
+						return redirectToFailure(error, request, mapping);
+					}
 				}
 				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
@@ -64,27 +76,7 @@ public class CountryABMAction extends SimonAction {
 		}
 		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.create"))
 				|| countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.modify"))) {
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					try {
-						countryABMForm.save();
-					} catch (FileNotFoundException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-			});
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					countryABMForm.reset();
-					countryABMForm.init();
-				}
-			});
+			return this.validateAndSave(countryABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");
 	}
