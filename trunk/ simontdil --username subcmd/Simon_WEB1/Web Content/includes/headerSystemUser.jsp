@@ -68,7 +68,7 @@ a:active {width: auto;}
 					<% 	if(eventMode && inNegotiation && isModerator) { 
 							if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 							%>
-							Mensajes Privados: <html:link  action="/goToListPrivateObservations.st"><span class="remarcado" id="privateMessagesCount"></span></html:link></span>
+							<html:link  action="/goToListPrivateObservations.st">Mensajes Privados: <span class="remarcado" id="privateMessagesCount"></span></html:link></span>
 							<% } else { %>
 							Negociación en curso
 							<% } %>

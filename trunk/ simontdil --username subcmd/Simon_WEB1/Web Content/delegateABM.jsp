@@ -56,7 +56,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="350" height="144"><!-- corte tabla template -->
 						<table width="350" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td width="143" align="right">Nombre completo:</td>
@@ -98,9 +98,11 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">Accesos:</td>
+								<td height="24" align="right" valign="top">Accesos:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:checkbox name="DelegateABM" property="typeOne"/> A - <html:checkbox name="DelegateABM" property="typeTwo"/> B  <html:errors property="delegate.typeOne" />- <html:checkbox name="DelegateABM" property="canSign"/> es firmante<html:errors property="delegate.canSign" /></td>
+								<td align="left"><html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
+								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <html:errors property="delegate.typeOne" /><br>
+								<html:checkbox name="DelegateABM" property="canSign"/> es firmante<html:errors property="delegate.canSign" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -111,7 +113,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td align="left"><html:text name="DelegateABM" property="job"/><html:errors property="delegate.job" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
+								<td colspan="3" height="15"><img src="images/null.gif" width="1" height="15"></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="25" align="center">
@@ -132,7 +134,7 @@ if ( dw_scrollObj.isSupported() ) {
 																</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="16"><img src="images/null.gif" width="1" height="16"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->

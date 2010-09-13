@@ -191,12 +191,18 @@ if ( dw_scrollObj.isSupported() ) {
 									</logic:equal></td>
 							</tr>
 							<tr>
+								<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
+							</tr>
+							<tr>
 								<td colspan="3" align="center" valign="middle">
 									<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
 										<html:submit property="operation">
 											<bean:message key="viewVersion.finishSign"/>
 										</html:submit>
 									</logic:equal></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
 								<td colspan="3" align="center" valign="middle">
@@ -210,6 +216,12 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
 							</tr>
 							<% if (isDelegate) { %>
+							<tr>
+								<td colspan="3"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
+							</tr>
+							<tr>
+								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
+							</tr>
 							<tr>
 								<td colspan="3" align="center">
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
@@ -287,10 +299,6 @@ if ( dw_scrollObj.isSupported() ) {
 										<bean:message key="viewVersion.addObservation"/>
 									</html:submit>
 								</logic:notEqual></td>
-							</tr>
-							<% } else { %>
-							<tr>
-								<td colspan="3" align="center"><img src="images/null.gif" width="1" height="24"></td>
 							</tr>
 							<% } %>
 							<tr>
