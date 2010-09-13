@@ -5,11 +5,6 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
-<style type="text/css">
-#centrador {
-	padding-left:80px;
-}  
-</style>
 <html:html>
 <html:form method="POST" action="/requestPassword">
 <div id="content">
@@ -34,7 +29,7 @@
 								<td height="25" colspan="3"><p align="left">En caso de no recordar su contrase&ntilde;a, le sugerimos pedir un blanqu&eacute;o de la misma, completando su usuario, la direcci&oacute;n de E-Mail utilizada para su registraci&oacute;n y haciendo clic  en el bot&oacute;n &ldquo;solicitar contrase&ntilde;a&rdquo;.</p><p align="left">Si no recuerda su Usuario o la direcci&oacute;n de E-Mail utilizada para su registraci&oacute;n, comun&iacute;quese con ......</p></td>
 							</tr>
 							<tr>
-								<td align="right" width="82">Usuario:</td>
+								<td width="82" align="right">Usuario:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="231" align="left"><html:text name="RequestPaswwordForm" property="username" styleClass="textfield_effect"/></td>
 							</tr>
@@ -54,14 +49,14 @@
 									<html:submit>
 										<bean:message key="requestPassword.request"/>
 									</html:submit>
-									<!--  a class="button" href="pedirnuevaclave_error.html"><span>Solicitar contase&ntilde;a</span></a -->
 								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3"><div id="centrador"><a class="button" href="login.jsp"><span>Volver al inicio</span></a></div></td>
+								<td colspan="2"></td>
+								<td><a class="button" href="login.jsp"><span>Volver al inicio</span></a></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->

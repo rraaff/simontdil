@@ -220,15 +220,12 @@ div#main {
 }
 
 #centrador {
-	text-align: center;
 	height: 25px;
 	margin-top: 0px;
 	margin-right: auto;
 	margin-bottom: 0px;
 	margin-left: auto;
 	position: relative;
-	padding-right: 0px;
-	padding-left: 120px;
 }
 /* ### Content ### */
 #content {
