@@ -56,8 +56,7 @@ if ( dw_scrollObj.isSupported() ) {
 		<tr>
 			<td align="center" valign="middle">
 			
-			<!-- MARCOS: Meteme un if else acá que maneje si tiene obs, sino -->
-			<!-- If tiene > ver linea:  -->
+			<logic:equal name="ViewVersion" property="hasObservations" value="true">
 				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 					<tr>
 						<td width="960" align="center" valign="top">
@@ -185,8 +184,10 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
+				</logic:equal>
+				<logic:equal name="ViewVersion" property="hasObservations" value="false">
 					<!-- Else no tiene -->
-					<!-- table width="400" height="300" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="400" height="300" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
 							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
 						</tr>
@@ -200,7 +201,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
-					-->
+				</logic:equal>
 				</td>
 			<tr>
 		</table>
