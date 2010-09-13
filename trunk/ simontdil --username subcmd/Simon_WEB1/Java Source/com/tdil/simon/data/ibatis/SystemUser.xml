@@ -125,13 +125,22 @@
 		and deleted = 0
   </select>
 
-	<select id="selectSystemUserCanSignCount" resultClass="java.lang.Integer"
-		parameterClass="int">
+	<select id="selectSystemUserCanSignCountTypeOne" resultClass="java.lang.Integer" parameterClass="int">
 		select count(1)
 		from SYSTEMUSER
-		where countryId = #value#
+		where countryId = #countryId#
 		and canSign = 1
 		and deleted = 0
+		and typeOne = 1
+  </select>
+  
+  	<select id="selectSystemUserCanSignCountTypeTwo" resultClass="java.lang.Integer" parameterClass="int">
+		select count(1)
+		from SYSTEMUSER
+		where countryId = #countryId#
+		and canSign = 1
+		and deleted = 0
+		and typeTwo = 1
   </select>
 
 	<select id="selectUserByUsername" parameterClass="java.lang.String"

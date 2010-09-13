@@ -16,6 +16,11 @@ import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 
+/**
+ * @deprecated
+ * @author mgodoy
+ *
+ */
 public class ModifyDelegateAction extends DelegateAction implements TransactionalAction {
 
 	private String id;
@@ -55,12 +60,12 @@ public class ModifyDelegateAction extends DelegateAction implements Transactiona
 		if (country == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
 		}
-		if (this.canSignBoolean && !toModify.isCanSign()) {
-			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-			if (canSignCount != 0) {
-				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-			}
-		}
+//		if (this.canSignBoolean && !toModify.isCanSign()) {
+//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
+//			if (canSignCount != 0) {
+//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
+//			}
+//		}
 		toModify.setName(this.name);
 		toModify.setEmail(this.email);
 		toModify.setCountryId(this.countryIdInt);

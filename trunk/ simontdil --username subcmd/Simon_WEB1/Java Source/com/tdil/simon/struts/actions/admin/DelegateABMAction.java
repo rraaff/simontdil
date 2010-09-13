@@ -10,16 +10,18 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
+import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
-import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
-public class DelegateABMAction extends SimonAction {
+public class DelegateABMAction extends ABMAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
@@ -46,12 +48,21 @@ public class DelegateABMAction extends SimonAction {
 					});
 				}
 				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							delegateABMForm.reactivate(imageSubmitData.getPosition());
-							delegateABMForm.init();
+					ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
+						public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
+							DelegateABMForm delegateABMForm = (DelegateABMForm)form;
+							ValidationError error = delegateABMForm.reactivate(imageSubmitData.getPosition());
+							if (error != null && error.hasError()) {
+								return error;
+							} else {
+								delegateABMForm.init();
+								return null;
+							}
 						}
-					});
+					}, delegateABMForm);
+					if (error != null && error.hasError()) {
+						return redirectToFailure(error, request, mapping);
+					}
 				}
 				return mapping.findForward("continue");
 			}
@@ -61,19 +72,7 @@ public class DelegateABMAction extends SimonAction {
 		}
 		if (delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.create"))
 				|| delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.modify"))) {
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					delegateABMForm.save();
-				}
-			});
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-				public void executeInTransaction() throws SQLException, ValidationException {
-					// TODO Auto-generated method stub
-					delegateABMForm.reset();
-					delegateABMForm.refreshUserList();
-				}
-			});
+			return this.validateAndSave(delegateABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");
 	}

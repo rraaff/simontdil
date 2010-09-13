@@ -1,7 +1,5 @@
 package com.tdil.simon.struts.actions.admin;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +16,8 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
-import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
-import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
