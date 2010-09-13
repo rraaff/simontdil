@@ -52,11 +52,10 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="920" height="340"><!-- corte tabla template -->
 						<table width="900" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="25" align="left"><bean:write name="CreateDocumentForm" property="title"/>
-									<bean:write name="CreateDocumentForm" property="versionNumber"/>
-									<bean:write name="CreateDocumentForm" property="versionName"/>
-									<bean:write name="CreateDocumentForm" property="limitObservationsDay"/>
-									<bean:write name="CreateDocumentForm" property="limitObservationsMonth"/></td>
+								<td height="25" align="left">Documento: <bean:write name="CreateDocumentForm" property="title"/> - 
+										V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
+									(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
+									Límite para realizar observaciones: <bean:write name="CreateDocumentForm" property="limitObservationsDay"/> / <bean:write name="CreateDocumentForm" property="limitObservationsMonth"/></td>
 							</tr>
 							<tr>
 								<td height="290" align="left" valign="top">

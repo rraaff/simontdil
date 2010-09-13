@@ -55,6 +55,9 @@ if ( dw_scrollObj.isSupported() ) {
 	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
+			
+			<!-- MARCOS: Meteme un if else acá que maneje si tiene obs, sino -->
+			<!-- If tiene > ver linea:  -->
 				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 					<tr>
 						<td width="960" align="center" valign="top">
@@ -118,9 +121,8 @@ if ( dw_scrollObj.isSupported() ) {
 																<bean:message key="listObservations.notNewParagraph" />
 															</logic:equal>
 															<logic:equal name="observation" property="addNewParagraph" value="true">
-																<bean:message key="listObservations.newParagraph" />
-															</logic:equal><br>
-														<!-- Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span>< --></td>
+																<span class="dataDinamica"><bean:message key="listObservations.newParagraph" /></span>
+															</logic:equal></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
@@ -141,9 +143,9 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													</logic:iterate>
-													<% if (lastParagraph == -1) { %>
-														<tr><td><bean:message key="listObservations.empty"/></td></tr>
-													<% } %>
+													<!-- % if (lastParagraph == -1) { % -->
+														<!-- tr><td><bean:message key="listObservations.empty"/></td></tr -->
+													<!-- % } % -->
 												</table>
 											<!-- corte tabla template -->
 											</div>
@@ -183,6 +185,22 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
+					<!-- Else no tiene -->
+					<!-- table width="400" height="300" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<html:form action="/viewVersionAction">
+									<html:submit property="operation">
+										<bean:message key="listObservations.back"/>
+									</html:submit>
+								</html:form >
+							</td>
+						</tr>
+					</table>
+					-->
 				</td>
 			<tr>
 		</table>

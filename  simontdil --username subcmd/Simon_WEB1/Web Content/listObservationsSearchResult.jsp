@@ -116,7 +116,7 @@ if ( dw_scrollObj.isSupported() ) {
 																<bean:message key="listObservations.notNewParagraph" />
 															</logic:equal>
 															<logic:equal name="observation" property="addNewParagraph" value="true">
-																<bean:message key="listObservations.newParagraph" />
+																<span class="dataDinamica"><bean:message key="listObservations.newParagraph" /></span>
 															</logic:equal><br>
 														<!-- Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>--></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
