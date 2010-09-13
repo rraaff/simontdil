@@ -55,7 +55,6 @@ if ( dw_scrollObj.isSupported() ) {
 	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
-			
 			<logic:equal name="ViewVersion" property="hasObservations" value="true">
 				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 					<tr>
@@ -186,8 +185,7 @@ if ( dw_scrollObj.isSupported() ) {
 					</table>
 				</logic:equal>
 				<logic:equal name="ViewVersion" property="hasObservations" value="false">
-					<!-- Else no tiene -->
-					<table width="400" height="300" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="400" height="120" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
 							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
 						</tr>
