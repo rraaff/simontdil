@@ -84,7 +84,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:select name="DelegateABM" property="countryId" styleClass="textfield_effect_month">
 																<html:optionsCollection name="DelegateABM" property="allCountries" value="id" label="name"/>
-															</html:select><html:errors property="xxx" /></td>
+															</html:select></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

@@ -20,6 +20,8 @@ public interface ValidationErrors {
 	
 	String EMAIL_FAILED = "EMAIL_FAILED";
 	
+	String SELECT_USER_TYPE = "SELECT_USER_TYPE";
+	
 	// New password and retype password are different
 	String PASSWORD_NOT_EQUALS = "PASSWORD_NOT_EQUALS";
 	

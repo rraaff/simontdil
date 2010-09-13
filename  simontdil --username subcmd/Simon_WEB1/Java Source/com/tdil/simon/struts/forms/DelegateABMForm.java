@@ -7,12 +7,9 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.actions.validations.CategoryValidation;
 import com.tdil.simon.actions.validations.SystemUserValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
@@ -252,7 +249,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			validationError.setFieldError("delegate.username", "delegate.username." + ValidationErrors.USER_ALREADY_EXISTS);
 		}
 		if (this.isCanSign()) {
-			// TODO esto deberia ser por tipo
 			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()), this.isTypeOne(), this.isTypeTwo());
 			if (canSignCount != 0) {
 				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);

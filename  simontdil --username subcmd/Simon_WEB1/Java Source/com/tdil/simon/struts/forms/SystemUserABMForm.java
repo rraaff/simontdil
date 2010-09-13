@@ -10,6 +10,10 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.SystemUserValidation;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
@@ -18,7 +22,7 @@ import com.tdil.simon.data.valueobjects.UserVO;
 import com.tdil.simon.utils.EmailUtils;
 import com.tdil.simon.utils.LoggerProvider;
 
-public class SystemUserABMForm extends ActionForm {
+public class SystemUserABMForm extends TransactionalValidationForm implements ABMForm {
 
 	private static final long serialVersionUID = 4257776435738129693L;
 	private String operation;
@@ -84,21 +88,6 @@ public class SystemUserABMForm extends ActionForm {
 	
 	private void modifyUser() throws SQLException {
 		SystemUser toModify = SystemUserDAO.getUser(this.id);
-//		if (toModify == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_DOES_NOT_EXISTS));
-//		}
-//		if (!toModify.isDelegate()) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_DOES_NOT_EXISTS));
-//		}
-//		if (country == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
-//		}
-//		if (this.canSignBoolean && !toModify.isCanSign()) {
-//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-//			if (canSignCount != 0) {
-//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-//			}
-//		}
 		toModify.setName(this.name);
 		toModify.setEmail(this.email);
 		toModify.setAdministrator(this.isAdministrator());
@@ -107,19 +96,6 @@ public class SystemUserABMForm extends ActionForm {
 		SystemUserDAO.updateUser(toModify);
 	}
 	private void addUser() throws SQLException {
-		SystemUser exists = SystemUserDAO.getUser(this.username);
-//		if (exists != null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_ALREADY_EXISTS));
-//		}
-//		if (country == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
-//		}
-//		if (this.isCanSign()) {
-//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-//			if (canSignCount != 0) {
-//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-//			}
-//		}
 		String generatedPassword = SystemUser.generateRandomPassword();
 		SystemUser user = new SystemUser();
 		user.setUsername(this.username);
@@ -184,7 +160,6 @@ public class SystemUserABMForm extends ActionForm {
 	
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-//		super.reset(mapping, request);
 		this.administrator = false;
 		this.moderator = false;
 		this.designer = false;
@@ -223,5 +198,26 @@ public class SystemUserABMForm extends ActionForm {
 	}
 	public void setHost(Country host) {
 		this.host = host;
+	}
+	
+	@Override
+	public ValidationError basicValidate() {
+		ValidationError validation = new ValidationError();
+		SystemUserValidation.validateUsername(this.username, "systemuser.username", validation);
+		SystemUserValidation.validateName(this.name, "systemuser.name", validation);
+		SystemUserValidation.validateEmail(this.email, "systemuser.email", validation);
+		if(!this.isAdministrator() && !this.isModerator() && !this.isDesigner()) {
+			validation.setFieldError("systemuser.administrator", "systemuser.administrator." + ValidationErrors.SELECT_USER_TYPE);
+
+		}
+		return validation;
+	}
+	
+	@Override
+	public void validateInTransaction(ValidationError validationError) throws SQLException {
+		SystemUser exists = SystemUserDAO.getUser(this.username);
+		if (exists != null && exists.getId() != this.getId()) {
+			validationError.setFieldError("systemuser.username", "systemuser.username." + ValidationErrors.USER_ALREADY_EXISTS);
+		}
 	}
 }

@@ -61,7 +61,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td width="143" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="200" align="left"><html:text name="SystemUserABM" property="name" /></td>
+								<td width="200" align="left"><html:text name="SystemUserABM" property="name" /><html:errors property="systemuser.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -75,7 +75,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</logic:equal>
 									<logic:notEqual name="SystemUserABM" property="id" value="0">
 										<html:text name="SystemUserABM" property="username" disabled="true"/>
-									</logic:notEqual></td>
+									</logic:notEqual><html:errors property="systemuser.username" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -83,13 +83,13 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">E-Mail:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="SystemUserABM" property="email"/></td>
+								<td align="left"><html:text name="SystemUserABM" property="email"/><html:errors property="systemuser.email" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/></td>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/><html:errors property="systemuser.administrator" /></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">Administrador</td>
 							</tr>
