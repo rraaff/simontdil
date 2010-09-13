@@ -178,6 +178,10 @@ public class ViewVersionForm extends ActionForm {
 	public List getObservations() {
 		return observations;
 	}
+	
+	public boolean getHasObservations() {
+		return this.getObservations() != null && this.getObservations().size() > 0;
+	}
 
 	public void setObservations(List observations) {
 		for (Object observationVO : observations) {
