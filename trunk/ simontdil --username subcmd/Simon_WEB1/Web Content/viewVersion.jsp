@@ -181,13 +181,13 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
 								<td colspan="3" align="center"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
 							</tr>
 							<tr>
-								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
+								<td colspan="3"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<%if (isModerator) { %>
 							<tr>
