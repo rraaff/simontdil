@@ -30,7 +30,7 @@ public class SearchObservationsForm extends ActionForm {
 
 	private String countryId;
 
-	private String exactDate;
+	private String exactDate = "range";
 
 	private String exactDay;
 	private String exactMonth;

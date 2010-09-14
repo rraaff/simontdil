@@ -6,6 +6,7 @@ public class SignatureVO extends Signature {
 
 	private String delegateName;
 	private String countryDescription;
+	private int countryId;
 	private String job;
 	
 	public String getDelegateName() {
@@ -25,6 +26,12 @@ public class SignatureVO extends Signature {
 	}
 	public void setJob(String job) {
 		this.job = job;
+	}
+	public int getCountryId() {
+		return countryId;
+	}
+	public void setCountryId(int countryId) {
+		this.countryId = countryId;
 	}
 	
 }

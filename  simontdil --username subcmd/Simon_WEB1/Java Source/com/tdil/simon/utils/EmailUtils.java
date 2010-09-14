@@ -11,13 +11,13 @@ public class EmailUtils {
 		body = body.replace("{FULLNAME}", fullName);
 		body = body.replace("{USERNAME}", username);
 		body = body.replace("{PASSWORD}", password);
-		new SendMail(SystemConfig.getMailServer()).sendCustomizedPlainTextMail(SystemConfig.getMailFromForNewPassword(), email, SystemConfig.getMailSubjectForNewPassword(), body);
+		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewPassword(), email, SystemConfig.getMailSubjectForNewPassword(), body);
 	}
 	
 	public static void sendAdminEmailUserRequestPasswordReset(String fullName, String username) throws MessagingException {
 		String body = SystemConfig.getMailBodyForPasswordReset();
 		body = body.replace("{FULLNAME}", fullName);
 		body = body.replace("{USERNAME}", username);		
-		new SendMail(SystemConfig.getMailServer()).sendCustomizedPlainTextMail(SystemConfig.getMailFromForPasswordReset(), SystemConfig.getMailToForPasswordReset(), SystemConfig.getMailSubjectForPasswordReset(), body);
+		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForPasswordReset(), SystemConfig.getMailToForPasswordReset(), SystemConfig.getMailSubjectForPasswordReset(), body);
 	}
 }

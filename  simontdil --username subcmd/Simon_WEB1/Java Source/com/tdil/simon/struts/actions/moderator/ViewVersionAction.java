@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -31,6 +32,7 @@ import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.struts.forms.ViewVersionForm;
+import com.tdil.simon.utils.LoggerProvider;
 
 public class ViewVersionAction extends SimonAction implements TransactionalActionWithValue {
 
@@ -79,23 +81,19 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			final OutputStream outputStream = response.getOutputStream();
 			response.setContentType("application/pdf");
 			VersionVO version = viewForm.getVersion();
-			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "_" + version.getVersion().getNumber() + ".pdf");
+			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + ".pdf");
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 					public void executeInTransaction() throws SQLException, ValidationException {
 						try {
 							ExportVersionAsPDF.exportDocument(viewForm.getUser(), viewForm.getVersion(), outputStream);
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							getLog().error(e.getMessage(), e);
 						} catch (ParserConfigurationException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							getLog().error(e.getMessage(), e);
 						} catch (DocumentException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							getLog().error(e.getMessage(), e);
 						} catch (SAXException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							getLog().error(e.getMessage(), e);
 						}
 					}
 				}	
@@ -118,6 +116,10 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("listObservations");
 		}
 		return mapping.findForward("continue");
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(ViewVersionAction.class);
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {

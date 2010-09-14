@@ -115,12 +115,15 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 		List<SignatureVO> all = SignatureDAO.selectSignaturesFor(version.getId());
 		List<String> delegates = new ArrayList<String>(all.size());
 		List<String> fileNames = new ArrayList<String>(all.size());
+		List<String> flags = new ArrayList<String>(all.size());
 		for (SignatureVO signatureVO : all) {
 			delegates.add(signatureVO.getDelegateName());
 			fileNames.add(signatureVO.getSignatureFileName());
+			flags.add(String.valueOf(signatureVO.getCountryId()));
 		}
 		result.put("delegates", delegates.toArray(new String[0]));
 		result.put("fileNames", fileNames.toArray(new String[0]));
+		result.put("flags", flags.toArray(new String[0]));
 	}
 
 }

@@ -17,6 +17,7 @@ import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
@@ -30,6 +31,10 @@ public class DelegateNegotiationForm extends ActionForm {
 
 	private SystemUser user;
 	private VersionVO versionVO;
+	
+	private Version negotiated;
+	public List<Paragraph> paragraphs;
+	
 	private HttpServletRequest request;
 	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 	private boolean goToSignShow;
@@ -53,6 +58,8 @@ public class DelegateNegotiationForm extends ActionForm {
 			versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(version.getId()));
 		}
 		setVersionVO(versionVO);
+		setNegotiated(VersionDAO.getVersionForNegotiation(version.getDocumentId()));
+		setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(getNegotiated().getId()));
 		if (Version.IN_SIGN.equals(version.getStatus())) {
 			if (!user.isCanSign()) {
 				goToSignShow = true;
@@ -134,6 +141,22 @@ public class DelegateNegotiationForm extends ActionForm {
 
 	public void setGoToSignShow(boolean goToSignShow) {
 		this.goToSignShow = goToSignShow;
+	}
+
+	public Version getNegotiated() {
+		return negotiated;
+	}
+
+	public void setNegotiated(Version negotiated) {
+		this.negotiated = negotiated;
+	}
+
+	public List<Paragraph> getParagraphs() {
+		return paragraphs;
+	}
+
+	public void setParagraphs(List<Paragraph> paragraphs) {
+		this.paragraphs = paragraphs;
 	}
 	
 }

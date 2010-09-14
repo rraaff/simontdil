@@ -8,7 +8,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -18,7 +17,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.w3c.dom.Document;
 import org.w3c.tidy.Tidy;
-import org.xhtmlrenderer.css.parser.property.PrimitivePropertyBuilders.FontSize;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 import org.xml.sax.SAXException;
 
@@ -26,10 +24,8 @@ import com.lowagie.text.DocumentException;
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
-import com.tdil.simon.data.model.DelegateAudit;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
-import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
