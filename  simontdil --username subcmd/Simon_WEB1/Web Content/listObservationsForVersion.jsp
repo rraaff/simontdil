@@ -51,7 +51,7 @@ if ( dw_scrollObj.isSupported() ) {
 <%@ include file="includes/footer.jsp" %>
 <div id="outerdiv">
 	<div id="innerdiv"></div>
-	<div id="contetTableComment">
+	<div id="contentTableComment">
 	<table width="980" height="597" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">

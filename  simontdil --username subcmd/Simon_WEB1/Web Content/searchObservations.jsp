@@ -21,7 +21,7 @@
 <html:form method="POST" action="/searchObservations">
 <div id="outerdiv">
 	<div id="innerdiv"></div>
-	<div id="contetTableComment">
+	<div id="contentTableComment">
 		<table height="582" align="center" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center" valign="middle">

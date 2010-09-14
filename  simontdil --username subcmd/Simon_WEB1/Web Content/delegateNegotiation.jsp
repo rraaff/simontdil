@@ -291,7 +291,7 @@ if ( dw_scrollObj.isSupported() ) {
 	<% } %>
 	<div id="outerdiv" style="display: <%=(isDelegate && isSign && user.isCanSign()) ? "block" : "none"%>;">
 		<div id="innerdiv"></div>
-		<div id="contetTableComment">
+		<div id="contentTableComment">
 			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td align="center" valign="middle">
@@ -341,7 +341,7 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="addCommentLayer" style="display: none;">
 	<!-- div id="innerdiv" -->
 		<div id="innerdiv"></div>
-		<div id="contetTableComment">
+		<div id="contentTableComment">
 		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center" valign="middle">

@@ -247,7 +247,7 @@ div#main {
 	margin-left: auto;
 	overflow: scroll;
 	position: relative;
-	background-color: #EEEEEE;
+	background-color: #F8F8F8;
 }
 
 #content #previewDocumento {
@@ -257,7 +257,7 @@ div#main {
 	margin-left: auto;
 	overflow: scroll;
 	position: relative;
-	background-color: #EEEEEE;
+	background-color: #F8F8F8;
 }
 #portaTabla  {
 	height: 290px;
@@ -623,7 +623,7 @@ tr.d1 td {
 }
 #innerdiv {position:absolute; width:980px; height:597px; background:#006699; }
 #innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
-#contetTableComment {
+#contentTableComment {
 	position:relative;
 	background:transparent;
 	clip: rect(0px,0px,0px,0px);
