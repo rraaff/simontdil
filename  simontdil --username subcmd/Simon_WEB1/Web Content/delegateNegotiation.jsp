@@ -181,9 +181,6 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20" id="imgReferencia" name="imgReferencia"></td>
-	</tr>
-	<tr>
 		<td width="528" valign="top">
 			<!-- inicio tabla template -->
 			<table width="528" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -282,9 +279,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="5" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
 </div>
