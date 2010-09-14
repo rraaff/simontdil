@@ -91,9 +91,6 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
 		<td width="294" valign="top">
 			<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -168,7 +165,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="274"><!-- corte tabla template -->
 						<table width="274" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td align="right" width="50" height="30"><span style="font-size: 10px;">Anteriores:</span></td>
@@ -187,7 +184,13 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="98"><img src="images/null.gif" width="1" height="98"></td>
+								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
+							</tr>
+							<tr>
+								<td colspan="3" align="center"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="80"><img src="images/null.gif" width="1" height="80"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -272,9 +275,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
 </div>

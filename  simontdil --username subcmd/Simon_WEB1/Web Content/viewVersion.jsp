@@ -183,6 +183,12 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
+							<tr>
+								<td colspan="3" align="center"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
+							</tr>
+							<tr>
+								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
+							</tr>
 							<%if (isModerator) { %>
 							<tr>
 								<td colspan="3" align="center" valign="middle">
@@ -218,12 +224,6 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="3"><img src="images/null.gif" width="1" height="3"></td>
 							</tr>
 							<% if (isDelegate) { %>
-							<tr>
-								<td colspan="3" align="center"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
-							</tr>
-							<tr>
-								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
-							</tr>
 							<tr>
 								<td colspan="3" align="center">
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
