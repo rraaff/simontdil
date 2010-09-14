@@ -52,7 +52,7 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="outerdiv">
 	<div id="innerdiv"></div>
 	<div id="contetTableComment">
-	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+	<table width="980" height="597" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
 			<logic:equal name="ViewVersion" property="hasObservations" value="true">
@@ -141,9 +141,6 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													</logic:iterate>
-													<!-- % if (lastParagraph == -1) { % -->
-														<!-- tr><td><bean:message key="listObservations.empty"/></td></tr -->
-													<!-- % } % -->
 												</table>
 											<!-- corte tabla template -->
 											</div>
