@@ -29,6 +29,8 @@ public class SystemConfig implements ServletContextListener {
 	private static String newPasswordBody;
 	private static String passwordResetBody;
 	
+	private static String newVersionBody;
+	private static String newObservationBody;
 	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(SystemConfig.class);
@@ -72,6 +74,8 @@ public class SystemConfig implements ServletContextListener {
 			properties.load(fileInputStream);
 			newPasswordBody = loadEmailBody(properties, "newpassword.body");
 			passwordResetBody = loadEmailBody(properties, "passworreset.body");
+			newVersionBody = loadEmailBody(properties, "newversion.body");
+			newObservationBody = loadEmailBody(properties, "newobservation.body");
 		} finally {
 			if (fileInputStream != null) {
 				fileInputStream.close();
@@ -156,5 +160,29 @@ public class SystemConfig implements ServletContextListener {
 	
 	public static String getSignatureStore() {
 		return properties.getProperty("store.signatures");
+	}
+	
+	public static String getMailFromForNewVersion() {
+		return properties.getProperty("newversion.from");
+	}
+	
+	public static String getMailSubjectForNewVersion() {
+		return properties.getProperty("newversion.subject");
+	}
+	
+	public static String getMailBodyForNewVersion() {
+		return newVersionBody;
+	}
+	
+	public static String getMailFromForNewObservation() {
+		return properties.getProperty("newobservation.from");
+	}
+	
+	public static String getMailSubjectForNewObservation() {
+		return properties.getProperty("newobservation.subject");
+	}
+	
+	public static String getMailBodyForNewObservation() {
+		return newObservationBody;
 	}
 }

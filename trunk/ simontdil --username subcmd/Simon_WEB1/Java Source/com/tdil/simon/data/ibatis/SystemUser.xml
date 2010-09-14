@@ -151,6 +151,33 @@
 		where username = #username#
 		and deleted = 0
   </select>
+  
+  <select id="selectNotDeletedDelegateUsersTypeOne" resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where delegate = 1
+		and typeOne = 1
+		and deleted = 0
+  </select>
+  
+  <select id="selectNotDeletedDelegateUsersTypeTwo" resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where delegate = 1
+		and typeTwo = 1
+		and deleted = 0
+  </select>
+
+  <select id="selectNotDeletedModerators" resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where moderator = 1
+		and deleted = 0
+  </select>  
+  
 
 	<select id="selectUserByUsernameForLogin" parameterClass="java.lang.String"
 		resultClass="SystemUser">
