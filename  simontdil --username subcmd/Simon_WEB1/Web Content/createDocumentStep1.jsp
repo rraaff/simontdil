@@ -7,14 +7,10 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 <html:html>
-		<html:errors property="general" />
-		<html:form method="POST" action="/createDocumentActionStep2">
-		
+<html:errors property="general" />
+<html:form method="POST" action="/createDocumentActionStep2">
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
 	<tr>
 		<td width="960">
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
@@ -84,13 +80,10 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="3" align="center">
 									<html:submit property="operation">
 										<bean:message key="createDocument.next"/>
-									</html:submit>
-									<!--  div id="centrador" style="padding-left:120px;"><a class="button" href="pedirnuevaclave_error.html"><span>Siguiente (Introducci&oacute;n)</span></a>
-									<a class="button" href="moderatorHome.jsp"><span>Cancelar</span></a></div -->
-								</td>
+									</html:submit></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template --></td>
@@ -105,11 +98,8 @@
 			</table>
 		</td>
 	</tr>
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
 </table>
 </div>
-		</html:form>
+</html:form>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

@@ -16,16 +16,13 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td height="10"><img src="images/null.gif" width="1" height="10"></td>
-	</tr>
-	<tr>
 		<td width="940">
 			<!-- inicio tabla template -->
 			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="920" height="19" align="left"><div id="blockTitle">Estadísticas</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Estadísticas</div></td>
+					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
@@ -38,7 +35,7 @@
 									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>
 								<tr>
-									<td width="60" height="20" align="left">Fecha</td>
+									<td width="80" height="20" align="left">Fecha</td>
 									<td width="200" align="left">Acciones</td>
 									<td align="left" colspan="<bean:write name="StatisticsForm" property="countryCount"/>">Delegaciones</td>
 								</tr>
@@ -46,7 +43,7 @@
 									<td height="20" bgcolor="#E6E6E6"><img src="images/null.gif" width="60" height="1"></td>
 									<td bgcolor="#E6E6E6"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:iterate name="StatisticsForm" property="statisticsVO.allCountries" id="countryIter"> 
-										<td width="80" align="left" bgcolor="#E6E6E6"><img src="images/null.gif" width="80" height="1"><bean:write name="countryIter" property="name" /></td>
+										<td width="80" align="left" bgcolor="#E6E6E6"><bean:write name="countryIter" property="name" /></td>
 									</logic:iterate>
 								</tr>
 								<tr>
@@ -107,9 +104,6 @@
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 </table>
 </div>

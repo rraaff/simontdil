@@ -39,9 +39,6 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
-	</tr>
-	<tr>
 		<td width="370">
 			<!-- inicio tabla template -->
 			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -56,26 +53,27 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="350" height="290"><!-- corte tabla template -->
 						<table width="350" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="143" align="right">Nombre:</td>
+								<td width="163" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="250" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/><html:errors property="country.name" /></td>
+								<td colspan="2" width="230" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/><html:errors property="country.name" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="93" align="right">Elegir archivo:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="250" align="left"><html:file property="flag"/><html:errors property="country.flag" /></td>
+								<td align="right">Seleccionar im&aacute;gen:</td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:file property="flag"/></td>
+								<td><html:errors property="country.flag" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
+								<td colspan="4" height="30"><img src="images/null.gif" width="1" height="30"></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25" align="center">
+								<td colspan="4" height="25" align="center">
 									<logic:equal name="CountryABMForm" property="id" value="0">
 										<html:submit property="operation">
 											<bean:message key="countryABM.create"/>
@@ -94,7 +92,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="16"><img src="images/null.gif" width="1" height="16"></td>
+								<td colspan="4" height="16"><img src="images/null.gif" width="1" height="16"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -178,9 +176,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 </table>
 </div>

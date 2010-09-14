@@ -196,11 +196,10 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="478" height="284" align="left" valign="top">
-					<!-- PABLO: intro -->
-					<bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" />
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
+								<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 								<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
 									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 								</logic:iterate>
