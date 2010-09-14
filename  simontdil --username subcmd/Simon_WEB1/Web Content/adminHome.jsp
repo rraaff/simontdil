@@ -9,22 +9,15 @@
 
 <html:html>
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="330" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
-		<td width="294" height="300">
+		<td width="294" valign="middle">
 			<!-- inicio tabla template -->
 			Usuario T&eacute;cnico: seleccione una actividad del men&uacute;.
 			<!-- fin tabla template -->
 		</td>
 	</tr>
-	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
 </table>
 </div>
 </html:html>
-
 <%@ include file="includes/footer.jsp" %>
