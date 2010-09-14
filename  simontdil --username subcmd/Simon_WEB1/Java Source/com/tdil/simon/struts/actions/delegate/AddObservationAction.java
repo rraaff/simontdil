@@ -21,6 +21,7 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.ObservationForm;
+import com.tdil.simon.utils.EmailUtils;
 
 public class AddObservationAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
@@ -46,6 +47,7 @@ public class AddObservationAction extends AjaxSimonAction implements Transaction
 		observationForm.setUser(this.getLoggedUser(request));
 		// TODO Try catch y devolver error
 		HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, observationForm);
+		EmailUtils.sendNewObservationEmail(observationForm);
 		this.writeJsonResponse(result, response);
 		return null;
 	}

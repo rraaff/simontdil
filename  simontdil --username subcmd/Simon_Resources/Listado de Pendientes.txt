@@ -1,3 +1,11 @@
+- Probar envio de emails
+
+- Agregar replacement de server para todos los emails
+
+- Agregar replacements a new observation y new version
+
+******************************************************
+
 - El scroll en la pagina signatureShow rompio la actualizacion automatica
 
 X Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT

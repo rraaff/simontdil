@@ -1,6 +1,7 @@
 package com.tdil.simon.data.ibatis;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,20 @@ public class SystemUserDAO {
 			count = count + (Integer) IBatisManager.sqlMapper.queryForObject("selectSystemUserCanSignCountTypeTwo", countryId);
 		}
 		return count;
+	}
+	
+	public static List selectDelegateUsers(boolean typeOne, boolean typeTwo) throws SQLException {
+		if (typeOne) {
+			return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersTypeOne");
+		}
+		if (typeTwo) {
+			return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersTypeTwo");
+		}
+		return new ArrayList();
+	}
+	
+	public static List selectModerators() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedModerators");
 	}
 
 	public static SystemUser getUser(int id) throws SQLException {

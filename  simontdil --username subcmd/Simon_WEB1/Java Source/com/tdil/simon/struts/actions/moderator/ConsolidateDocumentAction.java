@@ -12,6 +12,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.EmailUtils;
 
 public class ConsolidateDocumentAction extends SimonAction {
 
@@ -38,6 +39,8 @@ public class ConsolidateDocumentAction extends SimonAction {
 			} else {
 				createDocumentForm.setConsolidated(true);
 				createDocumentForm.save();
+				
+				EmailUtils.sendNewConsolidatedVersionEmail(this.getLoggedUser(request), createDocumentForm);
 				return mapping.findForward("save");
 			}
 		}
