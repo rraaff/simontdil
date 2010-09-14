@@ -91,15 +91,17 @@ if ( dw_scrollObj.isSupported() ) {
 					<br>
 					<div id="main">
 						<div id="lyr1" style="background-color:#FFFFFF">
+							<!-- PABLO: intro -->
+							<bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" />
 							<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
-								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write name="paragraph" property="paragraphText" /></p>
+								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
 							<table id="signTable" border="0" cellspacing="0" cellpadding="0">
 								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
 								<tr>
-									<td>INSERTAR BANDERITA</td>
+									<td><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
 								</tr>
 								<tr> 
 									<td align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
@@ -144,12 +146,19 @@ if ( dw_scrollObj.isSupported() ) {
 													var myTable = document.getElementById("signTable");
 													var tBody = myTable.getElementsByTagName("TBODY")[0];
 													var newTR = document.createElement('tr');
-													var dateTD = document.createElement('td');
-													dateTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
-													dateTD.className = "BorderRigth";
-													dateTD.width = "100";
-													dateTD.align="center";
-													newTR.appendChild (dateTD);
+													var flagTD = document.createElement('td');
+													flagTD.innerHTML = '<img width="200" height="110" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
+													flagTD.align="center";
+													newTR.appendChild (flagTD);
+													tBody.appendChild(newTR);
+													
+													newTR = document.createElement('tr');
+													var signTD = document.createElement('td');
+													signTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
+													signTD.className = "BorderRigth";
+													signTD.width = "100";
+													signTD.align="center";
+													newTR.appendChild (signTD);
 													tBody.appendChild(newTR);
 													
 													newTR = document.createElement('tr');

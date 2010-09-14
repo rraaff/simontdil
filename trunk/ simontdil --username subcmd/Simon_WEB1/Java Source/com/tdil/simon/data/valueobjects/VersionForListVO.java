@@ -7,6 +7,7 @@ public class VersionForListVO extends Version {
 
 	private String documentTitle;
 	private int observationCount;
+	private int newParagraphCount;
 	
 	public String getDocumentTitle() {
 		return documentTitle;
@@ -38,6 +39,20 @@ public class VersionForListVO extends Version {
 			return "-";
 		} else {
 			return String.valueOf(this.getObservationCount());
+		}
+	}
+	public int getNewParagraphCount() {
+		return newParagraphCount;
+	}
+	public void setNewParagraphCount(int newParagraphCount) {
+		this.newParagraphCount = newParagraphCount;
+	}
+	
+	public String getNewParagraphCountText() {
+		if (this.getNewParagraphCount() == 0) {
+			return "-";
+		} else {
+			return String.valueOf(this.getNewParagraphCount());
 		}
 	}
 }

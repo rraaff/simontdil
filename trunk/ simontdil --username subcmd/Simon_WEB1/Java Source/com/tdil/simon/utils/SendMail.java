@@ -255,6 +255,15 @@ public class SendMail {
 
 		this.sendCustomizedMail(from, toList, null, null, subject, false, body, null, null);
 	}
+	
+	public void sendCustomizedHtmlMail(String from, String to, String subject, String body)
+		throws MessagingException {
+	
+		ArrayList toList = new java.util.ArrayList();
+		toList.add(new InternetAddress(to));
+		
+		this.sendCustomizedMail(from, toList, null, null, subject, true, body, null, null);
+	}
 
 	/**
 	 * Sends mail using a file as body text

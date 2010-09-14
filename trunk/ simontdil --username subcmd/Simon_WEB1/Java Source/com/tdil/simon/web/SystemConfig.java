@@ -9,6 +9,7 @@ import java.util.Properties;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -24,6 +25,9 @@ public class SystemConfig implements ServletContextListener {
 	private static String publicPath;
 	private static String referencedDocPath;
 	private static String privateTemporaryPath;
+	
+	private static String newPasswordBody;
+	private static String passwordResetBody;
 	
 	
 	private static Logger getLog() {
@@ -66,6 +70,8 @@ public class SystemConfig implements ServletContextListener {
 			fileInputStream = new FileInputStream(System.getProperty(propertyLocation));
 			properties = new Properties();
 			properties.load(fileInputStream);
+			newPasswordBody = loadEmailBody(properties, "newpassword.body");
+			passwordResetBody = loadEmailBody(properties, "passworreset.body");
 		} finally {
 			if (fileInputStream != null) {
 				fileInputStream.close();
@@ -73,6 +79,25 @@ public class SystemConfig implements ServletContextListener {
 		}
 	}
 	
+	private static String loadEmailBody(Properties properties2, String key) {
+		FileInputStream fileInputStream = null;
+		try {
+			fileInputStream = new FileInputStream(properties2.getProperty(key));
+			return IOUtils.toString(fileInputStream);
+		} catch (IOException e) {
+			getLog().error(e.getMessage(), e);
+		} finally {
+			try {
+				if (fileInputStream != null) {
+					fileInputStream.close();
+				}
+			} catch (IOException e) {
+				getLog().error(e.getMessage(), e);
+			}
+		}
+		return "";
+	}
+
 	public static String getClientStatusRefreshTime() {
 		return properties.getProperty("client.refreshTime.status");
 	}
@@ -102,7 +127,7 @@ public class SystemConfig implements ServletContextListener {
 	}
 	
 	public static String getMailBodyForNewPassword() {
-		return "Hola {FULLNAME}, tu usuario de acceso a simon es {USERNAME} y tu clave es {PASSWORD}.";
+		return newPasswordBody;
 	}
 	
 	public static String getMailFromForPasswordReset() {
@@ -118,7 +143,7 @@ public class SystemConfig implements ServletContextListener {
 	}
 	
 	public static String getMailBodyForPasswordReset() {
-		return properties.getProperty("passworreset.body");
+		return passwordResetBody;
 	}
 	
 	public static String getFlagStore() {

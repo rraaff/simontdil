@@ -93,7 +93,12 @@
     (SELECT count(1) 
     	FROM Observation 
     	WHERE Observation.privateObservation = 0 
-    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount
+    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount,
+    (SELECT count(1) 
+    	FROM Observation 
+    	WHERE Observation.privateObservation = 0 
+    	AND Observation.addNewParagraph = 1
+    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as newParagraphCount
    	from VERSION, Document
    	WHERE VERSION.documentId = Document.id
    	order by Document.title, Version.number DESC

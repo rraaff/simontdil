@@ -172,8 +172,13 @@ if ( dw_scrollObj.isSupported() ) {
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="217" align="left" valign="middle">
 									<div id="portaVersiones">
-									<logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion">
-										<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+									<logic:iterate name="ViewVersion" property="version.reducedVersions" id="otherVersion">
+										<logic:equal name="otherVersion" property="current" value="true">
+											<b><bean:write name="otherVersion" property="number" /></b>
+										</logic:equal>
+										<logic:notEqual name="otherVersion" property="current" value="true">
+											<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+										</logic:notEqual>
 									</logic:iterate>
 									</div>
 								</td>
@@ -348,6 +353,8 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="578" height="284" align="left" valign="top">
+					<!-- PABLO: intro -->
+					<bean:write name="ViewVersion" property="version.document.introduction" />
 					<!-- corte tabla template -->
 					<div id="main">
 						<div id="lyr1">

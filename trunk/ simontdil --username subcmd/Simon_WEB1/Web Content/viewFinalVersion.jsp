@@ -88,7 +88,6 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isModerator) { %>
 	<%@ include file="includes/menu.jsp" %>
 <% } %>
-FInal final final
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -173,8 +172,13 @@ FInal final final
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="217" align="left" valign="middle">
 									<div id="portaVersiones">
-									<logic:iterate name="ViewVersion" property="version.allVersions" id="otherVersion">
-										<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+									<logic:iterate name="ViewVersion" property="version.reducedVersions" id="otherVersion">
+										<logic:equal name="otherVersion" property="current" value="true">
+											<b><bean:write name="otherVersion" property="number" /></b>
+										</logic:equal>
+										<logic:notEqual name="otherVersion" property="current" value="true">
+											<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+										</logic:notEqual>
 									</logic:iterate>
 									</div>
 								</td>

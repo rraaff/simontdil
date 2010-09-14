@@ -12,10 +12,11 @@
   <!-- Select with no parameters. -->
  
  <select id="selectSignaturesForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.SignatureVO">
-    select Signature.*, SystemUser.name as delegateName, SystemUser.countryDesc as countryDescription, SystemUser.job as job
-    from Signature, SystemUser
+    select Signature.*, SystemUser.name as delegateName, Country.name as countryDescription, Country.id as countryId, SystemUser.job as job
+    from Signature, SystemUser, Country
     where Signature.versionId = #id#
     AND Signature.userId = SystemUser.id
+    AND SystemUser.countryId = Country.id
   </select>
  
     <select id="getSignatureByVersionIdAndUserId" parameterClass="Signature">

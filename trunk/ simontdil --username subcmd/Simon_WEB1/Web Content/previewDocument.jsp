@@ -56,6 +56,9 @@ if ( dw_scrollObj.isSupported() ) {
 										V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
 									(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
 									Límite para realizar observaciones: <bean:write name="CreateDocumentForm" property="limitObservationsDay"/> / <bean:write name="CreateDocumentForm" property="limitObservationsMonth"/></td>
+							
+									<!-- PABLO: intro -->
+									<bean:write name="CreateDocumentForm" property="introduction"/>
 							</tr>
 							<tr>
 								<td height="290" align="left" valign="top">
