@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:500px;
+	width:550px;
 	height:290px;
 	font-size: 10px;
 }
@@ -39,29 +39,27 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
-	</tr>
-	<tr>
-		<td width="370">
+		<td width="320">
 			<!-- inicio tabla template -->
-			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="320" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="350" height="19" align="left"><div id="blockTitle">Editar usuarios del sistema</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="300" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar usuarios del sistema</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="144"><!-- corte tabla template -->
-						<table width="350" border="0" cellspacing="0" cellpadding="0">
+					<td width="300" height="144">
+						<!-- corte tabla template -->
+						<table width="300" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="40"><img src="images/null.gif" width="1" height="40"></td>
 							</tr>
 							<tr>
-								<td width="143" align="right">Nombre:</td>
+								<td width="133" align="right">Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="200" align="left"><html:text name="SystemUserABM" property="name" /><html:errors property="systemuser.name" /></td>
+								<td width="160" align="left"><html:text name="SystemUserABM" property="name" /> <html:errors property="systemuser.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -69,11 +67,9 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">Nombre de Usuario:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">
-									<logic:equal name="SystemUserABM" property="id" value="0">
+								<td align="left"><logic:equal name="SystemUserABM" property="id" value="0">
 										<html:text name="SystemUserABM" property="username"/>
-									</logic:equal>
-									<logic:notEqual name="SystemUserABM" property="id" value="0">
+									</logic:equal><logic:notEqual name="SystemUserABM" property="id" value="0">
 										<html:text name="SystemUserABM" property="username" disabled="true"/>
 									</logic:notEqual><html:errors property="systemuser.username" /></td>
 							</tr>
@@ -83,25 +79,25 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right">E-Mail:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:text name="SystemUserABM" property="email"/><html:errors property="systemuser.email" /></td>
+								<td align="left"><html:text name="SystemUserABM" property="email"/> <html:errors property="systemuser.email" /></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="11" ><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/><html:errors property="systemuser.administrator" /></td>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Administrador</td>
+								<td align="left">Administrador <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="moderator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Moderador</td>
+								<td align="left">Moderador <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="designer"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Diseñador</td>
+								<td align="left">Diseñador <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="23"><img src="images/null.gif" width="1" height="23"></td>
@@ -132,30 +128,30 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="550">
+		<td width="600">
 			<!-- inicio tabla template -->
-			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de usuarios del sistema</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="580" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de usuarios del sistema</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530" height="144">
+					<td width="580" height="144">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="505" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -212,9 +208,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 </table>
 </div>

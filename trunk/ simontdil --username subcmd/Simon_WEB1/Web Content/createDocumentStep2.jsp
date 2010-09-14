@@ -12,21 +12,19 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
 		<td width="470">
 			<!-- inicio tabla template -->
 			<table width="450" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="450" height="19" align="left"><div id="blockTitle">Datos del documento</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="450" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Datos del documento</div></td>
+					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="450" height="144"><!-- corte tabla template -->
+					<td width="450" height="144">
+						<!-- corte tabla template -->
 						<table width="450" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
@@ -87,7 +85,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25">
+								<td colspan="3" height="25" align="center">
 									<html:submit property="operation">
 										<bean:message key="createDocument.back"/>
 									</html:submit></td>
@@ -136,7 +134,7 @@
 								<td colspan="4" height="48"><img src="images/null.gif" width="1" height="48"></td>
 							</tr>
 							<tr>
-								<td colspan="4">
+								<td colspan="4" align="center">
 									<html:submit property="operation">
 										<bean:message key="createDocument.addParagraphs"/>
 									</html:submit></td>
@@ -151,19 +149,16 @@
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
 	</tr>
-	<tr>
-		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
 </table>
 </div>
-		</html:form>
+</html:form>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

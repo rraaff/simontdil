@@ -12,21 +12,19 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
-	</tr>
-	<tr>
 		<td width="470">
 			<!-- inicio tabla template -->
 			<table width="450" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="450" height="19" align="left"><div id="blockTitle">Datos del documento</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="450" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Datos del documento</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="450" height="144"><!-- corte tabla template -->
+					<td width="450" height="144">
+						<!-- corte tabla template -->
 						<table width="450" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="40"><img src="images/null.gif" width="1" height="40"></td>
@@ -89,11 +87,10 @@
 								<td align="left"><html:textarea name="CreateDocumentForm" property="limitedIntro" disabled="true" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="35"><img src="images/null.gif" width="1" height="35"></td>
+								<td colspan="3" height="28"><img src="images/null.gif" width="1" height="28"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
-								<html:submit property="operation">
+								<td colspan="3" align="center"><html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
 								</html:submit></td>
 							</tr>
@@ -148,13 +145,13 @@
 								<td width="32" align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
+								<td colspan="9" height="2"><img src="images/null.gif" width="1" height="2"></td>
 							</tr>
 							<tr>
 								<td colspan="9" align="center"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
+								<td colspan="9" height="2"><img src="images/null.gif" width="1" height="2"></td>
 							</tr>
 							<tr>
 								<td colspan="9" align="center">
@@ -202,7 +199,7 @@
 								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="25">
+								<td colspan="9" height="25" align="center">
 								<%if (isModerator) { %>
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
 									<html:submit property="operation">
@@ -215,7 +212,7 @@
 								<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="25">
+								<td colspan="9" height="25" align="center">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.preview"/>
 								</html:submit>								
@@ -227,16 +224,13 @@
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 </table>
 </div>

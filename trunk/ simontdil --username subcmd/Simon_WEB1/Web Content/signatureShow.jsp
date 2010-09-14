@@ -92,26 +92,28 @@ if ( dw_scrollObj.isSupported() ) {
 					<div id="main">
 						<div id="lyr1" style="background-color:#FFFFFF">
 							<!-- PABLO: intro -->
-							<bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" />
+							<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 							<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
 								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
-							<table id="signTable" border="0" cellspacing="0" cellpadding="0">
-								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
-								<tr>
-									<td><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
-								</tr>
+							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
 								<tr> 
-									<td align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
+									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
 									<script>
 										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
 										lastSignatureIndex = <%=signatureIndex%>;
 									</script>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td>Nombre de la delegación en MAYUSCULAS</td>
 								</tr>
-								<tr> 
-									<td height="50" align="center"><bean:write name="signature" property="delegateName" /></td>
+								<tr>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br>Cargo</td>
 								</tr>
 								</logic:iterate>
 							</table>

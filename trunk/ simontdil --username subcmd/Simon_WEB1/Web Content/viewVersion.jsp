@@ -91,25 +91,22 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
 		<td width="294" valign="top">
 			<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="274" height="19" align="left"><img src="images/titles/documentoPrincipalVistaDoc.gif" alt="Ingreso al Sitio" width="132" height="19"></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="10" height="19" background="images/interfaces/topLeftTitleDoc.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="274" height="19" align="left" background="images/interfaces/topTitle.gif"><img src="images/titles/documentoPrincipalVistaDoc.gif" alt="Ingreso al Sitio" width="132" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
-					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
+					<td width="10" height="1" background="images/interfaces/middleLeftDoc.gif"><img src="images/null.gif" width="10" height="1"></td>
 					<td height="11"><img src="images/null.gif" width="1" height="11"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
+					<td width="10" height="1" background="images/interfaces/middleLeftDoc.gif"><img src="images/null.gif" width="10" height="1"></td>
 					<td width="274" height="80" align="center" valign="middle">
 						<table width="254" border="0" cellspacing="0" cellpadding="0">
 							<tr>
@@ -147,9 +144,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td width="10" height="10" background="images/interfaces/bottomLeftDoc.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
@@ -222,7 +219,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</tr>
 							<% if (isDelegate) { %>
 							<tr>
-								<td colspan="3"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
+								<td colspan="3" align="center"><html:link action="/goToDelegateHome" >Volver al inicio</html:link></td>
 							</tr>
 							<tr>
 								<td colspan="3"><img src="images/null.gif" width="1" height="16"></td>
@@ -310,7 +307,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="3" align="center">
 									<html:submit property="operation">
 										<bean:message key="viewVersion.searchObservations"/>
 									</html:submit>
@@ -320,7 +317,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
 							<tr>
-								<td colspan="3">
+								<td colspan="3" align="center">
 									<html:submit property="operation">
 										<bean:message key="viewVersion.listObservations"/>
 									</html:submit>
@@ -333,9 +330,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 			<!-- fin tabla template -->
@@ -353,12 +350,11 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="578" height="284" align="left" valign="top">
-					<!-- PABLO: intro -->
-					<bean:write name="ViewVersion" property="version.document.introduction" />
 					<!-- corte tabla template -->
 					<div id="main">
 						<div id="lyr1">
 						<!-- div id="documentoCompleto" -->
+							<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
 									<% if (isDelegate) { %>
@@ -394,15 +390,12 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 				<tr>
 					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-					<td colspan="2" width="320" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
 </div>
@@ -421,9 +414,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<!-- inicio tabla template -->
 								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
-										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
-										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+										<td width="400" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
+										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
 										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
@@ -477,9 +470,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									</tr>
 									<tr>
-										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
-										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+										<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 									</tr>
 								</table>
 								<!-- fin tabla template -->

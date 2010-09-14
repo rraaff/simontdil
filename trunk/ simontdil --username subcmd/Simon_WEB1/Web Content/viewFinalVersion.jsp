@@ -168,6 +168,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="274"><!-- corte tabla template -->
 						<table width="274" border="0" cellspacing="0" cellpadding="0">
 							<tr>
+								<td colspan="3" height="20"><img src="images/null.gif" width="1" height="20"></td>
+							</tr>
+							<tr>
 								<td align="right" width="50" height="30"><span style="font-size: 10px;">Anteriores:</span></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="217" align="left" valign="middle">
@@ -184,7 +187,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="8"><img src="images/null.gif" width="1" height="8"></td>
+								<td colspan="3" height="98"><img src="images/null.gif" width="1" height="98"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -214,12 +217,32 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="578" height="284" align="left" valign="top">
 					<!-- corte tabla template -->
-					<div id="main">
+					<div id="main" style="background-color:#FFFFFF;">
 						<div id="lyr1">
+						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
 						<!-- div id="documentoCompleto" -->
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
 								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
+							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
+								<tr> 
+									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
+									<script>
+										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
+										lastSignatureIndex = <%=signatureIndex%>;
+									</script>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td>Nombre de la delegación en MAYUSCULAS</td>
+								</tr>
+								<tr>
+									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br>Cargo</td>
+								</tr>
+								</logic:iterate>
+							</table>
 						</div>
 					</div>
 					<!-- corte tabla template --></td>
@@ -254,23 +277,6 @@ if ( dw_scrollObj.isSupported() ) {
 		<td colspan="3" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
-							<table id="signTable" border="0" cellspacing="0" cellpadding="0">
-								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
-								<tr>
-									<td>INSERTAR BANDERITA</td>
-								</tr>
-								<tr> 
-									<td align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
-									<script>
-										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
-										lastSignatureIndex = <%=signatureIndex%>;
-									</script>
-								</tr>
-								<tr> 
-									<td height="50" align="center"><bean:write name="signature" property="delegateName" /></td>
-								</tr>
-								</logic:iterate>
-							</table>
 </div>
 </html:form>
 <%@ include file="includes/footer.jsp" %>

@@ -16,10 +16,6 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20" align="center" valign="middle" class="remarcado">
-		</td>
-	</tr>
-	<tr>
 		<td width="294">
 			<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -172,9 +168,6 @@
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20"></td>
 	</tr>
 </table>
 </div>

@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:500px;
+	width:550px;
 	height:290px;
 	font-size: 10px;
 }
@@ -39,29 +39,27 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
-	</tr>
-	<tr>
-		<td width="370">
+		<td width="320">
 			<!-- inicio tabla template -->
-			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="300" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="350" height="19" align="left"><div id="blockTitle">Editar delegados</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="300" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar delegados</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="144"><!-- corte tabla template -->
-						<table width="350" border="0" cellspacing="0" cellpadding="0">
+					<td width="300" height="144">
+						<!-- corte tabla template -->
+						<table width="300" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="143" align="right">Nombre completo:</td>
+								<td width="153" align="right">Nombre completo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="200" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
+								<td width="190" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -98,11 +96,12 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right" valign="top">Accesos:</td>
+								<td height="24" align="right" valign="top"><html:errors property="delegate.typeOne" />Accesos:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
-								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <html:errors property="delegate.typeOne" /><br>
-								<html:checkbox name="DelegateABM" property="canSign"/> es firmante<html:errors property="delegate.canSign" /></td>
+								<td align="left">
+								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
+								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
+								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -151,18 +150,18 @@ if ( dw_scrollObj.isSupported() ) {
 		<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="550">
+		<td width="600">
 			<!-- inicio tabla template -->
-			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de delegados</div></td>
+					<td colspan="2" background="images/interfaces/topTitle.gif" width="580" height="19" align="left"><div id="blockTitle">Listado de delegados</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530" height="144">
+					<td width="580" height="144">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
@@ -173,20 +172,20 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td height="20" align="left">Nombre</td>
 										<td align="left">Pais</td>
-										<td>Permisos</td>
-										<td>Firmante</td>
-										<td>Habilitado</td>
-										<td></td>
-										<td></td>
+										<td width="60" align="center">Permisos</td>
+										<td width="60" align="center">Firmante</td>
+										<td width="60" align="center">Habilitado</td>
+										<td width="60"></td>
+										<td width="80"></td>
 									</tr> 
 									<logic:iterate name="DelegateABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUser" property="countryName" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="permissionsString" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><bean:write name="iterUser" property="permissionsString" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
-											<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
+											<td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
 											<td><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
@@ -226,9 +225,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="3" height="10"><img src="images/null.gif" width="1" height="10"></td>
 	</tr>
 </table>
 </div>

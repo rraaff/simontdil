@@ -5,15 +5,11 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
-
-<html:form method="POST" action="/login">
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<html:form method="POST" action="/login">
+<table height="390" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td height="30"><img src="images/null.gif" width="1" height="30"></td>
-	</tr>
-	<tr>
-		<td>
+		<td valign="middle">
 			<table width="340" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
@@ -52,7 +48,10 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25"><span class="errorText"><html:errors property="general" /></span><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" align="center"><span class="errorText"><html:errors property="general" /></span></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
 								<td colspan="3">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
@@ -82,10 +81,13 @@
 			</table>
 		</td>
 	</tr>
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
 </table>
-</div>
 </html:form>
-<%@ include file="includes/footer.jsp" %>
+</div>
+<div id="footer">
+	<div id="copyright">SEGEC Secretar&iacute;a Ejecutiva XX Sumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
+	<div id="logoCumbres"><img src="images/footer/logoCumbres.gif" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
+	<div style="width:150px;font-size:10px; color:#999999; float:left; margin-top: -60px; margin-left: 10px;"> - El servidor utiliza GMT - </div>
+</div>
+</body>
+</html>
