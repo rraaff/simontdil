@@ -70,6 +70,7 @@ public class NewObservationNotification {
 			body = body.replace("{DELEGATE}", getUser().getName());
 			body = body.replace("{DELEGATION}", this.country.getName());
 			body = body.replace("{SERVER}", SystemConfig.getServerUrl());
+			body = body.replace("{FULLNAME}", user2.getName());
 			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewObservation(), user2.getEmail(), SystemConfig.getMailSubjectForNewObservation(), body);
 		} catch (Exception e) {
 			getLog().error(e.getMessage(), e);

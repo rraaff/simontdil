@@ -54,6 +54,7 @@ public class NewVersionNotification {
 			body = body.replace("{VERSION_NUMBER}", String.valueOf(version.getNumber()));
 			body = body.replace("{VERSION_NAME}", version.getName());
 			body = body.replace("{SERVER}", SystemConfig.getServerUrl());
+			body = body.replace("{FULLNAME}", user2.getName());
 			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewVersion(), user2.getEmail(), SystemConfig.getMailSubjectForNewVersion(), body);
 		} catch (Exception e) {
 			getLog().error(e.getMessage(), e);
