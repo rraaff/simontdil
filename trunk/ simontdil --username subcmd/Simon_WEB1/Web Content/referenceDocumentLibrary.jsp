@@ -95,6 +95,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
+				<tr>
+					<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+				</tr>
 			</table>
 		<!-- fin tabla template -->
 		</td>
