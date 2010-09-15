@@ -16,11 +16,11 @@
 <style type="text/css">
 <!--
 #centrador {
-	padding-left:430px;
+	padding-left:340px;
 }
 #content{
 	width:980px;
-	height:450px;
+	height:520px;
 }
 
 -->
@@ -30,13 +30,10 @@
 <div id="content">
 <table width="978" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td><img src="images/null.gif" width="1" height="100"></td>
+		<td><img src="images/demo/caratula.gif" width="978" height="480"></td>
 	</tr>
 	<tr>
-		<td><img src="images/demo/demo.jpg" width="980" height="300"></td>
-	</tr>
-	<tr>
-		<td><div id="centrador"><a class="button" href="login.jsp"><span>Iniciar Login</span></a></div></td>
+		<td><div id="centrador"><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a> <a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></div></td>
 	</tr>
 </table>
 </div>
