@@ -30,7 +30,7 @@
    	AND principal = 0
    	AND EXISTS (SELECT * 
    				FROM VERSION 
-   				WHERE VERSION.documentId = Document.id 
+   				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
    	order by title
