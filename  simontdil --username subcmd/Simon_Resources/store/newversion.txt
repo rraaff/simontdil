@@ -1,203 +1,49 @@
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Cumbres Iberoamericanas | Al servicio de la Comunidad Iberoamericana</title>
-<meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
-<meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
-<meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <style type="text/css">
 <!--
-#superBody{
+.fontMail{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 12px;
-	font-weight: normal;
-	font-variant: normal;
-	color: #616161;
-	background-color: #CCCCCC;
-	margin: 0px;
-	height: 100%;
-	width: 100%;
-}
-#superBody p {
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 12px;
-	font-weight: normal;
-	font-variant: normal;
-	color: #616161;
-}
-#superBody a {
-	color: #FFFFFF;
-	text-decoration:none;
-}
-#superBody a:link, a:visited {
-	color: #666666;
-}
-#superBody a:hover {
-	color: #333333;
-	text-decoration: underline;
-}
-#superBody p a:link, p a:visited {
-	color: #333333;
-}
-#superBody .textLink{
 	color:#666666;
-}
-#superBody h1 {
-	margin:0 0 0 0;
-	color:	#666666;
-	font-size: 18px;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-decoration: none;
-}
-#superBody #header {
-	background-color: #FFFFFF;
-	height: 142px;
-	width: 606px;
-	margin-top: 0px;
-	margin-right: auto;
-	margin-bottom: 0px;
-	margin-left: auto;
-	float: none;
-	position: relative;
-	border-top-width: 1px;
-	border-right-width: 1px;
-	border-left-width: 1px;
-	border-top-style: solid;
-	border-right-style: solid;
-	border-left-style: solid;
-	border-top-color: #808080;
-	border-right-color: #808080;
-	border-left-color: #808080;
-	padding-right: 22px;
-	padding-left: 22px;
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
-#superBody #header #siteSeccion {
-	height: 60px;
-	padding-top: 76px;
-}
-#superBody #header #logo {
-	width:243px;
-	height:136px;
-	margin: 0px;
-	padding: 0px;
-	float: left;
-}
-#superBody #rayitaHeader {
-	background-color: #40708C;
-	height: 5px;
-	width: 606px;
-	position: relative;
-	margin-right: auto;
-	margin-left: auto;
-	float: none;
-	clear: both;
-}
-#superBody #content {
-	width:650px;
-	padding:0px;
-	position: relative;
-	background-color: #FFFFFF;
-	height: 200px;
-	border-right-width: 1px;
-	border-left-width: 1px;
-	border-right-style: solid;
-	border-left-style: solid;
-	border-right-color: #808080;
-	border-left-color: #808080;
-	margin: auto;
-}
-#superBody #footer {
-	color:#808080;
-	height:65px;
-	width: 650px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	position: relative;
-	margin-right: auto;
-	margin-bottom: 0px;
-	margin-left: auto;
-	background-color: #E6E6E6;
-	z-index: 9999;
-	text-decoration: none;
-	background-image: url({SERVER}/Simon/images/footer/bgfoot.gif);
-	background-repeat: repeat-x;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-right-color: #666666;
-	border-bottom-color: #666666;
-	border-left-color: #666666;
-	padding: 0px;
-	margin-top: 0px;
-}
-
-#superBody #copyright{
-	width: 430px;
-	height: 60px;
-	position: relative;
-	line-height:13px;
-	margin-top: 0px;
-	margin-right: auto;
-	margin-bottom: 0px;
-	margin-left: auto;
-	float: both;
-	padding-top: 5px;
-	padding-right: 0px;
-	padding-bottom: 0px;
-	padding-left: 0px;
-	text-align: center;
-}
-#superBody #logoCumbres{
-	float: right;
-	position: relative;
-	height: 49px;
-	margin-top: -64px;
-	width: 103px;
 }
 -->
 </style>
-</head>
-<body>
-<div id="superBody">
-	<div id="header">
-		<div id="logo"><img src="{SERVER}/Simon/images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></div>
-		<div id="rayitaHeader"><img src="{SERVER}/Simon/images/null.gif" width="606" height="5"></div>
-	</div>
-	<div id="content">
-	<table width="610" border="0" cellspacing="0" cellpadding="0" align="center">
-		<tr>
-			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="1" height="20"></td>
-		</tr>
-		<tr>
-			<td width="294" align="left" valign="top"><p>Estimado <B>{FULLNAME}</B>,</p>
-			<p>Se ha creado una nueva versi&oacute;n del documento:<br>
-			T&iacute;tulo: <B>{DOCUMENT_TITLE}</B><br>
-			Versi&oacute;n: <B>{VERSION_NUMBER}</B> - <B>{VERSION_NAME}</B></p>
-			<p>Es importante que todas las delegaciones se encuentren al tanto de las propuestas realizadas por las otras delegaciones. Les recomendamos ingresar el sitio para leerlas.</p></td>
-		</tr>
-		<tr>
-			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
-		</tr>
-		<tr>
-			<td align="center"><img src="{SERVER}/Simon/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></td>
-		</tr>
-		<tr>
-			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
-		</tr>
-	</table>
-	</div>
-	<div id="footer">
-		<div id="copyright">SEGEC Secretar&iacute;a Ejecutiva XX Sumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina <br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
-		<div id="logoCumbres"><img src="{SERVER}/Simon/images/footer/logoCumbres.gif" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
-	</div>
-</div>
-</body>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#E6E6E6">
+	<tr>
+		<td align="center">
+			<table width="650" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+				<tr>
+					<td width="650" colspan="5"><img src="{SERVER}/Simon/images/mails/header.gif" width="650" height="167"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td width="22"><img src="{SERVER}/Simon/images/null.gif" width="22" height="1"></td>
+					<td width="604" align="left" valign="top" class="fontMail"><p>Estimado <B>{FULLNAME}</B>,</p>
+					<p>Se ha creado una nueva versi&oacute;n del documento:<br>
+					T&iacute;tulo: <B>{DOCUMENT_TITLE}</B><br>
+					Versi&oacute;n: <B>{VERSION_NUMBER}</B> - <B>{VERSION_NAME}</B></p>
+					<p>Es importante que todas las delegaciones se encuentren al tanto de las propuestas realizadas por las otras delegaciones. Les recomendamos ingresar el sitio para leerlas.</p></td>
+					<td width="22"><img src="{SERVER}/Simon/images/null.gif" width="22" height="1"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td colspan="3" height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td colspan="3" align="center"><a href="{SERVER}/Simon/index.jsp" target="_blank"><img src="{SERVER}/Simon/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td colspan="3" height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="5"><img src="{SERVER}/Simon/images/mails/footer.gif" width="650" height="84"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
