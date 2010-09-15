@@ -12,35 +12,35 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
-    select ReferenceDocument.*, Category.name as categoryName
-    from ReferenceDocument, Category
-    where ReferenceDocument.categoryId = Category.id
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
+    from REFERENCEDOCUMENT, CATEGORY
+    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
     order by title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
-    select ReferenceDocument.*, Category.name as categoryName
-    from ReferenceDocument, Category
-    where ReferenceDocument.categoryId = Category.id
-    and ReferenceDocument.deleted = 0
-    and Category.deleted = 0
-    order by Category.name, ReferenceDocument.title
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
+    from REFERENCEDOCUMENT, CATEGORY
+    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
+    and REFERENCEDOCUMENT.deleted = 0
+    and CATEGORY.deleted = 0
+    order by CATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocument">
     select *
-   	from ReferenceDocument, Category 
-   	WHERE ReferenceDocument.DELETED = 0
-   	AND Category.DELETED = 0
-   	AND ReferenceDocument.categoryId = Category.id
-   	order by Category.name, ReferenceDocument.title
+   	from REFERENCEDOCUMENT, CATEGORY 
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	order by CATEGORY.name, REFERENCEDOCUMENT.title
    	LIMIT 11
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForCategory" parameterClass="int" resultClass="ReferenceDocument">
     select *
-   	from ReferenceDocument 
-   	WHERE DELETED = 0
+   	from REFERENCEDOCUMENT 
+   	WHERE deleted = 0
    	and categoryId = #id#
    	order by title
   </select>
@@ -48,20 +48,20 @@
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
     select
       *
-    from ReferenceDocument
+    from REFERENCEDOCUMENT
     where id = #id#
   </select>
   
   <select id="selectReferenceDocumentByTitle" parameterClass="java.lang.String" resultClass="ReferenceDocument">
     select
       *
-    from ReferenceDocument
+    from REFERENCEDOCUMENT
     where title = #title#
   </select>
  
   <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
-    insert into ReferenceDocument (
-      ID, categoryId, TITLE, fileName, extension, contentType, DELETED
+    insert into REFERENCEDOCUMENT (
+      id, categoryId, title, fileName, extension, contentType, deleted
     ) values (
       #id#, #categoryId#, #title#, #fileName#, #extension#, #contentType#, #deleted#
     )
@@ -72,7 +72,7 @@
   
   
   <update id="updateReferenceDocument" parameterClass="ReferenceDocument">
-    update ReferenceDocument set
+    update REFERENCEDOCUMENT set
     	categoryId = #categoryId#,
       title = #title#,
       fileName = #fileName#,
@@ -84,7 +84,7 @@
   </update>
 
   <update id="logDeleteReferenceDocument" parameterClass="ReferenceDocument">
-    update ReferenceDocument set
+    update REFERENCEDOCUMENT set
       deleted = 1
     where
       ID = #id#

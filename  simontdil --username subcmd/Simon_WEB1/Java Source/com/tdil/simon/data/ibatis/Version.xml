@@ -22,7 +22,7 @@
     from VERSION
     where documentId = #id#
     and deleted = 0
-    and number = (select max(number) from version where deleted = 0 and documentId = #id#)
+    and number = (select max(number) from VERSION where deleted = 0 and documentId = #id#)
   </select>
   
    <select id="selectVersionForNegotiation" parameterClass="int" resultClass="Version">
@@ -31,21 +31,21 @@
     where documentId = #id#
     and deleted = 0
     and status = 'CONSOLIDATED'
-    and number = (select max(number) from version where deleted = 0 and status = 'CONSOLIDATED' and documentId = #id#)
+    and number = (select max(number) from VERSION where deleted = 0 and status = 'CONSOLIDATED' and documentId = #id#)
   </select>
   
   
   <select id="selectPrincipalVersion" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-   select VERSION.*, Document.title as documentTitle
-    from VERSION, Document
-    where VERSION.documentId = Document.id
+   select VERSION.*, DOCUMENT.title as documentTitle
+    from VERSION, DOCUMENT
+    where VERSION.documentId = DOCUMENT.id
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
-    and Document.PRINCIPAL = 1
-    and Document.deleted = 0
-    and Document.typeOne = #typeOne#
-    and Document.typeTwo = #typeTwo#
-    and number = (select max(number) from version where deleted = 0 and status != 'DRAFT' and documentId = Document.id)
+    and DOCUMENT.principal = 1
+    and DOCUMENT.deleted = 0
+    and DOCUMENT.typeOne = #typeOne#
+    and DOCUMENT.typeTwo = #typeTwo#
+    and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
   </select>
   
  <select id="selectVersionUnderNegotiation" resultClass="Version">
@@ -65,7 +65,7 @@
   </select>
   
   <select id="selectAllVersionNumbersForDocument" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionNumberVO">
-    select version.id, version.number
+    select VERSION.id, VERSION.number
     from VERSION
     where documentId = #id#
     and deleted = 0
@@ -83,25 +83,25 @@
   <select id="selectAllVersionsForDocumentNotDeleted" parameterClass="int" resultClass="Version">
     select *
    	from VERSION 
-   	WHERE DELETED = 0
+   	WHERE deleted = 0
    	AND documentId = #id#
    	order by number
   </select>
   
   <select id="selectVersionsVOForList" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-    select VERSION.*, Document.title as documentTitle,
+    select VERSION.*, DOCUMENT.title as documentTitle,
     (SELECT count(1) 
-    	FROM Observation 
-    	WHERE Observation.privateObservation = 0 
-    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as observationCount,
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as observationCount,
     (SELECT count(1) 
-    	FROM Observation 
-    	WHERE Observation.privateObservation = 0 
-    	AND Observation.addNewParagraph = 1
-    	AND Observation.paragraphId IN (SELECT id FROM Paragraph WHERE Paragraph.versionID = VERSION.id)) as newParagraphCount
-   	from VERSION, Document
-   	WHERE VERSION.documentId = Document.id
-   	order by Document.title, Version.number DESC
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.addNewParagraph = 1
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
+   	from VERSION, DOCUMENT
+   	WHERE VERSION.documentId = DOCUMENT.id
+   	order by DOCUMENT.title, VERSION.number DESC
   </select>
   
   <select id="selectVersionById" parameterClass="int" resultClass="Version">
@@ -120,7 +120,7 @@
  
    <insert id="insertVersion" parameterClass="Version">
     insert into VERSION (
-      ID, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, DELETED
+      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, deleted
     ) values (
       #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #deleted#
     )
@@ -141,14 +141,14 @@
 		deleted = #deleted#, 
 		hasDraft = #hasDraft#
     where
-      ID = #id#
+      id = #id#
   </update>
 
   <update id="updateVersionStatus" parameterClass="Version">
     update VERSION set
       status = #status#
     where
-      ID = #id#
+      id = #id#
   </update>
 
   <update id="updateVersionUnderNegotiationToConsolidatedForDocument" parameterClass="int">
@@ -162,14 +162,14 @@
     update VERSION set
       deleted = 0
     where
-      ID = #id#
+      id = #id#
   </update> 
 
   <update id="logDeleteVersion" parameterClass="Version">
     update VERSION set
       deleted = 1
     where
-      ID = #id#
+      id = #id#
   </update>
 
 </sqlMap>
