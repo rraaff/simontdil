@@ -12,25 +12,25 @@
   <select id="selectSiteByName" parameterClass="java.lang.String" resultClass="Site">
     select
       *
-    from Site
+    from SITE
     where name = #name#
     and deleted = 0
   </select>
   
   <insert id="insertSite" parameterClass="Site">
-    insert into Site (
-      ID, NAME, STATUS, DATAID, DELETED
+    insert into SITE (
+      id, name, status, dataId, deleted
     ) values (
       #id#, #name#, #status#, #dataId#, #deleted#
     )
   </insert>
 
   <update id="updateSite" parameterClass="Site">
-    update Site set
-      STATUS = #status#,
-      DATAID = #dataId#
+    update SITE set
+      status = #status#,
+      dataId = #dataId#
     where
-      ID = #id#
+      id = #id#
   </update>
   
 </sqlMap>

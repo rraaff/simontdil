@@ -12,30 +12,30 @@
   <!-- Select with no parameters. -->
   <select id="selectAllCountries" resultClass="Country">
     select *
-    from Country
+    from COUNTRY
     order by name
   </select>
   
   <select id="selectAllCountriesNotDeleted" resultClass="Country">
     select *
-   	from Country 
+   	from COUNTRY 
    	WHERE DELETED = 0
    	order by name
   </select>
   
   <select id="selectAllCountriesVO" resultClass="com.tdil.simon.data.valueobjects.CountryVO">
-    select Country.*,
-      (SELECT count(1) FROM SystemUser WHERE SystemUser.DELETED = 0 AND SystemUser.countryId = Country.id) as userCount
-   	from Country
-   	order by Country.name
+    select COUNTRY.*,
+      (SELECT count(1) FROM SYSTEMUSER WHERE SYSTEMUSER.deleted = 0 AND SYSTEMUSER.countryId = COUNTRY.id) as userCount
+   	from COUNTRY
+   	order by COUNTRY.name
   </select>
   
   <select id="selectAllCountriesVONotDeleted" resultClass="com.tdil.simon.data.valueobjects.CountryVO">
-    select Country.*,
-      (SELECT count(1) FROM SystemUser WHERE SystemUser.DELETED = 0 AND SystemUser.countryId = Country.id) as userCount
-   	from Country
-   	WHERE Country.DELETED = 0
-   	order by Country.name
+    select COUNTRY.*,
+      (SELECT count(1) FROM SYSTEMUSER WHERE SYSTEMUSER.deleted = 0 AND SYSTEMUSER.countryId = COUNTRY.id) as userCount
+   	from COUNTRY
+   	WHERE COUNTRY.deleted = 0
+   	order by COUNTRY.name
   </select>
   
   <select id="selectCountryHost" resultClass="Country">
@@ -62,7 +62,7 @@
  
   <insert id="insertCountry" parameterClass="Country">
     insert into COUNTRY (
-      ID, NAME, FLAG, HOST, DELETED
+      id, name, flag, host, deleted
     ) values (
       #id#, #name#, #flag#, #host#, #deleted#
     )
@@ -73,18 +73,18 @@
 
   <update id="updateCountry" parameterClass="Country">
     update COUNTRY set
-      NAME = #name#,
-      FLAG = #flag#,
+      name = #name#,
+      flag = #flag#,
       deleted = #deleted#
     where
-      ID = #id#
+      id = #id#
   </update>
   
   <update id="logDeleteCountry" parameterClass="Country">
     update COUNTRY set
       deleted = 1
     where
-      ID = #id#
+      id = #id#
   </update>
 
 </sqlMap>

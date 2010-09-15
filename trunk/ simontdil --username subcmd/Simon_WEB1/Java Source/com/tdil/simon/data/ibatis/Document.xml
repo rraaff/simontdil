@@ -12,22 +12,22 @@
   <!-- Select with no parameters. -->
   <select id="selectAllDocuments" resultClass="Document">
     select *
-    from Document
+    from DOCUMENT
     order by title
   </select>
   
   <select id="selectAllDocumentsNotDeleted" resultClass="Document">
     select *
-   	from Document 
-   	WHERE DELETED = 0
+   	from DOCUMENT 
+   	WHERE deleted = 0
    	order by title
   </select>
   
   <select id="selectNotDeletedNotPrincipalDocuments" resultClass="Document">
     select *
-   	from Document 
-   	WHERE DELETED = 0
-   	AND PRINCIPAL = 0
+   	from DOCUMENT 
+   	WHERE deleted = 0
+   	AND principal = 0
    	AND EXISTS (SELECT * 
    				FROM VERSION 
    				WHERE VERSION.documentId = Document.id 
@@ -39,14 +39,14 @@
   
   <select id="selectNotDeletedNotPrincipalDocumentsUsingTypes" parameterClass="java.util.Map" resultClass="Document">
     select *
-   	from Document 
-   	WHERE DELETED = 0
-   	AND PRINCIPAL = 0
-    and Document.typeOne = #typeOne#
-    and Document.typeTwo = #typeTwo#
+   	from DOCUMENT 
+   	WHERE deleted = 0
+   	AND principal = 0
+    and DOCUMENT.typeOne = #typeOne#
+    and DOCUMENT.typeTwo = #typeTwo#
        	AND EXISTS (SELECT * 
    				FROM VERSION 
-   				WHERE VERSION.documentId = Document.id 
+   				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
    	order by title
@@ -55,17 +55,17 @@
   
   <select id="getDocumentUnderWork" resultClass="Document">
     select *
-   	from Document 
-   	WHERE Document.id IN (SELECT documentId FROM Version where Version.STATUS IN ('IN_NEGOTIATION', 'IN_SIGN'))
+   	from DOCUMENT 
+   	WHERE DOCUMENT.id IN (SELECT documentId FROM VERSION where VERSION.status IN ('IN_NEGOTIATION', 'IN_SIGN'))
   </select>
     
   <select id="selectNotDeletedDocumentWithConsolidatedVersions" resultClass="Document">
     select *
-   	from Document 
+   	from DOCUMENT 
    	WHERE DELETED = 0
    	and EXISTS (SELECT * 
    				FROM VERSION 
-   				WHERE VERSION.documentId = Document.id 
+   				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
    	order by title
@@ -73,36 +73,36 @@
   <select id="selectDocumentById" parameterClass="int" resultClass="Document">
     select
       *
-    from Document
+    from DOCUMENT
     where id = #id#
   </select>
 
     <select id="selectPrincipalDocument" parameterClass="java.util.Map" resultClass="Document">
     select
-      Document.*
-    from Document
-    where Document.PRINCIPAL = 1
-    and Document.deleted = 0
-    and Document.typeOne = #typeOne#
-    and Document.typeTwo = #typeTwo#
+      DOCUMENT.*
+    from DOCUMENT
+    where DOCUMENT.principal = 1
+    and DOCUMENT.deleted = 0
+    and DOCUMENT.typeOne = #typeOne#
+    and DOCUMENT.typeTwo = #typeTwo#
   </select>
    
     <select id="selectDocumentForNegotiation" resultClass="Document">
     select
-      Document.*
-    from Document
-    where Document.PRINCIPAL = 1
-    and Document.deleted = 0
+      DOCUMENT.*
+    from DOCUMENT
+    where DOCUMENT.principal = 1
+    and DOCUMENT.deleted = 0
     and EXISTS (select * 
-    			from version  
-    			where Version.documentId = Document.ID
-    			and Version.STATUS = 'CONSOLIDATED'
-			    and Version.deleted = 0)
+    			from VERSION  
+    			where VERSION.documentId = DOCUMENT.ID
+    			and VERSION.status = 'CONSOLIDATED'
+			    and VERSION.deleted = 0)
   </select>
   
   <insert id="insertDocument" parameterClass="Document">
     insert into DOCUMENT (
-      ID, TITLE, INTRODUCTION, PRINCIPAL, typeOne, typeTwo, DELETED
+      id, title, introduction, principal, typeOne, typeTwo, deleted
     ) values (
       #id#, #title#, #introduction#,#principal#,#typeOne#, #typeTwo#, #deleted#
     )

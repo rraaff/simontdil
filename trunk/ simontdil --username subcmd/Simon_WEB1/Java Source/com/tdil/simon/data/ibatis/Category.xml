@@ -12,59 +12,59 @@
   <!-- Select with no parameters. -->
   <select id="selectAllCategories" resultClass="Category">
     select *
-    from Category
+    from CATEGORY
     order by name
   </select>
   
   <select id="selectAllCategoriesNotDeleted" resultClass="Category">
     select *
-   	from Category
-   	WHERE DELETED = 0
+   	from CATEGORY
+   	WHERE deleted = 0
    	order by name
   </select>
   
   <select id="selectAllCategoriesNotDeletedVO" resultClass="com.tdil.simon.data.valueobjects.CategoryVO">
     select *
-   	from Category
-   	WHERE DELETED = 0
+   	from CATEGORY
+   	WHERE deleted = 0
    	order by name
   </select>
 
   <select id="selectCategoryById" parameterClass="int" resultClass="Category">
     select
       *
-    from Category
+    from CATEGORY
     where id = #id#
   </select>
 
   <select id="selectCategoryByName" parameterClass="java.lang.String" resultClass="Category">
     select
       *
-    from Category
+    from CATEGORY
     where name = #name#
   </select>
   
   <insert id="insertCategory" parameterClass="Category">
-    insert into Category (
-      ID, NAME, DELETED
+    insert into CATEGORY (
+      id, name, deleted
     ) values (
       #id#, #name#, #deleted#
     )
   </insert>
 
   <update id="updateCategory" parameterClass="Category">
-    update Category set
-      NAME = #name#,
+    update CATEGORY set
+      name = #name#,
       deleted = #deleted#
     where
       ID = #id#
   </update>
   
   <update id="logDeleteCategory" parameterClass="Category">
-    update Category set
+    update CATEGORY set
       deleted = 1
     where
-      ID = #id#
+      id = #id#
   </update>
   
 </sqlMap>

@@ -12,15 +12,15 @@
   <!-- Select with no parameters. -->
   <select id="selectAllParagraphsForVersion" parameterClass="int" resultClass="Paragraph">
     select *
-    from Paragraph
+    from PARAGRAPH
     where versionId = #id#
     order by paragraphNumber
   </select>
   
   <select id="selectAllParagraphsForVersionNotDeleted" parameterClass="int" resultClass="Paragraph">
     select *
-   	from Paragraph 
-   	WHERE DELETED = 0
+   	from PARAGRAPH 
+   	WHERE deleted = 0
    	AND versionId = #id#
    	order by paragraphNumber
   </select>
@@ -28,21 +28,21 @@
   <select id="selectParagraphById" parameterClass="int" resultClass="Paragraph">
     select
       *
-    from Paragraph
+    from PARAGRAPH
     where id = #id#
   </select>
   
   <select id="selectParagraphByVersionAndNumber" parameterClass="java.util.Map" resultClass="Paragraph">
     select
       *
-    from Paragraph
+    from PARAGRAPH
     where versionId = #versionId#
     and paragraphNumber = #paragraphNumber#
   </select>
  
    <insert id="insertParagraph" parameterClass="Paragraph">
-    insert into Paragraph (
-      ID, versionId, paragraphNumber, paragraphText, versionNumber, DELETED
+    insert into PARAGRAPH (
+      id, versionId, paragraphNumber, paragraphText, versionNumber, deleted
     ) values (
       #id#, #versionId#, #paragraphNumber#, #paragraphText#, #versionNumber#, #deleted#
     )
@@ -57,14 +57,14 @@
       deleted = #deleted#,
       versionNumber = versionNumber + 1
     where
-      ID = #id#
+      id = #id#
   </update>
 
   <update id="logDeleteParagraph" parameterClass="Paragraph">
     update PARAGRAPH set
       deleted = 1
     where
-      ID = #id#
+      id = #id#
   </update>
 
 </sqlMap>

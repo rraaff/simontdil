@@ -30,10 +30,10 @@
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.deleted,
-		Country.NAME as countryName
-		from SYSTEMUSER, Country
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
 		WHERE SYSTEMUSER.delegate = 0
-		AND SYSTEMUSER.countryId = Country.id
+		AND SYSTEMUSER.countryId = COUNTRY.id
 		order by SYSTEMUSER.name
   </select>
 
@@ -57,10 +57,10 @@
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.deleted,
-		Country.NAME as countryName
-		from SYSTEMUSER, Country
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
 		WHERE SYSTEMUSER.delegate = 1
-		AND SYSTEMUSER.countryId = Country.id
+		AND SYSTEMUSER.countryId = COUNTRY.id
 		order by SYSTEMUSER.name
   </select>
   
@@ -84,10 +84,10 @@
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.deleted,
-		Country.NAME as countryName
-		from SYSTEMUSER, Country
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
 		WHERE SYSTEMUSER.deleted = 0
-		AND SYSTEMUSER.countryId = Country.id
+		AND SYSTEMUSER.countryId = COUNTRY.id
 		order by SYSTEMUSER.name
   </select>
 
@@ -183,11 +183,11 @@
 		resultClass="SystemUser">
 		select
 		SYSTEMUSER.*
-		from SYSTEMUSER, Country
+		from SYSTEMUSER, COUNTRY
 		where SYSTEMUSER.username = #username#
 		and SYSTEMUSER.deleted = 0
-		and SYSTEMUSER.countryId = Country.id
-		and Country.deleted = 0
+		and SYSTEMUSER.countryId = COUNTRY.id
+		and COUNTRY.deleted = 0
   </select>
 
 	<insert id="insertUser" parameterClass="SystemUser">
