@@ -101,7 +101,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td align="left">
 								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
-								<!-- html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" / --></td>
+							</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
