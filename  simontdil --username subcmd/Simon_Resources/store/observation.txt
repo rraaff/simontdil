@@ -125,7 +125,7 @@
 	background-color: #E6E6E6;
 	z-index: 9999;
 	text-decoration: none;
-	background-image: url({SERVER}/images/footer/bgfoot.gif);
+	background-image: url({SERVER}/Simon/images/footer/bgfoot.gif);
 	background-repeat: repeat-x;
 	border-right-width: 1px;
 	border-bottom-width: 1px;
@@ -169,13 +169,13 @@
 <body>
 <div id="superBody">
 	<div id="header">
-		<div id="logo"><img src="{SERVER}/images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></div>
-		<div id="rayitaHeader"><img src="{SERVER}/images/null.gif" width="606" height="5"></div>
+		<div id="logo"><img src="{SERVER}/Simon/images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></div>
+		<div id="rayitaHeader"><img src="{SERVER}/Simon/images/null.gif" width="606" height="5"></div>
 	</div>
 	<div id="content">
 	<table width="610" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
-			<td height="20"><img src="{SERVER}/images/null.gif" width="1" height="20"></td>
+			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="1" height="20"></td>
 		</tr>
 		<tr>
 			<td width="294" align="left" valign="top"><p>Estimado <B>{FULLNAME}</B></p>
@@ -183,19 +183,19 @@
 			<p>Es importante que todas las delegaciones se encuentren al tanto de las propuestas realizadas por las otras delegaciones. Les recomendamos ingresar el sitio para leerlas.</p></td>
 		</tr>
 		<tr>
-			<td height="20"><img src="{SERVER}/images/null.gif" width="10" height="20"></td>
+			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
 		</tr>
 		<tr>
-			<td align="center"><img src="{SERVER}/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></td>
+			<td align="center"><img src="{SERVER}/Simon/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></td>
 		</tr>
 		<tr>
-			<td height="20"><img src="{SERVER}/images/null.gif" width="10" height="20"></td>
+			<td height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
 		</tr>
 	</table>
 	</div>
 	<div id="footer">
 		<div id="copyright">SEGEC Secretar&iacute;a Ejecutiva XX Sumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina <br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
-		<div id="logoCumbres"><img src="{SERVER}/images/footer/logoCumbres.gif" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
+		<div id="logoCumbres"><img src="{SERVER}/Simon/images/footer/logoCumbres.gif" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
 	</div>
 </div>
 </body>
