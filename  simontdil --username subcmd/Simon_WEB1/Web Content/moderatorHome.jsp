@@ -16,6 +16,7 @@
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
+		<!-- IF HAY DOCS SECUNDARIOS -->
 		<td width="294">
 			<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -119,7 +120,9 @@
 			</table>
 		<!-- fin tabla template -->
 		</td>
+		<!-- ELSE SI NO HAY DOCS SECUNDARIOS -->
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+		<!-- END IF -->
 		<td width="294">
 		<!-- inicio tabla template -->
 			<table width="294" border="0" cellspacing="0" cellpadding="0" align="center">
