@@ -127,50 +127,55 @@ if ( dw_scrollObj.isSupported() ) {
 	var lastNumber = "0";
 	var lastText = "";
 	var lastParagraphVersion = "0";
+	var inProgress = false;
 	function getDelegateSiteStatus() {
-		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
-			var errorResult = json.error;
-			if ('notLogged' == errorResult) {
-				window.location='<html:rewrite page="/login.jsp"/>';
-				return;
-			}
-	        var sitestatus = json.sitestatus;
-	        if (sitestatus == 'NORMAL') {
-	        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
-	        } else {
-		        if (sitestatus == 'SIGN_SHOW') {
-		        	clearTimer();
-		        	showSignArea();
+		if (!inProgress) {
+			inProgress = true;
+			var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+				inProgress = false;
+				var errorResult = json.error;
+				if ('notLogged' == errorResult) {
+					window.location='<html:rewrite page="/login.jsp"/>';
+					return;
+				}
+		        var sitestatus = json.sitestatus;
+		        if (sitestatus == 'NORMAL') {
+		        	window.location='<html:rewrite page="/goToDelegateHome.st"/>';
 		        } else {
-		        	if (sitestatus == 'IN_NEGOTIATION') {
-		        		var paragraphNumber = json.paragraphNumber;
-		        		var paragraphText = json.paragraphText;
-		        		var paragraphVersion = json.paragraphVersion;
-		        		if (paragraphNumber == "0") {
-		        			lastNumber = paragraphNumber;
-			        		lastText = paragraphText;
-			        		var divObj = document.getElementById("lastParagraphText");
-		        			divObj.innerHTML = "-";
-		        		} else {
-		        			document.getElementById("addPrivateComment").disabled = false;
-		        			// le saque || lastText != paragraphText 
-			        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
-			        			var divObj = document.getElementById("lastParagraphText");
-			        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+			        if (sitestatus == 'SIGN_SHOW') {
+			        	clearTimer();
+			        	showSignArea();
+			        } else {
+			        	if (sitestatus == 'IN_NEGOTIATION') {
+			        		var paragraphNumber = json.paragraphNumber;
+			        		var paragraphText = json.paragraphText;
+			        		var paragraphVersion = json.paragraphVersion;
+			        		if (paragraphNumber == "0") {
 			        			lastNumber = paragraphNumber;
-			        			lastText = paragraphText;
-			        			lastParagraphVersion = paragraphVersion;
-			        		}
+				        		lastText = paragraphText;
+				        		var divObj = document.getElementById("lastParagraphText");
+			        			divObj.innerHTML = "-";
+			        		} else {
+			        			document.getElementById("addPrivateComment").disabled = false;
+			        			// le saque || lastText != paragraphText 
+				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
+				        			var divObj = document.getElementById("lastParagraphText");
+				        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+				        			lastNumber = paragraphNumber;
+				        			lastText = paragraphText;
+				        			lastParagraphVersion = paragraphVersion;
+				        		}
+				        	}
+			        	} else {
+			        		var divObj = document.getElementById("negotiationArea");
+			        		divObj.style.display = 'none';
+			        		showSignArea();
 			        	}
-		        	} else {
-		        		var divObj = document.getElementById("negotiationArea");
-		        		divObj.style.display = 'none';
-		        		showSignArea();
-		        	}
+			        }
 		        }
-	        }
-	      }
-	   }).get({'paragraphVersion': lastParagraphVersion, 'paragraphNumber': lastNumber});
+		      }
+		   }).get({'paragraphVersion': lastParagraphVersion, 'paragraphNumber': lastNumber});
+		}
 	}
 	var timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
 	
@@ -263,7 +268,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</div></td>
 							</tr>
 							<tr>
-								<td colspan="2" height="25" align="center"><input type="button" value="Mensaje al delegado" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
+								<td colspan="2" height="25" align="center"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->

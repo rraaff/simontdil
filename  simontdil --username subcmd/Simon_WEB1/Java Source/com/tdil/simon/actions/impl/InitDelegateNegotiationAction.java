@@ -14,7 +14,11 @@ import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.data.ibatis.SiteDAO;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.database.TransactionProvider;
-
+/**
+ * @deprecated
+ * @author mgodoy
+ *
+ */
 public class InitDelegateNegotiationAction extends AbstractAction implements TransactionalAction {
 
 	private String versionId;

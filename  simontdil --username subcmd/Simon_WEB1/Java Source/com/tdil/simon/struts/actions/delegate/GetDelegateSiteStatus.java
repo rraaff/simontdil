@@ -31,6 +31,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.LoggedUserForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class GetDelegateSiteStatus extends AjaxSimonAction implements TransactionalActionWithValue {
 
@@ -47,22 +48,23 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 		loggedUserForm.setUser(this.getLoggedUser(request));
 		loggedUserForm.setParagraphVersion(request.getParameter("paragraphVersion"));
 		loggedUserForm.setParagraphNumber(request.getParameter("paragraphNumber"));
-		HashMap<String, String> result = (HashMap<String, String>) TransactionProvider.executeInTransaction(this,
-				loggedUserForm);
+		HashMap<String, String> result = (HashMap<String, String>) executeInTransaction(loggedUserForm);
+//		System.out.println(result);
 		this.writeJsonResponse(result, response);
 		return null;
 	}
 
+	// TODO no es en transaccion
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		LoggedUserForm loggedUserForm = (LoggedUserForm) form;
 		HashMap<String, Object> result = new HashMap<String, Object>();
-		Site delegateSite = Site.getDELEGATE_SITE();
 
-		if (Site.NORMAL.equals(delegateSite.getStatus())) {
+		String delegateSiteStatus = DelegateSiteCache.getDelegateSiteStatus();
+		if (Site.NORMAL.equals(delegateSiteStatus)) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}
-		Document doc = DocumentDAO.getDocumentUnderWork();
+		Document doc = DelegateSiteCache.getDocumentUnderWork();
 		if (doc.isTypeOne() && !loggedUserForm.getUser().isTypeOne()) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
@@ -71,9 +73,9 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}
-		if (Site.IN_NEGOTIATION.endsWith(delegateSite.getStatus())) {
+		if (Site.IN_NEGOTIATION.endsWith(delegateSiteStatus)) {
 			result.put("sitestatus", Site.IN_NEGOTIATION);
-			Paragraph paragraph = ParagraphDAO.getParagraph(delegateSite.getDataId());
+			Paragraph paragraph = DelegateSiteCache.getNegotiatedParagraph();
 			if (paragraph != null) {
 				int pVersion = Integer.valueOf(loggedUserForm.getParagraphVersion());
 				int pNumber = Integer.valueOf(loggedUserForm.getParagraphNumber());
@@ -91,7 +93,7 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			}
 			return result;
 		}
-		if (Site.IN_SIGN.endsWith(delegateSite.getStatus())) {
+		if (Site.IN_SIGN.endsWith(delegateSiteStatus)) {
 			Version version = VersionDAO.getVersionUnderWork();
 			if (!loggedUserForm.getUser().isCanSign()) {
 				result.put("sitestatus", Site.SIGN_SHOW);
@@ -107,12 +109,12 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 				return result;
 			}
 		}
-		result.put("sitestatus", delegateSite.getStatus());
+		result.put("sitestatus", delegateSiteStatus);
 		return result;
 	}
 
 	private void fillSignatures(HashMap<String, Object> result, Version version) throws SQLException {
-		List<SignatureVO> all = SignatureDAO.selectSignaturesFor(version.getId());
+		List<SignatureVO> all = DelegateSiteCache.getAllSignatures();
 		List<String> delegates = new ArrayList<String>(all.size());
 		List<String> fileNames = new ArrayList<String>(all.size());
 		List<String> flags = new ArrayList<String>(all.size());

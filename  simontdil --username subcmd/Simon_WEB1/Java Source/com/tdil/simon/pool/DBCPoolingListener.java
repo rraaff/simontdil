@@ -10,6 +10,7 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 import com.tdil.simon.data.ibatis.IBatisManager;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
 
 public class DBCPoolingListener implements ServletContextListener {
@@ -24,6 +25,7 @@ public class DBCPoolingListener implements ServletContextListener {
 			DataSource ds = (DataSource) envCtx.lookup("jdbc/SimonDB");
 			DatasourceManager.setDatasource(ds);
 			IBatisManager.init("SqlMapConfig-JNDI.xml");
+			DelegateSiteCache.refresh();
 		} catch (NamingException e) {
 			getLog().error(e.getMessage(), e);
 		}

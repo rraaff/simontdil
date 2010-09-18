@@ -43,7 +43,7 @@
 									<td height="20" bgcolor="#E6E6E6"><img src="images/null.gif" width="60" height="1"></td>
 									<td bgcolor="#E6E6E6"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:iterate name="StatisticsForm" property="statisticsVO.allCountries" id="countryIter"> 
-										<td width="80" align="left" bgcolor="#E6E6E6"><bean:write name="countryIter" property="name" /></td>
+										<td width="180" align="left" bgcolor="#E6E6E6"><bean:write name="countryIter" property="name" /><img src="images/null.gif" width="150" height="1" border="0"></td>
 									</logic:iterate>
 								</tr>
 								<tr>

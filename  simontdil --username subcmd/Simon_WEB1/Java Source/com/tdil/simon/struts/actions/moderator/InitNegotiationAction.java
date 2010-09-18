@@ -25,6 +25,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class InitNegotiationAction extends SimonAction implements TransactionalActionWithValue {
 
@@ -45,6 +46,7 @@ public class InitNegotiationAction extends SimonAction implements TransactionalA
 					createDocumentForm.initWith(id);
 				}
 			});
+			DelegateSiteCache.refresh();
 			return mapping.findForward("success");
 		} catch (ValidationException e) {
 			ActionErrors errors = new ActionErrors();

@@ -17,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.NegotiationUtils;
 
 public class CreateDocumentActionParagraph extends SimonAction {
@@ -51,6 +52,9 @@ public class CreateDocumentActionParagraph extends SimonAction {
 							}
 						}
 					});
+					if (!createDocumentForm.getParagraphHidden()) {
+						DelegateSiteCache.refresh();
+					}
 				}
 				return mapping.findForward("addParagraphs");
 			}

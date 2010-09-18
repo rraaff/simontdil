@@ -32,6 +32,7 @@ import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.struts.forms.ViewVersionForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
 
 public class ViewVersionAction extends SimonAction implements TransactionalActionWithValue {
@@ -58,6 +59,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 						viewForm.finishSign(viewForm.getVersion().getVersion().getId());
 					}
 				});
+				DelegateSiteCache.refresh();
 				return mapping.findForward("continue");
 			} else {
 				return mapping.findForward("invalidAction");
@@ -67,6 +69,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			// Custom check for shared page and action
 			if (UserTypeValidation.isValid(this.getLoggedUser(request), new UserTypeValidation[] { UserTypeValidation.MODERATOR})) {
 				TransactionProvider.executeInTransaction(this, form);
+				DelegateSiteCache.refresh();
 				viewForm.init(viewForm.getVersion().getVersion().getId());
 				return mapping.findForward("continue");
 			} else {

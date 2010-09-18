@@ -17,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.utils.NegotiationUtils;
 
@@ -46,6 +47,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
 						}
 					});
+					DelegateSiteCache.refresh();
 				}
 			}
 			return mapping.findForward("next");
@@ -67,6 +69,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 									NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
 								}
 							});
+							DelegateSiteCache.refresh();
 						}
 					}
 				}
@@ -88,6 +91,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
 							}
 						});
+						DelegateSiteCache.refresh();
 					}
 				}
 			}
@@ -107,6 +111,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
 						}
 					});
+					DelegateSiteCache.refresh();
 				}
 			}
 			return mapping.findForward("stay");
