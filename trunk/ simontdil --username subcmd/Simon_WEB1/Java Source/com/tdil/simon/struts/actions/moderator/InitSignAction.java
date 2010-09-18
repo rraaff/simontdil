@@ -21,6 +21,7 @@ import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class InitSignAction extends SimonAction implements TransactionalActionWithValue {
 
@@ -35,6 +36,7 @@ public class InitSignAction extends SimonAction implements TransactionalActionWi
 			throws Exception {
 		try {
 			TransactionProvider.executeInTransaction(this, form);
+			DelegateSiteCache.refresh();
 			return mapping.findForward("success");
 		} catch (ValidationException e) {
 			ActionErrors errors = new ActionErrors();

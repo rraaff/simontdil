@@ -1,3 +1,17 @@
+viste que por un lado hay fases de observaciones y después hay eventos
+ ¿cómo hacemos para evitar que algún distraido ponga en negociación vía web?... se hacen instalaciones separadas?
+ onda web para la etapa previa y una intranet con el dump de la base para las negociaciones?
+ jajaa
+ y a la versión deploydeable para web no le activo el menú de negociación
+ Otro tema, que me parece que es un error. inahibité un usuario, y me siguen llegando los mails de nueva observación
+ ¿puede ser?
+ o será por que tengo creado un admin
+ ya vengo... me voy a desayunar por que esto de que anden bien el soswar es aburridisimo... Cero adrenalina con vos, pibe!!!
+ jajaja
+ 
+-
+
+
 - Probar envio de emails
 
 - Agregar replacement de server para todos los emails

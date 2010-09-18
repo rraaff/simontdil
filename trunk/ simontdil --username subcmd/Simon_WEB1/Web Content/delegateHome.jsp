@@ -8,18 +8,23 @@
 <html:html>
 <script type="text/javascript">
 	
+	var inProgress = false;
 	function getDelegateSiteStatus() {
-		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
-			var errorResult = json.error;
-			if ('notLogged' == errorResult) {
-				window.location='<html:rewrite page="/login.jsp"/>';
-				return;
-			}
-		    var sitestatus = json.sitestatus;
-			if (sitestatus != 'NORMAL') {
-				window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
-			}
-		}}).get();
+		if (!inProgress) {
+			inProgress = true;
+			var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
+				inProgress = false;
+				var errorResult = json.error;
+				if ('notLogged' == errorResult) {
+					window.location='<html:rewrite page="/login.jsp"/>';
+					return;
+				}
+			    var sitestatus = json.sitestatus;
+				if (sitestatus != 'NORMAL') {
+					window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
+				}
+			}}).get();
+		}
 	}
 	timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientStatusRefreshTime()%>);
 

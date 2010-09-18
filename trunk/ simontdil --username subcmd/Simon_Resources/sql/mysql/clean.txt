@@ -1,10 +1,10 @@
-delete from `simon`.`DOCUMENT`;
-delete from `simon`.`VERSION`;
-delete from `simon`.`PARAGRAPH`;
-delete from `simon`.`OBSERVATION`;
-delete from `simon`.`SIGNATURE`;
-delete from `simon`.`DELEGATEAUDIT`;
-update site set status = 'NORMAL';
+delete from SIMON.DOCUMENT;
+delete from SIMON.VERSION;
+delete from SIMON.PARAGRAPH;
+delete from SIMON.OBSERVATION;
+delete from SIMON.SIGNATURE;
+delete from SIMON.DELEGATEAUDIT;
+update SIMON.SITE set status = 'NORMAL';
 update systemuser set
 password = '123',
 temporaryPassword = 0

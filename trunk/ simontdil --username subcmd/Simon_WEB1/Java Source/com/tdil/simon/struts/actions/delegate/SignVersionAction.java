@@ -17,6 +17,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.DelegateNegotiationForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class SignVersionAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
@@ -34,6 +35,7 @@ public class SignVersionAction extends AjaxSimonAction implements TransactionalA
 		negotiationForm.setUser(this.getLoggedUser(request));
 		negotiationForm.setRequest(request);
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, negotiationForm);	
+		DelegateSiteCache.refresh();
 		this.writeJsonResponse(result, response);
 		return null;
 	}
