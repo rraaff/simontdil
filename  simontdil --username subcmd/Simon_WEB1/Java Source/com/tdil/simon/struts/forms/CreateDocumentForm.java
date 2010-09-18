@@ -64,9 +64,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	// Parrafos
 	private int paragraph = 0;
-	private String paragraphTexts[] = new String[100];
-	private boolean paragraphStatus[] = new boolean[100];
-	private int paragraphIds[] = new int[100];
+	private String paragraphTexts[] = new String[1000];
+	private boolean paragraphStatus[] = new boolean[1000];
+	private int paragraphIds[] = new int[1000];
 	
 	private String goToParagraph;
 	
@@ -98,6 +98,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 	}
 	
+	public boolean getIntroductoryParagraph() {
+		return this.getParagraph() < Paragraph.INTRODUCTION_LIMIT;
+	}
+	
 	public void reset() {
 		this.operation = null;
 		this.step = 0;
@@ -111,9 +115,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.documentType = null;
 		this.introduction= null;
 		this.paragraph = 0;
-		this.paragraphTexts = new String[100];
-		this.paragraphStatus = new boolean[100];
-		this.paragraphIds = new int[100];
+		this.paragraphTexts = new String[1000];
+		this.paragraphStatus = new boolean[1000];
+		this.paragraphIds = new int[1000];
 		this.consolidated = false;
 		this.consolidateText= null;
 		this.principal = false;
@@ -125,12 +129,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		return allMonths;
 	}
 	
-	public List<String> getAllParagraphNumbers() {
-		List<String> result = new ArrayList<String>();
-		int index = 0;
+	public List<Paragraph> getAllParagraphNumbers() {
+		List<Paragraph> result = new ArrayList<Paragraph>();
+		int index = this.paragraph < Paragraph.INTRODUCTION_LIMIT ? 0 : Paragraph.INTRODUCTION_LIMIT;
 		while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
 			index = index + 1;
-			result.add(String.valueOf(index));
+			Paragraph p = new Paragraph();
+			p.setParagraphNumber(index);
+			result.add(p);
 		}
 		return result;
 	}
@@ -205,7 +211,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public int getParagraphForDisplay() {
-		return paragraph + 1;
+		return Paragraph.GetParagraphNumberForDisplay(paragraph) + 1;
 	}
 	
 	public int getParagraph() {
@@ -228,7 +234,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public String getBackDisabled() {
-		if (this.paragraph == 0) {
+		if (this.paragraph == 0 || this.paragraph == Paragraph.INTRODUCTION_LIMIT) {
 			return "true";
 		} else {
 			return "false";
@@ -273,9 +279,21 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.step = step;
 	}
 	
-	public List getPreviewParagraphs() {
+	public List getPreviewIntroduction() {
 		List result = new ArrayList();
 		int index = 0;
+		String paragraphText = this.paragraphTexts[index];
+		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+			result.add(String.valueOf(index + 1) + ". " + paragraphText);
+			index = index + 1;
+			paragraphText = this.paragraphTexts[index];
+		}
+		return result;
+	}
+	
+	public List getPreviewParagraphs() {
+		List result = new ArrayList();
+		int index = Paragraph.INTRODUCTION_LIMIT;
 		String paragraphText = this.paragraphTexts[index];
 		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
 			result.add(String.valueOf(index + 1) + ". " + paragraphText);
@@ -336,39 +354,75 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	private void updateParagraphs() throws SQLException {
 		List paragraphs = ParagraphDAO.selectAllParagraphsFor(this.getVersionId());
-		int index = 0;
-		for (Object object : paragraphs) {
-			Paragraph paragraph = (Paragraph)object;
-			paragraph.setParagraphText(this.paragraphTexts[index]);
-			paragraph.setDeleted(this.paragraphStatus[index]);
-			index = index + 1;
-			ParagraphDAO.updateParagraph(paragraph);
+		for (int i = 0; i < 1000; i++) {
+			String text = this.paragraphTexts[i];
+			if (!StringUtils.isEmptyOrWhitespaceOnly(text)) {
+				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], paragraphs);
+			}
 		}
-		String paragraphText = this.paragraphTexts[index];
-		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
-			Paragraph paragraph = new Paragraph();
+		
+//		int index = 0;
+//		for (Object object : paragraphs) {
+//			Paragraph paragraph = (Paragraph)object;
+//			paragraph.setParagraphText(this.paragraphTexts[index]);
+//			paragraph.setDeleted(this.paragraphStatus[index]);
+//			index = index + 1;
+//			ParagraphDAO.updateParagraph(paragraph);
+//		}
+//		String paragraphText = this.paragraphTexts[index];
+//		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+//			Paragraph paragraph = new Paragraph();
+//			paragraph.setVersionId(this.getVersionId());
+//			paragraph.setParagraphNumber(index + 1);
+//			paragraph.setParagraphText(paragraphText);
+//			paragraph.setDeleted(this.paragraphStatus[index]);
+//			this.paragraphIds[index] = ParagraphDAO.insertParagraph(paragraph);
+//			index = index + 1;
+//			paragraphText = this.paragraphTexts[index];
+//		}
+	}
+	
+	private void insertOrUpdateParagrap(int paragraphNumber, String text, boolean deleted, List paragraphs) throws SQLException {
+		// TODO Auto-generated method stub
+		Paragraph paragraph = getParagraphForNumber(paragraphs, paragraphNumber);
+		if (paragraph != null) {
+			paragraph.setParagraphText(text);
+			paragraph.setDeleted(deleted);
+			ParagraphDAO.updateParagraph(paragraph);
+		} else {
+			paragraph = new Paragraph();
 			paragraph.setVersionId(this.getVersionId());
-			paragraph.setParagraphNumber(index + 1);
-			paragraph.setParagraphText(paragraphText);
-			paragraph.setDeleted(this.paragraphStatus[index]);
-			this.paragraphIds[index] = ParagraphDAO.insertParagraph(paragraph);
-			index = index + 1;
-			paragraphText = this.paragraphTexts[index];
+			paragraph.setParagraphNumber(paragraphNumber + 1);
+			paragraph.setParagraphText(text);
+			paragraph.setDeleted(deleted);
+			this.paragraphIds[paragraphNumber] = ParagraphDAO.insertParagraph(paragraph);
 		}
 	}
-	private void insertParagraphs() throws SQLException {
-		int index = 0;
-		String paragraphText = this.paragraphTexts[index];
-		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
-			Paragraph paragraph = new Paragraph();
-			paragraph.setVersionId(this.getVersionId());
-			paragraph.setParagraphNumber(index + 1);
-			paragraph.setParagraphText(paragraphText);
-			paragraph.setDeleted(this.paragraphStatus[index]);
-			this.paragraphIds[index] = ParagraphDAO.insertParagraph(paragraph);
-			index = index + 1;
-			paragraphText = this.paragraphTexts[index];
+
+	private Paragraph getParagraphForNumber(List paragraphs, int paragraphNumber) {
+		for (Object o : paragraphs) {
+			Paragraph p = (Paragraph)o;
+			if (p.getParagraphNumber() - 1 == paragraphNumber) {
+				return p;
+			}
 		}
+		return null;
+	}
+
+	private void insertParagraphs() throws SQLException {
+		updateParagraphs();
+//		int index = 0;
+//		String paragraphText = this.paragraphTexts[index];
+//		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+//			Paragraph paragraph = new Paragraph();
+//			paragraph.setVersionId(this.getVersionId());
+//			paragraph.setParagraphNumber(index + 1);
+//			paragraph.setParagraphText(paragraphText);
+//			paragraph.setDeleted(this.paragraphStatus[index]);
+//			this.paragraphIds[index] = ParagraphDAO.insertParagraph(paragraph);
+//			index = index + 1;
+//			paragraphText = this.paragraphTexts[index];
+//		}
 		
 	}
 	private void fillVersion(Version version) throws SQLException {
@@ -500,9 +554,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
-		this.paragraphTexts = new String[100];
-		this.paragraphStatus = new boolean[100];
-		this.paragraphIds = new int[100];
+		this.paragraphTexts = new String[1000];
+		this.paragraphStatus = new boolean[1000];
+		this.paragraphIds = new int[1000];
 		List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
 		for (Paragraph p : paragraphs) {
 			paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();

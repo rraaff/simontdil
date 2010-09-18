@@ -1,6 +1,5 @@
 package com.tdil.simon.data.model;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.tdil.simon.struts.ApplicationResources;

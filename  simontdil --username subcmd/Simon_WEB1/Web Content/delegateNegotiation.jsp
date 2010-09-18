@@ -128,6 +128,15 @@ if ( dw_scrollObj.isSupported() ) {
 	var lastText = "";
 	var lastParagraphVersion = "0";
 	var inProgress = false;
+	
+	function getParagraphForDisplay(pNumber) {
+		if (pNumber < 500) {
+			return pNumber;
+		} else {
+			return pNumber - 500;
+		}
+	}
+	
 	function getDelegateSiteStatus() {
 		if (!inProgress) {
 			inProgress = true;
@@ -160,7 +169,7 @@ if ( dw_scrollObj.isSupported() ) {
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
-				        			divObj.innerHTML = paragraphNumber + ". " + paragraphText;
+				        			divObj.innerHTML = getParagraphForDisplay(paragraphNumber) + ". " + paragraphText;
 				        			lastNumber = paragraphNumber;
 				        			lastText = paragraphText;
 				        			lastParagraphVersion = paragraphVersion;
@@ -203,7 +212,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1">
 								<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 								<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
-									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+									<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 								</logic:iterate>
 							</div>
 						</div>

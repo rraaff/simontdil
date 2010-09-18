@@ -31,6 +31,11 @@ public class ObservationVO extends Observation {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public int getParagraphNumberForDisplay() {
+		return Paragraph.GetParagraphNumberForDisplay(this.getParagraphNumber());
+	}
+	
 	public int getParagraphNumber() {
 		return paragraphNumber;
 	}

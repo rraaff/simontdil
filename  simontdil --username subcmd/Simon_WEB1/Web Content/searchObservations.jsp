@@ -129,7 +129,7 @@
 													<td colspan="3" align="left">
 													<html:select name="SearchObservationsForm" property="paragraphNumber" styleClass="textfield_effect_day">
 														<option value="">Todos</option>
-														<html:options name="SearchObservationsForm" property="allParagraphs"/>
+														<html:optionsCollection name="SearchObservationsForm" property="allParagraphs" value="paragraphNumber" label="paragraphNumberForDiplayAndDiscriminator"/>
 													</html:select></td>
 												</tr>
 												<tr>

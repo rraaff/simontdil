@@ -80,7 +80,7 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 				int pVersion = Integer.valueOf(loggedUserForm.getParagraphVersion());
 				int pNumber = Integer.valueOf(loggedUserForm.getParagraphNumber());
 				if (paragraph.getParagraphNumber() == pNumber && paragraph.getVersionNumber() == pVersion) {
-					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
+					result.put("paragraphNumber", paragraph.getParagraphNumber());
 					result.put("paragraphText", "");
 					result.put("paragraphVersion", loggedUserForm.getParagraphVersion());
 				} else {

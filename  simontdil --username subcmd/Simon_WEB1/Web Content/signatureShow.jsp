@@ -94,7 +94,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<!-- PABLO: intro -->
 							<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 							<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
-								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>

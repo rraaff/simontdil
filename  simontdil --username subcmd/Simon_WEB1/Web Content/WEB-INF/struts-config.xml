@@ -53,7 +53,7 @@
       <forward name="continue" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/createDocumentActionStep2" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionStep2" scope="session">
-      <forward name="continue" path="/createDocumentStep2.jsp"/>
+      <forward name="continue" path="/createDocumentStepParagraph.jsp"/>
       <forward name="failure" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
@@ -68,6 +68,7 @@
       <forward name="stay" path="/createDocumentStepParagraph.jsp"/>
       <forward name="modifyIntroduction" path="/createDocumentStep2.jsp"/>
       <forward name="failure" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="modifyDocument" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/countPrivateMessagesForVersion" type="com.tdil.simon.struts.actions.moderator.CountPrivateMessagesForVersion" scope="request">
     </action>

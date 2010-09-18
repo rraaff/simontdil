@@ -13,6 +13,7 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
@@ -116,6 +117,25 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 			return mapping.findForward("stay");
 		}
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.addParagraphs"))) {
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.setParagraph(Paragraph.INTRODUCTION_LIMIT);
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					if (!createDocumentForm.getParagraphHidden()) {
+						TransactionProvider.executeInTransaction(new TransactionalAction() {
+							public void executeInTransaction() throws SQLException, ValidationException {
+								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							}
+						});
+						DelegateSiteCache.refresh();
+					}
+				}
+				return mapping.findForward("stay");
+			}
+		}
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.add"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
@@ -140,8 +160,27 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.setParagraph(0);
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					if (!createDocumentForm.getParagraphHidden()) {
+						TransactionProvider.executeInTransaction(new TransactionalAction() {
+							public void executeInTransaction() throws SQLException, ValidationException {
+								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							}
+						});
+						DelegateSiteCache.refresh();
+					}
+				}
+				return mapping.findForward("stay");
+			}
+		}
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.modifyDocument"))) {
+			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
 				request.getSession().setAttribute("paragraphNegotiated", "false");
-				return mapping.findForward("modifyIntroduction");
+				return mapping.findForward("modifyDocument");
 			}
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.preview"))) {
