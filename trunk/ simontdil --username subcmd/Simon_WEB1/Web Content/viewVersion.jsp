@@ -360,11 +360,11 @@ if ( dw_scrollObj.isSupported() ) {
 									<% if (isDelegate) { %>
 										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 									<% } else { %>
-										<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+										<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 									<% } %>
 								</logic:equal>
 								<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
-									<p class="article"><bean:write name="paragraph" property="paragraphNumber" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+									<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 								</logic:notEqual>
 							</logic:iterate>
 						</div>
@@ -436,7 +436,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="243" align="left">
 													<select id="pNumber">
 														<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumber" /></option>
+															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDiplayAndDiscriminator" /></option>
 														</logic:iterate>
 													</select>
 													</td>

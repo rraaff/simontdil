@@ -225,7 +225,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
 						<!-- div id="documentoCompleto" -->
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-								<p class="article"><bean:write name="paragraph" property="paragraphNumber" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
 							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
 								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">

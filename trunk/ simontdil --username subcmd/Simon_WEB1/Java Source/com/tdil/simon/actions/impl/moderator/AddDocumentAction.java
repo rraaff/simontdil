@@ -26,7 +26,11 @@ import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
-
+/**
+ * @deprecated
+ * @author mgodoy
+ *
+ */
 public class AddDocumentAction extends AbstractAction implements TransactionalAction {
 
 	private String title;

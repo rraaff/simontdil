@@ -82,17 +82,18 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Introducción:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:textarea name="CreateDocumentForm" property="limitedIntro" disabled="true" styleClass="textfield_effect"/></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="28"><img src="images/null.gif" width="1" height="28"></td>
-							</tr>
-							<tr>
-								<td colspan="3" align="center"><html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
-								</html:submit></td>
+								<td colspan="3" align="center">
+									<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
+										<html:submit property="operation">
+											<bean:message key="createDocument.paragraphs.modifyDocument"/>
+										</html:submit>
+									</logic:equal>
+									<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
+										<html:submit property="operation">
+											<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
+										</html:submit>
+									</logic:equal>
+									</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -116,7 +117,16 @@
 			<table width="440" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="420" height="19" align="left"><div id="blockTitle">P&aacute;rrafos (Paso 3 de 4)</div></td>
+					<td background="images/interfaces/topTitle.gif" width="420" height="19" align="left">
+						<div id="blockTitle">
+						<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
+							Introducci&oacute;n (Paso 2 de 4)
+						</logic:equal>
+						<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
+							P&aacute;rrafos (Paso 3 de 4)
+						</logic:equal>
+						</div>
+					</td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -139,7 +149,7 @@
 								<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="31" align="right">
 									<html:select name="CreateDocumentForm" property="goToParagraph">
-										<html:options name="CreateDocumentForm" property="allParagraphNumbers"/>
+										<html:optionsCollection name="CreateDocumentForm" property="allParagraphNumbers" value="paragraphNumber" label="paragraphNumberForDisplay"/>
 									</html:select></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="32" align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
@@ -213,9 +223,16 @@
 							</tr>
 							<tr>
 								<td colspan="9" height="25" align="center">
-								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.preview"/>
-								</html:submit>								
+								<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
+									<html:submit property="operation">
+										<bean:message key="createDocument.addParagraphs"/>
+									</html:submit>
+								</logic:equal>
+								<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
+									<html:submit property="operation">
+										<bean:message key="createDocument.paragraphs.preview"/>
+									</html:submit>
+								</logic:equal>
 								</td>
 							</tr>
 						</table>

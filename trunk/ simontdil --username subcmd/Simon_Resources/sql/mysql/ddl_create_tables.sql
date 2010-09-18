@@ -40,7 +40,7 @@ CREATE  TABLE `simon`.`SYSTEMUSER` (
 CREATE  TABLE `simon`.`DOCUMENT` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `title` VARCHAR(100) NOT NULL ,
-  `introduction` MEDIUMTEXT NOT NULL ,
+  `introduction` MEDIUMTEXT NULL ,
   `principal` INT NULL ,
   `typeOne` INT NULL ,
   `typeTwo` INT NULL ,

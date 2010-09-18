@@ -59,7 +59,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<td height="270" align="left" valign="top">
 								<div id="main">
 									<div id="lyr1">
-										<p class="article"><bean:write name="CreateDocumentForm" property="introduction"/></p>
+										<logic:iterate name="CreateDocumentForm" property="previewIntroduction" id="intro"> 
+											<p class="article"><%=intro%></p>
+										</logic:iterate>
 										<logic:iterate name="CreateDocumentForm" property="previewParagraphs" id="paragraph"> 
 											<p class="article"><%=paragraph%></p>
 										</logic:iterate>

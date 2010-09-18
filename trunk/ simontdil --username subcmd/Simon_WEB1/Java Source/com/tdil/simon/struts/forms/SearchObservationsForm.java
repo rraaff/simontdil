@@ -206,12 +206,8 @@ public class SearchObservationsForm extends ActionForm {
 		this.exactDate = exactDate;
 	}
 
-	public List<String> getAllParagraphs() {
-		return allParagraphs;
-	}
-
-	public void setAllParagraphs(List<String> allParagraphs) {
-		this.allParagraphs = allParagraphs;
+	public List<Paragraph> getAllParagraphs() {
+		return paragraphs;
 	}
 
 	public void init() throws SQLException {
@@ -223,12 +219,6 @@ public class SearchObservationsForm extends ActionForm {
 		setAllCountries(CountryDAO.selectAllCountries());
 		List pars = ParagraphDAO.selectNotDeletedParagraphsFor(this.getVersionId());
 		setParagraphs(pars);
-		List<String> numbers = new ArrayList<String>();
-		for (Object o : pars) {
-			numbers.add(String.valueOf(((Paragraph) o).getParagraphNumber()));
-		}
-		setAllParagraphs(numbers);
-
 	}
 
 	public void search() throws SQLException {

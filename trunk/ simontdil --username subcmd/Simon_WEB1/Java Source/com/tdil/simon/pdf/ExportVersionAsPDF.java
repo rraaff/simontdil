@@ -8,6 +8,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -61,11 +62,15 @@ public class ExportVersionAsPDF {
 		// generate the body
 		buf.append("<body>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
+		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<H2>Introducción</H2>");
-		buf.append("<p>").append(version.getDocument().getIntroduction()).append("</p>");
+		for (Paragraph p : introduction) {
+			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(p.getParagraphText()).append("</p>");
+		}
+		List<Paragraph> paragraphs = version.getParagraphs().subList(introduction.size(), version.getParagraphs().size());
 		buf.append("<H2>Párrafos</H2>");
-		for (Paragraph p : version.getParagraphs()) {
-			buf.append("<p>").append(p.getParagraphNumber()).append(". ").append(p.getParagraphText()).append("</p>");
+		for (Paragraph p : paragraphs) {
+			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(p.getParagraphText()).append("</p>");
 		}
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
@@ -80,7 +85,6 @@ public class ExportVersionAsPDF {
 				buf.append("</TR><TR>");
 				buf.append("<TD>Posición: ").append(signatureVO.getJob()).append("</TD>");
 				buf.append("</TR></TABLE></TD>");
-				System.out.println(new File(".").getAbsolutePath()); 
 				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
 			}
 			buf.append("</table>");
@@ -94,7 +98,7 @@ public class ExportVersionAsPDF {
 					DelegateAuditDAO.registerDownloadObservation(user, o);
 					ObservationVO vo = (ObservationVO)o;
 					buf.append("<TR><TD><TABLE><TR>");
-					buf.append("<TD>Párrafo: ").append(vo.getParagraphNumber()).append("</TD>");
+					buf.append("<TD>Párrafo: ").append(vo.getParagraphNumberForDisplay()).append("</TD>");
 					buf.append("</TR><TR>");
 					buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
 					buf.append("</TR><TR>");
@@ -109,7 +113,6 @@ public class ExportVersionAsPDF {
 		}
 		buf.append("</body>");
 		buf.append("</html>");
-		System.out.println(buf.toString());
 		ByteArrayOutputStream tidyOut = new ByteArrayOutputStream();
 		Tidy tidy = new Tidy(); 
 		tidy.setXHTML(true); 
@@ -125,5 +128,17 @@ public class ExportVersionAsPDF {
 		renderer.setDocument( doc,  null);
 		renderer.layout();
 		renderer.createPDF(output);
+	}
+
+	private static List<Paragraph> filterIntroduction(List<Paragraph> paragraphs) {
+		List<Paragraph> result = new ArrayList<Paragraph>();
+		for (Paragraph p : paragraphs) {
+			if (p.belongsToIntroduction()) {
+				result.add(p);
+			} else {
+				return result;
+			}
+		}
+		return result;
 	}
 }
