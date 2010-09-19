@@ -233,10 +233,26 @@ if ( dw_scrollObj.isSupported() ) {
 										var editor;
 										
 										function refreshEditorContents(selectObj) {
-											editor.setData(document.getElementById('p_' + selectObj.value).innerHTML);
+											var paragraphtext = document.getElementById('p_' + selectObj.value).innerHTML;
+											editor.setData(extractParagraphContent(paragraphtext));
+										}
+										
+										function extractParagraphContent(content) {
+											return content.substring(content.indexOf('.') + 1, content.length);
+										}
+										
+										function clickNewPar(chkObj) {
+											if (chkObj.checked) {
+												document.getElementById('newParTextTD').style.display = 'block';
+											} else {
+												document.getElementById('newParTextTD').style.display = 'none';
+											}
 										}
 										
 										function addObservation() {
+											document.getElementById('pNewParagraph').checked = false;
+											document.getElementById('newParTextTD').style.display = 'none';
+											document.getElementById('newParText').value = '';
 											if ( editor )
 												return;
 											editor = CKEDITOR.appendTo( 'editor', {
@@ -251,6 +267,9 @@ if ( dw_scrollObj.isSupported() ) {
 										}
 										
 										function addObservationFor(pObj, pNumber) {
+											document.getElementById('pNewParagraph').checked = false;
+											document.getElementById('newParTextTD').style.display = 'none';
+											document.getElementById('newParText').value = '';
 											if ( editor )
 												return;
 											editor = CKEDITOR.appendTo( 'editor', {
@@ -259,7 +278,7 @@ if ( dw_scrollObj.isSupported() ) {
 												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
 												height:"140", width:"380",
 												baseFloatZIndex: 100002
-											}, pObj.innerHTML );
+											}, extractParagraphContent(pObj.innerHTML));
 											var pNumberObj = document.getElementById('pNumber');
 											var opts = pNumberObj.options;
 											var index = 0;
@@ -295,6 +314,9 @@ if ( dw_scrollObj.isSupported() ) {
 											var paragraphNumber = document.getElementById('pNumber').value;
 											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
 											var pText = editor.getData();
+											if (document.getElementById('pNewParagraph').checked) {
+												pText = document.getElementById('newParText').value + " - " + pText;
+											}
 											var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
 											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
 												var errorResult = json.error;
@@ -479,10 +501,16 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right"><input type="checkbox" id="pNewParagraph"></td>
+													<td align="right"><input type="checkbox" id="pNewParagraph" onclick="clickNewPar(this);"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td align="left">Solicitar como nuevo párrafo</td>
 												<tr>
+												<tr>
+													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+												</tr>
+												<tr>
+													<td colspan="3"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext"></div></td>
+												</tr>
 												<tr>
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
@@ -522,22 +550,4 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </div>
-<script type="text/javascript">
-function test() {
-      Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "OK", en cambio si desea modificarla o revisarla antes de enviarla, presione "cancelar"', { onComplete: 
-        function(returnvalue) {
-          if(returnvalue)
-          {
-            Sexy.info('Enviar');
-          }
-          else
-          {
-            Sexy.alert('Cancelar');
-          }
-        }
-      });
-}
-</script>
-AASAAAS
-<input type="button" onclick="test();" value="aaaaaa"/>
 <%@ include file="includes/footer.jsp" %>	
