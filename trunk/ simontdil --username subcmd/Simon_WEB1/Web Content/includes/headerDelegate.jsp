@@ -13,6 +13,7 @@
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
 <script type="text/javascript" src="ckeditor.js"></script>
+<script type="text/javascript" src="scripts/sexyalertbox.v1.2.moo.mini.js"></script>
 <!--[if lte IE 7]>
 <style>
 #menuwrapper, #p7menubar ul a {height: 1%;}
@@ -22,6 +23,7 @@ a:active {width: auto;}
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
+<link href="styles/sexyalertbox.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 <!--
 #content #centrador{
