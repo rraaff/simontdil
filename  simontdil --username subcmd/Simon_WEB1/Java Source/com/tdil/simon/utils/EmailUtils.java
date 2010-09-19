@@ -45,6 +45,7 @@ public class EmailUtils {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
 							notification.init();
+							notification.setCreationDate(observationForm.getCreationDate());
 						}
 					});
 					notification.notifyDelegates();

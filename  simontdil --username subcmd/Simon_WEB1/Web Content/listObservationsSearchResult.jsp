@@ -125,7 +125,7 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="560" align="left" valign="top"><p class="dataDinamica"><bean:write name="observation" property="observationText" /></p></td>
+														<td width="560" align="left" valign="top"><p class="dataDinamica"><bean:write filter="false" name="observation" property="observationText" /></p></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>

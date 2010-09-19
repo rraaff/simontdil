@@ -1,6 +1,7 @@
 package com.tdil.simon.utils;
 
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -24,6 +25,7 @@ public class NewObservationNotification {
 	private Version version;
 	private SystemUser user;
 	private Country country;
+	private Date creationDate;
 	private List<SystemUser> toNotify;
 	
 	public String getVersionId() {
@@ -71,7 +73,11 @@ public class NewObservationNotification {
 			body = body.replace("{DELEGATION}", this.country.getName());
 			body = body.replace("{SERVER}", SystemConfig.getServerUrl());
 			body = body.replace("{FULLNAME}", user2.getName());
-			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewObservation(), user2.getEmail(), SystemConfig.getMailSubjectForNewObservation(), body);
+			
+			String subject = SystemConfig.getMailSubjectForNewObservation();
+			subject = subject.replace("{DELEGATION}", this.country.getName());
+			subject = subject.replace("{DATE}", SystemConfig.getDateFormatWithMinutes().format(this.getCreationDate()));
+			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewObservation(), user2.getEmail(), subject, body);
 		} catch (Exception e) {
 			getLog().error(e.getMessage(), e);
 		}
@@ -79,6 +85,12 @@ public class NewObservationNotification {
 	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(NewObservationNotification.class);
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 	
 	

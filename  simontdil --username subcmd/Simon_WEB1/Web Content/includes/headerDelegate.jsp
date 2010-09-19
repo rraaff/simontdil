@@ -12,6 +12,7 @@
 <script type="text/javascript" src="./scripts/notimoo.js" ></script>
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
+<script type="text/javascript" src="ckeditor.js"></script>
 <!--[if lte IE 7]>
 <style>
 #menuwrapper, #p7menubar ul a {height: 1%;}

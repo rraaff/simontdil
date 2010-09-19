@@ -1,5 +1,7 @@
 package com.tdil.simon.struts.forms;
 
+import java.util.Date;
+
 import org.apache.struts.action.ActionForm;
 
 import com.tdil.simon.data.model.SystemUser;
@@ -13,6 +15,7 @@ public class ObservationForm extends ActionForm {
 	private String newParagraph;
 	private String paragraphText;
 	private String versionId;
+	private Date creationDate = new Date();
 	private SystemUser user;
 	
 	public String getParagraphNumber() {
@@ -44,5 +47,11 @@ public class ObservationForm extends ActionForm {
 	}
 	public void setUser(SystemUser user) {
 		this.user = user;
+	}
+	public Date getCreationDate() {
+		return creationDate;
+	}
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
 	}
 }
