@@ -20,27 +20,18 @@
 }
 #header #blockinHeader {
 	background-color: #FFFFFF;
-	height: 76px;
+	height: 50px;
 	width: 500px;
 	float: right;
 	position: relative;
-	border-right-width: 1px;
-	border-bottom-width: 1px;
-	border-left-width: 1px;
-	border-right-style: solid;
-	border-bottom-style: solid;
-	border-left-style: solid;
-	border-right-color: #FFFFFF;
-	border-bottom-color: #FFFFFF;
-	border-left-color: #FFFFFF;
 }
 -->
 </style>
 </head>
 <body>
 <div id="header">
-	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136"></div>
+	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
 	<div id="blockinHeader"></div>
 	<div id="siteSeccion"><img src="images/header/zonaRestringida.gif" width="168" height="60"></div>
-	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
+	<div id="rayitaHeader"><img src="images/null.gif" width="600" height="5"></div>
 </div>

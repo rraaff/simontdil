@@ -16,11 +16,26 @@
 <style type="text/css">
 <!--
 #centrador {
-	padding-left:340px;
+	padding-left:500px;
 }
 #content{
-	width:980px;
-	height:520px;
+	width:auto;
+	height:700px;
+	text-align:center;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #808080;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-left: 10px;
+}
+#imageHolder{
+	height: 480px;
+	width: 978px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+	padding-top: 100px;
 }
 
 -->
@@ -28,14 +43,8 @@
 </head>
 <body>
 <div id="content">
-<table width="978" border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td><img src="images/demo/caratula.gif" width="978" height="480"></td>
-	</tr>
-	<tr>
-		<td><div id="centrador"><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a> <a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></div></td>
-	</tr>
-</table>
+	<div id="imageHolder"><img src="images/demo/caratula.gif" width="978" height="480"></div>
+	<div id="centrador"><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a> <a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></div>
 </div>
 <div id="footer">
 	<div id="copyright">SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>

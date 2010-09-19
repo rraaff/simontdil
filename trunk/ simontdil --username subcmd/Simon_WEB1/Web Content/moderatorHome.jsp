@@ -14,7 +14,7 @@
 -->
 </style>
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="590" border="1" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<!-- IF HAY DOCS SECUNDARIOS -->
 		<td width="294">
