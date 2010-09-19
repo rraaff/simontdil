@@ -275,20 +275,26 @@ if ( dw_scrollObj.isSupported() ) {
 											editor.destroy();
 											editor = null;
 										}
-									
+										
 										function doAdd() {
+											var pText = editor.getData();
+											if (pText.length == 0) {
+												Sexy.error('Debe ingresar la observación.');
+												return;
+											}
+											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "OK", en cambio si desea modificarla o revisarla antes de enviarla, presione "cancelar"', { onComplete: 
+										        function(returnvalue) {
+										          if(returnvalue) {
+										            basicDoAdd();
+										          } 
+										        }
+										      });
+										}
+									
+										function basicDoAdd() {
 											var paragraphNumber = document.getElementById('pNumber').value;
 											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
 											var pText = editor.getData();
-											if (pText.length == 0) {
-												notimooErrorManager.show({
-													title: 'Error',
-													message: 'Debe ingresar el mensaje',
-													 customClass:'alert_error',
-													 sticky: true
-												});
-												return;
-											}
 											var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
 											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
 												var errorResult = json.error;
@@ -312,20 +318,13 @@ if ( dw_scrollObj.isSupported() ) {
 						
 										}
 										var notimooObservationManager = new Notimoo();
+										
 										function showOKMessage() {
-											notimooObservationManager.show({
-												title: 'Observación',
-												message: 'Su observación ha sido agregada exitosamente.'
-											});
+											Sexy.info('Su observación ha sido agregada exitosamente.');
 										}
 										
 										function showErrorMessage() {
-											notimooObservationManager.show({
-												title: 'Error',
-												message: 'Su observación no ha podido ser agregada.',
-												customClass:'alert_error',
-												 sticky: true
-											});
+											Sexy.error('Su observación no ha podido ser agregada.');
 										}
 									</script>
 									<input type="button" value="Añadir observacion" onclick="addObservation();">
@@ -523,6 +522,22 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </div>
-<script>
+<script type="text/javascript">
+function test() {
+      Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "OK", en cambio si desea modificarla o revisarla antes de enviarla, presione "cancelar"', { onComplete: 
+        function(returnvalue) {
+          if(returnvalue)
+          {
+            Sexy.info('Enviar');
+          }
+          else
+          {
+            Sexy.alert('Cancelar');
+          }
+        }
+      });
+}
 </script>
+AASAAAS
+<input type="button" onclick="test();" value="aaaaaa"/>
 <%@ include file="includes/footer.jsp" %>	
