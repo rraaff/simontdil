@@ -129,11 +129,17 @@ if ( dw_scrollObj.isSupported() ) {
 	var lastParagraphVersion = "0";
 	var inProgress = false;
 	
+	var intro = "abcdefghijklmnopqrstuvwxyz";
+	
 	function getParagraphForDisplay(pNumber) {
 		if (pNumber < 500) {
-			return pNumber;
+			if (pNumber < intro.length) {
+				return intro.charAt(pNumber);
+			} else {
+				return "z" + (pNumber - intro.length);
+			}
 		} else {
-			return pNumber - 500;
+			return pNumber - 500 + 1;
 		}
 	}
 	
@@ -169,7 +175,7 @@ if ( dw_scrollObj.isSupported() ) {
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
-				        			divObj.innerHTML = getParagraphForDisplay(paragraphNumber) + ". " + paragraphText;
+				        			divObj.innerHTML = getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText;
 				        			lastNumber = paragraphNumber;
 				        			lastText = paragraphText;
 				        			lastParagraphVersion = paragraphVersion;

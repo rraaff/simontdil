@@ -12,7 +12,7 @@ public class Paragraph extends PersistentObject {
 	
 	private int versionNumber = 1;
 	
-	private static final String[] introNumbers = new String[] {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+	private static final String[] introNumbers = new String[] {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};	
 	
 	public int getVersionId() {
 		return versionId;
@@ -39,7 +39,11 @@ public class Paragraph extends PersistentObject {
 	
 	public static String GetParagraphNumberForDisplay(int paragraphNumber) {
 		if (paragraphNumber < INTRODUCTION_LIMIT) {
-			return introNumbers[paragraphNumber];
+			if (paragraphNumber < introNumbers.length) {
+				return introNumbers[paragraphNumber];
+			} else {
+				return introNumbers[introNumbers.length - 1] + (paragraphNumber - introNumbers.length);
+			}
 		} else {
 			return String.valueOf(paragraphNumber - INTRODUCTION_LIMIT + 1);
 		}

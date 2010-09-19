@@ -436,7 +436,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="243" align="left">
 													<select id="pNumber">
 														<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDiplayAndDiscriminator" /></option>
+															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDiplay" /></option>
 														</logic:iterate>
 													</select>
 													</td>
