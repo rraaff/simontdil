@@ -7,10 +7,10 @@
 <%@ include file="includes/headerLogoff.jsp" %>
 <div id="content">
 <html:form method="POST" action="/login">
-<table height="390" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="middle">
-			<table width="340" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 					<td background="images/interfaces/topTitle.gif" width="320" height="19" align="center"><img src="images/titles/ingresoAlSitio.gif" alt="Ingreso al Sitio" width="109" height="19"></td>
@@ -19,15 +19,15 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="320"><!-- corte tabla template -->
-						<table width="320" border="0" cellspacing="0" cellpadding="0">
+					<td width="380"><!-- corte tabla template -->
+						<table width="380" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" width="101">Usuario:</td>
+								<td align="right" width="123">Usuario:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="212"><html:text name="LoginForm" property="username" styleClass="textfield_effect"/></td>
+								<td width="250"><html:text name="LoginForm" property="username" styleClass="textfield_effect"/></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

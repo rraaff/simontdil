@@ -8,7 +8,7 @@
 <html:html>
 <div id="content">
 <html:form method="POST" action="/requestPassword">
-<table width="960" height="390" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td>
 			<table width="340" border="0" cellspacing="0" cellpadding="0" align="center">
