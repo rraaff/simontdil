@@ -36,6 +36,10 @@ public class ParagraphValidation {
 		return FieldValidation.validateText(text, fieldName, 4000000, validation);
 	}
 	
+	public static String validateParagraphTextForLength(String text, String fieldName, ValidationError validation) {
+		return FieldValidation.validateTextForLength(text, fieldName, 4000000, validation);
+	}
+	
 	public static String validateObservation(String text, String fieldName, ValidationError validation) {
 		return FieldValidation.validateText(text, fieldName, 4000000, validation);
 	}

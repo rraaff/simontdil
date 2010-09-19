@@ -131,13 +131,24 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public List<Paragraph> getAllParagraphNumbers() {
 		List<Paragraph> result = new ArrayList<Paragraph>();
-		int index = this.paragraph < Paragraph.INTRODUCTION_LIMIT ? 0 : Paragraph.INTRODUCTION_LIMIT;
-		while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
-			index = index + 1;
-			Paragraph p = new Paragraph();
-			p.setParagraphNumber(index);
-			result.add(p);
+		if (this.paragraph < Paragraph.INTRODUCTION_LIMIT) {
+			int index = 0;	
+			while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
+				Paragraph p = new Paragraph();
+				index = index + 1;
+				p.setParagraphNumber(index);
+				result.add(p);
+			}
+		} else {
+			int index = Paragraph.INTRODUCTION_LIMIT;
+			while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
+				Paragraph p = new Paragraph();
+				index = index + 1;
+				p.setParagraphNumber(index);
+				result.add(p);
+			}
 		}
+		
 		return result;
 	}
 	
@@ -210,8 +221,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.paragraphTexts[paragraph] = paragraphText;
 	}
 	
-	public int getParagraphForDisplay() {
-		return Paragraph.GetParagraphNumberForDisplay(paragraph) + 1;
+	public String getParagraphForDisplay() {
+		return Paragraph.GetParagraphNumberForDisplay(paragraph);
 	}
 	
 	public int getParagraph() {
@@ -284,7 +295,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		int index = 0;
 		String paragraphText = this.paragraphTexts[index];
 		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
-			result.add(String.valueOf(index + 1) + ". " + paragraphText);
+			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
 		}
@@ -296,7 +307,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		int index = Paragraph.INTRODUCTION_LIMIT;
 		String paragraphText = this.paragraphTexts[index];
 		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
-			result.add(String.valueOf(index + 1) + ". " + paragraphText);
+			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
 		}
@@ -618,6 +629,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public void setInNegotiation(boolean isInNegotiation) {
 		this.isInNegotiation = isInNegotiation;
 	}
+	
+	public ValidationError validateCurrentParagraphForLength(ActionMapping mapping, HttpServletRequest request) {
+		ValidationError validation = new ValidationError();
+		ParagraphValidation.validateParagraphTextForLength(this.getParagraphText(), "paragraphText", validation);
+		return validation;
+	} 
 
 	public ValidationError validateCurrentParagraph(ActionMapping mapping, HttpServletRequest request) {
 		ValidationError validation = new ValidationError();

@@ -28,6 +28,19 @@ public class FieldValidation {
 		return result;
 	}
 	
+	public static String validateTextForLength(String text, String field, int length, ValidationError validation) {
+		String result = text;
+		if (StringUtils.isEmptyOrWhitespaceOnly(text)) {
+			return "";
+		} else {
+			result = text.trim();
+			if (result.length() > length) {
+				validation.setFieldError(field, field + "." + ValidationErrors.TEXT_TOO_LONG);
+			}
+		}
+		return result;
+	}
+	
 	public static String validateEmail(String email, String field, ValidationError validation) {
 		String result = email;
 		if (StringUtils.isEmptyOrWhitespaceOnly(email)) {
