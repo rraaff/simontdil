@@ -229,7 +229,37 @@ if ( dw_scrollObj.isSupported() ) {
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
 									<script type="text/javascript">
 										var notimooAddManager = new Notimoo();
-										function addObservationFor(pNumber) {
+										var alreadyReplaced = false;
+										var editor;
+										
+										function refreshEditorContents(selectObj) {
+											editor.setData(document.getElementById('p_' + selectObj.value).innerHTML);
+										}
+										
+										function addObservation() {
+											if ( editor )
+												return;
+											editor = CKEDITOR.appendTo( 'editor', {
+												// Defines a simpler toolbar to be used in this sample.
+												// Note that we have added out "MyButton" button here.
+												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+												height:"140", width:"380",
+												baseFloatZIndex: 100002
+											});
+											document.getElementById('outerdiv').style.display = '';
+											refreshEditorContents(document.getElementById('pNumber'));
+										}
+										
+										function addObservationFor(pObj, pNumber) {
+											if ( editor )
+												return;
+											editor = CKEDITOR.appendTo( 'editor', {
+												// Defines a simpler toolbar to be used in this sample.
+												// Note that we have added out "MyButton" button here.
+												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+												height:"140", width:"380",
+												baseFloatZIndex: 100002
+											}, pObj.innerHTML );
 											var pNumberObj = document.getElementById('pNumber');
 											var opts = pNumberObj.options;
 											var index = 0;
@@ -239,11 +269,17 @@ if ( dw_scrollObj.isSupported() ) {
 											opts[index].selected = true;
 											document.getElementById('outerdiv').style.display = '';
 										}
+										
+										function cancelAdd() {
+											document.getElementById('outerdiv').style.display = 'none';
+											editor.destroy();
+											editor = null;
+										}
 									
 										function doAdd() {
 											var paragraphNumber = document.getElementById('pNumber').value;
 											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
-											var pText = document.getElementById('pText').value;
+											var pText = editor.getData();
 											if (pText.length == 0) {
 												notimooErrorManager.show({
 													title: 'Error',
@@ -262,9 +298,10 @@ if ( dw_scrollObj.isSupported() ) {
 												}
 												var result = json.result;
 											   if ('OK' == result) {
+											   editor.destroy();
+											   editor = null;
 											   document.getElementById('pNumber').selectedIndex = 0;
 											   document.getElementById('pNewParagraph').checked = false;
-											   document.getElementById('pText').value = "";
 												document.getElementById('outerdiv').style.display = 'none';
 												showOKMessage();
 											   } else {
@@ -291,7 +328,7 @@ if ( dw_scrollObj.isSupported() ) {
 											});
 										}
 									</script>
-									<input type="button" value="Añadir observacion" onclick="document.getElementById('outerdiv').style.display = '';">
+									<input type="button" value="Añadir observacion" onclick="addObservation();">
 								</logic:equal></td>
 							</tr>
 							<tr>
@@ -358,7 +395,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
 								<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
 									<% if (isDelegate) { %>
-										<p class="article" onclick="addObservationFor('<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+										<p id="p_<bean:write name="paragraph" property="paragraphNumber" />" class="article" onclick="addObservationFor(this, '<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 									<% } else { %>
 										<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 									<% } %>
@@ -400,9 +437,7 @@ if ( dw_scrollObj.isSupported() ) {
 </table>
 </div>
 </html:form>
-<%@ include file="includes/footer.jsp" %>
 <div id="outerdiv" style="display: none;">
-	<!-- div id="innerdiv" -->
 		<div id="innerdiv"></div>
 		<div id="contentTableComment">
 		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
@@ -434,9 +469,9 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="150" align="right">Párrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="243" align="left">
-													<select id="pNumber">
+													<select id="pNumber" onchange="refreshEditorContents(this);">
 														<logic:iterate name="ViewVersion" property="version.paragraphs" id="paragraph"> 
-															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDiplay" /></option>
+															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDisplay" /></option>
 														</logic:iterate>
 													</select>
 													</td>
@@ -455,13 +490,17 @@ if ( dw_scrollObj.isSupported() ) {
 												<tr>
 													<td align="right" valign="top">Observación: </td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td align="left"><textarea id="pText" class="textfield_effect_area"></textarea></td>
+													<td align="left">
+														<!--  textarea id="pText" name="pText" class="textfield_effect_area"></textarea-->
+														<div id="editor">
+														</div>
+												</td>
 												<tr>
 												<tr>
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="3" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="document.getElementById('outerdiv').style.display = 'none';" value="Cancelar"></td>
+													<td colspan="3" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->
@@ -482,6 +521,8 @@ if ( dw_scrollObj.isSupported() ) {
 				</td>
 			<tr>
 		</table>
-		<!--/div -->
 	</div>
 </div>
+<script>
+</script>
+<%@ include file="includes/footer.jsp" %>	
