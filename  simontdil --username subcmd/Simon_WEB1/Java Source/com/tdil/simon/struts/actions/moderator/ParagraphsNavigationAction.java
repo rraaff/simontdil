@@ -38,7 +38,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 
 		String image = ImageTagUtil.getName(request);
 		if (image != null && "jumpTo".equals(image)) {
-			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()) - 1);
+			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()));
 			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 			if (!createDocumentForm.getParagraphHidden()) {
 				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
@@ -118,7 +118,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			return mapping.findForward("stay");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.addParagraphs"))) {
-			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			ValidationError error = createDocumentForm.validateCurrentParagraphForLength(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
@@ -184,7 +184,12 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.preview"))) {
-			return mapping.findForward("preview");
+			ValidationError error = createDocumentForm.validateCurrentParagraphForLength(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				return mapping.findForward("preview");
+			}
 		}
 		return mapping.findForward("stay");
 	}

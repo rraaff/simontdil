@@ -12,6 +12,8 @@ public class Paragraph extends PersistentObject {
 	
 	private int versionNumber = 1;
 	
+	private static final String[] introNumbers = new String[] {"a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"};
+	
 	public int getVersionId() {
 		return versionId;
 	}
@@ -20,11 +22,11 @@ public class Paragraph extends PersistentObject {
 	}
 	
 	public String getParagraphNumberForDiplayAndDiscriminator() {
-		return GetParagraphNumberForDisplayAndDiscriminator(this.getParagraphNumber());
+		return GetParagraphNumberForDisplayAndDiscriminator(this.getParagraphNumber() - 1);
 	}
 	
-	public int getParagraphNumberForDisplay() {
-		return GetParagraphNumberForDisplay(this.getParagraphNumber());
+	public String getParagraphNumberForDisplay() {
+		return GetParagraphNumberForDisplay(this.getParagraphNumber() - 1);
 	}
 	
 	public static String GetParagraphNumberForDisplayAndDiscriminator(int paragraphNumber) {
@@ -35,11 +37,11 @@ public class Paragraph extends PersistentObject {
 		}
 	}
 	
-	public static int GetParagraphNumberForDisplay(int paragraphNumber) {
+	public static String GetParagraphNumberForDisplay(int paragraphNumber) {
 		if (paragraphNumber < INTRODUCTION_LIMIT) {
-			return paragraphNumber;
+			return introNumbers[paragraphNumber];
 		} else {
-			return paragraphNumber - INTRODUCTION_LIMIT;
+			return String.valueOf(paragraphNumber - INTRODUCTION_LIMIT + 1);
 		}
 	}
 	
