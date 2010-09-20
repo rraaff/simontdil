@@ -9,6 +9,7 @@
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+<script src="scripts/simon.js" type="text/javascript"></script>
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
 
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
