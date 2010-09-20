@@ -54,7 +54,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
+								<td colspan="3" align="center">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

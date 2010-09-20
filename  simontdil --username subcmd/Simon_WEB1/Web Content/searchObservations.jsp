@@ -5,8 +5,10 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
-<div id="content"><img src="images/null.gif" width="1" height="340"></div>
+<div id="content">
 <html:form method="POST" action="/searchObservations">
+	<img src="images/null.gif" width="1" height="340">
+</div>
 <div id="outerdiv">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
@@ -163,7 +165,9 @@
 			<tr>
 		</table>
 	</div>
+</html:form>
 </div>
+<%@ include file="includes/footer.jsp" %>
 <script type="text/javascript">
 	function configureSearchBy() {
 		var exactRadios = document.SearchObservationsForm.exactDate;
@@ -197,5 +201,3 @@
 	}
 	configureSearchBy();
 </script>
-<%@ include file="includes/footer.jsp" %>
-</html:form>

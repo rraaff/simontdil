@@ -5,32 +5,13 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
-
-<style type="text/css">
-<!--
-/*#contentTableComment {
-	position:absolute;
-}*/
--->
-</style>
 <html:html>
-<div id="content">
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td height="300">
-			<!-- inicio tabla template -->
-			<img src="images/null.gif" width="1" height="340">
-			<!-- fin tabla template -->
-		</td>
-	</tr>
-</table>
-</div>
-<%@ include file="includes/footer.jsp" %>
+<div id="content"><img src="images/null.gif" width="1" height="340"></div>
 <html:form method="POST" action="/consolidateDocument">
 <div id="outerdiv">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
-		<table height="582" align="center" border="0" cellspacing="0" cellpadding="0">
+		<table height="100%" align="center" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td align="center" valign="middle">
 					<table width="490" height="265" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
@@ -93,3 +74,4 @@
 </div>
 </html:form>
 </html:html>
+<%@ include file="includes/footer.jsp" %>
