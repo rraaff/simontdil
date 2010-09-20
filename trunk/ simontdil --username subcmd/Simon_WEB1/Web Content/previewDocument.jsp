@@ -11,8 +11,8 @@ div#scrollbar {
 	display:none;
 }
 div#main{
-	width:900px;
-	height:260px;
+	width:auto;
+	height:450px;
 }
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
@@ -33,95 +33,94 @@ if ( dw_scrollObj.isSupported() ) {
 }
 </script>
 <div id="content">
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td>
-			<!-- inicio tabla template -->
-			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
-				<tr>
-					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Previsualización del documento</div></td>
-					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				</tr>
-				<tr>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="920">
-						<!-- corte tabla template -->
-						<table width="900" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td height="25" align="left">Documento: <bean:write name="CreateDocumentForm" property="title"/> - 
-										V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
-									(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
-									Límite para realizar observaciones: <!-- bean:write name="ViewVersion" property="version.version.limitObservationsString" /--></td>
-							</tr>
-							<tr>
-								<td height="270" align="left" valign="top">
-								<div id="main">
-									<div id="lyr1">
-										<logic:iterate name="CreateDocumentForm" property="previewIntroduction" id="intro"> 
-											<p class="article"><%=intro%></p>
-										</logic:iterate>
-										<logic:iterate name="CreateDocumentForm" property="previewParagraphs" id="paragraph"> 
-											<p class="article"><%=paragraph%></p>
-										</logic:iterate>
-									</div>
+	<div id="alcien" style="height:130px; padding-top:10px;">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Previsualización del documento</div></td>
+							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+						</tr>
+						<tr>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td width="98%">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0">
+									<tr>
+										<td height="25" align="left">Documento: <bean:write name="CreateDocumentForm" property="title"/> - 
+												V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
+											(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
+											Límite para realizar observaciones: <!-- bean:write name="ViewVersion" property="version.version.limitObservationsString" /--></td>
+									</tr>
+									<tr>
+										<td height="270" align="left" valign="top">
+										<div id="main">
+											<div id="lyr1">
+												<logic:iterate name="CreateDocumentForm" property="previewIntroduction" id="intro"> 
+													<p class="article"><%=intro%></p>
+												</logic:iterate>
+												<logic:iterate name="CreateDocumentForm" property="previewParagraphs" id="paragraph"> 
+													<p class="article"><%=paragraph%></p>
+												</logic:iterate>
+											</div>
+										</div>
+										</td>
+									</tr>
+									<tr>
+										<td height="30" align="center" valign="bottom"><html:errors property="general" />
+											<html:form method="POST" action="/previewDocument">
+												
+											<html:submit property="operation">
+												<bean:message key="createDocument.preview.editParagraphs"/>
+											</html:submit>
+											
+											<!-- Si no esta en negociacion -->
+											<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
+												<html:submit property="operation">
+													<bean:message key="createDocument.preview.save"/>
+												</html:submit>
+												<html:submit property="operation">
+													<bean:message key="createDocument.preview.consolidate"/>
+												</html:submit>
+											</logic:equal>
+											
+											<!-- Si esta en negociacion -->
+											<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">
+												<html:submit property="operation">
+													<bean:message key="createDocument.preview.saveAndContinue"/>
+												</html:submit>
+		
+											</logic:equal>
+											</html:form></td>
+									</tr>
+									<tr>
+										<td height="5"><img src="images/null.gif" width="1" height="5"></td>
+									</tr>
+								</table>
+							</td>
+							<td width="30" align="right">
+							<div id="scrollbar" style="height:450px;">
+								<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+								<div id="track" style="height:426px;">
+									<div id="dragBar"></div>
 								</div>
-								</td>
-							</tr>
-							<tr>
-								<td align="center"><html:errors property="general" />
-									<html:form method="POST" action="/previewDocument">
-										
-									<html:submit property="operation">
-										<bean:message key="createDocument.preview.editParagraphs"/>
-									</html:submit>
-									
-									<!-- Si no esta en negociacion -->
-									<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
-										<html:submit property="operation">
-											<bean:message key="createDocument.preview.save"/>
-										</html:submit>
-										<html:submit property="operation">
-											<bean:message key="createDocument.preview.consolidate"/>
-										</html:submit>
-									</logic:equal>
-									
-									<!-- Si esta en negociacion -->
-									<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">
-										<html:submit property="operation">
-											<bean:message key="createDocument.preview.saveAndContinue"/>
-										</html:submit>
-
-									</logic:equal>
-									</html:form></td>
-							</tr>
-							<tr>
-								<td height="5"><img src="images/null.gif" width="1" height="5"></td>
-							</tr>
-						</table>
-					</td>
-					<td width="30" align="right">
-					<div id="scrollbar" align="right">
-						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
-							<div id="dragBar"></div>
-						</div>
-						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-					</div></td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-					<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
-				</tr>
-			</table>
-		<!-- fin tabla template -->
-		</td>
-	</tr>
-</table>
+								<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
+							</div></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+						</tr>
+						<tr>
+							<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+							<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+							<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
 <div id="footer">
 <%@ include file="includes/footer.jsp" %>

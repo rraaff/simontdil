@@ -44,7 +44,13 @@
 <body>
 <div id="content">
 	<div id="imageHolder"><img src="images/demo/caratula.gif" width="978" height="480"></div>
-	<div id="centrador"><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a> <a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></div>
+	<table border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a></td>
+			<td>&nbsp;</td>
+			<td><a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></td>
+		</tr>
+	</table>
 </div>
 <div id="footer">
 	<div id="copyright">SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>

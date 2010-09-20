@@ -13,14 +13,13 @@ div#sizer img { margin-right:3px; }
 
 div#main { 
 	background-color:#eee;
-	width:480px;
+	width:auto;
+	height:500px;
 }
 
 #content #negotiationArea #lastParagraphText {
-	font-size: 11px;
-	color: #000000;
 	background-color: #F3F3F3;
-	width: 342px;
+	width: auto;
 	display: block;
 	text-align: left;
 	height: 500px;
@@ -169,13 +168,13 @@ if ( dw_scrollObj.isSupported() ) {
 			        			lastNumber = paragraphNumber;
 				        		lastText = paragraphText;
 				        		var divObj = document.getElementById("lastParagraphText");
-			        			divObj.innerHTML = "-";
+			        			divObj.innerHTML = "<p class='article'>-</p>";
 			        		} else {
 			        			document.getElementById("addPrivateComment").disabled = false;
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
-				        			divObj.innerHTML = getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText;
+				        			divObj.innerHTML = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText + "</p>";
 				        			lastNumber = paragraphNumber;
 				        			lastText = paragraphText;
 				        			lastParagraphVersion = paragraphVersion;
@@ -199,20 +198,18 @@ if ( dw_scrollObj.isSupported() ) {
 	}
 </script>
 <div id="content">
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td width="528" valign="top">
-			<!-- inicio tabla template -->
-			<table width="528" border="0" cellspacing="0" cellpadding="0" align="center">
+	<div id="alcien" style="height:560px; padding-top:10px;">
+		<div id="alcincuentaLeft" style="height:560px;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="478" height="284" align="left" valign="top">
+					<td height="480" align="left" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
@@ -224,9 +221,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					<!-- corte tabla template --></td>
 					<td width="30" align="right">
-					<div id="scrollbar" align="right">
+					<div id="scrollbar" style="width:20px; height:480px; float:right;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+						<div id="track" style="height:456px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -247,43 +244,40 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
-		<!-- fin tabla template -->
-		</td>
-		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="392" valign="top">
-			<!-- inicio tabla template -->
-			<table width="392" border="0" cellspacing="0" cellpadding="0" align="center">
+		</div>
+		<div id="alcincuentaRight" style="height:500px;">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="372" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - V <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - V <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td>
 						<!-- corte tabla template -->
-						<table width="372" border="0" cellspacing="0" cellpadding="0" id="workTable">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="workTable">
 							<tr>
 								<td colspan="2" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
 							<tr>
-								<td width="342" height="157" valign="top">
-								<div id="negotiationArea" style="width:342px; height:281px; text-align:left;">
+								<td width="98%" valign="top">
+								<div id="negotiationArea" style="width:auto; height:490px; text-align:left;">
 									<div id="lastParagraphText">  -  </div>
 								</div>
 								</td>
 								<td width="30" align="right">
-								<div id="scrollbar2" align="right">
+								<div id="scrollbar2" style="width:20px; height:480px; float:right;">
 									<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-									<div id="track2">
+									<div id="track2" style="height:456px;">
 										<div id="dragBar2"></div>
 									</div>
 									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
 								</div></td>
 							</tr>
 							<tr>
-								<td colspan="2" height="25" align="center"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
+								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -298,71 +292,67 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 			</table>
 		<!-- fin tabla template -->
-		</td>
-	</tr>
-</table>
-</div>
-</html:html>
-<%@ include file="includes/footer.jsp" %>
-	<% 	if(isDelegate && isSign && user.isCanSign()) { %>
-	<script type="text/javascript">
-		signAreaShowed = true;
-	</script>
-	<% } %>
-	<div id="outerdiv" style="display: <%=(isDelegate && isSign && user.isCanSign()) ? "block" : "none"%>;">
-		<div id="innerdiv"></div>
-		<div id="contentTableComment">
-			<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
-				<tr>
-					<td align="center" valign="middle">
-						<table width="640" height="370" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-							<tr>
-								<td width="640" align="center" valign="top">
-									<!-- inicio tabla template -->
-									<table width="620" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
-										<tr>
-											<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-											<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Firma en el documento</div></td>
-											<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-										</tr>
-										<tr>
-											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-											<td width="600">
-											<!-- corte tabla template -->
-												<%if (isDelegate && user.isCanSign()) { %>
-												<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
-												   flashvars="saveUrl=<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
-												   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
-												   pluginspage="http://www.adobe.com/go/getflashplayer">
-												</embed>
-												<% } %>
-											<!-- corte tabla template -->
-											</td>
-											<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-											<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-										</tr>
-										<tr>
-											<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-											<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
-											<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-										</tr>
-									</table>
-									<!-- fin tabla template -->
-								</td>
-							</tr>
-						</table>
-					</td>
-				<tr>
-			</table>
 		</div>
 	</div>
-<!-- div id="outerdiv" style="display: none;" -->
+</div>
+</html:html>
+<% 	if(isDelegate && isSign && user.isCanSign()) { %>
+<script type="text/javascript">
+	signAreaShowed = true;
+</script>
+<% } %>
+<div id="outerdiv" style="display: <%=(isDelegate && isSign && user.isCanSign()) ? "block" : "none"%>;">
+	<div id="innerdiv"></div>
+	<div id="contentTableComment">
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td align="center" valign="middle">
+					<table width="640" height="370" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+						<tr>
+							<td width="640" align="center" valign="top">
+								<!-- inicio tabla template -->
+								<table width="620" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+									<tr>
+										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+										<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Firma en el documento</div></td>
+										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+									</tr>
+									<tr>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="600">
+										<!-- corte tabla template -->
+											<%if (isDelegate && user.isCanSign()) { %>
+											<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
+											   flashvars="saveUrl=<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
+											   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
+											   pluginspage="http://www.adobe.com/go/getflashplayer">
+											</embed>
+											<% } %>
+										<!-- corte tabla template -->
+										</td>
+										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+									</tr>
+									<tr>
+										<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+										<td background="images/interfaces/bottomCenter.gif" height="10"><img src="images/null.gif" width="1" height="10"></td>
+										<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+									</tr>
+								</table>
+								<!-- fin tabla template -->
+							</td>
+						</tr>
+					</table>
+				</td>
+			<tr>
+		</table>
+	</div>
+</div>
 <div id="addCommentLayer" style="display: none;">
-	<!-- div id="innerdiv" -->
-		<div id="innerdiv"></div>
-		<div id="contentTableComment">
-		<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+	<div id="innerdiv"></div>
+	<div id="contentTableComment">
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td align="center" valign="middle">
 					<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
@@ -417,3 +407,4 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </div>
+<%@ include file="includes/footer.jsp" %>

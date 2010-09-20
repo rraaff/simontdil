@@ -21,8 +21,11 @@ div#scrollbar {
 	display:none;
 }
 #content #alcincuentaRight{
-	width:74%;
+	width:72%;
 	height:530px;
+	padding-left:10px;
+	padding-right:10px;
+	margin-top:12px;
 /*	#width: 400px; Para Internet Explorer */
 /*	_width: 400px; Para Internet Explorer 6 */
 }
@@ -30,7 +33,7 @@ div#main{
 /*	#width: 400px; Para Internet Explorer */
 /*	_width: 400px; Para Internet Explorer 6 */
 	width:95%;
-	height:530px;
+	height:470px;
 	float:left;
 	margin: 0px;
 	position: relative;
@@ -79,6 +82,9 @@ lyr1{
 	top: -15px;
 	left: 10px;
 }
+#documentContainerNew {
+	border: 1px solid #c6c6c6;
+}
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
@@ -110,9 +116,6 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 	dw_Event.add( window, 'resize', init_dw_Scroll);
 }
-// increase
-//decrease
-//reset
 
 </script>
 <% if (isDelegate) { %>
@@ -141,7 +144,7 @@ if ( dw_scrollObj.isSupported() ) {
 <% } %>
 <div id="content">
 <html:form action="/viewVersionAction">
-	<div id="alcien" style="height:560px;">
+	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:170px; margin-top:13px;">
 				<div id="blockTitle1">Documento Principal</div>
@@ -173,13 +176,13 @@ if ( dw_scrollObj.isSupported() ) {
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="center">
-							<table border="0" cellspacing="0" cellpadding="0">
+							<!--table border="0" cellspacing="0" cellpadding="0">
 								<tr>
 									<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
 									<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton">Volver</a></td>
 									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
 								</tr>
-							</table>
+							</table -->
 							<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link></td>
 					</tr>
 					<tr>
@@ -382,14 +385,17 @@ if ( dw_scrollObj.isSupported() ) {
 				</table>
 			</div>
 		</div>
-		<div id="alcincuentaRight">
-			<!-- div id="blockTitle1">Documento</div  -->
-			<div style="position:relative;">
-				<%if (isModerator) { %>
-					<div id="main" style="height:500px;">
-				<% } else { %>
-					<div id="main">
-				<% } %>
+		<%if (isModerator) { %>
+		<div id="alcincuentaRight" style="height:518px; border:1px solid #c6c6c6;">
+			<div id="blockTitle1">Documento</div>
+			<div>
+				<div id="main" style="height:460px;">
+		<% } else { %>
+		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
+			<div id="blockTitle1">Documento</div>
+			<div>
+				<div id="main">
+		<% } %>
 					<div id="lyr1">
 					<!-- div id="documentoCompleto" -->
 						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
@@ -408,13 +414,13 @@ if ( dw_scrollObj.isSupported() ) {
 					</div>
 				</div>
 				<%if (isModerator) { %>
-				<div id="scrollbar" style="width:20px; height:500px; float:right;">
+				<div id="scrollbar" style="width:20px; height:460px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-					<div id="track" style="height:476px;">
+					<div id="track" style="height:436px;">
 				<% } else { %>
-				<div id="scrollbar" style="width:20px; height:530px; float:right;">
+				<div id="scrollbar" style="width:20px; height:470px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-					<div id="track" style="height:506px;">
+					<div id="track" style="height:446px;">
 				<% } %>
 						<div id="dragBar"></div>
 					</div>
@@ -424,7 +430,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 		</div>
 	</div>
-
+	</html:form>
 </div>
 <div id="outerdiv" style="display: none;">
 	<div id="innerdiv"></div>
@@ -506,4 +512,3 @@ if ( dw_scrollObj.isSupported() ) {
 	</div>
 </div>
 <%@ include file="includes/footer.jsp" %>
-</html:form>

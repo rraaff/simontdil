@@ -7,12 +7,12 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 <div id="content">
-	<div id="alcien" style="height:200px;">
+	<div id="alcien" style="height:200px; padding-top:10px;">
 		<div id="alcincuentaLeft" style="height:200px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><img src="images/titles/documentoPrincipal.gif" alt="Ingreso al Sitio" width="132" height="19"></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento Principal</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -28,7 +28,7 @@
 							<logic:equal name="ModeratorHome" property="hasTypeOne" value="true"> 
 								<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeOne.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeOne.documentTitle" /></html:link></div>
 								Versi&oacute;n: <bean:write name="ModeratorHome" property="typeOne.number" /> - <bean:write name="ModeratorHome" property="typeOne.name" /><br>
-								L&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeOne.limitObservationsString" />
+								Fecha l&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeOne.limitObservationsString" />
 							</logic:equal>
 						</div>
 						<!-- corte tabla template --></td>
@@ -52,7 +52,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td width="10" height="19" background="images/interfaces/topLeftTitleDocB.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><img src="images/titles/documentoPrincipal.gif" alt="Ingreso al Sitio" width="132" height="19"></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento Principal</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -69,7 +69,7 @@
 						<logic:equal name="ModeratorHome" property="hasTypeTwo" value="true">
 							<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeTwo.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeTwo.documentTitle" /></html:link></div>
 							Versi&oacute;n: <bean:write name="ModeratorHome" property="typeTwo.number" /> - <bean:write name="ModeratorHome" property="typeTwo.name" /><br>
-							L&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeTwo.limitObservationsString" />
+							Fecha l&iacute;mite para observaciones: <bean:write name="ModeratorHome" property="typeTwo.limitObservationsString" />
 						</logic:equal>
 						</div>
 						<!-- corte tabla template -->
@@ -96,7 +96,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><img src="images/titles/documentosSecundarios.gif" alt="Ingreso al Sitio" width="154" height="19"></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos Específicos</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -119,8 +119,7 @@
 								</tr>
 							</table>
 						</div>
-						<!-- corte tabla template -->
-					</td>
+						<!-- corte tabla template -->					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -142,7 +141,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><img src="images/titles/libreriaDocsReferencia.gif" alt="Ingreso al Sitio" width="215" height="19"></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Librería de documendos de referencia</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
