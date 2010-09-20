@@ -34,11 +34,11 @@ var dw_fontSizerDX = {
         var links = sizerEl.getElementsByTagName('a');
         for (var i=0; links[i]; i++) {
             if ( dw_Util.hasClass( links[i], 'increase') ) {
-                links[i].onclick = function () { dw_fontSizerDX.adjust( dw_fontSizerDX.sizeIncrement ); return false }
+				links[i].onclick = function () { dw_fontSizerDX.adjust( dw_fontSizerDX.sizeIncrement ); init_dw_Scroll(); return false }
             } else if ( dw_Util.hasClass( links[i], 'decrease') ) {
-                links[i].onclick = function () { dw_fontSizerDX.adjust( -dw_fontSizerDX.sizeIncrement ); return false }
+                links[i].onclick = function () { dw_fontSizerDX.adjust( -dw_fontSizerDX.sizeIncrement ); init_dw_Scroll(); return false }
             } else if ( dw_Util.hasClass( links[i], 'reset')  ) {
-                links[i].onclick = function () { dw_fontSizerDX.reset(); return false }
+                links[i].onclick = function () { dw_fontSizerDX.reset(); init_dw_Scroll(); return false }
             }
         }
         if (sizerEl) sizerEl.style.display = "block";
