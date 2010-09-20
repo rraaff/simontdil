@@ -48,7 +48,7 @@ public class ExportVersionAsPDF {
 		buf.append("body {");
 		buf.append("	color:#000000;");
 		buf.append("	font-family: Verdana, Arial, Helvetica, sans-serif;");
-		buf.append("	font-size: 10px;");
+		buf.append("	font-size: 14px;");
 		buf.append("	line-height: normal;");
 		buf.append("	letter-spacing: normal;");
 		buf.append("	word-spacing: normal;");
@@ -63,7 +63,7 @@ public class ExportVersionAsPDF {
 		buf.append("<body>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
-		buf.append("<H2>Introducción</H2>");
+		buf.append("<H2>Preámbulo</H2>");
 		for (Paragraph p : introduction) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(p.getParagraphText()).append("</p>");
 		}

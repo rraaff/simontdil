@@ -95,7 +95,7 @@
 				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif">
 					<div id="blockTitle">
 					<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
-						Introducci&oacute;n (Paso 2 de 4)
+						Pre&aacute;mbulo (Paso 2 de 4)
 					</logic:equal>
 					<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
 						P&aacute;rrafos (Paso 3 de 4)
