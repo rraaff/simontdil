@@ -129,7 +129,7 @@
 					<td height="100%" valign="top">
 						<!-- corte tabla template -->
 						<div id="contentDocumentoSecundarios">
-							<table width="254" border="0" cellspacing="0" cellpadding="0" align="center">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
 								</tr>
