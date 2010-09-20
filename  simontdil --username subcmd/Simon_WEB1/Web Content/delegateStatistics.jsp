@@ -9,25 +9,26 @@
 <style>
 <!--
 #portaTabla{
-	width:900px;
+	width:980px;
+	height:460px;
 }
 -->
 </style>
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="940">
+		<td>
 			<!-- inicio tabla template -->
-			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Estadísticas</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Estadísticas</div></td>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="900" height="144">
+					<td height="500">
 					<!-- corte tabla template -->
 						<div id="portaTabla">
 							<table border="0" cellspacing="0" cellpadding="0" align="left">
@@ -40,7 +41,7 @@
 									<td align="left" colspan="<bean:write name="StatisticsForm" property="countryCount"/>">Delegaciones</td>
 								</tr>
 								<tr>
-									<td height="20" bgcolor="#E6E6E6"><img src="images/null.gif" width="60" height="1"></td>
+									<td height="20" bgcolor="#E6E6E6"><img src="images/null.gif" width="80" height="1"></td>
 									<td bgcolor="#E6E6E6"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:iterate name="StatisticsForm" property="statisticsVO.allCountries" id="countryIter"> 
 										<td width="180" align="left" bgcolor="#E6E6E6"><bean:write name="countryIter" property="name" /><img src="images/null.gif" width="150" height="1" border="0"></td>

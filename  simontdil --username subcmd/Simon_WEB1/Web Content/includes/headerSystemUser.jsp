@@ -10,6 +10,9 @@
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
+<script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
+<script type="text/javascript" src="./scripts/notimoo.js" ></script>
+<script type="text/javascript" src="ckeditor.js"></script>
 <!--[if lte IE 7]>
 <style>
 #menuwrapper, #p7menubar ul a {height: 1%;}
@@ -17,54 +20,38 @@ a:active {width: auto;}
 </style>
 <![endif]-->
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
-
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
-<script type="text/javascript" src="./scripts/notimoo.js" ></script>
-<script type="text/javascript" src="ckeditor.js"></script>
-<style type="text/css">
-<!--
-#content #centrador{
-	padding-left:130px;
-}
-#header #blockinHeader #userLogued {
-	width: 460px;
-}
--->
-</style>
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
-
 </head>
 <body onLoad="P7_ExpMenu();">
 <div id="header">
-	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136"></div>
+	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
 	<div id="blockinHeader">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
 				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
-				<td width="30" align="right"><html:link action="/logout" >Salir</html:link></td>
-				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="460" align="right" valign="middle">
-					<div id="userLogued">
-						<table width="460" height="30" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="410" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
-							</tr>
-						</table>
-					</div>
+				<td rowspan="2" align="left">
+					<table border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td width="140">Mod: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></td>
+						</tr>
+						<tr>
+							<td>Del: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></td>
+						</tr>
+						<tr>
+							<td>Pantalla: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></td>
+						</tr>
+					</table>
 				</td>
+				<td width="320" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
 			</tr>
 			<tr>
-				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
-			</tr>
-			<tr>
-				<td colspan="3" align="right" class="remarcado">
+				<td colspan="3" align="right"><html:link action="/logout" >Salir del sistema</html:link> - 
 					<% 	if(eventMode && inNegotiation && isModerator) { 
 							if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 							%>
@@ -76,44 +63,22 @@ a:active {width: auto;}
 						
 					<% } %>
 				</td>
-				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-			</tr>
-			<tr>
-				<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
-			</tr>
-			<tr>
-				<td colspan="4" height="10" align="center">
-					<div id="dataSites">
-						<table width="500" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="118">Mod: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="188" align="center">Del: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="154" align="right">Pantalla: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							</tr>
-						</table>
-					</div>
-				</td>
 			</tr>
 		</table>
 	</div>
 	<div id="siteSeccion">
-	<!-- acá me gustaría cargar una imagen dependiendo del estado del site LO_TENES -->
 	<% 	if(eventMode) { %>
 		<% 	if(inNegotiation) { %>
-			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento y negociando
+			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento y negociando -->
 		<% } else { %>
 			<% 	if(isSign) { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento firmando
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento firmando -->
 			<% } else { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="60">Modo evento aun no negociando
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento aun no negociando -->
 			<% } %>
 		<% } %>
 	<% } else { %>
-		<img src="images/header/administradorModerador.gif" width="187" height="60">
+		<img src="images/header/administradorModerador.gif" width="187" height="50">
 	<% } %>
 	</div>
 	<% 	if(eventMode && inNegotiation && isModerator ) { 

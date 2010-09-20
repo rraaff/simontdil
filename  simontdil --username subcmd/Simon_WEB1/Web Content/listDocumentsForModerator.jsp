@@ -10,8 +10,8 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:900px;
-	height:290px;
+	width:950px;
+	height:470px;
 	font-size: 10px;
 }
 div#scrollbar {
@@ -37,27 +37,24 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <html:form method="POST" action="/documentABM">
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
-		<td width="960" align="center">
+		<td align="center">
 			<!-- inicio tabla template -->
-			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" background="images/interfaces/topTitle.gif" width="920" height="19" align="left"><div id="blockTitle">Listado de Documentos</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de Documentos</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="920" height="300" valign="top">
+					<td height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="900" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="950" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -105,9 +102,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" align="right">
+					<div id="scrollbar" style="width:20px; height:440px; float:right;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+						<div id="track" style="height:416px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -123,9 +120,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
 	</tr>
 </table>
 </div>
