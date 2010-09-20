@@ -20,8 +20,18 @@ div#sizer img { margin-right:3px; }
 div#scrollbar {
 	display:none;
 }
+#content #alcincuentaRight{
+	width:74%;
+	height:530px;
+/*	#width: 400px; Para Internet Explorer */
+/*	_width: 400px; Para Internet Explorer 6 */
+}
 div#main{
-	* width:100%;
+/*	#width: 400px; Para Internet Explorer */
+/*	_width: 400px; Para Internet Explorer 6 */
+	width:95%;
+	height:530px;
+	float:left;
 	margin: 0px;
 	position: relative;
 }
@@ -191,7 +201,15 @@ if ( dw_scrollObj.isSupported() ) {
 				<div id="blockTitle2">Acciones disponibles</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
-						<td align="center"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link></td>
+						<td align="center">
+							<table border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
+									<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton">Volver</a></td>
+									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
+								</tr>
+							</table>
+							<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link></td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -250,8 +268,10 @@ if ( dw_scrollObj.isSupported() ) {
 										function clickNewPar(chkObj) {
 											if (chkObj.checked) {
 												document.getElementById('newParTextTD').style.display = 'block';
+												document.getElementById('newParTextTDLabel').style.display = 'block';
 											} else {
 												document.getElementById('newParTextTD').style.display = 'none';
+												document.getElementById('newParTextTDLabel').style.display = 'none';
 											}
 										}
 										
@@ -282,7 +302,7 @@ if ( dw_scrollObj.isSupported() ) {
 												// Defines a simpler toolbar to be used in this sample.
 												// Note that we have added out "MyButton" button here.
 												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
-												height:"140", width:"380",
+												height:"400", width:"800",
 												baseFloatZIndex: 100002
 											}, extractParagraphContent(pObj.innerHTML));
 											var pNumberObj = document.getElementById('pNumber');
@@ -391,10 +411,10 @@ if ( dw_scrollObj.isSupported() ) {
 				</table>
 			</div>
 		</div>
-		<div id="alcincuentaRight" style="width:74%; height:530px;">
+		<div id="alcincuentaRight">
 			<!-- div id="blockTitle1">Documento</div  -->
 			<div style="position:relative;">
-				<div id="main" style="width:95%; height:530px; float:left">
+				<div id="main">
 					<div id="lyr1">
 					<!-- div id="documentoCompleto" -->
 						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
@@ -448,13 +468,13 @@ if ( dw_scrollObj.isSupported() ) {
 										<!-- corte tabla template -->
 											<table width="940" border="0" cellspacing="0" cellpadding="0">
 												<tr>
-													<td colspan="9" id="error"></td>
+													<td colspan="10" id="error"></td>
 												<tr>
 												<tr>
-													<td colspan="9" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" align="right">Párrafo:</td>
+													<td width="73" height="30" align="right">Párrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(this);">
@@ -467,21 +487,22 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="200" align="left">Solicitar como nuevo párrafo</td>
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td><div id="newParTextTD" style="display: none;">Indicar ubicación: <input type="text" id="newParText" name="newPartext"></div></td>
+													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicación:</div></td>
+													<td width="348" valign="middle"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext" class="textfield_effect_300"></div></td>
 												</tr>
 												<tr>
-													<td colspan="9" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
 													<td align="right" valign="top">Observación: </td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td colspan="7" align="left"><div id="editor"></div></td>
+													<td colspan="8" align="left"><div id="editor"></div></td>
 												<tr>
 												<tr>
-													<td colspan="9" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="9" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->										</td>
