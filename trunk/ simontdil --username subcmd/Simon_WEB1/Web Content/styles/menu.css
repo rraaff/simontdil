@@ -8,9 +8,9 @@ It carries a background image for aesthetics.
 	border-bottom: 1px solid 40708c;
 	background-color: #dcebf4;
 	background-repeat: repeat-x;
-	width: 936px;
-	margin-right: auto;
-	margin-left: auto;
+	width: auto;
+	margin-right:22px;
+	margin-left:22px;
 	border-bottom: 1px solid #40708c;
 }
 /*Clears the floated menu items.

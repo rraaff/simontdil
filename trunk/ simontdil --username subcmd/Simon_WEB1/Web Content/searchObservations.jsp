@@ -5,24 +5,12 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
-
-<div id="content">
-<table border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td height="300">
-			<!-- inicio tabla template -->
-			<img src="images/null.gif" width="1" height="340">
-			<!-- fin tabla template -->
-		</td>
-	</tr>
-</table>
-</div>
-<%@ include file="includes/footer.jsp" %>
+<div id="content"><img src="images/null.gif" width="1" height="340"></div>
 <html:form method="POST" action="/searchObservations">
 <div id="outerdiv">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
-		<table height="582" align="center" border="0" cellspacing="0" cellpadding="0">
+		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td align="center" valign="middle">
 					<table width="330" height="410" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
@@ -209,4 +197,5 @@
 	}
 	configureSearchBy();
 </script>
+<%@ include file="includes/footer.jsp" %>
 </html:form>

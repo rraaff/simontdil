@@ -50,10 +50,9 @@ if ( dw_scrollObj.isSupported() ) {
 </html:html>
 <%@ include file="includes/footer.jsp" %>
 <div id="outerdiv">
-
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
-	<table width="980" height="582" border="0" cellspacing="0" cellpadding="0">
+	<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
 				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
@@ -119,9 +118,9 @@ if ( dw_scrollObj.isSupported() ) {
 									</div>
 									</td>
 									<td width="30" align="right">
-										<div id="scrollbar" align="right">
+										<div id="scrollbar" style="width:20px; height:640px;">
 											<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-											<div id="track">
+											<div id="track" style="height:616px;">
 												<div id="dragBar"></div>
 											</div>
 											<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>

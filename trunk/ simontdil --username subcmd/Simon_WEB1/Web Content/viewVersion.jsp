@@ -38,7 +38,7 @@ div#main{
 #mainDocContainer {
 	border: 1px solid #c6c6c6;
 	position: relative;
-	height: 150px;
+	height: 200px;
 }
 lyr1{
 	
@@ -78,35 +78,6 @@ lyr1{
 	position: relative;
 	top: -15px;
 	left: 10px;
-}
-
-#outerdiv {
-	position:absolute;
-	overflow:show;
-	z-index:100000;
-	margin-right: auto;
-	margin-left: auto;
-	height: 100%;
-	margin-top: -720px;
-}
-#addCommentLayer {
-	position:relative;
-	overflow:show;
-	z-index:100000;
-	margin-right: auto;
-	margin-left: auto;
-	height: 699px;
-}
-#innerdiv {position:absolute; width:100%; height:100%; background:#006699; }
-#innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
-#contentTableComment {
-	position:relative;
-	clip: rect(0px,0px,0px,0px);
-	margin-right: auto;
-	margin-left: auto;
-	vertical-align: middle;
-	height: 780px;
-	width: auto;
 }
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
@@ -327,7 +298,7 @@ if ( dw_scrollObj.isSupported() ) {
 												Sexy.error('Debe ingresar la observación.');
 												return;
 											}
-											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "OK", en cambio si desea modificarla o revisarla antes de enviarla, presione "cancelar"', { onComplete: 
+											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "Aceptar", en cambio si desea modificarla o revisarla antes de enviarla, presione "Cancelar"', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
 										            basicDoAdd();
@@ -414,7 +385,11 @@ if ( dw_scrollObj.isSupported() ) {
 		<div id="alcincuentaRight">
 			<!-- div id="blockTitle1">Documento</div  -->
 			<div style="position:relative;">
-				<div id="main">
+				<%if (isModerator) { %>
+					<div id="main" style="height:500px;">
+				<% } else { %>
+					<div id="main">
+				<% } %>
 					<div id="lyr1">
 					<!-- div id="documentoCompleto" -->
 						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
@@ -432,9 +407,15 @@ if ( dw_scrollObj.isSupported() ) {
 						</logic:iterate>
 					</div>
 				</div>
+				<%if (isModerator) { %>
+				<div id="scrollbar" style="width:20px; height:500px; float:right;">
+					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+					<div id="track" style="height:476px;">
+				<% } else { %>
 				<div id="scrollbar" style="width:20px; height:530px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 					<div id="track" style="height:506px;">
+				<% } %>
 						<div id="dragBar"></div>
 					</div>
 					<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -443,7 +424,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 		</div>
 	</div>
-</html:form>
+
 </div>
 <div id="outerdiv" style="display: none;">
 	<div id="innerdiv"></div>
@@ -505,7 +486,8 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
-										<!-- corte tabla template -->										</td>
+										<!-- corte tabla template -->
+										</td>
 										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									</tr>
@@ -524,3 +506,4 @@ if ( dw_scrollObj.isSupported() ) {
 	</div>
 </div>
 <%@ include file="includes/footer.jsp" %>
+</html:form>

@@ -48,7 +48,8 @@ p a:link, p a:visited {
 .newButton{
 	color:#FFFFFF;
 }
-.newButton a, a:link, a:visited, a:hover{
+.newButton a, .newButton a:link, .newButton a:visited, .newButton a:hover{
+/* No anda */
 	color:#E6F4FF;
 }
 h1 {
@@ -127,8 +128,8 @@ div#main {
 
 }
 #header #blockinHeader {
-	background-color: #edf4f8;
-	height: 77px;
+/*	background-color: #edf4f8; */
+	height: 50px;
 	width: 500px;
 	float: right;
 	position: relative;
@@ -215,10 +216,10 @@ div#main {
 
 #amMenu {
 	background-color: #FFFFFF;
-	height: 24px;
-	width: 980px;
-	margin-right: auto;
-	margin-left: auto;
+	height: 30px;
+	width: auto;
+	margin-right: 10px;
+	margin-left: 10px;
 	color: #000000;
 	position: relative;
 	z-index: 99999;
@@ -655,14 +656,14 @@ tr.d1 td {
 
 /* ### Tooltips ### */
 #outerdiv {
-	position:relative;
+	position:absolute;
 	overflow:show;
 	z-index:100000;
 	margin-right: auto;
 	margin-left: auto;
-	height: 699px;
 	width: 100%;
-	margin-top: -599px;
+	height: 100%;
+	margin-top: -720px;
 }
 #addCommentLayer {
 	position:relative;
@@ -671,15 +672,16 @@ tr.d1 td {
 	margin-right: auto;
 	margin-left: auto;
 	height: 699px;
-	width: 980px;
-	margin-top: -699px;
+	margin-top: -720px;
 }
-#innerdiv {position:absolute; width:980px; height:597px; background:#006699; }
+#innerdiv {position:absolute; width:100%; height:100%; background:#006699; }
 #innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
 #contentTableComment {
 	position:relative;
-	background:transparent;
 	clip: rect(0px,0px,0px,0px);
 	margin-right: auto;
 	margin-left: auto;
+	vertical-align: middle;
+	height: 780px;
+	width: auto;
 }

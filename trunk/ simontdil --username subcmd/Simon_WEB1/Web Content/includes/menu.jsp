@@ -1,4 +1,9 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
+<style type="text/css">
+#content {
+	height: 560px;
+}
+</style>
 <div id="amMenu">
 	<div id="menuwrapper">
 		<ul id="p7menubar">

@@ -6,18 +6,13 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-
-<html:html>
 <div id="content">
-<table height="330" border="0" cellspacing="0" cellpadding="0" align="center">
+<html:html>
+<table width="980" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="294" valign="middle">
-			<!-- inicio tabla template -->
-			Usuario T&eacute;cnico: seleccione una actividad del men&uacute;.
-			<!-- fin tabla template -->
-		</td>
+		<td align="center" valign="middle">Usuario T&eacute;cnico: seleccione una actividad del men&uacute;.</td>
 	</tr>
 </table>
-</div>
 </html:html>
+</div>
 <%@ include file="includes/footer.jsp" %>

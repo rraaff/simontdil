@@ -10,7 +10,7 @@
 div#main {
 	background-color:#FFFFFF;
 	width:910px;
-	height:430px;
+	height:660px;
 }
 div#scrollbar {
 	display:none;
@@ -34,42 +34,29 @@ if ( dw_scrollObj.isSupported() ) {
 }
 </script>
 <html:html>
-<div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-	<tr>
-		<td width="960" height="300" align="center"><img src="images/null.gif" width="1" height="300"></td>
-	</tr>
-	<tr>
-		<td height="20"><img src="images/null.gif" width="1" height="20"></td>
-	</tr>
-</table>
-</div>
-</html:html>
-<%@ include file="includes/footer.jsp" %>
+<div id="content"><img src="images/null.gif" width="1" height="300"></div>
+
 <div id="outerdiv">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
-	<table width="980" height="597" border="0" cellspacing="0" cellpadding="0">
+	<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center" valign="middle">
 			<logic:equal name="ViewVersion" property="hasObservations" value="true">
-				<table width="960" height="500" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+				<table width="980" height="740" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 					<tr>
-						<td width="960" align="center" valign="top">
+						<td width="980" align="center" valign="top">
 							<!-- inicio tabla template -->
-							<table width="920" border="0" cellspacing="0" cellpadding="0" align="center">
+							<table width="960" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr>
-									<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-									<td colspan="2" background="images/interfaces/topTitle.gif" width="900" height="19" align="left"><div id="blockTitle">Listado de Observaciones</div></td>
-									<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+									<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+									<td colspan="2" width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de Observaciones</div></td>
+									<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 								</tr>
 								<tr>
 									<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 									<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-									<td width="900" height="430" valign="top">
+									<td width="940" height="670" valign="top">
 									<!-- corte tabla template -->
 									<div id="main">
 										<div id="lyr1">
@@ -80,19 +67,19 @@ if ( dw_scrollObj.isSupported() ) {
 														if (lastParagraph != tmpObservation.getParagraphId()) { %>
 													<tr>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-														<td colspan="7" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+														<td width="900" colspan="7" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 													</tr>
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td colspan="7">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
+														<td width="900" colspan="7" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>
 													<tr>
 														<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-														<td colspan="7" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+														<td width="900" colspan="7" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 														<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													<% 
@@ -111,7 +98,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="280" valign="top"><p><img src="./download.do?action=flag&fileId=<bean:write name="observation" property="countryId" />" width="30" height="30"></p>
+														<td width="280" align="left" valign="top"><p><img src="./download.do?action=flag&fileId=<bean:write name="observation" property="countryId" />" width="30" height="30"></p>
 														Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
 														Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumberForDisplay" /></span><br>
 														Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
@@ -127,7 +114,7 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="560" valign="top"><p class="dataDinamica"><bean:write filter="false" name="observation" property="observationText" /></p></td>
+														<td width="560" align="left" valign="top"><p class="dataDinamica"><bean:write filter="false" name="observation" property="observationText" /></p></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>
@@ -147,9 +134,9 @@ if ( dw_scrollObj.isSupported() ) {
 										</div>
 										</td>
 										<td width="30" align="right">
-										<div id="scrollbar" align="right">
+										<div id="scrollbar" style="width:20px; height:640px;">
 											<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-											<div id="track">
+											<div id="track" style="height:616px;">
 												<div id="dragBar"></div>
 											</div>
 											<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -202,3 +189,5 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </div>
+<%@ include file="includes/footer.jsp" %>
+</html:html>
