@@ -11,7 +11,7 @@ Author URI: http://www.thatdayinlondon.com
 body {
 	color:#808080;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 11px;
 	font-style: normal;
 	font-weight: normal;
 	font-variant: normal;
@@ -40,6 +40,10 @@ p a:link, p a:visited {
 }
 .textLink{
 	color:#666666;
+}
+.article{
+	font-size: 12px;
+	line-height: 20px;	
 }
 h1 {
 	margin:0 0 0 0;
@@ -286,18 +290,16 @@ div#main {
 	overflow: scroll;
 	position: relative;
 }
-
 #blockTitle {
 	background-color: #FFFFFF;
 	width: auto;
+	position:relative;
+	height: 15px;
+	float: left;
+	padding-top: 4px;
 	padding-right: 4px;
 	padding-left: 4px;
-	float: left;
-	position: relative;
-	height: 15px;
-	padding-top: 4px;
 }
-
 #content #portaVersiones {
 	font-size: 12px;
 	color: #FFFFFF;
@@ -329,7 +331,7 @@ div#main {
 }
 
 #content .titleDocInModule {
-	font-size: 20px;
+	font-size: 18px;
 	line-height: 25px;
 	color:#333333;
 }
@@ -338,6 +340,14 @@ div#main {
 }
 #content .titleDocInModule a:hover {
 	color:#333333;
+}
+
+#content #simpleButtonContainer{
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
 }
 
 #bullet{
@@ -628,7 +638,7 @@ tr.d1 td {
 	margin-right: auto;
 	margin-left: auto;
 	height: 699px;
-	width: 980px;
+	width: 100%;
 	margin-top: -599px;
 }
 #addCommentLayer {
@@ -639,7 +649,7 @@ tr.d1 td {
 	margin-left: auto;
 	height: 699px;
 	width: 980px;
-	margin-top: -599px;
+	margin-top: -699px;
 }
 #innerdiv {position:absolute; width:980px; height:597px; background:#006699; }
 #innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
