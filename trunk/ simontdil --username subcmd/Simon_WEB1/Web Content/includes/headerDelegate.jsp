@@ -24,45 +24,23 @@ a:active {width: auto;}
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <link href="styles/sexyalertbox.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-<!--
-#content #centrador{
-	padding-left:130px;
-}
--->
-</style>
 </head>
 <body>
 <div id="header">
-	<div id="logo"><html:link action="/goToDelegateHome" ><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="243" height="136" border="0"></html:link></div>
+	<div id="logo"><html:link action="/goToDelegateHome" ><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110" border="0"></html:link>
+	</div>
 	<div id="blockinHeaderDelegate">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td colspan="2" height="10"><img src="images/null.gif" width="1" height="10"></td>
+				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
+				<td width="460" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-				<td width="320" align="right">
-					<div id="userLogued">
-						<table width="420" border="0" cellspacing="0" cellpadding="0">
-							<!-- Meter un if user logged acá con un else -->
-							<tr>
-								<td width="380" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
-								<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-								<td width="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td colspan="3" width="30" align="right"><html:link action="/logout" >Salir</html:link></td>
-							</tr>
-						</table>
-					</div>
-				</td>
+				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
 			</tr>
 			<tr>
-				<td colspan="2" height="9"><img src="images/null.gif" width="1" height="9"></td>
+				<td colspan="3" height="10" align="right"><html:link action="/logout" >Salir del sistema</html:link> - <a href="ayuda.jsp">Ayuda</a></td>
 			</tr>
 		</table>
 	</div>
