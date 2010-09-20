@@ -7,6 +7,7 @@
 <%@ include file="includes/headerLogoff.jsp" %>
 <div id="content">
 <html:form method="POST" action="/login">
+<html:hidden name="LoginForm" property="operation" value=""/>
 <table height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="middle">
@@ -42,9 +43,13 @@
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<html:submit property="operation">
-										<bean:message key="login.enter"/>
-									</html:submit>
+									<table border="0" cellspacing="0" cellpadding="0" onclick="doOperationSubmit('LoginForm','<bean:message key="login.enter"/>')">
+										<tr>
+											<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
+											<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton"><bean:message key="login.enter"/></a></td>
+											<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
+										</tr>
+									</table>
 								</td>
 							</tr>
 							<tr>
@@ -60,10 +65,15 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center" valign="middle">
-								<html:submit property="operation">
-									<bean:message key="login.requestPassword"/>
-								</html:submit></td>
+								<td colspan="3" align="center" valign="middle">	
+								<table border="0" cellspacing="0" cellpadding="0" onclick="doOperationSubmit('LoginForm','<bean:message key="login.requestPassword"/>')">
+									<tr>
+										<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
+										<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton"><bean:message key="login.requestPassword"/></a></td>
+										<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
+									</tr>
+								</table>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
