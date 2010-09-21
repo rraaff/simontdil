@@ -30,6 +30,7 @@ function init_dw_Scroll() {
 if ( dw_scrollObj.isSupported() ) {
     dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
     dw_Event.add( window, 'load', init_dw_Scroll);
+	dw_Event.add( window, 'resize', init_dw_Scroll);
 }
 </script>
 <div id="content">
