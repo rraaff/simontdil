@@ -6,10 +6,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
@@ -32,6 +34,8 @@ import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.SystemConfig;
 
 public class CreateDocumentForm extends ActionForm implements TransactionalActionWithValue {
 
@@ -419,6 +423,17 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 		return null;
 	}
+	
+	public String getLimitObservationsString() {
+		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		try {
+			Date date = dateFormat.parse(this.getLimitObservationsDay() + "/" + this.getLimitObservationsMonth() + "/" + this.getLimitObservationsYear());
+			return SystemConfig.getDateFormat().format(date);
+		} catch (ParseException e) {
+			getLog().error(e.getMessage(), e);
+			return "";
+		}
+	}
 
 	private void insertParagraphs() throws SQLException {
 		updateParagraphs();
@@ -436,6 +451,11 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 //		}
 		
 	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(CreateDocumentForm.class);
+	}
+	
 	private void fillVersion(Version version) throws SQLException {
 		version.setDocumentId(this.getDocumentId());
 		version.setName(this.getVersionName());
@@ -454,8 +474,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		try {
 			version.setUpToCommentDate(dateFormat.parse(this.getLimitObservationsDay() + "/" + this.getLimitObservationsMonth() + "/" + this.getLimitObservationsYear()));
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			getLog().error(e.getMessage(), e);
 		}
 		version.setDeleted(false);
 	}
