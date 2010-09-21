@@ -52,7 +52,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="25" align="left">Documento: <bean:write name="CreateDocumentForm" property="title"/> - 
 												V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
 											(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
-											Límite para realizar observaciones: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
+											Límite para realizar observaciones: <bean:write name="CreateDocumentForm" property="limitObservationsString" /></td>
 									</tr>
 									<tr>
 										<td height="270" align="left" valign="top">
