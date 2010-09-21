@@ -30,5 +30,8 @@
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/iText-2.0.8.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/jtidy-r938.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/xml-apis-xerces-2.9.1.jar"/>
+	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/jfor-0.7.2rc1.jar"/>
+	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/logkit-1.0.1.jar"/>
+	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/xerces-1.2.3.jar"/>
 	<classpathentry kind="output" path="Web Content/WEB-INF/classes"/>
 </classpath>

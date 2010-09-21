@@ -169,6 +169,12 @@ if ( dw_scrollObj.isSupported() ) {
 											<bean:message key="viewVersion.downloadPdf"/>
 										</html:submit></td>
 					</tr>
+					<tr>
+						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td colspan="3" align="center"><html:submit property="operation">
+											<bean:message key="viewVersion.downloadRtf"/>
+										</html:submit></td>
+					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">

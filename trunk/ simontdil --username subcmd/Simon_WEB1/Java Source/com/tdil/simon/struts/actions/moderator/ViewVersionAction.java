@@ -28,6 +28,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.pdf.ExportVersionAsPDF;
+import com.tdil.simon.pdf.ExportVersionAsRTF;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
@@ -96,6 +97,31 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 						} catch (DocumentException e) {
 							getLog().error(e.getMessage(), e);
 						} catch (SAXException e) {
+							getLog().error(e.getMessage(), e);
+						}
+					}
+				}	
+			);
+			return null;
+		}
+		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
+			final OutputStream outputStream = response.getOutputStream();
+			response.setContentType("application/rtf");
+			VersionVO version = viewForm.getVersion();
+			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + ".rtf");
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+					public void executeInTransaction() throws SQLException, ValidationException {
+						try {
+							ExportVersionAsRTF.exportDocument(viewForm.getUser(), viewForm.getVersion(), outputStream);
+						} catch (IOException e) {
+							getLog().error(e.getMessage(), e);
+						} catch (ParserConfigurationException e) {
+							getLog().error(e.getMessage(), e);
+						} catch (DocumentException e) {
+							getLog().error(e.getMessage(), e);
+						} catch (SAXException e) {
+							getLog().error(e.getMessage(), e);
+						} catch (Exception e) {
 							getLog().error(e.getMessage(), e);
 						}
 					}

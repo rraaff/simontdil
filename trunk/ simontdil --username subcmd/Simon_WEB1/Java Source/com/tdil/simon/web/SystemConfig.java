@@ -58,7 +58,7 @@ public class SystemConfig implements ServletContextListener {
 	
 	public static void init() throws IOException {
 		loadProperties();
-//		initLogger();
+		initLogger();
 	}
 	
 	private static void initLogger() {
@@ -184,5 +184,9 @@ public class SystemConfig implements ServletContextListener {
 	
 	public static String getMailBodyForNewObservation() {
 		return newObservationBody;
+	}
+
+	public static String getXHTML2FO() {
+		return properties.getProperty("xthml2fo");
 	}
 }
