@@ -2,7 +2,6 @@ package com.tdil.simon.pdf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -89,12 +88,22 @@ public class ExportVersionAsPDF {
 			}
 			buf.append("</table>");
 		} else {
+			int lastParagraphId = -1;
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
 			if (!observations.isEmpty()) {
 				DateFormat simpleDateFormat = SystemConfig.getDateFormatWithMinutes();
 				buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
 				buf.append("<table border=\"0\">");
 				for (Observation o : observations) {
+					if (o.getParagraphId() != lastParagraphId) {
+						Paragraph p = getParagraph(version.getParagraphs(), o.getParagraphId());
+						buf.append("<TR><TD>Párrafo original:<br/>");
+						buf.append(p.getParagraphNumberForDisplay()).append(". ");
+						buf.append(p.getParagraphText());
+						buf.append("</TD>");
+						buf.append("</TR>");
+						lastParagraphId = p.getId();
+					}
 					DelegateAuditDAO.registerDownloadObservation(user, o);
 					ObservationVO vo = (ObservationVO)o;
 					buf.append("<TR><TD><TABLE><TR>");
@@ -129,6 +138,16 @@ public class ExportVersionAsPDF {
 		renderer.layout();
 		renderer.createPDF(output);
 	}
+	
+	private static Paragraph getParagraph(List<Paragraph> paragraphs, int paragraphId) {
+		for (Paragraph p : paragraphs) {
+			if (p.getId() == paragraphId) {
+				return p;
+			}
+		}
+		return null;
+	}
+
 
 	private static List<Paragraph> filterIntroduction(List<Paragraph> paragraphs) {
 		List<Paragraph> result = new ArrayList<Paragraph>();
