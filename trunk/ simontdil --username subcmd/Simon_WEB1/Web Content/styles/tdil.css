@@ -157,7 +157,20 @@ div#main {
 #header p a:link, #header p a:visited {
 	color: #666666;
 }
-
+#alcien a {
+	color: #666666;
+	text-decoration:none;
+}
+#alcien a:link, #alcien a:visited {
+	color: #666666;
+}
+#alcien a:hover {
+	color: #666666;
+	text-decoration: underline;
+}
+#alcien p a:link, #alcien p a:visited {
+	color: #666666;
+}
 /* ### Buttons ###*/
 #header #blockinHeader .clear { /* generic container (i.e. div) for floating buttons */
     overflow: hidden;
