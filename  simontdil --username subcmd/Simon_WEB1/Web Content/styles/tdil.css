@@ -29,14 +29,14 @@ a {
 	text-decoration:none;
 }
 a:link, a:visited {
-	color: #666666;
+	color: #E8F7FF;
 }
 a:hover {
-	color: #333333;
+	color: #E8F7FF;
 	text-decoration: underline;
 }
 p a:link, p a:visited {
-	color: #333333;
+	color: #E8F7FF;
 }
 .textLink{
 	color:#666666;
@@ -143,6 +143,20 @@ div#main {
 	position: relative;
 }
 
+#header a {
+	color: #666666;
+	text-decoration:none;
+}
+#header a:link, #header a:visited {
+	color: #666666;
+}
+#header a:hover {
+	color: #666666;
+	text-decoration: underline;
+}
+#header p a:link, #header p a:visited {
+	color: #666666;
+}
 
 /* ### Buttons ###*/
 #header #blockinHeader .clear { /* generic container (i.e. div) for floating buttons */
