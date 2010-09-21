@@ -146,7 +146,7 @@ if ( dw_scrollObj.isSupported() ) {
 <html:form action="/viewVersionAction">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
-			<div id="mainDocContainer" style="height:170px; margin-top:13px;">
+			<div id="mainDocContainer" style="height:180px; margin-top:13px;">
 				<div id="blockTitle1">Documento Principal</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
