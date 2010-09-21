@@ -96,7 +96,12 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 				<tr>
-					<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+					<% if (isDelegate) { %>
+						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+					<% } %>
+					<% if (isModerator) { %>
+						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+					<% } %>
 				</tr>
 			</table>
 		<!-- fin tabla template -->
