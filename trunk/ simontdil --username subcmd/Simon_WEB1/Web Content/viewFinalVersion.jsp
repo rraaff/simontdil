@@ -112,7 +112,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td colspan="3" height="30"><div class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></div></td>
 							</tr>
-							<tr>
+							<!--tr>
 								<td colspan="3">
 									<table width="254" border="0" cellspacing="0" cellpadding="0">
 										<tr>
@@ -124,7 +124,7 @@ if ( dw_scrollObj.isSupported() ) {
 										</tr>
 									</table>
 								</td>
-							</tr>
+							</tr-->
 							<tr>
 								<td width="163" height="30" align="left">L&iacute;mite para observaciones:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>

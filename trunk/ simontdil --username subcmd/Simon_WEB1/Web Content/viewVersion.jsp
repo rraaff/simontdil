@@ -153,12 +153,12 @@ if ( dw_scrollObj.isSupported() ) {
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></td>
 					</tr>
-					<tr>
+					<!-- tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td width="60" align="left">Versi&oacute;n:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="ViewVersion" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="ViewVersion" property="version.version.name" /></td>
-					</tr>
+					</tr -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
