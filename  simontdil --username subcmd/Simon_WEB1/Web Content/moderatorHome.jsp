@@ -141,7 +141,7 @@
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Librería de documendos de referencia</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos de consulta</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -172,7 +172,7 @@
 				<tr>
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
-					<td height="20" valign="right"><html:link  action="/goToReferenceDocLibrary.st">Ver libreria de referencia</html:link></td>
+					<td height="20" valign="right"><html:link  action="/goToReferenceDocLibrary.st">Ver Documentos de consulta</html:link></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
