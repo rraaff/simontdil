@@ -70,12 +70,12 @@ a:active {width: auto;}
 	<div id="siteSeccion">
 	<% 	if(eventMode) { %>
 		<% 	if(inNegotiation) { %>
-			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento y negociando -->
+			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación y negociando -->
 		<% } else { %>
 			<% 	if(isSign) { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento firmando -->
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación firmando -->
 			<% } else { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo evento aun no negociando -->
+				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
 			<% } %>
 		<% } %>
 	<% } else { %>
