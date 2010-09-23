@@ -44,7 +44,7 @@ public class IBatisManager {
 		sqlMapper.commitTransaction();
 	}
 	
-	public static void rollbackTransaction() throws SQLException {
+	public static void endTransaction() throws SQLException {
 		sqlMapper.endTransaction();
 	}
 	

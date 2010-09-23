@@ -38,13 +38,11 @@ public class TransactionFilter implements Filter {
 			getLog().error(e.getMessage(), e);
 			throw new ServletException(e);
 		} finally {
-			if (!commited) {
 				try {
-					IBatisManager.rollbackTransaction();
+					IBatisManager.endTransaction();
 				} catch (SQLException e) {
 					getLog().error(e.getMessage(), e);
 				}
-			}
 		}
 
 	}

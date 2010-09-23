@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 
-import sun.security.action.GetLongAction;
-
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
@@ -14,7 +12,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.struts.forms.TransactionalValidationForm;
 import com.tdil.simon.utils.LoggerProvider;
-import com.tdil.simon.web.DownloadController;
 
 public class TransactionProvider {
 
@@ -27,12 +24,10 @@ public class TransactionProvider {
             IBatisManager.commitTransaction();
             commited = true;
 		} finally {
-			if (!commited) {
-				try {
-					IBatisManager.rollbackTransaction();
-				} catch (SQLException e) {
-					getLog().error(e.getMessage(), e);
-				}
+			try {
+				IBatisManager.endTransaction();
+			} catch (SQLException e) {
+				getLog().error(e.getMessage(), e);
 			}
 		}
 	}
@@ -42,20 +37,16 @@ public class TransactionProvider {
 	}
 	
 	public static Object executeInTransaction(TransactionalActionWithValue transactionalAction, ActionForm form) throws SQLException, ValidationException {
-		boolean commited = false;
 		Object result = null;
 		try {
 			IBatisManager.beginTransaction();
 			result = transactionalAction.executeInTransaction(form);
             IBatisManager.commitTransaction();
-            commited = true;
 		} finally {
-			if (!commited) {
-				try {
-					IBatisManager.rollbackTransaction();
-				} catch (SQLException e) {
-					getLog().error(e.getMessage(), e);
-				}
+			try {
+				IBatisManager.endTransaction();
+			} catch (SQLException e) {
+				getLog().error(e.getMessage(), e);
 			}
 		}
 		return result;
@@ -69,12 +60,10 @@ public class TransactionProvider {
             IBatisManager.commitTransaction();
             commited = true;
 		} finally {
-			if (!commited) {
-				try {
-					IBatisManager.rollbackTransaction();
-				} catch (SQLException e) {
-					getLog().error(e.getMessage(), e);
-				}
+			try {
+				IBatisManager.endTransaction();
+			} catch (SQLException e) {
+				getLog().error(e.getMessage(), e);
 			}
 		}
 	}
