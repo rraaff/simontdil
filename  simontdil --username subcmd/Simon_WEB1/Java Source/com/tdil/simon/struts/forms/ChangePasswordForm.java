@@ -6,6 +6,7 @@ import org.apache.struts.action.ActionForm;
 
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.utils.CryptoUtils;
 
 public class ChangePasswordForm extends ActionForm {
 
@@ -63,7 +64,7 @@ public class ChangePasswordForm extends ActionForm {
 			return false;
 //			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
-		exists.setPassword(this.newPassword);
+		exists.setPassword(CryptoUtils.getHashedValue(this.newPassword));
 		exists.setTemporaryPassword(false);
 		SystemUserDAO.updatePassword(exists);
 		return true;

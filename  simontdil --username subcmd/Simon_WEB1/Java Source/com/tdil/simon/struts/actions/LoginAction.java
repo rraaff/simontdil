@@ -22,6 +22,7 @@ import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.LoginForm;
+import com.tdil.simon.utils.CryptoUtils;
 import com.tdil.simon.web.LogOnceListener;
 
 public class LoginAction extends Action implements TransactionalActionWithValue {
@@ -68,9 +69,9 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
 		if (exists.isTemporaryPassword()) {
-			throw new ValidationException(new ValidationError(ValidationErrors.PASSWORD_EXPIRED));
+			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
-		if (!exists.getPassword().equals(loginform.getPassword())) {
+		if (!exists.getPassword().equals(CryptoUtils.getHashedValue(loginform.getPassword()))) {
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
 		if (exists.isDelegate()) {
