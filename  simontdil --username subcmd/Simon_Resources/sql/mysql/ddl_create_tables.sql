@@ -18,7 +18,7 @@ CREATE  TABLE `simon`.`SIGNATURE` (
 CREATE  TABLE `simon`.`SYSTEMUSER` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(20) NULL ,
-  `password` VARCHAR(20) NULL ,
+  `password` VARCHAR(4000) NULL ,
   `name` VARCHAR(150) NULL ,
   `email` VARCHAR(100) NULL ,
   `job` VARCHAR(100) NULL ,
