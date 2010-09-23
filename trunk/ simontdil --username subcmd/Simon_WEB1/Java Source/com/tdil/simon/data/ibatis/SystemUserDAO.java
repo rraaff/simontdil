@@ -2,7 +2,6 @@ package com.tdil.simon.data.ibatis;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import com.tdil.simon.data.model.SystemUser;
