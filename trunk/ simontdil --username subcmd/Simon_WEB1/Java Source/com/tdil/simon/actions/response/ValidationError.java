@@ -3,11 +3,11 @@ package com.tdil.simon.actions.response;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionMessage;
 import org.apache.struts.action.ActionMessages;
 
-import com.mysql.jdbc.StringUtils;
 
 public class ValidationError {
 
@@ -24,7 +24,7 @@ public class ValidationError {
 	}
 	
 	public boolean hasError() {
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getGeneralError())) {
+		if (!StringUtils.isEmpty(this.getGeneralError())) {
 			return true;
 		}
 		return fieldErrors.size() > 0;
@@ -56,7 +56,7 @@ public class ValidationError {
 			return null;
 		}
 		ActionMessages messages = new ActionMessages();
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getGeneralError())) {
+		if (!StringUtils.isEmpty(this.getGeneralError())) {
 			messages.add("general", new ActionMessage(this.getGeneralError()));
 		}
 		for (Map.Entry<String, String> error : this.getFieldErrors().entrySet()) {
@@ -70,7 +70,7 @@ public class ValidationError {
 			return null;
 		}
 		ActionErrors errors = new ActionErrors();
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getGeneralError())) {
+		if (!StringUtils.isEmpty(this.getGeneralError())) {
 			errors.add("general", new ActionMessage(this.getGeneralError()));
 		}
 		for (Map.Entry<String, String> error : this.getFieldErrors().entrySet()) {

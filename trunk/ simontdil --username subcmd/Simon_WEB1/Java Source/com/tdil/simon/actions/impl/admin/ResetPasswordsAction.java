@@ -7,9 +7,9 @@ import java.util.List;
 import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.AbstractAction;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
@@ -47,7 +47,7 @@ public class ResetPasswordsAction extends AbstractAction implements Transactiona
 	@Override
 	protected void basicValidate(HttpServletRequest req, ValidationError validation) {
 		for (String st : ids) {
-			if(!StringUtils.isEmptyOrWhitespaceOnly(st)) {
+			if(!StringUtils.isEmpty(st)) {
 				oids.add(IdValidation.validate(st, "ids", validation));
 			}
 		}

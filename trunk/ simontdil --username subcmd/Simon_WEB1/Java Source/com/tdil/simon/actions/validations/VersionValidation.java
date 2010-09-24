@@ -6,7 +6,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.DocumentDAO;
@@ -25,7 +26,7 @@ public class VersionValidation {
 	
 	public static Date validateUpToCommentDate(String upToCommentDate, ValidationError validation) {
 		String result = upToCommentDate;
-		if (StringUtils.isEmptyOrWhitespaceOnly(upToCommentDate)) {
+		if (StringUtils.isEmpty(upToCommentDate)) {
 			validation.setFieldError("upToCommentDate", ValidationErrors.UP_TO_COMMENT_DATE_CANNOT_BE_NULL);
 			return null;
 		} else {

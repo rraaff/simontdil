@@ -11,12 +11,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
 
-import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
@@ -137,7 +137,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		List<Paragraph> result = new ArrayList<Paragraph>();
 		if (this.paragraph < Paragraph.INTRODUCTION_LIMIT) {
 			int index = 0;	
-			while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
+			while(!StringUtils.isEmpty(paragraphTexts[index])) {
 				Paragraph p = new Paragraph();
 				index = index + 1;
 				p.setParagraphNumber(index);
@@ -145,7 +145,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			}
 		} else {
 			int index = Paragraph.INTRODUCTION_LIMIT;
-			while(!StringUtils.isEmptyOrWhitespaceOnly(paragraphTexts[index])) {
+			while(!StringUtils.isEmpty(paragraphTexts[index])) {
 				Paragraph p = new Paragraph();
 				index = index + 1;
 				p.setParagraphNumber(index);
@@ -257,7 +257,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public String getNextDisabled() {
-		if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph + 1])) {
+		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph + 1])) {
 			return "true";
 		} else {
 			return "false";
@@ -265,7 +265,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public String getLast() {
-		if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph + 1])) {
+		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph + 1])) {
 			return "true";
 		} else {
 			return "false";
@@ -273,7 +273,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public String getAddOrSave() {
-		if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph ])) {
+		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph ])) {
 			return ApplicationResources.getMessage("createDocument.paragraphs.add");
 		} else {
 			return ApplicationResources.getMessage("createDocument.paragraphs.save");
@@ -298,7 +298,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		List result = new ArrayList();
 		int index = 0;
 		String paragraphText = this.paragraphTexts[index];
-		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+		while (!StringUtils.isEmpty(paragraphText)) {
 			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
@@ -310,7 +310,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		List result = new ArrayList();
 		int index = Paragraph.INTRODUCTION_LIMIT;
 		String paragraphText = this.paragraphTexts[index];
-		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+		while (!StringUtils.isEmpty(paragraphText)) {
 			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
@@ -371,7 +371,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		List paragraphs = ParagraphDAO.selectAllParagraphsFor(this.getVersionId());
 		for (int i = 0; i < 1000; i++) {
 			String text = this.paragraphTexts[i];
-			if (!StringUtils.isEmptyOrWhitespaceOnly(text)) {
+			if (!StringUtils.isEmpty(text)) {
 				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], paragraphs);
 			}
 		}
@@ -385,7 +385,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 //			ParagraphDAO.updateParagraph(paragraph);
 //		}
 //		String paragraphText = this.paragraphTexts[index];
-//		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+//		while (!StringUtils.isEmpty(paragraphText)) {
 //			Paragraph paragraph = new Paragraph();
 //			paragraph.setVersionId(this.getVersionId());
 //			paragraph.setParagraphNumber(index + 1);
@@ -439,7 +439,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		updateParagraphs();
 //		int index = 0;
 //		String paragraphText = this.paragraphTexts[index];
-//		while (!StringUtils.isEmptyOrWhitespaceOnly(paragraphText)) {
+//		while (!StringUtils.isEmpty(paragraphText)) {
 //			Paragraph paragraph = new Paragraph();
 //			paragraph.setVersionId(this.getVersionId());
 //			paragraph.setParagraphNumber(index + 1);
@@ -663,8 +663,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public ValidationError validateCurrentParagraphForBack(ActionMapping mapping, HttpServletRequest request) {
 		ValidationError validation = new ValidationError();
-		if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph + 1])) {
-			if (StringUtils.isEmptyOrWhitespaceOnly(this.paragraphTexts[this.paragraph])) {
+		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph + 1])) {
+			if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph])) {
 				return validation;
 			}
 		}
