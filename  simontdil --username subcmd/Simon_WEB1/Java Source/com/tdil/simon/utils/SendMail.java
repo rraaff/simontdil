@@ -20,7 +20,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 
 /**
  * Insert the type's description here. Creation date: (4/9/2002 11:51:29 AM)
@@ -369,7 +370,7 @@ public class SendMail {
 				mailCheckDetails.append("Sending mail with SUBJECT null/n");
 				subject = "";
 			}
-			if (!StringUtils.isEmptyOrWhitespaceOnly(mailCheckDetails.toString())) {
+			if (!StringUtils.isEmpty(mailCheckDetails.toString())) {
 				mailCheckDetails.append("From: ");
 				mailCheckDetails.append(from);
 				mailCheckDetails.append(" To: ");

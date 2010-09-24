@@ -7,7 +7,8 @@ import java.util.TreeMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 import com.tdil.simon.actions.AbstractAction;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
@@ -123,7 +124,7 @@ public class AddDocumentAction extends AbstractAction implements TransactionalAc
 		this.consolidatedComment = req.getParameter("consolidatedComment");
 		int paragraphIndex = 1;
 		String text = null;
-		while(!StringUtils.isEmptyOrWhitespaceOnly(text = req.getParameter("paragraph" + paragraphIndex))) {
+		while(!StringUtils.isEmpty(text = req.getParameter("paragraph" + paragraphIndex))) {
 			this.paragraphs.put(paragraphIndex, text);
 			this.paragraphsDeleted.put(paragraphIndex, FieldValidation.validateBoolean(req.getParameter("paragraphDeleted" + paragraphIndex), new ValidationError()));
 			paragraphIndex = paragraphIndex + 1;

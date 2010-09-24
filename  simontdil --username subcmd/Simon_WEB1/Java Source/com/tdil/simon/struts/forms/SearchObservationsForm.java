@@ -7,9 +7,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 
-import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
@@ -224,18 +224,18 @@ public class SearchObservationsForm extends ActionForm {
 	public void search() throws SQLException {
 		HashMap params = new HashMap();
 		params.put("versionId", new Integer(this.getVersionId()));
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getCountryId())) {
+		if (!StringUtils.isEmpty(this.getCountryId())) {
 			params.put("countryId", new Integer(this.getCountryId()));
 		}
 		params.put("dateMin", getDateMin());
 		params.put("dateMax", getDateMax());
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getParagraphNumber())) {
+		if (!StringUtils.isEmpty(this.getParagraphNumber())) {
 			params.put("paragraphNumber", new Integer(this.getParagraphNumber()));
 		}
 		List observations = ObservationDAO.searchObservations(params);
 		
 		List result = new ArrayList();
-		if (StringUtils.isEmptyOrWhitespaceOnly(this.words)) {
+		if (StringUtils.isEmpty(this.words)) {
 			result = observations;
 		} else {
 			String search = this.words.trim().toUpperCase();

@@ -13,9 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.mysql.jdbc.StringUtils;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
@@ -61,7 +61,7 @@ public class DownloadController extends HttpServlet {
 		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
-		if (!StringUtils.isEmptyOrWhitespaceOnly(fileName)) {
+		if (!StringUtils.isEmpty(fileName)) {
 			res.setContentType("image/png");
 			FileInputStream inputStream = null;
 			try {
@@ -90,7 +90,7 @@ public class DownloadController extends HttpServlet {
 			res.setHeader("Cache-Control", "no-store");
 			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
-			if (!StringUtils.isEmptyOrWhitespaceOnly(fileName)) {
+			if (!StringUtils.isEmpty(fileName)) {
 				res.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(getDocumentAction.getReferenceDocument().getFileName(), "UTF-8"));
 				FileInputStream inputStream = null;
 				try {
@@ -110,7 +110,7 @@ public class DownloadController extends HttpServlet {
 		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
-		if (!StringUtils.isEmptyOrWhitespaceOnly(fileName)) {
+		if (!StringUtils.isEmpty(fileName)) {
 			res.setContentType("image/png");
 			FileInputStream inputStream = null;
 			try {

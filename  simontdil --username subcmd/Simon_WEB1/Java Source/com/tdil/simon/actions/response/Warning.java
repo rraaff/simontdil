@@ -3,7 +3,8 @@ package com.tdil.simon.actions.response;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 
 public class Warning {
 
@@ -20,7 +21,7 @@ public class Warning {
 	}
 	
 	public boolean hasWarning() {
-		if (!StringUtils.isEmptyOrWhitespaceOnly(this.getWarning())) {
+		if (!StringUtils.isEmpty(this.getWarning())) {
 			return true;
 		}
 		return fieldWarnings.size() > 0;

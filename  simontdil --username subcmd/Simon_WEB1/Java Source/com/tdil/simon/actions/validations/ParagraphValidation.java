@@ -3,7 +3,8 @@ package com.tdil.simon.actions.validations;
 import java.util.Map;
 import java.util.TreeMap;
 
-import com.mysql.jdbc.StringUtils;
+import org.apache.commons.lang.StringUtils;
+
 import com.tdil.simon.actions.response.ValidationError;
 
 public class ParagraphValidation {
@@ -19,7 +20,7 @@ public class ParagraphValidation {
 	}
 	
 	public static int validateParagraphNumber(String number, ValidationError validation) {
-		if (StringUtils.isEmptyOrWhitespaceOnly(number)) {
+		if (StringUtils.isEmpty(number)) {
 			validation.setFieldError("paragraph", ValidationErrors.CANNOT_BE_EMPTY);
 		} else {
 			String idToValidate = number.trim();
