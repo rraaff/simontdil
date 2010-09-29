@@ -31,7 +31,8 @@ lyr1{
 
 div#main { 
 	background-color:#eee;
-	width:900px;
+	width:auto;
+	height:480px;
 	text-align:left;
 }
 </style>
@@ -66,23 +67,20 @@ if ( dw_scrollObj.isSupported() ) {
 }
 </script>
 <div id="content">
-<table border="0" cellspacing="0" cellpadding="0" align="center">
+<table width="100%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td colspan="5" height="20"><img src="images/null.gif" width="1" height="20" id="imgReferencia" name="imgReferencia"></td>
-	</tr>
-	<tr>
-		<td valign="top">
+		<td valign="middle">
 			<!-- inicio tabla template -->
-			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - Número de Versión:<bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - Nombre:<bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - Número de Versión:<bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - Nombre:<bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="920" height="165">
+					<td height="300">
 					<!-- corte tabla template -->
 					<script type="text/javascript">
 						var signatureArray = new Array();
@@ -213,9 +211,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-	</tr>
-	<tr>
-		<td colspan="5" height="20" align="right"><img src="images/null.gif" width="10" height="20"></td>
 	</tr>
 </table>
 </div>

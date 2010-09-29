@@ -280,7 +280,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
-						</table>					
+						</table>
 						<!-- corte tabla template -->
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
@@ -356,9 +356,9 @@ if ( dw_scrollObj.isSupported() ) {
 		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td align="center" valign="middle">
-					<table width="440" height="225" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="980" height="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
-							<td width="440" align="center" valign="top">
+							<td align="center" valign="top">
 								<!-- inicio tabla template -->
 								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
