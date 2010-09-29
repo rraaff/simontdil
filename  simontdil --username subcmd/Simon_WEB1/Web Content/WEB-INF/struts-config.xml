@@ -36,14 +36,14 @@
   </global-forwards>
   <action-mappings>
     <action path="/login" name="LoginForm" type="com.tdil.simon.struts.actions.LoginAction" scope="session" input="/login.jsp">
-      <forward name="success" path="/success.jsp"/>
+      <forward name="success" redirect="true" path="/success.jsp"/>
       <forward name="failure" path="/login.jsp"/>
-      <forward name="admin" path="/adminHome.jsp"/>
-      <forward name="moderator" path="/goToModeratorHome.st"/>
-      <forward name="delegate" path="/goToDelegateHome.st"/>
+      <forward name="admin" redirect="true" path="/adminHome.jsp"/>
+      <forward name="moderator" redirect="true" path="/goToModeratorHome.st"/>
+      <forward name="delegate" redirect="true" path="/goToDelegateHome.st"/>
       <forward name="requestPassword" path="/requestPassword.jsp"/>
-      <forward name="negotiation" path="/goToDelegateNegotiation.st"/>
-      <forward name="signShow" path="/goToSignShow.st"/>
+      <forward name="negotiation" redirect="true" path="/goToDelegateNegotiation.st"/>
+      <forward name="signShow" redirect="true" path="/goToSignShow.st"/>
     </action>
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
