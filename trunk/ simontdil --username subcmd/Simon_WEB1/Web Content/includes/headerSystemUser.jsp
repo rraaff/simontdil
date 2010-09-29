@@ -37,17 +37,17 @@ a:active {width: auto;}
 				<td rowspan="2" align="left">
 					<table border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td width="140">Mod: <%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></td>
+							<td width="180">Mod: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b></td>
 						</tr>
 						<tr>
-							<td>Del: <%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></td>
+							<td>Del: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b></td>
 						</tr>
 						<tr>
-							<td>Pantalla: <%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></td>
+							<td>Pantalla: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
 						</tr>
 					</table>
 				</td>
-				<td width="320" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
+				<td width="280" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
 			</tr>
