@@ -11,7 +11,7 @@
 div#main {
 	background-color:#FFFFFF;
 	width:500px;
-	height:290px;
+	height:440px;
 	font-size: 10px;
 }
 div#scrollbar {
@@ -37,7 +37,7 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <html:form method="POST" action="/referenceDocumentABM" enctype="multipart/form-data">
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="370">
 			<!-- inicio tabla template -->
@@ -50,10 +50,10 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="290"><!-- corte tabla template -->
+					<td width="350" height="460" valign="top"><!-- corte tabla template -->
 						<table width="350" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
 								<td width="103" align="right">Nombre:</td>
@@ -130,7 +130,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530">
+					<td width="530" height="460" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
@@ -170,9 +170,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" align="right">
-						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+					<div id="scrollbar" style="width:20px; height:430px; float:right;">
+					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+						<div id="track" style="height:406px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>

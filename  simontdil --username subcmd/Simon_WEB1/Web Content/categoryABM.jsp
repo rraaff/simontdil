@@ -37,7 +37,7 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <html:form method="POST" action="/categoryABM">
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="370">
 			<!-- inicio tabla template -->
@@ -50,7 +50,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="290">
+					<td width="350" height="500" valign="top">
 						<!-- corte tabla template -->
 						<table width="350" border="0" cellspacing="0" cellpadding="0">
 							<tr>
@@ -109,7 +109,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530" height="144">
+					<td width="530" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
@@ -146,9 +146,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" align="right">
-						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+					<div id="scrollbar" style="width:20px; height:460px; float:right;">
+					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+						<div id="track" style="height:436px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>

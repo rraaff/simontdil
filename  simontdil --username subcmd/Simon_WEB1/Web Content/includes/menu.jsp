@@ -18,9 +18,9 @@
 				</ul>
 			</li>
 			<% } %>
-			<li><a class="trigger" href="#">Administrador SPT- SEGI</a>
+			<li><a class="trigger" href="#">Administrador SPT - SEGIB</a>
 				<ul>
-					<li><html:link action="/goToModeratorHome" >Home de SPT- SEGI</html:link></li>
+					<li><html:link action="/goToModeratorHome" >Home de SPT - SEGIB</html:link></li>
 					<li><html:link action="/createDocument" >Crear documento</html:link></li>
 					<li><html:link action="/goToListDocument" >Lista de documentos</html:link></li>
 					<li><html:link action="/goToReferenceDocumentABM" >Administrar Documentos de consulta</html:link></li>

@@ -10,8 +10,8 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:550px;
-	height:290px;
+	width:auto;
+	height:480px;
 	font-size: 10px;
 }
 div#scrollbar {
@@ -37,7 +37,7 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <html:form method="POST" action="/delegateABM">
 <div id="content">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="320">
 			<!-- inicio tabla template -->
@@ -50,11 +50,11 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="300" height="144">
+					<td width="300" height="500" valign="top">
 						<!-- corte tabla template -->
 						<table width="300" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
 								<td width="153" align="right">Nombre completo:</td>
@@ -133,7 +133,7 @@ if ( dw_scrollObj.isSupported() ) {
 																</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
@@ -161,11 +161,11 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="580" height="144">
+					<td width="580" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="540" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -173,7 +173,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="20" align="left">Nombre</td>
 										<td align="left">Pais</td>
 										<td width="60" align="center">Permisos</td>
-										<td width="60" align="center"><!-- Firmante --></td>
+										<td width="60" align="center">Firmante</td>
 										<td width="60" align="center">Habilitado</td>
 										<td width="60"></td>
 										<td width="80"></td>
@@ -207,9 +207,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" align="right">
-						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+					<div id="scrollbar" style="width:20px; height:440px; float:right;">
+					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
+						<div id="track" style="height:416px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
