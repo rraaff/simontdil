@@ -52,7 +52,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="192" align="right"><html:checkbox name="CreateDocumentForm" property="principal"/></td>
+								<td width="192" align="right"><html:checkbox name="CreateDocumentForm" property="principal"/><html:errors property="principal" /></td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="301" align="left">Marcar como documento principal a negociar</td>
 							</tr>

@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
@@ -29,7 +30,7 @@ public class CreateDocumentActionStep2 extends SimonAction {
 	}
 
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(final ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 		createDocumentForm.setStep(1);
@@ -46,7 +47,13 @@ public class CreateDocumentActionStep2 extends SimonAction {
 		if (!createDocumentForm.getParagraphHidden()) {
 			DelegateSiteCache.refresh();
 		}
-		ValidationError error = createDocumentForm.validateStep1(mapping, request);
+		ValidationError error = (ValidationError) TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
+			public Object executeInTransaction(ActionForm form)
+					throws SQLException, ValidationException {
+				CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
+				return createDocumentForm.validateStep1(mapping, request);
+			}
+		}, createDocumentForm);
 		if(error.hasError()) {
 			return redirectToFailure(error, request, mapping);
 		} else {

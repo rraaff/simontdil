@@ -134,7 +134,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 //			}
 //		}
 		toModify.setName(this.name);
-		toModify.setEmail(this.email);
+		toModify.setEmail(this.email.toLowerCase());
 		toModify.setCountryId(country.getId());
 		toModify.setTypeOne(this.isTypeOne());
 		toModify.setTypeTwo(this.isTypeTwo());
@@ -145,26 +145,13 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		SystemUserDAO.updateUser(toModify);
 	}
 	private void addUser() throws SQLException {
-		SystemUser exists = SystemUserDAO.getUser(this.username);
-//		if (exists != null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_ALREADY_EXISTS));
-//		}
 		Country country = CountryDAO.getCountry(Integer.valueOf(this.countryId));
-//		if (country == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
-//		}
-//		if (this.isCanSign()) {
-//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-//			if (canSignCount != 0) {
-//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-//			}
-//		}
 		String generatedPassword = SystemUser.generateRandomPassword();
 		SystemUser user = new SystemUser();
 		user.setUsername(this.username);
 		user.setPassword(generatedPassword);
 		user.setName(this.name);
-		user.setEmail(this.email);
+		user.setEmail(this.email.toLowerCase());
 		user.setCountryId(country.getId());
 		user.setDelegate(true);
 		user.setTypeOne(this.isTypeOne());
@@ -247,6 +234,10 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		SystemUser exists = SystemUserDAO.getUser(this.username);
 		if (exists != null && exists.getId() != this.getId()) {
 			validationError.setFieldError("delegate.username", "delegate.username." + ValidationErrors.USER_ALREADY_EXISTS);
+		}
+		SystemUser existsEmail = SystemUserDAO.getUserByEmail(this.email.toLowerCase());
+		if (existsEmail != null && existsEmail.getId() != this.getId()) {
+			validationError.setFieldError("delegate.email", "delegate.email." + ValidationErrors.USER_ALREADY_EXISTS);
 		}
 		if (this.isCanSign()) {
 			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()), this.isTypeOne(), this.isTypeTwo());

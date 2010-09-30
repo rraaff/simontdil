@@ -16,7 +16,7 @@ public class SignatureVO extends Signature {
 		this.delegateName = delegateName;
 	}
 	public String getCountryDescription() {
-		return countryDescription;
+		return countryDescription.toUpperCase();
 	}
 	public void setCountryDescription(String countryDescription) {
 		this.countryDescription = countryDescription;

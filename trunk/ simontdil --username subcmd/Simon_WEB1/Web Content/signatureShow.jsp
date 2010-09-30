@@ -97,7 +97,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="signaturePreview">
 							</div>
 							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
-								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
+								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
 								<tr> 
 									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
 									<script>
@@ -107,7 +107,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td>Nombre de la delegación en MAYUSCULAS</td>
+									<td><bean:write name="signature" property="countryDescription" /></td>
 								</tr>
 								<tr>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>

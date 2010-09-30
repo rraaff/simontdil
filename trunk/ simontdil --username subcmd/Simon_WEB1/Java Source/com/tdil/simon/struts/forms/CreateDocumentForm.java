@@ -489,7 +489,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		// TODO lanzar errores
 	}
 	
-	public ValidationError validateStep1(ActionMapping mapping, HttpServletRequest request) {
+	public ValidationError validateStep1(ActionMapping mapping, HttpServletRequest request) throws SQLException {
 		ValidationError validation = new ValidationError();
 		DocumentValidation.validateTitle(this.title, validation);
 		VersionValidation.validateName(this.versionName, validation);
@@ -500,6 +500,22 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		if (!typeOneBoolean && !typeTwoBoolean) {
 			validation.setFieldError("typeOne", "typeOne" + "." + ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
 		}
+		if (this.isPrincipal()) {
+			if (!Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
+				Document doc = DocumentDAO.getDocumentUnderWork();
+				if (doc != null) {
+					Version version = VersionDAO.getVersionUnderWork();
+					if (version.getId() != this.versionId) {
+						if (doc.isTypeOne() && this.isDocumentTypeOne()) {
+							validation.setFieldError("principal", "principal" + "." + ValidationErrors.DOCUMENT_IN_NEGOTIATION);
+						}
+						if (doc.isTypeTwo() && this.isDocumentTypeTwo()) {
+							validation.setFieldError("principal", "principal" + "." + ValidationErrors.DOCUMENT_IN_NEGOTIATION);
+						}
+					}
+				}
+			}
+		}
 		return validation;
 	}
 	public ValidationError validateStep2(ActionMapping mapping, HttpServletRequest request) {
@@ -508,19 +524,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		return validation;
 	}
 	
-	public ActionMessages validateStep1() {
-		ValidationError validation = new ValidationError();
-		DocumentValidation.validateTitle(this.title, validation);
-		VersionValidation.validateName(this.versionName, validation);
-		DocumentValidation.validateIntroduction(this.introduction, validation);
-		//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
-		boolean typeOneBoolean = this.isDocumentTypeOne();
-		boolean typeTwoBoolean = this.isDocumentTypeTwo();
-		if (!typeOneBoolean && !typeTwoBoolean) {
-			validation.setFieldError("typeOne", ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
-		}
-		return validation.asMessages();
-		}
 	public String getConsolidateText() {
 		return consolidateText;
 	}
