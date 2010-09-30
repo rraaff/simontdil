@@ -78,7 +78,7 @@
       <forward name="consolidate" path="/consolidateDocument.jsp"/>
       <forward name="save" path="/previewDocument.jsp"/>
       <forward name="editParagraphs" path="/createDocumentStepParagraph.jsp"/>
-      <forward name="goHome" path="/moderatorHome.jsp"/>
+      <forward name="goHome" path="/goToModeratorHome.st"/>
     </action>
     <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
       <forward name="save" path="/goToModeratorHome.st"/>
