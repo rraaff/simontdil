@@ -21,11 +21,13 @@ import org.xml.sax.InputSource;
 
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
+import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
+import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.web.SystemConfig;
 
@@ -55,7 +57,20 @@ public class ExportVersionAsRTF {
 		}
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
-			// TODO manejar la firma
+			List signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
+			buf.append("<table cols=\"150 300pt\" border=\"0\">");
+			for (Object signObj : signatures) {
+				SignatureVO signatureVO = (SignatureVO)signObj;
+				buf.append("<TR><TD>");
+				buf.append("Delegado: ").append(signatureVO.getDelegateName()).append("<br/>");
+				buf.append("");
+				buf.append("Delegación: ").append(signatureVO.getCountryDescription()).append("<br/>");
+				buf.append("Cargo: ").append(signatureVO.getJob()).append("<br/>");
+				buf.append("</TD>");
+				buf.append("<TD valign=\"top\">").append("<img width=\"1806px\" height=\"891px\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				buf.append("</TR>");
+			}
+			buf.append("</table>");
 		} else {
 			int lastParagraphId = -1;
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
@@ -111,6 +126,7 @@ public class ExportVersionAsRTF {
 			ByteArrayOutputStream fo = new ByteArrayOutputStream();
 			transformer.transform(new StreamSource(new ByteArrayInputStream(text.getBytes())), new StreamResult(fo));
 			
+			System.out.println(fo.toString());
 			final InputSource input = new InputSource(new ByteArrayInputStream(fo.toByteArray()));
 			OutputStreamWriter out = new OutputStreamWriter(output);
 			new Converter(input,out,Converter.createConverterOption ());
