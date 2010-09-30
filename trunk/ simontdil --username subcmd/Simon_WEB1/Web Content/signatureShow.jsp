@@ -96,10 +96,10 @@ if ( dw_scrollObj.isSupported() ) {
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
-							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+							<table width="100%" id="signTable" border="1" cellspacing="0" cellpadding="0">
 								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
 								<tr> 
-									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
+									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
 									<script>
 										signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
 										lastSignatureIndex = <%=signatureIndex%>;
@@ -111,7 +111,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</tr>
 								<tr>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br>Cargo</td>
+									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br><bean:write name="signature" property="job" /></td>
 								</tr>
 								</logic:iterate>
 							</table>
@@ -146,30 +146,40 @@ if ( dw_scrollObj.isSupported() ) {
 													var myTable = document.getElementById("signTable");
 													var tBody = myTable.getElementsByTagName("TBODY")[0];
 													var newTR = document.createElement('tr');
+													var signatureTD = document.createElement('td');
+													signatureTD.rowSpan = 2;
+													signatureTD.align="center";
+													signatureTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
+													newTR.appendChild (signatureTD);
+													
+													var spacerTD = document.createElement('td');
+													spacerTD.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+													newTR.appendChild (spacerTD);
+													
 													var flagTD = document.createElement('td');
-													flagTD.innerHTML = '<img width="200" height="110" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
-													flagTD.align="center";
+													flagTD.innerHTML = '<img width="30" height="30" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
 													newTR.appendChild (flagTD);
+													
+													var spacerTD1 = document.createElement('td');
+													spacerTD1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+													newTR.appendChild (spacerTD1);
+													
+													var countryTD = document.createElement('td');
+													countryTD.innerHTML = json.countries[i];
+													newTR.appendChild (countryTD);
 													tBody.appendChild(newTR);
 													
 													newTR = document.createElement('tr');
-													var signTD = document.createElement('td');
-													signTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
-													signTD.className = "BorderRigth";
-													signTD.width = "100";
-													signTD.align="center";
-													newTR.appendChild (signTD);
-													tBody.appendChild(newTR);
+													var spacerTD2 = document.createElement('td');
+													spacerTD2.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+													newTR.appendChild (spacerTD2);
 													
-													newTR = document.createElement('tr');
-													var operatorTD = document.createElement('td');
-													operatorTD.align="center";
-													operatorTD.innerHTML = '<b>' + json.delegates[i] + '</b>';
-													operatorTD.className = "BorderRigth";
-													operatorTD.width = "150";
-													newTR.appendChild (operatorTD);
+													var delegateNameTD = document.createElement('td');
+													delegateNameTD.colSpan = 3;
+													delegateNameTD.innerHTML = '<span class="remarcado">' + json.delegates[i] + '</span><br>' + json.jobs[i];
+													newTR.appendChild (delegateNameTD);
 													tBody.appendChild(newTR);
-													
+																
 													lastSignatureIndex = lastSignatureIndex + 1;
 													signatureArray[lastSignatureIndex] = json.fileNames[i];
 												}
