@@ -31,7 +31,7 @@ lyr1{
 
 div#main { 
 	background-color:#eee;
-	width:auto;
+	width:980px;
 	height:480px;
 	text-align:left;
 }
@@ -186,9 +186,9 @@ if ( dw_scrollObj.isSupported() ) {
 					</div>
 					<!-- corte tabla template --></td>
 					<td width="30" align="right" valign="bottom">
-					<div id="scrollbar" align="right">
+					<div id="scrollbar" style="width:20px; height:470px; float:right;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track">
+						<div id="track" style="height:446px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
