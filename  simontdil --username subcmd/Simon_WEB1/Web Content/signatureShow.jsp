@@ -96,7 +96,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
-							<table width="100%" id="signTable" border="1" cellspacing="0" cellpadding="0">
+							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
 								<logic:iterate name="DelegateNegotiationForm" property="signatures" id="signature" indexId="signatureIndex">
 								<tr> 
 									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
