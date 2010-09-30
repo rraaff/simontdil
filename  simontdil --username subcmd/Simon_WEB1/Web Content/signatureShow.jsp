@@ -182,6 +182,8 @@ if ( dw_scrollObj.isSupported() ) {
 																
 													lastSignatureIndex = lastSignatureIndex + 1;
 													signatureArray[lastSignatureIndex] = json.fileNames[i];
+													
+													init_dw_Scroll();
 												}
 												i = i + 1;
 											}
