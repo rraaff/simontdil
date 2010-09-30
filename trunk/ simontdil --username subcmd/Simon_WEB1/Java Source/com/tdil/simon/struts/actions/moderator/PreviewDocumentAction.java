@@ -12,6 +12,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class PreviewDocumentAction extends SimonAction {
 
@@ -44,6 +45,7 @@ public class PreviewDocumentAction extends SimonAction {
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndSign"))) {
 			createDocumentForm.setVersionStatus(Version.IN_SIGN);
 			createDocumentForm.save();
+			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.consolidate"))) {
