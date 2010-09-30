@@ -60,6 +60,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 						viewForm.finishSign(viewForm.getVersion().getVersion().getId());
 					}
 				});
+				viewForm.init(viewForm.getVersion().getVersion().getId());
 				DelegateSiteCache.refresh();
 				return mapping.findForward("continue");
 			} else {
@@ -69,10 +70,11 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.initNegotiation"))) {
 			// Custom check for shared page and action
 			if (UserTypeValidation.isValid(this.getLoggedUser(request), new UserTypeValidation[] { UserTypeValidation.MODERATOR})) {
-				TransactionProvider.executeInTransaction(this, form);
+				Integer newVersionId = (Integer)TransactionProvider.executeInTransaction(this, form);
 				DelegateSiteCache.refresh();
-				viewForm.init(viewForm.getVersion().getVersion().getId());
-				return mapping.findForward("continue");
+				viewForm.init(newVersionId);
+				request.setAttribute("id", String.valueOf(newVersionId.intValue()));
+				return mapping.findForward("editNegotiation");
 			} else {
 				return mapping.findForward("invalidAction");
 			}
@@ -162,6 +164,6 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		site.setStatus(Site.IN_NEGOTIATION);
 		site.setDataId(0);
 		SiteDAO.updateSite(site);
-		return null;
+		return createDocumentForm.getVersionId();
 	}
 }
