@@ -149,7 +149,14 @@
 		*
 		from SYSTEMUSER
 		where username = #username#
-		and deleted = 0
+  </select>
+  
+  <select id="selectUserByEmail" parameterClass="java.lang.String"
+		resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where LOWER(email) = #email#
   </select>
   
   <select id="selectNotDeletedDelegateUsersTypeOne" resultClass="SystemUser">

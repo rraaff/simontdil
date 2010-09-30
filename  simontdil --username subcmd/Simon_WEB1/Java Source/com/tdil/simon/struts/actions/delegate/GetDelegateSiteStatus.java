@@ -116,14 +116,17 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 	private void fillSignatures(HashMap<String, Object> result, Version version) throws SQLException {
 		List<SignatureVO> all = DelegateSiteCache.getAllSignatures();
 		List<String> delegates = new ArrayList<String>(all.size());
+		List<String> countries = new ArrayList<String>(all.size());
 		List<String> fileNames = new ArrayList<String>(all.size());
 		List<String> flags = new ArrayList<String>(all.size());
 		for (SignatureVO signatureVO : all) {
 			delegates.add(signatureVO.getDelegateName());
+			countries.add(signatureVO.getCountryDescription().toUpperCase());
 			fileNames.add(signatureVO.getSignatureFileName());
 			flags.add(String.valueOf(signatureVO.getCountryId()));
 		}
 		result.put("delegates", delegates.toArray(new String[0]));
+		result.put("countries", countries.toArray(new String[0]));
 		result.put("fileNames", fileNames.toArray(new String[0]));
 		result.put("flags", flags.toArray(new String[0]));
 	}

@@ -89,7 +89,7 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 	private void modifyUser() throws SQLException {
 		SystemUser toModify = SystemUserDAO.getUser(this.id);
 		toModify.setName(this.name);
-		toModify.setEmail(this.email);
+		toModify.setEmail(this.email.toLowerCase());
 		toModify.setAdministrator(this.isAdministrator());
 		toModify.setModerator(this.isModerator());
 		toModify.setDesigner(this.isDesigner());
@@ -101,7 +101,7 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		user.setUsername(this.username);
 		user.setPassword(generatedPassword);
 		user.setName(this.name);
-		user.setEmail(this.email);
+		user.setEmail(this.email.toLowerCase());
 		user.setCountryId(this.getHost().getId());
 		user.setDelegate(false);
 		user.setTypeOne(false);
@@ -218,6 +218,10 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		SystemUser exists = SystemUserDAO.getUser(this.username);
 		if (exists != null && exists.getId() != this.getId()) {
 			validationError.setFieldError("systemuser.username", "systemuser.username." + ValidationErrors.USER_ALREADY_EXISTS);
+		}
+		SystemUser existsEmail = SystemUserDAO.getUserByEmail(this.email.toLowerCase());
+		if (existsEmail != null && existsEmail.getId() != this.getId()) {
+			validationError.setFieldError("systemuser.email", "delegate.email." + ValidationErrors.USER_ALREADY_EXISTS);
 		}
 	}
 }

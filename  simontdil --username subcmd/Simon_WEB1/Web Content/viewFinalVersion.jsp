@@ -280,7 +280,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td>Nombre de la delegación en MAYUSCULAS</td>
+									<td><bean:write name="signature" property="countryDescription" /></td>
 								</tr>
 								<tr>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>

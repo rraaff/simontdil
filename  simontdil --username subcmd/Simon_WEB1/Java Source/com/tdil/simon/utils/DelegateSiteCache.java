@@ -37,6 +37,7 @@ public class DelegateSiteCache {
 						negotiatedParagraph = ParagraphDAO.getParagraph(Site.getDELEGATE_SITE().getDataId());
 					}
 					if (Site.IN_SIGN.endsWith(delegateSiteStatus)) {
+						documentUnderWork = DocumentDAO.getDocumentUnderWork();
 						version = VersionDAO.getVersionUnderWork();
 						allSignatures = SignatureDAO.selectSignaturesFor(version.getId());
 					}
