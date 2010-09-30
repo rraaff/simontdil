@@ -158,7 +158,9 @@ if ( dw_scrollObj.isSupported() ) {
 		        } else {
 			        if (sitestatus == 'SIGN_SHOW') {
 			        	clearTimer();
-			        	window.location='<html:rewrite page="/goToSignShow.st"/>';
+			        	<%if (!user.isCanSign()) { %>
+			        		window.location='<html:rewrite page="/goToSignShow.st"/>';
+			        	<% } %>
 			        } else {
 			        	if (sitestatus == 'IN_NEGOTIATION') {
 			        		var paragraphNumber = json.paragraphNumber;
