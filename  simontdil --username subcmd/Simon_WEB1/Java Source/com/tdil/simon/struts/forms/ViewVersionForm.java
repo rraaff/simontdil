@@ -20,6 +20,7 @@ import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionNumberVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class ViewVersionForm extends ActionForm {
 
@@ -115,6 +116,9 @@ public class ViewVersionForm extends ActionForm {
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
+		}
+		if (!Site.NORMAL.equals(DelegateSiteCache.getDelegateSiteStatus())) {
 			return false;
 		}
 		if (this.getVersion().getDocument().isPrincipal()) {
