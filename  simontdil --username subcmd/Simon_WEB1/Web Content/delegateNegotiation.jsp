@@ -356,7 +356,7 @@ if ( dw_scrollObj.isSupported() ) {
 		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td align="center" valign="middle">
-					<table width="980" height="600" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="440" height="230" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
 							<td align="center" valign="top">
 								<!-- inicio tabla template -->
