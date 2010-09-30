@@ -101,6 +101,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td align="left">
 								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
+								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
 							</td>
 							</tr>
 							<tr>
@@ -183,7 +184,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUser" property="countryName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><bean:write name="iterUser" property="permissionsString" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true"><!-- Si --></logic:equal>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
 											<td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
