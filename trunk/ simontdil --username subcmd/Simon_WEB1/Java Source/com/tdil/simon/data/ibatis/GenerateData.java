@@ -15,22 +15,22 @@ public class GenerateData {
 		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml");
 		IBatisManager.sqlMapper.startTransaction();
 
-		Country bolivia = CountryDAO.getCountry("Bolivia");
-		if (bolivia == null) {
-			bolivia = new Country();
-			bolivia.setName("Bolivia");
-			bolivia.setDeleted(false);
-			bolivia.setHost(false);
-			CountryDAO.insertCountry(bolivia);
-		} 
-		Country Chile = CountryDAO.getCountry("Chile");
-		if (Chile == null) {
-			Chile = new Country();
-			Chile.setName("Chile");
-			Chile.setDeleted(false);
-			Chile.setHost(false);
-			CountryDAO.insertCountry(Chile);
-		} 
+//		Country bolivia = CountryDAO.getCountry("Bolivia");
+//		if (bolivia == null) {
+//			bolivia = new Country();
+//			bolivia.setName("Bolivia");
+//			bolivia.setDeleted(false);
+//			bolivia.setHost(false);
+//			CountryDAO.insertCountry(bolivia);
+//		} 
+//		Country Chile = CountryDAO.getCountry("Chile");
+//		if (Chile == null) {
+//			Chile = new Country();
+//			Chile.setName("Chile");
+//			Chile.setDeleted(false);
+//			Chile.setHost(false);
+//			CountryDAO.insertCountry(Chile);
+//		} 
 		
 //		Country argentina = CountryDAO.getCountry("Argentina");
 //		int countryId = 0;
@@ -127,27 +127,27 @@ public class GenerateData {
 //				SystemUserDAO.insertUser(dele12);
 //			}
 //		}
-//		Site del = Site.getDELEGATE_SITE();
-//		if (del == null) {
-//			Site site = new Site();
-//			site.setName(Site.DELEGATE);
-//			site.setStatus(Site.NORMAL);
-//			SiteDAO.insertSite(site);
-//		}
-//
-//		if (Site.getMODERATOR_SITE() == null) {
-//			Site moderator = new Site();
-//			moderator.setName(Site.MODERATOR);
-//			moderator.setStatus(Site.NORMAL);
-//			SiteDAO.insertSite(moderator);
-//		}
-//
-//		if (Site.getPUBLIC_SITE() == null) {
-//			Site publicSite = new Site();
-//			publicSite.setName(Site.PUBLIC);
-//			publicSite.setStatus(Site.NORMAL);
-//			SiteDAO.insertSite(publicSite);
-//		}
+		Site del = Site.getDELEGATE_SITE();
+		if (del == null) {
+			Site site = new Site();
+			site.setName(Site.DELEGATE);
+			site.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(site);
+		}
+
+		if (Site.getMODERATOR_SITE() == null) {
+			Site moderator = new Site();
+			moderator.setName(Site.MODERATOR);
+			moderator.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(moderator);
+		}
+
+		if (Site.getPUBLIC_SITE() == null) {
+			Site publicSite = new Site();
+			publicSite.setName(Site.PUBLIC);
+			publicSite.setStatus(Site.NORMAL);
+			SiteDAO.insertSite(publicSite);
+		}
 //
 //		for (int i = 0; i < 15; i++) {
 //			ReferenceDocument refDoc = new ReferenceDocument();
