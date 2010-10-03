@@ -26,7 +26,7 @@
 					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
 					<td width="22"><img src="{SERVER}/Simon/images/null.gif" width="22" height="1"></td>
 					<td width="604" align="left" valign="top" class="fontMail"><p>Estimado <B>{FULLNAME}</B>,</p>
-					<p>Se ha creado un nuevo documento en la zona restringida del sitio web XX CUMBRE IBEROAMERICANA, URL, <a href="http://www.zr20ci.mrecic.gov.ar">www.zr20ci.mrecic.gov.ar</a>.</p>
+					<p>Se ha creado un nuevo documento en la zona restringida del sitio web XX CUMBRE IBEROAMERICANA, URL, <a href="{SERVER}/Simon/index.jsp">www.zr20ci.mrecic.gov.ar</a>.</p>
 					<p>El nombre del nuevo documento es: <B>{DOCUMENT_TITLE}</B><br/>Para ingresar al sitio utilice el siguiente enlace:</p>
 					<p align="center"><a href="{SERVER}/Simon/index.jsp" target="_blank"><img src="{SERVER}/Simon/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
 					<p>Ante cualquier consulta o dificultad, comuníquese con la Mesa de Ayuda de la Cancillería Argentina Correo electrónico: <a href="ayuda@xxcumbreiberoamericana.mrecic.gov.ar">ayuda@xxcumbreiberoamericana.mrecic.gov.ar</a>.<br />
