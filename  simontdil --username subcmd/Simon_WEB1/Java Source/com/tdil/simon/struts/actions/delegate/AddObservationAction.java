@@ -60,6 +60,7 @@ public class AddObservationAction extends AjaxSimonAction implements Transaction
 		boolean newParagraph = "true".equals(observationForm.getNewParagraph());
 		String text = observationForm.getParagraphText();
 		Paragraph paragraph = ParagraphDAO.getParagraph(versionId, number);
+		observationForm.setParagraphNumberForDiplay(paragraph.getParagraphNumberForDisplay());
 		Observation observation = new Observation();
 		observation.setParagraphId(paragraph.getId());
 		observation.setPrivateObservation(false);

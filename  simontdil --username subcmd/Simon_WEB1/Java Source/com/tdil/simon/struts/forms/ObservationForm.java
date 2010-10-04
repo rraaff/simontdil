@@ -12,6 +12,8 @@ public class ObservationForm extends ActionForm {
 	private static final long serialVersionUID = 44784135736887042L;
 
 	private String paragraphNumber;
+	private String paragraphNumberForDiplay;
+
 	private String newParagraph;
 	private String paragraphText;
 	private String versionId;
@@ -53,5 +55,11 @@ public class ObservationForm extends ActionForm {
 	}
 	public void setCreationDate(Date creationDate) {
 		this.creationDate = creationDate;
+	}
+	public String getParagraphNumberForDiplay() {
+		return paragraphNumberForDiplay;
+	}
+	public void setParagraphNumberForDiplay(String paragraphNumberForDiplay) {
+		this.paragraphNumberForDiplay = paragraphNumberForDiplay;
 	}
 }
