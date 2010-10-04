@@ -40,7 +40,7 @@ public class EmailUtils {
 				final NewObservationNotification notification = new NewObservationNotification();
 				notification.setUser(observationForm.getUser());
 				notification.setVersionId(observationForm.getVersionId());
-				notification.setParagraphNumber(observationForm.getParagraphNumber());
+				notification.setParagraphNumber(observationForm.getParagraphNumberForDiplay());
 				try {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {
