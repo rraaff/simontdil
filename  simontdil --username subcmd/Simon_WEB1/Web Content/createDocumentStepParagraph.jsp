@@ -226,7 +226,6 @@
 			</tr>
 		</table>
 	</div>
-</div>
 <script type="text/javascript">
 		//<![CDATA[
 			// Replace the <textarea id="editor1"> with an CKEditor instance.
@@ -240,5 +239,6 @@
 				});
 </script>
 </html:form>
+</div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:550px;
+	width:100%;
 	height:480px;
 	font-size: 10px;
 }
@@ -35,24 +35,24 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<html:form method="POST" action="/systemUserABM">
 <div id="content">
-<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
+<html:form method="POST" action="/systemUserABM">
+<table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="320">
+		<td width="35%">
 			<!-- inicio tabla template -->
-			<table width="320" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="300" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar usuarios del sistema</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar usuarios del sistema</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="300" height="500" valign="top">
+					<td height="500" valign="top">
 						<!-- corte tabla template -->
-						<table width="300" border="0" cellspacing="0" cellpadding="0">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
@@ -136,22 +136,22 @@ if ( dw_scrollObj.isSupported() ) {
 		<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="600">
+		<td width="65%">
 			<!-- inicio tabla template -->
-			<table width="600" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="580" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de usuarios del sistema</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de usuarios del sistema</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="580" height="500">
+					<td height="500">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -210,6 +210,6 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 </table>
-</div>
 </html:form>
+</div>
 <%@ include file="includes/footer.jsp" %>

@@ -7,9 +7,9 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 <html:html>
+<div id="content">
 <html:errors property="general" />
 <html:form method="POST" action="/createDocumentActionStep2">
-<div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="960">
@@ -99,7 +99,7 @@
 		</td>
 	</tr>
 </table>
-</div>
 </html:form>
+</div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

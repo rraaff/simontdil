@@ -7,8 +7,8 @@
 <%@ include file="includes/header.jsp" %>
 <html:html>
 <div id="content"><img src="images/null.gif" width="1" height="340"></div>
-<html:form method="POST" action="/consolidateDocument">
 <div id="outerdiv">
+<html:form method="POST" action="/consolidateDocument">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">
 		<table height="100%" align="center" border="0" cellspacing="0" cellpadding="0">
@@ -71,7 +71,7 @@
 			<tr>
 		</table>
 	</div>
-</div>
 </html:form>
+</div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>

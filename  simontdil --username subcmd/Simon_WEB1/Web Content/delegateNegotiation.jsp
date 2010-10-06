@@ -11,9 +11,11 @@ div#sizer { display:none; }
 /* breathing room between images in sizer */
 div#sizer img { margin-right:3px; }
 
-div#main { 
+div#main {
 	background-color:#eee;
-	width:540px;
+	* width:100%;
+	# width:100%;
+	width:auto;
 	height:500px;
 }
 
@@ -23,6 +25,12 @@ div#main {
 	display: block;
 	text-align: left;
 	height: 500px;
+}
+
+#content #negotiationArea {
+	* width:100%;
+	# width:100%;
+	width:auto;
 }
 
 div#scrollbar {
@@ -211,10 +219,10 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="480" align="left" valign="top">
+					<td width="100%" height="480" align="left" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
-							<div id="lyr1">
+							<div id="lyr1" style="width:auto; height:500px;">
 								<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 								<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
 									<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
@@ -258,7 +266,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td>
+					<td width="100%">
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="workTable">
 							<tr>
@@ -266,8 +274,8 @@ if ( dw_scrollObj.isSupported() ) {
 							</tr>
 							<tr>
 								<td width="98%" valign="top">
-								<div id="negotiationArea" style="width:auto; height:490px; text-align:left;">
-									<div id="lastParagraphText">  -  </div>
+								<div id="negotiationArea" style="width:100%; height:490px; text-align:left;">
+									<div id="lastParagraphText" style="width:100%; height:500px;">  -  </div>
 								</div>
 								</td>
 								<td width="30" align="right">

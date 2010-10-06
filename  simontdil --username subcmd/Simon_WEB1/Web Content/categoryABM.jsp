@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:500px;
+	width:100%;
 	height:290px;
 	font-size: 10px;
 }
@@ -35,24 +35,24 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<html:form method="POST" action="/categoryABM">
 <div id="content">
-<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
+<html:form method="POST" action="/categoryABM">
+<table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="370">
+		<td width="35%">
 			<!-- inicio tabla template -->
-			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="350" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar categorías de librería</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar categorías de librería</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="500" valign="top">
+					<td height="500" valign="top">
 						<!-- corte tabla template -->
-						<table width="350" border="0" cellspacing="0" cellpadding="0">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
@@ -98,22 +98,22 @@ if ( dw_scrollObj.isSupported() ) {
 		<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="550">
+		<td width="65%">
 			<!-- inicio tabla template -->
-			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de categor&iacute;as</div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Listado de categor&iacute;as</div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530" height="500" valign="top">
+					<td width="100%" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="500" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -166,6 +166,6 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 </table>
-</div>
 </html:form>
+</div>
 <%@ include file="includes/footer.jsp" %>
