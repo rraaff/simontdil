@@ -12,7 +12,7 @@ div#scrollbar {
 }
 div#main{
 	width:auto;
-	height:450px;
+	height:420px;
 }
 </style>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
@@ -56,7 +56,7 @@ if ( dw_scrollObj.isSupported() ) {
 											Límite para realizar observaciones: <bean:write name="CreateDocumentForm" property="limitObservationsString" /></td>
 									</tr>
 									<tr>
-										<td height="270" align="left" valign="top">
+										<td height="230" align="left" valign="top">
 										<div id="main">
 											<div id="lyr1">
 												<logic:iterate name="CreateDocumentForm" property="previewIntroduction" id="intro"> 
@@ -68,38 +68,6 @@ if ( dw_scrollObj.isSupported() ) {
 											</div>
 										</div>
 										</td>
-									</tr>
-									<tr>
-										<td height="30" align="center" valign="bottom"><html:errors property="general" />
-											<html:form method="POST" action="/previewDocument">
-												
-											<html:submit property="operation">
-												<bean:message key="createDocument.preview.editParagraphs"/>
-											</html:submit>
-											
-											<!-- Si no esta en negociacion -->
-											<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
-												<html:submit property="operation">
-													<bean:message key="createDocument.preview.save"/>
-												</html:submit>
-												<html:submit property="operation">
-													<bean:message key="createDocument.preview.consolidate"/>
-												</html:submit>
-											</logic:equal>
-											
-											<!-- Si esta en negociacion -->
-											<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">
-												<html:submit property="operation">
-													<bean:message key="createDocument.preview.saveAndContinue"/>
-												</html:submit>
-												<html:submit property="operation">
-													<bean:message key="createDocument.preview.saveAndSign"/>
-												</html:submit>
-											</logic:equal>
-											</html:form></td>
-									</tr>
-									<tr>
-										<td height="5"><img src="images/null.gif" width="1" height="5"></td>
 									</tr>
 								</table>
 							</td>
@@ -115,6 +83,44 @@ if ( dw_scrollObj.isSupported() ) {
 							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 						</tr>
 						<tr>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td colspan="2" width="98%" height="10"><img src="images/null.gif" width="1" height="10"></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+						</tr>
+						<tr>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td colspan="2" width="98%" height="20" align="center" valign="bottom">
+								<html:errors property="general" />
+								<html:form method="POST" action="/previewDocument">
+								<html:submit property="operation">
+									<bean:message key="createDocument.preview.editParagraphs"/>
+								</html:submit>
+								<!-- Si no esta en negociacion -->
+								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
+									<html:submit property="operation">
+										<bean:message key="createDocument.preview.save"/>
+									</html:submit>
+									<html:submit property="operation">
+										<bean:message key="createDocument.preview.consolidate"/>
+									</html:submit>
+								</logic:equal>
+								<!-- Si esta en negociacion -->
+								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">
+									<html:submit property="operation">
+										<bean:message key="createDocument.preview.saveAndContinue"/>
+									</html:submit>
+									<html:submit property="operation">
+										<bean:message key="createDocument.preview.saveAndSign"/>
+									</html:submit>
+								</logic:equal>
+								</html:form></td>
+							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+						</tr>
+						<tr>
 							<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
 							<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 							<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
@@ -125,5 +131,4 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </div>
-<div id="footer">
 <%@ include file="includes/footer.jsp" %>

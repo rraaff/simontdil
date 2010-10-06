@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:500px;
+	width:100%;
 	height:480px;
 	font-size: 10px;
 }
@@ -35,68 +35,64 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<html:form method="POST" action="/countryABM" enctype="multipart/form-data">
 <div id="content">
-<table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
+<html:form method="POST" action="/countryABM" enctype="multipart/form-data">
+<table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="370">
+		<td width="45%">
 			<!-- inicio tabla template -->
-			<table width="350" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="350" height="19" align="left"><div id="blockTitle">Editar delegaciones</div></td>
+					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle2">Editar delegaciones</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="350" height="480" valign="top"><!-- corte tabla template -->
-						<table width="350" border="0" cellspacing="0" cellpadding="0">
-							<tr>
-								<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
-							</tr>
-							<tr>
-								<td width="163" align="right">Nombre:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td colspan="2" width="230" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/><html:errors property="country.name" /></td>
-							</tr>
-							<tr>
-								<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td align="right">Seleccionar im&aacute;gen:</td>
-								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:file property="flag"/></td>
-								<td><html:errors property="country.flag" /></td>
-							</tr>
-							<tr>
-								<td colspan="4" height="30"><img src="images/null.gif" width="1" height="30"></td>
-							</tr>
-							<tr>
-								<td colspan="4" height="25" align="center">
-									<logic:equal name="CountryABMForm" property="id" value="0">
-										<html:submit property="operation">
-											<bean:message key="countryABM.create"/>
-										</html:submit>
-									</logic:equal>
-								
-									<logic:notEqual name="CountryABMForm" property="id" value="0">
-										<html:submit property="operation">
-										<bean:message key="countryABM.modify"/>
-										</html:submit>
-									</logic:notEqual>
-									
-									<html:submit property="operation">
-										<bean:message key="countryABM.cancel"/>
-									</html:submit>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
-							</tr>
-						</table>					
-						<!-- corte tabla template -->
-					</td>
+					<td height="480" valign="top"><!-- corte tabla template -->
+							<table width="100%" border="0" cellspacing="0" cellpadding="0">
+								<tr>
+									<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								</tr>
+								<tr>
+									<td width="163" align="right">Nombre:</td>
+									<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+									<td colspan="2" width="230" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/>
+											<html:errors property="country.name" /></td>
+								</tr>
+								<tr>
+									<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								</tr>
+								<tr>
+									<td align="right">Seleccionar im&aacute;gen:</td>
+									<td><img src="images/null.gif" width="7" height="1"></td>
+									<td align="left"><html:file property="flag"/></td>
+									<td><html:errors property="country.flag" /></td>
+								</tr>
+								<tr>
+									<td colspan="4" height="30"><img src="images/null.gif" width="1" height="30"></td>
+								</tr>
+								<tr>
+									<td colspan="4" height="25" align="center"><logic:equal name="CountryABMForm" property="id" value="0">
+											<html:submit property="operation">
+												<bean:message key="countryABM.create"/>
+											</html:submit>
+										</logic:equal>
+											<logic:notEqual name="CountryABMForm" property="id" value="0">
+												<html:submit property="operation">
+													<bean:message key="countryABM.modify"/>
+												</html:submit>
+											</logic:notEqual>
+											<html:submit property="operation">
+												<bean:message key="countryABM.cancel"/>
+											</html:submit>									</td>
+								</tr>
+								<tr>
+									<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								</tr>
+							</table>
+						<!-- corte tabla template -->					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -106,25 +102,25 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
-		<!-- fin tabla template -->
+			<!-- fin tabla template -->
 		</td>
 		<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="550">
+		<td width="55%">
 			<!-- inicio tabla template -->
-			<table width="550" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" background="images/interfaces/topTitle.gif" width="530" height="19" align="left"><div id="blockTitle">Listado de delegaciones</div></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Listado de delegaciones</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="530" height="460" valign="top">
+					<td width="100%" height="460" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="500" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
@@ -155,8 +151,7 @@ if ( dw_scrollObj.isSupported() ) {
 								</table>
 							<!-- corte tabla template -->
 							</div>
-						</div>
-					</td>
+						</div>					</td>
 					<td width="30" align="right" valign="middle">
 					<div id="scrollbar" style="width:20px; height:440px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -174,10 +169,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
-		<!-- fin tabla template -->
-		</td>
+		<!-- fin tabla template -->		</td>
 	</tr>
 </table>
-</div>
 </html:form>
+</div>
 <%@ include file="includes/footer.jsp" %>

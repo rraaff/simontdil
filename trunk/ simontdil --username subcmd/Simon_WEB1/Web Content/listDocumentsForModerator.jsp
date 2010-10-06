@@ -10,7 +10,7 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:950px;
+	width:100%;
 	height:470px;
 	font-size: 10px;
 }
@@ -35,8 +35,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<html:form method="POST" action="/documentABM">
 <div id="content">
+<html:form method="POST" action="/documentABM">
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td align="center">
@@ -54,15 +54,15 @@ if ( dw_scrollObj.isSupported() ) {
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1">
-								<table width="950" border="0" cellspacing="0" cellpadding="0" align="center">
+								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20">Documento</td>
+										<td height="20" align="left">Documento</td>
 										<td>Versión</td>
-										<td>Nombre de Versión</td>
-										<td>Estado</td>
+										<td align="left">Nombre de Versión</td>
+										<td align="left">Estado</td>
 										<td>Tiene Obs.</td>
 										<td># de obs.</td>
 										<td># nuevos solicitados</td>
@@ -72,10 +72,10 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> height="28"><bean:write name="version" property="documentTitle" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="version" property="documentTitle" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="versionWithSubversion" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="name" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="translatedStatus" /></td> 
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="name" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="translatedStatus" /></td> 
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="hasObservationText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="newParagraphCountText" /></td>
@@ -122,6 +122,6 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 </table>
-</div>
 </html:form>
+</div>
 <%@ include file="includes/footer.jsp" %>

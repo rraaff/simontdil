@@ -35,9 +35,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-
-<html:form method="POST" action="/resetPasswordAction">
 <div id="content">
+<html:form method="POST" action="/resetPasswordAction">
 	<div id="alcien" style="height:500px; padding-top:10px;">
 		<!-- inicio tabla template -->
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -120,7 +119,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<tr>
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-				<td colspan="2" width="530" height="25" align="center">
+				<td colspan="2" height="25" align="center">
 				<input type="button" value="<bean:message key="resetPassword.selectAll"/>" onclick="selectAll()"></input>
 				<html:submit property="operation">
 					<bean:message key="resetPassword.resetPassword"/>
@@ -135,6 +134,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</tr>
 		</table>
 	</div>
-</div>
 </html:form>
+</div>
 <%@ include file="includes/footer.jsp" %>

@@ -6,9 +6,8 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-
-<html:html>
 <div id="content">
+<html:html>
 <html:form method="POST" action="/paragraphNavigation">
 	<div id="alcien" style="height:150px;">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -209,6 +208,6 @@
 	</tr>
 </table>
 </html:form>
-</div>
 </html:html>
+</div>
 <%@ include file="includes/footer.jsp" %>

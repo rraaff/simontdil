@@ -9,7 +9,7 @@
 <style>
 <!--
 #portaTabla{
-	width:980px;
+	width:1000px;
 	height:460px;
 }
 -->
@@ -28,10 +28,10 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="500">
+					<td width="100%" height="500">
 					<!-- corte tabla template -->
 						<div id="portaTabla">
-							<table border="0" cellspacing="0" cellpadding="0" align="left">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 								<tr>
 									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>
