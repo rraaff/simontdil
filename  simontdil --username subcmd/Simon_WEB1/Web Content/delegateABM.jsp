@@ -10,7 +10,9 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:100%;
+	# width:100%;
+	* width:100%;
+	width:inherit;
 	height:480px;
 	font-size: 10px;
 }
@@ -162,13 +164,13 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="500" valign="top">
+					<td width="100%" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
-							<div id="lyr1">
+							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="8" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td width="200" height="20" align="left">Nombre</td>
@@ -178,6 +180,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="60" align="center">Habilitado</td>
 										<td width="60"></td>
 										<td width="80"></td>
+										<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
 									</tr> 
 									<logic:iterate name="DelegateABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
@@ -197,10 +200,11 @@ if ( dw_scrollObj.isSupported() ) {
 												<logic:equal name="iterUser" property="deleted" value="true">
 													<html:image property="reactivateImages" indexed="true" value="id" src="images/buttons/activar.png" border="0"></html:image>
 												</logic:equal></td>
+											<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="8" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>	
 							<!-- corte tabla template -->

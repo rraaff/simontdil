@@ -9,7 +9,7 @@
 <style>
 <!--
 #portaTabla{
-	width:1000px;
+	width:1160px;
 	height:460px;
 }
 -->
@@ -32,9 +32,9 @@
 					<!-- corte tabla template -->
 						<div id="portaTabla">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
-								<tr>
+								<!--tr>
 									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
-								</tr>
+								</tr-->
 								<tr>
 									<td width="80" height="20" align="left">Fecha</td>
 									<td width="200" align="left">Acciones</td>
@@ -87,9 +87,9 @@
 										</tr>
 									 </logic:iterate>
 								</logic:iterate>
-								<tr>
+								<!--tr>
 									<td colspan="7" height="25"><img src="images/null.gif" width="1" height="25"></td>
-								</tr>
+								</tr -->
 							</table>	
 						<!-- corte tabla template -->
 						</div>

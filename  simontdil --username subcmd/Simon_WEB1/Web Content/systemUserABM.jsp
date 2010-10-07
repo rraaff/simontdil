@@ -10,7 +10,9 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:100%;
+	# width:100%;
+	* width:100%;
+	width:inherit;
 	height:480px;
 	font-size: 10px;
 }
@@ -147,21 +149,21 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="500">
+					<td width="100%" height="500">
 					<!-- corte tabla template -->
 						<div id="main">
-							<div id="lyr1">
+							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="6" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">Username</td>
-										<td align="left">Nombre</td>
-										<td>Permisos</td>
-										<td>Habilitado</td>
-										<td> </td>
-										<td> </td>
+										<td width="20%" height="20" align="left">Username</td>
+										<td width="20%" align="left">Nombre</td>
+										<td width="30%">Permisos</td>
+										<td width="50">Habilitado</td>
+										<td width="60"> </td>
+										<td width="60"> </td>
 									</tr> 
 									<logic:iterate name="SystemUserABM" property="allUsers" id="iterUser" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
@@ -182,7 +184,7 @@ if ( dw_scrollObj.isSupported() ) {
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="6" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>	
 							<!-- corte tabla template -->
