@@ -10,7 +10,9 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:100%;
+	# width:100%;
+	* width:100%;
+	width:inherit;
 	height:480px;
 	font-size: 10px;
 }
@@ -44,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle2">Editar delegaciones</div></td>
+					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Editar delegaciones</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -86,13 +88,14 @@ if ( dw_scrollObj.isSupported() ) {
 											</logic:notEqual>
 											<html:submit property="operation">
 												<bean:message key="countryABM.cancel"/>
-											</html:submit>									</td>
+											</html:submit></td>
 								</tr>
 								<tr>
 									<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
 								</tr>
 							</table>
-						<!-- corte tabla template -->					</td>
+						<!-- corte tabla template -->
+					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -119,16 +122,17 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="100%" height="460" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
-							<div id="lyr1">
+							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td height="20" align="left">Nombre</td>
 										<td align="left">Usuarios</td>
 										<td width="60"></td>
 										<td width="60"></td>
+										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									</tr> 
 									<logic:iterate name="CountryABMForm" property="allCountries" id="iterCountry" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
@@ -143,15 +147,17 @@ if ( dw_scrollObj.isSupported() ) {
 												<logic:equal name="iterCountry" property="deleted" value="true">
 													<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
 												</logic:equal></td>
+											<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>
 							<!-- corte tabla template -->
 							</div>
-						</div>					</td>
+						</div>
+					</td>
 					<td width="30" align="right" valign="middle">
 					<div id="scrollbar" style="width:20px; height:440px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>

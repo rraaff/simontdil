@@ -10,9 +10,9 @@
 <div id="content">
 <html:errors property="general" />
 <html:form method="POST" action="/createDocumentActionStep2">
-<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<table width="100%" height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="960">
+		<td width="100%" valign="middle">
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>

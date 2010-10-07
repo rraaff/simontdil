@@ -10,7 +10,9 @@
 /* hide from incapable browsers */
 div#main {
 	background-color:#FFFFFF;
-	width:100%;
+	# width:100%;
+	* width:100%;
+	width:inherit;
 	height:470px;
 	font-size: 10px;
 }
@@ -50,10 +52,10 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="500" valign="top">
+					<td width="100%" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
-							<div id="lyr1">
+							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
