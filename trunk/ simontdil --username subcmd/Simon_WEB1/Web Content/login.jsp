@@ -5,6 +5,7 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
+
 <div id="content">
 <html:form method="POST" action="/login">
 <html:hidden name="LoginForm" property="operation" value=""/>
@@ -43,13 +44,10 @@
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<table border="0" cellspacing="0" cellpadding="0" onclick="doOperationSubmit('LoginForm','<bean:message key="login.enter"/>')">
-										<tr>
-											<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
-											<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton"><bean:message key="login.enter"/></a></td>
-											<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
-										</tr>
-									</table>
+									<jsp:include page="./includes/button.jsp">
+										<jsp:param name="_form" value="LoginForm" />
+										<jsp:param name="_operation" value="login.enter" />
+									</jsp:include> 
 								</td>
 							</tr>
 							<tr>
@@ -65,14 +63,11 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center" valign="middle">	
-								<table border="0" cellspacing="0" cellpadding="0" onclick="doOperationSubmit('LoginForm','<bean:message key="login.requestPassword"/>')">
-									<tr>
-										<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
-										<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton"><bean:message key="login.requestPassword"/></a></td>
-										<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
-									</tr>
-								</table>
+								<td colspan="3" align="center" valign="middle">
+									<jsp:include page="./includes/button.jsp">
+											<jsp:param name="_form" value="LoginForm" />
+											<jsp:param name="_operation" value="login.requestPassword" />
+									</jsp:include>
 								</td>
 							</tr>
 							<tr>

@@ -25,6 +25,8 @@ public class LoginForm extends ActionForm {
 	private String password;
 	private String operation;
 	
+	private boolean redirectToChangePassword = false;
+	
 	private boolean redirectToNegotiation = false;
 	
 	public String getUsername() {
@@ -45,6 +47,8 @@ public class LoginForm extends ActionForm {
 		super.reset(mapping, request);
 		username = null;
 		password = null;
+		redirectToNegotiation = false;
+		redirectToChangePassword = false;
 	}
 	public String getOperation() {
 		return operation;
@@ -84,6 +88,13 @@ public class LoginForm extends ActionForm {
 	}
 	public void setRedirectToNegotiation(boolean redirectToNegotiation) {
 		this.redirectToNegotiation = redirectToNegotiation;
+	}
+	
+	public boolean isRedirectToChangePassword() {
+		return redirectToChangePassword;
+	}
+	public void setRedirectToChangePassword(boolean redirectToChangePassword) {
+		this.redirectToChangePassword = redirectToChangePassword;
 	}
 
 }

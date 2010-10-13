@@ -36,6 +36,13 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 		if (login.getOperation().equals(ApplicationResources.getMessage("login.enter"))) {
 			try {
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
+				if (login.isRedirectToChangePassword()) {
+					request.setAttribute("username", user.getUsername());
+					request.setAttribute("email", user.getEmail());
+					request.setAttribute("password", login.getPassword());
+					login.setPassword("");
+					return mapping.findForward("initChangePassword");
+				}
 				user.setPassword(null);
 				request.getSession().setAttribute("user", user);
 				LogOnceListener.userHasLogged(user.getUsername(), user.isModerator(), request.getSession());
@@ -69,7 +76,12 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
 		if (exists.isTemporaryPassword()) {
-			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
+			if (exists.getPassword().equals(loginform.getPassword())) {
+				loginform.setRedirectToChangePassword(true);
+				return exists;
+			} else {
+				throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
+			}
 		}
 		if (!exists.getPassword().equals(CryptoUtils.getHashedValue(loginform.getPassword()))) {
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));

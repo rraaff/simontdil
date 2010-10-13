@@ -1,5 +1,6 @@
 package com.tdil.simon.struts.forms;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 
 import com.tdil.simon.data.ibatis.DocumentDAO;
@@ -23,6 +25,8 @@ import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.struts.actions.delegate.SignVersionAction;
+import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.web.SystemConfig;
 
 public class DelegateNegotiationForm extends ActionForm {
@@ -96,6 +100,8 @@ public class DelegateNegotiationForm extends ActionForm {
 		SignatureDAO.insertSignature(signature);
 		InputStream input = request.getInputStream();
 		// TODO error handling
+		File file = new File("a.txt");
+		getLog().error(file.getCanonicalPath());
 		FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
 		FileOutputStream fout2 = new FileOutputStream(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
 		try {
@@ -112,6 +118,10 @@ public class DelegateNegotiationForm extends ActionForm {
 			}
 		}
 		
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(DelegateNegotiationForm.class);
 	}
 
 	public List<SignatureVO> getSignatures() {
