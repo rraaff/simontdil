@@ -146,19 +146,37 @@ if ( dw_scrollObj.isSupported() ) {
 <html:form action="/viewVersionAction">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
-			<div id="mainDocContainer" style="height:180px; margin-top:13px;">
+			<div id="mainDocContainer" style="height:240px; margin-top:13px;">
 				<div id="blockTitle1">Documento Principal</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></td>
 					</tr>
-					<!-- tr>
+					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td width="60" align="left">Versi&oacute;n:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="ViewVersion" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="ViewVersion" property="version.version.name" /></td>
-					</tr -->
+					</tr>
+					<!-- INICIO: Recupero versión 197 :: Modificada -->
+					<tr>
+						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td height="30">Anteriores: </td>
+						<td colspan="2" align="left" valign="middle">
+						<div id="portaVersiones">
+						<logic:iterate name="ViewVersion" property="version.reducedVersions" id="otherVersion">
+							<logic:equal name="otherVersion" property="current" value="true">
+								<b><bean:write name="otherVersion" property="number" /></b>
+							</logic:equal>
+							<logic:notEqual name="otherVersion" property="current" value="true">
+								<html:link  action="/goToViewVersion.st?" paramName="otherVersion" paramProperty="id" paramId="versionID"><bean:write name="otherVersion" property="number" /></html:link>
+							</logic:notEqual>
+						</logic:iterate>
+						</div>
+						</td>
+					</tr>
+					<!-- FIN: Recupero versión 197 :: Modificada -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
@@ -189,12 +207,12 @@ if ( dw_scrollObj.isSupported() ) {
 									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
 								</tr>
 							</table -->
-							<% if (isDelegate) { %>
-								<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
-							<% } %>
-							<% if (isModerator) { %>
-								<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
-							<% } %>
+					<% if (isDelegate) { %>
+						<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+					<% } %>
+					<% if (isModerator) { %>
+						<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+					<% } %>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
