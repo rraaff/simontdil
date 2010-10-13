@@ -92,5 +92,8 @@ public class VersionDAO {
 		IBatisManager.sqlMapper.update("updateVersionUnderNegotiationToConsolidatedForDocument", documentId);
 	}
 
+	public static void updateVersionUnderNegotiationToConsolidated() throws SQLException {
+		IBatisManager.sqlMapper.update("updateVersionUnderNegotiationToConsolidated");
+	}
 
 }

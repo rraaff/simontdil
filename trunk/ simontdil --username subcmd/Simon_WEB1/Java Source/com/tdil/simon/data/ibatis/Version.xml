@@ -156,7 +156,14 @@
       status = 'CONSOLIDATED'
     where documentId = #id#
     and status = 'IN_NEGOTIATION'
-  </update>  
+  </update>
+  
+    <update id="updateVersionUnderNegotiationToConsolidated">
+    update VERSION set
+      status = 'CONSOLIDATED'
+    where status IN ('IN_NEGOTIATION', 'IN_SIGN')
+  </update>
+  
 
 	<update id="reactivateVersion" parameterClass="Version">
     update VERSION set
