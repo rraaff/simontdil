@@ -13,10 +13,12 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.SiteDAO;
+import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ModeratorSiteForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class SetModeratorSiteNormal extends SimonAction implements TransactionalActionWithValue {
 
@@ -34,6 +36,7 @@ public class SetModeratorSiteNormal extends SimonAction implements Transactional
 		moderatorSiteForm.setStatus(Site.NORMAL);
 		Site site = (Site) TransactionProvider.executeInTransaction(this, moderatorSiteForm);
 		Site.setMODERATOR_SITE(site);
+		DelegateSiteCache.refresh();
 		return mapping.findForward("home");
 	}
 
@@ -42,6 +45,10 @@ public class SetModeratorSiteNormal extends SimonAction implements Transactional
 		Site site = SiteDAO.getSite(Site.MODERATOR);
 		site.setStatus(moderatorSiteForm.getStatus());
 		SiteDAO.updateSite(site);
+		Site delegate = SiteDAO.getSite(Site.DELEGATE);
+		delegate.setStatus(Site.NORMAL);
+		SiteDAO.updateSite(delegate);
+		VersionDAO.updateVersionUnderNegotiationToConsolidated();
 		return site;
 	}
 }
