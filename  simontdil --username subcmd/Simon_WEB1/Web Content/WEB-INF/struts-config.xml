@@ -44,6 +44,7 @@
       <forward name="requestPassword" path="/requestPassword.jsp"/>
       <forward name="negotiation" redirect="true" path="/goToDelegateNegotiation.st"/>
       <forward name="signShow" redirect="true" path="/goToSignShow.st"/>
+      <forward name="initChangePassword" path="/initChangePassword.st"/>
     </action>
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
@@ -228,6 +229,9 @@
     </action>
     <action path="/documentABM" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.DocumentABMAction" scope="session">
       <forward name="continue" path="/goToListDocument.st"/>
+    </action>
+    <action path="/initChangePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.InitChangePasswordAction" scope="request">
+      <forward name="continue" path="/changePassword.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

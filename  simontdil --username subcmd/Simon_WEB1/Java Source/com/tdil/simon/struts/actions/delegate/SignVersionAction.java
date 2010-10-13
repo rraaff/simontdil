@@ -7,6 +7,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -18,6 +19,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.DelegateNegotiationForm;
 import com.tdil.simon.utils.DelegateSiteCache;
+import com.tdil.simon.utils.LoggerProvider;
 
 public class SignVersionAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
@@ -48,10 +50,15 @@ public class SignVersionAction extends AjaxSimonAction implements TransactionalA
 			result.put("result", "OK");
 			return result;
 		} catch (IOException e) {
+			getLog().error(e.getMessage(), e);
 			HashMap<String, String> result = new HashMap<String, String>();
 			result.put("result", "error");
 			result.put("error", "general error");
 			return result;
 		}
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(SignVersionAction.class);
 	}
 }

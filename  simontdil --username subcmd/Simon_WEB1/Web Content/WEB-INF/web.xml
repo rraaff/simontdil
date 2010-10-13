@@ -112,6 +112,9 @@
 		<url-pattern>*.st</url-pattern>
 	</filter-mapping>
 
+	<welcome-file-list>
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
 	<!--
 		<taglib> <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
 		<taglib-location>/WEB-INF/c.tld</taglib-location> </taglib> <taglib>
@@ -122,4 +125,5 @@
 		<taglib-uri>http://java.sun.com/jstl/x</taglib-uri>
 		<taglib-location>/WEB-INF/x.tld</taglib-location> </taglib>
 	-->
+	
 </web-app>
