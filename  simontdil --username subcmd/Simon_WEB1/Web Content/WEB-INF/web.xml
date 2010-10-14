@@ -38,6 +38,28 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>VersionRTFDownloadController</servlet-name>
+		<servlet-class>com.tdil.simon.web.VersionRTFDownloadController</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>VersionRTFDownloadController</servlet-name>
+		<url-pattern>/downloadRTF.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>VersionPDFDownloadController</servlet-name>
+		<servlet-class>com.tdil.simon.web.VersionPDFDownloadController</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>VersionPDFDownloadController</servlet-name>
+		<url-pattern>/downloadPDF.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
 		<init-param>

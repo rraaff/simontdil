@@ -81,6 +81,17 @@
    	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
   </select>
   
+  <select id="countAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="Integer">
+    select 
+    	count(1)
+   	from PARAGRAPH, OBSERVATION
+   	WHERE PARAGRAPH.versionId = #id#
+   	AND PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.privateObservation = 0
+   	AND OBSERVATION.DELETED = 0
+  </select>
+  
+  
   <select id="searchObservations" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
     select 
     	OBSERVATION.*,

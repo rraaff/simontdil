@@ -50,7 +50,6 @@ public class DownloadController extends HttpServlet {
 			downloadRefDoc(req, res);
 		}
 		if (action.equals("signature")) {
-			// TODO seguir por aca
 			downloadSignature(req, res);
 		}
 	}

@@ -84,54 +84,10 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("goToSearchObservations");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
-			// TODO redirect para evitar IE bug de cache
-			final OutputStream outputStream = response.getOutputStream();
-			response.setContentType("application/pdf");
-			VersionVO version = viewForm.getVersion();
-			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + ".pdf");
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						try {
-							ExportVersionAsPDF.exportDocument(viewForm.getUser(), viewForm.getVersion(), outputStream);
-						} catch (IOException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (ParserConfigurationException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (DocumentException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (SAXException e) {
-							getLog().error(e.getMessage(), e);
-						}
-					}
-				}	
-			);
-			return null;
+			return mapping.findForward("downloadPdf");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
-			// TODO redirect para evitar IE bug de cache
-			final OutputStream outputStream = response.getOutputStream();
-			response.setContentType("application/rtf");
-			VersionVO version = viewForm.getVersion();
-			response.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + ".rtf");
-			TransactionProvider.executeInTransaction(new TransactionalAction() {
-					public void executeInTransaction() throws SQLException, ValidationException {
-						try {
-							ExportVersionAsRTF.exportDocument(viewForm.getUser(), viewForm.getVersion(), outputStream);
-						} catch (IOException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (ParserConfigurationException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (DocumentException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (SAXException e) {
-							getLog().error(e.getMessage(), e);
-						} catch (Exception e) {
-							getLog().error(e.getMessage(), e);
-						}
-					}
-				}	
-			);
-			return null;
+			return mapping.findForward("downloadRtf");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.listObservations"))) {
 			TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
