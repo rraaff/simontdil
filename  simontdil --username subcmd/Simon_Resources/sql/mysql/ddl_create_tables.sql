@@ -33,6 +33,7 @@ CREATE  TABLE `SIMON`.`SYSTEMUSER` (
   `designer` INT NULL ,
   `passwordResetRequest` INT NULL ,
   `temporaryPassword` INT NULL ,
+  `canProposeParagraph` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `UNAME` (`username` ASC) );
@@ -58,6 +59,7 @@ CREATE  TABLE `SIMON`.`VERSION` (
   `status` VARCHAR(50) NULL ,
   `hasDraft` INT NULL ,
   `deleted` INT NULL ,
+  `commentsEnabled` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `document` (`documentId` ASC) );
 

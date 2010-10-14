@@ -24,6 +24,8 @@ public interface ValidationErrors {
 	
 	// New password and retype password are different
 	String PASSWORD_NOT_EQUALS = "PASSWORD_NOT_EQUALS";
+	String ALREADY_LOGGED = "ALREADY_LOGGED";
+	String MODERATOR_LOGGED = "MODERATOR_LOGGED";
 	
 	// Country
 	String COUNTRY_DOES_NOT_EXISTS = "COUNTRY_DOES_NOT_EXISTS";

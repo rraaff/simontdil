@@ -21,6 +21,7 @@ public class Version extends PersistentObject {
 	public static final String FINAL = "FINAL";
 	private String status;
 	private boolean hasDraft = false;
+	private boolean commentsEnabled = true;
 	
 	public int getDocumentId() {
 		return documentId;
@@ -94,4 +95,11 @@ public class Version extends PersistentObject {
 	public boolean isFinal() {
 		return FINAL.equals(this.getStatus());
 	}
+	public boolean isCommentsEnabled() {
+		return commentsEnabled;
+	}
+	public void setCommentsEnabled(boolean commentsEnabled) {
+		this.commentsEnabled = commentsEnabled;
+	}
+
 }

@@ -70,6 +70,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td># nuevos solicitados</td>
 										<td width="60"> </td>
 										<td width="80"> </td>
+										<% if (isModerator) { %><td width="80">Comentarios</td> <% } %>
 										<td width="5"> </td>
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
@@ -87,11 +88,18 @@ if ( dw_scrollObj.isSupported() ) {
 											<td>-</td>
 										<% } %> 
 										<td><logic:equal name="version" property="deleted" value="false">
-													<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
-												</logic:equal>
-												<logic:equal name="version" property="deleted" value="true">
-													<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
-												</logic:equal></td>
+												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+											</logic:equal>
+											<logic:equal name="version" property="deleted" value="true">
+												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+											</logic:equal></td>
+										<% if (isModerator) { %><td width="80">
+											<logic:equal name="version" property="commentsEnabled" value="true">
+												<html:image property="disableCommentsImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+											</logic:equal>
+											<logic:equal name="version" property="commentsEnabled" value="false">
+												<html:image property="enableCommentsImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+											</logic:equal></td> <% } %>
 										<td width="5"> </td>
 									</tr> 
 									</logic:iterate>

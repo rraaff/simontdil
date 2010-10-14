@@ -29,6 +29,7 @@
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.deleted,
 		COUNTRY.NAME as countryName
 		from SYSTEMUSER, COUNTRY
@@ -56,6 +57,7 @@
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.deleted,
 		COUNTRY.NAME as countryName
 		from SYSTEMUSER, COUNTRY
@@ -83,6 +85,7 @@
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.deleted,
 		COUNTRY.NAME as countryName
 		from SYSTEMUSER, COUNTRY
@@ -102,7 +105,8 @@
 		SYSTEMUSER.typeTwo,
 		SYSTEMUSER.canSign,
 		SYSTEMUSER.passwordResetRequest,
-		SYSTEMUSER.temporaryPassword
+		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph
 		from SYSTEMUSER
 		WHERE SYSTEMUSER.DELETED = 0
 		AND SYSTEMUSER.delegate = 1
@@ -200,10 +204,10 @@
 	<insert id="insertUser" parameterClass="SystemUser">
 		insert into SYSTEMUSER (
 		id,username,password,name,email, job, countryDesc,
-		countryId,administrator,moderator,delegate,typeOne,typeTwo,canSign,designer,passwordResetRequest,temporaryPassword,deleted
+		countryId,administrator,moderator,delegate,typeOne,typeTwo,canSign,designer,passwordResetRequest,temporaryPassword,canProposeParagraph,deleted
 		) values (
 		#id#,#username#,#password#,#name#,#email#,#job#,#countryDesc#,
-		#countryId#,#administrator#,#moderator#,#delegate#,#typeOne#,#typeTwo#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#deleted#
+		#countryId#,#administrator#,#moderator#,#delegate#,#typeOne#,#typeTwo#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,#deleted#
 		)
   </insert>
 
@@ -223,6 +227,7 @@
 		canSign = #canSign#,
 		designer = #designer#,
 		passwordResetRequest = #passwordResetRequest#,
+		canProposeParagraph = #canProposeParagraph#,
 		deleted = #deleted#
 		where
 		ID = #id#

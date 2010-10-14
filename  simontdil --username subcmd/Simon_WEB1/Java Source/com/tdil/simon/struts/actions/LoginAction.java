@@ -44,8 +44,8 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 					return mapping.findForward("initChangePassword");
 				}
 				user.setPassword(null);
-				request.getSession().setAttribute("user", user);
 				LogOnceListener.userHasLogged(user.getUsername(), user.isModerator(), request.getSession());
+				request.getSession().setAttribute("user", user);
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
 				}

@@ -120,9 +120,9 @@
  
    <insert id="insertVersion" parameterClass="Version">
     insert into VERSION (
-      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, deleted
+      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, deleted
     ) values (
-      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #deleted#
+      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -139,7 +139,8 @@
 		upToCommentDate = #upToCommentDate#,
 		status = #status#,
 		deleted = #deleted#, 
-		hasDraft = #hasDraft#
+		hasDraft = #hasDraft#,
+		commentsEnabled = #commentsEnabled#
     where
       id = #id#
   </update>
@@ -171,7 +172,21 @@
     where
       id = #id#
   </update> 
-
+  
+  <update id="blockComments" parameterClass="Version">
+    update VERSION set
+      commentsEnabled = 0
+    where
+      id = #id#
+  </update> 
+  
+  <update id="enableComments" parameterClass="Version">
+    update VERSION set
+      commentsEnabled = 1
+    where
+      id = #id#
+  </update> 
+ 
   <update id="logDeleteVersion" parameterClass="Version">
     update VERSION set
       deleted = 1
