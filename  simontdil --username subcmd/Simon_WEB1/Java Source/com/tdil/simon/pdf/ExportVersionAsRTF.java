@@ -110,6 +110,7 @@ public class ExportVersionAsRTF {
 		}
 		buf.append("</body>");
 		buf.append("</html>");
+		//System.out.println(buf.toString());
 		Tidy tidy = new Tidy();
 		tidy.setXHTML(true); 
 		tidy.setDocType("omit");
@@ -117,6 +118,7 @@ public class ExportVersionAsRTF {
 		ByteArrayOutputStream tidyOut = new ByteArrayOutputStream();
 		tidy.parse(byteIn, tidyOut);
 		String text = new String(tidyOut.toByteArray());
+		//System.out.println(text);
 		text = text.replace("xmlns=\"http://www.w3.org/1999/xhtml\"", "");
 		javax.xml.transform.TransformerFactory tFactory = javax.xml.transform.TransformerFactory.newInstance();
 		InputStream inputStream = null;
@@ -149,40 +151,78 @@ public class ExportVersionAsRTF {
 	}
 
 	private static String convertForRtf(String observationText) {
-		java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<span style=\"color: rgb\\(([0-9]+), ([0-9]+), ([0-9]+)\\);\">");
-		StringBuffer result = new StringBuffer();
-		Matcher matcher = pattern.matcher(observationText);
-		int previous = 0;
-		int end = 0;
-		while (matcher.find()) {
-			result.append(observationText.substring(previous, matcher.start()));
-			Integer r = Integer.valueOf(matcher.group(1));
-			String rhex = Integer.toHexString(r);  
-			if (rhex.length() == 1) {
-				rhex = "0" + rhex;
+		StringBuffer firstPass = new StringBuffer();
+		{
+			java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<span style=\"color: rgb\\(([0-9]+), ([0-9]+), ([0-9]+)\\);\">");
+			Matcher matcher = pattern.matcher(observationText);
+			int previous = 0;
+			while (matcher.find()) {
+				firstPass.append(observationText.substring(previous, matcher.start()));
+				Integer r = Integer.valueOf(matcher.group(1));
+				String rhex = Integer.toHexString(r);  
+				if (rhex.length() == 1) {
+					rhex = "0" + rhex;
+				}
+				Integer g = Integer.valueOf(matcher.group(2));
+				String ghex = Integer.toHexString(g);  
+				if (ghex.length() == 1) {
+					ghex = "0" + ghex;
+				}
+				Integer b = Integer.valueOf(matcher.group(3));
+				String bhex = Integer.toHexString(b);  
+				if (bhex.length() == 1) {
+					bhex = "0" + bhex;
+				}
+				firstPass.append("<font color=\"#").append(rhex).append(ghex).append(bhex).append("\">");
+				previous = matcher.end();
 			}
-			Integer g = Integer.valueOf(matcher.group(2));
-			String ghex = Integer.toHexString(g);  
-			if (ghex.length() == 1) {
-				ghex = "0" + ghex;
-			}
-			Integer b = Integer.valueOf(matcher.group(3));
-			String bhex = Integer.toHexString(b);  
-			if (bhex.length() == 1) {
-				bhex = "0" + bhex;
-			}
-			result.append("<font color=\"#").append(rhex).append(ghex).append(bhex).append("\">");
-			end = matcher.end();
+			firstPass.append(observationText.substring(previous, observationText.length()));
 		}
-		result.append(observationText.substring(end, observationText.length()));
-		String resultString = result.toString();
-		resultString = resultString.replaceAll("<span style=\"background-color: rgb\\(([0-9]+), ([0-9]+), ([0-9]+)\\);\">", "<font>"); // TODO manejar background color
+		StringBuffer secondPass = new StringBuffer();
+		String firstPassResult = firstPass.toString();
+		{
+			java.util.regex.Pattern pattern = java.util.regex.Pattern.compile("<span style=\"background-color: rgb\\(([0-9]+), ([0-9]+), ([0-9]+)\\);\">");
+			Matcher matcher = pattern.matcher(firstPassResult);
+			int previous = 0;
+			while (matcher.find()) {
+				secondPass.append(firstPassResult.substring(previous, matcher.start()));
+				Integer r = Integer.valueOf(matcher.group(1));
+				String rhex = Integer.toHexString(r);  
+				if (rhex.length() == 1) {
+					rhex = "0" + rhex;
+				}
+				Integer g = Integer.valueOf(matcher.group(2));
+				String ghex = Integer.toHexString(g);  
+				if (ghex.length() == 1) {
+					ghex = "0" + ghex;
+				}
+				Integer b = Integer.valueOf(matcher.group(3));
+				String bhex = Integer.toHexString(b);  
+				if (bhex.length() == 1) {
+					bhex = "0" + bhex;
+				}
+				secondPass.append("<font background-color=\"#").append(rhex).append(ghex).append(bhex).append("\">");
+				previous = matcher.end();
+			}
+			secondPass.append(firstPassResult.substring(previous, firstPassResult.length()));
+		}
+		
+		String resultString = secondPass.toString();
+		//resultString = resultString.replaceAll("<span style=\"background-color: rgb\\(([0-9]+), ([0-9]+), ([0-9]+)\\);\">", "<font>"); // TODO manejar background color
 		resultString = resultString.replaceAll("</span>", "</font>");
 		return resultString;
 	}
 	
 	public static void main(String[] args) {
-		System.out.println(convertForRtf("1. <strong>zzzzs</strong>dasda<strong>sda</strong><span style=\"color: rgb(255, 0, 0);\"><span style=\"background-color: rgb(0, 255, 0);\">dasdasdasdasdsss</span><br /> <span style=\"background-color: rgb(0, 255, 0);\">eessssstoooo</span></span>"));
+		System.out.println(convertForRtf("<span style=\"color: rgb(255, 0, 0);\">pepe <span style=\"background-color: rgb(255, 255, 0);\">background</span></span><br/>" + 
+				"<span style=\"color: rgb(255, 0, 0);\">bold rojo</span><br />"+ 
+				"<span style=\"color: rgb(255, 0, 0);\">italica rojo<br />"));// + 
+//				"<u>underline rojo</u><br />" + 
+//				"<strike>strike rojo</strike></span><br />" + 
+//				"<strong><span style=\"background-color: rgb(255, 255, 0);\">bold amarillo</span></strong><br />" + 
+//				"<em><span style=\"background-color: rgb(255, 255, 0);\">italica amarillo</span></em><br />" + 
+//				"<u><span style=\"background-color: rgb(255, 255, 0);\">underline amarillo</span></u><br />" + 
+//				"<strike><span style=\"background-color: rgb(255, 255, 0);\">strike amarillo</span></strike>"));
 	}
 
 	private static List<Paragraph> filterIntroduction(List<Paragraph> paragraphs) {
