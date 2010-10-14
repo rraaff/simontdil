@@ -20,6 +20,10 @@ public class ObservationDAO {
 	public static List selectNotDeletedObservationsForVersion(int versionID) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllObservationsForVersionNotDeleted", versionID);
 	}
+	
+	public static Integer countNotDeletedObservationsForVersion(int versionID) throws SQLException {
+		return (Integer)IBatisManager.sqlMapper.queryForObject("countAllObservationsForVersionNotDeleted", versionID);
+	}
 
 	public static List selectNotDeletedPrivateObservationsForVersion(int versionID) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedPrivateObservationsForVersion", versionID);

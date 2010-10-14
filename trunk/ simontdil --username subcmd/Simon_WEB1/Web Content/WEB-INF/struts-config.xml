@@ -123,6 +123,8 @@
       <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
       <forward name="goToSearchObservations" path="/goToSearchObservations.st"/>
       <forward name="editNegotiation" path="/editVersion.st"/>
+      <forward name="downloadRtf" path="/downloadRTF.do" redirect="true"/>
+      <forward name="downloadPdf" path="/downloadPDF.do" redirect="true"/>
     </action>
     <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
       <forward name="continue" path="/delegateHome.jsp"/>
