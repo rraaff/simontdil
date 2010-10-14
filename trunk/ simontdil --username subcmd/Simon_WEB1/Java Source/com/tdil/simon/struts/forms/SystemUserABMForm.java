@@ -114,6 +114,7 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 //		user.setCountryDesc(this.); TODO hablar con pablo
 		user.setPasswordResetRequest(false);
 		user.setTemporaryPassword(true);
+		user.setCanProposeParagraph(false);
 		user.setDeleted(false);
 		SystemUserDAO.insertUser(user);
 		try {

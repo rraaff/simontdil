@@ -15,7 +15,6 @@
 	</listener>
 	
 	<listener>
-	    <description>sessionListener</description>
 	    <listener-class>com.tdil.simon.web.LogOnceListener</listener-class>
 	</listener>
 
@@ -60,7 +59,7 @@
 		<servlet-name>action</servlet-name>
 		<url-pattern>*.st</url-pattern>
 	</servlet-mapping>
-
+	
 	<servlet>
 		<servlet-name>SignServlet</servlet-name>
 		<servlet-class>com.tdil.simon.web.SignServlet</servlet-class>

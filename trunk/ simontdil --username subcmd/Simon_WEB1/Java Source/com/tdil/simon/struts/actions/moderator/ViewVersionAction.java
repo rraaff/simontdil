@@ -84,6 +84,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("goToSearchObservations");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
+			// TODO redirect para evitar IE bug de cache
 			final OutputStream outputStream = response.getOutputStream();
 			response.setContentType("application/pdf");
 			VersionVO version = viewForm.getVersion();
@@ -107,6 +108,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return null;
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
+			// TODO redirect para evitar IE bug de cache
 			final OutputStream outputStream = response.getOutputStream();
 			response.setContentType("application/rtf");
 			VersionVO version = viewForm.getVersion();

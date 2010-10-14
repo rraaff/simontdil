@@ -79,8 +79,7 @@ public class VersionDAO {
 		IBatisManager.sqlMapper.update("logDeleteVersion", version);
 	}
 	
-	public static void reactivateVersion(Version version)
-	throws SQLException {
+	public static void reactivateVersion(Version version) throws SQLException {
 		IBatisManager.sqlMapper.update("reactivateVersion", version);
 	}
 
@@ -94,6 +93,14 @@ public class VersionDAO {
 
 	public static void updateVersionUnderNegotiationToConsolidated() throws SQLException {
 		IBatisManager.sqlMapper.update("updateVersionUnderNegotiationToConsolidated");
+	}
+	
+	public static void blockComments(Version version) throws SQLException {
+		IBatisManager.sqlMapper.update("blockComments", version);
+	}
+	
+	public static void enableComments(Version version) throws SQLException {
+		IBatisManager.sqlMapper.update("enableComments", version);
 	}
 
 }

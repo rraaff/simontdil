@@ -33,6 +33,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	private boolean typeOne;
 	private boolean typeTwo;
 	private boolean canSign;
+	private boolean canProposeParagraph;
 	private String job;
 	
 	private List<UserVO> allUsers;
@@ -140,6 +141,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		toModify.setTypeTwo(this.isTypeTwo());
 		toModify.setCanSign(this.isCanSign());
 		toModify.setJob(this.job);
+		toModify.setCanProposeParagraph(this.isCanProposeParagraph());
 //		toModify.setCountryDesc(this.countryDesc);
 //		toModify.setDeleted(false);
 		SystemUserDAO.updateUser(toModify);
@@ -164,6 +166,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 //		user.setCountryDesc(this.); TODO hablar con pablo
 		user.setPasswordResetRequest(false);
 		user.setTemporaryPassword(true);
+		user.setCanProposeParagraph(this.isCanProposeParagraph());
 		user.setDeleted(false);
 		SystemUserDAO.insertUser(user);
 		try {
@@ -182,6 +185,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		this.typeOne = false;
 		this.typeTwo = false;
 		this.canSign = false;
+		this.canProposeParagraph = false;
 		this.job = null;
 	}
 	public void init() throws SQLException {
@@ -213,6 +217,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			this.typeTwo = systemUser.isTypeTwo();
 			this.canSign = systemUser.isCanSign();
 			this.job = systemUser.getJob();
+			this.canProposeParagraph = systemUser.isCanProposeParagraph();
 		}
 	}
 	
@@ -253,6 +258,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		this.typeOne = false;
 		this.typeTwo = false;
 		this.canSign = false;
+		this.canProposeParagraph = false;
 	}
 	public void delete(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
@@ -276,5 +282,13 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			SystemUserDAO.reactivateUser(systemUser);
 		}
 		return null;
+	}
+
+	public boolean isCanProposeParagraph() {
+		return canProposeParagraph;
+	}
+
+	public void setCanProposeParagraph(boolean canProposeParagraph) {
+		this.canProposeParagraph = canProposeParagraph;
 	}
 }

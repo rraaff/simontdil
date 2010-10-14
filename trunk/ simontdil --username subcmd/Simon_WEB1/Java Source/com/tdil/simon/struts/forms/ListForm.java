@@ -58,4 +58,17 @@ public class ListForm extends ActionForm {
 		version.setDeleted(false);
 		VersionDAO.reactivateVersion(version);
 	}
+	
+	public void disableCommentsForVersion(int position) throws SQLException {
+		Version version = (Version)this.getList().get(position);
+		version.setCommentsEnabled(false);
+		VersionDAO.blockComments(version);
+	}
+
+	public void enableCommentsForVersion(int position) throws SQLException {
+		Version version = (Version)this.getList().get(position);
+		version.setCommentsEnabled(true);
+		VersionDAO.enableComments(version);
+	}
+	
 }

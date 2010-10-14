@@ -51,6 +51,20 @@ public class DocumentABMAction extends SimonAction {
 						}
 					});
 				}
+				if ("disableCommentsImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							versionListForm.disableCommentsForVersion(imageSubmitData.getPosition());
+						}
+					});
+				}
+				if ("enableCommentsImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							versionListForm.enableCommentsForVersion(imageSubmitData.getPosition());
+						}
+					});
+				}
 				return mapping.findForward("continue");
 			}
 		}

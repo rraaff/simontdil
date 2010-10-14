@@ -104,6 +104,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
 								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
+								<html:checkbox name="DelegateABM" property="canProposeParagraph"/> Puede proponer p&aacute;rrafo<html:errors property="delegate.canProposeParagraph" /><br/>
 							</td>
 							</tr>
 							<tr>

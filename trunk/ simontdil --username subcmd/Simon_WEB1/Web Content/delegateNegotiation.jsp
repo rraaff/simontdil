@@ -180,7 +180,9 @@ if ( dw_scrollObj.isSupported() ) {
 				        		var divObj = document.getElementById("lastParagraphText");
 			        			divObj.innerHTML = "<p class='article'>-</p>";
 			        		} else {
-			        			document.getElementById("addPrivateComment").disabled = false;
+			        			if (document.getElementById("addPrivateComment")) {
+			        				document.getElementById("addPrivateComment").disabled = false;
+			        			}
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
@@ -287,9 +289,11 @@ if ( dw_scrollObj.isSupported() ) {
 									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
 								</div></td>
 							</tr>
+							<% if (user.isCanProposeParagraph()) { %>
 							<tr>
 								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr>
+							<% } %>
 						</table>
 						<!-- corte tabla template -->
 					</td>

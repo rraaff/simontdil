@@ -37,6 +37,8 @@ public class SystemUser extends PersistentObject implements Serializable{
 	
 	private boolean passwordResetRequest = false;
 	private boolean temporaryPassword = false;
+	
+	private boolean canProposeParagraph = false;
 
 	public static String generateRandomPassword() {
 		return RandomStringUtils.randomAlphanumeric(20);
@@ -169,6 +171,14 @@ public class SystemUser extends PersistentObject implements Serializable{
 
 	public void setTemporaryPassword(boolean temporaryPassword) {
 		this.temporaryPassword = temporaryPassword;
+	}
+
+	public boolean isCanProposeParagraph() {
+		return canProposeParagraph;
+	}
+
+	public void setCanProposeParagraph(boolean canProposeParagraph) {
+		this.canProposeParagraph = canProposeParagraph;
 	}
 
 }
