@@ -566,6 +566,18 @@
         </xsl:otherwise>
       </xsl:choose>
     </xsl:variable>
+    
+    <xsl:variable name="bgcolor">
+      <xsl:choose>
+        <xsl:when test="@background-color">
+          <xsl:value-of select="@background-color"/>
+        </xsl:when>
+        <xsl:otherwise>
+          <xsl:text>white</xsl:text>
+        </xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+    
     <xsl:variable name="face">
       <xsl:choose>
         <xsl:when test="@face">
@@ -657,7 +669,7 @@
       </xsl:choose>
     </xsl:variable>
     <fo:inline font-size="{$size}" font-family="{$face}"
-      color="{$color}">
+      color="{$color}" background-color="{$bgcolor}">
       <xsl:apply-templates select="*|text()"/>
     </fo:inline>
   </xsl:template>
