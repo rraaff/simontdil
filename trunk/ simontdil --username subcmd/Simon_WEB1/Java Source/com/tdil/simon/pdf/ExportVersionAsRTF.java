@@ -44,14 +44,14 @@ public class ExportVersionAsRTF {
 
 		// generate the body
 		buf.append("<body>");
-		buf.append("<h1>").append(version.getDocument().getTitle()).append("</h1>");
+		buf.append("<h3>").append(version.getDocument().getTitle()).append("</h3>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<h4>Preámbulo</h4>");
 		for (Paragraph p : introduction) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(convertForRtf(p.getParagraphText())).append("</p>");
 		}
 		List<Paragraph> paragraphs = version.getParagraphs().subList(introduction.size(), version.getParagraphs().size());
-		buf.append("<h4>Párrafos</h4>");
+		buf.append("<br/><h4>Párrafos</h4>");
 		for (Paragraph p : paragraphs) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(convertForRtf(p.getParagraphText())).append("</p>");
 		}

@@ -65,13 +65,13 @@ if ( dw_scrollObj.isSupported() ) {
 														if (lastParagraph != tmpObservation.getParagraphId()) { %>
 													<tr>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-														<td width="880" colspan="7" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+														<td colspan="7" width="880" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 													</tr>
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="900" colspan="7" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
+														<td colspan="7" width="880" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>

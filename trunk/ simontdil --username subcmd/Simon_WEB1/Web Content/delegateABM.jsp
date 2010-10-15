@@ -59,9 +59,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="153" align="right">Nombre completo:</td>
+								<td width="172" align="right">Nombre completo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="190" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
+								<td width="380" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -104,7 +104,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
 								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
-								<html:checkbox name="DelegateABM" property="canProposeParagraph"/> Puede proponer p&aacute;rrafo<html:errors property="delegate.canProposeParagraph" /><br/>
+								<html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n<html:errors property="delegate.canProposeParagraph" /><br/>
 							</td>
 							</tr>
 							<tr>

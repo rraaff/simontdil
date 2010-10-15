@@ -47,11 +47,19 @@ public class ExportVersionAsPDF {
 		buf.append("body {");
 		buf.append("	color:#000000;");
 		buf.append("	font-family: Verdana, Arial, Helvetica, sans-serif;");
-		buf.append("	font-size: 14px;");
+		buf.append("	font-size: 13px;");
 		buf.append("	line-height: normal;");
 		buf.append("	letter-spacing: normal;");
 		buf.append("	word-spacing: normal;");
 		buf.append("	white-space: normal;");
+		buf.append("}");
+		buf.append("h1 {");
+		buf.append("	color:#000000;");
+		buf.append("	font-size: 16px;");
+		buf.append("}");
+		buf.append("h2 {");
+		buf.append("	color:#000000;");
+		buf.append("	font-size: 14px;");
 		buf.append("}");
 		buf.append("-->");
 		buf.append("</style>");
@@ -74,15 +82,15 @@ public class ExportVersionAsPDF {
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
 			List signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
-			buf.append("<table border=\"0\">");
+			buf.append("<table width=\"100%\" border=\"0\">");
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;
 				buf.append("<TR><TD><TABLE><TR>");
-				buf.append("<TD>Delegado: ").append(signatureVO.getDelegateName()).append("</TD>");
+				buf.append("<TD>Delegado: <b>").append(signatureVO.getDelegateName()).append("</b></TD>");
 				buf.append("</TR><TR>");
-				buf.append("<TD>Delegación: ").append(signatureVO.getCountryDescription()).append("</TD>");
+				buf.append("<TD>Delegación: <b>").append(signatureVO.getCountryDescription()).append("</b></TD>");
 				buf.append("</TR><TR>");
-				buf.append("<TD>Posición: ").append(signatureVO.getJob()).append("</TD>");
+				buf.append("<TD>Posición: <b>").append(signatureVO.getJob()).append("</b></TD>");
 				buf.append("</TR></TABLE></TD>");
 				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
 			}
@@ -93,27 +101,27 @@ public class ExportVersionAsPDF {
 			if (!observations.isEmpty()) {
 				DateFormat simpleDateFormat = SystemConfig.getDateFormatWithMinutes();
 				buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
-				buf.append("<table border=\"0\">");
+				buf.append("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\">");
 				for (Observation o : observations) {
 					if (o.getParagraphId() != lastParagraphId) {
 						Paragraph p = getParagraph(version.getParagraphs(), o.getParagraphId());
-						buf.append("<TR><TD>Párrafo original:<br/>");
+						buf.append("<TR><TD colspan=\"2\" width=\"100%\"><b>Párrafo original:</b><br/>");
 						buf.append(p.getParagraphNumberForDisplay()).append(". ");
 						buf.append(p.getParagraphText());
-						buf.append("</TD>");
+						buf.append("<br/></TD>");
 						buf.append("</TR>");
 						lastParagraphId = p.getId();
 					}
 					DelegateAuditDAO.registerDownloadObservation(user, o);
 					ObservationVO vo = (ObservationVO)o;
-					buf.append("<TR><TD><TABLE><TR>");
-					buf.append("<TD>Párrafo: ").append(vo.getParagraphNumberForDisplay()).append("</TD>");
+					buf.append("<TR><TD><TABLE width=\"100%\"><TR>");
+					buf.append("<TD>Párrafo: <b>").append(vo.getParagraphNumberForDisplay()).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("</TD>");
+					buf.append("<TD>Fecha de observación: <b>").append(simpleDateFormat.format(vo.getCreationDate())).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Delegado: ").append(vo.getName()).append("</TD>");
+					buf.append("<TD>Delegado: <b>").append(vo.getName()).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Delegación: ").append(vo.getCountryName()).append("</TD>");
+					buf.append("<TD>Delegación: <b>").append(vo.getCountryName()).append("</b></TD>");
 					buf.append("</TR></TABLE></TD>");
 					buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
 				}
