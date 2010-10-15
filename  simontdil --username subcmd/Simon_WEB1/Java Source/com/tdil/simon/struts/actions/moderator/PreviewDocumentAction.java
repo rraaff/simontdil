@@ -48,6 +48,13 @@ public class PreviewDocumentAction extends SimonAction {
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndFinalize"))) {
+			createDocumentForm.setVersionStatus(Version.FINAL);
+			createDocumentForm.save();
+			DelegateSiteCache.refresh();
+			return mapping.findForward("goHome");
+		}
+		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.consolidate"))) {
 			return mapping.findForward("consolidate");
 		}

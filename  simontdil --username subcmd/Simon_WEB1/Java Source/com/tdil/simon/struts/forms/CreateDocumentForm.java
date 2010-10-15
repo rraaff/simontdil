@@ -470,6 +470,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			site.setStatus(Site.IN_SIGN);
 			SiteDAO.updateSite(site);
 		}
+		if (Version.FINAL.equals(this.versionStatus)) {
+			version.setStatus(Version.FINAL);
+			VersionDAO.updateVersionStatus(version);
+			Site site = SiteDAO.getSite(Site.DELEGATE);
+			site.setStatus(Site.NORMAL);
+			site.setDataId(0);
+			SiteDAO.updateSite(site);
+		}
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
 			version.setUpToCommentDate(dateFormat.parse(this.getLimitObservationsDay() + "/" + this.getLimitObservationsMonth() + "/" + this.getLimitObservationsYear()));

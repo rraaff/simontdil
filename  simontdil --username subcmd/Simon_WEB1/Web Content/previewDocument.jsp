@@ -115,6 +115,9 @@ if ( dw_scrollObj.isSupported() ) {
 									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndSign"/>
 									</html:submit>
+									<html:submit property="operation">
+										<bean:message key="createDocument.preview.saveAndFinalize"/>
+									</html:submit>
 								</logic:equal>
 								</html:form></td>
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
