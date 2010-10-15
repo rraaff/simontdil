@@ -365,8 +365,14 @@ div#main {
 }
 
 #content .titleDocInModule {
-	font-size: 18px;
-	line-height: 25px;
+	font-size: 15px;
+	line-height: 20px;
+	color:#333333;
+}
+#content .titleDocInHome {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight:bold;
 	color:#333333;
 }
 #content .titleDocInModule a {

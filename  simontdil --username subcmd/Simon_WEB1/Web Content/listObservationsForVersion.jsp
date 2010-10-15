@@ -67,19 +67,19 @@ if ( dw_scrollObj.isSupported() ) {
 														if (lastParagraph != tmpObservation.getParagraphId()) { %>
 													<tr>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-														<td width="900" colspan="7" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+														<td colspan="7" width="880" height="19" background="images/interfaces/topTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 														<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 													</tr>
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td width="900" colspan="7" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
+														<td colspan="7" width="880" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>
 													<tr>
 														<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
-														<td width="900" colspan="7" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+														<td colspan="7" width="880" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 														<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													<% 
@@ -109,7 +109,6 @@ if ( dw_scrollObj.isSupported() ) {
 																<span class="dataDinamica"><bean:message key="listObservations.newParagraph" /></span>
 															</logic:equal></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
@@ -119,13 +118,13 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>
 													<tr>
-														<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
 														<td width="280" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-														<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 														<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="10"></td>
-														<td width="10" height="10" colspan="2" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomLeft.gif"><img src="images/null.gif" width="10" height="10"></td>
 														<td width="560" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-														<td width="10" height="10" colspan="2" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
+														<td colspan="2" width="10" height="10" background="images/interfaces/bottomRight.gif"><img src="images/null.gif" width="10" height="10"></td>
 													</tr>
 													</logic:iterate>
 												</table>
