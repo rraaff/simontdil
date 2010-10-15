@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import net.sf.json.JSONObject;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -16,6 +17,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.utils.LoggerProvider;
 
 public abstract class AjaxSimonAction extends Action {
 
@@ -39,6 +41,7 @@ public abstract class AjaxSimonAction extends Action {
 			return null;
 		}
 		if (!UserTypeValidation.isValid(user, this.getPermissions())) {
+			getLog().fatal("Invalid action for " + this.getClass().getName() + " user " + user.getName());
 			redirectToLogin(mapping, form, request, response);
 			return null;
 		}
@@ -59,5 +62,9 @@ public abstract class AjaxSimonAction extends Action {
 		HashMap<String, String> result = new HashMap<String, String>();
 		result.put("error", "notLogged");
 		writeJsonResponse(result, response);
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(AjaxSimonAction.class);
 	}
 }
