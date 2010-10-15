@@ -243,8 +243,16 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
 					</tr>
+					
 					<tr>
-						<td align="center"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link></td>
+						<td align="center">
+							<% if (isDelegate) { %>
+								<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+							<% } %>
+							<% if (isModerator) { %>
+								<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+							<% } %>
+						</td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
