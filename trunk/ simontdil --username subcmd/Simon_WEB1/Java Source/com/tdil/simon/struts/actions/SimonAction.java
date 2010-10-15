@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -14,6 +15,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.utils.LoggerProvider;
 
 public abstract class SimonAction extends Action {
 
@@ -36,6 +38,7 @@ public abstract class SimonAction extends Action {
 			return mapping.findForward("notLogged");
 		}
 		if (!UserTypeValidation.isValid(user, this.getPermissions())) {
+			getLog().fatal("Invalid action for " + this.getClass().getName() + " user " + user.getName());
 			return mapping.findForward("invalidAction");
 		}
 		if (this.getLoggedUser(request).isDelegate()) {
@@ -61,5 +64,9 @@ public abstract class SimonAction extends Action {
 			addErrors(request, errors);	
 		}
 		return mapping.findForward("failure");
+	}
+	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(SimonAction.class);
 	}
 }
