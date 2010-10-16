@@ -24,6 +24,7 @@ public class LoginForm extends ActionForm {
 	private String username;
 	private String password;
 	private String operation;
+	private boolean canForce = false;
 	
 	private boolean redirectToChangePassword = false;
 	
@@ -49,6 +50,7 @@ public class LoginForm extends ActionForm {
 		password = null;
 		redirectToNegotiation = false;
 		redirectToChangePassword = false;
+		canForce = false;
 	}
 	public String getOperation() {
 		return operation;
@@ -95,6 +97,12 @@ public class LoginForm extends ActionForm {
 	}
 	public void setRedirectToChangePassword(boolean redirectToChangePassword) {
 		this.redirectToChangePassword = redirectToChangePassword;
+	}
+	public boolean isCanForce() {
+		return canForce;
+	}
+	public void setCanForce(boolean canForce) {
+		this.canForce = canForce;
 	}
 
 }
