@@ -33,7 +33,7 @@
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
-   	order by title
+   	order by id desc
    	LIMIT 11
   </select>
   
@@ -49,7 +49,7 @@
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
-   	order by title
+   	order by id desc
    	LIMIT 11
   </select>
   
