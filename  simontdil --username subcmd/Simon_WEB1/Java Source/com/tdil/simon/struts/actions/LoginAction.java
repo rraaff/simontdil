@@ -33,8 +33,10 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 		if (login.getOperation().equals(ApplicationResources.getMessage("login.requestPassword"))) {
 			return mapping.findForward("requestPassword");
 		}
-		if (login.getOperation().equals(ApplicationResources.getMessage("login.enter"))) {
+		if (login.getOperation().equals(ApplicationResources.getMessage("login.enter")) || 
+				login.getOperation().equals(ApplicationResources.getMessage("login.logoutAndEnter"))) {
 			try {
+				boolean logout = login.getOperation().equals(ApplicationResources.getMessage("login.logoutAndEnter"));
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				if (login.isRedirectToChangePassword()) {
 					request.setAttribute("username", user.getUsername());
@@ -44,7 +46,7 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 					return mapping.findForward("initChangePassword");
 				}
 				user.setPassword(null);
-				LogOnceListener.userHasLogged(user.getUsername(), user.isModerator(), request.getSession());
+				LogOnceListener.userHasLogged(login, user.getUsername(), user.isModerator(), request.getSession(), logout);
 				request.getSession().setAttribute("user", user);
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");

@@ -44,10 +44,18 @@
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<jsp:include page="./includes/button.jsp">
-										<jsp:param name="_form" value="LoginForm" />
-										<jsp:param name="_operation" value="login.enter" />
-									</jsp:include> 
+									<logic:equal name="LoginForm" property="canForce" value="false">
+										<jsp:include page="./includes/button.jsp">
+											<jsp:param name="_form" value="LoginForm" />
+											<jsp:param name="_operation" value="login.enter" />
+										</jsp:include> 
+									</logic:equal>
+									<logic:equal name="LoginForm" property="canForce" value="true">
+										<jsp:include page="./includes/button.jsp">
+											<jsp:param name="_form" value="LoginForm" />
+											<jsp:param name="_operation" value="login.logoutAndEnter" />
+										</jsp:include> 
+									</logic:equal>
 								</td>
 							</tr>
 							<tr>

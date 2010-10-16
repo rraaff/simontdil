@@ -57,7 +57,7 @@ public class DownloadController extends HttpServlet {
 	private void downloadFlag(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Integer id = Integer.parseInt(req.getParameter("fileId"));
 		String fileName = getServerFlagFileNameFor("flag", id);
-		res.setHeader("Cache-Control", "no-store");
+//		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
 		if (!StringUtils.isEmpty(fileName)) {
@@ -86,7 +86,7 @@ public class DownloadController extends HttpServlet {
 			getLog().error(e.getMessage(), e);
 		}
 		if (getDocumentAction.getReferenceDocument() != null) {
-			res.setHeader("Cache-Control", "no-store");
+//			res.setHeader("Cache-Control", "no-store");
 			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
 			if (!StringUtils.isEmpty(fileName)) {
@@ -106,7 +106,7 @@ public class DownloadController extends HttpServlet {
 	
 	private void downloadSignature(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		String fileName = getServerSignatureFileNameFor(req.getParameter("signature"));
-		res.setHeader("Cache-Control", "no-store");
+//		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
 		if (!StringUtils.isEmpty(fileName)) {

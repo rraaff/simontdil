@@ -12,6 +12,7 @@ import org.apache.log4j.Logger;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.ValidationErrors;
+import com.tdil.simon.struts.forms.LoginForm;
 import com.tdil.simon.utils.LoggerProvider;
 
 public class LogOnceListener implements HttpSessionListener {
@@ -42,24 +43,34 @@ public class LogOnceListener implements HttpSessionListener {
 	    }
 	}
 	
-	public static void userHasLogged(String username, boolean moderator, HttpSession session) throws ValidationException {
+	public static void userHasLogged(LoginForm form, String username, boolean moderator, HttpSession session, boolean forceLogout) throws ValidationException {
 		synchronized (allSessions) {
 	    	HttpSession previousSession  = allSessions.get(username);
 	    	if (previousSession != null) {
-	    		getLog().fatal("Login denied for " + username + " because is logged in");
-	    		throw new ValidationException(new ValidationError(ValidationErrors.ALREADY_LOGGED));
-//	    		try {
-//	    			previousSession.invalidate();
-//				} catch (Exception e) {}
+	    		if (forceLogout) {
+		    		try {
+		    			getLog().fatal("Invalidating previous session for user " + username);
+		    			previousSession.invalidate();
+					} catch (Exception e) {}
+	    		} else {
+	    			form.setCanForce(true);
+	    			getLog().fatal("Login denied for " + username + " because is logged in");
+	    			throw new ValidationException(new ValidationError(ValidationErrors.ALREADY_LOGGED));
+	    		}
 	    	}
 	    	if (moderator) {
 	    		if (moderatorSession != null) {
 	    			String other = sessionToUsernames.get(moderatorSession);
-	    			getLog().fatal("Login denied for " + username + " because another moderator ("+ (other == null ? "null" : other)+") is logged in");
-	    			throw new ValidationException(new ValidationError(ValidationErrors.MODERATOR_LOGGED));
-//	    			try {
-//	    				moderatorSession.invalidate();
-//	    			} catch (Exception e) {}
+	    			if (forceLogout) {
+		    			try {
+		    				getLog().fatal("Invalidating previous session for moderator " + other + " because moderator " + username + " is loging in");
+		    				moderatorSession.invalidate();
+		    			} catch (Exception e) {}
+	    			} else {
+	    				form.setCanForce(true);
+	    				getLog().fatal("Login denied for " + username + " because another moderator ("+ (other == null ? "null" : other)+") is logged in");
+	    				throw new ValidationException(new ValidationError(ValidationErrors.MODERATOR_LOGGED));
+	    			}
 	    		}
 	    		moderatorSession = session;
 	    	}
