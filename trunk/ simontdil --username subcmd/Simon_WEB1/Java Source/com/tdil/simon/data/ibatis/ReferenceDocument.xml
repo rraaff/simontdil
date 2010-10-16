@@ -33,7 +33,7 @@
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND CATEGORY.deleted = 0
    	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
-   	order by CATEGORY.name, REFERENCEDOCUMENT.title
+   	order by REFERENCEDOCUMENT.id desc
    	LIMIT 11
   </select>
   
