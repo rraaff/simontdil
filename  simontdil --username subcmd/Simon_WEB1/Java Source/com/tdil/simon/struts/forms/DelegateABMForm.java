@@ -246,7 +246,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		}
 		if (this.isCanSign()) {
 			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()), this.isTypeOne(), this.isTypeTwo());
-			if (canSignCount != 0) {
+			if (canSignCount != 0 && (exists == null || exists.getId() != this.getId())) {
 				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);
 			}
 		}
