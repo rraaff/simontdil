@@ -12,4 +12,5 @@ CKEDITOR.editorConfig = function( config )
 	config.enterMode = CKEDITOR.ENTER_BR;
 	config.autoGrow_minHeight = 100;
 	config.resize_minHeight = 100;
+	config.forcePasteAsPlainText = true;
 };

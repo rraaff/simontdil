@@ -67,7 +67,7 @@ public class NewObservationNotification {
 			String body = SystemConfig.getMailBodyForNewObservation();
 			body = body.replace("{DOCUMENT_TITLE}", document.getTitle());
 			body = body.replace("{VERSION_NUMBER}", String.valueOf(version.getNumber()));
-			body = body.replace("{VERSION_NAME}", version.getName());
+			body = body.replace("{VERSION_NAME}", version.getName() == null ? "" : version.getName());
 			body = body.replace("{PARAGRAPH}", getParagraphNumber());
 			body = body.replace("{DELEGATE}", getUser().getName());
 			body = body.replace("{DELEGATION}", this.country.getName());
