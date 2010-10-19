@@ -339,7 +339,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<!-- corte tabla template -->
 											<%if (isDelegate && user.isCanSign()) { %>
 											<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
-											   flashvars="saveUrl=<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/Simon/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
+											   flashvars="saveUrl=<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
 											   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 											   pluginspage="http://www.adobe.com/go/getflashplayer">
 											</embed>

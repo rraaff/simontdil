@@ -1,5 +1,7 @@
 package com.tdil.simon.data.model;
 
+import com.tdil.simon.web.SystemConfig;
+
 public class Signature extends PersistentObject {
 
 	private int versionId;
@@ -34,6 +36,6 @@ public class Signature extends PersistentObject {
 	}
 
 	public String getSignatureFileName() {
-		return this.getVersionId() + "_" + this.getUserId() + ".png";
+		return SystemConfig.getServer() + "_" + this.getVersionId() + "_" + this.getUserId() + ".png";
 	}
 }

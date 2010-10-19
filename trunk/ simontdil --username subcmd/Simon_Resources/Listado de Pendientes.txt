@@ -1,8 +1,6 @@
-Los replacements para el subject son {DELEGATION} y {DATE}
-
-Probar si se puede meter algun estilo mas al editor loco (alineacion, viñetas, etc)
-
-sexy alert con error y ok
+No dejar iniciar negociacion si hay otro en negociacion
+No emails repetidos
+ver firma
 
 -------------------------
 

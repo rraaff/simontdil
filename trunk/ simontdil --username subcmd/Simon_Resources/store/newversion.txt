@@ -20,27 +20,27 @@
 		<td align="center">
 			<table width="650" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 				<tr>
-					<td width="650" colspan="5"><img src="{SERVER}/Simon/images/mails/header.gif" width="650" height="167"></td>
+					<td width="650" colspan="5"><img src="{SERVER}/images/mails/header.gif" width="650" height="167"></td>
 				</tr>
 				<tr>
-					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
-					<td width="22"><img src="{SERVER}/Simon/images/null.gif" width="22" height="1"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
 					<td width="604" align="left" valign="top" class="fontMail"><p>Estimado <B>{FULLNAME}</B>,</p>
-					<p>Se ha creado un nuevo documento en la zona restringida del sitio web XX CUMBRE IBEROAMERICANA, URL, <a href="{SERVER}/Simon/index.jsp">{SERVER}/Simon/</a>.</p>
+					<p>Se ha creado un nuevo documento en la zona restringida del sitio web XX CUMBRE IBEROAMERICANA, URL, <a href="{SERVER}/index.jsp">{SERVER}/</a>.</p>
 					<p>El nombre del nuevo documento es: <B>{DOCUMENT_TITLE}</B><br/>Para ingresar al sitio utilice el siguiente enlace:</p>
-					<p align="center"><a href="{SERVER}/Simon/index.jsp" target="_blank"><img src="{SERVER}/Simon/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
+					<p align="center"><a href="{SERVER}/index.jsp" target="_blank"><img src="{SERVER}/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
 					<p>Ante cualquier consulta o dificultad, comuníquese con la Mesa de Ayuda de la Cancillería Argentina Correo electrónico: <a href="ayuda@xxcumbreiberoamericana.mrecic.gov.ar">ayuda@xxcumbreiberoamericana.mrecic.gov.ar</a>.<br />
 					Telef&oacute;nos (+54 11) 4819 7658</p></td>
-					<td width="22"><img src="{SERVER}/Simon/images/null.gif" width="22" height="1"></td>
-					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
-					<td colspan="3" height="20"><img src="{SERVER}/Simon/images/null.gif" width="10" height="20"></td>
-					<td width="1" bgcolor="#666666"><img src="{SERVER}/Simon/images/null.gif" width="1" height="1"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+					<td colspan="3" height="20"><img src="{SERVER}/images/null.gif" width="10" height="20"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
-					<td colspan="5"><img src="{SERVER}/Simon/images/mails/footer.gif" width="650" height="84"></td>
+					<td colspan="5"><img src="{SERVER}/images/mails/footer.gif" width="650" height="84"></td>
 				</tr>
 			</table>
 		</td>

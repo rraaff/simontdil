@@ -2,23 +2,23 @@ package com.tdil.simon.web;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Properties;
-
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.tdil.simon.actions.TransactionalAction;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.ibatis.SysPropertiesDAO;
+import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
 
-public class SystemConfig implements ServletContextListener {
+public class SystemConfig {
 
-	public static final String propertyLocation = "simon.properties";
-	
 	public static Properties properties;
 	
 	public static String mailServer;
@@ -32,20 +32,11 @@ public class SystemConfig implements ServletContextListener {
 	private static String newVersionBody;
 	private static String newObservationBody;
 	
+	private static String server;
+	private static String simonLocation;
+	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(SystemConfig.class);
-	}
-	
-	public void contextInitialized(ServletContextEvent sce) {
-		try {
-			SystemConfig.init();
-		} catch (IOException e) {
-			getLog().error(e.getMessage(), e);
-		}
-	}
-
-	public void contextDestroyed(ServletContextEvent sce) {
-		LoggerProvider.destroy();
 	}
 	
 	public static DateFormat getDateFormat() {
@@ -57,10 +48,28 @@ public class SystemConfig implements ServletContextListener {
 	}
 	
 	public static void init() throws IOException {
+		loadPropertiesFromDB();
 		loadProperties();
 		initLogger();
 	}
 	
+	private static void loadPropertiesFromDB() {
+		try {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					server = SysPropertiesDAO.getPropertyByKey("simon.server.name");
+					simonLocation = SysPropertiesDAO.getPropertyByKey("simon.properties.location");
+				}
+			});
+		} catch (SQLException e) {
+			getLog().error(e.getMessage(), e);
+			throw new RuntimeException(e);
+		} catch (ValidationException e) {
+			getLog().error(e.getMessage(), e);
+			throw new RuntimeException(e);
+		} 
+	}
+
 	private static void initLogger() {
 		String logFilePath = properties.getProperty("log4.config");
 		LoggerProvider.initialize(logFilePath, LogManager.getCurrentLoggers());
@@ -69,7 +78,7 @@ public class SystemConfig implements ServletContextListener {
 	private static void loadProperties() throws IOException {
 		FileInputStream fileInputStream = null;
 		try {
-			fileInputStream = new FileInputStream(System.getProperty(propertyLocation));
+			fileInputStream = new FileInputStream(simonLocation);
 			properties = new Properties();
 			properties.load(fileInputStream);
 			newPasswordBody = loadEmailBody(properties, "newpassword.body");
@@ -188,5 +197,9 @@ public class SystemConfig implements ServletContextListener {
 
 	public static String getXHTML2FO() {
 		return properties.getProperty("xthml2fo");
+	}
+
+	public static String getServer() {
+		return server;
 	}
 }

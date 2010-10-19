@@ -10,9 +10,9 @@
 		<listener-class>com.tdil.simon.pool.DBCPoolingListener</listener-class>
 	</listener>
 	
-	<listener>
+	<!--  listener>
 		<listener-class>com.tdil.simon.web.SystemConfig</listener-class>
-	</listener>
+	</listener-->
 	
 	<listener>
 	    <listener-class>com.tdil.simon.web.LogOnceListener</listener-class>

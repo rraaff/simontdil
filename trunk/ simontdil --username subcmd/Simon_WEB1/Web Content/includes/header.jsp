@@ -10,6 +10,7 @@
 	</jsp:forward>
 <% 	
 	}
+	try {
 	boolean isAdministrator = user.isAdministrator();
 	boolean isModerator = user.isModerator();
 	boolean isDesigner = user.isDesigner();
