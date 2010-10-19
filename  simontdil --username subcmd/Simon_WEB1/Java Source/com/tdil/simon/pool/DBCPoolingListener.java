@@ -1,5 +1,7 @@
 package com.tdil.simon.pool;
 
+import java.io.IOException;
+
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -12,6 +14,7 @@ import org.apache.log4j.Logger;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.SystemConfig;
 
 public class DBCPoolingListener implements ServletContextListener {
 	
@@ -26,7 +29,10 @@ public class DBCPoolingListener implements ServletContextListener {
 			DatasourceManager.setDatasource(ds);
 			IBatisManager.init("SqlMapConfig-JNDI.xml");
 			DelegateSiteCache.refresh();
+			SystemConfig.init();
 		} catch (NamingException e) {
+			getLog().error(e.getMessage(), e);
+		} catch (IOException e) {
 			getLog().error(e.getMessage(), e);
 		}
 	}

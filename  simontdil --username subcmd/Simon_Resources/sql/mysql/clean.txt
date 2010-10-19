@@ -10,3 +10,5 @@ password = '123',
 temporaryPassword = 0
 where delegate = 1;
 COMMIT;
+
+delete from SIMON.SYSTEMUSER where username <> 'Admin';

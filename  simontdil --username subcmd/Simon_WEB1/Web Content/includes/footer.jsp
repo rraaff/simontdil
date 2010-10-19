@@ -23,3 +23,7 @@
 </div>
 </body>
 </html>
+<% } catch (Throwable e) {
+		com.tdil.simon.web.JspErrorLog.logJspError(e);%>
+		<%@ include file="./exception.jsp"%>
+<% } %>

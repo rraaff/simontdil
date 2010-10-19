@@ -33,7 +33,6 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<html:html>
 <div id="content"><img src="images/null.gif" width="1" height="300"></div>
 
 <div id="outerdiv">
@@ -189,4 +188,3 @@ if ( dw_scrollObj.isSupported() ) {
 	</div>
 </div>
 <%@ include file="includes/footer.jsp" %>
-</html:html>
