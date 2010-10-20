@@ -1,1 +1,1 @@
-OUCH!!!
+<div style="background-color:#FFECEC; padding:4px;">Se ha producido un error. Por Favor contactese con el Administrador del sistema.</div>
