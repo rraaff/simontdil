@@ -20,23 +20,7 @@ div#scrollbar {
 	display:none;
 }
 </style>
-<!--script src="scripts/dw_event.js" type="text/javascript"></script>
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
-<script type="text/javascript">
-function init_dw_Scroll() {
-    var wndo = new dw_scrollObj('main', 'lyr1');
-    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-    wndo.setUpScrollControls('scrollbar');
-}
 
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-}
-</script-->
 <div id="content">
 <table height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -63,7 +47,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="80"><img src="images/null.gif" width="1" height="1"></td>
 									</tr> 
 									<tr class="d0">
-										<td height="28" align="left">PROGRAMA DE A&Ccedil;&Atilde;O DE MAR DE PLATA</td>
+										<td height="28" align="left">PROJETO PROGRAMA DE A&Ccedil;&Atilde;O DE MAR DE PLATA</td>
 										<td><a href="other/Programa-de-Accion-P-Version-1.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr> 
 									<tr class="d1">
@@ -77,7 +61,19 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr class="d1">
 										<td height="28" align="left">PROJETO COMUNICADO ESPECIAL SOBRE A &quot;QUEST&Atilde;O DAS ILHAS MALVINAS&quot; (Proposta Argentina)</td>
 										<td><a href="other/Proy-Comunicado-Esp-Malvinas-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
-									</tr> 
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">PROJETO COMUNICADO ESPECIAL SOBRE A NECESSIDADE DE P&Ocirc;R FIM AO BLOQUEIO (Proposta Cuba)</td>
+										<td><a href="other/Proy-Comunicado-Esp-Bloqueo-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">PROJETO COMUNICADO ESPECIAL SOBRE O &ldquo;QHAPAQ &Ntilde;AN&rdquo;  (Proposta Argentina em nome de Bol&iacute;via, Chile, Colombia, Ecuador e Per&uacute;)</td>
+										<td><a href="other/Proy-Comunicado-Esp-Qhapaq-Nan-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">PROJETO COMUNICADO ESPECIAL DE APOIO &Agrave; LUTA CONTRA O  TERRORISMO (Proposta Cuba)</td>
+										<td><a href="other/Proy-Comunicado-Esp-Terrorismo-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
 									<tr>
 										<td colspan="2" height="25"><img src="images/null.gif" width="1" height="25"></td>
 									</tr>
