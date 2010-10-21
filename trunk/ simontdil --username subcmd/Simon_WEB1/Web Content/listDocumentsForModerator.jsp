@@ -70,7 +70,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td># nuevos solicitados</td>
 										<td width="60"> </td>
 										<td width="80"> </td>
-										<% if (isModerator) { %><td width="80">Comentarios</td> <% } %>
+										<% if (isModerator) { %><td width="100">Ingreso de Obs.</td> <% } %>
 										<td width="5"> </td>
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
