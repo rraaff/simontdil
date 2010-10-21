@@ -1,1 +1,1 @@
-<div style="background-color:#FFECEC; padding:4px;">Se ha producido un error. Por Favor contactese con el Administrador del sistema.</div>
+<div style="background-color:#F8F8F8; padding:4px;">Actualizando datos.</div>

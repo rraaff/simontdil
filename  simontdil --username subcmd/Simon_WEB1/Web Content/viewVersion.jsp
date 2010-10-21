@@ -162,7 +162,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<!-- INICIO: Recupero versión 197 :: Modificada -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td height="30">Anteriores: </td>
+						<td height="30">Verisi&oacute;n/es: </td>
 						<td colspan="2" align="left" valign="middle">
 						<div id="portaVersiones">
 						<logic:iterate name="ViewVersion" property="version.reducedVersions" id="otherVersion">

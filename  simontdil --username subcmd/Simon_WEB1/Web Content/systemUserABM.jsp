@@ -59,9 +59,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="133" align="right">Nombre:</td>
+								<td align="right">Apellido y Nombre:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="160" align="left"><html:text name="SystemUserABM" property="name" /> <html:errors property="systemuser.name" /></td>
+								<td align="left"><html:text name="SystemUserABM" property="name" /> <html:errors property="systemuser.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

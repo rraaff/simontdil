@@ -290,9 +290,9 @@ if ( dw_scrollObj.isSupported() ) {
 								</div></td>
 							</tr>
 							<% if (user.isCanProposeParagraph()) { %>
-							<tr>
+							<!--tr>
 								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
-							</tr>
+							</tr -->
 							<% } %>
 						</table>
 						<!-- corte tabla template -->

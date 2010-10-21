@@ -41,7 +41,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Previsualización del documento</div></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Previsualización del documento (Paso 4 de 4)</div></td>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 						</tr>
 						<tr>

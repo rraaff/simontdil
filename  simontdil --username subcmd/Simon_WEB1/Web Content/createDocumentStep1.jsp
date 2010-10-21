@@ -28,7 +28,7 @@
 								<td height="25" colspan="3"><p align="left">&nbsp;</p></td>
 							</tr>
 							<tr>
-								<td align="right" width="192">Titulo:</td>
+								<td align="right" width="192">T&iacute;tulo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="301" align="left"><html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" /></td>
 							</tr>
@@ -60,13 +60,13 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">L&iacute;mite para observaciones:</td>
+								<td align="right">Fecha l&iacute;mite para observaciones:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:select property="limitObservationsDay" styleClass="textfield_effect_day">
 							        <html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
 							      </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month">
 							        <html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-							      </html:select></td>
+							      </html:select> de 2010</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

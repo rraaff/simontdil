@@ -175,7 +175,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<tr>
 										<td width="200" height="20" align="left">Nombre</td>
-										<td align="left">Pais</td>
+										<td align="left">Pa&iacute;s</td>
 										<td width="60" align="center">Permisos</td>
 										<td width="60" align="center">Firmante</td>
 										<td width="60" align="center">Habilitado</td>
