@@ -16,7 +16,7 @@ import com.tdil.simon.utils.DelegateSiteCache;
 
 public class PreviewDocumentAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -31,16 +31,27 @@ public class PreviewDocumentAction extends SimonAction {
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.editParagraphs"))) {
 			return mapping.findForward("editParagraphs");
 		}
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.save"))) {
+		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.save"))) {
+			createDocumentForm.setVersionStatus(Version.DRAFT);
+			createDocumentForm.save();
+			return mapping.findForward("save");
+		}
+		
+		if (createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.save"))) {
 			createDocumentForm.setVersionStatus(Version.DRAFT);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
 
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndContinue"))) {
+		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndContinue"))) {
 			createDocumentForm.setVersionStatus(Version.IN_NEGOTIATION);
 			createDocumentForm.save();
 			return mapping.findForward("save");
+		}
+		if (createDocumentForm.isDesigner() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.designSave"))) {
+			//createDocumentForm.setVersionStatus(Version.FINAL);
+			createDocumentForm.save();
+			return mapping.findForward("designerHome");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndSign"))) {
 			createDocumentForm.setVersionStatus(Version.IN_SIGN);
@@ -48,14 +59,20 @@ public class PreviewDocumentAction extends SimonAction {
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndFinalize"))) {
+		if (!createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.saveAndFinalize"))) {
 			createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
 		
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.consolidate"))) {
+		if (createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.portuguesSave"))) {
+			createDocumentForm.setVersionStatus(Version.FINAL);
+			createDocumentForm.save();
+			return mapping.findForward("designerHome");
+		}
+		
+		if (!createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.consolidate"))) {
 			return mapping.findForward("consolidate");
 		}
 		return null;

@@ -22,7 +22,7 @@ import com.tdil.simon.utils.NegotiationUtils;
 
 public class CreateDocumentActionStep2 extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

@@ -30,7 +30,14 @@
 							<tr>
 								<td align="right" width="192">T&iacute;tulo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="301" align="left"><html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" /></td>
+								<td width="301" align="left">
+									<logic:equal name="CreateDocumentForm" property="portugues" value="false">
+										<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" />
+									</logic:equal>
+									<logic:equal name="CreateDocumentForm" property="portugues" value="true">
+										<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect" disabled="true"/>
+									</logic:equal>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -52,7 +59,14 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="192" align="right"><html:checkbox name="CreateDocumentForm" property="principal"/><html:errors property="principal" /></td>
+								<td width="192" align="right">
+									<logic:equal name="CreateDocumentForm" property="principalReadOnly" value="false">
+										<html:checkbox name="CreateDocumentForm" property="principal"/><html:errors property="principal" />
+									</logic:equal>
+									<logic:equal name="CreateDocumentForm" property="principalReadOnly" value="true">
+										<html:checkbox name="CreateDocumentForm" property="principal" disabled="true"/>
+									</logic:equal>
+									</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="301" align="left">Marcar como documento principal a negociar</td>
 							</tr>
@@ -62,11 +76,22 @@
 							<tr>
 								<td align="right">Fecha l&iacute;mite para observaciones:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:select property="limitObservationsDay" styleClass="textfield_effect_day">
+								<td align="left">
+								<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
+								  <html:select property="limitObservationsDay" styleClass="textfield_effect_day">
 							        <html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
 							      </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month">
 							        <html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-							      </html:select> de 2010</td>
+							      </html:select> de 2010
+							    </logic:equal>
+							    <logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
+								  <html:select property="limitObservationsDay" styleClass="textfield_effect_day" disabled="true">
+							        <html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
+							      </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month" disabled="true">
+							        <html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
+							      </html:select> de 2010
+							    </logic:equal>
+							    </td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -74,7 +99,14 @@
 							<tr>
 								<td align="right">Tipo de documento:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción</td>
+								<td align="left">
+								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción
+								</logic:equal>
+								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción
+								</logic:equal>
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

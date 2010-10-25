@@ -103,4 +103,18 @@ public class VersionDAO {
 		IBatisManager.sqlMapper.update("enableComments", version);
 	}
 
+	public static Version getPortuguesVersion(int versionID) throws SQLException {
+		return (Version) IBatisManager.sqlMapper.queryForObject(
+				"selectPostuguesVersionBySpanishId", versionID);
+	}
+	
+	public static Version getPortuguesVersionAnyStatus(int versionID) throws SQLException {
+		return (Version) IBatisManager.sqlMapper.queryForObject(
+				"selectPostuguesVersionAnyStatusBySpanishId", versionID);
+	}
+
+	public static List<VersionForListVO> selectVersionsVOForDesigner() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectVersionsVOForDesigner");
+	}
+
 }

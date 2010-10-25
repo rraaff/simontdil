@@ -15,7 +15,6 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-import org.apache.struts.action.ActionMessages;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
@@ -47,6 +46,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	// tmp
 	private boolean isInNegotiation = false;
 	private int temporaryVersionId;
+	
+	// designer
+	private boolean designer = false;
+	
+	// portugues
+	private boolean portugues = false;
+	private int introductoryParagraphs = 0;
+	private int textParagraphs = 0;
 	
 	// Saved
 	private int documentId; // If 0, create a document
@@ -127,6 +134,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.principal = false;
 		this.versionStatus = Version.DRAFT;
 		this.isInNegotiation = false;
+		this.portugues = false;
 	}
 	
 	public List<MonthOption> getMonths() {
@@ -256,14 +264,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 	}
 	
-	public String getNextDisabled() {
-		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph + 1])) {
-			return "true";
-		} else {
-			return "false";
-		}
-	}
-	
 	public String getLast() {
 		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph + 1])) {
 			return "true";
@@ -327,7 +327,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-		if (this.isPrincipal()) {
+		if (!this.isPortugues() && this.isPrincipal()) {
 			DocumentDAO.markNotPrincipal(this.isDocumentTypeOne(), this.isDocumentTypeTwo());
 		}
 		if (this.getDocumentId() == 0) {
@@ -349,6 +349,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			version.setStatus(this.getVersionStatus());
 			fillVersion(version);
 			version.setNumber(this.version);
+			version.setSpanishVersion(!this.isPortugues());
 			this.setVersionId(VersionDAO.insertVersion(version));
 			insertParagraphs();
 		} else {
@@ -566,6 +567,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initWith(int versionID) throws SQLException {
+		setPortugues(false);
 		Version version = VersionDAO.getVersion(versionID);
 		Document document = DocumentDAO.getDocument(version.getDocumentId());
 		this.documentId = document.getId();
@@ -653,7 +655,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public boolean getIsInNegotiation() {
-		return isInNegotiation;
+		return isInNegotiation && !this.isPortugues() && !this.isDesigner();
 	}
 
 	public void setInNegotiation(boolean isInNegotiation) {
@@ -695,5 +697,195 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setGoToParagraph(String goToParagraph) {
 		this.goToParagraph = goToParagraph;
+	}
+
+	public void addBefore() {
+		ArrayList<String> move = new ArrayList<String>();
+		ArrayList<Boolean> status = new ArrayList<Boolean>();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		int i = this.getParagraph();
+		while (!StringUtils.isEmpty(paragraphTexts[i])) {
+			move.add(paragraphTexts[i]);
+			status.add(paragraphStatus[i]);
+			ids.add(paragraphIds[i]);
+			i = i + 1;
+		}
+		int dest = this.getParagraph() + 1;
+		for (int index = 0; index < move.size(); index = index + 1) {
+			String text = move.get(index);
+			Boolean stat = status.get(index);
+			Integer id = ids.get(index);
+			paragraphTexts[dest] = text;
+			paragraphStatus[dest] = stat;
+			paragraphIds[dest] = id;
+			dest = dest + 1;
+		}
+		paragraphTexts[this.getParagraph()] = "";
+		paragraphStatus[this.getParagraph()] = false;
+		paragraphIds[this.getParagraph()] = 0;
+	}
+
+	public void addAfter() {
+		ArrayList<String> move = new ArrayList<String>();
+		ArrayList<Boolean> status = new ArrayList<Boolean>();
+		ArrayList<Integer> ids = new ArrayList<Integer>();
+		int i = this.getParagraph() + 1;
+		while (!StringUtils.isEmpty(paragraphTexts[i])) {
+			move.add(paragraphTexts[i]);
+			status.add(paragraphStatus[i]);
+			ids.add(paragraphIds[i]);
+			i = i + 1;
+		}
+		int dest = this.getParagraph() + 2;
+		for (int index = 0; index < move.size(); index = index + 1) {
+			String text = move.get(index);
+			Boolean stat = status.get(index);
+			Integer id = ids.get(index);
+			paragraphTexts[dest] = text;
+			paragraphStatus[dest] = stat;
+			paragraphIds[dest] = id;
+			dest = dest + 1;
+		}
+		this.setParagraph(this.getParagraph() + 1);
+		paragraphTexts[this.getParagraph()] = "";
+		paragraphStatus[this.getParagraph()] = false;
+		paragraphIds[this.getParagraph()] = 0;
+	}
+
+	public void initForPortuguesWith(int versionID) throws SQLException {
+		setPortugues(true);
+		setDesigner(false);
+		// con esta saco datos base
+		Version version = VersionDAO.getVersion(versionID);
+		this.paragraphStatus = new boolean[1000];
+		this.paragraphTexts = new String[1000];
+		String initial = ApplicationResources.getMessage("createDocument.paragraphs.portuguesInit");
+		{
+			List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
+			for (Paragraph p : paragraphs) {
+				paragraphTexts[p.getParagraphNumber() - 1] = initial;
+				paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
+				if (p.getParagraphNumber() < Paragraph.INTRODUCTION_LIMIT) {
+					this.introductoryParagraphs = this.introductoryParagraphs + 1;
+				} else {
+					this.textParagraphs = this.textParagraphs + 1;
+				}
+			}
+		}
+		// Con esta hago la edicion si existe
+		Version portuguesVersion = VersionDAO.getPortuguesVersionAnyStatus(versionID);
+		// TODO mantendra el mismo doc? hablar con pablo
+		Document document = DocumentDAO.getDocument(version.getDocumentId());
+		this.documentId = document.getId();
+		this.setPrincipal(document.isPrincipal());
+		if (portuguesVersion != null) {
+			this.versionId = portuguesVersion.getId();
+			this.versionName = portuguesVersion.getName();
+		} else {
+			this.versionId = 0;
+			this.versionName = "";
+		}
+		this.version = version.getNumber();
+		this.versionStatus = version.getStatus();
+		this.title = document.getTitle();
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(version.getUpToCommentDate());
+		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);;
+		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
+		this.introduction= document.getIntroduction();
+		this.paragraph = 0;
+		this.paragraphIds = new int[1000];
+		if (portuguesVersion != null) {
+			List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(portuguesVersion.getId());
+			for (Paragraph p : paragraphs) {
+				paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
+				// Esto lo maneja la version en castellano paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
+				paragraphIds[p.getParagraphNumber() - 1] = p.getId();
+			}
+		}
+		this.consolidated = false;
+		this.consolidateText= null;
+	}
+	
+	public boolean getCanAddParagraph() {
+		return !this.isPortugues() && !this.isDesigner();
+	}
+	
+	public boolean getTypeReadOnly() {
+		return this.isPortugues() || this.isDesigner();
+	}
+	
+	public boolean getDateLimitReadOnly() {
+		return this.isPortugues() || this.isDesigner();
+	}
+	
+	public boolean getPrincipalReadOnly() {
+		return this.isPortugues() || this.isDesigner();
+	}
+
+	public boolean isPortugues() {
+		return portugues;
+	}
+
+	public void setPortugues(boolean portugues) {
+		this.portugues = portugues;
+	}
+
+	public int getIntroductoryParagraphs() {
+		return introductoryParagraphs;
+	}
+
+	public void setIntroductoryParagraphs(int introductoryParagraphs) {
+		this.introductoryParagraphs = introductoryParagraphs;
+	}
+
+	public int getTextParagraphs() {
+		return textParagraphs;
+	}
+
+	public void setTextParagraphs(int textParagraphs) {
+		this.textParagraphs = textParagraphs;
+	}
+
+	public void initForDesignWith(int versionID) throws SQLException {
+		setPortugues(false);
+		setDesigner(true);
+		Version version = VersionDAO.getVersion(versionID);
+		Document document = DocumentDAO.getDocument(version.getDocumentId());
+		this.documentId = document.getId();
+		this.setPrincipal(document.isPrincipal());
+		this.versionId = version.getId();
+		this.version = version.getNumber();
+		this.versionName = version.getName();
+		this.versionStatus = version.getStatus();
+		this.title = document.getTitle();
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(version.getUpToCommentDate());
+		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);;
+		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
+		this.introduction= document.getIntroduction();
+		this.paragraph = 0;
+		this.paragraphTexts = new String[1000];
+		this.paragraphStatus = new boolean[1000];
+		this.paragraphIds = new int[1000];
+		List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
+		for (Paragraph p : paragraphs) {
+			paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
+			paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
+			paragraphIds[p.getParagraphNumber() - 1] = p.getId();
+		}
+		this.consolidated = false;
+		this.consolidateText= null;
+	}
+
+	public boolean isDesigner() {
+		return designer;
+	}
+
+	public void setDesigner(boolean designer) {
+		this.designer = designer;
 	}
 }

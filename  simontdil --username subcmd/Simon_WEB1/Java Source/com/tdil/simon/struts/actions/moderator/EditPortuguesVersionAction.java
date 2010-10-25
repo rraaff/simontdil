@@ -18,9 +18,9 @@ import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.utils.NegotiationUtils;
 
-public class EditVersionAction extends SimonAction implements TransactionalActionWithValue {
+public class EditPortuguesVersionAction extends SimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER};
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -47,7 +47,7 @@ public class EditVersionAction extends SimonAction implements TransactionalActio
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
-		createDocumentForm.initWith(createDocumentForm.getTemporaryVersionId());
+		createDocumentForm.initForPortuguesWith(createDocumentForm.getTemporaryVersionId());
 		return null;
 	}
 }

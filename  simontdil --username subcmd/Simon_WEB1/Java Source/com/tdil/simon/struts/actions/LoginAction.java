@@ -57,6 +57,9 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				if (user.isModerator()) {
 					return mapping.findForward("moderator");
 				}
+				if (user.isDesigner()) {
+					return mapping.findForward("designer");
+				}
 				if (user.isDelegate()) {
 					return mapping.findForward("delegate");
 				}

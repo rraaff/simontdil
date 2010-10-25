@@ -33,7 +33,7 @@ public abstract class AjaxSimonAction extends Action {
 		return user;
 	}
 
-	public final ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		SystemUser user = getLoggedUser(request);
 		if (user == null) {

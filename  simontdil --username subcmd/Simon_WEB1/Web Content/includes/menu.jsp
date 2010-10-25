@@ -1,3 +1,4 @@
+<% if (isAdministrator || isModerator) { %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <style type="text/css">
 #content {
@@ -28,11 +29,26 @@
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>
 			</li>
+			<% if (isDesigner) { %>
+			<li><a class="trigger" href="#">Dise&ntilde;ador</a>
+				<ul>
+					<li><html:link action="/goToListDocumentForDesign" >Home de Dise&ntilde;ador</html:link></li>
+				</ul>
+			</li>
+			<% } %>
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Modo negociación</a>
 				<ul>
 					<li><html:link action="setModSiteNormal" >Desactivar Modo Negociación</html:link></li>
 					<li><html:link action="setModSiteEvent" >Activar Modo Negociación</html:link></li>
+				</ul>
+			</li>
+			<% } %>
+			<% if (isAdministrator) { %>
+			<li><a class="trigger" href="#">Pantalla pública</a>
+				<ul>
+					<li><html:link action="setPublicSiteNormal" >Desactivar Modo Negociación</html:link></li>
+					<li><html:link action="setPublicSiteEvent" >Activar Modo Negociación</html:link></li>
 				</ul>
 			</li>
 			<% } %>
@@ -45,3 +61,4 @@
 		<br class="clearit">
 	</div>
 </div>
+<% } %>

@@ -188,6 +188,18 @@ if ( dw_scrollObj.isSupported() ) {
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
 					</tr>
+					<tr>
+						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td colspan="3" align="center"><html:submit property="operation">
+															<bean:message key="viewVersion.downloadPdf"/>
+														</html:submit></td>
+					</tr>
+					<tr>
+						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td colspan="3" align="center"><html:submit property="operation">
+											<bean:message key="viewVersion.downloadRtf"/>
+										</html:submit></td>
+					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
@@ -235,10 +247,20 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td align="center">
 							<% if (isDelegate) { %>
-								<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+								<logic:equal name="ViewVersion" property="hasTranslation" value="true">
+									<html:link page="/viewFinalVersion.jsp"><img src="images/buttons/volver.png" border="0"/></html:link>
+								</logic:equal>
+								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
+									<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+								</logic:equal >
 							<% } %>
 							<% if (isModerator) { %>
-								<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+							<logic:equal name="ViewVersion" property="hasTranslation" value="true">
+									<html:link page="/viewFinalVersion.jsp"><img src="images/buttons/volver.png" border="0"/></html:link>
+								</logic:equal>
+								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
+									<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+								</logic:equal >
 							<% } %>
 						</td>
 					</tr>
@@ -262,22 +284,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<div id="lyr1">
 						<p class="article"><bean:write name="ViewVersion" property="version.document.introduction" /></p>
 						<!-- div id="documentoCompleto" -->
-							<table width="100%" border="1" cellspacing="0" cellpadding="0">
-							<logic:iterate name="ViewVersion" property="paragraphs" id="paragraph"> 
-								<tr>
-									<td><p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />.<bean:write filter="false" name="paragraph" property="spanishVersion" /></p></td>
-									<td><p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />.<bean:write filter="false" name="paragraph" property="portuguesVersion" /></p></td>
-								</tr>
+							<logic:iterate name="ViewVersion" property="selectedLanguageParagraphs" id="paragraph"> 
+								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />.<bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 							</logic:iterate>
-								<tr>
-									<td><html:submit property="operation">
-											<bean:message key="viewVersion.viewSpanishOnly"/>
-										</html:submit></td>
-									<td><html:submit property="operation">
-											<bean:message key="viewVersion.viewPortuguesOnly"/>
-										</html:submit></td>
-								</tr>
-							</table>
 							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
 								<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
 								<tr> 

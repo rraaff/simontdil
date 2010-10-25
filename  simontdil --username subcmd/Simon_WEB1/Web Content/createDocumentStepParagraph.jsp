@@ -153,31 +153,66 @@
 							</logic:equal>
 							
 							<!-- Boton Next -->
-							<logic:notEqual name="CreateDocumentForm" property="nextDisabled" value="true">
+							<logic:notEqual name="CreateDocumentForm" property="last" value="true">
 								<html:submit property="operation">
-								<bean:message key="createDocument.paragraphs.next"/>
-							</html:submit>
+									<bean:message key="createDocument.paragraphs.next"/>
+								</html:submit>
 							</logic:notEqual>
-							<logic:equal name="CreateDocumentForm" property="nextDisabled" value="true">
+							<logic:equal name="CreateDocumentForm" property="last" value="true">
 								<html:submit property="operation" disabled="true">
-								<bean:message key="createDocument.paragraphs.next"/>
-							</html:submit>
+									<bean:message key="createDocument.paragraphs.next"/>
+								</html:submit>
+							</logic:equal>
+							
+							<!-- Boton Add before -->
+							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
+								<html:submit property="operation">
+									<bean:message key="createDocument.paragraphs.addBefore"/>
+								</html:submit>
+							</logic:equal>
+							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
+								<html:submit property="operation" disabled="true">
+									<bean:message key="createDocument.paragraphs.addBefore"/>
+								</html:submit>
 							</logic:equal>
 							
 							<logic:equal name="CreateDocumentForm" property="last" value="true">
-								<html:submit property="operation">
-								<bean:message key="createDocument.paragraphs.add"/>
-								</html:submit>
+								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
+									<html:submit property="operation">
+										<bean:message key="createDocument.paragraphs.add"/>
+									</html:submit>
+								</logic:equal>
+								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
+									<html:submit property="operation" disabled="true">
+										<bean:message key="createDocument.paragraphs.add"/>
+									</html:submit>
+								</logic:equal>
 							</logic:equal>
+							
 							<logic:notEqual name="CreateDocumentForm" property="last" value="true">
-								<html:submit property="operation" disabled="true">
-								<bean:message key="createDocument.paragraphs.add"/>
-								</html:submit>
+								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
+									<html:submit property="operation">
+										<bean:message key="createDocument.paragraphs.addAfter"/>
+									</html:submit>
+								</logic:equal>
+								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
+									<html:submit property="operation" disabled="true">
+										<bean:message key="createDocument.paragraphs.addAfter"/>
+									</html:submit>
+								</logic:equal>
 							</logic:notEqual>
 							
-							<html:submit property="operation">
-								<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
-							</html:submit>
+							<!-- Boton Hide/Unhide -->
+							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
+								<html:submit property="operation" disabled="true">
+									<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
+								</html:submit>
+							</logic:equal>
+							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
+								<html:submit property="operation">
+									<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
+								</html:submit>
+							</logic:equal>
 							</td>
 						</tr>
 						<tr>
