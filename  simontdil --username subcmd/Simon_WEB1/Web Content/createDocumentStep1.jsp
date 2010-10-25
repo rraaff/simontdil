@@ -16,21 +16,21 @@
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="500" height="19" align="left"><div id="blockTitle">Edición de documentos (Paso 1 de 4)</div></td>
+					<td background="images/interfaces/topTitle.gif" width="600" height="19" align="left"><div id="blockTitle">Edición de documentos (Paso 1 de 4)</div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="500" height="144"><!-- corte tabla template -->
-						<table width="500" border="0" cellspacing="0" cellpadding="0">
+					<td width="600" height="144"><!-- corte tabla template -->
+						<table width="600" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td height="25" colspan="3"><p align="left">&nbsp;</p></td>
 							</tr>
 							<tr>
 								<td align="right" width="192">T&iacute;tulo:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="301" align="left">
+								<td width="401" align="left">
 									<logic:equal name="CreateDocumentForm" property="portugues" value="false">
 										<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" />
 									</logic:equal>
@@ -97,14 +97,14 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Tipo de documento:</td>
+								<td align="right" valign="top">Tipo de documento:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Plan de Acción
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Documentos para Coordinadores Nacionales&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Documentos para Responsables de Cooperación
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Propuesta de declaraci&oacute;n&nbsp;&nbsp;&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Plan de Acción
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Documentos para Coordinadores Nacionales&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Documentos para Responsables de Cooperación
 								</logic:equal>
 								</td>
 							</tr>

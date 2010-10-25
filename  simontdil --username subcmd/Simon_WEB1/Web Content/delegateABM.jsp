@@ -104,8 +104,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
 								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
-								<html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n<html:errors property="delegate.canProposeParagraph" /><br/>
-							</td>
+								<!-- html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n--><html:errors property="delegate.canProposeParagraph" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -171,14 +170,14 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="8" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td width="200" height="20" align="left">Nombre</td>
 										<td align="left">Pa&iacute;s</td>
 										<td width="60" align="center">Permisos</td>
 										<td width="60" align="center">Firmante</td>
-										<td width="60" align="center">Habilitado</td>
+										<!-- td width="60" align="center">Habilitado</td  -->
 										<td width="60"></td>
 										<td width="80"></td>
 										<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
@@ -190,8 +189,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><bean:write name="iterUser" property="permissionsString" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
-											<td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
-											<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
+											<!-- td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal><logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td -->
 											<td><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>
@@ -205,7 +203,7 @@ if ( dw_scrollObj.isSupported() ) {
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="8" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>	
 							<!-- corte tabla template -->
