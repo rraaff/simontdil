@@ -26,11 +26,11 @@
 					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
 					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
 					<td width="604" align="left" valign="top" class="fontMail"><p>Estimado <B>{FULLNAME}</B>,</p>
-					<p>La delegación de <B>{DELEGATION}</B>, ha creado una nueva observación al párrafo número <B>{PARAGRAPH}</B>, del documento: <B>{DOCUMENT_TITLE}</B>.</p>
+					<p>La delegaci&oacute;n de <B>{DELEGATION}</B>, ha creado una nueva observaci&oacute;n al p&aacute;rrafo n&úacute;mero <B>{PARAGRAPH}</B>, del documento: <B>{DOCUMENT_TITLE}</B>.</p>
 					<p>Para ingresar al sitio utilice el siguiente enlace:</p>
-					<p align="center"><a href="{SERVER}/index.jsp" target="_blank"><img src="{SERVER}/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
-					<p>Ante cualquier consulta o dificultad, comuníquese con la Mesa de Ayuda de la Cancillería Argentina Correo electrónico: <a href="ayuda@xxcumbreiberoamericana.mrecic.gov.ar">ayuda@xxcumbreiberoamericana.mrecic.gov.ar</a>.<br />
-					Telef&oacute;nos (+54 11) 4819 7658</p></td>
+					<p align="center"><a href="{SERVER}/" target="_blank"><img src="{SERVER}/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
+					<p>Ante cualquier consulta o dificultad, comun&íacute;quese con la Mesa de Ayuda de la Canciller&íacute;a Argentina Correo electr&oacute;nico: <a href="ayuda@xxcumbreiberoamericana.mrecic.gov.ar">ayuda@xxcumbreiberoamericana.mrecic.gov.ar</a>.<br />
+					Tel&eacute;fonos (+54 11) 4819 7658</p></td>
 					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
 					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
 				</tr>
