@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Editar categorías para Documentos de consulta</div></td>
+					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Editar categorías para Documentos Informativos</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -127,7 +127,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" colspan="2" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado archivos de Documentos de consulta</div></td>
+					<td width="100%" height="19" align="left" colspan="2" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de archivos de Documentos Informativos</div></td>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>

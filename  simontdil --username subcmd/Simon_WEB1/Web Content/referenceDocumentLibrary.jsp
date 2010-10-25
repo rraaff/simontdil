@@ -40,18 +40,18 @@ if ( dw_scrollObj.isSupported() ) {
 <div id="content">
 <table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td width="940">
+		<td width="940" height="100%">
 			<!-- inicio tabla template -->
 			<table width="940" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos de consulta</div></td>
+					<td colspan="2" width="920" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos Informativos</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="900" height="144">
+					<td width="900" height="350">
 						<div id="main">
 							<div id="lyr1">
 								<table width="900" border="0" cellspacing="0" cellpadding="0" align="center">
