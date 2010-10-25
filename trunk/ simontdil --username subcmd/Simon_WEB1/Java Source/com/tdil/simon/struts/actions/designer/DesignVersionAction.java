@@ -1,4 +1,4 @@
-package com.tdil.simon.struts.actions.moderator;
+package com.tdil.simon.struts.actions.designer;
 
 import java.sql.SQLException;
 
@@ -16,11 +16,10 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
-import com.tdil.simon.utils.NegotiationUtils;
 
-public class EditVersionAction extends SimonAction implements TransactionalActionWithValue {
+public class DesignVersionAction extends SimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER};
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.DESIGNER };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -39,15 +38,12 @@ public class EditVersionAction extends SimonAction implements TransactionalActio
 		}
 		createDocumentForm.setTemporaryVersionId(versionID);
 		TransactionProvider.executeInTransaction(this, form);
-		boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
-		request.getSession().setAttribute("docNegotiated", inNegotiation ? "true" : "false");
-		request.getSession().setAttribute("paragraphNegotiated", "false");
 		return mapping.findForward("continue");
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
-		createDocumentForm.initWith(createDocumentForm.getTemporaryVersionId());
+		createDocumentForm.initForDesignWith(createDocumentForm.getTemporaryVersionId());
 		return null;
 	}
 }

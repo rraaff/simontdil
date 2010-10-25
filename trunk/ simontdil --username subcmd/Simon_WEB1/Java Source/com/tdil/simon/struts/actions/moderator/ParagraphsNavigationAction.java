@@ -24,7 +24,7 @@ import com.tdil.simon.utils.NegotiationUtils;
 
 public class ParagraphsNavigationAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -38,7 +38,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 
 		String image = ImageTagUtil.getName(request);
 		if (image != null && "jumpTo".equals(image)) {
-			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()));
+			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()) - 1);
 			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 			if (!createDocumentForm.getParagraphHidden()) {
 				request.getSession().setAttribute("paragraphNegotiated", inNegotiation ? "true" : "false");
@@ -146,6 +146,27 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return mapping.findForward("stay");
 			}
 		}
+		
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.addBefore"))) {
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.addBefore();
+				return mapping.findForward("stay");
+			}
+		}
+		
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.addAfter"))) {
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.addAfter();
+				return mapping.findForward("stay");
+			}
+		}
+		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.hide"))) {
 			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = true;
 			return mapping.findForward("stay");

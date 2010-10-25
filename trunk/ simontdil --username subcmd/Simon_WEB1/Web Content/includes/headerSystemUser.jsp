@@ -27,7 +27,12 @@ a:active {width: auto;}
 </head>
 <body onLoad="P7_ExpMenu();">
 <div id="header">
-	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
+	<div id="logo">
+		<% if (!isAdministrator && !isModerator && isDesigner) { %>
+				<html:link action="/goToListDocumentForDesign" ><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110" border="0"></html:link></div>
+			<% } else { %>
+				<img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
+			<% } %>
 	<div id="blockinHeader">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>

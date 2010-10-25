@@ -38,7 +38,7 @@ if ( dw_scrollObj.isSupported() ) {
 }
 </script>
 <div id="content">
-<html:form method="POST" action="/documentABM">
+<html:form method="POST" action="/designerList">
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td align="center">
@@ -68,38 +68,24 @@ if ( dw_scrollObj.isSupported() ) {
 										<td>Tiene Obs.</td>
 										<td># de obs.</td>
 										<td># nuevos solicitados</td>
-										<td width="60"> </td>
 										<td width="80"> </td>
-										<% if (isModerator) { %><td width="100">Ingreso de Obs.</td> <% } %>
+										<td width="80">Versión en portugués</td>
 										<td width="5"> </td>
 									</tr>
-									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
+									<logic:iterate name="ListDocumentsForDesign" property="list" id="version" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="version" property="documentTitle" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="versionWithSubversion" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="name" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="translatedStatus" /></td> 
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="hasObservationText" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
-										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="newParagraphCountText" /></td>
-										<% if (((com.tdil.simon.data.model.Version)version).canBeEdited()) { %>  
-											<td><html:link  action="editVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+										<td height="28" align="left"><bean:write name="version" property="documentTitle" /></td>
+										<td><bean:write name="version" property="versionWithSubversion" /></td>
+										<td align="left"><bean:write name="version" property="name" /></td>
+										<td align="left"><bean:write name="version" property="translatedStatus" /></td> 
+										<td><bean:write name="version" property="hasObservationText" /></td>
+										<td><bean:write name="version" property="observationCountText" /></td>
+										<td><bean:write name="version" property="newParagraphCountText" /></td>
+										<td><html:link  action="designVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link></td>
+										<% if (((com.tdil.simon.data.model.Version)version).isFinal()) { %>  
+											<td><html:link  action="editPortuguesVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
 										<% } else { %>  
 											<td>-</td>
-										<% } %> 
-										<td><logic:equal name="version" property="deleted" value="false">
-												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
-											</logic:equal>
-											<logic:equal name="version" property="deleted" value="true">
-												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
-											</logic:equal></td>
-										<% if (isModerator) { %><td width="80">
-											<logic:equal name="version" property="commentsEnabled" value="true">
-												<html:image property="disableCommentsImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
-											</logic:equal>
-											<logic:equal name="version" property="commentsEnabled" value="false">
-												<html:image property="enableCommentsImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
-											</logic:equal></td>
 										<% } %> 
 										<td width="5"> </td>
 									</tr> 

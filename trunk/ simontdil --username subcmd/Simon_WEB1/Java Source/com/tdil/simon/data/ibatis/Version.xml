@@ -14,6 +14,7 @@
     select *
     from VERSION
     where documentId = #id#
+    and spanishVersion = 1
     order by number
   </select>
   
@@ -22,7 +23,8 @@
     from VERSION
     where documentId = #id#
     and deleted = 0
-    and number = (select max(number) from VERSION where deleted = 0 and documentId = #id#)
+    and spanishVersion = 1
+    and number = (select max(number) from VERSION where deleted = 0 and documentId = #id# and spanishVersion = 1)
   </select>
   
    <select id="selectVersionForNegotiation" parameterClass="int" resultClass="Version">
@@ -31,7 +33,8 @@
     where documentId = #id#
     and deleted = 0
     and status = 'CONSOLIDATED'
-    and number = (select max(number) from VERSION where deleted = 0 and status = 'CONSOLIDATED' and documentId = #id#)
+    and spanishVersion = 1
+    and number = (select max(number) from VERSION where deleted = 0 and status = 'CONSOLIDATED' and documentId = #id# and spanishVersion = 1)
   </select>
   
   
@@ -41,6 +44,7 @@
     where VERSION.documentId = DOCUMENT.id
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
+    and VERSION.spanishVersion = 1
     and DOCUMENT.principal = 1
     and DOCUMENT.deleted = 0
     and DOCUMENT.typeOne = #typeOne#
@@ -54,13 +58,39 @@
    from VERSION
    where deleted = 0
    and status = 'IN_NEGOTIATION'
+   and spanishVersion = 1
   </select>
+  
+  <select id="selectPostuguesVersionBySpanishId" resultClass="Version">
+    select
+      v2.*
+   from VERSION v1, VERSION v2
+   where v1.spanishVersion = 1
+   and v2.spanishVersion = 0
+   and v2.status = 'FINAL'
+   and v1.documentId = v2.documentId
+   and v1.number = v2.number
+   and v1.id = #id#
+  </select>
+  
+  <select id="selectPostuguesVersionAnyStatusBySpanishId" resultClass="Version">
+    select
+      v2.*
+   from VERSION v1, VERSION v2
+   where v1.spanishVersion = 1
+   and v2.spanishVersion = 0
+   and v1.documentId = v2.documentId
+   and v1.number = v2.number
+   and v1.id = #id#
+  </select>
+  
   
    <select id="selectVersionForWork" resultClass="Version">
     select
       *
    from VERSION
    where deleted = 0
+   and spanishVersion = 1
    and status IN ('IN_NEGOTIATION', 'IN_SIGN')
   </select>
   
@@ -68,6 +98,7 @@
     select VERSION.id, VERSION.number
     from VERSION
     where documentId = #id#
+    and spanishVersion = 1
     and deleted = 0
     and status != 'DRAFT'
     order by number
@@ -78,6 +109,7 @@
    	from VERSION 
    	WHERE documentId = #documentId#
    	and number = #number#
+   	and spanishVersion = 1
   </select>
   
   <select id="selectAllVersionsForDocumentNotDeleted" parameterClass="int" resultClass="Version">
@@ -85,6 +117,7 @@
    	from VERSION 
    	WHERE deleted = 0
    	AND documentId = #id#
+   	and spanishVersion = 1
    	order by number
   </select>
   
@@ -101,8 +134,28 @@
     	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
    	from VERSION, DOCUMENT
    	WHERE VERSION.documentId = DOCUMENT.id
+   	and VERSION.spanishVersion = 1
    	order by DOCUMENT.title, VERSION.number DESC
   </select>
+  
+  <select id="selectVersionsVOForDesigner" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+    select VERSION.*, DOCUMENT.title as documentTitle,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as observationCount,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.addNewParagraph = 1
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
+   	from VERSION, DOCUMENT
+   	WHERE VERSION.documentId = DOCUMENT.id
+   	and VERSION.spanishVersion = 1
+   	and VERSION.status IN ('CONSOLIDATED', 'FINAL')
+   	order by DOCUMENT.title, VERSION.number DESC
+  </select>
+  
   
   <select id="selectVersionById" parameterClass="int" resultClass="Version">
     select
@@ -116,13 +169,14 @@
       count(1)
     from VERSION
     where documentId = #id#
+    and spanishVersion = 1
   </select>
  
    <insert id="insertVersion" parameterClass="Version">
     insert into VERSION (
-      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, deleted
+      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, spanishVersion, deleted
     ) values (
-      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #deleted#
+      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #spanishVersion#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id

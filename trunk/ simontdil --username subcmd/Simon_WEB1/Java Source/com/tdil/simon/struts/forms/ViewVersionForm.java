@@ -32,11 +32,21 @@ public class ViewVersionForm extends ActionForm {
 	private SystemUser user;
 	private String operation;
 	private VersionVO version;
+	private boolean showSpanish = true;
+	private VersionVO portugues;
 	private List observations;
 	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 
 	public VersionVO getVersion() {
 		return version;
+	}
+	
+	public boolean getHasTranslation() {
+		return this.getPortugues() != null;
+	}
+	
+	public boolean hasTranslation() {
+		return this.getPortugues() != null;
 	}
 
 	public void setVersion(VersionVO version) {
@@ -62,6 +72,46 @@ public class ViewVersionForm extends ActionForm {
 		if (version.isFinal()) {
 			setSignatures(SignatureDAO.selectSignaturesFor(version.getId()));
 		}
+		
+		Version translated = VersionDAO.getPortuguesVersion(versionID);
+		if (translated != null) {
+			VersionVO portuguesVersionVO = new VersionVO();
+			portuguesVersionVO.setVersion(translated);
+			portuguesVersionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(translated.getId()));
+			portuguesVersionVO.setDocument(versionVO.getDocument());
+			setPortugues(portuguesVersionVO);
+		} else {
+			setPortugues(null);
+		}
+	}
+	
+	public List<Paragraph> getSelectedLanguageParagraphs() {
+		if (this.isShowSpanish()) {
+			return version.getParagraphs();
+		} else {
+			return portugues.getParagraphs();
+		}
+	}
+	
+	public List<SpanishAndPortuguesParagraph> getParagraphs() {
+		List<SpanishAndPortuguesParagraph> result = new ArrayList<SpanishAndPortuguesParagraph>();
+		int spanishMax = version.getParagraphs().size();
+		int portuguesMax = portugues.getParagraphs().size();
+		for (int i = 0; i < Math.max(spanishMax, portuguesMax); i++) {
+			SpanishAndPortuguesParagraph spanishAndPortuguesParagraph = new SpanishAndPortuguesParagraph();
+			if (i < spanishMax)  {
+				Paragraph spanishPar = version.getParagraphs().get(i);
+				spanishAndPortuguesParagraph.setParagraphNumberForDisplay(spanishPar.getParagraphNumberForDisplay());
+				spanishAndPortuguesParagraph.setSpanishVersion(spanishPar.getParagraphText());
+			}
+			if (i < portuguesMax) {
+				Paragraph portuguesPar = portugues.getParagraphs().get(i);
+				spanishAndPortuguesParagraph.setParagraphNumberForDisplay(portuguesPar.getParagraphNumberForDisplay());
+				spanishAndPortuguesParagraph.setPortuguesVersion(portuguesPar.getParagraphText());
+			}
+			result.add(spanishAndPortuguesParagraph);
+		}
+		return result;
 	}
 	
 	public String getParagraphText(int observationId) {
@@ -215,6 +265,22 @@ public class ViewVersionForm extends ActionForm {
 
 	public boolean isFinal() {
 		return this.getVersion().getVersion().isFinal();
+	}
+
+	public VersionVO getPortugues() {
+		return portugues;
+	}
+
+	public void setPortugues(VersionVO portugues) {
+		this.portugues = portugues;
+	}
+
+	public boolean isShowSpanish() {
+		return showSpanish;
+	}
+
+	public void setShowSpanish(boolean showSpanish) {
+		this.showSpanish = showSpanish;
 	}
 
 }

@@ -58,8 +58,15 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 				TransactionProvider.executeInTransaction(new TransactionalAction() {
 					public void executeInTransaction() throws SQLException, ValidationException {
 						viewForm.finishSign(viewForm.getVersion().getVersion().getId());
+						Site site = Site.getPUBLIC_SITE();
+						if (Site.EVENT.equals(site.getStatus())) {
+							site.setStatus(Site.SIGN_SHOW);
+							SiteDAO.updateSite(site);
+						}
 					}
 				});
+				Site.setPUBLIC_SITE(null);
+				Site.getPUBLIC_SITE();
 				viewForm.init(viewForm.getVersion().getVersion().getId());
 				DelegateSiteCache.refresh();
 				return mapping.findForward("continue");
@@ -85,6 +92,14 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
 			return mapping.findForward("downloadPdf");
+		}
+		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.viewSpanishOnly"))) {
+			viewForm.setShowSpanish(true);
+			return mapping.findForward("viewSingleVersion");
+		}
+		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.viewPortuguesOnly"))) {
+			viewForm.setShowSpanish(false);
+			return mapping.findForward("viewSingleVersion");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
 			return mapping.findForward("downloadRtf");

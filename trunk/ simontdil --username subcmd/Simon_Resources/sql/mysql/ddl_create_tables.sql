@@ -60,6 +60,7 @@ CREATE  TABLE `SIMON`.`VERSION` (
   `hasDraft` INT NULL ,
   `deleted` INT NULL ,
   `commentsEnabled` INT NULL ,
+  `spanishVersion` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `document` (`documentId` ASC) );
 

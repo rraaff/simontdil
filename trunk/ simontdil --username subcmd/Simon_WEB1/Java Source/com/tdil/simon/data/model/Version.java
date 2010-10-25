@@ -22,6 +22,7 @@ public class Version extends PersistentObject {
 	private String status;
 	private boolean hasDraft = false;
 	private boolean commentsEnabled = true;
+	private boolean spanishVersion = true;
 	
 	public int getDocumentId() {
 		return documentId;
@@ -83,7 +84,7 @@ public class Version extends PersistentObject {
 	public boolean canBeEdited() {
 		return !this.isHasDraft() && !this.isInFinalStatus();
 	}
-	private boolean isInFinalStatus() {
+	public boolean isInFinalStatus() {
 		if (IN_SIGN.equals(this.getStatus())) {
 			return true;
 		}
@@ -100,6 +101,12 @@ public class Version extends PersistentObject {
 	}
 	public void setCommentsEnabled(boolean commentsEnabled) {
 		this.commentsEnabled = commentsEnabled;
+	}
+	public boolean isSpanishVersion() {
+		return spanishVersion;
+	}
+	public void setSpanishVersion(boolean spanishVersion) {
+		this.spanishVersion = spanishVersion;
 	}
 
 }

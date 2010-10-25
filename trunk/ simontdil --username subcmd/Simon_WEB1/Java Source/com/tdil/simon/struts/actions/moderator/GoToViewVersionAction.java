@@ -40,7 +40,12 @@ public class GoToViewVersionAction extends SimonAction {
 			}
 		});
 		if (viewVersionForm.isFinal()) {
-			return mapping.findForward("goToFinalVersion");
+			if (viewVersionForm.hasTranslation()) {
+				return mapping.findForward("goToFinalVersion");
+			} else {
+				viewVersionForm.setShowSpanish(true);
+				return mapping.findForward("goToFinalVersionSingle");
+			}
 		} else {
 			return mapping.findForward("continue");
 		}
