@@ -264,7 +264,7 @@
     <action path="/goToViewVersionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionPopupAction" scope="session">
       <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
-    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="request">
+    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocumentPopup" scope="request">
       <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
   </action-mappings>
