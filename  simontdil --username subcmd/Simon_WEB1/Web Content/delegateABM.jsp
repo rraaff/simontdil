@@ -101,8 +101,8 @@ if ( dw_scrollObj.isSupported() ) {
 								<td height="24" align="right" valign="top"><html:errors property="delegate.typeOne" />Accesos:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
-								<html:checkbox name="DelegateABM" property="typeOne"/> Propuesta de declaraci&oacute;n<br>
-								<html:checkbox name="DelegateABM" property="typeTwo"/> Plan de Acci&oacute;n <br>
+								<html:checkbox name="DelegateABM" property="typeOne"/> Documentos para Coordinadores Nacionales <br />
+								<html:checkbox name="DelegateABM" property="typeTwo"/> Documentos para Responsables de Cooperaci&oacute;n<br>
 								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
 								<!-- html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n--><html:errors property="delegate.canProposeParagraph" /></td>
 							</tr>

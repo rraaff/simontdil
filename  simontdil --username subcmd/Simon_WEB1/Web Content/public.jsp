@@ -28,6 +28,37 @@ a:active {width: auto;}
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#content {
+	height:auto;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #808080;
+}
+#blockTitle1 {
+	background-color: #FFFFFF;
+	width: auto;
+	position: relative;
+	height: 15px;
+	float: left;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-bottom: 0px;
+	padding-left: 4px;
+	left: 10px;
+	top: -15px;
+}
+#mainDocContainer {
+	border: 1px solid #c6c6c6;
+	position: relative;
+	height: 200px;
+}
+.article{
+	font-size: 16px;
+	line-height: 20px;	
+}
+</style>
+
 <script>
 
 	var intro = "abcdefghijklmnopqrstuvwxyz";
@@ -116,24 +147,50 @@ a:active {width: auto;}
 Splash
 </div>
 <div id="negotiationLayer" <%= com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
-<table>
-	<tr>
-		<td id="originalParagraph">
-			<% if ("".equals(statusMap.get("originalText"))) { %>
-				-
-			<% } else {%>
-				<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>. <%=statusMap.get("originalText")%></p>
-			<% } %>
-			</td>
-		<td id="negotiatedParagraph">
-			<% if ("".equals(statusMap.get("originalText"))) { %>
-				-
-			<% } else {%>
-				<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>.<%=statusMap.get("paragraphText")%></p>
-			<% } %>
-		</td>
-	</tr>
-</table>
+	<div id="header">
+		<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110" border="0"></div>
+		<div id="blockinHeaderDelegate"></div>
+		<div id="siteSeccion"><img src="images/header/modoNegociacionDelegados.gif" alt="Zona Restringida" width="187" height="50"></div>
+		<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
+	</div>
+	<div id="content">
+		<table width="95%" height="100%" cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td><div id="mainDocContainer" style="height:250px; margin-top:13px;">
+					<div id="blockTitle1">P&aacute;rrafo Original</div>
+						<table width="95%" cellpadding="0" cellspacing="5" border="0" align="center">
+							<tr>
+								<td id="originalParagraph">
+									<% if ("".equals(statusMap.get("originalText"))) { %>
+										-
+									<% } else {%>
+										<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>. <%=statusMap.get("originalText")%></p>
+									<% } %>
+								</td>
+							</tr>
+						</table>
+					</div></td>
+			</tr>
+			<tr>
+				<td><img src="images/null.gif" width="1" height="20"></td>
+			</tr>
+			<tr>
+				<td><div id="mainDocContainer" style="height:250px; margin-top:13px;">
+					<div id="blockTitle1">P&aacute;rrafo en Negociaci&oacute;n</div>
+						<table width="95%" cellpadding="0" cellspacing="5" border="0" align="center">
+							<tr>
+								<td id="negotiatedParagraph">
+									<% if ("".equals(statusMap.get("originalText"))) { %>
+										-
+									<% } else {%>
+										<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>.<%=statusMap.get("paragraphText")%></p>
+									<% } %>
+								</td>
+							</tr>
+						</table></div></td>
+			</tr>
+		</table>
+	</div>
 </div>
 <div id="inSignLayer" <%= com.tdil.simon.data.model.Site.IN_SIGN.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
 En firmas

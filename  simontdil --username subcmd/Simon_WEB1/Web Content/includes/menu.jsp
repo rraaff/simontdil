@@ -39,12 +39,13 @@
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Modo negociación</a>
 				<ul>
+				<% 	if(eventMode) { %>
 					<li><html:link action="setModSiteNormal" >Desactivar Modo Negociación</html:link></li>
+				<% } else { %>
 					<li><html:link action="setModSiteEvent" >Activar Modo Negociación</html:link></li>
+				<% } %>
 				</ul>
 			</li>
-			<% } %>
-			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Pantalla pública</a>
 				<ul>
 					<li><html:link action="setPublicSiteNormal" >Desactivar Modo Negociación</html:link></li>
