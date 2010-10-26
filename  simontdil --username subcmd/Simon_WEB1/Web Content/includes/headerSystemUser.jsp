@@ -48,7 +48,7 @@ a:active {width: auto;}
 							<td>Del: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b></td>
 						</tr>
 						<tr>
-							<td>Pantalla: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
+							<td>TV: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
 						</tr>
 					</table>
 				</td>

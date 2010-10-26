@@ -68,6 +68,10 @@ public class ExportVersionAsPDF {
 
 		// generate the body
 		buf.append("<body>");
+		buf.append("<table width=\"100%\" height=\"154\" border=\"0\">");
+		buf.append("<TR><TD width=\"310\"><img width=\"310\" height=\"154\" src=\"./images/header/logoCumbresPDFsRTFs.jpg\"></TD>");
+		// buf.append("<TD align=\"center\">") acá va el textito que le agrega el diseñador .append("</TD>");
+		buf.append("<TD width=\"301\"><img width=\"301\" height=\"154\" src=\"./images/header/logoSegibPDFsRTFs.png\"></TD></TR></TABLE>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<H2>Preámbulo</H2>");
@@ -92,7 +96,7 @@ public class ExportVersionAsPDF {
 				buf.append("</TR><TR>");
 				buf.append("<TD>Posición: <b>").append(signatureVO.getJob()).append("</b></TD>");
 				buf.append("</TR></TABLE></TD>");
-				buf.append("<TD valign=\"top\">").append("<img widht=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				buf.append("<TD valign=\"top\">").append("<img width=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
 			}
 			buf.append("</table>");
 		} else {

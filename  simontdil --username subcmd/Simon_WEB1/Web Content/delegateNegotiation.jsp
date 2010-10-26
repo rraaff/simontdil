@@ -41,6 +41,7 @@ div#scrollbar {
 	display: none;
 }
 </style>
+<script src="scripts/popup.js" type="text/javascript"></script>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
 <script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
@@ -74,6 +75,14 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
+
+
+/* +++++++++ abro el popup ++++++++++ */
+function openDocs(){
+	openPopupWindow('forcedDocs.jsp', 1024, 550, 0, 0, false, true, 'Documentos', false);
+}
+
+
 </script>
 <html:html>
 <script type="text/javascript">
@@ -294,6 +303,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr -->
 							<% } %>
+							<tr>
+								<td colspan="2" height="30" align="center" valign="bottom"><a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a></td>
+							</tr>
 						</table>
 						<!-- corte tabla template -->
 					</td>
