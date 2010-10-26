@@ -4,6 +4,17 @@
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Cumbres Iberoamericanas | Al servicio de la Comunidad Iberoamericana</title>
+<meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
+<script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
+<link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 /* hide from incapable browsers */
 div#sizer {
@@ -21,7 +32,6 @@ div#scrollbar {
 }
 #content #alcincuentaRight{
 	width:72%;
-	height:530px;
 	padding-left:10px;
 	padding-right:10px;
 	margin-top:12px;
@@ -32,7 +42,7 @@ div#main{
 /*	#width: 400px; Para Internet Explorer */
 /*	_width: 400px; Para Internet Explorer 6 */
 	width:95%;
-	height:470px;
+	height:370px;
 	float:left;
 	margin: 0px;
 	position: relative;
@@ -85,6 +95,7 @@ lyr1{
 	border: 1px solid #c6c6c6;
 }
 </style>
+
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
 <script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
@@ -117,10 +128,12 @@ if ( dw_scrollObj.isSupported() ) {
 }
 
 </script>
-<div id="content">
+</head>
+<body>
+<div id="content" style="height:450px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;">
 <html:form action="/viewVersionAction">
-	<div id="alcien" style="height:560px; padding-top:20px;">
-		<div id="alcincuentaLeft" style="width:24%; height:540px;">
+	<div id="alcien" style="height:500px; padding-top:20px;">
+		<div id="alcincuentaLeft" style="width:24%; height:400px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
 				<div id="blockTitle1">Documento Principal</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
@@ -139,7 +152,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td height="30">Verisi&oacute;n/es: </td>
 						<td colspan="2" align="left" valign="middle">
-						<div id="portaVersiones">
+						<div id="portaVersiones" style="width:130px;">
 						<logic:iterate name="ViewVersionPopup" property="version.reducedVersions" id="otherVersion">
 							<logic:equal name="otherVersion" property="current" value="true">
 								<b><bean:write name="otherVersion" property="number" /></b>
@@ -151,11 +164,11 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 						</td>
 					</tr>
-					<!-- FIN: Recupero versión 197 :: Modificada -->
+					<!-- FIN: Recupero versión 197 :: Modificada 
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersionPopup" property="version.version.limitObservationsString" /></td>
-					</tr>
+					</tr>-->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><html:submit property="operation">
@@ -168,9 +181,13 @@ if ( dw_scrollObj.isSupported() ) {
 											<bean:message key="viewVersion.downloadRtf"/>
 										</html:submit></td>
 					</tr>
+					<tr>
+						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td colspan="3" align="center"><a href="./forcedDocs.jsp" ><img src="images/buttons/volver.png" border="0"/></a></td>
+					</tr>
 				</table>
 			</div>
-			<div id="mainDocContainer" style="margin-top:20px;">
+			<!-- div id="mainDocContainer" style="margin-top:20px;">
 				<div id="blockTitle2">Acciones disponibles</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
@@ -181,7 +198,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton">Volver</a></td>
 									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
 								</tr>
-							</table -->
+							</table ->
 					<a href="./forcedDocs.jsp" ><img src="images/buttons/volver.png" border="0"/></a>
 					</tr>
 					<tr>
@@ -212,14 +229,14 @@ if ( dw_scrollObj.isSupported() ) {
 						<td><img src="images/null.gif" width="1" height="10"></td>
 					</tr>
 				</table>
-			</div>
+			</div-->
 		</div>
 		
-		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
+		<div id="alcincuentaRight" style="width:70%; border:1px solid #c6c6c6;">
 			<div id="blockTitle1">Documento</div>
 			<div>
-				<div id="main">
-					<div id="lyr1">
+				<div id="main" style="height:430px;">
+					<div id="lyr1" style="height:430px;">
 					<!-- div id="documentoCompleto" -->
 						<p class="article"><bean:write name="ViewVersionPopup" property="version.document.introduction" /></p>
 						<logic:iterate name="ViewVersionPopup" property="version.paragraphs" id="paragraph"> 
@@ -227,9 +244,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</logic:iterate>
 					</div>
 				</div>
-				<div id="scrollbar" style="width:20px; height:470px; float:right;">
+				<div id="scrollbar" style="width:20px; height:440px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-					<div id="track" style="height:446px;">
+					<div id="track" style="height:416px;">
 						<div id="dragBar"></div>
 					</div>
 					<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>

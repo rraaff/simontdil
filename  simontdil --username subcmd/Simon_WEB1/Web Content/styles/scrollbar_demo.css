@@ -43,6 +43,12 @@ div#scrollbar2 {
 	display:block; /* initially display:none; to hide from incapable */
 }
 
+div#main2 { 
+	position:relative;
+/*    width:280px; height:200px;*/
+	overflow:hidden;
+}
+
 div#negotiationArea { 
 	position:relative;
 	overflow:hidden;
