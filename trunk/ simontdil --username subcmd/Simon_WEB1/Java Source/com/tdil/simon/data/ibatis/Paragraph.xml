@@ -55,6 +55,7 @@
     update PARAGRAPH set
       paragraphText = #paragraphText#,
       deleted = #deleted#,
+      paragraphNumber = #paragraphNumber#,
       versionNumber = versionNumber + 1
     where
       id = #id#

@@ -89,7 +89,12 @@ public class ExportVersionAsPDF {
 		}
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
-			List signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
+			List signatures ;
+			if (version.getVersion().isSpanishVersion()) {
+				signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
+			} else {
+				signatures = SignatureDAO.selectSignaturesForPortugues(version.getDocument().getId(), version.getVersion().getNumber());
+			}
 			buf.append("<table width=\"100%\" border=\"0\">");
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;

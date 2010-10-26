@@ -107,15 +107,20 @@ public class ParagraphsNavigationAction extends SimonAction {
 		}
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.pushData"))) {
-			createDocumentForm.save();
-			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
-				if (!createDocumentForm.getParagraphHidden()) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
-						}
-					});
-					DelegateSiteCache.refresh();
+			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
+			if(error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else  {
+				createDocumentForm.save();
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					if (!createDocumentForm.getParagraphHidden()) {
+						TransactionProvider.executeInTransaction(new TransactionalAction() {
+							public void executeInTransaction() throws SQLException, ValidationException {
+								NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+							}
+						});
+						DelegateSiteCache.refresh();
+					}
 				}
 			}
 			return mapping.findForward("stay");
@@ -147,6 +152,14 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return redirectToFailure(error, request, mapping);
 			} else  {
 				createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(0);
+						}
+					});
+					DelegateSiteCache.refresh();
+				}
 				return mapping.findForward("stay");
 			}
 		}
@@ -157,6 +170,14 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return redirectToFailure(error, request, mapping);
 			} else  {
 				createDocumentForm.addBefore();
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(0);
+						}
+					});
+					DelegateSiteCache.refresh();
+				}
 				return mapping.findForward("stay");
 			}
 		}
@@ -167,6 +188,14 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return redirectToFailure(error, request, mapping);
 			} else  {
 				createDocumentForm.addAfter();
+				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							NegotiationUtils.updateDelegateSiteParagraph(0);
+						}
+					});
+					DelegateSiteCache.refresh();
+				}
 				return mapping.findForward("stay");
 			}
 		}

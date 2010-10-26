@@ -143,10 +143,6 @@ if ( dw_scrollObj.isSupported() ) {
 									<logic:iterate name="ViewVersion" property="signatures" id="signature" indexId="signatureIndex">
 									<tr> 
 										<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signature" property="signatureFileName" />"></td>
-										<script>
-											signatureArray[<%=signatureIndex%>] = '<bean:write name="signature" property="signatureFileName" />';
-											lastSignatureIndex = <%=signatureIndex%>;
-										</script>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signature" property="countryId" />" width="30" height="30"></td>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>

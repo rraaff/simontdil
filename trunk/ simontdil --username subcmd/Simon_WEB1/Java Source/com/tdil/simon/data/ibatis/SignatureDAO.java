@@ -20,6 +20,12 @@ public class SignatureDAO {
 	public static List selectSignaturesFor(int versionID) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectSignaturesForVersion", versionID);
 	}
+	public static List selectSignaturesForPortugues(int docID, int versionNumber) throws SQLException {
+		HashMap params = new HashMap();
+		params.put("docID", docID);
+		params.put("versionNumber", versionNumber);
+		return IBatisManager.sqlMapper.queryForList("selectSignaturesForPortugues", params);
+	}
 	
 	
 	public static Signature getSignatureBy(int versionId, int userId) throws SQLException {

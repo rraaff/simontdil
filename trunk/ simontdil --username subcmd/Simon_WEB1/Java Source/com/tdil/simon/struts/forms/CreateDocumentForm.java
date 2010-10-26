@@ -371,7 +371,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		for (int i = 0; i < 1000; i++) {
 			String text = this.paragraphTexts[i];
 			if (!StringUtils.isEmpty(text)) {
-				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], paragraphs);
+				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], paragraphs, i);
 			}
 		}
 		
@@ -396,13 +396,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 //		}
 	}
 	
-	private void insertOrUpdateParagrap(int paragraphNumber, String text, boolean deleted, List paragraphs) throws SQLException {
+	private void insertOrUpdateParagrap(int paragraphNumber, String text, boolean deleted, List paragraphs, int position) throws SQLException {
 		// TODO Auto-generated method stub
-		Paragraph paragraph = getParagraphForNumber(paragraphs, paragraphNumber);
+		Paragraph paragraph = getParagraphForPosition(paragraphs, position);
 		if (paragraph != null) {
 			String pText = paragraph.getParagraphText(); 
 			paragraph.setParagraphText(text);
 			paragraph.setDeleted(deleted);
+			paragraph.setParagraphNumber(paragraphNumber + 1);
 			ParagraphDAO.updateParagraph(paragraph);
 //			TODO esta cosa no anda asi, no va
 //			if (!text.equals(pText)) {
@@ -432,6 +433,21 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 //			trackChange.setChangeText(text);
 //			trackChange.setParagraphId(parId);
 //			TrackChangeDAO.insertTrackChange(trackChange);
+		}
+	}
+
+	private Paragraph getParagraphForPosition(List paragraphs, int position) {
+		int id = paragraphIds[position];
+		if (id == 0) {
+			return null;
+		} else {
+			for (Object o : paragraphs) {
+				Paragraph p = (Paragraph)o;
+				if (p.getId() == id) {
+					return p;
+				}
+			}
+			return null;
 		}
 	}
 
