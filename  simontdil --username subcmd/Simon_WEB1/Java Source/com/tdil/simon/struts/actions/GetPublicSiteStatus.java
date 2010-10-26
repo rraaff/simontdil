@@ -24,7 +24,7 @@ public class GetPublicSiteStatus extends AjaxSimonAction {
 			HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		HashMap<String, String> result = (HashMap<String, String>) basicExecute(request.getParameter("paragraphVersion"), request.getParameter("paragraphNumber"));
-		System.out.println(result);
+//		System.out.println(result);
 		this.writeJsonResponse(result, response);
 		return null;
 	}
@@ -57,7 +57,7 @@ public class GetPublicSiteStatus extends AjaxSimonAction {
 					Paragraph original = DelegateSiteCache.getOriginalParagraph();
 					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
 					result.put("paragraphText", String.valueOf(paragraph.getParagraphText()));
-					result.put("originalText", String.valueOf(original.getParagraphText()));
+					result.put("originalText", original != null ? original.getParagraphText() : "-");
 					result.put("paragraphVersion", String.valueOf(paragraph.getVersionNumber()));
 					result.put("paragraphNumberForDisplay", paragraph.getParagraphNumberForDisplay());
 				}
