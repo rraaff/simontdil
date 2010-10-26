@@ -22,6 +22,10 @@ public class ReferenceDocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHome");
 	}
 	
+	public static List selectNotDeletedReferenceDocumentForModeratorHomeNoLimit() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeNoLimit");
+	}
+	
 	public static List selectAllReferenceDocumentForCategory(Category category) throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocumentsNotDeletedForCategory", category.getId());
 	}

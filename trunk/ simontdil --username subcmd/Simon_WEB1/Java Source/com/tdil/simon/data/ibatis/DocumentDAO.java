@@ -20,12 +20,24 @@ public class DocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocuments");
 	}
 	
+	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsNoLimit");
+	}
+	
 	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHome(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
 		HashMap params = new HashMap();
 		params.put("typeOne", documentTypeOne);
 		params.put("typeTwo", documentTypeTwo);
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypes", params);
 	}
+	
+	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
+		HashMap params = new HashMap();
+		params.put("typeOne", documentTypeOne);
+		params.put("typeTwo", documentTypeTwo);
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit", params);
+	}
+	
 	
 	public static List selectNotDeletedDocumentWithConsolidatedVersions() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDocumentWithConsolidatedVersions");

@@ -37,6 +37,21 @@
    	LIMIT 11
   </select>
   
+  <select id="selectNotDeletedNotPrincipalDocumentsNoLimit" resultClass="Document">
+    select *
+   	from DOCUMENT 
+   	WHERE deleted = 0
+   	AND principal = 0
+   	AND EXISTS (SELECT * 
+   				FROM VERSION 
+   				WHERE VERSION.documentId = DOCUMENT.id 
+   				AND VERSION.deleted = 0
+   				AND VERSION.status = 'CONSOLIDATED')
+   	order by id desc
+  </select>
+  
+  
+  
   <select id="selectNotDeletedNotPrincipalDocumentsUsingTypes" parameterClass="java.util.Map" resultClass="Document">
     select *
    	from DOCUMENT 
@@ -51,6 +66,21 @@
    				AND VERSION.status = 'CONSOLIDATED')
    	order by id desc
    	LIMIT 11
+  </select>
+  
+  <select id="selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit" parameterClass="java.util.Map" resultClass="Document">
+    select *
+   	from DOCUMENT 
+   	WHERE deleted = 0
+   	AND principal = 0
+    and DOCUMENT.typeOne = #typeOne#
+    and DOCUMENT.typeTwo = #typeTwo#
+       	AND EXISTS (SELECT * 
+   				FROM VERSION 
+   				WHERE VERSION.documentId = DOCUMENT.id 
+   				AND VERSION.deleted = 0
+   				AND VERSION.status = 'CONSOLIDATED')
+   	order by id desc
   </select>
   
   <select id="getDocumentUnderWork" resultClass="Document">

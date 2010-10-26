@@ -29,6 +29,7 @@
     <form-bean name="SearchObservationsForm" type="com.tdil.simon.struts.forms.SearchObservationsForm"/>
     <form-bean name="SystemUserABM" type="com.tdil.simon.struts.forms.SystemUserABMForm"/>
     <form-bean name="ListDocumentsForDesign" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="ViewVersionPopup" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -259,6 +260,12 @@
       <forward name="continue" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/getPublicSiteStatus" type="com.tdil.simon.struts.actions.GetPublicSiteStatus" scope="request">
+    </action>
+    <action path="/goToViewVersionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionPopupAction" scope="session">
+      <forward name="continue" path="/viewVersionPopup.jsp"/>
+    </action>
+    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="request">
+      <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

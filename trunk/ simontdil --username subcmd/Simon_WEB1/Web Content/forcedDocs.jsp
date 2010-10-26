@@ -5,8 +5,20 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerDelegateForForcedDocs.jsp" %>
+<jsp:useBean id="delegatePopupBean" scope="session" class="com.tdil.simon.struts.forms.DelegatePopupBean"/>
+<% 
+	delegatePopupBean.setLoggedUser(user);
+	delegatePopupBean.init(); 
+%>
+
 <div id="content" style="height:350px;">
-	Insertar lista de docs según los permisos
+	<% if (delegatePopupBean.getTypeOne() != null) { %>
+		<a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=delegatePopupBean.getTypeOne().getDocumentId()%>"><%=delegatePopupBean.getTypeOne().getDocumentTitle()%></a>
+	<% } %>
+	
+	<% if (delegatePopupBean.getTypeTwo() != null) { %>
+		<a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=delegatePopupBean.getTypeTwo().getDocumentId()%>"><%=delegatePopupBean.getTypeTwo().getDocumentTitle()%></a>
+	<% } %>
 	
 	Documentos Principales
 		<div id="alcincuentaLeft">
@@ -26,11 +38,13 @@
 								<tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
 								</tr>
-								<logic:iterate name="ModeratorHome" property="otherDocumentsList" id="doc" indexId="referenceListIndex"> 
+								<%  int referenceListIndex = 0;
+									for (com.tdil.simon.data.model.Document doc : delegatePopupBean.getOtherDocumentsList()) { %> 
 									<tr> 
-										<td height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="doc" paramProperty="id" paramId="documentID"><bean:write name="doc" property="title" /></html:link></td>
+										<td height="22" class="row<%=referenceListIndex % 2 == 0 ? "ODD" : "EVEN"%>"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=doc.getId()%>"><%=doc.getTitle()%></a></td>
 									</tr>
-								</logic:iterate>
+								<% referenceListIndex = referenceListIndex + 1;
+									} %>
 								<tr>
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
 								</tr>
@@ -55,7 +69,17 @@
 				</tr>
 			</table>
 		</div>
-	Documentos Informativos
+		<table>
+	<%  int iterIndex = 0;
+		for (com.tdil.simon.data.model.ReferenceDocument ref : delegatePopupBean.getReferenceList()) { %>
+		<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
+			<td height="28" align="left"><%=ref.getTitle()%></td>
+			<td align="left"><%=ref.getFileName()%></td>
+			<td><a href="./download.do?action=refdoc&fileId=<%=ref.getId()%>"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+		</tr> 
+	<% iterIndex = iterIndex + 1;
+		} %>
+		</table>
 	
 	
 </div>

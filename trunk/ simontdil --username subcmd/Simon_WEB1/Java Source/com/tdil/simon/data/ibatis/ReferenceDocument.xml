@@ -37,6 +37,15 @@
    	LIMIT 11
   </select>
   
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeNoLimit" resultClass="ReferenceDocument">
+    select *
+   	from REFERENCEDOCUMENT, CATEGORY 
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	order by REFERENCEDOCUMENT.id desc
+  </select>
+  
   <select id="selectAllReferenceDocumentsNotDeletedForCategory" parameterClass="int" resultClass="ReferenceDocument">
     select *
    	from REFERENCEDOCUMENT 

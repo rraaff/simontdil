@@ -10,6 +10,12 @@
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/simon.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
+<%	com.tdil.simon.data.model.SystemUser user = (com.tdil.simon.data.model.SystemUser)session.getAttribute("user");
+	if (user == null) { %>
+	<jsp:forward page="./login.jsp">
+		<jsp:param name="error" value="notlogged"/>
+	</jsp:forward>
+	<% } %>
 <!--[if lte IE 7]>
 <style>
 #menuwrapper, #p7menubar ul a {height: 1%;}
