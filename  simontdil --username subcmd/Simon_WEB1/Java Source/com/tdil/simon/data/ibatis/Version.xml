@@ -174,9 +174,9 @@
  
    <insert id="insertVersion" parameterClass="Version">
     insert into VERSION (
-      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, spanishVersion, deleted
+      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, spanishVersion, designerText, deleted
     ) values (
-      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #spanishVersion#, #deleted#
+      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #spanishVersion#, #designerText#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -194,7 +194,8 @@
 		status = #status#,
 		deleted = #deleted#, 
 		hasDraft = #hasDraft#,
-		commentsEnabled = #commentsEnabled#
+		commentsEnabled = #commentsEnabled#,
+		designerText = #designerText#
     where
       id = #id#
   </update>

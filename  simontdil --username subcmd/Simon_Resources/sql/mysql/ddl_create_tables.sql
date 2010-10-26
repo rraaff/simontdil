@@ -61,6 +61,7 @@ CREATE  TABLE `SIMON`.`VERSION` (
   `deleted` INT NULL ,
   `commentsEnabled` INT NULL ,
   `spanishVersion` INT NULL ,
+  `designerText` MEDIUMTEXT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `document` (`documentId` ASC) );
 
@@ -127,6 +128,12 @@ CREATE  TABLE `SIMON`.`SYSPROPERTIES` (
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 
+CREATE  TABLE `SIMON`.`TRACKCHANGE` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `paragraphId` INT NULL ,
+  `changeText` MEDIUMTEXT NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
 
 INSERT INTO SIMON.COUNTRY(name, host, deleted) VALUES ('Argentina', 1, 0);
 INSERT INTO SIMON.SYSTEMUSER (username, password, name, email, countryId, administrator,moderator,delegate,

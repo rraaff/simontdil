@@ -29,4 +29,5 @@
   <sqlMap resource="com/tdil/simon/data/ibatis/DelegateAudit.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/Category.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/SysProperties.xml"/>
+  <sqlMap resource="com/tdil/simon/data/ibatis/TrackChange.xml"/>
 </sqlMapConfig>

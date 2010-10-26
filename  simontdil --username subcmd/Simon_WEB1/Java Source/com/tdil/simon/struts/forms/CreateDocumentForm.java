@@ -85,6 +85,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private boolean consolidated = false;
 	private String consolidateText;
 	
+	private String designerText;
+	
 	private static List<MonthOption> allMonths;
 	private static List<DayOption> allDays;
 	
@@ -143,24 +145,20 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public List<Paragraph> getAllParagraphNumbers() {
 		List<Paragraph> result = new ArrayList<Paragraph>();
-		if (this.paragraph < Paragraph.INTRODUCTION_LIMIT) {
-			int index = 0;	
-			while(!StringUtils.isEmpty(paragraphTexts[index])) {
-				Paragraph p = new Paragraph();
-				index = index + 1;
-				p.setParagraphNumber(index);
-				result.add(p);
-			}
-		} else {
-			int index = Paragraph.INTRODUCTION_LIMIT;
-			while(!StringUtils.isEmpty(paragraphTexts[index])) {
-				Paragraph p = new Paragraph();
-				index = index + 1;
-				p.setParagraphNumber(index);
-				result.add(p);
-			}
+		int index = 0;	
+		while(!StringUtils.isEmpty(paragraphTexts[index])) {
+			Paragraph p = new Paragraph();
+			index = index + 1;
+			p.setParagraphNumber(index);
+			result.add(p);
 		}
-		
+		index = Paragraph.INTRODUCTION_LIMIT;
+		while(!StringUtils.isEmpty(paragraphTexts[index])) {
+			Paragraph p = new Paragraph();
+			index = index + 1;
+			p.setParagraphNumber(index);
+			result.add(p);
+		}
 		return result;
 	}
 	
@@ -402,16 +400,38 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		// TODO Auto-generated method stub
 		Paragraph paragraph = getParagraphForNumber(paragraphs, paragraphNumber);
 		if (paragraph != null) {
+			String pText = paragraph.getParagraphText(); 
 			paragraph.setParagraphText(text);
 			paragraph.setDeleted(deleted);
 			ParagraphDAO.updateParagraph(paragraph);
+//			TODO esta cosa no anda asi, no va
+//			if (!text.equals(pText)) {
+//				TrackChange trackChange = TrackChangeDAO.getLastVersionForDocument(paragraph.getId());
+//				try {
+//					String diff = ParagraphComparator.compare(RemoveChangesComments.clean(trackChange.getChangeText()), text);
+//					trackChange.setChangeText(RemoveChangesComments.removeHtml(diff));
+//					TrackChangeDAO.updateTrackChange(trackChange);
+//				} catch (TransformerConfigurationException e) {
+//					getLog().error(e.getMessage(), e);
+//				} catch (IOException e) {
+//					getLog().error(e.getMessage(), e);
+//				} catch (SAXException e) {
+//					getLog().error(e.getMessage(), e);
+//				}
+//			}
 		} else {
 			paragraph = new Paragraph();
 			paragraph.setVersionId(this.getVersionId());
 			paragraph.setParagraphNumber(paragraphNumber + 1);
 			paragraph.setParagraphText(text);
 			paragraph.setDeleted(deleted);
-			this.paragraphIds[paragraphNumber] = ParagraphDAO.insertParagraph(paragraph);
+			int parId = ParagraphDAO.insertParagraph(paragraph);
+			this.paragraphIds[paragraphNumber] = parId;
+//			TODO esta cosa asi no anda, hay que buscarle otra solucion
+//			TrackChange trackChange = new TrackChange();
+//			trackChange.setChangeText(text);
+//			trackChange.setParagraphId(parId);
+//			TrackChangeDAO.insertTrackChange(trackChange);
 		}
 	}
 
@@ -461,6 +481,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		version.setDocumentId(this.getDocumentId());
 		version.setName(this.getVersionName());
 		version.setUpToCommentDate(null);
+		version.setDesignerText(this.getDesignerText());
 		if (this.consolidated) {
 			version.setStatus(Version.CONSOLIDATED);
 			version.setDescription(this.getConsolidateText());
@@ -473,7 +494,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 		if (Version.FINAL.equals(this.versionStatus)) {
 			version.setStatus(Version.FINAL);
-			VersionDAO.updateVersionStatus(version);
+			VersionDAO.updateVersion(version);
 			Site site = SiteDAO.getSite(Site.DELEGATE);
 			site.setStatus(Site.NORMAL);
 			site.setDataId(0);
@@ -589,6 +610,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			}
 		}
 		this.versionStatus = version.getStatus();
+		this.designerText = version.getDesignerText();
 		this.title = document.getTitle();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
@@ -781,7 +803,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		if (portuguesVersion != null) {
 			this.versionId = portuguesVersion.getId();
 			this.versionName = portuguesVersion.getName();
+			this.designerText = portuguesVersion.getDesignerText();
 		} else {
+			this.designerText = "";
 			this.versionId = 0;
 			this.versionName = "";
 		}
@@ -828,6 +852,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public boolean isPortugues() {
 		return portugues;
 	}
+	
+	public boolean isPortuguesOrDesigner() {
+		return this.isPortugues() || this.isDesigner();
+	}
 
 	public void setPortugues(boolean portugues) {
 		this.portugues = portugues;
@@ -860,6 +888,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.version = version.getNumber();
 		this.versionName = version.getName();
 		this.versionStatus = version.getStatus();
+		this.designerText = version.getDesignerText();
 		this.title = document.getTitle();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
@@ -887,5 +916,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setDesigner(boolean designer) {
 		this.designer = designer;
+	}
+
+	public String getDesignerText() {
+		return designerText;
+	}
+
+	public void setDesignerText(String designerText) {
+		this.designerText = designerText;
 	}
 }

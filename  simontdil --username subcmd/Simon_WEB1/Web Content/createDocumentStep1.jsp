@@ -108,6 +108,13 @@
 								</logic:equal>
 								</td>
 							</tr>
+							<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
+								<tr>
+									<td colspan="4">
+										<html:textarea name="CreateDocumentForm" property="designerText" styleClass="textfield_effect_area"/><html:errors property="designerText" />
+									</td>
+								</tr>
+							</logic:equal>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
@@ -131,6 +138,20 @@
 		</td>
 	</tr>
 </table>
+<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
+<script type="text/javascript">
+		//<![CDATA[
+			// Replace the <textarea id="editor1"> with an CKEditor instance.
+			var editor = CKEDITOR.replace( 'designerText',
+				{
+					// Defines a simpler toolbar to be used in this sample.
+					// Note that we have added out "MyButton" button here.
+					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+					height:"120", width:"960"
+					
+				});
+</script>
+</logic:equal>
 </html:form>
 </div>
 </html:html>
