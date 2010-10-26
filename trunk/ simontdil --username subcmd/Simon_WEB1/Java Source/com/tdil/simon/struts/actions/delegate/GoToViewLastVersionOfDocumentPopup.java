@@ -1,4 +1,4 @@
-package com.tdil.simon.struts.actions.moderator;
+package com.tdil.simon.struts.actions.delegate;
 
 import java.sql.SQLException;
 
@@ -14,13 +14,16 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
+import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ViewVersionForm;
 import com.tdil.simon.utils.LoggerProvider;
 
-public class GoToViewVersionPopupAction extends SimonAction {
+public class GoToViewLastVersionOfDocumentPopup extends SimonAction {
 
 	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR,
 			UserTypeValidation.DELEGATE };
@@ -30,6 +33,10 @@ public class GoToViewVersionPopupAction extends SimonAction {
 		return permissions;
 	}
 	
+	private static Logger getLog() {
+		return LoggerProvider.getLogger(GoToViewLastVersionOfDocumentPopup.class);
+	}
+
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		SystemUser user = getLoggedUser(request);
@@ -42,32 +49,22 @@ public class GoToViewVersionPopupAction extends SimonAction {
 		}
 		return this.basicExecute(mapping, form, request, response);
 	}
-
+	
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final ViewVersionForm viewVersionForm = (ViewVersionForm) form;
 		viewVersionForm.setUser(this.getLoggedUser(request));
-		final int versionID = Integer.parseInt(request.getParameter("versionID"));
+		final int documentID = Integer.parseInt(request.getParameter("documentID"));
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
-				viewVersionForm.init(versionID);
+				Version version = VersionDAO.getVersionForNegotiation(documentID);
+				viewVersionForm.init(version.getId());
 				DelegateAuditDAO.registerViewVersion(viewVersionForm.getUser(), viewVersionForm.getVersion().getVersion());
 			}
 		});
-//		if (viewVersionForm.isFinal()) {
-//			if (viewVersionForm.hasTranslation()) {
-//				return mapping.findForward("goToFinalVersion");
-//			} else {
-//				viewVersionForm.setShowSpanish(true);
-//				return mapping.findForward("goToFinalVersionSingle");
-//			}
-//		} else {
-			return mapping.findForward("continue");
-//		}
+
+		return mapping.findForward("continue");
 	}
-	
-	private static Logger getLog() {
-		return LoggerProvider.getLogger(GoToViewVersionPopupAction.class);
-	}
+
 }
