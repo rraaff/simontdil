@@ -38,6 +38,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 
 		String image = ImageTagUtil.getName(request);
 		if (image != null && "jumpTo".equals(image)) {
+			createDocumentForm.save();
 			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()) - 1);
 			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 			if (!createDocumentForm.getParagraphHidden()) {
@@ -60,6 +61,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return redirectToFailure(error, request, mapping);
 			} else  {
 				if (createDocumentForm.getParagraph() > 0) {
+					createDocumentForm.save();
 					createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
 					boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 					if (!createDocumentForm.getParagraphHidden()) {
@@ -82,6 +84,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.save();
 				createDocumentForm.setParagraph(createDocumentForm.getParagraph() + 1);
 				boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);
 				if (!createDocumentForm.getParagraphHidden()) {
@@ -122,6 +125,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.save();
 				createDocumentForm.setParagraph(Paragraph.INTRODUCTION_LIMIT);
 				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
 					if (!createDocumentForm.getParagraphHidden()) {
@@ -169,10 +173,12 @@ public class ParagraphsNavigationAction extends SimonAction {
 		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.hide"))) {
 			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = true;
+			createDocumentForm.save();
 			return mapping.findForward("stay");
 		}
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.unhide"))) {
 			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = false;
+			createDocumentForm.save();
 			return mapping.findForward("stay");
 		}
 
@@ -181,6 +187,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.save();
 				createDocumentForm.setParagraph(0);
 				if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
 					if (!createDocumentForm.getParagraphHidden()) {
@@ -200,6 +207,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.save();
 				request.getSession().setAttribute("paragraphNegotiated", "false");
 				return mapping.findForward("modifyDocument");
 			}
@@ -209,6 +217,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
 			} else  {
+				createDocumentForm.save();
 				return mapping.findForward("preview");
 			}
 		}

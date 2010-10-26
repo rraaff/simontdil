@@ -41,10 +41,14 @@ public class ExportVersionAsRTF {
 		buf.append("<head>");
 		buf.append("<title>").append(version.getDocument().getTitle()).append("</title>");
 		buf.append("</head>");
-
 		// generate the body
 		buf.append("<body>");
 		buf.append("<h3>").append(version.getDocument().getTitle()).append("</h3>");
+		String designerText = version.getVersion().getDesignerText();
+		if (designerText == null) {
+			designerText = "";
+		}
+		buf.append("<h4>").append(designerText).append("</h4>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<h4>Preámbulo</h4>");
 		for (Paragraph p : introduction) {
