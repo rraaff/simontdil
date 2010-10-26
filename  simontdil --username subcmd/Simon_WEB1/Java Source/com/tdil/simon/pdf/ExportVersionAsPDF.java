@@ -69,9 +69,9 @@ public class ExportVersionAsPDF {
 		// generate the body
 		buf.append("<body>");
 		buf.append("<table width=\"100%\" height=\"154\" border=\"0\">");
-		buf.append("<TR><TD width=\"310\"><img width=\"310\" height=\"154\" src=\"./images/header/logoCumbresPDFsRTFs.jpg\"></TD>");
-		// buf.append("<TD align=\"center\">") acá va el textito que le agrega el diseñador .append("</TD>");
-		buf.append("<TD width=\"301\"><img width=\"301\" height=\"154\" src=\"./images/header/logoSegibPDFsRTFs.png\"></TD></TR></TABLE>");
+		buf.append("<TR><TD width=\"155\"><img width=\"155\" height=\"77\" src=\"./logoCumbresPDFsRTFs.png\"></TD>");
+		buf.append("<TD align=\"center\">acá va el textito que le agrega el diseñador</TD>");
+		buf.append("<TD width=\"150\"><img width=\"150\" height=\"77\" src=\"./logoSegibPDFsRTFs.png\"></TD></TR></TABLE>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<H2>Preámbulo</H2>");
