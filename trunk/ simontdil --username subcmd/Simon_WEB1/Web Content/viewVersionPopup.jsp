@@ -131,7 +131,7 @@ if ( dw_scrollObj.isSupported() ) {
 </head>
 <body>
 <div id="content" style="height:450px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;">
-<html:form action="/viewVersionAction">
+<html:form action="/viewVersionActionPopup">
 	<div id="alcien" style="height:500px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:400px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">

@@ -142,6 +142,15 @@
       <forward name="downloadPdf" redirect="true" path="/downloadPDF.do"/>
       <forward name="viewSingleVersion" path="/viewFinalVersionSingle.jsp"/>
     </action>
+    <action path="/viewVersionActionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
+      <forward name="goToSearchObservations" path="/goToSearchObservations.st"/>
+      <forward name="editNegotiation" path="/editVersion.st"/>
+      <forward name="downloadRtf" redirect="true" path="/downloadRTF.do"/>
+      <forward name="downloadPdf" redirect="true" path="/downloadPDF.do"/>
+      <forward name="viewSingleVersion" path="/viewFinalVersionSingle.jsp"/>
+    </action>
     <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
       <forward name="continue" path="/delegateHome.jsp"/>
     </action>
@@ -264,7 +273,7 @@
     <action path="/goToViewVersionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionPopupAction" scope="session">
       <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
-    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocumentPopup" scope="request">
+    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocumentPopup" scope="session">
       <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
   </action-mappings>
