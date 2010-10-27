@@ -24,6 +24,7 @@ import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.SiteDAO;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Site;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.database.TransactionProvider;
@@ -44,6 +45,29 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 	@Override
 	protected UserTypeValidation[] getPermissions() {
 		return permissions;
+	}
+	
+	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
+		SystemUser user = getLoggedUser(request);
+		if (user == null) {
+			return mapping.findForward("notLogged");
+		}
+		if (!UserTypeValidation.isValid(user, this.getPermissions())) {
+			getLog().fatal("Invalid action for " + this.getClass().getName() + " user " + user.getName());
+			return mapping.findForward("invalidAction");
+		}
+		final ViewVersionForm viewForm = (ViewVersionForm) form;
+		if (!viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
+			if (!viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
+				if (this.getLoggedUser(request).isDelegate()) {
+					if (Site.IN_NEGOTIATION.equals(Site.getDELEGATE_SITE().getStatus())) {
+						return mapping.findForward("goToDelegateNegotiation");
+					} 
+				} 
+			}
+		}
+		return this.basicExecute(mapping, form, request, response);
 	}
 
 	@Override
@@ -91,6 +115,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("goToSearchObservations");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadPdf"))) {
+			request.getSession().setAttribute("downloadPDF", viewForm);
 			return mapping.findForward("downloadPdf");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.viewSpanishOnly"))) {
@@ -102,6 +127,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("viewSingleVersion");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.downloadRtf"))) {
+			request.getSession().setAttribute("downloadRTF", viewForm);
 			return mapping.findForward("downloadRtf");
 		}
 		if (viewForm.getOperation().equals(ApplicationResources.getMessage("viewVersion.listObservations"))) {
