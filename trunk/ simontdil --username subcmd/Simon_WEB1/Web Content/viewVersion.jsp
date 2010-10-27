@@ -150,7 +150,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<div id="blockTitle1">Documento Principal</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
-						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
+						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></td>
 					</tr>
 					<tr>
