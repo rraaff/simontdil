@@ -16,37 +16,12 @@ div#main2 {
 	# width:100%;
 	width:auto;
 }
-div#scrollbar {
-	display:none;
-}
-div#scrollbar2 {
-	display:none;
+#content .titleDocInModule {
+	font-size: 12px;
+	line-height: 14px;
+	color:#333333;
 }
 </style>
-<script src="scripts/dw_event.js" type="text/javascript"></script>
-<script src="scripts/dw_cookies.js" type="text/javascript"></script>
-<script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
-
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
-<script type="text/javascript">
-function init_dw_Scroll() {
-	var wndo = new dw_scrollObj('main', 'lyr1');
-	wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-	wndo.setUpScrollControls('scrollbar');
-	
-	var wndo = new dw_scrollObj('main2', 'lyr2');
-	wndo.setUpScrollbar("dragBar2", "track2", "v", 1, 1);
-	wndo.setUpScrollControls('scrollbar2');
-}
-
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-}
-</script>
 <jsp:useBean id="delegatePopupBean" scope="session" class="com.tdil.simon.struts.forms.DelegatePopupBean"/>
 <% 
 	delegatePopupBean.setLoggedUser(user);
@@ -115,8 +90,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="100%">
 						<!-- corte tabla template -->
-						<div id="main" style="width:inherit; height:250px;">
-							<div id="lyr1" style="width:inherit; height:240px;">
+						<!--div id="main" style="width:inherit; height:250px;">
+							<div id="lyr1" style="width:inherit; height:240px;"-->
+							<div id="main" style="background-color:#eeeeee; width:98%; height:240px; overflow:scroll;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<%  int referenceListIndex = 0;
 										for (com.tdil.simon.data.model.Document doc : delegatePopupBean.getOtherDocumentsList()) { %> 
@@ -127,16 +103,16 @@ if ( dw_scrollObj.isSupported() ) {
 										} %>
 								</table>
 							</div>
-						</div>
+						<!-- /div -->
 					</td>
 					<td width="30">
-						<div id="scrollbar" style="width:20px; height:240px; float:right;">
+						<!--div id="scrollbar" style="width:20px; height:240px; float:right;">
 							<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 							<div id="track" style="height:216px;">
 								<div id="dragBar"></div>
 							</div>
 							<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-						</div>
+						</div-->
 					<!-- corte tabla template -->
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
@@ -161,8 +137,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="100%">
 						<!-- corte tabla template -->
-						<div id="main2" style="width:inherit; height:250px;">
-							<div id="lyr2" style="width:inherit; height:240px;">
+						<!--div id="main2" style="width:inherit; height:250px;">
+							<div id="lyr2" style="width:inherit; height:240px;"-->
+							<div id="main2" style="background-color:#eeeeee; width:98%; height:240px; overflow:scroll; position:relative;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<%  int iterIndex = 0;
 										for (com.tdil.simon.data.model.ReferenceDocument ref : delegatePopupBean.getReferenceList()) { %>
@@ -175,17 +152,17 @@ if ( dw_scrollObj.isSupported() ) {
 										} %>
 								</table>
 							</div>
-						</div>
+						<!-- /div -->
 					<!-- corte tabla template -->
 					</td>
 					<td width="30">
-						<div id="scrollbar2" style="width:20px; height:240px; float:right;">
+						<!--div id="scrollbar2" style="width:20px; height:240px; float:right;">
 							<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 							<div id="track2" style="height:216px;">
 								<div id="dragBar2"></div>
 							</div>
 							<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-						</div>
+						</div-->
 					<!-- corte tabla template -->
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>

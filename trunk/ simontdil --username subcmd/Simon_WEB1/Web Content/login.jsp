@@ -64,7 +64,7 @@
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
-							<tr>
+							<!--tr>
 								<td colspan="3" align="center">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
 							</tr>
 							<tr>
@@ -77,7 +77,7 @@
 											<jsp:param name="_operation" value="login.requestPassword" />
 									</jsp:include>
 								</td>
-							</tr>
+							</tr-->
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
