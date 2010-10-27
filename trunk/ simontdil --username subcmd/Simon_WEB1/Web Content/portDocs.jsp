@@ -142,6 +142,26 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="28" align="left">Projecto de Or&ccedil;amento 2011</td>
 										<td><a href="other/ANEXOIV DIVPRE11-SEGIB-extraCNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Calend&aacute;rio geral de reuni&otilde;es da Confer&ecirc;ncia Ibero-Americana 2010</td>
+										<td><a href="other/CALCONF-SEGIB-extraCNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Relat&oacute;rio de Actividades da Secretaria-Geral Ibero-Americana - 1 de Janeiro a 15 de Setembro</td>
+										<td><a href="other/Inf-Actividades PORT.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Processo de ratifica&ccedil;&atilde;o do Acordo de Santa Cruz de la Sierra</td>
+										<td><a href="other/LISRAT-SEGIB-extraCNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Manual Operativo da Coopera&ccedil;&atilde;o Ibero-Americana</td>
+										<td><a href="other/GUIA-MANUAL-OPERATIVO-PORT.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Manual Operativo</td>
+										<td><a href="other/MANUAL-OPERATIVO-PORT.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
 									<tr>
 										<td colspan="2" height="25"><img src="images/null.gif" width="1" height="25"></td>
 									</tr>
