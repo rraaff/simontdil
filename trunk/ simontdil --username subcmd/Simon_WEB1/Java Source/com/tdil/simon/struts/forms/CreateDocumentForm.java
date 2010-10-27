@@ -16,6 +16,7 @@ import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
@@ -736,6 +737,39 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public void setGoToParagraph(String goToParagraph) {
 		this.goToParagraph = goToParagraph;
 	}
+	
+	public void deleteCurrent() throws SQLException, ValidationException {
+		TransactionProvider.executeInTransaction(new TransactionalAction() {
+			public void executeInTransaction() throws SQLException, ValidationException {
+				CreateDocumentForm createDocumentForm = CreateDocumentForm.this;
+				// No fue grabado, muevo el resto y salvo
+				
+				if (createDocumentForm.paragraphIds[createDocumentForm.getParagraph()] != 0) {
+					ParagraphDAO.deleteParagraph(createDocumentForm.paragraphIds[createDocumentForm.getParagraph()]);
+				}
+				int i = createDocumentForm.getParagraph();
+				for (; !StringUtils.isEmpty(createDocumentForm.paragraphTexts[i]) && i < 1000; i = i + 1) {
+					createDocumentForm.paragraphIds[i] = createDocumentForm.paragraphIds[i + 1];
+					createDocumentForm.paragraphTexts[i] = createDocumentForm.paragraphTexts[i + 1];
+					createDocumentForm.paragraphStatus[i] = createDocumentForm.paragraphStatus[i + 1];
+					Paragraph toModify = ParagraphDAO.getParagraph(createDocumentForm.paragraphIds[i]);
+					if (toModify != null) {
+						toModify.setParagraphNumber(toModify.getParagraphNumber() - 1);
+						ParagraphDAO.updateParagraph(toModify);
+					}
+				}
+				if (StringUtils.isEmpty(createDocumentForm.paragraphTexts[createDocumentForm.getParagraph()])) {
+					if (createDocumentForm.getParagraph() > 500) {
+						createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
+					} else {
+						if (createDocumentForm.getParagraph() < 500 && createDocumentForm.getParagraph() > 0) {
+							createDocumentForm.setParagraph(createDocumentForm.getParagraph() - 1);
+						}
+					}
+				}
+			}
+		});
+	}
 
 	public void addBefore() {
 		ArrayList<String> move = new ArrayList<String>();
@@ -850,6 +884,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public boolean getCanAddParagraph() {
+		return !this.isPortugues() && !this.isDesigner();
+	}
+	
+	public boolean getCanDeleteParagraph() {
 		return !this.isPortugues() && !this.isDesigner();
 	}
 	

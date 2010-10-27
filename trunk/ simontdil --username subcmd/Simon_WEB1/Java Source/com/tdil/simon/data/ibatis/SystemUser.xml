@@ -195,7 +195,7 @@
 		select
 		SYSTEMUSER.*
 		from SYSTEMUSER, COUNTRY
-		where SYSTEMUSER.username = #username#
+		where UPPER(SYSTEMUSER.username) = #username#
 		and SYSTEMUSER.deleted = 0
 		and SYSTEMUSER.countryId = COUNTRY.id
 		and COUNTRY.deleted = 0
