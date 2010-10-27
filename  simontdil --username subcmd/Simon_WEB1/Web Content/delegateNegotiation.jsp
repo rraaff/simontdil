@@ -5,43 +5,6 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
-<style type="text/css">
-/* hide from incapable browsers */
-div#sizer { display:none; }  
-/* breathing room between images in sizer */
-div#sizer img { margin-right:3px; }
-
-div#main {
-	background-color:#eee;
-	* width:100%;
-	# width:100%;
-	width:auto;
-	height:500px;
-}
-
-#content #negotiationArea #lastParagraphText {
-	background-color: #F3F3F3;
-	width: auto;
-	display: block;
-	text-align: left;
-	height: 500px;
-}
-
-#content #negotiationArea {
-	* width:100%;
-	# width:100%;
-	width:auto;
-}
-
-div#scrollbar {
-	display:none;
-}
-
-#content #signArea {
-	display: none;
-}
-</style>
-<script src="scripts/popup.js" type="text/javascript"></script>
 <script src="scripts/dw_event.js" type="text/javascript"></script>
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
 <script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
@@ -60,29 +23,49 @@ dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
 
 dw_Event.add( window, 'load', dw_fontSizerDX.init );
 
-function init_dw_Scroll() {
-	var wndo = new dw_scrollObj('main', 'lyr1');
-	wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-	wndo.setUpScrollControls('scrollbar');
-	
-	var wndo = new dw_scrollObj('negotiationArea', 'lastParagraphText');
-	wndo.setUpScrollbar("dragBar2", "track2", "v", 1, 1);
-	wndo.setUpScrollControls('scrollbar2');
+/*function init_dw_Scroll() {
+    var wndo = new dw_scrollObj('main', 'lyr1');
+    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
+    wndo.setUpScrollControls('scrollbar');
 }
 
 // if code supported, link in the style sheet and call the init function onload
 if ( dw_scrollObj.isSupported() ) {
     dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
     dw_Event.add( window, 'load', init_dw_Scroll);
+	//dw_Event.add( window, 'resize', init_dw_Scroll);
+}*/
+</script>
+<style type="text/css">
+/* hide from incapable browsers */
+div#sizer {
+	display:none;
+	position: relative;
+	float: right;
+	padding-top: 10px;
+	padding-right: 10px;
+}  
+/* breathing room between images in sizer */
+div#sizer img { margin-right:3px; }
+
+div#scrollbar {
+	display:none;
+}
+div#main{
+	background-color:#eee;
+	width:inherit;
+	height:500px;
 }
 
-
-/* +++++++++ abro el popup ++++++++++ */
+#content #signArea {
+	display: none;
+}
+</style>
+<script src="scripts/popup.js" type="text/javascript"></script>
+<script type="text/javascript">
 function openDocs(){
 	openPopupWindow('forcedDocs.jsp', 1024, 550, 0, 0, false, true, 'Documentos', false);
 }
-
-
 </script>
 <html:html>
 <script type="text/javascript">
@@ -220,7 +203,7 @@ function openDocs(){
 </script>
 <div id="content">
 	<div id="alcien" style="height:560px; padding-top:10px;">
-		<div id="alcincuentaLeft" style="height:560px;">
+		<div id="alcincuentaLeft" style="width:47%; height:560px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -232,18 +215,19 @@ function openDocs(){
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="100%" height="480" align="left" valign="top">
 					<!-- corte tabla template -->
-						<div id="main">
-							<div id="lyr1" style="width:auto; height:500px;">
+						<!--div id="main">
+							<div id="lyr1" -->
+							<div id="main" style="background-color:#eeeeee; width:inherit; height:490px; overflow:scroll;">
 								<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 								<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
 									<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 								</logic:iterate>
 							</div>
-						</div>
+						<!--/div-->
 					<!-- corte tabla template --></td>
 					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 					<td width="30" align="right">
-					<div id="scrollbar" style="width:20px; height:480px; float:right;">
+					<div id="scrollbar" style="width:20px; height:480px;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 						<div id="track" style="height:456px;">
 							<div id="dragBar"></div>
@@ -267,7 +251,7 @@ function openDocs(){
 				</tr>
 			</table>
 		</div>
-		<div id="alcincuentaRight" style="height:500px;">
+		<div id="alcincuentaRight" style="width:47%; height:500px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -285,18 +269,18 @@ function openDocs(){
 							</tr>
 							<tr>
 								<td width="98%" valign="top">
-								<div id="negotiationArea" style="width:100%; height:490px; text-align:left;">
+								<div id="negotiationArea" style="background-color:#eeeeee; width:inherit; height:490px; overflow:scroll;">
 									<div id="lastParagraphText" style="width:100%; height:500px;">  -  </div>
 								</div>
 								</td>
 								<td width="30" align="right">
-								<div id="scrollbar2" style="width:20px; height:480px; float:right;">
+								<!--div id="scrollbar2" style="width:20px; height:480px; float:right;">
 									<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 									<div id="track2" style="height:456px;">
 										<div id="dragBar2"></div>
 									</div>
 									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-								</div></td>
+								</div--></td>
 							</tr>
 							<% if (user.isCanProposeParagraph()) { %>
 							<!--tr>

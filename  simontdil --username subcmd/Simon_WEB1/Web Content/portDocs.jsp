@@ -162,6 +162,10 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="28" align="left">Manual Operativo</td>
 										<td><a href="other/MANUAL-OPERATIVO-PORT.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Reuni&otilde;es Ministeriais Sectoriais 2010</td>
+										<td><a href="other/Reunioes-Ministeriais-Sectoriais-2010.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
 									<tr>
 										<td colspan="2" height="25"><img src="images/null.gif" width="1" height="25"></td>
 									</tr>

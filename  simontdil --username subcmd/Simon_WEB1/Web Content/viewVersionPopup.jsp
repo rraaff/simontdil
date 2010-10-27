@@ -100,9 +100,6 @@ lyr1{
 <script src="scripts/dw_cookies.js" type="text/javascript"></script>
 <script src="scripts/dw_sizerdx.js" type="text/javascript"></script>
 
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
 <script type="text/javascript">
 // setDefaults arguments: size unit, default size, minimum, maximum
 // optional array of elements or selectors to apply these defaults to
@@ -114,27 +111,14 @@ dw_fontSizerDX.set(18, 12, 36, ['div#main h2'] );
 
 dw_Event.add( window, 'load', dw_fontSizerDX.init );
 
-function init_dw_Scroll() {
-    var wndo = new dw_scrollObj('main', 'lyr1');
-    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-    wndo.setUpScrollControls('scrollbar');
-}
-
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-	dw_Event.add( window, 'resize', init_dw_Scroll);
-}
-
 </script>
 </head>
 <body>
-<div id="content" style="height:450px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;">
+<div id="content" style="height:530px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;">
 <html:form action="/viewVersionActionPopup">
-	<div id="alcien" style="height:500px; padding-top:20px;">
-		<div id="alcincuentaLeft" style="width:24%; height:400px;">
-			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
+	<div id="alcien" style="height:510px; padding-top:20px;">
+		<div id="alcincuentaLeft" style="width:24%; height:510px;">
+			<div id="mainDocContainer" style="height:470px; margin-top:13px;">
 				<div id="blockTitle1">Documento Principal</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
@@ -164,93 +148,34 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 						</td>
 					</tr>
-					<!-- FIN: Recupero versión 197 :: Modificada 
-					<tr>
-						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersionPopup" property="version.version.limitObservationsString" /></td>
-					</tr>-->
-					<tr>
-						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3" align="center"><html:submit property="operation">
-											<bean:message key="viewVersion.downloadPdf"/>
-										</html:submit></td>
-					</tr>
-					<tr>
-						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3" align="center"><html:submit property="operation">
-											<bean:message key="viewVersion.downloadRtf"/>
-										</html:submit></td>
-					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><a href="./forcedDocs.jsp" ><img src="images/buttons/volver.png" border="0"/></a></td>
 					</tr>
 				</table>
 			</div>
-			<!-- div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2">Acciones disponibles</div>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td align="center">
-							<!--table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
-									<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton">Volver</a></td>
-									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
-								</tr>
-							</table ->
-					<a href="./forcedDocs.jsp" ><img src="images/buttons/volver.png" border="0"/></a>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center">
-							<html:submit property="operation">
-								<bean:message key="viewVersion.searchObservations"/>
-							</html:submit>							</td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center">
-							<html:submit property="operation">
-								<bean:message key="viewVersion.listObservations"/>
-							</html:submit>							</td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-				</table>
-			</div-->
 		</div>
-		
 		<div id="alcincuentaRight" style="width:70%; border:1px solid #c6c6c6;">
 			<div id="blockTitle1">Documento</div>
 			<div>
-				<div id="main" style="height:430px;">
-					<div id="lyr1" style="height:430px;">
+				<!-- div id="main" style="height:430px;">
+					<div id="lyr1" style="height:430px;"-->
 					<!-- div id="documentoCompleto" -->
+					<div id="main" style="background-color:#eeeeee; width:660px; height:422px; overflow:scroll;">
 						<p class="article"><bean:write name="ViewVersionPopup" property="version.document.introduction" /></p>
 						<logic:iterate name="ViewVersionPopup" property="version.paragraphs" id="paragraph"> 
 								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 						</logic:iterate>
 					</div>
-				</div>
-				<div id="scrollbar" style="width:20px; height:440px; float:right;">
+					<!--/div>
+				</div-->
+				<!--div id="scrollbar" style="width:20px; height:440px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 					<div id="track" style="height:416px;">
 						<div id="dragBar"></div>
 					</div>
 					<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-				</div>
+				</div -->
 			</div>
 			<div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 		</div>
