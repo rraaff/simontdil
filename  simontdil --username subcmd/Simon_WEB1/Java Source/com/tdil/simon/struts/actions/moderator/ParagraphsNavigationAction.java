@@ -181,6 +181,18 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return mapping.findForward("stay");
 			}
 		}
+		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.delete"))) {
+			createDocumentForm.deleteCurrent();
+			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
+				TransactionProvider.executeInTransaction(new TransactionalAction() {
+					public void executeInTransaction() throws SQLException, ValidationException {
+						NegotiationUtils.updateDelegateSiteParagraph(createDocumentForm.getCurrentParagraphId());
+					}
+				});
+				DelegateSiteCache.refresh();
+			}
+			return mapping.findForward("stay");
+		}
 		
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.addAfter"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);

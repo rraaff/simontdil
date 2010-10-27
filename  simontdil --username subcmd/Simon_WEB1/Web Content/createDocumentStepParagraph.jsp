@@ -202,17 +202,18 @@
 								</logic:equal>
 							</logic:notEqual>
 							
-							<!-- Boton Hide/Unhide -->
-							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
-								<html:submit property="operation" disabled="true">
-									<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
-								</html:submit>
-							</logic:equal>
-							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
+							<!-- Boton delete -->
+							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="true">
 								<html:submit property="operation">
-									<bean:write name="CreateDocumentForm" property="hideOrUnhide" />
+									<bean:message key="createDocument.paragraphs.delete"/>
 								</html:submit>
 							</logic:equal>
+							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="false">
+								<html:submit property="operation" disabled="true">
+									<bean:message key="createDocument.paragraphs.delete"/>
+								</html:submit>
+							</logic:equal>
+							
 							</td>
 						</tr>
 						<tr>

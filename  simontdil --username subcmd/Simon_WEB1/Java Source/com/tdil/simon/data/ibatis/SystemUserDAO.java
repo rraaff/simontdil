@@ -67,7 +67,7 @@ public class SystemUserDAO {
 	}
 
 	public static SystemUser getUserForLogin(String userName) throws SQLException {
-		return (SystemUser) IBatisManager.sqlMapper.queryForObject("selectUserByUsernameForLogin", userName);
+		return (SystemUser) IBatisManager.sqlMapper.queryForObject("selectUserByUsernameForLogin", userName.toUpperCase());
 	}
 
 	public static void insertUser(SystemUser systemUser) throws SQLException {

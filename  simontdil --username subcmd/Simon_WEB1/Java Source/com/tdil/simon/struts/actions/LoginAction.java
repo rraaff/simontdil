@@ -80,20 +80,24 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 		if (exists == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
-		if (exists.isTemporaryPassword()) {
-			if (exists.getPassword().equals(loginform.getPassword())) {
-				loginform.setRedirectToChangePassword(true);
-				return exists;
-			} else {
-				throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
-			}
-		}
-		if (!exists.getPassword().equals(CryptoUtils.getHashedValue(loginform.getPassword()))) {
+		if (!loginform.getUsername().toUpperCase().equals(loginform.getPassword().toUpperCase())) {
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
-		if (exists.isDelegate()) {
-			DelegateAuditDAO.registerAction(exists.getId(), exists.getCountryId(), exists.getId(), DelegateAudit.LOGIN);
-		}
+// 		TODO arreglarlo
+//		if (exists.isTemporaryPassword()) {
+//			if (exists.getPassword().equals(loginform.getPassword())) {
+//				loginform.setRedirectToChangePassword(true);
+//				return exists;
+//			} else {
+//				throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
+//			}
+//		}
+//		if (!exists.getPassword().equals(CryptoUtils.getHashedValue(loginform.getPassword()))) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
+//		}
+//		if (exists.isDelegate()) {
+//			DelegateAuditDAO.registerAction(exists.getId(), exists.getCountryId(), exists.getId(), DelegateAudit.LOGIN);
+//		}
 		loginform.init(exists);
 		return exists;
 	}

@@ -67,5 +67,9 @@
     where
       id = #id#
   </update>
+  
+  <delete id="deleteParagraph" parameterClass="int">
+  	delete FROM PARAGRAPH where id = #id#
+  </delete>
 
 </sqlMap>

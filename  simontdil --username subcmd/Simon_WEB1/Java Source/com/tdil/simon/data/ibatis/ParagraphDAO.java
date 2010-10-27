@@ -48,4 +48,8 @@ public class ParagraphDAO {
 			throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteParagraph", Paragraph);
 	}
+
+	public static void deleteParagraph(int id) throws SQLException {
+		IBatisManager.sqlMapper.delete("deleteParagraph", id);
+	}
 }
