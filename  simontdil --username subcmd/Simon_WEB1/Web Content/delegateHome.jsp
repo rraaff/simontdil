@@ -31,7 +31,7 @@
 </script>
 <div id="content">
 	<div id="alcien" style="height:200px; padding-top:20px;">
-		<div id="alcincuentaLeft" style="height:200px;">
+		<div id="alcincuentaLeft" style="width:45%; height:200px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
@@ -72,7 +72,7 @@
 				</tr>
 			</table>
 		</div>
-		<div id="alcincuentaRight" style="height:200px;">
+		<div id="alcincuentaRight" style="width:45%; height:200px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td width="10" height="19" background="images/interfaces/topLeftTitleDocB.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -116,7 +116,7 @@
 		</div>
 	</div>
 	<div id="alcien">
-		<div id="alcincuentaLeft">
+		<div id="alcincuentaLeft" style="width:45%;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -126,9 +126,9 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="100%" valign="top">
+					<td height="250" valign="top">
 						<!-- corte tabla template -->
-						<div id="contentDocumentoSecundarios">
+						<div id="contentDocumentoSecundarios" style="height:260px; overflow:scroll;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
@@ -138,9 +138,9 @@
 										<td height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="doc" paramProperty="id" paramId="documentID"><bean:write name="doc" property="title" /></html:link></td>
 									</tr>
 								</logic:iterate>
-								<tr>
+								<!--tr>
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
-								</tr>
+								</tr-->
 							</table>
 						</div>
 						<!-- corte tabla template -->
@@ -162,7 +162,7 @@
 				</tr>
 			</table>
 		</div>
-		<div id="alcincuentaRight">
+		<div id="alcincuentaRight" style="width:45%;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
@@ -172,21 +172,21 @@
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="100%" valign="top">
+					<td height="250" valign="top">
 						<!-- corte tabla template -->
-						<div id="contentDocumentoSecundarios">
+						<div id="contentDocumentoSecundarios" style="height:260px; overflow:scroll;">
 							<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-								<tr> 
+								<!--tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
-								</tr>
+								</tr-->
 								<logic:iterate name="ModeratorHome" property="referenceList" id="ref" indexId="referenceListIndex"> 
 									<tr> 
 										<td height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
 									</tr>
 								</logic:iterate>
-								<tr> 
+								<!--tr> 
 									<td height="15"><img src="images/null.gif" width="1" height="15"></td>
-								</tr>
+								</tr-->
 							</table>
 						</div>
 						<!-- corte tabla template -->
