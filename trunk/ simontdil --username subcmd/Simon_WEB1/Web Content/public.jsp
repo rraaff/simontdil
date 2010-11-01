@@ -37,32 +37,8 @@
 	font-size: 16px;
 	line-height: 20px;	
 }
-div#scrollbar {
-	display:none;
-}
-div#main{
-	width:auto;
-	height:420px;
-}
 </style>
-<script src="scripts/dw_event.js" type="text/javascript"></script>
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
-<script type="text/javascript">
-function init_dw_Scroll() {
-    var wndo = new dw_scrollObj('main', 'lyr1');
-    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-    wndo.setUpScrollControls('scrollbar');
-}
 
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-	dw_Event.add( window, 'resize', init_dw_Scroll);
-}
-</script>
 <script type="text/javascript">
 
 	var intro = "abcdefghijklmnopqrstuvwxyz";
@@ -164,7 +140,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="3" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo Original</div></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo Original</div></td>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 						</tr>
 						<tr>
@@ -172,8 +148,9 @@ if ( dw_scrollObj.isSupported() ) {
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="100%" height="320" align="left" valign="top">
 							<!-- corte tabla template -->
-								<div id="main" style="width:100%; height:320px;">
-									<div id="lyr1" style="width:100%; height:320px;">
+								<div id="main1" style="background-color:#eeeeee; width:100%; height:340px; overflow:scroll;">
+								<!--div id="main" style="width:100%; height:320px;">
+									<div id="lyr1" style="width:100%; height:320px;"-->
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<tr>
 											<td id="originalParagraph">
@@ -189,20 +166,20 @@ if ( dw_scrollObj.isSupported() ) {
 								</div>
 							<!-- corte tabla template --></td>
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td width="30" align="right">
+							<!--td width="30" align="right">
 								<div id="scrollbar" style="height:350px;">
 									<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 									<div id="track" style="height:326px;">
 										<div id="dragBar"></div>
 									</div>
 									<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-								</div></td>
+								</div></td-->
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 						</tr>
 						<tr>
 							<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-							<td colspan="3" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+							<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 							<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 						</tr>
 					</table>
@@ -216,7 +193,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="3" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo en Negociaci&oacute;n</div></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo en Negociaci&oacute;n</div></td>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 						</tr>
 						<tr>
@@ -224,8 +201,9 @@ if ( dw_scrollObj.isSupported() ) {
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="100%" height="320" align="left" valign="top">
 							<!-- corte tabla template -->
-								<div id="negotiationArea" style="width:100%; height:350px;">
-									<div id="lyr2" style="width:100%; height:326px;">
+								<div id="main" style="background-color:#eeeeee; width:100%; height:340px; overflow:scroll;">
+								<!--div id="negotiationArea" style="width:100%; height:350px;">
+									<div id="lyr2" style="width:100%; height:326px;"-->
 										<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
 											<tr>
 												<td id="negotiatedParagraph">
@@ -241,20 +219,20 @@ if ( dw_scrollObj.isSupported() ) {
 								</div>
 							<!-- corte tabla template --></td>
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td width="30" align="right">
+							<!--td width="30" align="right">
 								<div id="scrollbar2" style="width:20px; height:350px; float:right;">
 									<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 									<div id="track2" style="height:326px;">
 										<div id="dragBar2"></div>
 									</div>
 									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-								</div></td>
+								</div></td-->
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 						</tr>
 						<tr>
 							<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-							<td colspan="3" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+							<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 							<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 						</tr>
 					</table>
