@@ -269,7 +269,7 @@
 				{
 					// Defines a simpler toolbar to be used in this sample.
 					// Note that we have added out "MyButton" button here.
-					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor'],['simonflags']],
 					height:"220", width:"960"
 					
 				});

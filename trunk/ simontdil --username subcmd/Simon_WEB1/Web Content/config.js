@@ -13,4 +13,6 @@ CKEDITOR.editorConfig = function( config )
 	config.autoGrow_minHeight = 100;
 	config.resize_minHeight = 100;
 	config.forcePasteAsPlainText = true;
+	config.extraPlugins = 'simonflags';
+	config.simonflags_path = 'plugins/simonflags/images/'
 };
