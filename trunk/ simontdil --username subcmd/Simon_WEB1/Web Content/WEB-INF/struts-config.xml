@@ -276,6 +276,8 @@
     <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocumentPopup" scope="session">
       <forward name="continue" path="/viewVersionPopup.jsp"/>
     </action>
+    <action path="/moveToParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.MoveToParagraphAction" scope="session">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>

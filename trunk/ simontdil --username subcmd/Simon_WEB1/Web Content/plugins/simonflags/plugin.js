@@ -1,6 +1,5 @@
 /*
-Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.html or http://ckeditor.com/license
+Marcos Godoy
 */
 
 CKEDITOR.plugins.add( 'simonflags',
@@ -77,7 +76,7 @@ CKEDITOR.config.simonflags_images = [
  */
 CKEDITOR.config.simonflags_descriptions =
 	[
-		'argentina', 'brazil', 'colombia', 'españa'
+		'ARGENTINA', 'BRAZIL', 'COLOMBIA', 'ESPAÑA'
 	];
 
 /**
