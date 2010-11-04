@@ -264,12 +264,13 @@
 	</div>
 <script type="text/javascript">
 		//<![CDATA[
+			var moveToParagraphUrl = '<html:rewrite page="/moveToParagraph.st"/>';
 			// Replace the <textarea id="editor1"> with an CKEditor instance.
 			var editor = CKEDITOR.replace( 'paragraphText',
 				{
 					// Defines a simpler toolbar to be used in this sample.
 					// Note that we have added out "MyButton" button here.
-					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor'],['simonflags']],
+					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor'],['simonflags','moveto']],
 					height:"220", width:"960"
 					
 				});

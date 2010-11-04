@@ -1,6 +1,5 @@
 /*
-Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
-For licensing, see LICENSE.html or http://ckeditor.com/license
+Marcos Godoy
 */
 
 CKEDITOR.dialog.add( 'simonflags', function( editor )
@@ -39,10 +38,9 @@ CKEDITOR.dialog.add( 'simonflags', function( editor )
 					alt : title
 				}
 			});
-
-		editor.insertHtml( '(' + title  + '&nbsp;');
+		editor.insertHtml( '(');
 		editor.insertElement( img );
-		editor.insertHtml( '&nbsp;sugiere)&nbsp');
+		editor.insertHtml( '&nbsp;' + title + '&nbsp;-&nbsp;)');
 		dialog.hide();
 		evt.data.preventDefault();
 	};
