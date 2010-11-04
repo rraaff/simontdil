@@ -91,6 +91,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private static List<MonthOption> allMonths;
 	private static List<DayOption> allDays;
 	
+	private String destination;
+	private String append;
+	private String newParagraphText;
+	
 	static {
 		allMonths = new ArrayList<MonthOption>();
 		allMonths.add(new MonthOption("1", "Enero"));
@@ -978,5 +982,67 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setDesignerText(String designerText) {
 		this.designerText = designerText;
+	}
+
+	public String getDestination() {
+		return destination;
+	}
+
+	public void setDestination(String destination) {
+		this.destination = destination;
+	}
+
+	public String getAppend() {
+		return append;
+	}
+
+	public void setAppend(String append) {
+		this.append = append;
+	}
+
+	public String getNewParagraphText() {
+		return newParagraphText;
+	}
+
+	public void setNewParagraphText(String newParagraphText) {
+		this.newParagraphText = newParagraphText;
+	}
+
+	public String performMove() throws SQLException, ValidationException {
+		String result = Paragraph.GetParagraphNumberForDisplay(this.getParagraph());
+		int dest = Paragraph.extractParagraphNunmberFromDisplay(this.destination);
+		// if -1 not recognized destination
+		boolean append = Boolean.valueOf(this.append);
+		if (dest < this.getParagraph() && !append) {
+			result = Paragraph.GetParagraphNumberForDisplay(this.getParagraph() + 1);
+		}
+		if (append) {
+			this.paragraphTexts[dest] = this.paragraphTexts[dest] + this.getNewParagraphText();
+		} else {
+			int upperLimit = getLastParagraph(dest);
+			for (; upperLimit >= dest; upperLimit = upperLimit - 1) {
+				this.paragraphTexts[upperLimit + 1] = this.paragraphTexts[upperLimit];
+				this.paragraphStatus[upperLimit + 1] = this.paragraphStatus[upperLimit];
+				this.paragraphIds[upperLimit + 1] = this.paragraphIds[upperLimit];
+			}
+			this.paragraphTexts[dest] = this.getNewParagraphText();
+			this.paragraphStatus[dest] = false;
+			this.paragraphIds[dest] = 0;
+		}
+		executeInTransaction(this);
+		
+		return result;
+	}
+
+	private int getLastParagraph(int dest) {
+		int i = dest; 
+		for (; i < Paragraph.PARAGRAPH_LIMIT && !StringUtils.isEmpty(paragraphTexts[i]); i = i + 1) {
+			
+		}
+		if (i == Paragraph.PARAGRAPH_LIMIT) {
+			return -1;
+		} else {
+			return i;
+		}
 	}
 }

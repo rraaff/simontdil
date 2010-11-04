@@ -5,6 +5,7 @@ import com.tdil.simon.struts.ApplicationResources;
 public class Paragraph extends PersistentObject {
 
 	public static final int INTRODUCTION_LIMIT = 500;
+	public static final int PARAGRAPH_LIMIT = 1000;
 	
 	private int versionId;
 	private int paragraphNumber;
@@ -19,6 +20,24 @@ public class Paragraph extends PersistentObject {
 	}
 	public void setVersionId(int versionId) {
 		this.versionId = versionId;
+	}
+	
+	public static int extractParagraphNunmberFromDisplay(String destination) {
+		try {
+			// if number
+			int dest = Integer.valueOf(destination);
+			if (dest > INTRODUCTION_LIMIT * 2) {
+				return -1;
+			}
+			return dest - 1;
+		} catch (Exception e) {
+			for (int i = 0; i < INTRODUCTION_LIMIT; i++) {
+				if (GetParagraphNumberForDisplay(i).equals(destination)) {
+					return i;
+				}
+			}
+			return -1;
+		}
 	}
 	
 	public String getParagraphNumberForDiplayAndDiscriminator() {

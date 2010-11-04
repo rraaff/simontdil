@@ -30,9 +30,9 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
-		String destination = request.getParameter("destination");
-		String append = request.getParameter("append");
-		String newParagraphText = request.getParameter("newParagraphText");
+		createDocumentForm.setDestination(request.getParameter("destination"));
+		createDocumentForm.setAppend(request.getParameter("append"));
+		createDocumentForm.setNewParagraphText(request.getParameter("newParagraphText"));
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, createDocumentForm);
 		//JSONObject json = JSONObject.fromObject(result);
 		this.writeJsonResponse(result, response);
@@ -42,7 +42,9 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		HashMap<String, String> result = new HashMap<String, String>();
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
-		
+		// TODO validaciones y retornar error
+		String actualParagraph = createDocumentForm.performMove();
+		// TODO retornar nuevo numero de parrafo actual si aplica
 		result.put("result", "OK");
 		return result;
 	}
