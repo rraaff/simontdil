@@ -1010,11 +1010,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public String performMove() throws SQLException, ValidationException {
 		String result = Paragraph.GetParagraphNumberForDisplay(this.getParagraph());
-		int dest = Paragraph.extractParagraphNunmberFromDisplay(this.destination);
+		int dest = Paragraph.extractParagraphNumberFromDisplay(this.destination);
 		// if -1 not recognized destination
 		boolean append = Boolean.valueOf(this.append);
 		if (dest < this.getParagraph() && !append) {
 			result = Paragraph.GetParagraphNumberForDisplay(this.getParagraph() + 1);
+			setParagraph(this.getParagraph() + 1);
 		}
 		if (append) {
 			this.paragraphTexts[dest] = this.paragraphTexts[dest] + this.getNewParagraphText();
@@ -1044,5 +1045,23 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		} else {
 			return i;
 		}
+	}
+
+	public String validateMove() {
+		int dest = Paragraph.extractParagraphNumberFromDisplay(this.destination);
+		if (dest == -1) {
+			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.INVALID_DESTINATION_PARAGRAPH);
+		}
+		if (dest == this.getParagraph()) {
+			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_CANNOT_BE_ORIGIN);
+		}
+		if (dest > this.getLastParagraph(dest >= Paragraph.INTRODUCTION_LIMIT? Paragraph.INTRODUCTION_LIMIT : 0)) {
+			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_UPPER_LIMIT_ERROR);
+		}
+		boolean append = Boolean.valueOf(this.append);
+		if (append && StringUtils.isEmpty(this.paragraphTexts[dest])) {
+			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.EMPTY_DESTINATION);
+		}
+		return null;
 	}
 }

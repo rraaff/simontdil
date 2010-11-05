@@ -22,14 +22,17 @@ public class Paragraph extends PersistentObject {
 		this.versionId = versionId;
 	}
 	
-	public static int extractParagraphNunmberFromDisplay(String destination) {
+	public static int extractParagraphNumberFromDisplay(String destination) {
 		try {
 			// if number
 			int dest = Integer.valueOf(destination);
 			if (dest > INTRODUCTION_LIMIT * 2) {
 				return -1;
 			}
-			return dest - 1;
+			if (dest < 1) {
+				return -1;
+			}
+			return dest  - 1 + INTRODUCTION_LIMIT;
 		} catch (Exception e) {
 			for (int i = 0; i < INTRODUCTION_LIMIT; i++) {
 				if (GetParagraphNumberForDisplay(i).equals(destination)) {

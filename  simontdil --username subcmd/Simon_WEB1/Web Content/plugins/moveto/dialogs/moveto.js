@@ -4,14 +4,14 @@ Marcos Godoy
 function showMoveOKMessage() {
 		notimooNormalManager.show({
 			title: 'Mensaje',
-			message: 'El texto ha sido movido exitosamente.',
+			message: 'El texto ha sido copiado exitosamente.',
 			 sticky: true
 		});
 	}
-	function showMoveErrorMessage() {
+	function showMoveErrorMessage(errText) {
 		notimooErrorManager.show({
 			title: 'Error',
-			message: 'El texto no ha podido ser movido.',
+			message: 'El texto no ha podido ser copiado, error: ' + errText,
 			customClass:'alert_error',
 			 sticky: true
 		});
@@ -20,7 +20,7 @@ function showMoveOKMessage() {
 CKEDITOR.dialog.add( 'moveto', function( editor )
 {
 	return {
-		title : 'Mover contenido seleccionado a párrafo',
+		title : 'Copiar contenido seleccionado a párrafo',
 		minWidth : 400,
 		minHeight : 200,
 		contents : [
@@ -46,7 +46,7 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 		buttons : [{
 			type:'button',
 			id:'moveButtonID', /* note: this is not the CSS ID attribute! */
-			label: 'Mover',
+			label: 'Copiar',
 			onClick: function(event){
 				var oEditor = CKEDITOR.instances.paragraphText;
 				var temp = new CKEDITOR.dom.element( 'span' );
@@ -57,7 +57,7 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 				if (newParagraphText.length == 0) {
 					notimooErrorManager.show({
 						title: 'Error',
-						message: 'No ha seleccionado nada para mover',
+						message: 'No ha seleccionado nada para copiar',
 						customClass:'alert_error',
 						sticky: true
 					});
@@ -98,10 +98,12 @@ function doMoveRequest(objDialog, pText, append, newParagraphText, oEditor, rang
 		   	oEditor.getSelection().selectRanges(ranges);
 		   	showMoveOKMessage();
 		    objDialog.hide();
-			oEditor.insertHtml('');
+			//oEditor.insertHtml('');
+			document.getElementById('parDisplay').innerHTML = json.actualParagraph;
 		   } else {
 		   	var error = json.error;
-		   	showMoveErrorMessage();
+		   	oEditor.getSelection().selectRanges(ranges);
+		   	showMoveErrorMessage(error);
 		   }
 		}
 	}).post({'destination': pText, 'append': append, 'newParagraphText': newParagraphText});

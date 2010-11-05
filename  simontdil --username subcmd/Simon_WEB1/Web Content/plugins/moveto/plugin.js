@@ -12,7 +12,7 @@ CKEDITOR.plugins.add( 'moveto',
 		editor.addCommand( 'moveto', new CKEDITOR.dialogCommand( 'moveto' ) );
 		editor.ui.addButton( 'moveto',
 			{
-				label : 'Mover a párrafo',
+				label : 'Copiar a párrafo',
 				command : 'moveto',
 				icon: this.path + 'images/moveto.gif'
 
