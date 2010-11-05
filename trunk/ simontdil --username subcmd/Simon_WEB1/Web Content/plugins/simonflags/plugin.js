@@ -48,8 +48,7 @@ CKEDITOR.plugins.add( 'simonflags',
  *     'broken_heart.gif','kiss.gif','envelope.gif'];
  */
 CKEDITOR.config.simonflags_images = [
-	'argentina.gif','brazil.gif','colombia.gif','spain.gif'];
-
+	'andorra.png','argentina.png','bolivia.png','brasil.png','chile.png','colombia.png','costarica.png','cuba.png','dominicana.png','ecuadr.png','elsalvador.png','espana.png','guatemala.png','honduras.png','mexico.png','nicaragua.png','nicaragua.png','paraguay.png','peru.png','portugal.png','uruguay.png','venezuela.png'];
 /**
  * The description to be used for each of the smileys defined in the
  * {@link CKEDITOR.config.simonflags_images} setting. Each entry in this array list
@@ -76,7 +75,7 @@ CKEDITOR.config.simonflags_images = [
  */
 CKEDITOR.config.simonflags_descriptions =
 	[
-		'ARGENTINA', 'BRAZIL', 'COLOMBIA', 'ESPAÑA'
+		'ANDORRA','ARGENTINA','BOLIVIA','BRASIL','CHILE','COLOMBIA','COSTARICA','CUBA','DOMINICANA','ECUADR','ELSALVADOR','ESPANA','GUATEMALA','HONDURAS','MEXICO','NICARAGUA','NICARAGUA','PARAGUAY','PERU','PORTUGAL','URUGUAY','VENEZUELA'
 	];
 
 /**
