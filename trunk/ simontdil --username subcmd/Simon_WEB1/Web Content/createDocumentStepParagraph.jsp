@@ -112,7 +112,7 @@
 						<tr>
 							<td align="right">Párrafo:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
-							<td align="left"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
+							<td align="left" id="parDisplay"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
 							<td align="center">
 								<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="true">
 									<bean:message key="createDocument.paragraphs.hidden"/>

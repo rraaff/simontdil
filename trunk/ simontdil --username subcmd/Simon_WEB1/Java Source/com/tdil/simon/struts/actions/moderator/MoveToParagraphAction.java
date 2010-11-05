@@ -6,6 +6,7 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -42,10 +43,15 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		HashMap<String, String> result = new HashMap<String, String>();
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
-		// TODO validaciones y retornar error
-		String actualParagraph = createDocumentForm.performMove();
-		// TODO retornar nuevo numero de parrafo actual si aplica
-		result.put("result", "OK");
+		String error = createDocumentForm.validateMove();
+		if (StringUtils.isEmpty(error)) {
+			String actualParagraph = createDocumentForm.performMove();
+			result.put("result", "OK");
+			result.put("actualParagraph", actualParagraph);
+		} else {
+			result.put("result", "ERROR");
+			result.put("error", error);
+		}
 		return result;
 	}
 }
