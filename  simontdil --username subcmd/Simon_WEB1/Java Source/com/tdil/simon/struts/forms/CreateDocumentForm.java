@@ -77,6 +77,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	// Parrafos
 	private int paragraph = 0;
 	private String paragraphTexts[] = new String[1000];
+	private String paragraphDetails[] = new String[1000];
 	private boolean paragraphStatus[] = new boolean[1000];
 	private int paragraphIds[] = new int[1000];
 	
@@ -92,6 +93,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private static List<DayOption> allDays;
 	
 	private String destination;
+	private String detail;
 	private String append;
 	private String newParagraphText;
 	
@@ -167,6 +169,25 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		return result;
 	}
 	
+	public List<String> getAllParagraphs() {
+		List<String> result = new ArrayList<String>();
+		int index = 0;	
+		while(!StringUtils.isEmpty(paragraphTexts[index])) {
+			Paragraph p = new Paragraph();
+			result.add(String.valueOf(index + 1));
+			result.add(Paragraph.GetParagraphNumberForDisplay(index));
+			index = index + 1;
+		}
+		index = Paragraph.INTRODUCTION_LIMIT;
+		while(!StringUtils.isEmpty(paragraphTexts[index])) {
+			Paragraph p = new Paragraph();
+			result.add(String.valueOf(index + 1));
+			result.add(Paragraph.GetParagraphNumberForDisplay(index));
+			index = index + 1;
+		}
+		return result;
+	}
+	
 	public List<DayOption> getDays() {
 		return allDays;
 	}
@@ -234,6 +255,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	public void setParagraphText(String paragraphText) {
 		this.paragraphTexts[paragraph] = paragraphText;
+	}
+	
+	public void setCurrentDetail(String detail) {
+		this.paragraphDetails[paragraph] = detail;
+	}
+	public String getCurrentDetail() {
+		return this.paragraphDetails[paragraph];
 	}
 	
 	public String getParagraphForDisplay() {
@@ -376,7 +404,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		for (int i = 0; i < 1000; i++) {
 			String text = this.paragraphTexts[i];
 			if (!StringUtils.isEmpty(text)) {
-				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], paragraphs, i);
+				insertOrUpdateParagrap(i, text, this.paragraphStatus[i], this.paragraphDetails[i], paragraphs, i);
 			}
 		}
 		
@@ -401,7 +429,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 //		}
 	}
 	
-	private void insertOrUpdateParagrap(int paragraphNumber, String text, boolean deleted, List paragraphs, int position) throws SQLException {
+	private void insertOrUpdateParagrap(int paragraphNumber, String text, boolean deleted, String detail, List paragraphs, int position) throws SQLException {
 		// TODO Auto-generated method stub
 		Paragraph paragraph = getParagraphForPosition(paragraphs, position);
 		if (paragraph != null) {
@@ -409,6 +437,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			paragraph.setParagraphText(text);
 			paragraph.setDeleted(deleted);
 			paragraph.setParagraphNumber(paragraphNumber + 1);
+			paragraph.setNumberDetail(detail);
 			ParagraphDAO.updateParagraph(paragraph);
 //			TODO esta cosa no anda asi, no va
 //			if (!text.equals(pText)) {
@@ -431,6 +460,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			paragraph.setParagraphNumber(paragraphNumber + 1);
 			paragraph.setParagraphText(text);
 			paragraph.setDeleted(deleted);
+			paragraph.setNumberDetail(detail);
 			int parId = ParagraphDAO.insertParagraph(paragraph);
 			this.paragraphIds[paragraphNumber] = parId;
 //			TODO esta cosa asi no anda, hay que buscarle otra solucion
@@ -648,6 +678,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
 			paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
 			paragraphIds[p.getParagraphNumber() - 1] = p.getId();
+			paragraphDetails[p.getParagraphNumber() - 1] = p.getNumberDetail();
 		}
 		this.consolidated = false;
 		this.consolidateText= null;
@@ -708,12 +739,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public ValidationError validateCurrentParagraphForLength(ActionMapping mapping, HttpServletRequest request) {
 		ValidationError validation = new ValidationError();
 		ParagraphValidation.validateParagraphTextForLength(this.getParagraphText(), "paragraphText", validation);
+		ParagraphValidation.validateParagraphDetail(this.getCurrentDetail() == null ? "" : this.getCurrentDetail(), "paragraphDetail", validation);
 		return validation;
 	} 
 
 	public ValidationError validateCurrentParagraph(ActionMapping mapping, HttpServletRequest request) {
 		ValidationError validation = new ValidationError();
 		ParagraphValidation.validateParagraphText(this.getParagraphText(), "paragraphText", validation);
+		ParagraphValidation.validateParagraphDetail(this.getCurrentDetail() == null ? "" : this.getCurrentDetail(), "paragraphDetail", validation);
 		return validation;
 	}
 	
@@ -725,6 +758,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			}
 		}
 		ParagraphValidation.validateParagraphText(this.getParagraphText(), "paragraphText", validation);
+		ParagraphValidation.validateParagraphDetail(this.getCurrentDetail() == null ? "" : this.getCurrentDetail(), "paragraphDetail", validation);
 		return validation;
 	}
 
@@ -756,6 +790,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 					createDocumentForm.paragraphIds[i] = createDocumentForm.paragraphIds[i + 1];
 					createDocumentForm.paragraphTexts[i] = createDocumentForm.paragraphTexts[i + 1];
 					createDocumentForm.paragraphStatus[i] = createDocumentForm.paragraphStatus[i + 1];
+					createDocumentForm.paragraphDetails[i] = createDocumentForm.paragraphDetails[i + 1];
 					Paragraph toModify = ParagraphDAO.getParagraph(createDocumentForm.paragraphIds[i]);
 					if (toModify != null) {
 						toModify.setParagraphNumber(toModify.getParagraphNumber() - 1);
@@ -779,11 +814,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		ArrayList<String> move = new ArrayList<String>();
 		ArrayList<Boolean> status = new ArrayList<Boolean>();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ArrayList<String> details = new ArrayList<String>();
 		int i = this.getParagraph();
 		while (!StringUtils.isEmpty(paragraphTexts[i])) {
 			move.add(paragraphTexts[i]);
 			status.add(paragraphStatus[i]);
 			ids.add(paragraphIds[i]);
+			details.add(paragraphDetails[i]);
 			i = i + 1;
 		}
 		int dest = this.getParagraph() + 1;
@@ -791,25 +828,30 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			String text = move.get(index);
 			Boolean stat = status.get(index);
 			Integer id = ids.get(index);
+			String detail = details.get(index);
 			paragraphTexts[dest] = text;
 			paragraphStatus[dest] = stat;
 			paragraphIds[dest] = id;
+			paragraphDetails[dest] = detail;
 			dest = dest + 1;
 		}
 		paragraphTexts[this.getParagraph()] = "";
 		paragraphStatus[this.getParagraph()] = false;
 		paragraphIds[this.getParagraph()] = 0;
+		paragraphDetails[this.getParagraph()] = "";
 	}
 
 	public void addAfter() {
 		ArrayList<String> move = new ArrayList<String>();
 		ArrayList<Boolean> status = new ArrayList<Boolean>();
 		ArrayList<Integer> ids = new ArrayList<Integer>();
+		ArrayList<String> details = new ArrayList<String>();
 		int i = this.getParagraph() + 1;
 		while (!StringUtils.isEmpty(paragraphTexts[i])) {
 			move.add(paragraphTexts[i]);
 			status.add(paragraphStatus[i]);
 			ids.add(paragraphIds[i]);
+			details.add(paragraphDetails[i]);
 			i = i + 1;
 		}
 		int dest = this.getParagraph() + 2;
@@ -817,15 +859,18 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			String text = move.get(index);
 			Boolean stat = status.get(index);
 			Integer id = ids.get(index);
+			String detail = details.get(index);
 			paragraphTexts[dest] = text;
 			paragraphStatus[dest] = stat;
 			paragraphIds[dest] = id;
+			paragraphDetails[dest] = detail;
 			dest = dest + 1;
 		}
 		this.setParagraph(this.getParagraph() + 1);
 		paragraphTexts[this.getParagraph()] = "";
 		paragraphStatus[this.getParagraph()] = false;
 		paragraphIds[this.getParagraph()] = 0;
+		paragraphDetails[this.getParagraph()] = "";
 	}
 
 	public void initForPortuguesWith(int versionID) throws SQLException {
@@ -963,6 +1008,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
 			paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
 			paragraphIds[p.getParagraphNumber() - 1] = p.getId();
+			paragraphDetails[p.getParagraphNumber() - 1] = p.getNumberDetail();
 		}
 		this.consolidated = false;
 		this.consolidateText= null;
@@ -1019,16 +1065,19 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 		if (append) {
 			this.paragraphTexts[dest] = this.paragraphTexts[dest] + this.getNewParagraphText();
+			this.paragraphDetails[dest] = this.getDetail();
 		} else {
 			int upperLimit = getLastParagraph(dest);
 			for (; upperLimit >= dest; upperLimit = upperLimit - 1) {
 				this.paragraphTexts[upperLimit + 1] = this.paragraphTexts[upperLimit];
 				this.paragraphStatus[upperLimit + 1] = this.paragraphStatus[upperLimit];
 				this.paragraphIds[upperLimit + 1] = this.paragraphIds[upperLimit];
+				this.paragraphDetails[upperLimit + 1] = this.paragraphDetails[upperLimit];
 			}
 			this.paragraphTexts[dest] = this.getNewParagraphText();
 			this.paragraphStatus[dest] = false;
 			this.paragraphIds[dest] = 0;
+			this.paragraphDetails[dest] = this.getDetail();
 		}
 		executeInTransaction(this);
 		
@@ -1052,16 +1101,35 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		if (dest == -1) {
 			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.INVALID_DESTINATION_PARAGRAPH);
 		}
-		if (dest == this.getParagraph()) {
+		boolean append = Boolean.valueOf(this.append);
+		if (dest == this.getParagraph()) { // TODO ver si este chequeo esta bien
 			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_CANNOT_BE_ORIGIN);
 		}
 		if (dest > this.getLastParagraph(dest >= Paragraph.INTRODUCTION_LIMIT? Paragraph.INTRODUCTION_LIMIT : 0)) {
 			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_UPPER_LIMIT_ERROR);
 		}
-		boolean append = Boolean.valueOf(this.append);
+		if (this.getDetail().length() > 100) {
+			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DETAIL_TOO_LONG_ERROR);
+		}
 		if (append && StringUtils.isEmpty(this.paragraphTexts[dest])) {
 			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.EMPTY_DESTINATION);
 		}
 		return null;
+	}
+
+	public String getDetail() {
+		return detail;
+	}
+
+	public void setDetail(String detail) {
+		this.detail = detail;
+	}
+
+	public String[] getParagraphDetails() {
+		return paragraphDetails;
+	}
+
+	public void setParagraphDetails(String[] paragraphDetails) {
+		this.paragraphDetails = paragraphDetails;
 	}
 }

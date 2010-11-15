@@ -32,6 +32,7 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 			HttpServletResponse response) throws Exception {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm)form;
 		createDocumentForm.setDestination(request.getParameter("destination"));
+		createDocumentForm.setDetail(request.getParameter("detail"));
 		createDocumentForm.setAppend(request.getParameter("append"));
 		createDocumentForm.setNewParagraphText(request.getParameter("newParagraphText"));
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, createDocumentForm);
@@ -41,13 +42,31 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-		HashMap<String, String> result = new HashMap<String, String>();
+		HashMap<String, Object> result = new HashMap<String, Object>();
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
+		boolean notHadBack = createDocumentForm.getParagraph() == 0;
+		boolean wasLast = createDocumentForm.getLast().equals("true");
 		String error = createDocumentForm.validateMove();
 		if (StringUtils.isEmpty(error)) {
 			String actualParagraph = createDocumentForm.performMove();
 			result.put("result", "OK");
 			result.put("actualParagraph", actualParagraph);
+			boolean hasBack = createDocumentForm.getParagraph() != 0;
+			boolean isLast = createDocumentForm.getLast().equals("true");
+			if (!notHadBack && hasBack) {
+				result.put("changeBack", "true");
+			} else {
+				result.put("changeBack", "false");
+			}
+			
+			if (wasLast && !isLast) {
+				result.put("changeLast", "true");
+			} else {
+				result.put("changeLast", "false");
+			}
+			if (!"true".equals(createDocumentForm.getAppend())) {
+				result.put("paragraphs", createDocumentForm.getAllParagraphs());
+			}
 		} else {
 			result.put("result", "ERROR");
 			result.put("error", error);
