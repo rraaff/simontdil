@@ -9,6 +9,7 @@ public class Paragraph extends PersistentObject {
 	
 	private int versionId;
 	private int paragraphNumber;
+	private String numberDetail;
 	private String paragraphText;
 	
 	private int versionNumber = 1;
@@ -92,5 +93,12 @@ public class Paragraph extends PersistentObject {
 	public boolean belongsToIntroduction() {
 		return this.getParagraphNumber() < INTRODUCTION_LIMIT;
 	}
-	
+
+	public String getNumberDetail() {
+		return numberDetail;
+	}
+	public void setNumberDetail(String numberDetail) {
+		this.numberDetail = numberDetail;
+	}
+
 }

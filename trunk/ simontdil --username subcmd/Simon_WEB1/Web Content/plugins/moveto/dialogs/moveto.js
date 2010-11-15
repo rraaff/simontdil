@@ -33,12 +33,17 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 					{
 						id : 'input1',
 						type : 'text',
-						label : 'Número de párrafo'
+						label : 'Como párrafo'
+					},
+					{
+						id : 'detail',
+						type : 'text',
+						label : 'Detalle'
 					},
 						{
 						id : 'input2',
 						type : 'checkbox',
-						label : 'incorporar'
+						label : 'Agregar al existente'
 					}
 				]
 			}
@@ -77,14 +82,31 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 			
 				//alert(moveToParagraphUrl);
 			   var append = this.getDialog().getContentElement('tab1','input2').getValue();
+			   var detail = this.getDialog().getContentElement('tab1','detail').getValue();
 			   // aca hago todo el proceso si anda mal, muestro algo, si anda bien, muestro otra cosa
-			   doMoveRequest(this.getDialog(), pText, append, newParagraphText, oEditor, ranges);
+			   doMoveRequest(this.getDialog(), pText, detail, append, newParagraphText, oEditor, ranges);
 			}
 		},CKEDITOR.dialog.cancelButton],
 	};
 } );
 
-function doMoveRequest(objDialog, pText, append, newParagraphText, oEditor, ranges) {
+function clearSelect(objSelect) {
+	for (var i = objSelect.options.length; i >= 0; i--) {
+		objSelect.options[i] = null;
+	}
+}
+
+function setOptionsWithValue(objSelect, arr) {
+	clearSelect(objSelect);
+	for (var i =0; i < arr.length; i+=2) {
+		var opt1 = document.createElement('OPTION');
+		opt1.value = arr[i];
+		opt1.text = arr[i+1];
+		objSelect.options.add(opt1);
+	}
+}
+
+function doMoveRequest(objDialog, pText, detail, append, newParagraphText, oEditor, ranges) {
  var jsonRequest = new Request.JSON({url: moveToParagraphUrl, 
  	onSuccess: 
  		function(json, responseText){
@@ -100,11 +122,20 @@ function doMoveRequest(objDialog, pText, append, newParagraphText, oEditor, rang
 		    objDialog.hide();
 			//oEditor.insertHtml('');
 			document.getElementById('parDisplay').innerHTML = json.actualParagraph;
+			var changeLast = json.changeLast;
+			if ('true' == changeLast) {
+				var nextSpanObj = document.getElementById('nextButtonLayer');
+				var submits = nextSpanObj.getElementsByTagName("input");
+				submits[0].disabled = false;
+			}
+			if (!append) {
+				setOptionsWithValue(document.forms['CreateDocumentForm'].goToParagraph, json.paragraphs);
+			}
 		   } else {
 		   	var error = json.error;
 		   	oEditor.getSelection().selectRanges(ranges);
 		   	showMoveErrorMessage(error);
 		   }
 		}
-	}).post({'destination': pText, 'append': append, 'newParagraphText': newParagraphText});
+	}).post({'destination': pText, 'detail' : detail, 'append': append, 'newParagraphText': newParagraphText});
 }

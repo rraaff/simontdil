@@ -71,6 +71,7 @@ CREATE  TABLE `SIMON`.`PARAGRAPH` (
   `paragraphNumber` INT NULL ,
   `paragraphText` MEDIUMTEXT NULL ,
   `versionNumber` INT NULL,
+  `numberDetail` VARCHAR(100) NULL,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 
@@ -138,17 +139,19 @@ CREATE  TABLE `SIMON`.`TRACKCHANGE` (
 INSERT INTO SIMON.COUNTRY(name, host, deleted) VALUES ('Argentina', 1, 0);
 INSERT INTO SIMON.SYSTEMUSER (username, password, name, email, countryId, administrator,moderator,delegate,
 typeOne, typeTwo, canSign, designer, passwordResetRequest, temporaryPassword, canProposeParagraph, deleted)
-SELECT 'Admin', '4E7AFEBCFBAE000B22C7C85E5560F89A2A0280B4', 'Admin', 'admin@tdil.com', c.id, 1,1,0,
+SELECT 'Admin', '4E7AFEBCFBAE000B22C7C85E5560F89A2A0280B4', 'Admin', 'admin@tdil.com', C.id, 1,1,0,
 0,0,0,1,0,0,0,0
-FROM COUNTRY C
+FROM SIMON.COUNTRY C
 WHERE C.HOST = 1;
 
 COMMIT;
 
-insert into SITE(name, status, deleted) values('Delegate', 'NORMAL',0);
-insert into SITE(name, status, deleted) values('Moderator', 'NORMAL',0);
-insert into SITE(name, status, deleted) values('Public', 'NORMAL',0);
+insert into SIMON.SITE(name, status, deleted) values('Delegate', 'NORMAL',0);
+insert into SIMON.SITE(name, status, deleted) values('Moderator', 'NORMAL',0);
+insert into SIMON.SITE(name, status, deleted) values('Public', 'NORMAL',0);
 
-update SITE set dataId = 0;
+update SIMON.SITE set dataId = 0;
 
+INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.properties.location', '/home/mgodoy/icarus/workspace/simon/Simon_Resources/props/simon.properties', 0);
+INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.server.name', 'localhost', 0);
 commit;

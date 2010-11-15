@@ -113,13 +113,8 @@
 							<td align="right">Párrafo:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="left" id="parDisplay"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
-							<td align="center">
-								<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="true">
-									<bean:message key="createDocument.paragraphs.hidden"/>
-								</logic:equal>
-								<logic:equal name="CreateDocumentForm" property="paragraphHidden" value="false">
-									<bean:message key="createDocument.paragraphs.visible"/>
-								</logic:equal></td>
+							<td align="left">Detalle:</td>
+							<td align="left" id="parDetail"><html:text name="CreateDocumentForm" property="currentDetail" styleClass="textfield_effect"/></td>
 							<td align="right">Cambiar al párrafo:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="right">
@@ -147,9 +142,11 @@
 								</html:submit>
 							</logic:notEqual>
 							<logic:equal name="CreateDocumentForm" property="backDisabled" value="true">
+								<span id="backButtonLayer">
 								<html:submit property="operation" disabled="true">
 								<bean:message key="createDocument.paragraphs.back" />
 								</html:submit>
+								</span>
 							</logic:equal>
 							
 							<!-- Boton Next -->
@@ -159,9 +156,11 @@
 								</html:submit>
 							</logic:notEqual>
 							<logic:equal name="CreateDocumentForm" property="last" value="true">
+								<span id="nextButtonLayer">
 								<html:submit property="operation" disabled="true">
 									<bean:message key="createDocument.paragraphs.next"/>
 								</html:submit>
+								</span>
 							</logic:equal>
 							
 							<!-- Boton Add before -->
