@@ -63,7 +63,7 @@
 		from SYSTEMUSER, COUNTRY
 		WHERE SYSTEMUSER.delegate = 1
 		AND SYSTEMUSER.countryId = COUNTRY.id
-		order by SYSTEMUSER.name
+		order by COUNTRY.name, SYSTEMUSER.name
   </select>
   
   	<select id="selectNotDeletedUsers" resultClass="UserVO">
