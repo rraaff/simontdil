@@ -330,7 +330,11 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		int index = 0;
 		String paragraphText = this.paragraphTexts[index];
 		while (!StringUtils.isEmpty(paragraphText)) {
-			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
+			if (StringUtils.isEmpty(this.paragraphDetails[index])) {
+				result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
+			} else {
+				result.add(Paragraph.GetParagraphNumberForDisplay(index) + " (" + this.paragraphDetails[index]+ "). " + paragraphText);
+			}
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
 		}
@@ -342,7 +346,11 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		int index = Paragraph.INTRODUCTION_LIMIT;
 		String paragraphText = this.paragraphTexts[index];
 		while (!StringUtils.isEmpty(paragraphText)) {
-			result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
+			if (StringUtils.isEmpty(this.paragraphDetails[index])) {
+				result.add(Paragraph.GetParagraphNumberForDisplay(index) + ". " + paragraphText);
+			} else {
+				result.add(Paragraph.GetParagraphNumberForDisplay(index) + " (" + this.paragraphDetails[index]+ "). " + paragraphText);
+			}
 			index = index + 1;
 			paragraphText = this.paragraphTexts[index];
 		}

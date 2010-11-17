@@ -1,6 +1,7 @@
 package com.tdil.simon.struts.actions.admin;
 
 import java.sql.SQLException;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
+import com.tdil.simon.web.LogOnceListener;
 
 public class CountryABMAction extends ABMAction {
 
@@ -54,6 +56,10 @@ public class CountryABMAction extends ABMAction {
 					}, countryABMForm);
 					if (error != null && error.hasError()) {
 						return redirectToFailure(error, request, mapping);
+					} else {
+						// desloguear si hay alguien logueado con un pais borrado
+						Set<Integer> deletedCountries = countryABMForm.getDeletedCountries();
+						LogOnceListener.logoutDelegatesFor(deletedCountries);
 					}
 				}
 				if ("reactivateImages".equals(imageSubmitData.getProperty())) {

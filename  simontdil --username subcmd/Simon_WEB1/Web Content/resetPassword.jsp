@@ -37,6 +37,7 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/resetPasswordAction">
+<html:hidden name="ResetPassword" property="operation" value=""/>
 	<div id="alcien" style="height:500px; padding-top:10px;">
 		<!-- inicio tabla template -->
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -85,6 +86,18 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr> 
 								</logic:iterate>
 								<script type="text/javascript">
+								
+									function resetConfirm() {
+										Sexy.confirm('Desea blanquear las contraseñas a los usuarios seleccionados?', { onComplete: 
+										        function(returnvalue) {
+										          if(returnvalue) {
+										            document.forms['ResetPassword'].operation.value="<bean:message key="resetPassword.resetPassword"/>";
+										            document.forms['ResetPassword'].submit();
+										          } 
+										        }
+										      });
+									}
+								
 									function selectAll() {
 										var checksObj = document.ResetPassword.selectedIds;
 										if (checksObj.length > 0) {
@@ -121,9 +134,11 @@ if ( dw_scrollObj.isSupported() ) {
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td colspan="2" height="25" align="center">
 				<input type="button" value="<bean:message key="resetPassword.selectAll"/>" onclick="selectAll()"></input>
-				<html:submit property="operation">
+				<html:submit onclick="resetConfirm();">
 					<bean:message key="resetPassword.resetPassword"/>
-				</html:submit></td>
+				</html:submit>
+				<input type="button" onclick="resetConfirm();" value="<bean:message key="resetPassword.resetPassword"/>"></input>
+				</td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 			</tr>

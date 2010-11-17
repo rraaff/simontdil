@@ -14,6 +14,7 @@
 <script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
 <script type="text/javascript" src="./scripts/notimoo.js" ></script>
 <script type="text/javascript" src="ckeditor.js"></script>
+<script type="text/javascript" src="scripts/sexyalertbox.v1.2.moo.mini.js"></script>
 <!--[if lte IE 7]>
 <style>
 #menuwrapper, #p7menubar ul a {height: 1%;}
@@ -24,6 +25,7 @@ a:active {width: auto;}
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
+<link href="styles/sexyalertbox.css" rel="stylesheet" type="text/css">
 </head>
 <body onLoad="P7_ExpMenu();">
 <div id="header">
