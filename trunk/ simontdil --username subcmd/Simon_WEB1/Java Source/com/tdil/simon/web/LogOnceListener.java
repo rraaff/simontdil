@@ -2,6 +2,7 @@ package com.tdil.simon.web;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -18,16 +19,17 @@ import com.tdil.simon.utils.LoggerProvider;
 public class LogOnceListener implements HttpSessionListener {
 	
 	private static Map<String, HttpSession> allSessions = new HashMap<String, HttpSession>();
-	private static Map<HttpSession, String> sessionToUsernames = new HashMap<HttpSession, String>();
+	private static Map<HttpSession, UserAndCountry> sessionToUsernames = new HashMap<HttpSession, UserAndCountry>();
 	private static HttpSession moderatorSession;
 
+	
 	public void sessionCreated(HttpSessionEvent event) {
 	    System.out.println("session created");
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
 		synchronized (allSessions) {
-			String username = sessionToUsernames.get(event.getSession());
+			String username = sessionToUsernames.get(event.getSession()).getUsername();
 			if (event.getSession() == moderatorSession) {
 				if (username != null) {
 					getLog().fatal("User " + username + " has log out, moderator = true");
@@ -43,7 +45,7 @@ public class LogOnceListener implements HttpSessionListener {
 	    }
 	}
 	
-	public static void userHasLogged(LoginForm form, String username, boolean moderator, HttpSession session, boolean forceLogout) throws ValidationException {
+	public static void userHasLogged(LoginForm form, String username, int countryId, boolean moderator, HttpSession session, boolean forceLogout) throws ValidationException {
 		synchronized (allSessions) {
 	    	HttpSession previousSession  = allSessions.get(username);
 	    	if (previousSession != null) {
@@ -60,7 +62,7 @@ public class LogOnceListener implements HttpSessionListener {
 	    	}
 	    	if (moderator) {
 	    		if (moderatorSession != null) {
-	    			String other = sessionToUsernames.get(moderatorSession);
+	    			String other = sessionToUsernames.get(moderatorSession).getUsername();
 	    			if (forceLogout) {
 		    			try {
 		    				getLog().fatal("Invalidating previous session for moderator " + other + " because moderator " + username + " is loging in");
@@ -75,12 +77,25 @@ public class LogOnceListener implements HttpSessionListener {
 	    		moderatorSession = session;
 	    	}
 	    	allSessions.put(username, session);
-	    	sessionToUsernames.put(session, username);
+	    	sessionToUsernames.put(session, new UserAndCountry(countryId, username));
 	    	getLog().fatal("User " + username + " has log in, moderator = " + String.valueOf(moderator));
 	    }
 	}
 	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(LogOnceListener.class);
+	}
+
+	public static void logoutDelegatesFor(Set<Integer> deletedCountries) {
+		synchronized (allSessions) {
+			for (Map.Entry<HttpSession, UserAndCountry> session : sessionToUsernames.entrySet()) {
+				if (deletedCountries.contains(session.getValue().getCountry())) {
+					try {
+						getLog().fatal("Invalidating previous session for user because country deleted " + session.getValue().getUsername());
+						session.getKey().invalidate(); // TODO falta algo
+					} catch (Exception e) {}
+				}
+			}
+	    }
 	}
 }

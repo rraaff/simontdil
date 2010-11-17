@@ -3,7 +3,9 @@ package com.tdil.simon.struts.forms;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.apache.struts.upload.FormFile;
@@ -143,5 +145,14 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(CountryABMForm.class);
+	}
+	public Set<Integer> getDeletedCountries() {
+		Set<Integer> result = new HashSet<Integer>();
+		for (Country c : this.getAllCountries()) {
+			if (c.isDeleted()) {
+				result.add(c.getId());
+			}
+		}
+		return result;
 	}
 }
