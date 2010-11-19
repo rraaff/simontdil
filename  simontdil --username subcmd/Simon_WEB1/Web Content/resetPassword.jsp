@@ -134,9 +134,6 @@ if ( dw_scrollObj.isSupported() ) {
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td colspan="2" height="25" align="center">
 				<input type="button" value="<bean:message key="resetPassword.selectAll"/>" onclick="selectAll()"></input>
-				<html:submit onclick="resetConfirm();">
-					<bean:message key="resetPassword.resetPassword"/>
-				</html:submit>
 				<input type="button" onclick="resetConfirm();" value="<bean:message key="resetPassword.resetPassword"/>"></input>
 				</td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
