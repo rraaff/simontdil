@@ -62,6 +62,14 @@ public class DelegateSiteCache {
 		}
 	}
 	
+	public static synchronized void livePreview(String pId, String pText) {
+		if (negotiatedParagraph != null && String.valueOf(negotiatedParagraph.getId()).equals(pId)) {
+			negotiatedParagraph.setVersionNumber(negotiatedParagraph.getVersionNumber() + 1);
+			negotiatedParagraph.setParagraphText(pText);
+		}
+		
+	}
+	
 	public static List<Paragraph> getFinalParagraphs() {
 		try {
 			return (List<Paragraph>) TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {

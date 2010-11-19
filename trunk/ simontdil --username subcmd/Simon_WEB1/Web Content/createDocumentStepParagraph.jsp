@@ -123,18 +123,23 @@
 								</html:select></td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
+							<td align="left">
+								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
+									<input type="checkbox" id="livePreview">Live preview</input>
+								</logic:equal>
+							</td>
 						</tr>
 						<tr>
-							<td colspan="9" height="2"><img src="images/null.gif" width="1" height="2"></td>
+							<td colspan="11" height="2"><img src="images/null.gif" width="1" height="2"></td>
 						</tr>
 						<tr>
-							<td colspan="9" align="center"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
+							<td colspan="11" align="center"><html:textarea name="CreateDocumentForm" property="paragraphText" styleClass="textfield_effect_area"/><html:errors property="paragraphText" /></td>
 						</tr>
 						<tr>
-							<td colspan="9" height="2"><img src="images/null.gif" width="1" height="2"></td>
+							<td colspan="11" height="2"><img src="images/null.gif" width="1" height="2"></td>
 						</tr>
 						<tr>
-							<td colspan="9" align="center">
+							<td colspan="11" align="center">
 							<!-- Boton prev -->
 							<logic:notEqual name="CreateDocumentForm" property="backDisabled" value="true">
 								<html:submit property="operation">
@@ -216,10 +221,10 @@
 							</td>
 						</tr>
 						<tr>
-							<td colspan="9" height="5"><img src="images/null.gif" width="1" height="5"></td>
+							<td colspan="11" height="5"><img src="images/null.gif" width="1" height="5"></td>
 						</tr>
 						<tr>
-							<td colspan="9" height="25" align="center">
+							<td colspan="11" height="25" align="center">
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
 								<html:submit property="operation">
 									<bean:message key="createDocument.paragraphs.modifyDocument"/>
@@ -273,6 +278,25 @@
 					height:"220", width:"960"
 					
 				});
+				
+		<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
+			var lastPush = "";
+			var parId = "<bean:write name="CreateDocumentForm" property="currentParagraphId"/>";
+			function pushData() {
+				var mustPush = document.getElementById('livePreview').checked;
+				if (mustPush) {
+					var current = editor.getData();
+					if (lastPush != current) {
+						var jsonRequest = new Request.JSON({url: '<html:rewrite page="/livePreviewParagraph.st"/>', onSuccess: function(json, responseText){
+							// nothing to do
+						}
+						}).post({'pText':current, 'parId' : parId});
+						lastPush = current;
+					}
+				}
+			}
+			var timer = setInterval("pushData()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
+		</logic:equal>
 </script>
 </html:form>
 </div>
