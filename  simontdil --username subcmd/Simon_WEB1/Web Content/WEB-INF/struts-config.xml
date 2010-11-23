@@ -280,6 +280,8 @@
     </action>
     <action path="/livePreviewParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.LivePreviewParagraph" scope="session">
     </action>
+    <action path="/getCompleteDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.delegate.GetCompleteDocument" scope="session">
+    </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
   <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>
