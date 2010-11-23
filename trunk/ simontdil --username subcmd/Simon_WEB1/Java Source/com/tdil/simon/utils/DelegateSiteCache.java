@@ -27,6 +27,7 @@ public class DelegateSiteCache {
 	public static String delegateSiteStatus;
 	public static Document documentUnderWork;
 	public static Paragraph negotiatedParagraph;
+	public static List<Paragraph> allParagraph;
 	public static VersionVO previousVersion;
 	public static Version version;
 	
@@ -41,6 +42,11 @@ public class DelegateSiteCache {
 					if (Site.IN_NEGOTIATION.equals(delegateSiteStatus)) {
 						documentUnderWork = DocumentDAO.getDocumentUnderWork();
 						negotiatedParagraph = ParagraphDAO.getParagraph(Site.getDELEGATE_SITE().getDataId());
+						if (negotiatedParagraph != null) {
+							allParagraph = ParagraphDAO.selectNotDeletedParagraphsFor(negotiatedParagraph.getVersionId());
+						} else {
+							allParagraph = new ArrayList<Paragraph>();
+						}
 					}
 					if (Site.IN_SIGN.endsWith(delegateSiteStatus)) {
 						documentUnderWork = DocumentDAO.getDocumentUnderWork();
@@ -118,5 +124,9 @@ public class DelegateSiteCache {
 
 	public static synchronized List<SignatureVO> getAllSignatures() {
 		return allSignatures;
+	}
+	
+	public static synchronized List<Paragraph> getAllParagraphs() {
+		return allParagraph;
 	}
 }

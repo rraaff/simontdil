@@ -178,7 +178,14 @@ function openDocs(){
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
-				        			divObj.innerHTML = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText + "</p>";
+				        			var newText = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText + "</p>";
+				        			divObj.innerHTML = newText;
+				        			if (lastNumber == paragraphNumber) {
+				        				var pObj = document.getElementById("current_version_" + paragraphNumber);
+				        				pObj.innerHTML = newText;
+				        			} else {
+				        				refreshCompleteCurrentArea();
+				        			}
 				        			lastNumber = paragraphNumber;
 				        			lastText = paragraphText;
 				        			lastParagraphVersion = paragraphVersion;
@@ -197,9 +204,28 @@ function openDocs(){
 	}
 	var timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
 	
+	function refreshCompleteCurrentArea() {
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getCompleteDocument.st"/>', 
+			onSuccess: function(json, responseText){
+				var i = 0;
+				var newDoc = "";
+				while(i < json.paragraph.length) {
+					newDoc = newDoc + "<p class='article' id='current_version_" + json.paragraphNumber[i] + "'>" + getParagraphForDisplay(json.paragraphNumber[i] - 1) + ". " + json.paragraph[i] + "</p>"
+					i = i + 1;
+				}	
+				document.getElementById("main_current").innerHTML = newDoc;
+			}
+		}).get();
+	}
+	
 	function clearTimer() {
 		timer = clearInterval(timer);
 	}
+	
+	/* usage */
+	window.addEvent('load',function() {
+		var tabset = new TabSet($$('#tabs1 li a'),$$('#contents1 li'));
+	});
 </script>
 <div id="content">
 	<div id="alcien" style="height:560px; padding-top:10px;">
@@ -217,12 +243,31 @@ function openDocs(){
 					<!-- corte tabla template -->
 						<!--div id="main">
 							<div id="lyr1" -->
-							<div id="main" style="background-color:#eeeeee; width:inherit; height:490px; overflow:scroll;">
-								<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
-								<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
-									<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
-								</logic:iterate>
+							
+							<div class="tab-container">
+								<ul id="tabs1" class="tabs">
+									<li><a href="">Original</a></li>
+									<li><a href="">En negociación</a></li>
+								</ul>
 							</div>
+							<div class="clear"></div>
+							<ul id="contents1" class="tabs-content">
+								<li>
+									<div id="main" style="background-color:#eeeeee; width:inherit; height:440px; overflow:scroll;">
+										<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
+										<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
+											<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+										</logic:iterate>
+									</div>
+								</li>
+								<li>
+									<div id="main_current" style="background-color:#eeeeee; width:inherit; height:440px; overflow:scroll;">
+										<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph1"> 
+											<p class="article" id="current_version_<bean:write name="paragraph1" property="paragraphNumber" />"><bean:write name="paragraph1" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph1" property="paragraphText" /></p>
+										</logic:iterate>
+									</div>
+								</li>
+							</ul>
 						<!--/div-->
 					<!-- corte tabla template --></td>
 					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
