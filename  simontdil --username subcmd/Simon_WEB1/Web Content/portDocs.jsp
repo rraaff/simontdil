@@ -166,6 +166,50 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="28" align="left">Reuni&otilde;es Ministeriais Sectoriais 2010</td>
 										<td><a href="other/Reunioes-Ministeriais-Sectoriais-2010.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
+									<tr class="d1">
+										<td height="28" align="left">O Sistema Inter-Governamental Ibero-Americano: a coordena&ccedil;&atilde;o dos Organismos Ibero-Americanos</td>
+										<td><a href="other/EL-SISTEMA-INTERGUBERNAMENTAL-IBEROAMERICANO-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Regra de funcionamento do Registro de Redes Ibero-Americanas</td>
+										<td><a href="other/REGLA-DEFINITIVA-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Comunicado especial sobre a iniciativa YASUNI-ITT</td>
+										<td><a href="other/Proy-Comunicado-Esp-Yasuni-ITT-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Comunicado especial sobre o "QHAPAQ ÑAN"</td>
+										<td><a href="other/Proy-Comunicado-Esp-Qhapaq-Nan--P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Comunicado especial sobre defesa da democracia</td>
+										<td><a href="other/Proy-Comunicado-Esp-Clausula-Democratica-VERSION-ULTIMA-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Estados de Contas e Notas Explicativas 31/12/2009</td>
+										<td><a href="other/INFAUD09-SEGIB-RMREXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Projecto De Orçamento 2011</td>
+										<td><a href="other/DIVPRE11-SEGIB-2CNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Quadro Acompanhamento Pagamento De Quotas 2010</td>
+										<td><a href="other/INFCUOTA10-SEGIB-IICNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Informes De Execução Do Orçamento E Dos Fundos Voluntários 2010</td>
+										<td><a href="other/Informes-ejecucion-2010-SEGIB-2CNRCXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Informe E Aprovação Da Prorroga Do Auditor Externo</td>
+										<td><a href="other/INFRENAUD-SEGIB-RMREXX-P.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Projeto Declaração de Mar Del Plata</td>
+										<td><a href="other/Proy-Decl-XX-Cumbre-Ibero-P-Version-3.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
 									<tr>
 										<td colspan="2" height="25"><img src="images/null.gif" width="1" height="25"></td>
 									</tr>
