@@ -30,6 +30,7 @@
     <form-bean name="SystemUserABM" type="com.tdil.simon.struts.forms.SystemUserABMForm"/>
     <form-bean name="ListDocumentsForDesign" type="com.tdil.simon.struts.forms.ListForm"/>
     <form-bean name="ViewVersionPopup" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="AssistantHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -49,6 +50,8 @@
       <forward name="signShow" redirect="true" path="/goToSignShow.st"/>
       <forward name="initChangePassword" path="/initChangePassword.st"/>
       <forward name="designer" path="/goToListDocumentForDesign.st"/>
+      <forward name="assistant" path="/goToAssistantHome.st"/>
+      <forward name="translator" path="/goToTranslatorHome.st"/>
     </action>
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
@@ -281,6 +284,14 @@
     <action path="/livePreviewParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.LivePreviewParagraph" scope="session">
     </action>
     <action path="/getCompleteDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.delegate.GetCompleteDocument" scope="session">
+    </action>
+    <action path="/goToAssistantHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
+      <forward name="continue" path="/assistantHome.jsp"/>
+    </action>
+    <action path="/goToTranslatorHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
+      <forward name="continue" path="/assistantHome.jsp"/>
+    </action>
+    <action path="/addPrivateObservationAction" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.AddPrivateObservationAction" scope="session">
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

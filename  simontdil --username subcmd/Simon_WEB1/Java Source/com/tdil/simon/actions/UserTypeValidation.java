@@ -16,6 +16,18 @@ public enum UserTypeValidation {
 			return user.isModerator();
 		}
 	},
+	ASSISTANT {
+		@Override
+		public boolean isValid(SystemUser user) {
+			return user.isAssistant();
+		}
+	},
+	TRANSLATOR {
+		@Override
+		public boolean isValid(SystemUser user) {
+			return user.isTranslator();
+		}
+	},
 	DELEGATE {
 		@Override
 		public boolean isValid(SystemUser user) {

@@ -35,7 +35,7 @@ import com.tdil.simon.utils.DelegateSiteCache;
 
 public class GetDelegateSiteStatus extends AjaxSimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE};
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE, UserTypeValidation.ASSISTANT};
 	
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -65,11 +65,11 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			return result;
 		}
 		Document doc = DelegateSiteCache.getDocumentUnderWork();
-		if (doc.isTypeOne() && !loggedUserForm.getUser().isTypeOne()) {
+		if (doc.isTypeOne() && loggedUserForm.getUser().isDelegate() && !loggedUserForm.getUser().isTypeOne()) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}
-		if (doc.isTypeTwo() && !loggedUserForm.getUser().isTypeTwo()) {
+		if (doc.isTypeTwo() && loggedUserForm.getUser().isDelegate() && !loggedUserForm.getUser().isTypeTwo()) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}

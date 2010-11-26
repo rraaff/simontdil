@@ -34,6 +34,8 @@ public class SystemUser extends PersistentObject implements Serializable{
 	private boolean typeTwo = false;
 	private boolean canSign = false;
 	private boolean designer = false;
+	private boolean assistant = false;
+	private boolean translator = false;
 	
 	private boolean passwordResetRequest = false;
 	private boolean temporaryPassword = false;
@@ -179,6 +181,22 @@ public class SystemUser extends PersistentObject implements Serializable{
 
 	public void setCanProposeParagraph(boolean canProposeParagraph) {
 		this.canProposeParagraph = canProposeParagraph;
+	}
+
+	public boolean isAssistant() {
+		return assistant;
+	}
+
+	public void setAssistant(boolean assistant) {
+		this.assistant = assistant;
+	}
+
+	public boolean isTranslator() {
+		return translator;
+	}
+
+	public void setTranslator(boolean translator) {
+		this.translator = translator;
 	}
 
 }
