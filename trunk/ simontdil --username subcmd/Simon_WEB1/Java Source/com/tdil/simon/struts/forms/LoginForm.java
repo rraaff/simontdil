@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
@@ -59,7 +62,7 @@ public class LoginForm extends ActionForm {
 		this.operation = operation;
 	}
 	
-	public void init(SystemUser user) throws SQLException {
+	public void init(SystemUser user) throws SQLException, ValidationException {
 		if (user.isDelegate()) {
 			if (Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
 				return;
@@ -82,6 +85,25 @@ public class LoginForm extends ActionForm {
 			if (Version.IN_SIGN.equals(version.getStatus())) {
 				this.redirectToNegotiation = true;
 				return;
+			}
+		} else {
+			if (!user.isAdministrator() && !user.isDesigner()) {
+				if (user.isAssistant() || user.isTranslator()) {
+					if (Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
+						throw new ValidationException(new ValidationError(ValidationErrors.NOT_IN_NEGOTIATION));
+					}
+					Document doc = DocumentDAO.getDocumentUnderWork();
+					if (doc == null) {
+						throw new ValidationException(new ValidationError(ValidationErrors.NOT_IN_NEGOTIATION));
+					}
+					Version version = VersionDAO.getVersionUnderWork();
+					if (version != null && Version.IN_NEGOTIATION.equals(version.getStatus())) {
+						this.redirectToNegotiation = true;
+						return;
+					} else {
+						throw new ValidationException(new ValidationError(ValidationErrors.NOT_IN_NEGOTIATION));
+					}
+				}
 			}
 		}
 	}

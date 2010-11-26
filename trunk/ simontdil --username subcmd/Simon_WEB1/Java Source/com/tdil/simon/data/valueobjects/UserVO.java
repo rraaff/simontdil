@@ -56,6 +56,20 @@ public class UserVO extends SystemUser {
 			result.append(ApplicationResources.getMessage("designer"));
 			insertSeparator = true;
 		}
+		if (this.isAssistant()) {
+			if (insertSeparator) {
+				result.append(", ");
+			}
+			result.append(ApplicationResources.getMessage("assistant"));
+			insertSeparator = true;
+		}
+		if (this.isTranslator()) {
+			if (insertSeparator) {
+				result.append(", ");
+			}
+			result.append(ApplicationResources.getMessage("translator"));
+			insertSeparator = true;
+		}
 		return result.toString();
 	}
 	

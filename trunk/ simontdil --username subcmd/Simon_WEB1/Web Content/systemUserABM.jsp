@@ -102,6 +102,16 @@ if ( dw_scrollObj.isSupported() ) {
 								<td align="left">Diseñador <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="assistant"/></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">Asistente <html:errors property="systemuser.assistant" /></td>
+							</tr>
+							<tr>
+								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="translator"/></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">Traductor <html:errors property="systemuser.translator" /></td>
+							</tr>
+							<tr>
 								<td colspan="3" height="23"><img src="images/null.gif" width="1" height="23"></td>
 							</tr>
 							<tr>

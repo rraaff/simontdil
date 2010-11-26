@@ -34,6 +34,8 @@ CREATE  TABLE `SIMON`.`SYSTEMUSER` (
   `passwordResetRequest` INT NULL ,
   `temporaryPassword` INT NULL ,
   `canProposeParagraph` INT NULL ,
+  `assistant` INT NULL ,
+  `translator` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `UNAME` (`username` ASC) );

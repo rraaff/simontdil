@@ -34,6 +34,8 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 	private boolean administrator;
 	private boolean moderator;
 	private boolean designer;
+	private boolean assistant;
+	private boolean translator;
 	
 	private List<UserVO> allUsers;
 	private Country host;
@@ -93,6 +95,8 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		toModify.setAdministrator(this.isAdministrator());
 		toModify.setModerator(this.isModerator());
 		toModify.setDesigner(this.isDesigner());
+		toModify.setAssistant(this.isAssistant());
+		toModify.setTranslator(this.isTranslator());
 		SystemUserDAO.updateUser(toModify);
 	}
 	private void addUser() throws SQLException {
@@ -115,6 +119,8 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		user.setPasswordResetRequest(false);
 		user.setTemporaryPassword(true);
 		user.setCanProposeParagraph(false);
+		user.setAssistant(this.isAssistant());
+		user.setTranslator(this.isTranslator());
 		user.setDeleted(false);
 		SystemUserDAO.insertUser(user);
 		try {
@@ -132,6 +138,8 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		this.administrator = false;
 		this.moderator = false;
 		this.designer = false;
+		this.assistant = false;
+		this.translator = false;
 		
 	}
 	public void init() throws SQLException {
@@ -155,8 +163,9 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 			this.administrator = systemUser.isAdministrator();
 			this.moderator = systemUser.isModerator();
 			this.designer = systemUser.isDesigner();
+			this.assistant = systemUser.isAssistant();
+			this.translator = systemUser.isTranslator();
 		}
-		
 	}
 	
 	@Override
@@ -164,6 +173,8 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		this.administrator = false;
 		this.moderator = false;
 		this.designer = false;
+		this.assistant = false;
+		this.translator = false;
 	}
 	public void delete(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
@@ -207,9 +218,18 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		SystemUserValidation.validateUsername(this.username, "systemuser.username", validation);
 		SystemUserValidation.validateName(this.name, "systemuser.name", validation);
 		SystemUserValidation.validateEmail(this.email, "systemuser.email", validation);
-		if(!this.isAdministrator() && !this.isModerator() && !this.isDesigner()) {
+		if(!this.isAdministrator() && !this.isModerator() && !this.isDesigner() && !this.isAssistant() && !this.isTranslator()) {
 			validation.setFieldError("systemuser.administrator", "systemuser.administrator." + ValidationErrors.SELECT_USER_TYPE);
 
+		}
+		if (this.isModerator() && this.isAssistant()) {
+			validation.setFieldError("systemuser.assistant", "systemuser.administrator." + ValidationErrors.MODERATOR_CANNOT_BE_ASSISTANT);
+		}
+		if (this.isModerator() && this.isTranslator()) {
+			validation.setFieldError("systemuser.translator", "systemuser.administrator." + ValidationErrors.MODERATOR_CANNOT_BE_TRANSLATOR);
+		}
+		if (this.isAssistant() && this.isTranslator()) {
+			validation.setFieldError("systemuser.assistant", "systemuser.administrator." + ValidationErrors.ASSISTANT_CANNOT_BE_TRANSLATOR);
 		}
 		return validation;
 	}
@@ -224,5 +244,21 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		if (existsEmail != null && existsEmail.getId() != this.getId()) {
 			validationError.setFieldError("systemuser.email", "delegate.email." + ValidationErrors.USER_ALREADY_EXISTS);
 		}
+	}
+
+	public boolean isAssistant() {
+		return assistant;
+	}
+
+	public void setAssistant(boolean assistant) {
+		this.assistant = assistant;
+	}
+
+	public boolean isTranslator() {
+		return translator;
+	}
+
+	public void setTranslator(boolean translator) {
+		this.translator = translator;
 	}
 }
