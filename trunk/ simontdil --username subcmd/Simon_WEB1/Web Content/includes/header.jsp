@@ -30,6 +30,11 @@
 		if (isAsisstant) { %>
 			<%@ include file="headerAssistant.jsp" %>
 		<%
+		} else {
+			if (isTranslator) { %>
+				<%@ include file="headerTranslator.jsp" %>
+			<%
+			}
 		}
 	}
 } %>

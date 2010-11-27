@@ -1,6 +1,5 @@
 package com.tdil.simon.utils;
 
-import com.tdil.simon.data.model.Site;
 
 public class ParagraphUtils {
 

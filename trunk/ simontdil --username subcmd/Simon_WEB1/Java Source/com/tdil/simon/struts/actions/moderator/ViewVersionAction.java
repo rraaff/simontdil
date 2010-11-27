@@ -1,20 +1,15 @@
 package com.tdil.simon.struts.actions.moderator;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.sql.SQLException;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-import org.xml.sax.SAXException;
 
-import com.lowagie.text.DocumentException;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
@@ -26,10 +21,7 @@ import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
-import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.pdf.ExportVersionAsPDF;
-import com.tdil.simon.pdf.ExportVersionAsRTF;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;

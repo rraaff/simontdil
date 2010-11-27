@@ -674,7 +674,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);;
+		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
@@ -923,7 +923,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);;
+		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
@@ -1004,7 +1004,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);;
+		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;

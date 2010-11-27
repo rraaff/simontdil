@@ -31,6 +31,7 @@
     <form-bean name="ListDocumentsForDesign" type="com.tdil.simon.struts.forms.ListForm"/>
     <form-bean name="ViewVersionPopup" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
     <form-bean name="AssistantHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
+    <form-bean name="TranslatorHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -288,10 +289,14 @@
     <action path="/goToAssistantHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
       <forward name="continue" path="/assistantHome.jsp"/>
     </action>
-    <action path="/goToTranslatorHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
-      <forward name="continue" path="/assistantHome.jsp"/>
+    <action path="/goToTranslatorHome" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.GoToTranslatorHome" scope="session">
+      <forward name="continue" path="/translatorHome.jsp"/>
     </action>
     <action path="/addPrivateObservationAction" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.AddPrivateObservationAction" scope="session">
+    </action>
+    <action path="/addTranslatorObservationAction" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.AddTranslationObservationAction" scope="session">
+    </action>
+    <action path="/getTranslatorObservationAction" type="com.tdil.simon.struts.actions.translator.GetTranslationObservationAction" scope="session">
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

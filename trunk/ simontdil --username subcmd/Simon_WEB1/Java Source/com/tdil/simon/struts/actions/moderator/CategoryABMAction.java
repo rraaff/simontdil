@@ -12,14 +12,10 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
-import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
-import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CategoryABMForm;
-import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.utils.LoggerProvider;

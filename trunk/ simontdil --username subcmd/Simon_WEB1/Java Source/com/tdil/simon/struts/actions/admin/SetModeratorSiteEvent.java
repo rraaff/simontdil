@@ -17,7 +17,6 @@ import com.tdil.simon.data.model.Site;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ModeratorSiteForm;
-import com.tdil.simon.utils.DelegateSiteCache;
 
 public class SetModeratorSiteEvent extends SimonAction implements TransactionalActionWithValue {
 

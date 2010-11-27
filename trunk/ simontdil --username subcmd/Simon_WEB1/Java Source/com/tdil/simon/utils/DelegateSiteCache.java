@@ -11,12 +11,15 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.DocumentDAO;
+import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
+import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
@@ -27,6 +30,9 @@ public class DelegateSiteCache {
 	public static String delegateSiteStatus;
 	public static Document documentUnderWork;
 	public static Paragraph negotiatedParagraph;
+	public static Observation portuguesParagrah;
+
+
 	public static List<Paragraph> allParagraph;
 	public static VersionVO previousVersion;
 	public static Version version;
@@ -44,6 +50,7 @@ public class DelegateSiteCache {
 						negotiatedParagraph = ParagraphDAO.getParagraph(Site.getDELEGATE_SITE().getDataId());
 						if (negotiatedParagraph != null) {
 							allParagraph = ParagraphDAO.selectNotDeletedParagraphsFor(negotiatedParagraph.getVersionId());
+							refreshPortuguesParagraph(negotiatedParagraph);
 						} else {
 							allParagraph = new ArrayList<Paragraph>();
 						}
@@ -65,6 +72,35 @@ public class DelegateSiteCache {
 			getLog().error(e.getMessage(), e);
 		} catch (ValidationException e) {
 			getLog().error(e.getMessage(), e);
+		}
+	}
+	
+	public static boolean shouldProceedToNegotiation(SystemUser user) {
+		if (user.isDelegate()) {
+			Document doc = getDocumentUnderWork();
+			if (doc == null) {
+				return false;
+			} else {
+				if (doc.isTypeOne() && user.isTypeOne()) {
+					return true;
+				}
+				if (doc.isTypeTwo() && user.isTypeTwo()) {
+					return true;
+				}
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
+	private static void refreshPortuguesParagraph(Paragraph paragraph) throws SQLException {
+		portuguesParagrah = ObservationDAO.getPortuguesFor(paragraph.getId());
+	}
+	
+	public static synchronized void setPortuguesParagraphIfCurrent(Observation observation) throws SQLException {
+		if (negotiatedParagraph != null && negotiatedParagraph.getId() == observation.getParagraphId()) {
+			portuguesParagrah = observation;
 		}
 	}
 	
@@ -128,5 +164,9 @@ public class DelegateSiteCache {
 	
 	public static synchronized List<Paragraph> getAllParagraphs() {
 		return allParagraph;
+	}
+	
+	public static synchronized Observation getPortuguesParagrah() {
+		return portuguesParagrah;
 	}
 }

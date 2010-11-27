@@ -13,7 +13,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
-import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.database.TransactionProvider;
 

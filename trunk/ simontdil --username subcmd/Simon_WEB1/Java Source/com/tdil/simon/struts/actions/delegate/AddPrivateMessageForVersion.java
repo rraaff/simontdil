@@ -6,8 +6,6 @@ import java.util.HashMap;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import net.sf.json.JSONObject;
-
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -22,7 +20,6 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
-import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.PrivateMessageForm;
 
 public class AddPrivateMessageForVersion extends AjaxSimonAction implements TransactionalActionWithValue {

@@ -15,6 +15,7 @@
     from OBSERVATION
     where paragraphId = #id#
     AND privateObservation = 0
+    AND portuguesTranslation = 0
     order by creationDate
   </select>
   
@@ -24,6 +25,7 @@
    	WHERE deleted = 0
    	AND paragraphId = #id#
    	AND privateObservation = 0
+   	AND portuguesTranslation = 0
    	order by creationDate
   </select>
   
@@ -42,6 +44,7 @@
    	AND OBSERVATION.privateObservation = 1
    	AND SYSTEMUSER.countryId = COUNTRY.id
    	AND OBSERVATION.deleted = 0
+   	AND OBSERVATION.portuguesTranslation = 0
    	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
   </select>
   
@@ -60,6 +63,7 @@
    	AND OBSERVATION.privateObservation = 1
    	AND SYSTEMUSER.countryId = COUNTRY.id
    	AND OBSERVATION.deleted = 0
+   	AND OBSERVATION.portuguesTranslation = 0
    	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
   </select>
   
@@ -78,6 +82,7 @@
    	AND OBSERVATION.privateObservation = 0
    	AND SYSTEMUSER.countryId = COUNTRY.id
    	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
    	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
   </select>
   
@@ -89,6 +94,7 @@
    	AND PARAGRAPH.id = OBSERVATION.paragraphId
    	AND OBSERVATION.privateObservation = 0
    	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
   </select>
   
   
@@ -106,6 +112,7 @@
    	AND OBSERVATION.privateObservation = 0
    	AND SYSTEMUSER.countryId = COUNTRY.id
    	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
    	<isNotNull prepend="AND" property="versionId">
     	(PARAGRAPH.versionId = #versionId#)
     </isNotNull>
@@ -131,6 +138,14 @@
     where id = #id#
   </select>
   
+  <select id="selectPortuguesByParagraphId" parameterClass="int" resultClass="Observation">
+    select
+      *
+    from OBSERVATION
+    where OBSERVATION.paragraphId = #id#
+    AND OBSERVATION.portuguesTranslation = 1
+  </select>
+  
   <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
     select
       count(1) as count, IFNULL(max(OBSERVATION.id),0) as maxId
@@ -140,6 +155,7 @@
     and OBSERVATION.paragraphId = PARAGRAPH.id
     and OBSERVATION.privateObservation = 1
     and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
   </select>
   
     <select id="countPrivateObservationsForNegotiatedParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
@@ -149,6 +165,7 @@
     where OBSERVATION.paragraphId = #id#
     and OBSERVATION.privateObservation = 1
     and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
   </select>
   
   
@@ -159,13 +176,14 @@
     where OBSERVATION.paragraphId = #id#
     and OBSERVATION.privateObservation = 1
     and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
   </select>
  
    <insert id="insertObservation" parameterClass="Observation">
     insert into OBSERVATION (
-      id, paragraphId, userId, addNewParagraph, privateObservation, creationDate, observationText, deleted
+      id, paragraphId, userId, addNewParagraph, privateObservation, creationDate, observationText, portuguesTranslation, deleted
     ) values (
-      #id#, #paragraphId#, #userId#, #addNewParagraph#, #privateObservation#, #creationDate#, #observationText#, #deleted#
+      #id#, #paragraphId#, #userId#, #addNewParagraph#, #privateObservation#, #creationDate#, #observationText#, #portuguesTranslation#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -182,6 +200,13 @@
   <update id="logDeleteObservation" parameterClass="Observation">
     update OBSERVATION set
       deleted = 1
+    where
+      id = #id#
+  </update>
+  
+  <update id="updatePortugues" parameterClass="Observation">
+    update OBSERVATION set
+      observationText = #observationText#
     where
       id = #id#
   </update>

@@ -1,25 +1,11 @@
 package com.tdil.simon.data.ibatis;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 
-import org.apache.commons.io.IOUtils;
-
-import com.tdil.simon.data.model.Document;
-import com.tdil.simon.data.model.Observation;
-import com.tdil.simon.data.model.Paragraph;
-import com.tdil.simon.data.model.ReferenceDocument;
-import com.tdil.simon.data.model.Signature;
-import com.tdil.simon.data.model.Site;
-import com.tdil.simon.data.model.SystemUser;
-import com.tdil.simon.data.model.Version;
 import com.tdil.simon.web.SystemConfig;
 
 public class Test {

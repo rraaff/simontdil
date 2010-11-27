@@ -10,7 +10,6 @@ import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.utils.LoggerProvider;
-import com.tdil.simon.web.DownloadController;
 
 public class CountryValidation {
 
