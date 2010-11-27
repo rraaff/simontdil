@@ -86,6 +86,7 @@ CREATE  TABLE `SIMON`.`OBSERVATION` (
   `privateObservation` INT NULL ,
   `creationDate` DATETIME NULL ,
   `observationText` MEDIUMTEXT NULL ,
+  `portuguesTranslation` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
   
