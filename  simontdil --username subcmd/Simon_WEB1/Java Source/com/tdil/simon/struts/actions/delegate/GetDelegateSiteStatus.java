@@ -4,12 +4,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import net.sf.json.JSONObject;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -18,8 +15,6 @@ import org.apache.struts.action.ActionMapping;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.data.ibatis.DocumentDAO;
-import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
@@ -27,15 +22,14 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
-import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
-import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.LoggedUserForm;
 import com.tdil.simon.utils.DelegateSiteCache;
 
 public class GetDelegateSiteStatus extends AjaxSimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE, UserTypeValidation.ASSISTANT};
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] {UserTypeValidation.DELEGATE, UserTypeValidation.ASSISTANT, 
+		UserTypeValidation.TRANSLATOR};
 	
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -75,6 +69,9 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 		}
 		if (Site.IN_NEGOTIATION.endsWith(delegateSiteStatus)) {
 			result.put("sitestatus", Site.IN_NEGOTIATION);
+			if (loggedUserForm.getUser().isAssistant() || loggedUserForm.getUser().isTranslator()) {
+				return result;
+			}
 			Paragraph paragraph = DelegateSiteCache.getNegotiatedParagraph();
 			if (paragraph != null) {
 				int pVersion = Integer.valueOf(loggedUserForm.getParagraphVersion());
@@ -83,13 +80,16 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 					result.put("paragraphNumber", paragraph.getParagraphNumber());
 					result.put("paragraphText", "");
 					result.put("paragraphVersion", loggedUserForm.getParagraphVersion());
+					result.put("hasTranslation", DelegateSiteCache.getPortuguesParagrah() != null ? "true" : "false");
 				} else {
 					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
 					result.put("paragraphText", String.valueOf(paragraph.getParagraphText()));
 					result.put("paragraphVersion", String.valueOf(paragraph.getVersionNumber()));
+					result.put("hasTranslation", DelegateSiteCache.getPortuguesParagrah() != null ? "true" : "false");
 				}
 			} else {
 				result.put("paragraphNumber", "0");
+				result.put("hasTranslation", "false");
 			}
 			return result;
 		}

@@ -17,6 +17,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.AjaxSimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 
 public class MoveToParagraphAction extends AjaxSimonAction implements TransactionalActionWithValue {
 
@@ -37,6 +38,7 @@ public class MoveToParagraphAction extends AjaxSimonAction implements Transactio
 		createDocumentForm.setNewParagraphText(request.getParameter("newParagraphText"));
 		HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, createDocumentForm);
 		//JSONObject json = JSONObject.fromObject(result);
+		DelegateSiteCache.refresh();
 		this.writeJsonResponse(result, response);
 		return null;
 	}

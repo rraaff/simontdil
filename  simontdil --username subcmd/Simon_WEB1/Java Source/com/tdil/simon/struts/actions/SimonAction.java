@@ -13,8 +13,8 @@ import org.apache.struts.action.ActionMessages;
 
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
 
 public abstract class SimonAction extends Action {
@@ -41,10 +41,8 @@ public abstract class SimonAction extends Action {
 			getLog().fatal("Invalid action for " + this.getClass().getName() + " user " + user.getName());
 			return mapping.findForward("invalidAction");
 		}
-		if (this.getLoggedUser(request).isDelegate()) {
-			if (Site.IN_NEGOTIATION.equals(Site.getDELEGATE_SITE().getStatus())) {
-				return mapping.findForward("goToDelegateNegotiation");
-			} 
+		if (DelegateSiteCache.shouldProceedToNegotiation(this.getLoggedUser(request))){
+			return mapping.findForward("goToDelegateNegotiation");
 		} 
 		return this.basicExecute(mapping, form, request, response);
 	}

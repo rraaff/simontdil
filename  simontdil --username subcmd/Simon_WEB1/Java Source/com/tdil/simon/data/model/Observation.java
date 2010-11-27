@@ -12,7 +12,14 @@ public class Observation extends PersistentObject {
 	private boolean privateObservation;
 	private Date creationDate = new Date();
 	private String observationText;
+	private boolean portuguesTranslation = false;
 	
+	public boolean isPortuguesTranslation() {
+		return portuguesTranslation;
+	}
+	public void setPortuguesTranslation(boolean portuguesTranslation) {
+		this.portuguesTranslation = portuguesTranslation;
+	}
 	public int getParagraphId() {
 		return paragraphId;
 	}

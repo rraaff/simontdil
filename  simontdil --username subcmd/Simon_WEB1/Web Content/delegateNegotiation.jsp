@@ -127,6 +127,7 @@ function openDocs(){
 	var lastText = "";
 	var lastParagraphVersion = "0";
 	var inProgress = false;
+	var retries = 0;
 	
 	var intro = "abcdefghijklmnopqrstuvwxyz";
 	
@@ -142,8 +143,27 @@ function openDocs(){
 		}
 	}
 	
+	function viewPortugues() {
+		var pVersion = '<bean:write name="DelegateNegotiationForm" property="versionVO.version.id" />';
+		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getTranslatorObservationAction.st"/>', 
+			onSuccess: function(json, responseText){
+				var result = json.result;
+				   if ('OK' == result) {
+				   	if (json.exists == 'true') {
+				   		alert(json.translation);
+				   	} else {
+				   		alert("");
+				   	}
+				   } else {
+					alert("");
+				}
+			}
+		}).post({'pNumber':lastNumber, 'pVersion':pVersion})
+	}
+	
 	function getDelegateSiteStatus() {
-		if (!inProgress) {
+		if (!inProgress || retries > 60) {
+			retries = 0;
 			inProgress = true;
 			var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getDelegateSiteStatus.st"/>', onSuccess: function(json, responseText){
 				inProgress = false;
@@ -163,6 +183,11 @@ function openDocs(){
 			        	<% } %>
 			        } else {
 			        	if (sitestatus == 'IN_NEGOTIATION') {
+			        		if (json.hasTranslation == 'true') {
+			        			document.getElementById("viewPortugues").disabled = false;
+			        		} else {
+			        			document.getElementById("viewPortugues").disabled = true;
+			        		}
 			        		var paragraphNumber = json.paragraphNumber;
 			        		var paragraphText = json.paragraphText;
 			        		var paragraphVersion = json.paragraphVersion;
@@ -200,6 +225,8 @@ function openDocs(){
 		        }
 		      }
 		   }).get({'paragraphVersion': lastParagraphVersion, 'paragraphNumber': lastNumber});
+		} else {
+			retries = retries + 1;
 		}
 	}
 	var timer = setInterval("getDelegateSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
@@ -309,6 +336,9 @@ function openDocs(){
 					<td width="100%">
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="workTable">
+							<tr>
+								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+							</tr>
 							<tr>
 								<td colspan="2" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>

@@ -48,6 +48,10 @@ public class ObservationDAO {
 	public static void logicallyDeleteObservation(Observation Observation) throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteObservation", Observation);
 	}
+	
+	public static void updatePortuguesText(Observation Observation) throws SQLException {
+		IBatisManager.sqlMapper.update("updatePortugues", Observation);
+	}
 
 	public static void logicallyDeleteObservationById(int id) throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteObservationById", id);
@@ -66,5 +70,9 @@ public class ObservationDAO {
 
 	public static Integer countPrivateObservationsForParagrapth(int paragraphdId) throws SQLException {
 		return (Integer) IBatisManager.sqlMapper.queryForObject("countPrivateObservationsForParagrapth", paragraphdId);
+	}
+
+	public static Observation getPortuguesFor(int paragraphId) throws SQLException {
+		return (Observation) IBatisManager.sqlMapper.queryForObject("selectPortuguesByParagraphId", paragraphId);
 	}
 }

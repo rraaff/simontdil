@@ -18,7 +18,6 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 
-import com.tdil.simon.actions.AbstractAction;
 import com.tdil.simon.actions.response.ActionResponse;
 import com.tdil.simon.actions.response.Error;
 import com.tdil.simon.actions.response.ResponseType;

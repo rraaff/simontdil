@@ -3,7 +3,7 @@ package com.tdil.simon.actions.validations;
 import org.apache.commons.fileupload.FileItem;
 import org.apache.log4j.Logger;
 import org.apache.struts.upload.FormFile;
-import org.xhtmlrenderer.simple.extend.form.FormField;
+
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.utils.LoggerProvider;

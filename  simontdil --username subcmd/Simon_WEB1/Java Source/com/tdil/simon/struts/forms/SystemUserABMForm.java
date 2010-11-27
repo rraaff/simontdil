@@ -7,11 +7,9 @@ import javax.mail.MessagingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.log4j.Logger;
-import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.SystemUserValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;

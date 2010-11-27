@@ -25,7 +25,6 @@ import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
-import com.tdil.simon.struts.actions.delegate.SignVersionAction;
 import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.web.SystemConfig;
 

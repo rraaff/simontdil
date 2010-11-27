@@ -14,7 +14,6 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
-import com.tdil.simon.struts.forms.CategoryABMForm;
 import com.tdil.simon.struts.forms.ListForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;

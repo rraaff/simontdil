@@ -140,7 +140,7 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isAdministrator || isDesigner) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
-<form name="refreshForm" action="goToAssistantHome.st">
+<form name="refreshForm" action="goToTranslatorHome.st">
 </form>
 <div id="content">
 	<div id="alcien" style="height:560px; padding-top:20px;">
@@ -150,13 +150,13 @@ if ( dw_scrollObj.isSupported() ) {
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3" class="titleDocInModule"><bean:write name="AssistantHome" property="version.document.title" /></td>
+						<td colspan="3" class="titleDocInModule"><bean:write name="TranslatorHome" property="version.document.title" /></td>
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td width="60" align="left">Versi&oacute;n:</td>
-						<td width="30"><div id="versionStrong"><bean:write name="AssistantHome" property="version.version.number" /></div></td>
-						<td align="left"><bean:write name="AssistantHome" property="version.version.name" /></td>
+						<td width="30"><div id="versionStrong"><bean:write name="TranslatorHome" property="version.version.number" /></div></td>
+						<td align="left"><bean:write name="TranslatorHome" property="version.version.name" /></td>
 					</tr>
 				</table>
 			</div>
@@ -173,29 +173,35 @@ if ( dw_scrollObj.isSupported() ) {
 										var alreadyReplaced = false;
 										var editor;
 										
-										function refreshEditorContents(selectObj) {
+										function refreshEditorContents(editor, selectObj) {
+											var paragraphNumber = document.getElementById('pNumber').value;
 											var paragraphtext = document.getElementById('p_' + selectObj.value).innerHTML;
-											editor.setData(extractParagraphContent(paragraphtext));
+											editor.setData("Consultado...");
+											var pVersion = '<bean:write name="TranslatorHome" property="version.version.id" />';
+											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getTranslatorObservationAction.st"/>', onSuccess: function(json, responseText){
+												var errorResult = json.error;
+												if ('notLogged' == errorResult) {
+													window.location='<html:rewrite page="/login.jsp"/>';
+													return;
+												}
+												var result = json.result;
+											   if ('OK' == result) {
+											   	if (json.exists == 'true') {
+											   		editor.setData(json.translation);
+											   	} else {
+											   		editor.setData("");
+											   	}
+											   } else {
+												editor.setData("");
+											}
+											}}).post({'pNumber':paragraphNumber, 'pVersion':pVersion});
 										}
 										
 										function extractParagraphContent(content) {
 											return content.substring(content.indexOf('.') + 1, content.length);
 										}
 										
-										function clickNewPar(chkObj) {
-											if (chkObj.checked) {
-												document.getElementById('newParTextTD').style.display = 'block';
-												document.getElementById('newParTextTDLabel').style.display = 'block';
-											} else {
-												document.getElementById('newParTextTD').style.display = 'none';
-												document.getElementById('newParTextTDLabel').style.display = 'none';
-											}
-										}
-										
-										function addObservation() {
-											document.getElementById('pNewParagraph').checked = false;
-											document.getElementById('newParTextTD').style.display = 'none';
-											document.getElementById('newParText').value = '';
+										function modifyTranslation() {
 											if ( editor )
 												return;
 											editor = CKEDITOR.appendTo( 'editor', {
@@ -206,13 +212,10 @@ if ( dw_scrollObj.isSupported() ) {
 												baseFloatZIndex: 100002
 											});
 											document.getElementById('outerdiv').style.display = '';
-											refreshEditorContents(document.getElementById('pNumber'));
+											refreshEditorContents(editor, document.getElementById('pNumber'));
 										}
 										
 										function addObservationFor(pObj, pNumber) {
-											document.getElementById('pNewParagraph').checked = false;
-											document.getElementById('newParTextTD').style.display = 'none';
-											document.getElementById('newParText').value = '';
 											if ( editor )
 												return;
 											editor = CKEDITOR.appendTo( 'editor', {
@@ -221,7 +224,7 @@ if ( dw_scrollObj.isSupported() ) {
 												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
 												height:"400", width:"800",
 												baseFloatZIndex: 100002
-											}, extractParagraphContent(pObj.innerHTML));
+											}, "");
 											var pNumberObj = document.getElementById('pNumber');
 											var opts = pNumberObj.options;
 											var index = 0;
@@ -230,6 +233,7 @@ if ( dw_scrollObj.isSupported() ) {
 											}
 											opts[index].selected = true;
 											document.getElementById('outerdiv').style.display = '';
+											refreshEditorContents(editor, document.getElementById('pNumber'));
 										}
 										
 										function cancelAdd() {
@@ -255,13 +259,9 @@ if ( dw_scrollObj.isSupported() ) {
 									
 										function basicDoAdd() {
 											var paragraphNumber = document.getElementById('pNumber').value;
-											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
 											var pText = editor.getData();
-											if (document.getElementById('pNewParagraph').checked) {
-												pText = document.getElementById('newParText').value + " - " + pText;
-											}
-											var pVersion = '<bean:write name="AssistantHome" property="version.version.id" />';
-											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addPrivateObservationAction.st"/>', onSuccess: function(json, responseText){
+											var pVersion = '<bean:write name="TranslatorHome" property="version.version.id" />';
+											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addTranslatorObservationAction.st"/>', onSuccess: function(json, responseText){
 												var errorResult = json.error;
 												if ('notLogged' == errorResult) {
 													window.location='<html:rewrite page="/login.jsp"/>';
@@ -272,31 +272,30 @@ if ( dw_scrollObj.isSupported() ) {
 											   editor.destroy();
 											   editor = null;
 											   document.getElementById('pNumber').selectedIndex = 0;
-											   document.getElementById('pNewParagraph').checked = false;
 												document.getElementById('outerdiv').style.display = 'none';
 												showOKMessage();
 											   } else {
 												var error = json.error;
 												showErrorMessage();
 											}
-											}}).post({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
+											}}).post({'pNumber':paragraphNumber, 'pText':pText, 'pVersion':pVersion});
 						
 										}
 										var notimooObservationManager = new Notimoo();
 										
 										function showOKMessage() {
-											Sexy.info('Su observación ha sido agregada exitosamente.');
+											Sexy.info('Su traducción ha sido agregada exitosamente.');
 										}
 										
 										function showErrorMessage() {
-											Sexy.error('Su observación no ha podido ser agregada.');
+											Sexy.error('Su traducción no ha podido ser agregada.');
 										}
 										
 										function refreshPage() {
 											document.forms['refreshForm'].submit();
 										}
 									</script>
-									<input type="button" value="Añadir observacion" onclick="addObservation();">
+									<input type="button" value="Modificar traducción" onclick="modifyTranslation();">
 							</td>
 					</tr>
 					<tr>
@@ -317,8 +316,8 @@ if ( dw_scrollObj.isSupported() ) {
 				<div id="main">
 					<div id="lyr1">
 					<!-- div id="documentoCompleto" -->
-						<p class="article"><bean:write name="AssistantHome" property="version.document.introduction" /></p>
-						<logic:iterate name="AssistantHome" property="version.paragraphs" id="paragraph"> 
+						<p class="article"><bean:write name="TranslatorHome" property="version.document.introduction" /></p>
+						<logic:iterate name="TranslatorHome" property="version.paragraphs" id="paragraph"> 
 							<p id="p_<bean:write name="paragraph" property="paragraphNumber" />" class="article" onclick="addObservationFor(this, '<bean:write name="paragraph" property="paragraphNumber" />')"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 						</logic:iterate>
 					</div>
@@ -358,27 +357,24 @@ if ( dw_scrollObj.isSupported() ) {
 										<!-- corte tabla template -->
 											<table width="940" border="0" cellspacing="0" cellpadding="0">
 												<tr>
-													<td colspan="10" id="error"></td>
+													<td colspan="7" id="error"></td>
 												<tr>
 												<tr>
-													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
 													<td width="73" height="30" align="right">Párrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
-													<select id="pNumber" onchange="refreshEditorContents(this);">
-														<logic:iterate name="AssistantHome" property="version.paragraphs" id="paragraph"> 
+													<select id="pNumber" onchange="refreshEditorContents(editor, this);">
+														<logic:iterate name="TranslatorHome" property="version.paragraphs" id="paragraph"> 
 															<option value="<bean:write name="paragraph" property="paragraphNumber" />"><bean:write name="paragraph" property="paragraphNumberForDisplay" /></option>
 														</logic:iterate>
 													</select></td>
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td width="20" align="right"><input type="checkbox" id="pNewParagraph" onclick="clickNewPar(this);"></td>
+													<td width="20" align="right"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="200" align="left">Solicitar como nuevo párrafo</td>
-													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicación:</div></td>
-													<td width="348" valign="middle"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext" class="textfield_effect_300"></div></td>
+													<td width="348" valign="middle"></td>
 												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -386,13 +382,13 @@ if ( dw_scrollObj.isSupported() ) {
 												<tr>
 													<td align="right" valign="top">Observación: </td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td colspan="8" align="left"><div id="editor"></div></td>
+													<td colspan="5" align="left"><div id="editor"></div></td>
 												<tr>
 												<tr>
-													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
+													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="7" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->

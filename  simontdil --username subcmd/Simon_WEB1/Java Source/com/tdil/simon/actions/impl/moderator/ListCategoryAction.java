@@ -11,7 +11,6 @@ import com.tdil.simon.actions.response.ActionResponse;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.CategoryDAO;
-import com.tdil.simon.data.ibatis.CountryDAO;
 
 public class ListCategoryAction extends AbstractAction {
 

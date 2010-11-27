@@ -69,12 +69,15 @@ public class LoginForm extends ActionForm {
 			}
 			Document doc = DocumentDAO.getDocumentUnderWork();
 			if (doc == null) {
+				this.redirectToNegotiation = false;
 				return;
 			}
 			if (doc.isTypeOne() && !user.isTypeOne()) {
+				this.redirectToNegotiation = false;
 				return;
 			}
 			if (doc.isTypeTwo() && !user.isTypeTwo()) {
+				this.redirectToNegotiation = false;
 				return;
 			}
 			Version version = VersionDAO.getVersionUnderWork();

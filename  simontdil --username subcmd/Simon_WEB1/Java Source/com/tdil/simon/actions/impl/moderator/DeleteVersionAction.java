@@ -12,7 +12,6 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
-import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;

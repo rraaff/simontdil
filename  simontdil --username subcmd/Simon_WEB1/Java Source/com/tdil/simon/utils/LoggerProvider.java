@@ -62,7 +62,7 @@ public class LoggerProvider {
 			DOMConfigurator.configure(logFilePath);
 			Logger logger;
 			while (loggersEnum.hasMoreElements()) {
-				logger = (Logger) loggersEnum.nextElement();
+				logger = loggersEnum.nextElement();
 				if (logger != null && logger.getName() != null) {
 					addLogger(logger.getName(), logger);
 				}
@@ -98,7 +98,7 @@ public class LoggerProvider {
 	 * @return Logger
 	 */
 	private static Logger getLogger(String loggerName) {
-		Logger logger = (Logger) getLoggers().get(loggerName);
+		Logger logger = getLoggers().get(loggerName);
 		//In the case that the loggerName represents a new logger
 		//we create it and put it in the map
 		if (logger == null) {

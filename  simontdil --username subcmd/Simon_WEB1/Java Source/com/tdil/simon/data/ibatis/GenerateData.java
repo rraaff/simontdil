@@ -4,10 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import com.tdil.simon.data.model.Country;
-import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.Site;
-import com.tdil.simon.data.model.SystemUser;
 
 public class GenerateData {
 

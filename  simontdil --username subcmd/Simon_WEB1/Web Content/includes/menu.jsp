@@ -36,6 +36,20 @@
 				</ul>
 			</li>
 			<% } %>
+			<% if (isTranslator) { %>
+			<li><a class="trigger" href="#">Traductor</a>
+				<ul>
+					<li><html:link action="/goToTranslatorHome" >Home de Traductor</html:link></li>
+				</ul>
+			</li>
+			<% } %>
+			<% if (isAsisstant) { %>
+			<li><a class="trigger" href="#">Asistente</a>
+				<ul>
+					<li><html:link action="/goToAssistantHome" >Home de Asistentes</html:link></li>
+				</ul>
+			</li>
+			<% } %>
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#">Modo negociación</a>
 				<ul>
