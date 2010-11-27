@@ -150,12 +150,25 @@ function openDocs(){
 				var result = json.result;
 				   if ('OK' == result) {
 				   	if (json.exists == 'true') {
-				   		alert(json.translation);
+				   		//alert(json.translation);
+				   		box = new LightFace({ 
+				 			title: 'Traduccion al portugues', 
+							width: 400,
+							height: 300,
+				  			content: json.translation,
+				 			buttons: [
+								{
+									title: 'Cerrar',
+									event: function() { this.close(); }
+								}
+							]
+				 		});
+				 		box.open();
 				   	} else {
-				   		alert("");
+				   		// nothing to do
 				   	}
 				   } else {
-					alert("");
+					// nothing to do
 				}
 			}
 		}).post({'pNumber':lastNumber, 'pVersion':pVersion})
