@@ -23,6 +23,14 @@ public class Paragraph extends PersistentObject {
 		this.versionId = versionId;
 	}
 	
+	public String getParagraphDetailForDisplay() {
+		if (this.getNumberDetail() == null || this.getNumberDetail().length() == 0) {
+			 return "";
+		} else {
+			return " " + this.getNumberDetail();
+		}
+	}
+	
 	public static int extractParagraphNumberFromDisplay(String destination) {
 		try {
 			// if number

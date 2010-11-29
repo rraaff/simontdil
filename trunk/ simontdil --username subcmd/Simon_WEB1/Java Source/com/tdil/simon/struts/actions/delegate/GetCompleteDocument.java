@@ -61,12 +61,15 @@ public class GetCompleteDocument extends AjaxSimonAction {
 			return result;
 		}
 		List<String> pNumbers = new ArrayList<String>();
+		List<String> pComments = new ArrayList<String>();
 		List<String> pTexts = new ArrayList<String>();
 		for (Paragraph p : DelegateSiteCache.getAllParagraphs()) {
 			pNumbers.add(String.valueOf(p.getParagraphNumber()));
+			pComments.add(p.getNumberDetail() != null ? p.getNumberDetail() : "");
 			pTexts.add(p.getParagraphText());
 		}
 		result.put("paragraphNumber", pNumbers.toArray(new String[0]));
+		result.put("paragraphComments", pComments.toArray(new String[0]));
 		result.put("paragraph", pTexts.toArray(new String[0]));
 		return result;
 	}

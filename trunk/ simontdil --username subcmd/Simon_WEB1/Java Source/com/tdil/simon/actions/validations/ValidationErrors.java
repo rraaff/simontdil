@@ -78,4 +78,5 @@ public interface ValidationErrors {
 	String DETAIL_TOO_LONG_ERROR = "DETAIL_TOO_LONG";
 	
 	String NOT_IN_NEGOTIATION = "NOT_IN_NEGOTIATION";
+	String CAN_NOT_CONTAIN_DOT = "CAN_NOT_CONTAIN_DOT";
 }

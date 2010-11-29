@@ -164,7 +164,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					<div id="main" style="background-color:#eeeeee; width:660px; height:422px; overflow:scroll;">
 						<p class="article"><bean:write name="ViewVersionPopup" property="version.document.introduction" /></p>
 						<logic:iterate name="ViewVersionPopup" property="version.paragraphs" id="paragraph"> 
-								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+								<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" /><bean:write name="paragraph" property="paragraphDetailForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 						</logic:iterate>
 					</div>
 					<!--/div>
