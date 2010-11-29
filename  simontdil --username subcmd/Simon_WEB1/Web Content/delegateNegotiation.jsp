@@ -318,7 +318,7 @@ function openDocs(){
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-					</div--></td>
+					</div></td-->
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
@@ -350,22 +350,14 @@ function openDocs(){
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="workTable">
 							<tr>
-								<td colspan="2" height="8"><img src="images/null.gif" width="1" height="8"></td>
+								<td height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
 							<tr>
-								<td width="98%" valign="top">
+								<td width="100%" valign="top">
 								<div id="negotiationArea" style="background-color:#eeeeee; width:inherit; height:490px; overflow:scroll;">
-									<div id="lastParagraphText" style="width:100%; height:500px;">  -  </div>
+									<div id="lastParagraphText" style="width:inherit; height:500px;">  -  </div>
 								</div>
 								</td>
-								<td width="30" align="right">
-								<!--div id="scrollbar2" style="width:20px; height:480px; float:right;">
-									<div id="up2"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-									<div id="track2" style="height:456px;">
-										<div id="dragBar2"></div>
-									</div>
-									<div id="down2"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-								</div--></td>
 							</tr>
 							<% if (user.isCanProposeParagraph()) { %>
 							<!--tr>
@@ -373,7 +365,7 @@ function openDocs(){
 							</tr -->
 							<% } %>
 							<tr>
-								<td colspan="2" height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><!-- a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a --><img src="images/null.fig" width="10" height="1"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+								<td height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><!-- a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a --><img src="images/null.fig" width="10" height="1"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template -->
