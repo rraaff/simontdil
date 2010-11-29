@@ -34,8 +34,8 @@
 	border-top-color: #808080;
 }
 .article{
-	font-size: 16px;
-	line-height: 20px;	
+	font-size: 20px;
+	line-height: 24px;	
 }
 </style>
 
@@ -136,57 +136,23 @@
 	<div id="content">
 		<table width="95%" cellpadding="0" cellspacing="0" border="0" align="center">
 			<tr>
-				<td>
-					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-						<tr>
-							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo Original</div></td>
-							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-						</tr>
-						<tr>
-							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-							<td width="100%" height="320" align="left" valign="top">
-							<!-- corte tabla template -->
-								<div id="main1" style="background-color:#eeeeee; width:100%; height:340px; overflow:scroll;">
-								<!--div id="main" style="width:100%; height:320px;">
-									<div id="lyr1" style="width:100%; height:320px;"-->
-									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-										<tr>
-											<td id="originalParagraph">
-												<% if ("".equals(statusMap.get("originalText"))) { %>
-													-
-												<% } else {%>
-													<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>. <%=statusMap.get("originalText")%></p>
-												<% } %>
-											</td>
-										</tr>
-									</table>
-									</div>
-								</div>
-							<!-- corte tabla template --></td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<!--td width="30" align="right">
-								<div id="scrollbar" style="height:350px;">
-									<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-									<div id="track" style="height:326px;">
-										<div id="dragBar"></div>
-									</div>
-									<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-								</div></td-->
-							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-							<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-						</tr>
-						<tr>
-							<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-							<td colspan="2" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
-							<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-						</tr>
-					</table>
-				</td>
+				<td><img src="images/null.gif" width="1" height="17"></td>
 			</tr>
 			<tr>
-				<td><img src="images/null.gif" width="1" height="20"></td>
+				<td><div id="main1" style="background-color:#eeeeee; width:100%; height:2px; overflow:scroll;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+						<tr>
+							<td id="originalParagraph">
+								<% if ("".equals(statusMap.get("originalText"))) { %>
+									-
+								<% } else {%>
+									<p class='article'><%=statusMap.get("paragraphNumberForDisplay")%>. <%=statusMap.get("originalText")%></p>
+								<% } %>
+							</td>
+						</tr>
+					</table>
+					</div>
+				</td>
 			</tr>
 			<tr>
 				<td>
@@ -201,7 +167,7 @@
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="100%" height="320" align="left" valign="top">
 							<!-- corte tabla template -->
-								<div id="main" style="background-color:#eeeeee; width:100%; height:340px; overflow:scroll;">
+								<div id="main" style="background-color:#eeeeee; width:100%; height:680px; overflow:scroll;">
 								<!--div id="negotiationArea" style="width:100%; height:350px;">
 									<div id="lyr2" style="width:100%; height:326px;"-->
 										<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
@@ -237,6 +203,9 @@
 						</tr>
 					</table>
 				</td>
+			</tr>
+			<tr>
+				<td><img src="images/null.gif" width="1" height="20"></td>
 			</tr>
 		</table>
 	</div>
