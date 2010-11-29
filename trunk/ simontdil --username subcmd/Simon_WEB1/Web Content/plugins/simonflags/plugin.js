@@ -14,7 +14,7 @@ CKEDITOR.plugins.add( 'simonflags',
 			{
 				label : 'Banderas',
 				command : 'simonflags',
-				icon: this.path + 'images/flag.gif'
+				icon: this.path + 'images/flag.png'
 
 			});
 		CKEDITOR.dialog.add( 'simonflags', this.path + 'dialogs/simonflags.js' );

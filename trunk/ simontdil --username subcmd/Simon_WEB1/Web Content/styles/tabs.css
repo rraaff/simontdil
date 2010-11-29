@@ -1,7 +1,8 @@
 /* tabs structure */
 .tab-container	{
 	width:100%;
-	background:#7fc7ec;
+	height:18px;
+	background-color:#7fc7ec;
 	padding-top: 5px;
 	padding-right: 5px;
 	padding-bottom: 0px;
@@ -46,7 +47,7 @@ ul.tabs li a.active	{
 	color:#FFFFFF;
 }
 ul.tabs li a.active:hover	{ text-decoration:none; cursor:default; }
-ul.tabs li:hover	{ text-decoration:underline; background:#40708c; }
+ul.tabs li:hover	{ text-decoration:underline; }
 ul.tabs-content	{ margin:0 0 0 0; padding:0; }
 ul.tabs-content li	{ height:0; overflow:hidden; margin:0; padding:0; }
 

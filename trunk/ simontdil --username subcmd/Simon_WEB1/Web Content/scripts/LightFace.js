@@ -37,7 +37,7 @@ var LightFace = new Class({
 		constrain: false,
 		resetOnScroll: true,
 		baseClass: 'lightface',
-		errorMessage: '<p>The requested file could not be found.</p>'/*,
+		errorMessage: '<p>No se ha encontrado el archivo solicitado.</p>'/*,
 		onOpen: $empty,
 		onClose: $empty,
 		onFade: $empty,

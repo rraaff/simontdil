@@ -152,13 +152,13 @@ function openDocs(){
 				   	if (json.exists == 'true') {
 				   		//alert(json.translation);
 				   		box = new LightFace({ 
-				 			title: 'Traduccion al portugues', 
-							width: 400,
-							height: 300,
+				 			title: 'Tradução do parágrafo', 
+							width: 700,
+							height: 500,
 				  			content: json.translation,
 				 			buttons: [
 								{
-									title: 'Cerrar',
+									title: 'Fechar',
 									event: function() { this.close(); }
 								}
 							]
@@ -283,14 +283,14 @@ function openDocs(){
 					<!-- corte tabla template -->
 						<!--div id="main">
 							<div id="lyr1" -->
-							<div class="clear"></div>
+							<div class="clear"><img src="images/null.gif" width="1" height="10"></div>
 							<div class="tab-container">
 								<ul id="tabs1" class="tabs">
 									<li><a href="">Versi&oacute;n Consolidada</a></li>
 									<li><a href="">Previsualizaci&oacute;n</a></li>
 								</ul>
 							</div>
-							<div class="clear"></div>
+							<div class="clear"><img src="images/null.gif" width="1" height="10"></div>
 							<ul id="contents1" class="tabs-content">
 								<li>
 									<div id="main" style="background-color:#eeeeee; width:inherit; height:440px; overflow:scroll;">
@@ -365,7 +365,7 @@ function openDocs(){
 							</tr -->
 							<% } %>
 							<tr>
-								<td height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><!-- a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a --><img src="images/null.fig" width="10" height="1"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+								<td height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1"><input type="button" value="Ver en portugués" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template -->
