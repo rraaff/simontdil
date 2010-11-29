@@ -140,13 +140,13 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isAdministrator || isDesigner) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
+<div id="content">
 <form name="refreshForm" action="goToTranslatorHome.st">
 </form>
-<div id="content">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
-				<div id="blockTitle1">Documento Principal</div>
+				<div id="blockTitle1">Negocia&ccedil;&atilde;o de documento</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -154,14 +154,14 @@ if ( dw_scrollObj.isSupported() ) {
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td width="60" align="left">Versi&oacute;n:</td>
+						<td width="60" align="left">Vers&atilde;o:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="TranslatorHome" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="TranslatorHome" property="version.version.name" /></td>
 					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2">Acciones disponibles</div>
+				<div id="blockTitle2">Ac&ccedil;&otilde;es Dispon&iacute;veis</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -245,10 +245,10 @@ if ( dw_scrollObj.isSupported() ) {
 										function doAdd() {
 											var pText = editor.getData();
 											if (pText.length == 0) {
-												Sexy.error('Debe ingresar la observación.');
+												Sexy.error('Você deve digitar a tradução do parágrafo.');
 												return;
 											}
-											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "Aceptar", en cambio si desea modificarla o revisarla antes de enviarla, presione "Cancelar"', { onComplete: 
+											Sexy.confirm('Traduzido parágrafo podem ser editados posteriormente. Sem embarlo, uma vez que adicionou a tradução pode ser visto pelos delegados. Verifique se estão corretas. Se você quiser adicionar ou editar clique em "OK", porém se você quiser editar ou revisá-lo antes de enviá-lo, pressione "Cancelar".', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
 										            basicDoAdd();
@@ -284,25 +284,25 @@ if ( dw_scrollObj.isSupported() ) {
 										var notimooObservationManager = new Notimoo();
 										
 										function showOKMessage() {
-											Sexy.info('Su traducción ha sido agregada exitosamente.');
+											Sexy.info('Sua tradução foi adicionada com sucesso.');
 										}
 										
 										function showErrorMessage() {
-											Sexy.error('Su traducción no ha podido ser agregada.');
+											Sexy.error('Sua tradução não foi adicionado.');
 										}
 										
 										function refreshPage() {
 											document.forms['refreshForm'].submit();
 										}
 									</script>
-									<input type="button" value="Modificar traducción" onclick="modifyTranslation();">
+									<input type="button" value="Editar Tradução" onclick="modifyTranslation();">
 							</td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
 					</tr>
 					<tr>
-						<td  align="center"><input type="button" value="Refrescar" onclick="refreshPage();"></td>
+						<td  align="center"><input type="button" value="Atualizar" onclick="refreshPage();"></td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -347,7 +347,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<table width="960" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
+										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Adicionar Tradu&ccedil;&atilde;o</div></td>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -363,7 +363,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" height="30" align="right">Párrafo:</td>
+													<td width="73" height="30" align="right">Par&aacute;grafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(editor, this);">
@@ -380,7 +380,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Observación: </td>
+													<td align="right" valign="top">Texto:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="5" align="left"><div id="editor"></div></td>
 												<tr>
@@ -388,7 +388,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="7" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="7" align="center"><input type="button" onclick="doAdd()" value="   Ok   "> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->
