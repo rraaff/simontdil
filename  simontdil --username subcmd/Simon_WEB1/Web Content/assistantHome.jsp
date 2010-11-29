@@ -140,13 +140,14 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isAdministrator || isDesigner) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
+
+<div id="content">
 <form name="refreshForm" action="goToAssistantHome.st">
 </form>
-<div id="content">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
-				<div id="blockTitle1">Documento Principal</div>
+				<div id="blockTitle1">Documento en negociaci&oacute;n</div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -241,10 +242,10 @@ if ( dw_scrollObj.isSupported() ) {
 										function doAdd() {
 											var pText = editor.getData();
 											if (pText.length == 0) {
-												Sexy.error('Debe ingresar la observación.');
+												Sexy.error('Debe ingresar un texto.');
 												return;
 											}
-											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "Aceptar", en cambio si desea modificarla o revisarla antes de enviarla, presione "Cancelar"', { onComplete: 
+											Sexy.confirm('La propuesta no podrá ser editada una vez enviada. Si desea enviarla presione "Aceptar", en cambio si desea modificarla o revisarla antes de enviarla, presione "Cancelar"', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
 										            basicDoAdd();
@@ -285,18 +286,18 @@ if ( dw_scrollObj.isSupported() ) {
 										var notimooObservationManager = new Notimoo();
 										
 										function showOKMessage() {
-											Sexy.info('Su observación ha sido agregada exitosamente.');
+											Sexy.info('La propuesta ha sido enviada exitosamente.');
 										}
 										
 										function showErrorMessage() {
-											Sexy.error('Su observación no ha podido ser agregada.');
+											Sexy.error('La propuesta no ha podido ser enviada. Intentelo nuevamente.');
 										}
 										
 										function refreshPage() {
 											document.forms['refreshForm'].submit();
 										}
 									</script>
-									<input type="button" value="Añadir observacion" onclick="addObservation();">
+									<input type="button" value="Proponer modificación" onclick="addObservation();">
 							</td>
 					</tr>
 					<tr>
@@ -348,7 +349,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<table width="960" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
+										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">A&ntilde;adir comentario</div></td>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -364,7 +365,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" height="30" align="right">Párrafo:</td>
+													<td width="73" height="30" align="right">P&aacute;rrafo:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(this);">
@@ -375,16 +376,16 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 													<td width="20" align="right"><input type="checkbox" id="pNewParagraph" onclick="clickNewPar(this);"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="200" align="left">Solicitar como nuevo párrafo</td>
+													<td width="200" align="left">Solicitar como nuevo p&aacute;rrafo</td>
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicación:</div></td>
+													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicaci&oacute;n:</div></td>
 													<td width="348" valign="middle"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext" class="textfield_effect_300"></div></td>
 												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Observación: </td>
+													<td align="right" valign="top">Texto:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="8" align="left"><div id="editor"></div></td>
 												<tr>
@@ -392,7 +393,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->
