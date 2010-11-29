@@ -11,7 +11,7 @@
 <div id="content">
 <html:form method="POST" action="/paragraphNavigation">
 	<div id="alcien" style="height:130px;">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<table border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Datos del documento</div></td>
@@ -23,7 +23,7 @@
 				<td>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td colspan="5"><img src="images/null.gif" width="1" height="5"></td>
+							<td colspan="11"><img src="images/null.gif" width="1" height="5"></td>
 						</tr>
 						<tr>
 							<td width="53" align="right">Titulo:</td>
@@ -107,13 +107,13 @@
 			<tr>
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-				<td valign="top"><!-- corte tabla template -->
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<td valign="top" align="center"><!-- corte tabla template -->
+					<table border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td align="right">Párrafo:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="left" id="parDisplay"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
-							<td align="left">Detalle:</td>
+							<td align="right">Etiqueta: </td>
 							<td align="left" id="parDetail"><html:text name="CreateDocumentForm" property="currentDetail" styleClass="textfield_effect"/></td>
 							<td align="right">Cambiar al párrafo:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
@@ -125,7 +125,7 @@
 							<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
 							<td align="left">
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
-									<input type="checkbox" id="livePreview">Live preview</input>
+									<input type="checkbox" id="livePreview">Actualización en vivo</input>
 								</logic:equal>
 							</td>
 						</tr>

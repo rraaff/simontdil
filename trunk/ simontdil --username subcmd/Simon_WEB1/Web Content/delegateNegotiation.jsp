@@ -273,21 +273,21 @@ function openDocs(){
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="3" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="100%" height="480" align="left" valign="top">
+					<td width="100%" height="500" align="left" valign="top" bordercolor="#00CC00">
 					<!-- corte tabla template -->
 						<!--div id="main">
 							<div id="lyr1" -->
-							
+							<div class="clear"></div>
 							<div class="tab-container">
 								<ul id="tabs1" class="tabs">
-									<li><a href="">Original</a></li>
-									<li><a href="">En negociación</a></li>
+									<li><a href="">Versi&oacute;n Consolidada</a></li>
+									<li><a href="">Previsualizaci&oacute;n</a></li>
 								</ul>
 							</div>
 							<div class="clear"></div>
@@ -310,28 +310,28 @@ function openDocs(){
 							</ul>
 						<!--/div-->
 					<!-- corte tabla template --></td>
-					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-					<td width="30" align="right">
-					<div id="scrollbar" style="width:20px; height:480px;">
+					<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td>
+					<td width="5" align="right" -->
+					<!--div id="scrollbar" style="width:20px; height:480px;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
 						<div id="track" style="height:456px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
-					</div></td>
+					</div--></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td colspan="3" width="508" height="30"><div id="sizer" align="right"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div></td>
+					<td height="30"><div id="sizer" align="right"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td colspan="2" background="images/interfaces/bottomLeft.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td colspan="3" height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
+					<td height="10" background="images/interfaces/bottomCenter.gif"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
 			</table>
@@ -349,9 +349,6 @@ function openDocs(){
 					<td width="100%">
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" id="workTable">
-							<tr>
-								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
-							</tr>
 							<tr>
 								<td colspan="2" height="8"><img src="images/null.gif" width="1" height="8"></td>
 							</tr>
@@ -376,7 +373,7 @@ function openDocs(){
 							</tr -->
 							<% } %>
 							<tr>
-								<td colspan="2" height="30" align="center" valign="bottom"><a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a></td>
+								<td colspan="2" height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><!-- a href="javascript:openDocs();"><img src="images/buttons/abrirDocumentos.png" width="125" height="24" border="0" /></a --><img src="images/null.fig" width="10" height="1"><input type="button" value="Ver en portugues" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template -->
