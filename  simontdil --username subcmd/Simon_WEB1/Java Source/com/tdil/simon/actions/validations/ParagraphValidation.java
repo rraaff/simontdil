@@ -38,6 +38,11 @@ public class ParagraphValidation {
 	}
 	
 	public static String validateParagraphDetail(String text, String fieldName, ValidationError validation) {
+		if (!StringUtils.isEmpty(text)) {
+			if (text.indexOf(".") != -1) {
+				validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.CAN_NOT_CONTAIN_DOT);
+			}
+		}
 		return FieldValidation.validateTextForLength(text, fieldName, 100, validation);
 	}
 	

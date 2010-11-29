@@ -202,6 +202,7 @@ function openDocs(){
 			        			document.getElementById("viewPortugues").disabled = true;
 			        		}
 			        		var paragraphNumber = json.paragraphNumber;
+			        		var paragraphComment = json.paragraphComment;
 			        		var paragraphText = json.paragraphText;
 			        		var paragraphVersion = json.paragraphVersion;
 			        		if (paragraphNumber == "0") {
@@ -216,7 +217,12 @@ function openDocs(){
 			        			// le saque || lastText != paragraphText 
 				        		if (lastNumber != paragraphNumber || lastParagraphVersion != paragraphVersion) {
 				        			var divObj = document.getElementById("lastParagraphText");
-				        			var newText = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText + "</p>";
+				        			var newText = "";
+				        			if (paragraphComment.length == 0) { 
+				        				newText = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + ". " + paragraphText + "</p>";
+				        			} else {
+				        				newText = "<p class='article'>" + getParagraphForDisplay(paragraphNumber - 1) + " " + paragraphComment + ". " + paragraphText + "</p>";
+				        			}
 				        			divObj.innerHTML = newText;
 				        			if (lastNumber == paragraphNumber) {
 				        				var pObj = document.getElementById("current_version_" + paragraphNumber);
@@ -250,7 +256,11 @@ function openDocs(){
 				var i = 0;
 				var newDoc = "";
 				while(i < json.paragraph.length) {
-					newDoc = newDoc + "<p class='article' id='current_version_" + json.paragraphNumber[i] + "'>" + getParagraphForDisplay(json.paragraphNumber[i] - 1) + ". " + json.paragraph[i] + "</p>"
+					if (json.paragraphComments[i].length == 0) {
+						newDoc = newDoc + "<p class='article' id='current_version_" + json.paragraphNumber[i] + "'>" + getParagraphForDisplay(json.paragraphNumber[i] - 1) + ". " + json.paragraph[i] + "</p>"
+					} else {
+						newDoc = newDoc + "<p class='article' id='current_version_" + json.paragraphNumber[i] + "'>" + getParagraphForDisplay(json.paragraphNumber[i] - 1) + " " + json.paragraphComments[i] + ". " + json.paragraph[i] + "</p>"
+					}
 					i = i + 1;
 				}	
 				document.getElementById("main_current").innerHTML = newDoc;
@@ -296,14 +306,14 @@ function openDocs(){
 									<div id="main" style="background-color:#eeeeee; width:inherit; height:440px; overflow:scroll;">
 										<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 										<logic:iterate name="DelegateNegotiationForm" property="paragraphs" id="paragraph"> 
-											<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
+											<p class="article"><bean:write name="paragraph" property="paragraphNumberForDisplay" /><bean:write name="paragraph" property="paragraphDetailForDisplay" />. <bean:write filter="false" name="paragraph" property="paragraphText" /></p>
 										</logic:iterate>
 									</div>
 								</li>
 								<li>
 									<div id="main_current" style="background-color:#eeeeee; width:inherit; height:440px; overflow:scroll;">
 										<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph1"> 
-											<p class="article" id="current_version_<bean:write name="paragraph1" property="paragraphNumber" />"><bean:write name="paragraph1" property="paragraphNumberForDisplay" />. <bean:write filter="false" name="paragraph1" property="paragraphText" /></p>
+											<p class="article" id="current_version_<bean:write name="paragraph1" property="paragraphNumber" />"><bean:write name="paragraph1" property="paragraphNumberForDisplay" /><bean:write name="paragraph1" property="paragraphDetailForDisplay" />. <bean:write filter="false" name="paragraph1" property="paragraphText" /></p>
 										</logic:iterate>
 									</div>
 								</li>
