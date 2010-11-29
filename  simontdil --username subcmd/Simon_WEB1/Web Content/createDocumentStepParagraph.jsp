@@ -125,7 +125,7 @@
 							<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
 							<td align="left">
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
-									<input type="checkbox" id="livePreview">Actualización en vivo</input>
+									<html:checkbox name="CreateDocumentForm" property="livePreview">Actualización en vivo</html:checkbox>
 								</logic:equal>
 							</td>
 						</tr>
@@ -282,8 +282,9 @@
 		<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
 			var lastPush = "";
 			var parId = "<bean:write name="CreateDocumentForm" property="currentParagraphId"/>";
+			var liveP = document.getElementsByName('livePreview')[0];
 			function pushData() {
-				var mustPush = document.getElementById('livePreview').checked;
+				var mustPush = liveP.checked;
 				if (mustPush) {
 					var current = editor.getData();
 					if (lastPush != current) {
