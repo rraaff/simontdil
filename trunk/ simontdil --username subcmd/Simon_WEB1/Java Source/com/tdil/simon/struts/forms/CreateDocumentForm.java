@@ -48,6 +48,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private boolean isInNegotiation = false;
 	private int temporaryVersionId;
 	
+	// live preview
+	private boolean livePreview = false;
+
 	// designer
 	private boolean designer = false;
 	
@@ -1139,5 +1142,18 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setParagraphDetails(String[] paragraphDetails) {
 		this.paragraphDetails = paragraphDetails;
+	}
+	
+	public boolean isLivePreview() {
+		return livePreview;
+	}
+
+	public void setLivePreview(boolean livePreview) {
+		this.livePreview = livePreview;
+	}
+	
+	@Override
+	public void reset(ActionMapping mapping, HttpServletRequest request) {
+		this.livePreview = false;
 	}
 }
