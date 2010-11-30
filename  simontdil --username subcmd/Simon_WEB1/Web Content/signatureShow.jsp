@@ -113,7 +113,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td id="country_desc_td_<%=index%>"><bean:write name="signatureRow" property="left.countryDescription" /></td>
 									
 									<% index = index + 1;%>
-									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td width="200"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
 										<td id="signature_td_<%=index%>" rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
 										<script>
@@ -143,7 +143,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td id="name_td_<%=index - 1%>" colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="left.delegateName" /></span><br><bean:write name="signatureRow" property="left.job" /></td>
 									
-									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+									<td width="200"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td id="name_td_<%=index%>" colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br><bean:write name="signatureRow" property="right.job" /></td>
@@ -222,7 +222,7 @@ if ( dw_scrollObj.isSupported() ) {
 														
 														// Separator
 														var spacerTD2 = document.createElement('td');
-														spacerTD2.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+														spacerTD2.innerHTML = '<img src="images/null.gif" width="200" height="1">';
 														newTR.appendChild (spacerTD2);
 														
 														lastSignatureIndex = lastSignatureIndex + 1;
@@ -272,7 +272,7 @@ if ( dw_scrollObj.isSupported() ) {
 														newTR.appendChild (spacerTD22);
 														
 														var spacerTD2C1 = document.createElement('td');
-														spacerTD2C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+														spacerTD2C1.innerHTML = '<img src="images/null.gif" width="200" height="1">';
 														newTR.appendChild (spacerTD2C1);
 														
 														var delegateNameTDC1 = document.createElement('td');
