@@ -26,9 +26,23 @@ a:active {width: auto;}
 </style>
 <![endif]-->
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
+<link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <style type="text/css">
+#content {
+	height:700px;
+/*border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #808080;*/
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #808080;
+}
+.article{
+	font-size: 15px;
+	line-height: 18px;	
+}
 #news-feed	 { height:200px; width:400px; overflow:hidden; position:relative; border:1px solid #ccc; background:#eee; }
 #news-feed ul	{ position:absolute; top:0; left:0; list-style-type:none; padding:0; margin:0; }
 #news-feed ul li { height:180px; font-size:12px; margin:0; padding:10px; overflow:hidden; }
@@ -98,35 +112,50 @@ a:active {width: auto;}
 
 </head>
 <body>
-<table>
-<% java.util.List<com.tdil.simon.data.model.Paragraph> paragraphs = com.tdil.simon.utils.DelegateSiteCache.getFinalParagraphs(); %>
-<% for (com.tdil.simon.data.model.Paragraph p : paragraphs) { %>
-	<tr><td><%=p.getParagraphNumberForDisplay()%>. <%=p.getParagraphText()%></td></tr>
-<% } %>
-</table>
-
-<div id="news-feed">
-<ul>
-
-<% for (com.tdil.simon.data.valueobjects.SignatureVO signature : allSignatures) { %>
-<li>
-<table>
-<tr> 
-	<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signature.getSignatureFileName()%>"></td>
-	<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-	<td width="30"><img src="./download.do?action=flag&fileId=<%=signature.getCountryId()%>" width="30" height="30"></td>
-	<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-	<td><%=signature.getCountryDescription()%></td>
-</tr>
-<tr>
-	<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-	<td colspan="3" height="60"><span class="remarcado"><%=signature.getDelegateName()%></span><br><%=signature.getJob()%></td>
-</tr>
-</table>
-</li>
-<% } %>
-</ul>
+<div id="splashLayer">
+	<div id="content" style="height:500px; overflow:scroll; ">
+		<table width="95%" cellpadding="0" cellspacing="0" border="0" align="center">
+			<tr>
+				<td><img src="images/null.gif" width="1" height="17"></td>
+			</tr>
+			<tr>
+				<td>
+					<table width="95%" height="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
+						<% java.util.List<com.tdil.simon.data.model.Paragraph> paragraphs = com.tdil.simon.utils.DelegateSiteCache.getFinalParagraphs(); %>
+						<% for (com.tdil.simon.data.model.Paragraph p : paragraphs) { %>
+							<tr><td><%=p.getParagraphNumberForDisplay()%>. <%=p.getParagraphText()%></td></tr>
+						<% } %>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td><img src="images/null.gif" width="1" height="17"></td>
+			</tr>
+		</table>
+		</div>
+		<div id="content" style="height:200px;">
+		<div id="news-feed">
+			<ul>
+			<% for (com.tdil.simon.data.valueobjects.SignatureVO signature : allSignatures) { %>
+				<li>
+					<table>
+						<tr> 
+							<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signature.getSignatureFileName()%>"></td>
+							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+							<td width="30"><img src="./download.do?action=flag&fileId=<%=signature.getCountryId()%>" width="30" height="30"></td>
+							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+							<td><%=signature.getCountryDescription()%></td>
+						</tr>
+						<tr>
+							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+							<td colspan="3" height="60"><span class="remarcado"><%=signature.getDelegateName()%></span><br><%=signature.getJob()%></td>
+						</tr>
+					</table>
+				</li>
+			<% } %>
+			</ul>
+		</div>
+	</div>
 </div>
-</table>
 </body>
 </html>

@@ -25,7 +25,7 @@
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #content {
-	height:auto;
+	height:700px;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #808080;
@@ -127,7 +127,7 @@
 	<div id="content">
 		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center"><img src="images/others/splashSegib.gif" width="500" height="500"></td>
+				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"></td>
 			</tr>
 		</table>
 	</div>
@@ -167,7 +167,7 @@
 							<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 							<td width="100%" height="320" align="left" valign="top">
 							<!-- corte tabla template -->
-								<div id="main" style="background-color:#eeeeee; width:100%; height:680px; overflow:scroll;">
+								<div id="main" style="background-color:#eeeeee; width:100%; height:640px; overflow:scroll;">
 								<!--div id="negotiationArea" style="width:100%; height:350px;">
 									<div id="lyr2" style="width:100%; height:326px;"-->
 										<table width="100%" cellpadding="0" cellspacing="5" border="0" align="center">
@@ -211,7 +211,13 @@
 	</div>
 </div>
 <div id="inSignLayer" <%= com.tdil.simon.data.model.Site.IN_SIGN.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
-En firmas
+	<div id="content">
+		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
+			<tr>
+				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"><br><br>El documento est&aacute; siendo firmado. / O documento est&aacute; sendo assinado.</td>
+			</tr>
+		</table>
+	</div>
 </div>
 <% if (com.tdil.simon.data.model.Site.SIGN_SHOW.equals(status)) { %>
 	<jsp:forward page="./publicSignShow.jsp"/>
