@@ -77,6 +77,9 @@ public class DelegateSiteCache {
 	
 	public static boolean shouldProceedToNegotiation(SystemUser user) {
 		if (user.isDelegate()) {
+			if (!Site.IN_NEGOTIATION.equals(delegateSiteStatus)) {
+				return false;
+			}
 			Document doc = getDocumentUnderWork();
 			if (doc == null) {
 				return false;

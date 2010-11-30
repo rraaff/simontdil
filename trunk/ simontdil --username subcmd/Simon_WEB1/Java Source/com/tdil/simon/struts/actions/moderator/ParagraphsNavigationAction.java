@@ -259,6 +259,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return redirectToFailure(error, request, mapping);
 			} else  {
 				createDocumentForm.save();
+				request.getSession().setAttribute("paragraphNegotiated", "false");
 				return mapping.findForward("preview");
 			}
 		}
