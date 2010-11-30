@@ -405,11 +405,11 @@ function openDocs(){
 		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td align="center" valign="middle">
-					<table width="640" height="370" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+					<table width="940" height="640" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
-							<td width="640" align="center" valign="top">
+							<td width="940" align="center" valign="top">
 								<!-- inicio tabla template -->
-								<table width="620" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+								<table width="920" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 										<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Firma en el documento</div></td>
@@ -418,10 +418,10 @@ function openDocs(){
 									<tr>
 										<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 										<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-										<td width="600">
+										<td width="900">
 										<!-- corte tabla template -->
 											<%if (isDelegate && user.isCanSign()) { %>
-											<embed src="swf/SimonSignaturator.swf" quality="high" width="600" height="330"
+											<embed src="swf/SimonSignaturator.swf" quality="high" width="900" height="600"
 											   flashvars="saveUrl=<%=com.tdil.simon.web.SystemConfig.getServerUrl()%>/signVersion.st&goToDocUrl=goToSignShow.st" scale="noscale" salign="l" name="testClass" align="middle"
 											   play="true" loop="false" quality="best" allowScriptAccess="always" type="application/x-shockwave-flash"
 											   pluginspage="http://www.adobe.com/go/getflashplayer">
