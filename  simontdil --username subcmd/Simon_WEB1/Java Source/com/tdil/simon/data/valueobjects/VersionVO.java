@@ -14,38 +14,41 @@ public class VersionVO {
 	public Version version;
 	public List<VersionNumberVO> allVersions;
 	public List<Paragraph> paragraphs;
+	
+	private static final int VERSIONS_TO_SHOW = 5;
+	private static final int HALF_VERSIONS_TO_SHOW = 2;
 
 	public List<VersionNumberVO> getReducedVersions() {
 		setAllAsNotCurrent(allVersions);
 		int position = getPositionFor(version.getNumber());
 		allVersions.get(position).setCurrent(true);
-		if (allVersions.size() <= 7) {
+		if (allVersions.size() <= VERSIONS_TO_SHOW) {
 			return allVersions;
 		}
 		if (position == 0) {
-			return allVersions.subList(0, 7);
+			return allVersions.subList(0, VERSIONS_TO_SHOW);
 		}
 		if (position == allVersions.size() - 1) {
-			return allVersions.subList(allVersions.size() - 7, allVersions.size());
+			return allVersions.subList(allVersions.size() - VERSIONS_TO_SHOW, allVersions.size());
 		}
 		List<VersionNumberVO> after = new ArrayList<VersionNumberVO>();
 		int afterIndex;
-		for (afterIndex = position + 1; afterIndex < allVersions.size() && afterIndex <= position + 4; afterIndex++) {
+		for (afterIndex = position + 1; afterIndex < allVersions.size() && afterIndex <= position + HALF_VERSIONS_TO_SHOW; afterIndex++) {
 			after.add(allVersions.get(afterIndex));
 		}
 		List<VersionNumberVO> before = new ArrayList<VersionNumberVO>();
 		int beforeIndex;
-		for (beforeIndex = position - 1; beforeIndex >= 0 && beforeIndex >= position - 3; beforeIndex--) {
+		for (beforeIndex = position - 1; beforeIndex >= 0 && beforeIndex >= position - HALF_VERSIONS_TO_SHOW; beforeIndex--) {
 			before.add(0, allVersions.get(beforeIndex));
 		}
-		if (after.size() < 3) {
-			int toAdd = 3 - after.size();
+		if (after.size() < HALF_VERSIONS_TO_SHOW) {
+			int toAdd = HALF_VERSIONS_TO_SHOW - after.size();
 			for (int i = 0; i < toAdd; i++) {
 				before.add(0, allVersions.get(beforeIndex--));
 			}
 		} else {
-			if (before.size() < 3) {
-				int toAdd = 3 - before.size();
+			if (before.size() < HALF_VERSIONS_TO_SHOW) {
+				int toAdd = HALF_VERSIONS_TO_SHOW - before.size();
 				for (int i = 0; i < toAdd; i++) {
 					after.add(allVersions.get(afterIndex++));
 				}
