@@ -295,7 +295,12 @@ if ( dw_scrollObj.isSupported() ) {
 									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signatureRow" property="left.countryId" />" width="30" height="30"></td>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td><bean:write name="signatureRow" property="left.countryDescription" /></td>
-									
+									<logic:equal name="signatureRow" property="hasRight" value="false">
+										<td rowspan="2" width="200" align="center">&nbsp;</td>
+										<td width="10">&nbsp;</td>
+										<td width="30">&nbsp;</td>
+										<td width="10">&nbsp;</td>
+									</logic:equal>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
 										<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -303,25 +308,18 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td><bean:write name="signatureRow" property="right.countryDescription" /></td>
 									</logic:equal>
-									<logic:equal name="signatureRow" property="hasRight" value="false">
-										<td rowspan="2" width="200" align="center">&nbsp;</td>
-										<td width="10">&nbsp;</td>
-										<td width="30">&nbsp;</td>
-										<td width="10">&nbsp;</td>
-									</logic:equal>
 								</tr>
 								
 								<tr>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="left.delegateName" /></span><br>Cargo</td>
-									
-									<logic:equal name="signatureRow" property="hasRight" value="true">
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br>Cargo</td>
-									</logic:equal>
 									<logic:equal name="signatureRow" property="hasRight" value="false">
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td colspan="3" height="60">&nbsp;</td>
+									</logic:equal>
+									<logic:equal name="signatureRow" property="hasRight" value="true">
+										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br>Cargo</td>
 									</logic:equal>
 								</tr>
 								
