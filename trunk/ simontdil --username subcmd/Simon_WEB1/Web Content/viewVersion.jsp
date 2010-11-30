@@ -49,6 +49,9 @@ lyr1{
 #content #portaVersiones a {
 	color: #FFFFFF;
 }
+#content #portaVersiones {
+	width:130px;
+}
 #versionStrong {
 	font-size: 14px;
 	color: #FFFFFF;
