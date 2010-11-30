@@ -29,6 +29,7 @@ public class PreviewDocumentAction extends SimonAction {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
 		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.editParagraphs"))) {
+			request.getSession().setAttribute("paragraphNegotiated", "true");
 			return mapping.findForward("editParagraphs");
 		}
 		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.preview.save"))) {
