@@ -42,6 +42,23 @@ public class DelegateNegotiationForm extends ActionForm {
 	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 	private boolean goToSignShow;
 
+	
+	public List<SignatureRow> getSignaturesRows() {
+		List<SignatureRow> result = new ArrayList<SignatureRow>();
+		for (int i = 0; i + 1 < getSignatures().size(); i = i + 2) {
+			SignatureRow signatureRow = new SignatureRow();
+			signatureRow.setLeft(getSignatures().get(i));
+			signatureRow.setRight(getSignatures().get(i + 1));
+			result.add(signatureRow);
+		}
+		if (getSignatures().size() % 2 == 1) {
+			SignatureRow signatureRow = new SignatureRow();
+			signatureRow.setLeft(getSignatures().get(getSignatures().size() - 1));
+			result.add(signatureRow);
+		}
+		return result;
+	}
+	
 	public SystemUser getUser() {
 		return user;
 	}
