@@ -133,9 +133,10 @@ if ( dw_scrollObj.isSupported() ) {
 									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndContinue"/>
 									</html:submit>
-									<!-- h t m l : s u b m i  t   p r o p e r t y ="  op  er a t i o n " >
-										< b e a n  : m e s s a g e   k e y = " c r e a t e  D o c u m e n t . p r e v i e w . s a v e A n d S i g n " / >
-									< / h t m  l : s u  b m i t -->
+									<!-- <html:submit property="operation">
+										<bean:message key="createDocument.preview.saveAndSign"/>
+									</html:submit>
+									-->
 									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndFinalize"/>
 									</html:submit>
