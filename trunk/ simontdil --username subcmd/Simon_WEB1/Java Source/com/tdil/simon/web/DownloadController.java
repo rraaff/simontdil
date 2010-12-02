@@ -31,6 +31,18 @@ public class DownloadController extends HttpServlet {
 	}
 	
 	public void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		String action = req.getParameter("action");
+		if (action == null) {
+			return;
+		}
+		if (action.equals("signature")) {
+			downloadSignature(req, res);
+			return;
+		} 
+		if (action.equals("flag")) {
+			downloadFlag(req, res);
+			return;
+		}
 		HttpSession session = req.getSession(false);
 		if (session == null) {
 			return;
@@ -39,18 +51,8 @@ public class DownloadController extends HttpServlet {
 		if (user == null) {
 			return;
 		}
-		String action = req.getParameter("action");
-		if (action == null) {
-			return;
-		}
-		if (action.equals("flag")) {
-			downloadFlag(req, res);
-		}
 		if (action.equals("refdoc")) {
 			downloadRefDoc(req, res);
-		}
-		if (action.equals("signature")) {
-			downloadSignature(req, res);
 		}
 	}
 
