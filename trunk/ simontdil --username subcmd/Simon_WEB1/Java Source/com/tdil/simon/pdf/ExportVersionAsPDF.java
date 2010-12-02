@@ -61,6 +61,10 @@ public class ExportVersionAsPDF {
 		buf.append("	color:#000000;");
 		buf.append("	font-size: 14px;");
 		buf.append("}");
+		buf.append("nameDelegate {");
+		buf.append("	color:#333333;");
+		buf.append("	font-size: 12px;");
+		buf.append("}");
 		buf.append("-->");
 		buf.append("</style>");
 		buf.append("<title>").append(version.getDocument().getTitle()).append("</title>");
@@ -95,17 +99,18 @@ public class ExportVersionAsPDF {
 			} else {
 				signatures = SignatureDAO.selectSignaturesForPortugues(version.getDocument().getId(), version.getVersion().getNumber());
 			}
-			buf.append("<table width=\"100%\" border=\"0\">");
+			buf.append("<table border=\"0\">");
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;
-				buf.append("<TR><TD><TABLE><TR>");
-				buf.append("<TD>Delegado: <b>").append(signatureVO.getDelegateName()).append("</b></TD>");
+				buf.append("<TR>");
+				buf.append("<TD valign=\"top\">").append("<img width=\"200\" height=\"126\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				buf.append("<TD><TABLE><TR>");
+				buf.append("<TD class=\"nameDelegate\">").append(signatureVO.getDelegateName()).append("</TD>");
 				buf.append("</TR><TR>");
-				buf.append("<TD>Delegación: <b>").append(signatureVO.getCountryDescription()).append("</b></TD>");
+				buf.append("<TD>").append(signatureVO.getCountryDescription()).append("</TD>");
 				buf.append("</TR><TR>");
-				buf.append("<TD>Posición: <b>").append(signatureVO.getJob()).append("</b></TD>");
+				buf.append("<TD>").append(signatureVO.getJob()).append("</TD>");
 				buf.append("</TR></TABLE></TD>");
-				buf.append("<TD valign=\"top\">").append("<img width=\"100\" height=\"100\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
 			}
 			buf.append("</table>");
 		} else {
