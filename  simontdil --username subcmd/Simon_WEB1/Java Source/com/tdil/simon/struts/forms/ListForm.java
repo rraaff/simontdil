@@ -7,6 +7,9 @@ import java.util.Map;
 
 import org.apache.struts.action.ActionForm;
 
+import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Version;
 
@@ -47,8 +50,11 @@ public class ListForm extends ActionForm {
 		this.operation = operation;
 	}
 
-	public void deleteVersion(int position) throws SQLException {
+	public void deleteVersion(int position) throws SQLException, ValidationException {
 		Version version = (Version)this.getList().get(position);
+		if (Version.IN_NEGOTIATION.equals(version.getStatus())) {
+			throw new ValidationException(new ValidationError(ValidationErrors.CAN_NOT_DELETE_VERSION_IN_NEGOTIATION));
+		}
 		version.setDeleted(true);
 		VersionDAO.logicallyDeleteVersion(version);
 	}

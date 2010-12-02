@@ -274,9 +274,12 @@ public class ViewVersionForm extends ActionForm {
 		version.setStatus(Version.FINAL);
 		VersionDAO.updateVersionStatus(version);
 		Site site = SiteDAO.getSite(Site.DELEGATE);
+		Site publicSite = SiteDAO.getSite(Site.PUBLIC);
+		publicSite.setDataId(version.getId());
 		site.setStatus(Site.NORMAL);
 		site.setDataId(0);
 		SiteDAO.updateSite(site);
+		SiteDAO.updateSite(publicSite);
 	}
 
 	public boolean isFinal() {

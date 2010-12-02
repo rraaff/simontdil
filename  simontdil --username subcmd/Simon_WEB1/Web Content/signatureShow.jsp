@@ -86,6 +86,8 @@ if ( dw_scrollObj.isSupported() ) {
 						var signatureArray = new Array();
 						var lastSignatureIndex = 0;
 						var completed;
+						var cleanBeforeShow = true;
+						var lastSignaturesLength = <bean:write name="DelegateNegotiationForm" property="signaturesSize" />;	
 					</script>
 					<br>
 					<div id="main">
@@ -181,6 +183,18 @@ if ( dw_scrollObj.isSupported() ) {
 										if (sitestatus == 'NORMAL') {
 											window.location='<html:rewrite page="/goToDelegateHome.st"/>';
 										} else {
+											if (cleanBeforeShow) {
+												if (lastSignaturesLength == json.delegates.length) {
+													return;
+												}
+												signatureArray = new Array();
+												lastSignatureIndex = 0;
+												completed = true;
+												var myTable = document.getElementById("signTable");
+												var tBody = myTable.getElementsByTagName("TBODY")[0];
+												tBody.innerHTML = '';
+												lastSignaturesLength = json.delegates.length;
+											}
 											// TODO manejar variable de bloqueo
 											var i = 0;
 											while(i < json.delegates.length) {
@@ -272,7 +286,7 @@ if ( dw_scrollObj.isSupported() ) {
 														newTR.appendChild (spacerTD22);
 														
 														var spacerTD2C1 = document.createElement('td');
-														spacerTD2C1.innerHTML = '<img src="images/null.gif" width="200" height="1">';
+														spacerTD2C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
 														newTR.appendChild (spacerTD2C1);
 														
 														var delegateNameTDC1 = document.createElement('td');

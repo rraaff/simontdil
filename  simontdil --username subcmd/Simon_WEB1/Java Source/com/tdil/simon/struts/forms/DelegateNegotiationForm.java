@@ -143,6 +143,10 @@ public class DelegateNegotiationForm extends ActionForm {
 	public List<SignatureVO> getSignatures() {
 		return signatures;
 	}
+	
+	public int getSignaturesSize() {
+		return this.getSignatures().size();
+	}
 
 	public void setSignatures(List<SignatureVO> signatures) {
 		this.signatures = signatures;

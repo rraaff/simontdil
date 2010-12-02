@@ -41,6 +41,7 @@ public class SetPublicSiteNormal extends SimonAction implements TransactionalAct
 		ModeratorSiteForm moderatorSiteForm = (ModeratorSiteForm) form;
 		Site site = SiteDAO.getSite(Site.PUBLIC);
 		site.setStatus(moderatorSiteForm.getStatus());
+		site.setDataId(0);
 		SiteDAO.updateSite(site);
 		return site;
 	}
