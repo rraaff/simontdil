@@ -17,6 +17,7 @@
     where SIGNATURE.versionId = #id#
     AND SIGNATURE.userId = SYSTEMUSER.id
     AND SYSTEMUSER.countryId = COUNTRY.id
+    order by COUNTRY.name ASC
   </select>
   
   <select id="selectSignaturesForPortugues" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.SignatureVO">
@@ -28,6 +29,7 @@
     AND VERSION.spanishVersion = 1
     AND SIGNATURE.userId = SYSTEMUSER.id
     AND SYSTEMUSER.countryId = COUNTRY.id
+    order by COUNTRY.name ASC
   </select>
  
     <select id="getSignatureByVersionIdAndUserId" parameterClass="Signature">

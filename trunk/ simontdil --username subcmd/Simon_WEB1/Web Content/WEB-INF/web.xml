@@ -136,6 +136,11 @@
 	<welcome-file-list>
 		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
+	
+	<error-page>
+        <error-code>500</error-code>
+        <location>/processing.html</location>
+    </error-page>
 	<!--
 		<taglib> <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>
 		<taglib-location>/WEB-INF/c.tld</taglib-location> </taglib> <taglib>

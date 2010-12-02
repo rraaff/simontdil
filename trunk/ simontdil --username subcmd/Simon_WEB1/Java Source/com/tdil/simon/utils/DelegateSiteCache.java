@@ -55,10 +55,17 @@ public class DelegateSiteCache {
 							allParagraph = new ArrayList<Paragraph>();
 						}
 					}
-					if (Site.IN_SIGN.endsWith(delegateSiteStatus)) {
+					if (Site.IN_SIGN.equals(delegateSiteStatus)) {
 						documentUnderWork = DocumentDAO.getDocumentUnderWork();
 						version = VersionDAO.getVersionUnderWork();
 						allSignatures = SignatureDAO.selectSignaturesFor(version.getId());
+					}
+					String publicSiteStatus = Site.getPUBLIC_SITE().getStatus();
+					if (Site.NORMAL.equals(delegateSiteStatus) && Site.SIGN_SHOW.equals(publicSiteStatus)) {
+						version = VersionDAO.getVersion(Site.getPUBLIC_SITE().getDataId());
+						documentUnderWork = DocumentDAO.getDocument(version.getDocumentId());
+						allSignatures = SignatureDAO.selectSignaturesFor(version.getId());
+						
 					}
 					if (oldDocumentUnderWork != documentUnderWork) {
 						previousVersion = new VersionVO();

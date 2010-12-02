@@ -133,10 +133,10 @@ if ( dw_scrollObj.isSupported() ) {
 									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndContinue"/>
 									</html:submit>
-									<!-- <html:submit property="operation">
+									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndSign"/>
 									</html:submit>
-									-->
+									
 									<html:submit property="operation">
 										<bean:message key="createDocument.preview.saveAndFinalize"/>
 									</html:submit>

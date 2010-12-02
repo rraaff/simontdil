@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -37,11 +38,17 @@ public class DocumentABMAction extends SimonAction {
 			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
 			if (imageSubmitData.isParsed())  {
 				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							versionListForm.deleteVersion(imageSubmitData.getPosition());
-						}
-					});
+					try {
+						TransactionProvider.executeInTransaction(new TransactionalAction() {
+							public void executeInTransaction() throws SQLException, ValidationException {
+								versionListForm.deleteVersion(imageSubmitData.getPosition());
+							}
+						});
+					} catch (ValidationException e) {
+						ActionErrors errors = new ActionErrors();
+						errors.add(e.asMessages());
+						addErrors(request, errors);
+					}
 				}
 				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {

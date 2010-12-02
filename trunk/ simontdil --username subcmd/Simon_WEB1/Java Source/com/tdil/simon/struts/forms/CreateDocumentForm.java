@@ -561,6 +561,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			site.setStatus(Site.NORMAL);
 			site.setDataId(0);
 			SiteDAO.updateSite(site);
+			
+			Site publicSite = SiteDAO.getSite(Site.PUBLIC);
+			publicSite.setDataId(version.getId());
+			if (!site.NORMAL.equals(publicSite.getStatus())) {
+				publicSite.setStatus(Site.SIGN_SHOW);
+			}
+			SiteDAO.updateSite(publicSite);
 		}
 		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
