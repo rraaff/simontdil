@@ -290,7 +290,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
 								<logic:iterate name="ViewVersion" property="signaturesRows" id="signatureRow" indexId="signatureIndex">
 								<tr> 
-									<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signatureRow" property="left.signatureFileName" />"></td>
+									<td rowspan="2" width="200" align="center"><img width="200" height="127" src="././download.do?action=signature&signature=<bean:write name="signatureRow" property="left.signatureFileName" />"></td>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 									<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signatureRow" property="left.countryId" />" width="30" height="30"></td>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -302,7 +302,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="10">&nbsp;</td>
 									</logic:equal>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
-										<td rowspan="2" width="200" align="center"><img width="200" height="110" src="././download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
+										<td rowspan="2" width="200" align="center"><img width="200" height="127" src="././download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signatureRow" property="right.countryId" />" width="30" height="30"></td>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
