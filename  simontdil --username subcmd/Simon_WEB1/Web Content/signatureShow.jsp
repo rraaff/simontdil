@@ -30,7 +30,7 @@ lyr1{
 }
 
 div#main { 
-	background-color:#eee;
+	background-color:#FFFFFF;
 	width:980px;
 	height:480px;
 	text-align:left;
