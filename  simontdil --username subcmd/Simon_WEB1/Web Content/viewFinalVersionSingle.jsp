@@ -312,14 +312,14 @@ if ( dw_scrollObj.isSupported() ) {
 								
 								<tr>
 									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="left.delegateName" /></span><br>Cargo</td>
+									<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="left.delegateName" /></span><br><bean:write name="signatureRow" property="left.job" /></td>
 									<logic:equal name="signatureRow" property="hasRight" value="false">
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 										<td colspan="3" height="60">&nbsp;</td>
 									</logic:equal>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br>Cargo</td>
+										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br><bean:write name="signatureRow" property="right.job" /></td>
 									</logic:equal>
 								</tr>
 								

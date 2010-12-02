@@ -78,38 +78,7 @@ a:active {width: auto;}
 	}
 	var timer = setInterval("getPublicSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
 </script>
-<% java.util.List<com.tdil.simon.data.valueobjects.SignatureVO> allSignatures = com.tdil.simon.utils.DelegateSiteCache.getAllSignatures(); %>
-<% if (allSignatures != null && !allSignatures.isEmpty()) { %>
-<script type="text/javascript">
-	window.addEvent('domready',function() {
-		/* settings */
-		var list = $('news-feed').getFirst('ul');
-		var items = list.getElements('li');
-		var showDuration = 3000;
-		var scrollDuration = 500;
-		var index = 0;
-		var height = items[0].getSize().y;
-		/* action func */
-		var move = function() {
-			list.set('tween',{
-				duration: scrollDuration,
-				onComplete: function() {
-					if(index == items.length - 1) {
-						index = 0 - 1;
-						list.scrollTo(0,0);
-					}
-				}
-			}).tween('top',0 - (++index * height));
-		};
-		/* go! */
-		window.addEvent('load',function() {
-			
-			move.periodical(showDuration);
-		});
-	});
-</script>
-<% } %>
-
+<% java.util.List<com.tdil.simon.struts.forms.SignatureRow> allSignatures = com.tdil.simon.utils.DelegateSiteCache.getSignaturesRows(); %>
 </head>
 <body>
 <div id="splashLayer">
@@ -133,29 +102,43 @@ a:active {width: auto;}
 			</tr>
 		</table>
 		</div>
-		<div id="content" style="height:200px;">
-		<div id="news-feed">
-			<ul>
-			<% for (com.tdil.simon.data.valueobjects.SignatureVO signature : allSignatures) { %>
-				<li>
-					<table>
-						<tr> 
-							<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signature.getSignatureFileName()%>"></td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td width="30"><img src="./download.do?action=flag&fileId=<%=signature.getCountryId()%>" width="30" height="30"></td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td><%=signature.getCountryDescription()%></td>
-						</tr>
-						<tr>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td colspan="3" height="60"><span class="remarcado"><%=signature.getDelegateName()%></span><br><%=signature.getJob()%></td>
-						</tr>
-					</table>
-				</li>
+		
+		<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+			<% for (com.tdil.simon.struts.forms.SignatureRow signatureRow : allSignatures) { %>
+			<tr> 
+				<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getLeft().getSignatureFileName()%>"></td>
+				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+				<td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getLeft().getCountryId()%>" width="30" height="30"></td>
+				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+				<td><%=signatureRow.getLeft().getCountryDescription()%></td>
+				<% if (!signatureRow.getHasRight()) { %>
+					<td rowspan="2" width="200" align="center">&nbsp;</td>
+					<td width="10">&nbsp;</td>
+					<td width="30">&nbsp;</td>
+					<td width="10">&nbsp;</td>
+				<% } else {%>
+					<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getRight().getSignatureFileName()%>"></td>
+					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+					<td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getRight().getCountryId()%>" width="30" height="30"></td>
+					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+					<td><%=signatureRow.getRight().getCountryDescription()%></td>
+				<% } %>
+			</tr>
+			
+			<tr>
+				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+				<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getLeft().getDelegateName()%></span><br><%=signatureRow.getLeft().getJob()%></td>
+				<% if (!signatureRow.getHasRight()) { %>
+					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+					<td colspan="3" height="60">&nbsp;</td>
+				<% } else {%>
+					<td width="10"><img src="images/null.gif" width="10" height="1"></td>
+					<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getRight().getDelegateName()%></span><br><%=signatureRow.getRight().getJob()%></td>
+				<% } %>
+			</tr>
+			
 			<% } %>
-			</ul>
-		</div>
-	</div>
+		</table>
 </div>
 </body>
 </html>

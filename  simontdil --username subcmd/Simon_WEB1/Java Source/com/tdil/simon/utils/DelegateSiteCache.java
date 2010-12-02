@@ -24,6 +24,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.forms.SignatureRow;
 
 public class DelegateSiteCache {
 
@@ -80,6 +81,23 @@ public class DelegateSiteCache {
 		} catch (ValidationException e) {
 			getLog().error(e.getMessage(), e);
 		}
+	}
+	
+	public static List<SignatureRow> getSignaturesRows() {
+		List<SignatureVO> allSignatures = getAllSignatures();
+		List<SignatureRow> result = new ArrayList<SignatureRow>();
+		for (int i = 0; i + 1 < allSignatures.size(); i = i + 2) {
+			SignatureRow signatureRow = new SignatureRow();
+			signatureRow.setLeft(allSignatures.get(i));
+			signatureRow.setRight(allSignatures.get(i + 1));
+			result.add(signatureRow);
+		}
+		if (allSignatures.size() % 2 == 1) {
+			SignatureRow signatureRow = new SignatureRow();
+			signatureRow.setLeft(allSignatures.get(allSignatures.size() - 1));
+			result.add(signatureRow);
+		}
+		return result;
 	}
 	
 	public static boolean shouldProceedToNegotiation(SystemUser user) {
