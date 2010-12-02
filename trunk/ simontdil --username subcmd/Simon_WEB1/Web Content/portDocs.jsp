@@ -228,20 +228,48 @@ if ( dw_scrollObj.isSupported() ) {
 										<td><a href="other/PRAGDRC-SPT-CNRC2XX-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
 									<tr class="d0">
-										<td height="28" align="left"><p>Agenda Tem&aacute;tica &ndash; Ses&otilde;es Conjuntas</p></td>
+										<td height="28" align="left">Agenda Tem&aacute;tica &ndash; Ses&otilde;es Conjuntas</td>
 										<td><a href="other/PRAGDCONJ-SPT-CNRC2XX-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
                                     <tr class="dl">
-										<td height="28" align="left"><p>Programa Geral</p></td>
+										<td height="28" align="left">Programa Geral</td>
 										<td><a href="other/PROGEN-SEGIB-IICNRCXX-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
                                     <tr class="d0">
-										<td height="28" align="left"><p>O Sistema Inter-Governamental Ibero-Americano: a coordenação dos Organismos Ibero-Americanos</p></td>
+										<td height="28" align="left">O Sistema Inter-Governamental Ibero-Americano: a coordenação dos Organismos Ibero-Americanos</td>
 										<td><a href="other/EL SISTEMA INTERGUBERNAMENTAL IBEROAMERICANO PORT.pdf" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
                                     <tr class="dl">
-										<td height="28" align="left"><p>Regra de funcionamento do Registo de Redes Ibero-Americanas</p></td>
-										<td><a href="other/REGLA DEFINITIVA PORT.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+										<td height="28" align="left">Regra de funcionamento do Registo de Redes Ibero-Americanas</td>
+										<td><a href="other/REGLA%20DEFINITIVA%20PORT.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">AGENDA TEMÁTICA PARA A CÚPULA DE CHEFES DE ESTADO E DE GOVERNO</td>
+										<td><a href="other/PRAGDCEG-SPT-CNRC2XX-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">AGENDA TEMÁTICA PARA LA CUMBRE DE JEFES DE ESTADO Y DE GOBIERNO</td>
+										<td><a href="other/PRAGDCEG-SPT-CNRC2XX-E.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Alinhamentos para o PROGRAMA DE TRABALHO 2011 da Secretaria-Geral Ibero-Americana</td>
+										<td><a href="other/LINEAMIENTOS-2011-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Lineamientos para el PROGRAMA DE TRABAJO 2011 de la Secretaria General Iberoamericana</td>
+										<td><a href="other/LINEAMIENTOS-2011-E.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Comunicado Especial Sobre a &quot;Quest&atilde;o Das  Ilhas Malvinas&quot; (Proposta Argentina)</td>
+										<td><a href="other/VERSION-2-PROYECTO-Malvinas-al-23-de-nov-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d1">
+										<td height="28" align="left">Comunicado Especial Sobre &quot;A Comunidade De Estados Da Am&eacute;rica Latina e Do Caribe (Celac)&quot; (Proposta Venezuela)</td>
+										<td><a href="other/Proy-Comunicado-Esp-sobre-CELAC-Prop-Venezuela-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+									</tr>
+									<tr class="d0">
+										<td height="28" align="left">Comunicado Especial Sobre O Combate &agrave; Delinq&uuml;&ecirc;ncia Organizada Transnacional Em Todas Suas Formas E Manifesta&otilde;es (Proposta El Salvador)</td>
+										<td><a href="other/Proy-Com-Esp-Delincuencia-Org-El-Salvador-Versión-2-P.doc" target="_blank"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
 									</tr>
 									<tr>
 										<td colspan="2" height="25"><img src="images/null.gif" width="1" height="25"></td>
