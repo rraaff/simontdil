@@ -79,9 +79,36 @@ a:active {width: auto;}
 	var timer = setInterval("getPublicSiteStatus()",<%=com.tdil.simon.web.SystemConfig.getClientParagrahRefreshTime()%>);
 </script>
 <% java.util.List<com.tdil.simon.struts.forms.SignatureRow> allSignatures = com.tdil.simon.utils.DelegateSiteCache.getSignaturesRows(); %>
+<script>
+	var velocidad = 0;
+	function scrollme() {
+		e=document.getElementById("content");
+		if (e.scrollTop>(e.scrollHeight-1200)) {
+			velocidad+=1;
+		} else {
+			velocidad+=5;
+		}		
+		e.scrollTop=0+velocidad;
+		if(e.scrollTop>=(e.scrollHeight-e.clientHeight)) {
+			clearInterval(timer2);
+		}		
+	}
+	
+	var timer2 = setInterval("scrollme()",20);
+
+	function startScroll() {
+		e=document.getElementById("content");
+		e.scrollTop=0;
+		timer2 = setInterval("scrollme()",20);
+	}
+	function stopScroll() {
+		clearInterval(timer2);
+	}
+</script>
+
 </head>
 <body>
-<div id="content" style="overflow:scroll; ">
+<div id="content" style="overflow:scroll;">
 	<table width="95%" cellpadding="0" cellspacing="0" border="0" align="center">
 		<tr>
 			<td><img src="images/null.gif" width="1" height="17"></td>
@@ -100,39 +127,53 @@ a:active {width: auto;}
 			<td><img src="images/null.gif" width="1" height="50"></td>
 		</tr>
 		<tr>
-			<td>
-				<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+			<td align="center">
+				<table width="500" id="signTable" border="0" cellspacing="0" cellpadding="0" align="center">
 					<% for (com.tdil.simon.struts.forms.SignatureRow signatureRow : allSignatures) { %>
 					<tr> 
-						<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getLeft().getSignatureFileName()%>"></td>
-						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-						<td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getLeft().getCountryId()%>" width="30" height="30"></td>
-						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-						<td><%=signatureRow.getLeft().getCountryDescription()%></td>
+						<td width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getLeft().getSignatureFileName()%>"></td>
+						<td width="100"><img src="images/null.gif" width="10" height="1"></td>
+						<!-- td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getLeft().getCountryId()%>" width="30" height="30"></td>
+						<td width="10"><img src="images/null.gif" width="10" height="1"></td -->
 						<% if (!signatureRow.getHasRight()) { %>
-							<td rowspan="2" width="200" align="center">&nbsp;</td>
-							<td width="10">&nbsp;</td>
-							<td width="30">&nbsp;</td>
-							<td width="10">&nbsp;</td>
+							<td width="200"><img src="images/null.gif" width="10" height="1"></td>
 						<% } else {%>
-							<td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getRight().getSignatureFileName()%>"></td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getRight().getCountryId()%>" width="30" height="30"></td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td><%=signatureRow.getRight().getCountryDescription()%></td>
+							<td width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getRight().getSignatureFileName()%>"></td>
 						<% } %>
 					</tr>
-					
 					<tr>
-						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getLeft().getDelegateName()%></span><br><%=signatureRow.getLeft().getJob()%></td>
+						<td align="center" height="18"><%=signatureRow.getLeft().getCountryDescription()%></td>
+						<td width="100"><img src="images/null.gif" width="10" height="1"></td>
 						<% if (!signatureRow.getHasRight()) { %>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td colspan="3" height="60">&nbsp;</td>
+							<td width="200"><img src="images/null.gif" width="10" height="1"></td>
+							<!-- td rowspan="2" width="200" align="center">&nbsp;</td>
+							<td width="10">&nbsp;</td>
+							<td width="30">&nbsp;</td>
+							<td width="10">&nbsp;</td -->
 						<% } else {%>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getRight().getDelegateName()%></span><br><%=signatureRow.getRight().getJob()%></td>
+							<!-- td rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<%=signatureRow.getRight().getSignatureFileName()%>"></td>
+							<td width="10"><img src="images/null.gif" width="10" height="1"></td-->
+							<!-- td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getRight().getCountryId()%>" width="30" height="30"></td>
+							<td width="10"><img src="images/null.gif" width="10" height="1"></td -->
+							<td align="center"><%=signatureRow.getRight().getCountryDescription()%></td>
 						<% } %>
+					</tr>
+					<tr>
+						<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td -->
+						<td align="center" height="18"><span class="remarcado"><!-- % =signatureRow.getLeft().getDelegateName()%></span><br --><%=signatureRow.getLeft().getJob()%></span></td>
+						<td width="100"><img src="images/null.gif" width="10" height="1"></td>
+						<% if (!signatureRow.getHasRight()) { %>
+							<td width="200"><img src="images/null.gif" width="10" height="1"></td>
+							<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td>
+							<td colspan="3" height="60">&nbsp;</td -->
+						<% } else {%>
+							<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td>
+							<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getRight().getDelegateName()%></span><br><%=signatureRow.getRight().getJob()%></td-->
+							<td align="center"><span class="remarcado"><%=signatureRow.getRight().getJob()%></span></td>
+						<% } %>
+					</tr>
+					<tr>
+						<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 					</tr>
 					<% } %>
 				</table>
@@ -143,5 +184,6 @@ a:active {width: auto;}
 		</tr>
 	</table>
 </div>
+<a href="javascript:stopScroll()" style="color:#CCCCCC">Q</a>
 </body>
 </html>

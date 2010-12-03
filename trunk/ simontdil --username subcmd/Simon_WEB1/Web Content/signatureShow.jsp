@@ -91,7 +91,7 @@ if ( dw_scrollObj.isSupported() ) {
 					</script>
 					<br>
 					<div id="main">
-						<div id="lyr1" style="background-color:#FFFFFF">
+						<div id="lyr1" style="width:100%; background-color:#FFFFFF">
 							<!-- PABLO: intro -->
 							<p class="article"><bean:write name="DelegateNegotiationForm" property="versionVO.document.introduction" /></p>
 							<logic:iterate name="DelegateNegotiationForm" property="versionVO.paragraphs" id="paragraph"> 
@@ -99,63 +99,50 @@ if ( dw_scrollObj.isSupported() ) {
 							</logic:iterate>
 							<div id="signaturePreview">
 							</div>
-							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0">
+							<table width="100%" id="signTable" border="0" cellspacing="0" cellpadding="0" align="center">
 								<% int index = 0;%>
 								<logic:iterate name="DelegateNegotiationForm" property="signaturesRows" id="signatureRow">
 								<tr>
-									<td id="signature_td_<%=index%>" rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signatureRow" property="left.signatureFileName" />"></td>
+									<td id="signature_td_<%=index%>" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signatureRow" property="left.signatureFileName" />"></td>
 									<script>
 										signatureArray[<%=index%>] = '<bean:write name="signatureRow" property="left.signatureFileName" />';
 										lastSignatureIndex = <%=index%>;
 										completed = false;
 									</script>
-									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td id="flag_td_<%=index%>" width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signatureRow" property="left.countryId" />" width="30" height="30"></td>
-									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td id="country_desc_td_<%=index%>"><bean:write name="signatureRow" property="left.countryDescription" /></td>
-									
+									<td width="200"><img src="images/null.gif" width="10" height="1"></td>
 									<% index = index + 1;%>
-									<td width="200"><img src="images/null.gif" width="200" height="1"></td>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
-										<td id="signature_td_<%=index%>" rowspan="2" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
+										<td id="signature_td_<%=index%>" width="200" align="center"><img width="200" height="110" src="./download.do?action=signature&signature=<bean:write name="signatureRow" property="right.signatureFileName" />"></td>
 										<script>
 											signatureArray[<%=index%>] = '<bean:write name="signatureRow" property="right.signatureFileName" />';
 											lastSignatureIndex = <%=index%>;
 											completed = true;
 										</script>
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="flag_td_<%=index%>" width="30"><img src="./download.do?action=flag&fileId=<bean:write name="signatureRow" property="right.countryId" />" width="30" height="30"></td>
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="country_desc_td_<%=index%>"><bean:write name="signatureRow" property="right.countryDescription" /></td>
-									</logic:equal>
-									<logic:equal name="signatureRow" property="hasRight" value="false">
-										<td id="signature_td_<%=index%>" rowspan="2" width="200" align="center">&nbsp;</td>
-										<script>
-											lastSignatureIndex = <%=index%>;
-											completed = false;
-										</script>
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="flag_td_<%=index%>" width="30">&nbsp;</td>
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="country_desc_td_<%=index%>">&nbsp;</td>
 									</logic:equal>
 								</tr>
-								
 								<tr>
-									<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-									<td id="name_td_<%=index - 1%>" colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="left.delegateName" /></span><br><bean:write name="signatureRow" property="left.job" /></td>
-									
-									<td width="200"><img src="images/null.gif" width="200" height="1"></td>
+									<td id="country_desc_td_<%=index%>" height="18" align="center"><span class="remarcado"><bean:write name="signatureRow" property="left.countryDescription" /></span></td>
+									<td width="200"><img src="images/null.gif" width="10" height="1"></td>
+									<% index = index + 1;%>
 									<logic:equal name="signatureRow" property="hasRight" value="true">
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="name_td_<%=index%>" colspan="3" height="60"><span class="remarcado"><bean:write name="signatureRow" property="right.delegateName" /></span><br><bean:write name="signatureRow" property="right.job" /></td>
+										<td id="country_desc_td_<%=index%>" align="center"><span class="remarcado"><bean:write name="signatureRow" property="right.countryDescription" /></span></td>
 									</logic:equal>
 									<logic:equal name="signatureRow" property="hasRight" value="false">
-										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td id="name_td_<%=index%>" colspan="3" height="60">&nbsp;</td>
+									</logic:equal>
+								</tr>
+								<tr>
+									<td align="center" height="18"><bean:write name="signatureRow" property="left.job" /></td>
+									<td width="200"><img src="images/null.gif" width="10" height="1"></td>
+									<logic:equal name="signatureRow" property="hasRight" value="true">
+										<td id="name_td_<%=index%>" align="center"><bean:write name="signatureRow" property="right.job" /></td>
+									</logic:equal>
+									<logic:equal name="signatureRow" property="hasRight" value="false">
 									</logic:equal>
 								</tr>
 								<% index = index + 1;%>
+								<tr>
+									<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
+								</tr>
 								</logic:iterate>
 							</table>
 							<% if (isSign) { %>
