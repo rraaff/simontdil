@@ -177,6 +177,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td align="left">Pa&iacute;s</td>
 										<td width="60" align="center">Permisos</td>
 										<td width="60" align="center">Firmante</td>
+										<td width="60" align="center">Firmo</td>
 										<!-- td width="60" align="center">Habilitado</td  -->
 										<td width="60"></td>
 										<td width="80"></td>
@@ -189,6 +190,21 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><bean:write name="iterUser" property="permissionsString" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
+											
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center">
+												<% boolean hasSignedCurrent = com.tdil.simon.struts.forms.DelegateABMForm.hasSigned((com.tdil.simon.data.model.SystemUser)iterUser);%>
+												<% if (hasSignedCurrent) { %>
+													<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+														<tr>
+														<td>Si</td>
+														<td><html:image property="delSignatureImages" indexed="true" value="id" src="images/buttons/borrar.png" border="0"></html:image></td>
+														</tr>
+													</table>
+												<% } else { %>
+													No
+												<% } %>
+												</td>
+											
 											<!-- td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal><logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td -->
 											<td><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">

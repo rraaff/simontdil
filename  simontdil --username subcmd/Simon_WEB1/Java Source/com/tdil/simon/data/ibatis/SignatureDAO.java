@@ -38,4 +38,8 @@ public class SignatureDAO {
 	public static boolean exist(int versionId, int userId) throws SQLException {
 		return getSignatureBy(versionId, userId) != null;
 	}
+	
+	public static void delete(Signature signature) throws SQLException {
+		IBatisManager.sqlMapper.delete("deleteSignature", signature.getId());
+	}
 }

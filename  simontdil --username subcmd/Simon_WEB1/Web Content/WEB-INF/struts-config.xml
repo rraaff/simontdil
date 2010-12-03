@@ -178,7 +178,7 @@
       <forward name="continue" path="/goToListPrivateObservations.st"/>
     </action>
     <action path="/goToDelegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.GoToDelegateABMAction" scope="session">
-      <forward name="continue" path="/delegateABM.jsp"/>
+      <forward name="continue" path="/delegateABM.jsp" redirect="true"/>
     </action>
     <action path="/delegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.DelegateABMAction" scope="session">
       <forward name="continue" path="/delegateABM.jsp"/>

@@ -18,6 +18,7 @@ import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
+import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
@@ -81,6 +82,29 @@ public class DelegateSiteCache {
 		} catch (ValidationException e) {
 			getLog().error(e.getMessage(), e);
 		}
+	}
+	
+	public static boolean hasSigned(SystemUser user) {
+		if(allSignatures == null) {
+			return false;
+		}
+		for (Signature signature : getAllSignatures()) {
+			if (signature.getUserId() == user.getId()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	public static Signature getSignature(SystemUser user) {
+		if(allSignatures == null) {
+			return null;
+		}
+		for (Signature signature : getAllSignatures()) {
+			if (signature.getUserId() == user.getId()) {
+				return signature;
+			}
+		}
+		return null;
 	}
 	
 	public static List<SignatureRow> getSignaturesRows() {

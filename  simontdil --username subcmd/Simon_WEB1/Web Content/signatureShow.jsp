@@ -170,136 +170,140 @@ if ( dw_scrollObj.isSupported() ) {
 										if (sitestatus == 'NORMAL') {
 											window.location='<html:rewrite page="/goToDelegateHome.st"/>';
 										} else {
-											if (cleanBeforeShow) {
-												if (lastSignaturesLength == json.delegates.length) {
-													return;
-												}
-												signatureArray = new Array();
-												lastSignatureIndex = 0;
-												completed = true;
-												var myTable = document.getElementById("signTable");
-												var tBody = myTable.getElementsByTagName("TBODY")[0];
-												tBody.innerHTML = '';
-												lastSignaturesLength = json.delegates.length;
-											}
-											// TODO manejar variable de bloqueo
-											var i = 0;
-											while(i < json.delegates.length) {
-												if (!alreadyDisplayed(json.fileNames[i])) {
-													if (completed) {
-														lastSignatureIndex = lastSignatureIndex + 1;
-														signatureArray[lastSignatureIndex] = json.fileNames[i];
-														
-														var myTable = document.getElementById("signTable");
-														var tBody = myTable.getElementsByTagName("TBODY")[0];
-														// First row
-														var newTR = document.createElement('tr');
-														
-														// First cell
-														var signatureTD = document.createElement('td');
-														signatureTD.id = 'signature_td_' + lastSignatureIndex;
-														signatureTD.rowSpan = 2;
-														signatureTD.align="center";
-														signatureTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
-														newTR.appendChild (signatureTD);
-														
-														var spacerTD = document.createElement('td');
-														spacerTD.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD);
-														
-														var flagTD = document.createElement('td');
-														flagTD.id = 'flag_td_' + lastSignatureIndex;
-														flagTD.innerHTML = '<img width="30" height="30" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
-														newTR.appendChild (flagTD);
-														
-														var spacerTD1 = document.createElement('td');
-														spacerTD1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD1);
-														
-														var countryTD = document.createElement('td');
-														countryTD.id = 'country_desc_td_' + lastSignatureIndex;
-														countryTD.innerHTML = json.countries[i];
-														newTR.appendChild (countryTD);
-														
-														// Separator
-														var spacerTD2 = document.createElement('td');
-														spacerTD2.innerHTML = '<img src="images/null.gif" width="200" height="1">';
-														newTR.appendChild (spacerTD2);
-														
-														lastSignatureIndex = lastSignatureIndex + 1;
-														// Second cell
-														var signatureTDC1 = document.createElement('td');
-														signatureTDC1.id = 'signature_td_' + lastSignatureIndex;
-														signatureTDC1.rowSpan = 2;
-														signatureTDC1.align="center";
-														signatureTDC1.innerHTML = '&nbsp;';
-														newTR.appendChild (signatureTDC1);
-														
-														var spacerTDC1 = document.createElement('td');
-														spacerTDC1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTDC1);
-														
-														var flagTDC1 = document.createElement('td');
-														flagTDC1.id = 'flag_td_' + lastSignatureIndex;
-														flagTDC1.innerHTML = '&nbsp;';
-														newTR.appendChild (flagTDC1);
-														
-														var spacerTD1C1 = document.createElement('td');
-														spacerTD1C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD1C1);
-														
-														var countryTDC1 = document.createElement('td');
-														countryTDC1.id = 'country_desc_td_' + lastSignatureIndex;
-														countryTDC1.innerHTML = '&nbsp;';
-														newTR.appendChild (countryTDC1);
-														
-														tBody.appendChild(newTR);
-														
-														newTR = document.createElement('tr');
-														
-														var spacerTD2 = document.createElement('td');
-														spacerTD2.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD2);
-														
-														var delegateNameTD = document.createElement('td');
-														delegateNameTD.id = 'name_td_' + (lastSignatureIndex - 1);
-														delegateNameTD.colSpan = 3;
-														delegateNameTD.innerHTML = '<span class="remarcado">' + json.delegates[i] + '</span><br>' + json.jobs[i];
-														newTR.appendChild (delegateNameTD);
-														
-														// Separator
-														var spacerTD22 = document.createElement('td');
-														spacerTD22.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD22);
-														
-														var spacerTD2C1 = document.createElement('td');
-														spacerTD2C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
-														newTR.appendChild (spacerTD2C1);
-														
-														var delegateNameTDC1 = document.createElement('td');
-														delegateNameTDC1.id = 'name_td_' + (lastSignatureIndex);
-														delegateNameTDC1.colSpan = 3;
-														delegateNameTDC1.innerHTML = '&nbsp;';
-														newTR.appendChild (delegateNameTDC1);
-														
-														tBody.appendChild(newTR);
-	
-														init_dw_Scroll();
-														completed = false;
-													} else {
-														signatureArray[lastSignatureIndex] = json.fileNames[i];
-														var signatureTD = document.getElementById('signature_td_' + lastSignatureIndex);
-														signatureTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
-														var flagTD = document.getElementById('flag_td_' + lastSignatureIndex);
-														flagTD.innerHTML = '<img width="30" height="30" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
-														var countryTD = document.getElementById('country_desc_td_' + lastSignatureIndex);
-														countryTD.innerHTML = json.countries[i];
-														var delegateNameTD = document.getElementById('name_td_' + lastSignatureIndex);
-														delegateNameTD.innerHTML = '<span class="remarcado">' + json.delegates[i] + '</span><br>' + json.jobs[i];
-														completed = true;
+											if (sitestatus == 'IN_SIGN') {
+												window.location='<html:rewrite page="/goToDelegateNegotiation.st"/>';
+											} else {
+												if (cleanBeforeShow) {
+													if (lastSignaturesLength == json.delegates.length) {
+														return;
 													}
+													signatureArray = new Array();
+													lastSignatureIndex = 0;
+													completed = true;
+													var myTable = document.getElementById("signTable");
+													var tBody = myTable.getElementsByTagName("TBODY")[0];
+													tBody.innerHTML = '';
+													lastSignaturesLength = json.delegates.length;
 												}
-												i = i + 1;
+												// TODO manejar variable de bloqueo
+												var i = 0;
+												while(i < json.delegates.length) {
+													if (!alreadyDisplayed(json.fileNames[i])) {
+														if (completed) {
+															lastSignatureIndex = lastSignatureIndex + 1;
+															signatureArray[lastSignatureIndex] = json.fileNames[i];
+															
+															var myTable = document.getElementById("signTable");
+															var tBody = myTable.getElementsByTagName("TBODY")[0];
+															// First row
+															var newTR = document.createElement('tr');
+															
+															// First cell
+															var signatureTD = document.createElement('td');
+															signatureTD.id = 'signature_td_' + lastSignatureIndex;
+															signatureTD.rowSpan = 2;
+															signatureTD.align="center";
+															signatureTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
+															newTR.appendChild (signatureTD);
+															
+															var spacerTD = document.createElement('td');
+															spacerTD.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD);
+															
+															var flagTD = document.createElement('td');
+															flagTD.id = 'flag_td_' + lastSignatureIndex;
+															flagTD.innerHTML = '<img width="30" height="30" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
+															newTR.appendChild (flagTD);
+															
+															var spacerTD1 = document.createElement('td');
+															spacerTD1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD1);
+															
+															var countryTD = document.createElement('td');
+															countryTD.id = 'country_desc_td_' + lastSignatureIndex;
+															countryTD.innerHTML = json.countries[i];
+															newTR.appendChild (countryTD);
+															
+															// Separator
+															var spacerTD2 = document.createElement('td');
+															spacerTD2.innerHTML = '<img src="images/null.gif" width="200" height="1">';
+															newTR.appendChild (spacerTD2);
+															
+															lastSignatureIndex = lastSignatureIndex + 1;
+															// Second cell
+															var signatureTDC1 = document.createElement('td');
+															signatureTDC1.id = 'signature_td_' + lastSignatureIndex;
+															signatureTDC1.rowSpan = 2;
+															signatureTDC1.align="center";
+															signatureTDC1.innerHTML = '&nbsp;';
+															newTR.appendChild (signatureTDC1);
+															
+															var spacerTDC1 = document.createElement('td');
+															spacerTDC1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTDC1);
+															
+															var flagTDC1 = document.createElement('td');
+															flagTDC1.id = 'flag_td_' + lastSignatureIndex;
+															flagTDC1.innerHTML = '&nbsp;';
+															newTR.appendChild (flagTDC1);
+															
+															var spacerTD1C1 = document.createElement('td');
+															spacerTD1C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD1C1);
+															
+															var countryTDC1 = document.createElement('td');
+															countryTDC1.id = 'country_desc_td_' + lastSignatureIndex;
+															countryTDC1.innerHTML = '&nbsp;';
+															newTR.appendChild (countryTDC1);
+															
+															tBody.appendChild(newTR);
+															
+															newTR = document.createElement('tr');
+															
+															var spacerTD2 = document.createElement('td');
+															spacerTD2.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD2);
+															
+															var delegateNameTD = document.createElement('td');
+															delegateNameTD.id = 'name_td_' + (lastSignatureIndex - 1);
+															delegateNameTD.colSpan = 3;
+															delegateNameTD.innerHTML = '<span class="remarcado">' + json.delegates[i] + '</span><br>' + json.jobs[i];
+															newTR.appendChild (delegateNameTD);
+															
+															// Separator
+															var spacerTD22 = document.createElement('td');
+															spacerTD22.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD22);
+															
+															var spacerTD2C1 = document.createElement('td');
+															spacerTD2C1.innerHTML = '<img src="images/null.gif" width="10" height="1">';
+															newTR.appendChild (spacerTD2C1);
+															
+															var delegateNameTDC1 = document.createElement('td');
+															delegateNameTDC1.id = 'name_td_' + (lastSignatureIndex);
+															delegateNameTDC1.colSpan = 3;
+															delegateNameTDC1.innerHTML = '&nbsp;';
+															newTR.appendChild (delegateNameTDC1);
+															
+															tBody.appendChild(newTR);
+		
+															init_dw_Scroll();
+															completed = false;
+														} else {
+															signatureArray[lastSignatureIndex] = json.fileNames[i];
+															var signatureTD = document.getElementById('signature_td_' + lastSignatureIndex);
+															signatureTD.innerHTML = '<img width="200" height="110" src="./download.do?action=signature&signature=' + json.fileNames[i] + '">';
+															var flagTD = document.getElementById('flag_td_' + lastSignatureIndex);
+															flagTD.innerHTML = '<img width="30" height="30" src="./download.do?action=flag&fileId=' + json.flags[i] + '">';
+															var countryTD = document.getElementById('country_desc_td_' + lastSignatureIndex);
+															countryTD.innerHTML = json.countries[i];
+															var delegateNameTD = document.getElementById('name_td_' + lastSignatureIndex);
+															delegateNameTD.innerHTML = '<span class="remarcado">' + json.delegates[i] + '</span><br>' + json.jobs[i];
+															completed = true;
+														}
+													}
+													i = i + 1;
+												}
 											}
 										}
 									  }
