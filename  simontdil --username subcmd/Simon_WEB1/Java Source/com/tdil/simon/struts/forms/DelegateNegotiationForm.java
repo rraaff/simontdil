@@ -109,31 +109,35 @@ public class DelegateNegotiationForm extends ActionForm {
 	}
 
 	public void sign() throws SQLException, IOException {
-		Signature signature = new Signature();
-		signature.setUserId(this.getUser().getId());
-		signature.setVersionId(this.getVersionVO().getVersion().getId());
-		signature.setDeleted(false);
-		SignatureDAO.insertSignature(signature);
-		InputStream input = request.getInputStream();
-		// TODO error handling
-		File file = new File("a.txt");
-		getLog().error(file.getCanonicalPath());
-		FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
-		FileOutputStream fout2 = new FileOutputStream(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
-		try {
-			IOUtils.copy(input, fout);
-			fout.close();
-			FileInputStream finput = new FileInputStream(signature.getSignatureFileName());
-			IOUtils.copy(finput, fout2);
-		} finally {
-			try {
-				fout2.close();
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		synchronized (this.getUser()) {
+			Signature previous = SignatureDAO.getSignatureBy(this.getVersionVO().getVersion().getId(), this.getUser().getId());
+			if (previous == null) {
+				Signature signature = new Signature();
+				signature.setUserId(this.getUser().getId());
+				signature.setVersionId(this.getVersionVO().getVersion().getId());
+				signature.setDeleted(false);
+				SignatureDAO.insertSignature(signature);
+				InputStream input = request.getInputStream();
+				// TODO error handling
+				File file = new File("a.txt");
+				getLog().error(file.getCanonicalPath());
+				FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
+				FileOutputStream fout2 = new FileOutputStream(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
+				try {
+					IOUtils.copy(input, fout);
+					fout.close();
+					FileInputStream finput = new FileInputStream(signature.getSignatureFileName());
+					IOUtils.copy(finput, fout2);
+				} finally {
+					try {
+						fout2.close();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 			}
 		}
-		
 	}
 	
 	private static Logger getLog() {
