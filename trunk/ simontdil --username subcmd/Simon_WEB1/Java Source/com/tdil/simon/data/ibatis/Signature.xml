@@ -52,6 +52,11 @@
     	#id#, #versionId#, #userId#, #deleted#
     )
   </insert>
+  
+  <delete id="deleteSignature" parameterClass="int">
+    delete from SIGNATURE
+    where id = #id#
+  </delete>
 
 
 </sqlMap>

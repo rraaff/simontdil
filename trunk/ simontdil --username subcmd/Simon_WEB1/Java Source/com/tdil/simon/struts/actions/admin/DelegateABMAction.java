@@ -18,6 +18,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.DelegateABMForm;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 
@@ -39,6 +40,16 @@ public class DelegateABMAction extends ABMAction {
 		if (image != null) {
 			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
 			if (imageSubmitData.isParsed())  {
+				if ("delSignatureImages".equals(imageSubmitData.getProperty())) {
+					TransactionProvider.executeInTransaction(new TransactionalAction() {
+						public void executeInTransaction() throws SQLException, ValidationException {
+							delegateABMForm.deleteSignature(imageSubmitData.getPosition());
+							delegateABMForm.init();
+						}
+					});
+					DelegateSiteCache.refresh();
+				}
+				
 				if ("deleteImages".equals(imageSubmitData.getProperty())) {
 					TransactionProvider.executeInTransaction(new TransactionalAction() {
 						public void executeInTransaction() throws SQLException, ValidationException {

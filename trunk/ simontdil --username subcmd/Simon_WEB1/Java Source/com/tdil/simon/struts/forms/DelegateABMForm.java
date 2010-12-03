@@ -1,5 +1,7 @@
 package com.tdil.simon.struts.forms;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -13,12 +15,17 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.validations.SystemUserValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CountryDAO;
+import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.Country;
+import com.tdil.simon.data.model.Signature;
+import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.valueobjects.UserVO;
+import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.EmailUtils;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.SystemConfig;
 
 public class DelegateABMForm extends TransactionalValidationForm implements ABMForm {
 
@@ -41,6 +48,10 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(DelegateABMForm.class);
+	}
+	
+	public static boolean hasSigned(SystemUser user) {
+		return DelegateSiteCache.hasSigned(user);
 	}
 	
 	public int getId() {
@@ -265,6 +276,26 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		systemUser.setDeleted(true);
 		SystemUserDAO.logicallyDeleteUser(systemUser);
 	}
+	
+	public void deleteSignature(int position) throws SQLException {
+		String delegateSiteStatus = Site.getDELEGATE_SITE().getStatus();
+		if (Site.IN_SIGN.equals(delegateSiteStatus)) {
+			SystemUser systemUser = this.getAllUsers().get(position);
+			Signature signature = DelegateSiteCache.getSignature(systemUser);
+			if (signature != null) {
+				SignatureDAO.delete(signature);
+			}
+			try {
+				File fout = new File(signature.getSignatureFileName());
+				File fout2 = new File(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
+				fout.delete();
+				fout2.delete();
+			} catch (Exception e) {
+				getLog().error(e.getMessage(), e);
+			}
+		}
+	}
+	
 	public ValidationError reactivate(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
 		if (systemUser.isCanSign()) {
@@ -291,4 +322,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	public void setCanProposeParagraph(boolean canProposeParagraph) {
 		this.canProposeParagraph = canProposeParagraph;
 	}
+	
+	
 }
