@@ -142,7 +142,7 @@ a:active {width: auto;}
 						<% } %>
 					</tr>
 					<tr>
-						<td align="center" height="18"><%=signatureRow.getLeft().getCountryDescription()%></td>
+						<td align="center" height="18">Por <%=signatureRow.getLeft().getCountryDescription()%></td>
 						<td width="100"><img src="images/null.gif" width="10" height="1"></td>
 						<% if (!signatureRow.getHasRight()) { %>
 							<td width="200"><img src="images/null.gif" width="10" height="1"></td>
@@ -155,12 +155,12 @@ a:active {width: auto;}
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td-->
 							<!-- td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getRight().getCountryId()%>" width="30" height="30"></td>
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td -->
-							<td align="center"><%=signatureRow.getRight().getCountryDescription()%></td>
+							<td align="center">Por <%=signatureRow.getRight().getCountryDescription()%></td>
 						<% } %>
 					</tr>
 					<tr>
 						<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td -->
-						<td align="center" height="18"><span class="remarcado"><!-- % =signatureRow.getLeft().getDelegateName()%></span><br --><%=signatureRow.getLeft().getJob()%></span></td>
+						<td align="center" height="18"><span class="remarcado"><!-- % =signatureRow.getLeft().getDelegateName()%></span><br --><!--  %=signatureRow.getLeft().getJob()% --></span></td>
 						<td width="100"><img src="images/null.gif" width="10" height="1"></td>
 						<% if (!signatureRow.getHasRight()) { %>
 							<td width="200"><img src="images/null.gif" width="10" height="1"></td>
@@ -168,8 +168,8 @@ a:active {width: auto;}
 							<td colspan="3" height="60">&nbsp;</td -->
 						<% } else {%>
 							<!-- td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getRight().getDelegateName()%></span><br><%=signatureRow.getRight().getJob()%></td-->
-							<td align="center"><span class="remarcado"><%=signatureRow.getRight().getJob()%></span></td>
+							<td colspan="3" height="60"><span class="remarcado"><%=signatureRow.getRight().getDelegateName()%></span><br><!-- %=signatureRow.getRight().getJob()% --></td-->
+							<td align="center"><span class="remarcado"><!--  %=signatureRow.getRight().getJob()% --></span></td>
 						<% } %>
 					</tr>
 					<tr>
