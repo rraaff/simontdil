@@ -6,7 +6,7 @@ CREATE  TABLE `SIMON`.`SYSPROPERTIES` (
   PRIMARY KEY (`id`) );
   
   
-INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.properties.location', 'C:/icarus/workspace/simon/Simon_Resources/props/simon.properties', 0);
+INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.properties.location', '/home/mgodoy/icarus/workspace/simon/Simon_Resources/props/simon.properties', 0);
 INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.server.name', 'localhost', 0);
 
 COMMIT;
