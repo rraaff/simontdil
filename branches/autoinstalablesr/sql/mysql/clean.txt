@@ -1,0 +1,14 @@
+delete from SIMON.DOCUMENT;
+delete from SIMON.VERSION;
+delete from SIMON.PARAGRAPH;
+delete from SIMON.OBSERVATION;
+delete from SIMON.SIGNATURE;
+delete from SIMON.DELEGATEAUDIT;
+update SIMON.SITE set status = 'NORMAL';
+update systemuser set
+password = '123',
+temporaryPassword = 0
+where delegate = 1;
+COMMIT;
+
+delete from SIMON.SYSTEMUSER where username <> 'Admin';

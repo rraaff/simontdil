@@ -1,0 +1,28 @@
+El primer moderador se crea por script
+
+Login de moderador
+Login de Delegado
+
+Cambio de password?
+
+Alta de pais
+Baja de pais
+Modificacion de pais
+
+Alta de usuario (password con hash)
+Baja de usuario
+Modificacion de usuario (cambio de password?)
+Que pasa si un usuario se olvida el password?
+
+************
+
+A modelar
+
+Estos dos tienen que tener un modo o algo asi
+PublicSite (no persistente)
+DelegateSite (no persistente)
+
+***********
+Como vamos a reportar los errores? xml generico? Me imagino que si
+
+

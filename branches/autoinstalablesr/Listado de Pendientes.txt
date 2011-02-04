@@ -1,0 +1,76 @@
+No dejar iniciar negociacion si hay otro en negociacion
+No emails repetidos
+ver firma
+
+-------------------------
+
+viste que por un lado hay fases de observaciones y después hay eventos
+ ¿cómo hacemos para evitar que algún distraido ponga en negociación vía web?... se hacen instalaciones separadas?
+ onda web para la etapa previa y una intranet con el dump de la base para las negociaciones?
+ jajaa
+ y a la versión deploydeable para web no le activo el menú de negociación
+
+******************************************************
+
+- El scroll en la pagina signatureShow rompio la actualizacion automatica
+
+X Modificar todos los Estados o Palabras en Inglés a Castellano, ejemplo: sitio del moderador: EVENT
+Los estados de los sitios y documentos deberian funcionarte bien, si queres tocar estan en ApplicationResourcse
+
+- Generales
+  X Necesito cambiar todas las palabras en inglés tales como Draft o Consolidated bla bla.. mismo caso que el anterior
+  - Los mensajes de aprobación o error entre acción y acción o pantalla y pantalla.
+
+- Vista HOME
+  - Lo más probable es que no haya docs secundarios, tengo que rediseñar la puta home para que no se vea con un agujero!
+  X Ponerle link a los docs directo en los elementos de la lista de docs secundarios.
+
+X Ver obsercaciones
+  X Poner la delegación primero con la banderita
+  X Ordenar por número de párrafo (y despues??? porque)
+  X Antes de cada grupo de observaciones poner el texto original del párrafo.
+
+X Negociación
+  X Panel de edición de texto para los párrafos en negociación
+    X Negrita
+    X Itálica
+    X Subrayado
+    X Resaltado
+    X Tachado
+    X Colores (con 5 se dan por felices)
+- Me parece que el area de edicion es muy chiquita
+
+X Lista de Docs
+  X Botón Borrar
+
+X Alta/edición de Docs
+  X Si se puede, agregar el combo de párrafos para poder switchear del 1 al 74 sin tener que pasar por todos.
+
+- General en los listados
+  - Si se puede, cambiarle el estilo de texto a los contenidos de los TRs que estén desactivados. usar este class: notActive
+
+
+X Lista de Observaciones o mensajes privados
+  X Hay 3 archivos que tiene <p>INSERTAR BANDERITA</p>, buscalos y reemplazamelo por la banderita de la delegación que hizo el comentario.
+  X Header
+    X El la última prueba que hice, no me actualizó el numerito de mensajes privados en el header. pero el link me anduvo bien.
+
+X Firma
+  X Parece que sigue hardcodeada y desde una máquina que no es la que tiene el server, no anda el grabar.
+  Pablo, esto funciona con una property, esta simon.properties y es la que se llama server.url, esta tendria que tener
+  una direccion que vean todos.
+  
+X No devolver el texto del parrafo si es el mismo que el delegado esta viendo
+	X Campo en la base de version, que pase el delegado
+
+X Property que maneje el tiempo de refresco
+
+- Logout de moderador si se loguea otro moderador (si tienen un cluster, fuimos)
+
+- Validaciones por todos lados
+
+- Email al momento del agregado de observacion para el resto?
+
+X che... eso que me consultaste en el mail del salvado durante la negociación, será aquello de que no 
+existan draft de un archivo en negociación... que el hecho de estar en negociación es un draft en si mismo?
+En principio parece que anda bien

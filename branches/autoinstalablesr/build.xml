@@ -1,0 +1,6 @@
+<project name="Simon" default="makeWar" basedir=".">
+	
+	<target name="makeWar">
+		<war destfile="/home/mgodoy/Simon_WEB.war" basedir="../Simon_WEB/Web Content/" webxml="../Simon_WEB/Web Content/WEB-INF/web.xml"></war>
+	</target>
+</project>

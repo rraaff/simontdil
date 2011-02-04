@@ -1,0 +1,8 @@
+validacion documento con mismo nombre
+validaciondocumento sin parrafos
+
+resto de validaciones
+
+layer de todas las versiones
+
+limitar versiones a 7 en la vista
