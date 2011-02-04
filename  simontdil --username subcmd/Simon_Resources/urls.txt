@@ -1,8 +1,0 @@
-baja de imagen 
-http://localhost:8180/Simon/download.do?action=flag&fileId=3
-
-http://localhost:8180/Simon/controller.do?action=addDocument&title=aaa&description=sdsdsdd&versionDescription=VersionInicial&paragraph1=TATATA&paragraph2=tetetete
-
-http://localhost:8080/Simon/controller.do?action=viewObservations&id=3
-http://localhost:8180/Simon/controller.do?action=addObservation&versionId=5&paragraph=1&observation=Asi no puede ser
-http://localhost:8180/Simon/controller.do?action=addObservation&versionId=3&paragraph=1&observation=ehhhhhhhhhhhh%20imposible

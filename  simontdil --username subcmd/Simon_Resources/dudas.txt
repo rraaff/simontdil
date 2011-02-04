@@ -1,5 +1,0 @@
-Tema versiones, cuando ves una version, te muestra cuantas mas hay, que pasa si una de esas esta borrada? que pasa con la numeracion?
-Quizas no se deberian borrar, o aun borradas que se puedan ver.
-
-Tema observaciones, se pueden agregar hasta la fecha de fin de coment sin importar el estado? que estados tendran las versiones? 
-inicial, consolidado, final???
