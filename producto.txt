@@ -1,5 +1,12 @@
-Problema por el uso de los directorios, idea original del blob y copiado a los dirs bajo demanda o politica
-de backup que diga que esos directorios se deben backup-ear
+Llevar a resource bundle todos los textos hardcodeados, luego cambiar de resource bundle en archivo a 
+resource bundle en la base de datos.
+Esto va a traer un problema, que hoy no tienen contexto, es decir, los resource bundles estan en las paginas,
+pero la clave de los mismos no dice en que pagina, quizas seria un buen momento para ponerle nombres a las
+paginas y usarlas como contexto del rb, entonces podrias agruparlos por la misma.
+Otro tema es que se asume que el idioma por defecto es el español, y el alternativo el portugues, quizas se deberia
+abstraer y asumir un idioma default y un idioma alternativo.
+
+Problema por el uso de los directorios, idea original del blob y copiado a los dirs bajo demanda.
 
 Que levante con un esquema vacio y que sepa crear toda la data (minimo: tablas, pais host, Admin y sites)
 Todo esto con una pantalla de configuracion que pida los datos antes descriptos y los datos de sysproperties.
