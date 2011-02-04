@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Observation">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Observation" type="com.tdil.simon.data.model.Observation"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllObservationsForParagraph" parameterClass="int" resultClass="Observation">
+    select *
+    from OBSERVATION
+    where paragraphId = #id#
+    AND privateObservation = 0
+    AND portuguesTranslation = 0
+    order by creationDate
+  </select>
+  
+  <select id="selectAllObservationsForParagraphNotDeleted" parameterClass="int" resultClass="Observation">
+    select *
+   	from OBSERVATION 
+   	WHERE deleted = 0
+   	AND paragraphId = #id#
+   	AND privateObservation = 0
+   	AND portuguesTranslation = 0
+   	order by creationDate
+  </select>
+  
+   <select id="selectNotDeletedPrivateObservationsForParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	OBSERVATION.*,
+    	SYSTEMUSER.username,
+    	SYSTEMUSER.name,
+    	COUNTRY.id as countryId,
+    	COUNTRY.name as countryName,
+    	PARAGRAPH.paragraphNumber as paragraphNumber
+   	from PARAGRAPH, OBSERVATION, SYSTEMUSER, COUNTRY 
+   	WHERE PARAGRAPH.id = #id#
+   	AND PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.userId = SYSTEMUSER.id
+   	AND OBSERVATION.privateObservation = 1
+   	AND SYSTEMUSER.countryId = COUNTRY.id
+   	AND OBSERVATION.deleted = 0
+   	AND OBSERVATION.portuguesTranslation = 0
+   	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
+  </select>
+  
+  <select id="selectNotDeletedPrivateObservationsForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	OBSERVATION.*,
+    	SYSTEMUSER.username,
+    	SYSTEMUSER.name,
+    	COUNTRY.id as countryId,
+    	COUNTRY.name as countryName,
+    	PARAGRAPH.paragraphNumber as paragraphNumber
+   	from PARAGRAPH, OBSERVATION, SYSTEMUSER, COUNTRY 
+   	WHERE PARAGRAPH.versionId = #id#
+   	AND PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.userId = SYSTEMUSER.id
+   	AND OBSERVATION.privateObservation = 1
+   	AND SYSTEMUSER.countryId = COUNTRY.id
+   	AND OBSERVATION.deleted = 0
+   	AND OBSERVATION.portuguesTranslation = 0
+   	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
+  </select>
+  
+  <select id="selectAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	OBSERVATION.*,
+    	SYSTEMUSER.username,
+    	SYSTEMUSER.name,
+    	COUNTRY.id as countryId,
+    	COUNTRY.name as countryName,
+    	PARAGRAPH.paragraphNumber as paragraphNumber
+   	from PARAGRAPH, OBSERVATION, SYSTEMUSER, COUNTRY 
+   	WHERE PARAGRAPH.versionId = #id#
+   	AND PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.userId = SYSTEMUSER.id
+   	AND OBSERVATION.privateObservation = 0
+   	AND SYSTEMUSER.countryId = COUNTRY.id
+   	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
+   	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
+  </select>
+  
+  <select id="countAllObservationsForVersionNotDeleted" parameterClass="int" resultClass="Integer">
+    select 
+    	count(1)
+   	from PARAGRAPH, OBSERVATION
+   	WHERE PARAGRAPH.versionId = #id#
+   	AND PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.privateObservation = 0
+   	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
+  </select>
+  
+  
+  <select id="searchObservations" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.ObservationVO">
+    select 
+    	OBSERVATION.*,
+    	SYSTEMUSER.username,
+    	SYSTEMUSER.name,
+    	COUNTRY.id as countryId,
+    	COUNTRY.name as countryName,
+    	PARAGRAPH.paragraphNumber as paragraphNumber
+   	from PARAGRAPH, OBSERVATION, SYSTEMUSER, COUNTRY
+   	WHERE PARAGRAPH.id = OBSERVATION.paragraphId
+   	AND OBSERVATION.userId = SYSTEMUSER.id
+   	AND OBSERVATION.privateObservation = 0
+   	AND SYSTEMUSER.countryId = COUNTRY.id
+   	AND OBSERVATION.DELETED = 0
+   	AND OBSERVATION.portuguesTranslation = 0
+   	<isNotNull prepend="AND" property="versionId">
+    	(PARAGRAPH.versionId = #versionId#)
+    </isNotNull>
+   	<isNotNull prepend="AND" property="countryId">
+    	(COUNTRY.id = #countryId#)
+    </isNotNull>
+    <isNotNull prepend="AND" property="dateMin">
+    	(OBSERVATION.creationDate &gt;= #dateMin#)
+    </isNotNull>
+    <isNotNull prepend="AND" property="dateMax">
+    	(OBSERVATION.creationDate &lt;= #dateMax#)
+    </isNotNull>
+   	<isNotNull prepend="AND" property="paragraphNumber">
+    	(PARAGRAPH.paragraphNumber = #paragraphNumber#)
+    </isNotNull>
+   	order by PARAGRAPH.paragraphNumber, OBSERVATION.creationDate, COUNTRY.name, SYSTEMUSER.name
+  </select>
+  
+  <select id="selectObservationById" parameterClass="int" resultClass="Observation">
+    select
+      *
+    from OBSERVATION
+    where id = #id#
+  </select>
+  
+  <select id="selectPortuguesByParagraphId" parameterClass="int" resultClass="Observation">
+    select
+      *
+    from OBSERVATION
+    where OBSERVATION.paragraphId = #id#
+    AND OBSERVATION.portuguesTranslation = 1
+  </select>
+  
+  <select id="countPrivateObservationsForVersionInNegotiation" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
+    select
+      count(1) as count, IFNULL(max(OBSERVATION.id),0) as maxId
+    from OBSERVATION, PARAGRAPH, VERSION
+    where VERSION.status = 'IN_NEGOTIATION'
+    and PARAGRAPH.versionId = VERSION.id
+    and OBSERVATION.paragraphId = PARAGRAPH.id
+    and OBSERVATION.privateObservation = 1
+    and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
+  </select>
+  
+    <select id="countPrivateObservationsForNegotiatedParagraph" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationSummaryVO">
+    select
+      count(1) as count, IFNULL(max(OBSERVATION.id),0) as maxId
+    from OBSERVATION
+    where OBSERVATION.paragraphId = #id#
+    and OBSERVATION.privateObservation = 1
+    and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
+  </select>
+  
+  
+  <select id="countPrivateObservationsForParagrapth" parameterClass="int" resultClass="Integer">
+    select
+      count(1)
+    from OBSERVATION
+    where OBSERVATION.paragraphId = #id#
+    and OBSERVATION.privateObservation = 1
+    and OBSERVATION.deleted = 0
+    AND OBSERVATION.portuguesTranslation = 0
+  </select>
+ 
+   <insert id="insertObservation" parameterClass="Observation">
+    insert into OBSERVATION (
+      id, paragraphId, userId, addNewParagraph, privateObservation, creationDate, observationText, portuguesTranslation, deleted
+    ) values (
+      #id#, #paragraphId#, #userId#, #addNewParagraph#, #privateObservation#, #creationDate#, #observationText#, #portuguesTranslation#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+  
+  <update id="logDeleteObservationById" parameterClass="int">
+    update OBSERVATION set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+
+  <update id="logDeleteObservation" parameterClass="Observation">
+    update OBSERVATION set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+  <update id="updatePortugues" parameterClass="Observation">
+    update OBSERVATION set
+      observationText = #observationText#
+    where
+      id = #id#
+  </update>
+
+</sqlMap>
