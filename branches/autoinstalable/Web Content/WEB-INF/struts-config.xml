@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+  <form-beans>
+    <form-bean name="LoginForm" type="com.tdil.simon.struts.forms.LoginForm"/>
+    <form-bean name="InitNegotiationForm" type="com.tdil.simon.struts.forms.InitNegotiationForm"/>
+    <form-bean name="NegotiateParagraphForm" type="com.tdil.simon.struts.forms.NegotiateParagraphForm"/>
+    <form-bean name="CreateDocumentForm" type="com.tdil.simon.struts.forms.CreateDocumentForm"/>
+    <form-bean name="ListDocument" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="RequestPaswwordForm" type="com.tdil.simon.struts.forms.RequestPasswordForm"/>
+    <form-bean name="ModeratorSite" type="com.tdil.simon.struts.forms.ModeratorSiteForm"/>
+    <form-bean name="PublicSite" type="com.tdil.simon.struts.forms.ModeratorSiteForm"/>
+    <form-bean name="SelectPrincipalDocument" type="com.tdil.simon.struts.forms.SelectPrincipalDocumentForm"/>
+    <form-bean name="ModeratorHome" type="com.tdil.simon.struts.forms.ModeratorHome"/>
+    <form-bean name="ViewVersion" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="ListObservations" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="DelegateNegotiation" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="DelegateNegotiationForm" type="com.tdil.simon.struts.forms.DelegateNegotiationForm"/>
+    <form-bean name="ListPrivate" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="DeleteObservation" type="com.tdil.simon.struts.forms.DeleteObservationForm"/>
+    <form-bean name="DelegateABM" type="com.tdil.simon.struts.forms.DelegateABMForm"/>
+    <form-bean name="ChangePassword" type="com.tdil.simon.struts.forms.ChangePasswordForm"/>
+    <form-bean name="ResetPassword" type="com.tdil.simon.struts.forms.ResetPasswordForm"/>
+    <form-bean name="StatisticsForm" type="com.tdil.simon.struts.forms.StatisticsForm"/>
+    <form-bean name="CountryABMForm" type="com.tdil.simon.struts.forms.CountryABMForm"/>
+    <form-bean name="CategoryABMForm" type="com.tdil.simon.struts.forms.CategoryABMForm"/>
+    <form-bean name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.forms.ReferenceDocumentABMForm"/>
+    <form-bean name="ReferenceDocumentList" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="SearchObservationsForm" type="com.tdil.simon.struts.forms.SearchObservationsForm"/>
+    <form-bean name="SystemUserABM" type="com.tdil.simon.struts.forms.SystemUserABMForm"/>
+    <form-bean name="ListDocumentsForDesign" type="com.tdil.simon.struts.forms.ListForm"/>
+    <form-bean name="ViewVersionPopup" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
+    <form-bean name="AssistantHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
+    <form-bean name="TranslatorHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
+  </form-beans>
+  <global-forwards>
+    <forward name="ajaxReturn" path="/empty.jsp"/>
+    <forward name="notLogged" path="/login.jsp"/>
+    <forward name="invalidAction" path="/login.jsp"/>
+    <forward name="goToDelegateNegotiation" path="/goToDelegateNegotiation.st"/>
+  </global-forwards>
+  <action-mappings>
+    <action path="/login" name="LoginForm" type="com.tdil.simon.struts.actions.LoginAction" scope="session" input="/login.jsp">
+      <forward name="success" redirect="true" path="/success.jsp"/>
+      <forward name="failure" path="/login.jsp"/>
+      <forward name="admin" redirect="true" path="/adminHome.jsp"/>
+      <forward name="moderator" redirect="true" path="/goToModeratorHome.st"/>
+      <forward name="delegate" redirect="true" path="/goToDelegateHome.st"/>
+      <forward name="requestPassword" path="/requestPassword.jsp"/>
+      <forward name="negotiation" redirect="true" path="/goToDelegateNegotiation.st"/>
+      <forward name="signShow" redirect="true" path="/goToSignShow.st"/>
+      <forward name="initChangePassword" path="/initChangePassword.st"/>
+      <forward name="designer" path="/goToListDocumentForDesign.st"/>
+      <forward name="assistant" path="/goToAssistantHome.st"/>
+      <forward name="translator" path="/goToTranslatorHome.st"/>
+    </action>
+    <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
+      <forward name="failure" path="/moderatorHome.jsp"/>
+      <forward name="success" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/createDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/createDocumentActionStep2" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionStep2" scope="session">
+      <forward name="continue" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="failure" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
+      <forward name="back" path="/createDocumentStep1.jsp"/>
+      <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="failure" path="/createDocumentStep2.jsp"/>
+    </action>
+    <action path="/paragraphNavigation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ParagraphsNavigationAction" scope="session">
+      <forward name="previous" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="next" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="preview" path="/previewDocument.jsp"/>
+      <forward name="stay" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="modifyIntroduction" path="/createDocumentStep2.jsp"/>
+      <forward name="failure" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="modifyDocument" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/countPrivateMessagesForVersion" type="com.tdil.simon.struts.actions.moderator.CountPrivateMessagesForVersion" scope="request">
+    </action>
+    <action path="/addPrivateMessage" type="com.tdil.simon.struts.actions.delegate.AddPrivateMessageForVersion" scope="request">
+    </action>
+    <action path="/previewDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.PreviewDocumentAction" scope="session">
+      <forward name="consolidate" path="/consolidateDocument.jsp"/>
+      <forward name="save" path="/previewDocument.jsp"/>
+      <forward name="editParagraphs" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="goHome" path="/goToModeratorHome.st"/>
+      <forward name="designerHome" path="/goToListDocumentForDesign.st"/>
+    </action>
+    <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
+      <forward name="save" path="/goToModeratorHome.st"/>
+      <forward name="cancel" path="/createDocumentStepParagraph.jsp"/>
+      <forward name="failure" path="/consolidateDocument.jsp"/>
+    </action>
+    <action path="/goToListDocument" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.GoToListDocument" scope="session">
+      <forward name="continue" path="/listDocumentsForModerator.jsp"/>
+    </action>
+    <action path="/editVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.EditVersionAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/editPortuguesVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.EditPortuguesVersionAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/requestPassword" name="RequestPaswwordForm" type="com.tdil.simon.struts.actions.RequestPasswordAction" scope="request">
+      <forward name="continue" path="/requestPassword.jsp"/>
+      <forward name="stay" path="/requestPassword.jsp"/>
+    </action>
+    <action path="/setModSiteNormal" name="ModeratorSite" type="com.tdil.simon.struts.actions.admin.SetModeratorSiteNormal" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/setModSiteEvent" name="ModeratorSite" type="com.tdil.simon.struts.actions.admin.SetModeratorSiteEvent" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/setPublicSiteNormal" name="PublicSite" type="com.tdil.simon.struts.actions.admin.SetPublicSiteNormal" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/setPublicSiteEvent" name="PublicSite" type="com.tdil.simon.struts.actions.admin.SetPublicSiteEvent" scope="request">
+      <forward name="home" path="/adminHome.jsp"/>
+    </action>
+    <action path="/selectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.SelectPrincipalDocumentAction" scope="request">
+      <forward name="home" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToSelectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.GoToSelectPrincipalDocument" scope="request">
+      <forward name="continue" path="/selectPrincipalDocument.jsp"/>
+    </action>
+    <action path="/initSign" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction">
+      <forward name="continue" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToModeratorHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
+      <forward name="continue" path="/moderatorHome.jsp"/>
+    </action>
+    <action path="/goToViewVersion" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="goToFinalVersion" path="/viewFinalVersion.jsp"/>
+      <forward name="goToFinalVersionSingle" path="/viewFinalVersionSingle.jsp"/>
+    </action>
+    <action path="/viewVersionAction" name="ViewVersion" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
+      <forward name="goToSearchObservations" path="/goToSearchObservations.st"/>
+      <forward name="editNegotiation" path="/editVersion.st"/>
+      <forward name="downloadRtf" redirect="true" path="/downloadRTF.do"/>
+      <forward name="downloadPdf" redirect="true" path="/downloadPDF.do"/>
+      <forward name="viewSingleVersion" path="/viewFinalVersionSingle.jsp"/>
+    </action>
+    <action path="/viewVersionActionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.ViewVersionAction" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+      <forward name="listObservations" path="/listObservationsForVersion.jsp"/>
+      <forward name="goToSearchObservations" path="/goToSearchObservations.st"/>
+      <forward name="editNegotiation" path="/editVersion.st"/>
+      <forward name="downloadRtf" redirect="true" path="/downloadRTF.do"/>
+      <forward name="downloadPdf" redirect="true" path="/downloadPDF.do"/>
+      <forward name="viewSingleVersion" path="/viewFinalVersionSingle.jsp"/>
+    </action>
+    <action path="/goToDelegateHome" name="ModeratorHome" type="com.tdil.simon.struts.actions.moderator.GoToModeratorHome" scope="session">
+      <forward name="continue" path="/delegateHome.jsp"/>
+    </action>
+    <action path="/addObservation" type="com.tdil.simon.struts.actions.delegate.AddObservationAction" scope="request">
+    </action>
+    <action path="/goToDelegateNegotiation" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToDelegateNegotiation" scope="session">
+      <forward name="continue" path="/delegateNegotiation.jsp"/>
+      <forward name="signShow" path="/goToSignShow.st"/>
+    </action>
+    <action path="/getDelegateSiteStatus" type="com.tdil.simon.struts.actions.delegate.GetDelegateSiteStatus" scope="request">
+    </action>
+    <action path="/signVersion" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.SignVersionAction" scope="session">
+    </action>
+    <action path="/goToSignShow" name="DelegateNegotiationForm" type="com.tdil.simon.struts.actions.delegate.GoToSignShowAction" scope="session">
+      <forward name="continue" path="/signatureShow.jsp"/>
+    </action>
+    <action path="/goToListPrivateObservations" name="ListPrivate" type="com.tdil.simon.struts.actions.moderator.GoToListPrivateObservations" scope="request">
+      <forward name="continue" path="/listPrivateObservationsForVersion.jsp"/>
+    </action>
+    <action path="/deletePrivateObservation" name="DeleteObservation" type="com.tdil.simon.struts.actions.moderator.DeletePrivateObservationAction" scope="request">
+      <forward name="continue" path="/goToListPrivateObservations.st"/>
+    </action>
+    <action path="/goToDelegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.GoToDelegateABMAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp" redirect="true"/>
+    </action>
+    <action path="/delegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.DelegateABMAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp"/>
+      <forward name="failure" path="/delegateABM.jsp"/>
+    </action>
+    <action path="/editDelegate" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.EditDelegateAction" scope="session">
+      <forward name="continue" path="/delegateABM.jsp"/>
+    </action>
+    <action path="/changePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.ChangePasswordAction" scope="request">
+      <forward name="goToLogin" path="/login.jsp"/>
+      <forward name="stay" path="/changePassword.jsp"/>
+    </action>
+    <action path="/goToResetPassword" name="ResetPassword" type="com.tdil.simon.struts.actions.admin.GoToResetPasswordAction" scope="session">
+      <forward name="continue" redirect="false" path="/resetPassword.jsp"/>
+    </action>
+    <action path="/resetPasswordAction" name="ResetPassword" type="com.tdil.simon.struts.actions.admin.ResetPasswordAction" scope="session">
+      <forward name="stay" redirect="true" path="/goToResetPassword.st"/>
+    </action>
+    <action path="/goToDelegateStats" name="StatisticsForm" type="com.tdil.simon.struts.actions.admin.GoToDelegateStats" scope="request">
+      <forward name="continue" path="/delegateStatistics.jsp"/>
+    </action>
+    <action path="/goToCountryABM" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.GoToCountryABMAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
+    </action>
+    <action path="/countryABM" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.CountryABMAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
+      <forward name="failure" path="/countryABM.jsp"/>
+    </action>
+    <action path="/editCountry" name="CountryABMForm" type="com.tdil.simon.struts.actions.admin.EditCountryAction" scope="session">
+      <forward name="continue" path="/countryABM.jsp"/>
+    </action>
+    <action path="/goToCategoryABM" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.GoToCategoryABMAction" scope="session">
+      <forward name="continue" path="/categoryABM.jsp"/>
+    </action>
+    <action path="/categoryABM" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.CategoryABMAction" scope="session">
+      <forward name="continue" path="/categoryABM.jsp"/>
+      <forward name="failure" path="/categoryABM.jsp"/>
+    </action>
+    <action path="/editCategory" name="CategoryABMForm" type="com.tdil.simon.struts.actions.moderator.EditCategoryAction" scope="session">
+      <forward name="continue" path="/categoryABM.jsp"/>
+    </action>
+    <action path="/goToReferenceDocumentABM" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.GoToReferenceDocumentABMAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/referenceDocumentABM" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.ReferenceDocumentABMAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+      <forward name="failure" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/editReferenceDocument" name="ReferenceDocumentABMForm" type="com.tdil.simon.struts.actions.moderator.EditReferenceDocumentAction" scope="session">
+      <forward name="continue" path="/referenceDocumentABM.jsp"/>
+    </action>
+    <action path="/goToReferenceDocLibrary" name="ReferenceDocumentList" type="com.tdil.simon.struts.actions.delegate.GoToReferenceDocumentList" scope="request">
+      <forward name="continue" path="/referenceDocumentLibrary.jsp"/>
+    </action>
+    <action path="/goToSearchObservations" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.GoToSearchObservations" scope="session">
+      <forward name="continue" path="/searchObservations.jsp"/>
+    </action>
+    <action path="/searchObservations" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.SearchObservationsAction" scope="session">
+      <forward name="continue" path="/listObservationsSearchResult.jsp"/>
+      <forward name="back" path="/viewVersion.jsp"/>
+    </action>
+    <action path="/listObservationsSearchResult" name="SearchObservationsForm" type="com.tdil.simon.struts.actions.delegate.ListObservationsSearchResult" scope="session">
+      <forward name="goToSearch" path="/searchObservations.jsp"/>
+    </action>
+    <action path="/goToSystemUserABM" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.GoToSystemUserABMAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
+    </action>
+    <action path="/systemUserABM" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.SystemUserABMAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
+      <forward name="failure" path="/systemUserABM.jsp"/>
+    </action>
+    <action path="/editSystemUser" name="SystemUserABM" type="com.tdil.simon.struts.actions.admin.EditSystemUserAction" scope="session">
+      <forward name="continue" path="/systemUserABM.jsp"/>
+    </action>
+    <action path="/logout" type="com.tdil.simon.struts.actions.LogoutAction">
+    </action>
+    <action path="/goToViewLastVersionOfDocument" name="ViewVersion" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="session">
+      <forward name="continue" path="/viewVersion.jsp"/>
+    </action>
+    <action path="/documentABM" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.DocumentABMAction" scope="session">
+      <forward name="continue" path="/goToListDocument.st"/>
+    </action>
+    <action path="/initChangePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.InitChangePasswordAction" scope="request">
+      <forward name="continue" path="/changePassword.jsp"/>
+    </action>
+    <action path="/designerList" name="ListDocumentsForDesign" type="com.tdil.simon.struts.actions.designer.DesignerListAction" scope="session">
+    </action>
+    <action path="/goToListDocumentForDesign" name="ListDocumentsForDesign" type="com.tdil.simon.struts.actions.designer.GoToListDocumentForDesignAction" scope="session">
+      <forward name="continue" path="/listDocumentsForDesigner.jsp"/>
+    </action>
+    <action path="/designVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.designer.DesignVersionAction" scope="session">
+      <forward name="continue" path="/createDocumentStep1.jsp"/>
+    </action>
+    <action path="/getPublicSiteStatus" type="com.tdil.simon.struts.actions.GetPublicSiteStatus" scope="request">
+    </action>
+    <action path="/goToViewVersionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionPopupAction" scope="session">
+      <forward name="continue" path="/viewVersionPopup.jsp"/>
+    </action>
+    <action path="/goToViewLastVersionOfDocumentPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocumentPopup" scope="session">
+      <forward name="continue" path="/viewVersionPopup.jsp"/>
+    </action>
+    <action path="/moveToParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.MoveToParagraphAction" scope="session">
+    </action>
+    <action path="/livePreviewParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.LivePreviewParagraph" scope="session">
+    </action>
+    <action path="/getCompleteDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.delegate.GetCompleteDocument" scope="session">
+    </action>
+    <action path="/goToAssistantHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
+      <forward name="continue" path="/assistantHome.jsp"/>
+    </action>
+    <action path="/goToTranslatorHome" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.GoToTranslatorHome" scope="session">
+      <forward name="continue" path="/translatorHome.jsp"/>
+    </action>
+    <action path="/addPrivateObservationAction" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.AddPrivateObservationAction" scope="session">
+    </action>
+    <action path="/addTranslatorObservationAction" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.AddTranslationObservationAction" scope="session">
+    </action>
+    <action path="/getTranslatorObservationAction" type="com.tdil.simon.struts.actions.translator.GetTranslationObservationAction" scope="session">
+    </action>
+  </action-mappings>
+  <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
+  <message-resources parameter="com/tdil.simon.struts/ApplicationResource"/>
+  <plug-in className="org.apache.struts.tiles.TilesPlugin">
+    <set-property property="definitions-config" value="/WEB-INF/tiles-defs.xml"/>
+    <set-property property="moduleAware" value="true"/>
+  </plug-in>
+  <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
+    <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml"/>
+  </plug-in>
+</struts-config>
