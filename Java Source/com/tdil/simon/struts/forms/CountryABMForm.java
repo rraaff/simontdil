@@ -30,6 +30,7 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 	private int id;
 	private String name;
 	private FormFile flag;
+	private byte [] flagBytes;
 	
 	private List<CountryVO> allCountries;
 	
@@ -85,7 +86,7 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		CountryValidation.validateName(this.name, "country.name", validation);
-		CountryValidation.validateFlag(this.flag, "country.flag", this.id == 0, validation);
+		this.flagBytes = CountryValidation.validateFlag(this.flag, "country.flag", this.id == 0, validation);
 		return validation;
 	}
 	
@@ -115,14 +116,18 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 		}
 	}
 	private void modifyCountry() throws SQLException, FileNotFoundException, IOException {
-		Country country = CountryDAO.getCountry(this.getId());
+		Country country = CountryDAO.getCountryWithFlag(this.getId());
 		country.setName(this.getName());
+		if (this.flagBytes != null) {
+			country.setFlag(this.flagBytes);
+		}
 		CountryDAO.updateCountry(country);
 		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + this.getId() + ".png");
 	}
 	private void addCountry() throws SQLException, FileNotFoundException, IOException {
 		Country country = new Country();
 		country.setName(this.getName());
+		country.setFlag(this.flagBytes);
 		int countryId = CountryDAO.insertCountry(country);
 		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + countryId + ".png");
 	}

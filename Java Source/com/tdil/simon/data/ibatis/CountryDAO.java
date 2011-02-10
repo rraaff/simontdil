@@ -33,6 +33,11 @@ public class CountryDAO {
 		return (Country) IBatisManager.sqlMapper.queryForObject(
 				"selectCountryById", id);
 	}
+	
+	public static Country getCountryWithFlag(int id) throws SQLException {
+		return (Country) IBatisManager.sqlMapper.queryForObject(
+				"selectCountryByIdWithFlag", id);
+	}
 
 	public static Country getCountry(String name) throws SQLException {
 		return (Country) IBatisManager.sqlMapper.queryForObject(
