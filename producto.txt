@@ -11,20 +11,39 @@ Problema por el uso de los directorios, idea original del blob y copiado a los d
 Que levante con un esquema vacio y que sepa crear toda la data (minimo: tablas, pais host, Admin y sites)
 Todo esto con una pantalla de configuracion que pida los datos antes descriptos y los datos de sysproperties.
 Para levantar va a necesitar al menos un dir de log, ver como hacemos esto deducible y unico, quizas usando 
-el contexto web como parte del nombre.
+el contexto web como parte del nombre. Es decir, podria ser por default el user.home/contexto web/... pero editable.
 
-Arreglar el uso del directorio home de tomcat para el export del pdf, alguna vuelta tiene que tener.
+Arreglar el uso del directorio home de tomcat para el export del pdf, alguna vuelta tiene que tener. De ultima que mande todo
+al directorio de las firmas y lo genere desde ahi.
 
 Llevar lo mas posible a sys properties, en lo posible, todo el simon.properties.
+Agregarle una descripcion?, en que idioma?
 
 Usar el mismo dir de store para todo, usando un prefijo: f flags, s signature, r reference
 
 Modelar los templates de los emails en la base asi pueden ser modificados a gusto.
+Modelar los 4 emails que salen, con modificacion de los mismos y activacion de los mismos.
+Deberan tener una clave y adema una descripcion.
 
 Limpiar codigo muerto y jsps muertas (idea original de flash, jsps que ya no se usan, el daisydiff?)
+
+Llevar los docs que subia pablo en portuges a algun objeto en la base.
+
+La configuracion de log4j.
+
+Ver si es posible que se use con un war cerrado, es decir, no desplegado
+
+Debera ser posible que el entorno se regenere solo con el backup de las base, es decir,
+no se guardara nada fuera de la base que no puede regenerarse desde la misma (banderas, firmas, docs, etc).
+
+Se agregara para el administrador un menu con la configuracion del sistema, es decir:
+1) las sysproperties
+2) los resource bundles
+3) los emails
 
 Mantenimiento:
 Para mantenimiento seria util tener la version, tanto en la base como en el war.
 Integrar un sistema de control de cambios?
 Tagging
 Incorporar esquema release notes
+Se podria hacer que el war sea capaz de correr incrementales en la base? vale la pena?
