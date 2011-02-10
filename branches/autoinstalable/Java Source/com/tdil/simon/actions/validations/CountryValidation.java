@@ -51,20 +51,37 @@ public class CountryValidation {
 		return null;
 	}
 	
-	public static void validateFlag(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
+	public static byte[] validateFlag(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
 		boolean isEmpty = fileItem.getFileSize() == 0;
 		if (isEmpty && add) {
 			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.CANNOT_BE_EMPTY);
-			return;
+			return null;
 		}
 		if (isEmpty) {
-			return;
+			return null;
 		}
 		String fileName = fileItem.getFileName();
 		if (!fileName.toUpperCase().endsWith(".PNG")) {
 			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.FLAG_MUST_BE_PNG);
-			return;
+			return null;
 		}
-		return;
+		InputStream io = null;
+		try {
+			io = fileItem.getInputStream();
+			return IOUtils.toByteArray(io);
+		} catch (IOException e) {
+			getLog().error(e.getMessage(), e);
+			validation.setGeneralError(e.getMessage());
+		} finally {
+			if (io != null) {
+				try {
+					io.close();
+				} catch (IOException e) {
+					getLog().error(e.getMessage(), e);
+					validation.setGeneralError(e.getMessage());
+				}
+			}
+		}
+		return null;
 	}
 }

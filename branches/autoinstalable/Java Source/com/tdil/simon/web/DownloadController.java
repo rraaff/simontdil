@@ -16,15 +16,20 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.ibatis.CountryDAO;
+import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.UploadUtils;
 
 public class DownloadController extends HttpServlet {
 
 	private static final long serialVersionUID = -8356531321540585903L;
-
+	
+	private static Object extractFlagSemaphore = new Object();
 
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(DownloadController.class);
@@ -62,6 +67,18 @@ public class DownloadController extends HttpServlet {
 //		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
+		File flag = new File(fileName);
+		if (!flag.exists()) {
+			synchronized (extractFlagSemaphore) {				
+				try {
+					extractFlagFromDB(id);
+				} catch (SQLException e) {
+					getLog().error(e.getMessage(), e);
+				} catch (ValidationException e) {
+					getLog().error(e.getMessage(), e);
+				}
+			}
+		}
 		if (!StringUtils.isEmpty(fileName)) {
 			res.setContentType("image/png");
 			FileInputStream inputStream = null;
@@ -76,6 +93,15 @@ public class DownloadController extends HttpServlet {
 		}
 	}
 	
+	private void extractFlagFromDB(final Integer id) throws SQLException, ValidationException {
+		TransactionProvider.executeInTransaction(new TransactionalAction() {
+			public void executeInTransaction() throws SQLException, ValidationException {
+				Country country = CountryDAO.getCountryWithFlag(id);
+				UploadUtils.createFile(country.getFlag(), getServerFlagFileNameFor("flag", id));
+			}
+		});
+	}
+
 	private void downloadRefDoc(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Integer id = Integer.parseInt(req.getParameter("fileId"));
 		String fileName = getServerRefDocFileNameFor("flag", id);
@@ -125,7 +151,7 @@ public class DownloadController extends HttpServlet {
 		}
 	}
 
-	private String getServerFlagFileNameFor(String action, Integer id) {
+	private static String getServerFlagFileNameFor(String action, Integer id) {
 		return SystemConfig.getFlagStore() + "/" + String.valueOf(id) + ".png";
 	}
 

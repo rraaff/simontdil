@@ -9,6 +9,15 @@
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="Country" type="com.tdil.simon.data.model.Country"/>
 
+   <resultMap class="Country" id="CountryWithFlag">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="name" property="name" />
+   <result column="host" property="host" />
+   <result column="flag" property="flag" jdbcType="BLOB"/>
+   </resultMap>
+
+
   <!-- Select with no parameters. -->
   <select id="selectAllCountries" resultClass="Country">
     select *
@@ -54,6 +63,13 @@
   </select>
   
   <select id="selectCountryById" parameterClass="int" resultClass="Country">
+    select
+      *
+    from COUNTRY
+    where id = #id#
+  </select>
+  
+  <select id="selectCountryByIdWithFlag" parameterClass="int" resultMap="CountryWithFlag">
     select
       *
     from COUNTRY
