@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
+import org.apache.log4j.lf5.util.StreamUtils;
 import org.apache.struts.action.ActionForm;
 
 import com.tdil.simon.data.ibatis.DocumentDAO;
@@ -116,8 +117,10 @@ public class DelegateNegotiationForm extends ActionForm {
 				signature.setUserId(this.getUser().getId());
 				signature.setVersionId(this.getVersionVO().getVersion().getId());
 				signature.setDeleted(false);
-				SignatureDAO.insertSignature(signature);
 				InputStream input = request.getInputStream();
+				signature.setImage(IOUtils.toByteArray(input));
+				SignatureDAO.insertSignature(signature);
+				
 				// TODO error handling
 				File file = new File("a.txt");
 				getLog().error(file.getCanonicalPath());

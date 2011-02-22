@@ -21,8 +21,11 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
+import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
+import com.tdil.simon.data.model.Signature;
+import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
@@ -34,6 +37,7 @@ public class DownloadController extends HttpServlet {
 	
 	private static Object extractFlagSemaphore = new Object();
 	private static Object extractRefDocSemaphore = new Object();
+	private static Object extractSignatureSemaphore = new Object();
 
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(DownloadController.class);
@@ -162,6 +166,21 @@ public class DownloadController extends HttpServlet {
 	
 	private void downloadSignature(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		String fileName = getServerSignatureFileNameFor(req.getParameter("signature"));
+		File signature = new File(fileName);
+		if (!signature.exists()) {
+			synchronized (extractSignatureSemaphore) {				
+				try {
+					
+					String file = fileName.substring(fileName.indexOf(SystemConfig.getServer() + '_'), fileName.length() - 4);
+					file = file.substring(file.indexOf('_') + 1);
+					extractSignatureFromDB(file);
+				} catch (SQLException e) {
+					getLog().error(e.getMessage(), e);
+				} catch (ValidationException e) {
+					getLog().error(e.getMessage(), e);
+				}
+			}
+		}
 //		res.setHeader("Cache-Control", "no-store");
 		res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
@@ -177,6 +196,15 @@ public class DownloadController extends HttpServlet {
 				}
 			}
 		}
+	}
+	
+	private void extractSignatureFromDB(final String fileName) throws SQLException, ValidationException {
+		TransactionProvider.executeInTransaction(new TransactionalAction() {
+			public void executeInTransaction() throws SQLException, ValidationException {
+				Signature sign = SignatureDAO.getSignatureWithImage(fileName);
+				UploadUtils.createFile(sign.getImage(), getServerSignatureFileNameFor(SystemConfig.getServer() + '_') + fileName + ".png");
+			}
+		});
 	}
 
 	private static String getServerFlagFileNameFor(String action, Integer id) {

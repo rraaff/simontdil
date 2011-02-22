@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.Signature;
 
 public class SignatureDAO {
@@ -41,5 +42,13 @@ public class SignatureDAO {
 	
 	public static void delete(Signature signature) throws SQLException {
 		IBatisManager.sqlMapper.delete("deleteSignature", signature.getId());
+	}
+
+	public static Signature getSignatureWithImage(String fileName) throws SQLException {
+		HashMap params = new HashMap();
+		params.put("versionId", fileName.substring(0, fileName.indexOf('_')));
+		params.put("userId", fileName.substring(fileName.indexOf('_') + 1));
+		return (Signature) IBatisManager.sqlMapper.queryForObject(
+				"selectSignatureByFileNameWithImage", params);
 	}
 }
