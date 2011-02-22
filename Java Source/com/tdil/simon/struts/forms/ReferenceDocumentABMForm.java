@@ -10,6 +10,7 @@ import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.CountryValidation;
 import com.tdil.simon.actions.validations.ReferenceDocumentValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
@@ -31,6 +32,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	private int categoryId;
 	private String title;
 	private FormFile document;
+	private byte [] documentBytes;
 	
 	private List<Category> allCategories;
 	private List<ReferenceDocumentVO> allReferenceDocuments;
@@ -108,6 +110,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		ReferenceDocument reference = new ReferenceDocument();
 		reference.setTitle(this.title);
 		reference.setCategoryId(this.getCategoryId());
+		reference.setDocument(this.documentBytes);
 		int docId = ReferenceDocumentDAO.insertReferenceDocument(reference);
 		String contentType = this.document.getContentType();
         String fileName    = this.document.getFileName();
@@ -173,7 +176,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		ReferenceDocumentValidation.validateTitle(this.title, "refDoc.title", validation);
-		ReferenceDocumentValidation.validateDocument(this.document, "refDoc.document", this.id == 0, validation);
+		this.documentBytes = ReferenceDocumentValidation.validateDocument(this.document, "refDoc.document", this.id == 0, validation);
 		if (this.categoryId == 0){
 			validation.setFieldError("refDoc.category", ValidationErrors.CANNOT_BE_EMPTY);
 		}
