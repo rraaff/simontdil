@@ -103,7 +103,8 @@ public class ExportVersionAsPDF {
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;
 				buf.append("<TR>");
-				buf.append("<TD valign=\"top\">").append("<img width=\"200\" height=\"126\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				//buf.append("<TD valign=\"top\">").append("<img width=\"200\" height=\"126\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				buf.append("<TD valign=\"top\">").append("<img width=\"200\" height=\"126\" src=\"").append(SystemConfig.getSignatureStore() + "/" +signatureVO.getSignatureFileName()).append("\"></TD>");
 				buf.append("<TD><TABLE><TR>");
 				buf.append("<TD class=\"nameDelegate\">").append(signatureVO.getDelegateName()).append("</TD>");
 				buf.append("</TR><TR>");

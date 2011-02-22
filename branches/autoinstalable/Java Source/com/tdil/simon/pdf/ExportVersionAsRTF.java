@@ -76,7 +76,7 @@ public class ExportVersionAsRTF {
 				buf.append("Delegación: ").append(signatureVO.getCountryDescription()).append("<br/>");
 				buf.append("Cargo: ").append(signatureVO.getJob()).append("<br/>");
 				buf.append("</TD>");
-				buf.append("<TD valign=\"top\">").append("<img width=\"1806px\" height=\"891px\" src=\"./").append(signatureVO.getSignatureFileName()).append("\"></TD>");
+				buf.append("<TD valign=\"top\">").append("<img width=\"1806px\" height=\"891px\" src=\"").append(SystemConfig.getSignatureStore() + "/" +signatureVO.getSignatureFileName()).append("\"></TD>");
 				buf.append("</TR>");
 			}
 			buf.append("</table>");
