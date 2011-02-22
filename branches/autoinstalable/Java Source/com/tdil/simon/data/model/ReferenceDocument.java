@@ -7,7 +7,15 @@ public class ReferenceDocument extends PersistentObject {
 	private String fileName;
 	private String extension;
 	private String contentType;
+	
+	private byte[] document;
 
+	public byte[] getDocument() {
+		return document;
+	}
+	public void setDocument(byte[] document) {
+		this.document = document;
+	}
 	public String getFileName() {
 		return fileName;
 	}

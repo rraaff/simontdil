@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.tdil.simon.data.model.Category;
+import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
 
 public class ReferenceDocumentDAO {
@@ -51,5 +52,10 @@ public class ReferenceDocumentDAO {
 	public static void logicallyDeleteReferenceDocument(ReferenceDocument document)
 			throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteReferenceDocument", document);
+	}
+
+	public static ReferenceDocument getReferenceDocumentWithDocument(Integer id) throws SQLException {
+		return (ReferenceDocument) IBatisManager.sqlMapper.queryForObject(
+				"selectReferenceDocumentByIdWithDocument", id);
 	}
 }

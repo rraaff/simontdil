@@ -9,6 +9,17 @@
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="ReferenceDocument" type="com.tdil.simon.data.model.ReferenceDocument"/>
   <typeAlias alias="ReferenceDocumentVO" type="com.tdil.simon.data.valueobjects.ReferenceDocumentVO"/>
+  
+  <resultMap class="ReferenceDocument" id="ReferenceDocumentWithDocument">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="categoryId" property="categoryId" />
+   <result column="title" property="title" />
+   <result column="fileName" property="fileName" />
+   <result column="extension" property="extension" />
+   <result column="contentType" property="contentType" />
+   <result column="document" property="document" jdbcType="BLOB"/>
+   </resultMap>
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
@@ -61,6 +72,13 @@
     where id = #id#
   </select>
   
+  <select id="selectReferenceDocumentByIdWithDocument" parameterClass="int" resultMap="ReferenceDocumentWithDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where id = #id#
+  </select>
+  
   <select id="selectReferenceDocumentByTitle" parameterClass="java.lang.String" resultClass="ReferenceDocument">
     select
       *
@@ -70,9 +88,9 @@
  
   <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
     insert into REFERENCEDOCUMENT (
-      id, categoryId, title, fileName, extension, contentType, deleted
+      id, categoryId, title, fileName, extension, contentType, document, deleted
     ) values (
-      #id#, #categoryId#, #title#, #fileName#, #extension#, #contentType#, #deleted#
+      #id#, #categoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #deleted#
     )
     <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id

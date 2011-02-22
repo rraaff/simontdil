@@ -16,10 +16,13 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
+import com.sun.org.apache.xml.internal.security.signature.Reference;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.CountryDAO;
+import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
 import com.tdil.simon.data.model.Country;
+import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
@@ -30,6 +33,7 @@ public class DownloadController extends HttpServlet {
 	private static final long serialVersionUID = -8356531321540585903L;
 	
 	private static Object extractFlagSemaphore = new Object();
+	private static Object extractRefDocSemaphore = new Object();
 
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(DownloadController.class);
@@ -101,10 +105,34 @@ public class DownloadController extends HttpServlet {
 			}
 		});
 	}
+	
+	private void extractReferenceDocFromDB(final Integer id) throws SQLException, ValidationException {
+		// TODO
+		TransactionProvider.executeInTransaction(new TransactionalAction() {
+			public void executeInTransaction() throws SQLException, ValidationException {
+				ReferenceDocument doc = ReferenceDocumentDAO.getReferenceDocumentWithDocument(id);
+				UploadUtils.createFile(doc.getDocument(), getServerRefDocFileNameFor("flag", id));
+			}
+		});
+	}
 
 	private void downloadRefDoc(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Integer id = Integer.parseInt(req.getParameter("fileId"));
 		String fileName = getServerRefDocFileNameFor("flag", id);
+		res.setHeader("Pragma", "no-cache");
+		res.setDateHeader("Expires", 0);
+		File flag = new File(fileName);
+		if (!flag.exists()) {
+			synchronized (extractRefDocSemaphore) {				
+				try {
+					extractReferenceDocFromDB(id);
+				} catch (SQLException e) {
+					getLog().error(e.getMessage(), e);
+				} catch (ValidationException e) {
+					getLog().error(e.getMessage(), e);
+				}
+			}
+		}
 		GetDocumentAction getDocumentAction = new GetDocumentAction(id);
 		try {
 			TransactionProvider.executeInTransaction(getDocumentAction);

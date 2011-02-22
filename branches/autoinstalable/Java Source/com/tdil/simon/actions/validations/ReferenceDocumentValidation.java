@@ -1,6 +1,10 @@
 package com.tdil.simon.actions.validations;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.io.IOUtils;
 import org.apache.log4j.Logger;
 import org.apache.struts.upload.FormFile;
 
@@ -38,22 +42,40 @@ public class ReferenceDocumentValidation {
 		return new String [] {documentName, extension};
 	}
 	
-	public static void validateDocument(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
+	public static byte[] validateDocument(FormFile fileItem, String fieldName, boolean add, ValidationError validation) {
 		boolean isEmpty = fileItem.getFileSize() == 0;
 		if (isEmpty && add) {
 			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.CANNOT_BE_EMPTY);
-			return;
+			return null;
 		}
 		if (isEmpty) {
-			return;
+			return null;
 		}
 		String documentName = fileItem.getFileName();
 		if (!documentName.toUpperCase().endsWith(".DOC") &&
 				!documentName.toUpperCase().endsWith(".PDF") &&
 				!documentName.toUpperCase().endsWith(".PPT")) {
 			validation.setFieldError(fieldName, fieldName + "." + ValidationErrors.INVALID_DOC_TYPE);
-			return;
+			return null;
 		}
-		return;
+		InputStream io = null;
+		try {
+			io = fileItem.getInputStream();
+			return IOUtils.toByteArray(io);
+		} catch (IOException e) {
+			getLog().error(e.getMessage(), e);
+			validation.setGeneralError(e.getMessage());
+		} finally {
+			if (io != null) {
+				try {
+					io.close();
+				} catch (IOException e) {
+					getLog().error(e.getMessage(), e);
+					validation.setGeneralError(e.getMessage());
+				}
+			}
+			// TODO fileItem.delete();
+		}
+		return null;
 	}
 }
