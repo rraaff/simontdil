@@ -70,6 +70,18 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String limitObservationsDay;
 	private String limitObservationsMonth;
 	private String limitObservationsYear = "2010";
+	
+	// TODO mejora
+	private String limitObservations;
+	
+	public String getLimitObservations() {
+		return limitObservations;
+	}
+
+	public void setLimitObservations(String limitObservations) {
+		this.limitObservations = limitObservations;
+	}
+
 	private boolean principal;
 	private String documentType;
 	
