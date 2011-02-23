@@ -74,14 +74,13 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td>asdasdasdasdasdsdssd<br>
-								<label>Datepicker with Vista skin:</label>
-								<input name='date_B' type='text' value='' class='date demo_vista' />
-								</td>
+								<td align="right">Fecha l&iacute;mite para observaciones:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="7"><html:text name="CreateDocumentForm" property="limitObservations" styleClass='date demo_vista' /></td>
 								<script>
 								window.addEvent('load', function() {
-	new DatePicker('.demo_vista', { pickerClass: 'datepicker_vista' });
-});
+									new DatePicker('.demo_vista', { pickerClass: 'datepicker_vista' });
+								});
 								</script>
 							</tr>
 							<tr>
