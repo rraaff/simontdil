@@ -699,7 +699,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
-		this.limitObservations = 
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.limitObservations = dateFormat.format(cal.getTime());
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
