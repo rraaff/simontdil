@@ -109,10 +109,10 @@ $$('input.slimpicker').each( function(el){
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> Documentos para Coordinadores Nacionales&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> Documentos para Responsables de Cooperación
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> A&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> B
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> Documentos para Coordinadores Nacionales&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> Documentos para Responsables de Cooperación
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> A&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> B
 								</logic:equal>
 								</td>
 							</tr>
