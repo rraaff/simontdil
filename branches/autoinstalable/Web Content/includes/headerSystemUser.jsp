@@ -4,7 +4,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Cumbres Iberoamericanas | Al servicio de la Comunidad Iberoamericana</title>
+<title>SIMON - Sistema de modificación de notas</title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -38,32 +38,35 @@ input.date {
 <div id="header">
 	<div id="logo">
 		<% if (!isAdministrator && !isModerator && isDesigner) { %>
-				<html:link action="/goToListDocumentForDesign" ><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110" border="0"></html:link></div>
+				<html:link action="/goToListDocumentForDesign" ><img src="images/header/logo.gif" width="143" height="80" border="0"></html:link></div>
 			<% } else { %>
-				<img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
+				<img src="images/header/logo.gif" width="143" height="80" border="0"></div>
 			<% } %>
 	<div id="blockinHeader">
-		<table width="500" border="0" cellspacing="0" cellpadding="0">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
+				<td colspan="5" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
-				<td rowspan="2" align="left">
-					<table border="0" cellspacing="0" cellpadding="0">
-						<tr>
-							<td width="180">Mod: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b></td>
-						</tr>
-						<tr>
-							<td>Del: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b></td>
-						</tr>
-						<tr>
-							<td>TV: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
-						</tr>
-					</table>
-				</td>
+				<td rowspan="2" align="left">Mod: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b><br>Del: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b><br>TV: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
 				<td width="280" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
+				<td rowspan="2" align="right" valign="bottom">
+					<% 	if(eventMode) { %>
+						<% 	if(inNegotiation) { %>
+							<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación y negociando -->
+						<% } else { %>
+							<% 	if(isSign) { %>
+								<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación firmando -->
+							<% } else { %>
+								<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
+							<% } %>
+						<% } %>
+					<% } else { %>
+						<img src="images/header/administradorModerador.gif" width="187" height="50">
+					<% } %>
+				</td>
 			</tr>
 			<tr>
 				<td colspan="3" align="right"><html:link action="/logout" >Salir del sistema</html:link> - 
@@ -81,21 +84,7 @@ input.date {
 			</tr>
 		</table>
 	</div>
-	<div id="siteSeccion">
-	<% 	if(eventMode) { %>
-		<% 	if(inNegotiation) { %>
-			<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación y negociando -->
-		<% } else { %>
-			<% 	if(isSign) { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación firmando -->
-			<% } else { %>
-				<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
-			<% } %>
-		<% } %>
-	<% } else { %>
-		<img src="images/header/administradorModerador.gif" width="187" height="50">
-	<% } %>
-	</div>
+	<!-- div id="siteSeccion"> - </div -->
 	<% 	if(eventMode && inNegotiation && isModerator ) { 
 			if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 			
