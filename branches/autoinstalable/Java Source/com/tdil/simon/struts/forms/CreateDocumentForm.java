@@ -67,9 +67,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String title;
 	private int version = 1;
 	private String versionName;
-	private String limitObservationsDay;
-	private String limitObservationsMonth;
-	private String limitObservationsYear = "2010";
+	//private String limitObservationsDay;
+	//private String limitObservationsMonth;
+	//private String limitObservationsYear = "2010";
 	
 	// TODO mejora
 	private String limitObservations;
@@ -145,8 +145,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.title = null;
 		this.version = 1;
 		this.versionName = null;
-		this.limitObservationsDay= null;
-		this.limitObservationsMonth= null;
+		//this.limitObservationsDay= null;
+		//this.limitObservationsMonth= null;
+		this.limitObservations = null;
 		this.documentType = null;
 		this.introduction= null;
 		this.paragraph = 0;
@@ -219,24 +220,24 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public void setVersionName(String versionName) {
 		this.versionName = versionName;
 	}
-	public String getLimitObservationsDay() {
-		return limitObservationsDay;
-	}
-	public void setLimitObservationsDay(String limitObservationsDay) {
-		this.limitObservationsDay = limitObservationsDay;
-	}
-	public String getLimitObservationsMonth() {
-		return limitObservationsMonth;
-	}
-	public void setLimitObservationsMonth(String limitObservationsMonth) {
-		this.limitObservationsMonth = limitObservationsMonth;
-	}
-	public String getLimitObservationsYear() {
-		return limitObservationsYear;
-	}
-	public void setLimitObservationsYear(String limitObservationsYear) {
-		this.limitObservationsYear = limitObservationsYear;
-	}
+//	public String getLimitObservationsDay() {
+//		return limitObservationsDay;
+//	}
+//	public void setLimitObservationsDay(String limitObservationsDay) {
+//		this.limitObservationsDay = limitObservationsDay;
+//	}
+//	public String getLimitObservationsMonth() {
+//		return limitObservationsMonth;
+//	}
+//	public void setLimitObservationsMonth(String limitObservationsMonth) {
+//		this.limitObservationsMonth = limitObservationsMonth;
+//	}
+//	public String getLimitObservationsYear() {
+//		return limitObservationsYear;
+//	}
+//	public void setLimitObservationsYear(String limitObservationsYear) {
+//		this.limitObservationsYear = limitObservationsYear;
+//	}
 	public String getIntroduction() {
 		return introduction;
 	}
@@ -520,9 +521,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public String getLimitObservationsString() {
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		try {
-			Date date = dateFormat.parse(this.getLimitObservationsDay() + "/" + this.getLimitObservationsMonth() + "/" + this.getLimitObservationsYear());
+			Date date = dateFormat.parse(this.getLimitObservations());
 			return SystemConfig.getDateFormat().format(date);
 		} catch (ParseException e) {
 			getLog().error(e.getMessage(), e);
@@ -581,10 +582,11 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			}
 			SiteDAO.updateSite(publicSite);
 		}
-		DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 		try {
-			version.setUpToCommentDate(dateFormat.parse(this.getLimitObservationsDay() + "/" + this.getLimitObservationsMonth() + "/" + this.getLimitObservationsYear()));
-		} catch (ParseException e) {
+			// TODO MARCOS version.setUpToCommentDate(dateFormat.parse(this.getLimitObservations()));
+			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+			version.setUpToCommentDate(dateFormat.parse(this.getLimitObservations()));
+		} catch (Exception e) {
 			getLog().error(e.getMessage(), e);
 		}
 		version.setDeleted(false);
@@ -695,8 +697,9 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.title = document.getTitle();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
-		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		this.limitObservations = 
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
@@ -944,8 +947,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
-		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.limitObservations = dateFormat.format(cal.getTime());
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
@@ -1025,8 +1030,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.title = document.getTitle();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
-		this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		this.limitObservations = dateFormat.format(cal.getTime());
 		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;

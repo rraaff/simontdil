@@ -46,13 +46,9 @@
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="left">Marcar como documento principal a negociar</td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-							<td align="right">L&iacute;mite para observaciones:</td>
-							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td align="left"><html:select property="limitObservationsDay" styleClass="textfield_effect_day" disabled="true">
-								<html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
-							  </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month" disabled="true">
-								<html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-							  </html:select></td>
+							<td align="right">Fecha l&iacute;mite para observaciones:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="7"><html:text name="CreateDocumentForm" property="limitObservations" disabled="true"/></td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 							<td align="right">Tipo de documento:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
