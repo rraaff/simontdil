@@ -8,6 +8,12 @@ Version: 1.0
 Author: Pablo Agustin Mendoza
 Author URI: http://www.thatdayinlondon.com
 */
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
 body {
 	color:#808080;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -106,7 +112,7 @@ div#main {
 
 #header {
 	background-color: #FFFFFF;
-	height: 115px;
+	height: 90px;
 	width: auto;
 	margin-top: 10px;
 	margin-right: 10px;
@@ -128,9 +134,9 @@ div#main {
 
 }
 #header #blockinHeader {
-/*	background-color: #edf4f8; */
-	height: 50px;
-	width: 500px;
+	/*	background-color: #edf4f8; */
+	height: 20px;
+	width: 800px;
 	float: right;
 	position: relative;
 }
@@ -155,20 +161,6 @@ div#main {
 	text-decoration: underline;
 }
 #header p a:link, #header p a:visited {
-	color: #666666;
-}
-#alcien a {
-	color: #666666;
-	text-decoration:none;
-}
-#alcien a:link, #alcien a:visited {
-	color: #666666;
-}
-#alcien a:hover {
-	color: #666666;
-	text-decoration: underline;
-}
-#alcien p a:link, #alcien p a:visited {
 	color: #666666;
 }
 /* ### Buttons ###*/
@@ -210,7 +202,7 @@ div#main {
 
 #header #logo {
 	width:197px;
-	height:110px;
+	height:85px;
 	margin: 0px;
 	padding: 0px;
 	float: left;
@@ -228,6 +220,20 @@ div#main {
 	margin-bottom: 0px;
 	margin-left: 0px;
 	clear: right;
+}
+#alcien a {
+	color: #666666;
+	text-decoration:none;
+}
+#alcien a:link, #alcien a:visited {
+	color: #666666;
+}
+#alcien a:hover {
+	color: #666666;
+	text-decoration: underline;
+}
+#alcien p a:link, #alcien p a:visited {
+	color: #666666;
 }
 
 #rayitaHeader {
@@ -268,7 +274,7 @@ div#main {
 	padding:0px;
 	position: relative;
 	background-color: #FFFFFF;
-	height: 590px;
+	height: 560px;
 	border-right-width: 1px;
 	border-left-width: 1px;
 	border-right-style: solid;

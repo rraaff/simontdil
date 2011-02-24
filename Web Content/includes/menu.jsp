@@ -9,9 +9,9 @@
 	<div id="menuwrapper">
 		<ul id="p7menubar">
 			<% if (isAdministrator) { %>
-			<li><a class="trigger" href="#">Usuario t&eacute;cnico</a>
+			<li><a class="trigger" href="#">Administraci&oacute;n de Usuarios</a>
 				<ul>
-					<li><a href="adminHome.jsp">Home</a></li>
+					<li><a href="adminHome.jsp">Inicio</a></li>
 					<li><html:link action="/goToCountryABM" >Administrar Delegaciones</html:link></li>
 					<li><html:link action="/goToDelegateABM" >Administrar Delegados</html:link></li>
 					<li><html:link action="/goToSystemUserABM" >Administrar Usuarios del sistema</html:link></li>
@@ -19,13 +19,13 @@
 				</ul>
 			</li>
 			<% } %>
-			<li><a class="trigger" href="#">Administrador SPT - SEGIB</a>
+			<li><a class="trigger" href="#">Administraci&oacute;n de Documentos</a>
 				<ul>
-					<li><html:link action="/goToModeratorHome" >Home de SPT - SEGIB</html:link></li>
+					<li><html:link action="/goToModeratorHome" >Inicio/Documentos</html:link></li>
 					<li><html:link action="/createDocument" >Crear documento</html:link></li>
 					<li><html:link action="/goToListDocument" >Lista de documentos</html:link></li>
-					<li><html:link action="/goToReferenceDocumentABM" >Administrar Documentos de consulta</html:link></li>
-					<li><html:link action="/goToCategoryABM" >Administrar Categor&iacute;as de Documentos de consulta</html:link></li>
+					<li><html:link action="/goToReferenceDocumentABM" >Documentos de consulta</html:link></li>
+					<li><html:link action="/goToCategoryABM" >Categor&iacute;as de Documentos de consulta</html:link></li>
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>
 			</li>
