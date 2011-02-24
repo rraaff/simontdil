@@ -46,13 +46,14 @@
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 							<td align="right">L&iacute;mite para obs.:</td>
 							<td><img src="images/null.gif" width="7" height="1"></td>
-							<td width="359" align="left"><html:select property="limitObservationsDay" styleClass="textfield_effect_day" disabled="true">
-									<html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
-								</html:select>
-								de
-								<html:select property="limitObservationsMonth" styleClass="textfield_effect_month" disabled="true">
-									<html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-								</html:select></td>
+							<td width="359" align="left">
+								<html:text name="CreateDocumentForm" property="limitObservations" styleClass='date demo_vista' disabled="true"/>
+								<script>
+									window.addEvent('load', function() {
+										new DatePicker('.demo_vista', { pickerClass: 'datepicker_vista' });
+									});
+								</script>
+							</td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 							<td width="160" align="right">Tipo de doc.:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>

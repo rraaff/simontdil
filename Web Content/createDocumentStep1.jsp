@@ -76,32 +76,30 @@
 							<tr>
 								<td align="right">Fecha l&iacute;mite para observaciones:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="7"><html:text name="CreateDocumentForm" property="limitObservations" styleClass='date demo_vista' /></td>
-								<script>
-								window.addEvent('load', function() {
-									new DatePicker('.demo_vista', { pickerClass: 'datepicker_vista' });
-								});
-								</script>
-							</tr>
-							<tr>
-								<td align="right">Fecha l&iacute;mite para observaciones:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">
-								<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
-								  <html:select property="limitObservationsDay" styleClass="textfield_effect_day">
-							        <html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
-							      </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month">
-							        <html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-							      </html:select> de 2010
-							    </logic:equal>
-							    <logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
-								  <html:select property="limitObservationsDay" styleClass="textfield_effect_day" disabled="true">
-							        <html:optionsCollection name="CreateDocumentForm" property="days" value="dayNumber" label="dayNumber"/>
-							      </html:select> de <html:select property="limitObservationsMonth" styleClass="textfield_effect_month" disabled="true">
-							        <html:optionsCollection name="CreateDocumentForm" property="months" value="monthNumber" label="monthText"/>
-							      </html:select> de 2010
-							    </logic:equal>
-							    </td>
+								<td width="7">
+									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
+										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' alt="{
+			dayChars:3,
+			format:'dd-mm-yyyy',
+			startDay:1,
+			yearOrder:'desc',
+			yearRange:90,
+			yearStart:2007
+		}"/>
+									</logic:equal>
+									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
+										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' disabled="true"/>
+									</logic:equal>
+								</td>
+<script>
+
+$$('input.slimpicker').each( function(el){
+	var picker = new SlimPicker(el);
+});
+
+</script>
+
+
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
