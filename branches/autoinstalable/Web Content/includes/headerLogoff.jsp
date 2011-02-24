@@ -4,7 +4,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>Cumbres Iberoamericanas | Al servicio de la Comunidad Iberoamericana</title>
+<title>SIMON - Sistema de modificación de notas</title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -21,7 +21,7 @@
 }
 #header #blockinHeader {
 	background-color: #FFFFFF;
-	height: 50px;
+	height: 20px;
 	width: 500px;
 	float: right;
 	position: relative;
@@ -31,7 +31,7 @@
 </head>
 <body>
 <div id="header">
-	<div id="logo"><img src="images/header/logo.gif" alt="Cumbres Iberoamericanas | Argentina 2010" width="197" height="110"></div>
+	<div id="logo"><img src="images/header/logo.gif" width="143" height="80" border="0"></div>
 	<div id="blockinHeader"></div>
 	<div id="siteSeccion"><img src="images/header/zonaRestringida.gif" width="168" height="60"></div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="600" height="5"></div>

@@ -209,9 +209,6 @@
 			</table>
 		</div>
 	</div>
-	<div id="alcien" style="width:260px; height:40px; display:block;">
-		<div style="padding-top:10px; float:left;"><img src="images/others/portDocs.gif"></div><div style="size:12px; padding-top:12px; float:right;"><a href="portDocs.jsp">Descarregar os documentos em português</a></div>
-	</div>
 </div>
 </html:html>
 <%@ include file="includes/footer.jsp" %>
