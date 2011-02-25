@@ -51,7 +51,7 @@ public class SystemConfig {
 		initLogger();
 	}
 	
-	private static void loadPropertiesFromDB() {
+	public static void loadPropertiesFromDB() {
 		try {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
