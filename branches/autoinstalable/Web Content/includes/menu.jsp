@@ -29,6 +29,14 @@
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>
 			</li>
+			<li><a class="trigger" href="#">Administraci&oacute;n de Notificaciones</a>
+				<ul>
+					<li><html:link action="/editEmail?id=newpassword" >Nueva Password</html:link></li>
+					<li><html:link action="/editEmail?id=passworreset" >Blanqueo de password</html:link></li>
+					<li><html:link action="/editEmail?id=newversion" >Nueva Versi&oacute;n</html:link></li>
+					<li><html:link action="/editEmail?id=newobservation" >Nueva Observaci&oacute;n</html:link></li>
+				</ul>
+			</li>
 			<% if (isDesigner) { %>
 			<li><a class="trigger" href="#">Dise&ntilde;ador</a>
 				<ul>

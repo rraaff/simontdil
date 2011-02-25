@@ -1,6 +1,12 @@
 package com.tdil.simon.data.model;
 
 public class NotificationEmail extends PersistentObject {
+	
+	// Constants
+	public static String newpassword = "newpassword";
+	public static String passworreset = "passworreset";
+	public static String newversion = "newversion";
+	public static String newobservation = "newobservation";
 
 	private String emailKey;
 	private String emailFrom;

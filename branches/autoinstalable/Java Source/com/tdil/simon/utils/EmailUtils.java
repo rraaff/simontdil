@@ -8,6 +8,7 @@ import org.apache.log4j.Logger;
 
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
@@ -17,20 +18,22 @@ import com.tdil.simon.web.SystemConfig;
 public class EmailUtils {
 
 	public static void sendPasswordEmail(String email, String fullName, String username, String password) throws MessagingException {
-		String body = SystemConfig.getMailBodyForNewPassword();
+		NotificationEmail notificationEmail = SystemConfig.getMailForNewPassword();
+		String body = notificationEmail.getEmailText();
 		body = body.replace("{FULLNAME}", fullName);
 		body = body.replace("{USERNAME}", username);
 		body = body.replace("{PASSWORD}", password);
 		body = body.replace("{SERVER}", SystemConfig.getServerUrl());
-		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewPassword(), email, SystemConfig.getMailSubjectForNewPassword(), body);
+		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(notificationEmail.getEmailFrom(), email, notificationEmail.getEmailSubject(), body);
 	}
 	
 	public static void sendAdminEmailUserRequestPasswordReset(String fullName, String username) throws MessagingException {
-		String body = SystemConfig.getMailBodyForPasswordReset();
+		NotificationEmail notificationEmail = SystemConfig.getMailForPasswordReset();
+		String body = notificationEmail.getEmailText();
 		body = body.replace("{FULLNAME}", fullName);
 		body = body.replace("{USERNAME}", username);
 		body = body.replace("{SERVER}", SystemConfig.getServerUrl());
-		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForPasswordReset(), SystemConfig.getMailToForPasswordReset(), SystemConfig.getMailSubjectForPasswordReset(), body);
+		new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(notificationEmail.getEmailFrom(), notificationEmail.getEmailTo(), notificationEmail.getEmailText(), body);
 	}
 
 	public static void sendNewObservationEmail(final ObservationForm observationForm) {

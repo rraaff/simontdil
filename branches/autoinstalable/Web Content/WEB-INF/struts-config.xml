@@ -32,6 +32,7 @@
     <form-bean name="ViewVersionPopup" type="com.tdil.simon.struts.forms.ViewVersionForm"/>
     <form-bean name="AssistantHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
     <form-bean name="TranslatorHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
+    <form-bean name="NotificationEmail" type="com.tdil.simon.struts.forms.NotificationEmailABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -178,7 +179,7 @@
       <forward name="continue" path="/goToListPrivateObservations.st"/>
     </action>
     <action path="/goToDelegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.GoToDelegateABMAction" scope="session">
-      <forward name="continue" path="/delegateABM.jsp" redirect="true"/>
+      <forward name="continue" redirect="true" path="/delegateABM.jsp"/>
     </action>
     <action path="/delegateABM" name="DelegateABM" type="com.tdil.simon.struts.actions.admin.DelegateABMAction" scope="session">
       <forward name="continue" path="/delegateABM.jsp"/>
@@ -297,6 +298,12 @@
     <action path="/addTranslatorObservationAction" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.AddTranslationObservationAction" scope="session">
     </action>
     <action path="/getTranslatorObservationAction" type="com.tdil.simon.struts.actions.translator.GetTranslationObservationAction" scope="session">
+    </action>
+    <action path="/editEmail" name="NotificationEmail" type="com.tdil.simon.struts.actions.moderator.EditEmailNotificationAction" scope="session">
+      <forward name="continue" path="/notificationEmail.jsp"/>
+    </action>
+    <action path="/notificationEmailSaveAction" name="NotificationEmail" type="com.tdil.simon.struts.actions.moderator.NotificationEmailSaveAction" scope="session">
+      <forward name="continue" path="/notificationEmail.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
