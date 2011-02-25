@@ -10,8 +10,10 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.struts.forms.ABMForm;
 import com.tdil.simon.struts.forms.SysPropertyABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.SystemConfig;
 
 public class SysPropertySaveAction extends ABMAction {
 
@@ -35,6 +37,15 @@ public class SysPropertySaveAction extends ABMAction {
 			return this.validateAndSave(sysForm, request, mapping);
 		} 
 		return mapping.findForward("continue");
+	}
+	
+	@Override
+	public ActionForward validateAndSave(ABMForm form, HttpServletRequest request, ActionMapping mapping) {
+		try {
+			return super.validateAndSave(form, request, mapping);
+		} finally {
+			SystemConfig.loadPropertiesFromDB();
+		}
 	}
 
 	private static Logger getLog() {
