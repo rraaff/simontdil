@@ -32,7 +32,6 @@ public class SystemConfig {
 	private static String server;
 	private static String serverUrl;
 	private static String tempPath;
-	private static String simonLocation;
 	
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(SystemConfig.class);
@@ -93,7 +92,6 @@ public class SystemConfig {
 					} catch (IOException e) {
 						getLog().error(e.getMessage(), e);
 					}
-					simonLocation = SysPropertiesDAO.getPropertyByKey("simon.properties.location");
 				}
 			});
 		} catch (SQLException e) {
@@ -154,6 +152,10 @@ public class SystemConfig {
 		
 	public static String getFlagStore() {
 		return tempPath + "/flags/";
+	}
+	
+	public static String getTempPath() {
+		return tempPath;
 	}
 	
 	public static String getLog4J() {

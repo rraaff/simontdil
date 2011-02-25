@@ -2,6 +2,8 @@ package com.tdil.simon.pdf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -15,6 +17,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import org.apache.commons.io.IOUtils;
 import org.w3c.dom.Document;
 import org.w3c.tidy.Tidy;
 import org.xhtmlrenderer.pdf.ITextRenderer;
@@ -36,6 +39,17 @@ import com.tdil.simon.web.SystemConfig;
 public class ExportVersionAsPDF {
 
 	public static void exportDocument(SystemUser user, VersionVO version, OutputStream output) throws SQLException, IOException, ParserConfigurationException, DocumentException, SAXException {
+		File file = new File(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png");
+		if (!file.exists()) {
+			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoHeaderPDFsRTFs.png");
+			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png"));
+		}
+		file = new File(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png");
+		if (!file.exists()) {
+			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoSegundoPDFsRTFs.png");
+			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png"));
+		}
+		
 		DelegateAuditDAO.registerDownloadVersion(user, version.getVersion());
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
@@ -73,13 +87,13 @@ public class ExportVersionAsPDF {
 		// generate the body
 		buf.append("<body>");
 		buf.append("<table width=\"100%\" height=\"154\" border=\"0\">");
-		buf.append("<TR><TD width=\"155\"><img width=\"155\" height=\"77\" src=\"./logoHeaderPDFsRTFs.png\"></TD>");
+		buf.append("<TR><TD width=\"155\"><img width=\"155\" height=\"77\" src=\""+SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png"+"\"></TD>");
 		String designerText = version.getVersion().getDesignerText();
 		if (designerText == null) {
 			designerText = "";
 		}
 		buf.append("<TD align=\"center\">").append(designerText).append("</TD>");
-		buf.append("<TD width=\"150\"><img width=\"150\" height=\"77\" src=\"./logoSegundoPDFsRTFs.png\"></TD></TR></TABLE>");
+		buf.append("<TD width=\"150\"><img width=\"150\" height=\"77\" src=\""+SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png"+"\"></TD></TR></TABLE>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<H2>Preámbulo</H2>");

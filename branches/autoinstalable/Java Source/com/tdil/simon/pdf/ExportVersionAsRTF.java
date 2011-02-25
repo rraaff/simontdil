@@ -2,7 +2,9 @@ package com.tdil.simon.pdf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -15,6 +17,7 @@ import java.util.regex.Matcher;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.jfor.jfor.converter.Converter;
 import org.w3c.tidy.Tidy;
 import org.xml.sax.InputSource;
@@ -34,6 +37,16 @@ import com.tdil.simon.web.SystemConfig;
 public class ExportVersionAsRTF {
 
 	public static void exportDocument(SystemUser user, VersionVO version, OutputStream output) throws Exception {
+		File file = new File(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png");
+		if (!file.exists()) {
+			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoHeaderPDFsRTFs.png");
+			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png"));
+		}
+		file = new File(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png");
+		if (!file.exists()) {
+			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoSegundoPDFsRTFs.png");
+			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png"));
+		}
 		DelegateAuditDAO.registerDownloadVersion(user, version.getVersion());
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
