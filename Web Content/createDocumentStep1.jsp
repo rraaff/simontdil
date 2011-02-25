@@ -80,9 +80,11 @@
 									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
 										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' alt="{
 			dayChars:3,
+			dayNames:['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
 			format:'dd-mm-yyyy',
 			startDay:1,
 			yearOrder:'desc',
+			monthNames:['Enero', 'Februero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			yearRange:1,
 			yearStart:2011
 		}"/>
