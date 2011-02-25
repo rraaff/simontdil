@@ -83,8 +83,8 @@
 			format:'dd-mm-yyyy',
 			startDay:1,
 			yearOrder:'desc',
-			yearRange:90,
-			yearStart:2007
+			yearRange:1,
+			yearStart:2011
 		}"/>
 									</logic:equal>
 									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
