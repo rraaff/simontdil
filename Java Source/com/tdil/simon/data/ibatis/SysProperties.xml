@@ -24,4 +24,11 @@
     and deleted = 0
   </select>
   
+  <update id="updateProperty" parameterClass="SysProperties">
+    update SYSPROPERTIES set
+      propValue = #propValue#
+    where
+      propKey = #propKey#
+  </update>
+  
 </sqlMap>

@@ -21,6 +21,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.NotificationEmailDAO;
 import com.tdil.simon.data.ibatis.SysPropertiesDAO;
 import com.tdil.simon.data.model.NotificationEmail;
+import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
 
@@ -55,9 +56,9 @@ public class SystemConfig {
 		try {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
-					server = SysPropertiesDAO.getPropertyByKey("simon.server.name");
-					serverUrl = SysPropertiesDAO.getPropertyByKey("simon.server.url");
-					tempPath = System.getProperty("java.io.tmpdir") + "/" + SysPropertiesDAO.getPropertyByKey("simon.tmp.subpath");
+					server = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_NAME);
+					serverUrl = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_URL);
+					tempPath = System.getProperty("java.io.tmpdir") + "/" + SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_PATH);
 					try {
 						File file = new File(tempPath);
 						if (!file.exists()) {

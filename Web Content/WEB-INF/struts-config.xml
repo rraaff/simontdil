@@ -33,6 +33,7 @@
     <form-bean name="AssistantHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
     <form-bean name="TranslatorHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
     <form-bean name="NotificationEmail" type="com.tdil.simon.struts.forms.NotificationEmailABMForm"/>
+    <form-bean name="SysProperty" type="com.tdil.simon.struts.forms.SysPropertyABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -304,6 +305,12 @@
     </action>
     <action path="/notificationEmailSaveAction" name="NotificationEmail" type="com.tdil.simon.struts.actions.moderator.NotificationEmailSaveAction" scope="session">
       <forward name="continue" path="/notificationEmail.jsp"/>
+    </action>
+    <action path="/editProperty" name="SysProperty" type="com.tdil.simon.struts.actions.moderator.EditSysPropertyAction" scope="session">
+      <forward name="continue" path="/sysProperty.jsp"/>
+    </action>
+    <action path="/saveProperty" name="SysProperty" type="com.tdil.simon.struts.actions.moderator.SysPropertySaveAction" scope="session">
+      <forward name="continue" path="/sysProperty.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
