@@ -84,7 +84,7 @@
 			format:'dd-mm-yyyy',
 			startDay:1,
 			yearOrder:'desc',
-			monthNames:['Enero', 'Februero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+			monthNames:['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
 			yearRange:1,
 			yearStart:2011
 		}"/>
