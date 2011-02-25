@@ -38,20 +38,21 @@ a:active {width: auto;}
 <div id="header">
 	<div id="logo"><html:link action="/goToDelegateHome" ><img src="images/header/logo.gif" width="143" height="80" border="0"></html:link></div>
 	<div id="blockinHeaderDelegate">
-		<table width="500" border="0" cellspacing="0" cellpadding="0">
+		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 			<tr>
-				<td colspan="3" height="5"><img src="images/null.gif" width="1" height="5"></td>
+				<td colspan="4" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
 				<td width="460" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
+				<td><div id="siteSeccion"><img src="images/header/zonaRestringida.gif" alt="Zona Restringida" width="168" height="60"></div></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="10" align="right"><html:link action="/logout" >Salir del sistema</html:link> - <a href="ayuda.jsp">Ayuda</a></td>
+				<td colspan="4" height="10" align="right"><html:link action="/logout" >Salir del sistema</html:link><!-- - <a href="ayuda.jsp">Ayuda</a--></td>
 			</tr>
 		</table>
 	</div>
-	<div id="siteSeccion"><img src="images/header/zonaRestringida.gif" alt="Zona Restringida" width="168" height="60"></div>
+	
 	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
 </div>
