@@ -18,7 +18,7 @@ import com.tdil.simon.struts.forms.NotificationEmailABMForm;
 
 public class EditEmailNotificationAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
