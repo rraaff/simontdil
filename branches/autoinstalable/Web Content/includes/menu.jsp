@@ -29,12 +29,15 @@
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>
 			</li>
-			<li><a class="trigger" href="#">Administraci&oacute;n de Notificaciones</a>
+			<li><a class="trigger" href="#">Administraci&oacute;n de Systema</a>
 				<ul>
-					<li><html:link action="/editEmail?id=newpassword" >Nueva Password</html:link></li>
-					<li><html:link action="/editEmail?id=passworreset" >Blanqueo de password</html:link></li>
-					<li><html:link action="/editEmail?id=newversion" >Nueva Versi&oacute;n</html:link></li>
-					<li><html:link action="/editEmail?id=newobservation" >Nueva Observaci&oacute;n</html:link></li>
+					<li><html:link action="/editEmail?id=newpassword" >Email Nueva Password</html:link></li>
+					<li><html:link action="/editEmail?id=passworreset" >Email Blanqueo de password</html:link></li>
+					<li><html:link action="/editEmail?id=newversion" >Email Nueva Versi&oacute;n</html:link></li>
+					<li><html:link action="/editEmail?id=newobservation" >Email Nueva Observaci&oacute;n</html:link></li>
+					<li><html:link action="/editProperty?id=simon.server.name" >Nombre del server</html:link></li>
+					<li><html:link action="/editProperty?id=simon.server.url" >URL del server</html:link></li>
+					<li><html:link action="/editProperty?id=simon.tmp.subpath" >Subpath temporal</html:link></li>
 				</ul>
 			</li>
 			<% if (isDesigner) { %>
