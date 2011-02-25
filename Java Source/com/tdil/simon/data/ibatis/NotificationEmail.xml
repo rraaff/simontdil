@@ -13,8 +13,7 @@
     select
       *
     from NOTIFICATIONEMAIL
-    where name = #name#
-    and deleted = 0
+    where emailKey = #emailKey#
   </select>
   
   <insert id="insertEmail" parameterClass="NotificationEmail">

@@ -9,6 +9,7 @@ import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
+import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.web.SystemConfig;
@@ -49,13 +50,14 @@ public class NewVersionNotification {
 	}
 	private void sendEmail(SystemUser user2) {
 		try {
-			String body = SystemConfig.getMailBodyForNewVersion();
+			NotificationEmail notificationEmail = SystemConfig.getMailForNewObservation();
+			String body = notificationEmail.getEmailText();
 			body = body.replace("{DOCUMENT_TITLE}", document.getTitle());
 			body = body.replace("{VERSION_NUMBER}", String.valueOf(version.getNumber()));
 			body = body.replace("{VERSION_NAME}", version.getName());
 			body = body.replace("{SERVER}", SystemConfig.getServerUrl());
 			body = body.replace("{FULLNAME}", user2.getName());
-			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(SystemConfig.getMailFromForNewVersion(), user2.getEmail(), SystemConfig.getMailSubjectForNewVersion(), body);
+			new SendMail(SystemConfig.getMailServer()).sendCustomizedHtmlMail(notificationEmail.getEmailFrom(), user2.getEmail(), notificationEmail.getEmailSubject(), body);
 		} catch (Exception e) {
 			getLog().error(e.getMessage(), e);
 		}
