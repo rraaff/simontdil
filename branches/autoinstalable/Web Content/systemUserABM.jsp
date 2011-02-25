@@ -94,7 +94,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="moderator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">SPT - SEGIB <html:errors property="systemuser.administrator" /></td>
+								<td align="left">Secretaría <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="designer"/></td>
