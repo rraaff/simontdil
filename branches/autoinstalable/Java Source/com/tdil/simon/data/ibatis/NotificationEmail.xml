@@ -19,15 +19,18 @@
   
   <insert id="insertEmail" parameterClass="NotificationEmail">
     insert into NOTIFICATIONEMAIL (
-      id, emailKey, emailText, deleted
+      id, emailKey, emailText, emailFrom, emailTo, emailSubject, deleted
     ) values (
-      #id#, #emailKey#, #emailText#, #deleted#
+      #id#, #emailKey#, #emailText#, #emailFrom#, #emailTo#, #emailSubject#, #deleted#
     )
   </insert>
 
   <update id="updateEmail" parameterClass="NotificationEmail">
     update NOTIFICATIONEMAIL set
-      status = #emailText#
+      emailText = #emailText#,
+      emailFrom = #emailFrom#,
+      emailTo = #emailTo#,
+      emailSubject = #emailSubject#,
       deleted = #deleted#
     where
       emailKey = #emailKey#

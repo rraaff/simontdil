@@ -158,11 +158,15 @@ update SIMON.SITE set dataId = 0;
 
 INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.properties.location', '/home/mgodoy/icarus/workspace/simon/Simon_Resources/props/simon.properties', 0);
 INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.server.name', 'localhost', 0);
+INSERT INTO `SIMON`.`SYSPROPERTIES`(propKey, propValue, deleted) VALUES('simon.tmp.subpath', 'simon', 0);
 commit;
 
 CREATE  TABLE `SIMON`.`NOTIFICATIONEMAIL` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `emailKey` VARCHAR(100) NULL ,
   `emailText` MEDIUMTEXT NULL ,
+  `emailFrom` VARCHAR(100) NULL ,
+  `emailTo` VARCHAR(100) NULL ,
+  `emailSubject` VARCHAR(100) NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
