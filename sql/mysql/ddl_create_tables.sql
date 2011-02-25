@@ -142,9 +142,9 @@ CREATE  TABLE `SIMON`.`TRACKCHANGE` (
 
 INSERT INTO SIMON.COUNTRY(name, host, deleted) VALUES ('Argentina', 1, 0);
 INSERT INTO SIMON.SYSTEMUSER (username, password, name, email, countryId, administrator,moderator,delegate,
-typeOne, typeTwo, canSign, designer, passwordResetRequest, temporaryPassword, canProposeParagraph, deleted)
+typeOne, typeTwo, canSign, designer, passwordResetRequest, temporaryPassword, canProposeParagraph, deleted, assistant, translator)
 SELECT 'Admin', '4E7AFEBCFBAE000B22C7C85E5560F89A2A0280B4', 'Admin', 'admin@tdil.com', C.id, 1,1,0,
-0,0,0,1,0,0,0,0
+0,0,0,1,0,0,0,0,0,0
 FROM SIMON.COUNTRY C
 WHERE C.HOST = 1;
 
