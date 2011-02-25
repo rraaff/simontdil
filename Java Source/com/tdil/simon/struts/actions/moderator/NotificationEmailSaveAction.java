@@ -16,7 +16,7 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class NotificationEmailSaveAction extends ABMAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

@@ -15,7 +15,7 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class SysPropertySaveAction extends ABMAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR };
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

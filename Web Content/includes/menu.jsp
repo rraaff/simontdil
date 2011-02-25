@@ -29,7 +29,8 @@
 					<li><html:link action="/goToDelegateStats" >Panel de Control</html:link></li>
 				</ul>
 			</li>
-			<li><a class="trigger" href="#">Administraci&oacute;n de Systema</a>
+			<% if (isAdministrator) { %>
+			<li><a class="trigger" href="#">Administraci&oacute;n de Sistema</a>
 				<ul>
 					<li><html:link action="/editEmail?id=newpassword" >Email Nueva Password</html:link></li>
 					<li><html:link action="/editEmail?id=passworreset" >Email Blanqueo de password</html:link></li>
@@ -40,6 +41,7 @@
 					<li><html:link action="/editProperty?id=simon.tmp.subpath" >Subpath temporal</html:link></li>
 				</ul>
 			</li>
+			<% } %>
 			<% if (isDesigner) { %>
 			<li><a class="trigger" href="#">Dise&ntilde;ador</a>
 				<ul>
