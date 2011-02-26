@@ -124,12 +124,8 @@ public class DelegateNegotiationForm extends ActionForm {
 				// TODO error handling
 				File file = new File("a.txt");
 				getLog().error(file.getCanonicalPath());
-				FileOutputStream fout = new FileOutputStream(signature.getSignatureFileName());
 				FileOutputStream fout2 = new FileOutputStream(SystemConfig.getSignatureStore() + "/" + signature.getSignatureFileName());
 				try {
-					IOUtils.write(signature.getImage(), fout);
-					fout.close();
-					FileInputStream finput = new FileInputStream(signature.getSignatureFileName());
 					IOUtils.write(signature.getImage(), fout2);
 				} finally {
 					try {
