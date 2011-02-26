@@ -172,15 +172,8 @@ public class SystemConfig {
 
 	public static NotificationEmail getMailForNewPassword() {
 		try {
-			return (NotificationEmail)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
-				public Object executeInTransaction(org.apache.struts.action.ActionForm form) throws SQLException ,ValidationException {
-					return NotificationEmailDAO.getEmail(NotificationEmail.newpassword);
-					};
-				}, null);
+			return NotificationEmailDAO.getEmail(NotificationEmail.newpassword);
 		} catch (SQLException e) {
-			getLog().error(e.getMessage(), e);
-			return null;
-		} catch (ValidationException e) {
 			getLog().error(e.getMessage(), e);
 			return null;
 		}
@@ -188,15 +181,8 @@ public class SystemConfig {
 		
 	public static NotificationEmail getMailForPasswordReset() {
 		try {
-			return (NotificationEmail)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
-				public Object executeInTransaction(org.apache.struts.action.ActionForm form) throws SQLException ,ValidationException {
-					return NotificationEmailDAO.getEmail(NotificationEmail.passworreset);
-					};
-				}, null);
+			return NotificationEmailDAO.getEmail(NotificationEmail.passworreset);
 		} catch (SQLException e) {
-			getLog().error(e.getMessage(), e);
-			return null;
-		} catch (ValidationException e) {
 			getLog().error(e.getMessage(), e);
 			return null;
 		}
