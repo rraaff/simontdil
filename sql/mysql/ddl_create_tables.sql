@@ -380,3 +380,12 @@ VALUES('newobservation', '<style type="text/css">
 	</tr>
 </table>', 'sejec@cancilleria.gob.ar', 'sejec@cancilleria.gob.ar', 'Nueva observacion', 0);
 commit;
+
+
+CREATE  TABLE `SIMON`.`RESOURCEBUNDLE` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `rbContext` VARCHAR(100) NULL ,
+  `rbKey` VARCHAR(100) NULL ,
+  `rbValue` MEDIUMTEXT NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
