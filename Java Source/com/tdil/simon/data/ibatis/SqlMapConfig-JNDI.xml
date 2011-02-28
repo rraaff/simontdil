@@ -31,4 +31,5 @@
   <sqlMap resource="com/tdil/simon/data/ibatis/SysProperties.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/TrackChange.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/NotificationEmail.xml"/>
+  <sqlMap resource="com/tdil/simon/data/ibatis/ResourceBundle.xml"/>
 </sqlMapConfig>
