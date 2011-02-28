@@ -90,7 +90,7 @@ function showErrorMessage() {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=com.tdil.simon.web.ResourceBundleCache.get(getServletInfo(), "workarea")%></div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -103,7 +103,7 @@ function showErrorMessage() {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right">Contexto:</td>
+								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "contexto")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="380" align="left">
 									<html:select property="rbContext">
@@ -115,7 +115,7 @@ function showErrorMessage() {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right">Traducci&oacute;n:</td>
+								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="380" align="left"><html:text name="ResourceBundleForm" property="rbSearchValue" /></td>
 							</tr>
@@ -125,7 +125,7 @@ function showErrorMessage() {
 							<tr>
 								<td colspan="3" height="25" align="center">
 									<html:submit property="operation">
-									<bean:message key="resourceBundle.search"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
 									</html:submit>
 								</td>
 							</tr>
@@ -136,9 +136,9 @@ function showErrorMessage() {
 								<td colspan="3" height="25" align="center">
 									<table>
 										<tr class="d1">
-											<td width="">Context</td>
-											<td>Clave</td>
-											<td>Valor</td>
+											<td><%=ResourceBundleCache.get(getServletInfo(), "contexto")%></td>
+											<td><%=ResourceBundleCache.get(getServletInfo(), "clave")%></td>
+											<td><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%></td>
 										</tr> 
 										<logic:iterate name="ResourceBundleForm" property="searchResult" id="iterResourceBundle" indexId="iterIndex"> 
 											<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">

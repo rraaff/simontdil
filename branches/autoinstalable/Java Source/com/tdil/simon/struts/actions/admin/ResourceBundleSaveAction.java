@@ -14,10 +14,10 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.ResourceBundleForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class ResourceBundleSaveAction extends ABMAction {
 
@@ -32,21 +32,13 @@ public class ResourceBundleSaveAction extends ABMAction {
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final ResourceBundleForm resourceBundleForm = (ResourceBundleForm) form;
-
-		if (resourceBundleForm.getOperation().equals(ApplicationResources.getMessage("resourceBundle.cancel"))) {
-			resourceBundleForm.reset();
-		}
-		if (resourceBundleForm.getOperation().equals(ApplicationResources.getMessage("resourceBundle.search"))) {
+		if (resourceBundleForm.getOperation().equals(ResourceBundleCache.get("resourceBundle", "buscar"))) {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					resourceBundleForm.search();
 				}
 			});
 		}
-		if (resourceBundleForm.getOperation().equals(ApplicationResources.getMessage("resourceBundle.create"))
-				|| resourceBundleForm.getOperation().equals(ApplicationResources.getMessage("resourceBundle.modify"))) {
-			return this.validateAndSave(resourceBundleForm, request, mapping);
-		} 
 		return mapping.findForward("continue");
 	}
 
