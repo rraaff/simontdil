@@ -84,5 +84,11 @@ public class GenerateCleanDatabase {
 		}
 		
 		IBatisManager.sqlMapper.commitTransaction();
+		try {
+			bufferedRead.close();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
