@@ -87,7 +87,7 @@ function showErrorMessage() {
 <div id="content">
 <html:form method="POST" action="/saveResourceBundle">
 			<!-- inicio tabla template -->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
@@ -96,45 +96,39 @@ function showErrorMessage() {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="500" valign="top">
+					<td height="500" align="center" valign="top">
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="9" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "contexto")%>:</td>
+								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "contexto")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="380" align="left">
-									<html:select property="rbContext">
-							        <html:optionsCollection name="ResourceBundleForm" property="allContext" value="context" label="context"/>
-							      </html:select>
-							    </td>
-							</tr>
-							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%>:</td>
+								<td><html:select property="rbContext" styleClass="textfield_effect_300">
+														        <html:optionsCollection name="ResourceBundleForm" property="allContext" value="context" label="context"/>
+															</html:select></td>
+								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="380" align="left"><html:text name="ResourceBundleForm" property="rbSearchValue" /></td>
+								<td><html:text name="ResourceBundleForm" property="rbSearchValue" styleClass="textfield_effect_300"/></td>
+								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+								<td><html:submit property="operation">
+																				<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
+																			</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="9" height="10"><img src="images/null.gif" width="1" height="10"></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25" align="center">
-									<html:submit property="operation">
-									<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
-									</html:submit>
-								</td>
+								<td colspan="9" align="center"><i>Haga doble clic para editar el texto.</i></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="9" height="10"><img src="images/null.gif" width="1" height="10"></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="25" align="center">
-									<table>
+								<td colspan="9" height="25" align="center">
+									<table width="100%" border="0">
 										<tr class="d1">
 											<td><%=ResourceBundleCache.get(getServletInfo(), "contexto")%></td>
 											<td><%=ResourceBundleCache.get(getServletInfo(), "clave")%></td>
@@ -147,7 +141,7 @@ function showErrorMessage() {
 												<td><p class="editable textarea" rbContext="<bean:write name="iterResourceBundle" property="rbContext" />" rbKey="<bean:write name="iterResourceBundle" property="rbKey" />"><bean:write name="iterResourceBundle" property="rbValue" /></p></td>
 											</tr> 
 										</logic:iterate>
-									<table>
+									</table>
 								</td>
 							</tr>
 						</table>					
