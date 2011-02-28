@@ -16,7 +16,6 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
-import com.sun.org.apache.xml.internal.security.signature.Reference;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.CountryDAO;
@@ -25,7 +24,6 @@ import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.Signature;
-import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;

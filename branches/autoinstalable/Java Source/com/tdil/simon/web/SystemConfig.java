@@ -89,6 +89,7 @@ public class SystemConfig {
 							InputStream io = SystemConfig.class.getResourceAsStream("xhtml-to-xslfo.xsl");
 							IOUtils.copy(io, new FileOutputStream(tempPath + "/xhtml-to-xslfo.xsl"));
 						}
+						ResourceBundleCache.reload();
 					} catch (IOException e) {
 						getLog().error(e.getMessage(), e);
 					}

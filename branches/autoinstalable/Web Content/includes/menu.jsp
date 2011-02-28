@@ -39,6 +39,7 @@
 					<li><html:link action="/editProperty?id=simon.server.name" >Nombre del server</html:link></li>
 					<li><html:link action="/editProperty?id=simon.server.url" >URL del server</html:link></li>
 					<li><html:link action="/editProperty?id=simon.tmp.subpath" >Subpath temporal</html:link></li>
+					<li><html:link action="/goToResourceBundle" >Resource Bundle</html:link></li>
 				</ul>
 			</li>
 			<% } %>

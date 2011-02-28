@@ -1,3 +1,4 @@
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <% 	if (session == null) { %>
 	<jsp:forward page="./login.jsp">
 		<jsp:param name="error" value="notlogged"/>

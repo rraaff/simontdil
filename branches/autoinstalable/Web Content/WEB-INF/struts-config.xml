@@ -34,6 +34,7 @@
     <form-bean name="TranslatorHome" type="com.tdil.simon.struts.forms.NegotiationForm"/>
     <form-bean name="NotificationEmail" type="com.tdil.simon.struts.forms.NotificationEmailABMForm"/>
     <form-bean name="SysProperty" type="com.tdil.simon.struts.forms.SysPropertyABMForm"/>
+    <form-bean name="ResourceBundleForm" type="com.tdil.simon.struts.forms.ResourceBundleForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -311,6 +312,14 @@
     </action>
     <action path="/saveProperty" name="SysProperty" type="com.tdil.simon.struts.actions.moderator.SysPropertySaveAction" scope="session">
       <forward name="continue" path="/sysProperty.jsp"/>
+    </action>
+    <action path="/goToResourceBundle" name="ResourceBundleForm" type="com.tdil.simon.struts.actions.admin.GoToResourceBundleABMAction" scope="session">
+      <forward name="continue" path="/resourceBundle.jsp"/>
+    </action>
+    <action path="/saveResourceBundle" name="ResourceBundleForm" type="com.tdil.simon.struts.actions.admin.ResourceBundleSaveAction" scope="session">
+      <forward name="continue" path="/resourceBundle.jsp"/>
+    </action>
+    <action path="/saveResourceBundleAjax" type="com.tdil.simon.struts.actions.admin.AjaxSaveResourceBundleAction">
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>
