@@ -30,7 +30,7 @@ div#scrollbar {
 <div id="content">
 <html:form method="POST" action="/saveProperty">
 			<!-- inicio tabla template -->
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
@@ -43,33 +43,23 @@ div#scrollbar {
 						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="9" height="75"><img src="images/null.gif" width="1" height="75"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "clave")%>:</td>
+								<td width="172"><%=ResourceBundleCache.get(getServletInfo(), "clave")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="380" align="left"><html:text name="SysProperty" property="key" disabled="true"/></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "valor")%>:</td>
+								<td width="380"><html:text name="SysProperty" property="key" disabled="true" styleClass="textfield_effect_300"/></td>
+								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+								<td width="172"><%=ResourceBundleCache.get(getServletInfo(), "valor")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="380" align="left"><html:text name="SysProperty" property="value"/></td>
+								<td width="380"><html:text name="SysProperty" property="value" styleClass="textfield_effect_300"/></td>
+								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
+								<td><html:submit property="operation">
+										<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
+									</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="25" align="center">
-									<html:submit property="operation">
-									<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
-									</html:submit>
-								</td>
-							</tr>
-							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="9" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->
