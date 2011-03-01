@@ -13,11 +13,11 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.SystemUserABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class SystemUserABMAction extends ABMAction {
 
@@ -56,11 +56,11 @@ public class SystemUserABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
-		if (systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.cancel"))) {
+		if (systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "cancelar"))) {
 			systemUserABMForm.reset();
 		}
-		if (systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.create"))
-				|| systemUserABMForm.getOperation().equals(ApplicationResources.getMessage("systemUserABM.modify"))) {
+		if (systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "crear"))
+				|| systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "modificar"))) {
 			return this.validateAndSave(systemUserABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");

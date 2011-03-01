@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar usuarios del sistema</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -59,7 +59,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td align="right">Apellido y Nombre:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "apellidoNombre")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="SystemUserABM" property="name" /> <html:errors property="systemuser.name" /></td>
 							</tr>
@@ -67,7 +67,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">Nombre de Usuario:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "nombreUsuario")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><logic:equal name="SystemUserABM" property="id" value="0">
 										<html:text name="SystemUserABM" property="username"/>
@@ -79,7 +79,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">E-Mail:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "email")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="SystemUserABM" property="email"/> <html:errors property="systemuser.email" /></td>
 							</tr>
@@ -89,27 +89,27 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="administrator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Administrador <html:errors property="systemuser.administrator" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "administrador")%> <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="moderator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Secretaría <html:errors property="systemuser.administrator" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "secretaria")%> <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="designer"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Diseñador <html:errors property="systemuser.administrator" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "diseñador")%> <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="assistant"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Asistente <html:errors property="systemuser.assistant" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "asistente")%> <html:errors property="systemuser.assistant" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="translator"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left">Traductor <html:errors property="systemuser.translator" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "traductor")%> <html:errors property="systemuser.translator" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="23"><img src="images/null.gif" width="1" height="23"></td>
@@ -118,16 +118,16 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="24" align="center">
 									<logic:equal name="SystemUserABM" property="id" value="0">
 										<html:submit property="operation">
-											<bean:message key="systemUserABM.create"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 										</html:submit>
 									</logic:equal>
 									<logic:notEqual name="SystemUserABM" property="id" value="0">
 										<html:submit property="operation">
-										<bean:message key="systemUserABM.modify"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 										</html:submit>
 									</logic:notEqual>
 									<html:submit property="operation">
-										<bean:message key="systemUserABM.cancel"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
 									</html:submit></td>
 							</tr>
 							<tr>
@@ -153,7 +153,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de usuarios del sistema</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -168,10 +168,10 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="6" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td width="20%" height="20" align="left">Username</td>
-										<td width="20%" align="left">Nombre</td>
-										<td width="30%">Permisos</td>
-										<td width="50">Habilitado</td>
+										<td width="20%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombreUsuario")%></td>
+										<td width="20%" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td width="30%"><%=ResourceBundleCache.get(getServletInfo(), "permisos")%></td>
+										<td width="50"><%=ResourceBundleCache.get(getServletInfo(), "habilitado")%></td>
 										<td width="60"> </td>
 										<td width="60"> </td>
 									</tr> 
@@ -180,8 +180,8 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="username" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="systemPermissionsString" /></td>
-											<td><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal>
-											<logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td>
+											<td><logic:equal name="iterUser" property="deleted" value="true"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal>
+											<logic:equal name="iterUser" property="deleted" value="false"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal></td>
 											<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>
