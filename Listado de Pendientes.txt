@@ -4,3 +4,5 @@ Poner componente de fecha en busqueda de observaciones
 Seguir con la aplicacion de resource bundles
 
 Modificar editor para borrar todo lo tachadado con un solo click
+
+Los textos en el flash de firma debe ser parametros
