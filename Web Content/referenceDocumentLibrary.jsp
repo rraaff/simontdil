@@ -47,7 +47,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos Informativos</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -62,9 +62,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">Título</td>
-										<td align="left">Categoría</td>
-										<td align="left">Archivo</td>
+										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
 										<td width="80"><img src="images/null.gif" width="1" height="1"></td>
 									</tr> 
 									<logic:iterate name="ReferenceDocumentList" property="list" id="iterRefDoc" indexId="iterIndex"> 

@@ -22,3 +22,7 @@ requestPassword-ayuda=En caso de no recordar su contrase&ntilde;a, le sugerimos 
 requestPassword-usuario=Usuario
 requestPassword-email=E-mail
 requestPassword-solicitar=Solicitar Contraseña
+referenceDocumentLibrary-titulo=Documentos Informativos
+referenceDocumentLibrary-categoria=Categoría
+referenceDocumentLibrary-archivo=Archivo
+referenceDocumentLibrary-tituloDocumento=Título
