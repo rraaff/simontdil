@@ -74,7 +74,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - Número de Versión:<bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - Nombre:<bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%>: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - <%=ResourceBundleCache.get(getServletInfo(), "numeroVersion")%>:<bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <%=ResourceBundleCache.get(getServletInfo(), "nombre")%>:<bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -121,7 +121,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</logic:equal>
 								</tr>
 								<tr>
-									<td id="country_desc_td_<%=index%>" height="18" align="center"><span class="remarcado">Por <bean:write name="signatureRow" property="left.countryDescription" /></span></td>
+									<td id="country_desc_td_<%=index%>" height="18" align="center"><span class="remarcado"><%=ResourceBundleCache.get(getServletInfo(), "por")%> <bean:write name="signatureRow" property="left.countryDescription" /></span></td>
 									<td width="200"><img src="images/null.gif" width="10" height="1"></td>
 									<% index = index + 1;%>
 									<logic:equal name="signatureRow" property="hasRight" value="true">

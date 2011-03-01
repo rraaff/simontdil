@@ -33,7 +33,7 @@ div#scrollbar {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar property</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -46,7 +46,7 @@ div#scrollbar {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right">Clave:</td>
+								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "clave")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="380" align="left"><html:text name="SysProperty" property="key" disabled="true"/></td>
 							</tr>
@@ -54,7 +54,7 @@ div#scrollbar {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right">Valor:</td>
+								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "valor")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="380" align="left"><html:text name="SysProperty" property="value"/></td>
 							</tr>
@@ -64,7 +64,7 @@ div#scrollbar {
 							<tr>
 								<td colspan="3" height="25" align="center">
 									<html:submit property="operation">
-									<bean:message key="sysProperty.modify"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 									</html:submit>
 								</td>
 							</tr>

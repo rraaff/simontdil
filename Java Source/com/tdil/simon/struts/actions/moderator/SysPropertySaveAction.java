@@ -9,10 +9,10 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.ABMForm;
 import com.tdil.simon.struts.forms.SysPropertyABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class SysPropertySaveAction extends ABMAction {
@@ -29,11 +29,7 @@ public class SysPropertySaveAction extends ABMAction {
 			throws Exception {
 		final SysPropertyABMForm sysForm = (SysPropertyABMForm) form;
 
-		if (sysForm.getOperation().equals(ApplicationResources.getMessage("sysProperty.cancel"))) {
-			sysForm.reset();
-		}
-		if (sysForm.getOperation().equals(ApplicationResources.getMessage("sysProperty.create"))
-				|| sysForm.getOperation().equals(ApplicationResources.getMessage("sysProperty.modify"))) {
+		if (sysForm.getOperation().equals(ResourceBundleCache.get("sysProperty", "modificar"))) {
 			return this.validateAndSave(sysForm, request, mapping);
 		} 
 		return mapping.findForward("continue");

@@ -22,7 +22,7 @@
 								<table width="310" border="0" cellspacing="0" cellpadding="0" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="290" height="19" align="left"><div id="blockTitle">Buscar observaciones</div></td>
+										<td background="images/interfaces/topTitle.gif" width="290" height="19" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -34,11 +34,11 @@
 													<td colspan="5" height="25"><img src="images/null.gif" width="1" height="25"></td>
 												</tr>
 												<tr>
-													<td width="60" align="right" valign="top">Delegaci&oacute;n:</td>
+													<td width="60" align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" width="223" align="left">
 													<html:select name="SearchObservationsForm" property="countryId" styleClass="textfield_effect">
-														<option value="">Todos</option>
+														<option value=""><%=ResourceBundleCache.get(getServletInfo(), "todos")%></option>
 														<html:optionsCollection name="SearchObservationsForm" property="allCountries" value="id" label="name"/>
 													</html:select></td>
 												</tr>
@@ -48,11 +48,12 @@
 												<tr>
 													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="exact" onclick="configureSearchBy();"/></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td colspan="3" align="left">Buscar por fecha exacta</td>
+													<td colspan="3" align="left"><%=ResourceBundleCache.get(getServletInfo(), "fechaExacta")%></td>
 												</tr>
 												<tr>
 													<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
+												<!-- XXX poner el componente de fechas aca -->
 												<tr>
 													<td align="right" valign="top"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
@@ -73,13 +74,13 @@
 												<tr>
 													<td align="right" valign="top"><html:radio name="SearchObservationsForm" property="exactDate" value="range" onclick="configureSearchBy();"/></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td colspan="3" align="left">Buscar por rango de fechas</td>
+													<td colspan="3" align="left"><%=ResourceBundleCache.get(getServletInfo(), "rangoFechas")%></td>
 												</tr>
 												<tr>
 													<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Desde:</td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "desde")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td align="right" valign="top">
 													<html:select name="SearchObservationsForm" property="lowerDay" styleClass="textfield_effect_day">
@@ -96,7 +97,7 @@
 													<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Hasta:</td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "hasta")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td align="right" valign="top">
 													<html:select name="SearchObservationsForm" property="upperDay" styleClass="textfield_effect_day">
@@ -114,7 +115,7 @@
 													<td colspan="5" height="30"><img src="images/null.gif" width="1" height="30"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Parrafo:</td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "parrafo")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left">
 													<html:select name="SearchObservationsForm" property="paragraphNumber" styleClass="textfield_effect_day">
@@ -126,7 +127,7 @@
 													<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Palabras:</td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "palabras")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left"><html:text name="SearchObservationsForm" property="words" styleClass="textfield_effect"/></td>
 												</tr>
@@ -136,10 +137,10 @@
 												<tr>
 													<td colspan="5" align="center">
 													<html:submit property="operation">
-														<bean:message key="searchObservations.search"/>
+														<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
 													</html:submit>
 													<html:submit property="operation">
-														<bean:message key="searchObservations.back"/>
+														<%=ResourceBundleCache.get(getServletInfo(), "volver")%>
 													</html:submit></td>
 												</tr>
 												<tr>
