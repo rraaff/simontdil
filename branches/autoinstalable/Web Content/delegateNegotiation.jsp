@@ -73,7 +73,7 @@ function openDocs(){
 		var pText = document.getElementById('pText').value;
 		if (pText.length == 0) {
 			notimooErrorManager.show({
-				title: 'Error',
+				title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
 				message: 'Debe ingresar el mensaje',
 				 customClass:'alert_error',
 				 sticky: true
@@ -106,7 +106,7 @@ function openDocs(){
 	}
 	function showErrorMessage() {
 		notimooErrorManager.show({
-			title: 'Error',
+			title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
 			message: 'Su mensaje no ha podido ser agregado.',
 			customClass:'alert_error',
 			 sticky: true

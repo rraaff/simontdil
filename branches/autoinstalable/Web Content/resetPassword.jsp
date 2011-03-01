@@ -43,7 +43,7 @@ if ( dw_scrollObj.isSupported() ) {
 		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Usuarios</div></td>
+				<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 				<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 			</tr>
 			<tr>
@@ -59,12 +59,12 @@ if ( dw_scrollObj.isSupported() ) {
 								</tr>
 								<tr>
 									<td height="20">&nbsp;</td>
-									<td align="left">Usuario</td>
-									<td align="left">Nombre</td>
-									<td align="left">E-Mail</td>
-									<td align="left">Delegación</td>
-									<td width="100">Solicitó blanqueo</td>
-									<td width="100">Clave Provisoria</td>
+									<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "usuario")%></td>
+									<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+									<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "email")%></td>
+									<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%></td>
+									<td width="100"><%=ResourceBundleCache.get(getServletInfo(), "solicitoBlanqueo")%></td>
+									<td width="100"><%=ResourceBundleCache.get(getServletInfo(), "claveProvisoria")%></td>
 									<td height="5">&nbsp;</td>
 								</tr>
 								<logic:iterate name="ResetPassword" property="list" id="userForReset" indexId="iterIndex"> 
@@ -78,8 +78,8 @@ if ( dw_scrollObj.isSupported() ) {
 										<td align="left"><bean:write name="userForReset" property="name" /></td> 
 										<td align="left"><bean:write name="userForReset" property="email" /></td>
 										<td align="left"><bean:write name="userForReset" property="countryName" /></td>
-										<td><logic:equal name="userForReset" property="passwordResetRequest" value="true">SI</logic:equal>
-										<logic:notEqual name="userForReset" property="passwordResetRequest" value="true">NO</logic:notEqual>
+										<td><logic:equal name="userForReset" property="passwordResetRequest" value="true"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal>
+										<logic:notEqual name="userForReset" property="passwordResetRequest" value="true"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:notEqual>
 										</td>
 										<td><bean:write name="userForReset" property="password" /></td>
 										<td></td>
@@ -88,10 +88,10 @@ if ( dw_scrollObj.isSupported() ) {
 								<script type="text/javascript">
 								
 									function resetConfirm() {
-										Sexy.confirm('Desea blanquear las contraseñas a los usuarios seleccionados?', { onComplete: 
+										Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmarBlanqueo")%>', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
-										            document.forms['ResetPassword'].operation.value="<bean:message key="resetPassword.resetPassword"/>";
+										            document.forms['ResetPassword'].operation.value='<%=ResourceBundleCache.get(getServletInfo(), "blanquear")%>';
 										            document.forms['ResetPassword'].submit();
 										          } 
 										        }
@@ -133,8 +133,8 @@ if ( dw_scrollObj.isSupported() ) {
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td colspan="2" height="25" align="center">
-				<input type="button" value="<bean:message key="resetPassword.selectAll"/>" onclick="selectAll()"></input>
-				<input type="button" onclick="resetConfirm();" value="<bean:message key="resetPassword.resetPassword"/>"></input>
+				<input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "seleccionarTodos")%>" onclick="selectAll()"></input>
+				<input type="button" onclick="resetConfirm();" value="<%=ResourceBundleCache.get(getServletInfo(), "blanquear")%>"></input>
 				</td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
