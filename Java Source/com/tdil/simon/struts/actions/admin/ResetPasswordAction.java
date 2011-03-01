@@ -13,9 +13,9 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ResetPasswordForm;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class ResetPasswordAction extends SimonAction implements TransactionalActionWithValue {
 
@@ -31,7 +31,7 @@ public class ResetPasswordAction extends SimonAction implements TransactionalAct
 			throws Exception {
 		final ResetPasswordForm resetPasswordForm = (ResetPasswordForm) form;
 
-		if (resetPasswordForm.getOperation().equals(ApplicationResources.getMessage("resetPassword.resetPassword"))) {
+		if (resetPasswordForm.getOperation().equals(ResourceBundleCache.get("resetPassword", "blanquear"))) {
 			TransactionProvider.executeInTransaction(this, resetPasswordForm);
 		}
 		return mapping.findForward("stay");

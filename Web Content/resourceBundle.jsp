@@ -77,8 +77,8 @@ window.addEvent('domready', function() {
 
 function showErrorMessage() {
 		notimooErrorManager.show({
-			title: 'Error',
-			message: 'El resource bundle no ha podido ser salvado.',
+			title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
+			message: '<%=ResourceBundleCache.get(getServletInfo(), "errorGrabar")%>',
 			customClass:'alert_error',
 			 sticky: true
 		});

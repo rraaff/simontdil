@@ -9,7 +9,7 @@
 	});
 	<% if ("true".equals((String)request.getAttribute("hasError"))) { %>
 	notimooErrorManager.show({
-							title: 'Error',
+							title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
 							message: '<html:messages id="msg" message="true"><% if (!"*".equals(msg)) {%><%=msg%><br><% } %></html:messages>',
 							 customClass:'alert_error',
 							 sticky: true

@@ -37,14 +37,14 @@ public class AjaxSaveResourceBundleAction extends AjaxSimonAction implements Tra
 		resourceBundleForm.setRbKey(rbKey);
 		resourceBundleForm.setRbValue(rbValue);
 		try {
-			HashMap result = (HashMap)TransactionProvider.executeInTransaction(this, resourceBundleForm);
+			HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, resourceBundleForm);
 			ResourceBundleCache.put(rbContext, rbKey, rbValue);
 			this.writeJsonResponse(result, response);
 		} catch (Exception e) {
-			HashMap result = new HashMap();
+			HashMap<String, String> result = new HashMap<String, String>();
 			result.put("result", "error");
 			result.put("error", "No se pudo salvar");
-			result.put("rbValue", "No se pudo salvar"); // TODO Aca buscar el original
+			result.put("rbValue", ResourceBundleCache.get(rbContext, rbKey));
 			this.writeJsonResponse(result, response);
 		}
 		return null;
@@ -53,7 +53,7 @@ public class AjaxSaveResourceBundleAction extends AjaxSimonAction implements Tra
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		ResourceBundleForm resourceBundleForm = (ResourceBundleForm)form;
 		resourceBundleForm.save();
-		HashMap result = new HashMap();
+		HashMap<String, String> result = new HashMap<String, String>();
 		result.put("result", "OK");
 		return result;
 	}
