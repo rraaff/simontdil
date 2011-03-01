@@ -13,10 +13,10 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class ReferenceDocumentABMAction extends ABMAction {
 
@@ -55,11 +55,11 @@ public class ReferenceDocumentABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
-		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.cancel"))) {
+		if (referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "cancelar"))) {
 			referenceDocumentABMForm.reset();
 		}
-		if (referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.create"))
-				|| referenceDocumentABMForm.getOperation().equals(ApplicationResources.getMessage("referenceDocumentABM.modify"))) {
+		if (referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "crear"))
+				|| referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "modificar"))) {
 			return this.validateAndSave(referenceDocumentABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");

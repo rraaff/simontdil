@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Editar categorías para Documentos Informativos</div></td>
+					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -59,7 +59,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right">Nombre:</td>
+								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left"><html:text name="ReferenceDocumentABMForm" property="title" styleClass="textfield_effect"/><html:errors property="refDoc.title" /></td>
 							</tr>
@@ -67,7 +67,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right">Elegir archivo:</td>
+								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "elegirArchivo")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left"><html:file property="document" styleClass="textfield_effect"/><html:errors property="refDoc.document" /></td>
 							</tr>
@@ -75,7 +75,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right">Categoría:</td>
+								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left">
 									<html:select name="ReferenceDocumentABMForm" property="categoryId" styleClass="textfield_effect">
@@ -89,18 +89,18 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25" align="center">
 									<logic:equal name="ReferenceDocumentABMForm" property="id" value="0">
 										<html:submit property="operation">
-											<bean:message key="referenceDocumentABM.create"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 										</html:submit>
 									</logic:equal>
 										
 									<logic:notEqual name="ReferenceDocumentABMForm" property="id" value="0">
 										<html:submit property="operation">
-										<bean:message key="referenceDocumentABM.modify"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 										</html:submit>
 									</logic:notEqual>
 									
 									<html:submit property="operation">
-										<bean:message key="referenceDocumentABM.cancel"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
 									</html:submit>
 								</td>
 							</tr>
@@ -127,7 +127,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" colspan="2" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de archivos de Documentos Informativos</div></td>
+					<td width="100%" height="19" align="left" colspan="2" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -142,9 +142,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">T&iacute;tulo</td>
-										<td align="left">Archivo</td>
-										<td align="left">Categor&iacute;a</td>
+										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
 										<td width="60"> </td>
 										<td width="60"> </td>
 									</tr> 
