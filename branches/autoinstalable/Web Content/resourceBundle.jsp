@@ -98,9 +98,9 @@ function showErrorMessage() {
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td height="500" align="center" valign="top">
 						<!-- corte tabla template -->
-						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="9" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td colspan="9" height="75"><img src="images/null.gif" width="1" height="75"></td>
 							</tr>
 							<tr>
 								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "contexto")%>:</td>
