@@ -1,4 +1,5 @@
-<%@ page info="public"%>
+<%@ page info="publicSignShow"%>
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -10,7 +11,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -155,7 +156,7 @@ a:active {width: auto;}
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td-->
 							<!-- td width="30"><img src="./download.do?action=flag&fileId=<%=signatureRow.getRight().getCountryId()%>" width="30" height="30"></td>
 							<td width="10"><img src="images/null.gif" width="10" height="1"></td -->
-							<td align="center">Por <%=signatureRow.getRight().getCountryDescription()%></td>
+							<td align="center"><%=ResourceBundleCache.get(getServletInfo(), "por")%> <%=signatureRow.getRight().getCountryDescription()%></td>
 						<% } %>
 					</tr>
 					<tr>

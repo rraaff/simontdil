@@ -1,4 +1,4 @@
-<%@ page info="viewVersion"%>
+<%@ page info="viewFinalVersionSingle"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -172,7 +172,7 @@ if ( dw_scrollObj.isSupported() ) {
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:180px; margin-top:13px;">
-				<div id="blockTitle1">Documento Principal</div>
+				<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documentoPrincipal")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -186,24 +186,24 @@ if ( dw_scrollObj.isSupported() ) {
 					</tr -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
+						<td colspan="3"><%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><html:submit property="operation">
-															<bean:message key="viewVersion.downloadPdf"/>
+															<%=ResourceBundleCache.get(getServletInfo(), "bajarPdf")%>
 														</html:submit></td>
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><html:submit property="operation">
-											<bean:message key="viewVersion.downloadRtf"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "bajarRtf")%>
 										</html:submit></td>
 					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2">Acciones disponibles</div>
+				<div id="blockTitle2"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<!-- tr>
 						<td align="center">
@@ -272,12 +272,12 @@ if ( dw_scrollObj.isSupported() ) {
 		</div>
 		<%if (isModerator) { %>
 		<div id="alcincuentaRight" style="height:518px; border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main" style="height:460px; background-color:#FFFFFF;">
 		<% } else { %>
 		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main" style="background-color:#FFFFFF;">
 		<% } %>

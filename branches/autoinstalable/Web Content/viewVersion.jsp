@@ -150,7 +150,7 @@ if ( dw_scrollObj.isSupported() ) {
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
-				<div id="blockTitle1">Documento Principal</div>
+				<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documentoPrincipal")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -158,14 +158,14 @@ if ( dw_scrollObj.isSupported() ) {
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td width="60" align="left">Versi&oacute;n:</td>
+						<td width="60" align="left"><%=ResourceBundleCache.get(getServletInfo(), "version")%>:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="ViewVersion" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="ViewVersion" property="version.version.name" /></td>
 					</tr>
 					<!-- INICIO: Recupero versión 197 :: Modificada -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td height="30">Verisi&oacute;n/es: </td>
+						<td height="30"><%=ResourceBundleCache.get(getServletInfo(), "versiones")%>: </td>
 						<td colspan="2" align="left" valign="middle">
 						<div id="portaVersiones">
 						<logic:iterate name="ViewVersion" property="version.reducedVersions" id="otherVersion">
@@ -182,24 +182,24 @@ if ( dw_scrollObj.isSupported() ) {
 					<!-- FIN: Recupero versión 197 :: Modificada -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3">L&iacute;mite para obs.: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
+						<td colspan="3"><%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></td>
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><html:submit property="operation">
-											<bean:message key="viewVersion.downloadPdf"/>
+											<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf")%>
 										</html:submit></td>
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
 						<td colspan="3" align="center"><html:submit property="operation">
-											<bean:message key="viewVersion.downloadRtf"/>
+											<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf")%>
 										</html:submit></td>
 					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2">Acciones disponibles</div>
+				<div id="blockTitle2"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="center">
@@ -225,7 +225,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<td align="center" valign="middle">
 							<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
 								<html:submit property="operation">
-									<bean:message key="viewVersion.initNegotiation"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "negociar")%>
 								</html:submit>
 							</logic:equal></td>
 					</tr>
@@ -236,7 +236,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<td align="center" valign="middle">
 							<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
 								<html:submit property="operation">
-									<bean:message key="viewVersion.finishSign"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "finalizarFirmas")%>
 								</html:submit>
 							</logic:equal></td>
 					</tr>
@@ -330,10 +330,10 @@ if ( dw_scrollObj.isSupported() ) {
 										function doAdd() {
 											var pText = editor.getData();
 											if (pText.length == 0) {
-												Sexy.error('Debe ingresar la observación.');
+												Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionVacia")%>');
 												return;
 											}
-											Sexy.confirm('Las Observaciones no pueden ser editadas, una vez enviadas. Si desea enviarla presione "Aceptar", en cambio si desea modificarla o revisarla antes de enviarla, presione "Cancelar"', { onComplete: 
+											Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmeObservacion")%>', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
 										            basicDoAdd();
@@ -374,21 +374,21 @@ if ( dw_scrollObj.isSupported() ) {
 										var notimooObservationManager = new Notimoo();
 										
 										function showOKMessage() {
-											Sexy.info('Su observación ha sido agregada exitosamente.');
+											Sexy.info('<%=ResourceBundleCache.get(getServletInfo(), "observacionAgregada")%>');
 										}
 										
 										function showErrorMessage() {
-											Sexy.error('Su observación no ha podido ser agregada.');
+											Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionNoAgregada")%>');
 										}
 									</script>
-									<input type="button" value="Añadir observacion" onclick="addObservation();">
+									<input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>" onclick="addObservation();">
 								</logic:equal></td>
 					</tr>
 					<tr>
 						<td align="center">
 						<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
 							<html:submit property="operation" disabled="true">
-								<bean:message key="viewVersion.addObservation"/>
+								<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>
 							</html:submit>
 						</logic:notEqual></td>
 					</tr>
@@ -399,7 +399,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td align="center">
 							<html:submit property="operation">
-								<bean:message key="viewVersion.searchObservations"/>
+								<%=ResourceBundleCache.get(getServletInfo(), "buscarObservaciones")%>
 							</html:submit>							</td>
 					</tr>
 					<tr>
@@ -408,7 +408,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td align="center">
 							<html:submit property="operation">
-								<bean:message key="viewVersion.listObservations"/>
+								<%=ResourceBundleCache.get(getServletInfo(), "listarObservaciones")%>
 							</html:submit>							</td>
 					</tr>
 					<tr>
@@ -419,12 +419,12 @@ if ( dw_scrollObj.isSupported() ) {
 		</div>
 		<%if (isModerator) { %>
 		<div id="alcincuentaRight" style="height:518px; border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main" style="height:460px;">
 		<% } else { %>
 		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main">
 		<% } %>
@@ -493,7 +493,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" height="30" align="right">Párrafo:</td>
+													<td width="73" height="30" align="right"><%=ResourceBundleCache.get(getServletInfo(), "parrafo")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(this);">
@@ -504,16 +504,16 @@ if ( dw_scrollObj.isSupported() ) {
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 													<td width="20" align="right"><input type="checkbox" id="pNewParagraph" onclick="clickNewPar(this);"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="200" align="left">Solicitar como nuevo párrafo</td>
+													<td width="200" align="left"><%=ResourceBundleCache.get(getServletInfo(), "solicitarNuevoParrafo")%></td>
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicación:</div></td>
+													<td width="105"><div id="newParTextTDLabel" style="display: none;"><%=ResourceBundleCache.get(getServletInfo(), "indicarUbicacion")%>:</div></td>
 													<td width="348" valign="middle"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext" class="textfield_effect_300"></div></td>
 												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Observación: </td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "observacion")%>: </td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="8" align="left"><div id="editor"></div></td>
 												<tr>
@@ -521,7 +521,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>"> <input type="button" onclick="cancelAdd();" value="<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->

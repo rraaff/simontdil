@@ -305,13 +305,13 @@
       <forward name="continue" path="/notificationEmail.jsp"/>
     </action>
     <action path="/notificationEmailSaveAction" name="NotificationEmail" type="com.tdil.simon.struts.actions.moderator.NotificationEmailSaveAction" scope="session">
-      <forward name="continue" path="/notificationEmail.jsp"/>
+      <forward name="continue" path="/adminHome.jsp"/>
     </action>
     <action path="/editProperty" name="SysProperty" type="com.tdil.simon.struts.actions.moderator.EditSysPropertyAction" scope="session">
       <forward name="continue" path="/sysProperty.jsp"/>
     </action>
     <action path="/saveProperty" name="SysProperty" type="com.tdil.simon.struts.actions.moderator.SysPropertySaveAction" scope="session">
-      <forward name="continue" path="/sysProperty.jsp"/>
+      <forward name="continue" path="/adminHome.jsp"/>
     </action>
     <action path="/goToResourceBundle" name="ResourceBundleForm" type="com.tdil.simon.struts.actions.admin.GoToResourceBundleABMAction" scope="session">
       <forward name="continue" path="/resourceBundle.jsp"/>

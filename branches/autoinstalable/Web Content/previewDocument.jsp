@@ -41,7 +41,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Previsualización del documento (Paso 4 de 4)</div></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 						</tr>
 						<tr>
@@ -50,10 +50,10 @@ if ( dw_scrollObj.isSupported() ) {
 							<td width="98%">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0">
 									<tr>
-										<td height="25" align="left">Documento: <bean:write name="CreateDocumentForm" property="title"/> - 
+										<td height="25" align="left"><%=ResourceBundleCache.get(getServletInfo(), "documento")%>: <bean:write name="CreateDocumentForm" property="title"/> - 
 												V <bean:write name="CreateDocumentForm" property="versionNumber"/> - 
 											(<bean:write name="CreateDocumentForm" property="versionName"/>) - 
-											Límite para realizar observaciones: <bean:write name="CreateDocumentForm" property="limitObservationsString" /></td>
+											<%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="CreateDocumentForm" property="limitObservationsString" /></td>
 									</tr>
 									<tr>
 										<td height="230" align="left" valign="top">
@@ -96,7 +96,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<html:errors property="general" />
 								<html:form method="POST" action="/previewDocument">
 								<html:submit property="operation">
-									<bean:message key="createDocument.preview.editParagraphs"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "editarParrafos")%>
 								</html:submit>
 								<!-- Si no esta en negociacion -->
 								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
@@ -105,40 +105,40 @@ if ( dw_scrollObj.isSupported() ) {
 										<!-- Si no es portugues -->
 										<logic:equal name="CreateDocumentForm" property="portugues" value="false">
 											<html:submit property="operation">
-												<bean:message key="createDocument.preview.save"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "grabarBorrador")%>
 											</html:submit>
 											<html:submit property="operation">
-												<bean:message key="createDocument.preview.consolidate"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "consolidar")%>
 											</html:submit>
 										</logic:equal>
 										<!-- Si es portugues -->
 										<logic:equal name="CreateDocumentForm" property="portugues" value="true">
 											<html:submit property="operation">
-												<bean:message key="createDocument.preview.save"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "grabarBorrador")%>
 											</html:submit>
 											<html:submit property="operation">
-												<bean:message key="createDocument.preview.portuguesSave"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "grabarIdiomaAlternativo")%>
 											</html:submit>
 										</logic:equal>
 									</logic:equal>
 									<!-- Si esta en disenio -->
 									<logic:equal name="CreateDocumentForm" property="designer" value="true">
 										<html:submit property="operation">
-											<bean:message key="createDocument.preview.designSave"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "grabarDiseño")%>
 										</html:submit>
 									</logic:equal>
 								</logic:equal>
 								<!-- Si esta en negociacion -->
 								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">
 									<html:submit property="operation">
-										<bean:message key="createDocument.preview.saveAndContinue"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "grabarYContinuar")%>
 									</html:submit>
 									<html:submit property="operation">
-										<bean:message key="createDocument.preview.saveAndSign"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "ponerEnFirma")%>
 									</html:submit>
 									
 									<html:submit property="operation">
-										<bean:message key="createDocument.preview.saveAndFinalize"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "finalizar")%>
 									</html:submit>
 								</logic:equal>
 								</html:form></td>
