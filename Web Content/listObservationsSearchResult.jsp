@@ -1,4 +1,4 @@
-<%@ page info="listObservationsForVersion"%>
+<%@ page info="listObservationsSearchResult"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -48,7 +48,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<table width="960" border="0" cellspacing="0" cellpadding="0" align="center">
 								<tr>
 									<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-									<td colspan="2" width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de Observaciones</div></td>
+									<td colspan="2" width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 									<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 								</tr>
 								<tr>
@@ -71,7 +71,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<tr>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-														<td colspan="7" width="880" align="left">P&aacute;rrafo original: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
+														<td colspan="7" width="880" align="left"><%=ResourceBundleCache.get(getServletInfo(), "parrafoOriginal")%>: <%=tmpObservation.getParagraphNumberForDisplay()%> . <%=tmpObservation.getParagraphText()%></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													</tr>
@@ -97,9 +97,9 @@ if ( dw_scrollObj.isSupported() ) {
 														<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 														<td width="280" align="left" valign="top"><p><img src="./download.do?action=flag&fileId=<bean:write name="observation" property="countryId" />" width="30" height="30"></p>
-														Delegación: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
-														Párrafo: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumberForDisplay" /></span><br>
-														Fecha de Observación: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
+														<%=ResourceBundleCache.get(getServletInfo(), "delegacion")%>: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
+														<%=ResourceBundleCache.get(getServletInfo(), "parrafo")%>: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumberForDisplay" /></span><br>
+														<%=ResourceBundleCache.get(getServletInfo(), "fecha")%>: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
 														<logic:equal name="observation" property="addNewParagraph" value="false">
 																<bean:message key="listObservations.notNewParagraph" />
 															</logic:equal>
@@ -148,7 +148,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="2" height="30" align="center" valign="middle">
 										<html:form action="/listObservationsSearchResult">
 											<html:submit property="operation">
-												<bean:message key="searchObservations.backFromSearch"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "volver")%>
 											</html:submit>
 										</html:form >
 										</td>
@@ -169,13 +169,13 @@ if ( dw_scrollObj.isSupported() ) {
 				<logic:equal name="SearchObservationsForm" property="hasObservations" value="false">
 					<table width="400" height="120" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
-							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
+							<td height="50" align="center" valign="middle"><%=ResourceBundleCache.get(getServletInfo(), "busquedaVacia")%></td>
 						</tr>
 						<tr>
 							<td align="center">
 								<html:form action="/viewVersionAction">
 									<html:submit property="operation">
-										<bean:message key="listObservations.back"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "volver")%>
 									</html:submit>
 								</html:form >
 							</td>

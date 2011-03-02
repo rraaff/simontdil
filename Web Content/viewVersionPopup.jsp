@@ -1,4 +1,5 @@
 <%@ page info="viewVersionPopup"%>
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -9,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -119,7 +120,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 	<div id="alcien" style="height:510px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:510px;">
 			<div id="mainDocContainer" style="height:470px; margin-top:13px;">
-				<div id="blockTitle1">Documento Principal</div>
+				<div id="blockTitle1"><%=ResourceBundleCache.get("viewVersion", "documentoPrincipal")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
@@ -127,14 +128,14 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td width="60" align="left">Versi&oacute;n:</td>
+						<td width="60" align="left"><%=ResourceBundleCache.get("viewVersion", "version")%>:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="ViewVersionPopup" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="ViewVersionPopup" property="version.version.name" /></td>
 					</tr>
 					<!-- INICIO: Recupero versión 197 :: Modificada -->
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td height="30">Verisi&oacute;n/es: </td>
+						<td height="30"><%=ResourceBundleCache.get("viewVersion", "versiones")%>: </td>
 						<td colspan="2" align="left" valign="middle">
 						<div id="portaVersiones" style="width:130px;">
 						<logic:iterate name="ViewVersionPopup" property="version.reducedVersions" id="otherVersion">
@@ -156,7 +157,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 			</div>
 		</div>
 		<div id="alcincuentaRight" style="width:70%; border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get("viewVersion", "documento")%></div>
 			<div>
 				<!-- div id="main" style="height:430px;">
 					<div id="lyr1" style="height:430px;"-->
@@ -195,7 +196,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 								<table width="960" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">A&ntilde;adir observaci&oacute;n</div></td>
+										<td width="940" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get("viewVersion", "agregarObservacion")%></div></td>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -211,7 +212,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" height="30" align="right">Párrafo:</td>
+													<td width="73" height="30" align="right"><%=ResourceBundleCache.get("viewVersion", "parrafo")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(this);">
@@ -222,16 +223,16 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 													<td width="20" align="right"><input type="checkbox" id="pNewParagraph" onclick="clickNewPar(this);"></td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-													<td width="200" align="left">Solicitar como nuevo párrafo</td>
+													<td width="200" align="left"><%=ResourceBundleCache.get("viewVersion", "solicitarNuevoParrafo")%></td>
 													<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-													<td width="105"><div id="newParTextTDLabel" style="display: none;">Indicar ubicación:</div></td>
+													<td width="105"><div id="newParTextTDLabel" style="display: none;"><%=ResourceBundleCache.get("viewVersion", "indicarUbicacion")%>:</div></td>
 													<td width="348" valign="middle"><div id="newParTextTD" style="display: none;"><input type="text" id="newParText" name="newPartext" class="textfield_effect_300"></div></td>
 												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Observación: </td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get("viewVersion", "observacion")%>: </td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="8" align="left"><div id="editor"></div></td>
 												<tr>
@@ -239,7 +240,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="Agregar observacion"> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="<%=ResourceBundleCache.get("viewVersion", "agregarObservacion")%>"> <input type="button" onclick="cancelAdd();" value="<%=ResourceBundleCache.get("viewVersion", "cancelar")%>"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->

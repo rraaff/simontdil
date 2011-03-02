@@ -1,4 +1,5 @@
 <%@ page info="public"%>
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -10,7 +11,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -159,7 +160,7 @@
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 						<tr>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">P&aacute;rrafo en Negociaci&oacute;n</div></td>
+							<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "parrafoEnNegociacion")%></div></td>
 							<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 						</tr>
 						<tr>
@@ -214,7 +215,7 @@
 	<div id="content">
 		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"><br><br>El documento est&aacute; siendo firmado. / O documento est&aacute; sendo assinado.</td>
+				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"><br><br><%=ResourceBundleCache.get(getServletInfo(), "documentoEnFirma")%>.</td>
 			</tr>
 		</table>
 	</div>

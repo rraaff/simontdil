@@ -27,7 +27,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" width="123">Usuario:</td>
+								<td align="right" width="123"><%=ResourceBundleCache.get(getServletInfo(), "usuario")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="250"><html:text name="LoginForm" property="username" styleClass="textfield_effect"/></td>
 							</tr>
@@ -35,7 +35,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Contrase&ntilde;a:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "contraseña")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td><html:password name="LoginForm" property="password" styleClass="textfield_effect"/></td>
 							</tr>
@@ -47,13 +47,15 @@
 									<logic:equal name="LoginForm" property="canForce" value="false">
 										<jsp:include page="./includes/button.jsp">
 											<jsp:param name="_form" value="LoginForm" />
-											<jsp:param name="_operation" value="login.enter" />
+											<jsp:param name="_context" value="login" />
+											<jsp:param name="_key" value="ingresar" />
 										</jsp:include> 
 									</logic:equal>
 									<logic:equal name="LoginForm" property="canForce" value="true">
 										<jsp:include page="./includes/button.jsp">
 											<jsp:param name="_form" value="LoginForm" />
-											<jsp:param name="_operation" value="login.logoutAndEnter" />
+											<jsp:param name="_context" value="login" />
+											<jsp:param name="_key" value="desloguearEIngresar" />
 										</jsp:include> 
 									</logic:equal>
 								</td>
@@ -65,7 +67,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<!--tr>
-								<td colspan="3" align="center">Si ha olvidado su contrase&ntilde;a puede solicitar una nueva.</td>
+								<td colspan="3" align="center"><%=ResourceBundleCache.get(getServletInfo(), "pedirNuevaContraseña")%></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -74,7 +76,8 @@
 								<td colspan="3" align="center" valign="middle">
 									<jsp:include page="./includes/button.jsp">
 											<jsp:param name="_form" value="LoginForm" />
-											<jsp:param name="_operation" value="login.requestPassword" />
+											<jsp:param name="_context" value="login" />
+											<jsp:param name="_key" value="pedirNuevaContraseña" />
 									</jsp:include>
 								</td>
 							</tr-->

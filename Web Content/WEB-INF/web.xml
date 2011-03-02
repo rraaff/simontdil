@@ -139,7 +139,7 @@
 	
 	<error-page>
         <error-code>500</error-code>
-        <location>/processing.html</location>
+        <location>/processing.jsp</location>
     </error-page>
 	<!--
 		<taglib> <taglib-uri>http://java.sun.com/jstl/core</taglib-uri>

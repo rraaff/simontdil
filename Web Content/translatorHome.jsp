@@ -1,4 +1,4 @@
-<%@ page info="assistantHome"%>
+<%@ page info="translatorHome"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -146,7 +146,7 @@ if ( dw_scrollObj.isSupported() ) {
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
 			<div id="mainDocContainer" style="height:260px; margin-top:13px;">
-				<div id="blockTitle1">Negocia&ccedil;&atilde;o de documento</div>
+				<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="left">
 					<tr>
 						<td width="10"><img src="images/null.gif" width="10" height="1"></td>
@@ -154,14 +154,14 @@ if ( dw_scrollObj.isSupported() ) {
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td width="60" align="left">Vers&atilde;o:</td>
+						<td width="60" align="left"><%=ResourceBundleCache.get(getServletInfo(), "version")%>:</td>
 						<td width="30"><div id="versionStrong"><bean:write name="TranslatorHome" property="version.version.number" /></div></td>
 						<td align="left"><bean:write name="TranslatorHome" property="version.version.name" /></td>
 					</tr>
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2">Ac&ccedil;&otilde;es Dispon&iacute;veis</div>
+				<div id="blockTitle2"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
 				<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -176,7 +176,7 @@ if ( dw_scrollObj.isSupported() ) {
 										function refreshEditorContents(editor, selectObj) {
 											var paragraphNumber = document.getElementById('pNumber').value;
 											var paragraphtext = document.getElementById('p_' + selectObj.value).innerHTML;
-											editor.setData("Consultado...");
+											editor.setData("<%=ResourceBundleCache.get(getServletInfo(), "consultando")%>");
 											var pVersion = '<bean:write name="TranslatorHome" property="version.version.id" />';
 											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getTranslatorObservationAction.st"/>', onSuccess: function(json, responseText){
 												var errorResult = json.error;
@@ -245,10 +245,10 @@ if ( dw_scrollObj.isSupported() ) {
 										function doAdd() {
 											var pText = editor.getData();
 											if (pText.length == 0) {
-												Sexy.error('Você deve digitar a tradução do parágrafo.');
+												Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "sinTraduccion")%>');
 												return;
 											}
-											Sexy.confirm('Traduzido parágrafo podem ser editados posteriormente. Sem embarlo, uma vez que adicionou a tradução pode ser visto pelos delegados. Verifique se estão corretas. Se você quiser adicionar ou editar clique em "OK", porém se você quiser editar ou revisá-lo antes de enviá-lo, pressione "Cancelar".', { onComplete: 
+											Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmar")%>', { onComplete: 
 										        function(returnvalue) {
 										          if(returnvalue) {
 										            basicDoAdd();
@@ -284,25 +284,25 @@ if ( dw_scrollObj.isSupported() ) {
 										var notimooObservationManager = new Notimoo();
 										
 										function showOKMessage() {
-											Sexy.info('Sua tradução foi adicionada com sucesso.');
+											Sexy.info('<%=ResourceBundleCache.get(getServletInfo(), "traduccionAgregada")%>');
 										}
 										
 										function showErrorMessage() {
-											Sexy.error('Sua tradução não foi adicionado.');
+											Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "traduccionNoAgregada")%>');
 										}
 										
 										function refreshPage() {
 											document.forms['refreshForm'].submit();
 										}
 									</script>
-									<input type="button" value="Editar Tradução" onclick="modifyTranslation();">
+									<input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "editarTraduccion")%>" onclick="modifyTranslation();">
 							</td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
 					</tr>
 					<tr>
-						<td  align="center"><input type="button" value="Atualizar" onclick="refreshPage();"></td>
+						<td  align="center"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "actualizar")%>" onclick="refreshPage();"></td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -311,7 +311,7 @@ if ( dw_scrollObj.isSupported() ) {
 			</div>
 		</div>
 		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
-			<div id="blockTitle1">Documento</div>
+			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main">
 					<div id="lyr1">
@@ -363,7 +363,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td width="73" height="30" align="right">Par&aacute;grafo:</td>
+													<td width="73" height="30" align="right"><%=ResourceBundleCache.get(getServletInfo(), "parrafo")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td width="60" align="left">
 													<select id="pNumber" onchange="refreshEditorContents(editor, this);">
@@ -380,7 +380,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="right" valign="top">Texto:</td>
+													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "texto")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="5" align="left"><div id="editor"></div></td>
 												<tr>
@@ -388,7 +388,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td colspan="7" align="center"><input type="button" onclick="doAdd()" value="   Ok   "> <input type="button" onclick="cancelAdd();" value="Cancelar"></td>
+													<td colspan="7" align="center"><input type="button" onclick="doAdd()" value="<%=ResourceBundleCache.get(getServletInfo(), "ok")%>"> <input type="button" onclick="cancelAdd();" value="<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>"></td>
 												<tr>
 											</table>
 										<!-- corte tabla template -->

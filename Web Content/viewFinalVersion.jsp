@@ -1,4 +1,4 @@
-<%@ page info="viewVersion"%>
+<%@ page info="viewFinalVersion"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -107,7 +107,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <b><bean:write name="ViewVersion" property="version.document.title" /></b></div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "documento")%>: <b><bean:write name="ViewVersion" property="version.document.title" /></b></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -121,8 +121,8 @@ if ( dw_scrollObj.isSupported() ) {
 							<!-- div id="documentoCompleto"-->
 								<table width="100%" border="0" cellspacing="0" cellpadding="5">
 									<tr>
-										<td width="50%">Versi&oacute;n en Espa&ntilde;ol</td>
-										<td width="50%">Versi&oacute;n en Portugu&eacute;s</td>
+										<td width="50%"><%=ResourceBundleCache.get(getServletInfo(), "idiomaDefault")%></td>
+										<td width="50%"><%=ResourceBundleCache.get(getServletInfo(), "idiomaAlternativo")%></td>
 									</tr>
 								<logic:iterate name="ViewVersion" property="paragraphs" id="paragraph"> 
 									<tr>
@@ -132,10 +132,10 @@ if ( dw_scrollObj.isSupported() ) {
 								</logic:iterate>
 									<tr>
 										<td align="center" bgcolor="#FFFFFF"><html:submit property="operation">
-												<bean:message key="viewVersion.viewSpanishOnly"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "verIdiomaDefault")%>
 											</html:submit></td>
 										<td align="center" bgcolor="#FFFFFF"><html:submit property="operation">
-												<bean:message key="viewVersion.viewPortuguesOnly"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "verIdiomaAlternativo")%>
 											</html:submit></td>
 									</tr>
 								</table>
@@ -150,7 +150,7 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<tr>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br>Cargo</td>
+										<td colspan="3" height="60"><span class="remarcado"><bean:write name="signature" property="delegateName" /></span><br><%=ResourceBundleCache.get(getServletInfo(), "cargo")%></td>
 									</tr>
 									</logic:iterate>
 								</table>
