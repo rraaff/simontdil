@@ -9,10 +9,9 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
-import com.tdil.simon.struts.ApplicationResources;
-import com.tdil.simon.struts.forms.CategoryABMForm;
 import com.tdil.simon.struts.forms.NotificationEmailABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class NotificationEmailSaveAction extends ABMAction {
 
@@ -28,14 +27,14 @@ public class NotificationEmailSaveAction extends ABMAction {
 			throws Exception {
 		final NotificationEmailABMForm notificationEmailABMForm = (NotificationEmailABMForm) form;
 
-		if (notificationEmailABMForm.getOperation().equals(ApplicationResources.getMessage("notificationEmail.cancel"))) {
-			notificationEmailABMForm.reset();
-		}
-		if (notificationEmailABMForm.getOperation().equals(ApplicationResources.getMessage("notificationEmail.create"))
-				|| notificationEmailABMForm.getOperation().equals(ApplicationResources.getMessage("notificationEmail.modify"))) {
+		if (notificationEmailABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(notificationEmailABMForm, request, mapping);
 		} 
 		return mapping.findForward("continue");
+	}
+
+	private String getServletInfo() {
+		return "notificationEmail";
 	}
 
 	private static Logger getLog() {
