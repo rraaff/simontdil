@@ -20,23 +20,23 @@ import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.DelegateAudit;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.LoginForm;
 import com.tdil.simon.utils.CryptoUtils;
 import com.tdil.simon.web.LogOnceListener;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class LoginAction extends Action implements TransactionalActionWithValue {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		LoginForm login = (LoginForm) form;
-		if (login.getOperation().equals(ApplicationResources.getMessage("login.requestPassword"))) {
+		if (login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "pedirNuevaContraseña"))) {
 			return mapping.findForward("requestPassword");
 		}
-		if (login.getOperation().equals(ApplicationResources.getMessage("login.enter")) || 
-				login.getOperation().equals(ApplicationResources.getMessage("login.logoutAndEnter"))) {
+		if (login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "ingresar")) || 
+				login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "desloguearEIngresar"))) {
 			try {
-				boolean logout = login.getOperation().equals(ApplicationResources.getMessage("login.logoutAndEnter"));
+				boolean logout = login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "desloguearEIngresar"));
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				if (login.isRedirectToChangePassword()) {
 					request.setAttribute("username", user.getUsername());
@@ -78,6 +78,10 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 			}
 		}
 		return null;
+	}
+
+	private String getServletInfo() {
+		return "login";
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
