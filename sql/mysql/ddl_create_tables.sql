@@ -389,3 +389,10 @@ CREATE  TABLE `SIMON`.`RESOURCEBUNDLE` (
   `rbValue` MEDIUMTEXT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
+  
+CREATE  TABLE `SIMON`.`LOGO` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `logoKey` VARCHAR(100) NULL ,
+  `logoData` MEDIUMBLOB NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
