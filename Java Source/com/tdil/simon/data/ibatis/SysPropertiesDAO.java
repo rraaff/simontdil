@@ -18,7 +18,7 @@ public class SysPropertiesDAO {
 	}
 	
 	public static void insertProperty(SysProperties sysProperties) throws SQLException {
-		IBatisManager.sqlMapper.insert("insertSysproperty", sysProperties);
+		IBatisManager.sqlMapper.insert("insertProperty", sysProperties);
 	}
 	
 	public static void updateProperty(SysProperties sysProperties) throws SQLException {

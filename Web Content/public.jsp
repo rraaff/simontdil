@@ -128,7 +128,7 @@
 	<div id="content">
 		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"></td>
+				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"></td>
 			</tr>
 		</table>
 	</div>
@@ -215,7 +215,7 @@
 	<div id="content">
 		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"><br><br><%=ResourceBundleCache.get(getServletInfo(), "documentoEnFirma")%>.</td>
+				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"><br><br><%=ResourceBundleCache.get(getServletInfo(), "documentoEnFirma")%>.</td>
 			</tr>
 		</table>
 	</div>
