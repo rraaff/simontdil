@@ -9,7 +9,22 @@ Ver tema de ayuda.jsp
 [Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
 
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
-faltaria ver para las imagenes)
+
+IMAGENES GENÉRICAS
+Web Content\images\footer\logoCumbres.gif
+Web Content\images\header\headerInternoCumbre.gif
+Web Content\images\header\logo.gif
+Web Content\images\header\logoCumbresPDFsRTFs.jpg
+Web Content\images\header\logoCumbresPDFsRTFs.png
+Web Content\images\header\logoHeaderPDFsRTFs.jpg
+Web Content\images\header\logoHeaderPDFsRTFs.png
+Web Content\images\header\logoSegibPDFsRTFs.png
+Web Content\images\header\logoSegundoPDFsRTFs.png
+Web Content\images\mails\header.gif
+Web Content\images\mails\footer.gif
+Web Content\images\others\splashSegib.gif
+
+[Queda para la próxima versión] Resource bundle para los errores
 
 Resource bundle de los js
 
