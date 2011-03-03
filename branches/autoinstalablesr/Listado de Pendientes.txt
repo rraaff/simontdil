@@ -11,18 +11,16 @@ Ver tema de ayuda.jsp
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
 
 IMAGENES GENÉRICAS
-Web Content\images\footer\logoCumbres.gif
+Web Content\images\footer\logoCumbres.png
 Web Content\images\header\headerInternoCumbre.gif
-Web Content\images\header\logo.gif
-Web Content\images\header\logoCumbresPDFsRTFs.jpg
+Web Content\images\header\logo.png
 Web Content\images\header\logoCumbresPDFsRTFs.png
-Web Content\images\header\logoHeaderPDFsRTFs.jpg
 Web Content\images\header\logoHeaderPDFsRTFs.png
 Web Content\images\header\logoSegibPDFsRTFs.png
 Web Content\images\header\logoSegundoPDFsRTFs.png
-Web Content\images\mails\header.gif
-Web Content\images\mails\footer.gif
-Web Content\images\others\splashSegib.gif
+Web Content\images\mails\header.png
+Web Content\images\mails\footer.png
+Web Content\images\others\splashSegib.png
 
 [Queda para la próxima versión] Resource bundle para los errores
 
