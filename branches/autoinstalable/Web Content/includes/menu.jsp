@@ -19,6 +19,7 @@
 					<li><html:link action="/editProperty?id=simon.server.url" ><%=ResourceBundleCache.get("menu", "urlServidor")%></html:link></li>
 					<li><html:link action="/editProperty?id=simon.tmp.subpath" ><%=ResourceBundleCache.get("menu", "subpathTemporal")%></html:link></li>
 					<li><html:link action="/goToResourceBundle" ><%=ResourceBundleCache.get("menu", "textosDelSitio")%></html:link></li>
+					<li><html:link action="/goToLogoABM" ><%=ResourceBundleCache.get("menu", "logos")%></html:link></li>
 				</ul>
 			</li>
 			<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "administracionDeUsuarios")%></a>

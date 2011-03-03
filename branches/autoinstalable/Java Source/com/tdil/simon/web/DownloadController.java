@@ -19,9 +19,11 @@ import org.apache.log4j.Logger;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.CountryDAO;
+import com.tdil.simon.data.ibatis.LogoDAO;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
 import com.tdil.simon.data.model.Country;
+import com.tdil.simon.data.model.Logo;
 import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.Signature;
 import com.tdil.simon.data.model.SystemUser;
@@ -36,6 +38,7 @@ public class DownloadController extends HttpServlet {
 	private static Object extractFlagSemaphore = new Object();
 	private static Object extractRefDocSemaphore = new Object();
 	private static Object extractSignatureSemaphore = new Object();
+	private static Object extractLogoSemaphore = new Object();
 
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(DownloadController.class);
@@ -52,6 +55,10 @@ public class DownloadController extends HttpServlet {
 		} 
 		if (action.equals("flag")) {
 			downloadFlag(req, res);
+			return;
+		}
+		if (action.equals("logo")) {
+			downloadLogo(req, res);
 			return;
 		}
 		HttpSession session = req.getSession(false);
@@ -99,11 +106,52 @@ public class DownloadController extends HttpServlet {
 		}
 	}
 	
+	private void downloadLogo(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		String key = req.getParameter("fileId");
+		String fileName = getServerLogoFileNameFor("logo", key);
+//		res.setHeader("Cache-Control", "no-store");
+		res.setHeader("Pragma", "no-cache");
+		res.setDateHeader("Expires", 0);
+		File logo = new File(fileName);
+		if (!logo.exists()) {
+			synchronized (extractLogoSemaphore) {				
+				try {
+					extractLogoFromDB(key);
+				} catch (SQLException e) {
+					getLog().error(e.getMessage(), e);
+				} catch (ValidationException e) {
+					getLog().error(e.getMessage(), e);
+				}
+			}
+		}
+		if (!StringUtils.isEmpty(fileName)) {
+			res.setContentType("image/png");
+			FileInputStream inputStream = null;
+			try {
+				inputStream = new FileInputStream(new File(fileName));
+				IOUtils.copy(inputStream, res.getOutputStream());
+			} finally {
+				if (inputStream != null) {
+					inputStream.close();
+				}
+			}
+		}
+	}
+	
 	private void extractFlagFromDB(final Integer id) throws SQLException, ValidationException {
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
 				Country country = CountryDAO.getCountryWithFlag(id);
 				UploadUtils.createFile(country.getFlag(), getServerFlagFileNameFor("flag", id));
+			}
+		});
+	}
+	
+	private void extractLogoFromDB(final String key) throws SQLException, ValidationException {
+		TransactionProvider.executeInTransaction(new TransactionalAction() {
+			public void executeInTransaction() throws SQLException, ValidationException {
+				Logo logo = LogoDAO.getLogo(key);
+				UploadUtils.createFile(logo.getLogoData(), getServerLogoFileNameFor("logo", key));
 			}
 		});
 	}
@@ -207,6 +255,10 @@ public class DownloadController extends HttpServlet {
 
 	private static String getServerFlagFileNameFor(String action, Integer id) {
 		return SystemConfig.getFlagStore() + "/" + String.valueOf(id) + ".png";
+	}
+	
+	private static String getServerLogoFileNameFor(String action, String key) {
+		return SystemConfig.getLogoStore() + "/" + key + ".png";
 	}
 
 	private String getServerRefDocFileNameFor(String action, Integer id) {
