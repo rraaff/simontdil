@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar delegados</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -59,7 +59,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="172" align="right">Nombre completo:</td>
+								<td width="172" align="right"><%=ResourceBundleCache.get(getServletInfo(), "nombreCompleto")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="380" align="left"><html:text name="DelegateABM" property="name" /><html:errors property="delegate.name" /></td>
 							</tr>
@@ -67,7 +67,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">Nombre de Usuario:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "usuario")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><logic:equal name="DelegateABM" property="id" value="0">
 																<html:text name="DelegateABM" property="username"/>
@@ -80,7 +80,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">País:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:select name="DelegateABM" property="countryId" styleClass="textfield_effect_month">
 																<html:optionsCollection name="DelegateABM" property="allCountries" value="id" label="name"/>
@@ -90,7 +90,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">E-Mail:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "email")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="DelegateABM" property="email"/><html:errors property="delegate.email" /></td>
 							</tr>
@@ -98,19 +98,19 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right" valign="top"><html:errors property="delegate.typeOne" />Accesos:</td>
+								<td height="24" align="right" valign="top"><html:errors property="delegate.typeOne" /><%=ResourceBundleCache.get(getServletInfo(), "accesos")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
-								<html:checkbox name="DelegateABM" property="typeOne"/> Documentos para Coordinadores Nacionales <br />
-								<html:checkbox name="DelegateABM" property="typeTwo"/> Documentos para Responsables de Cooperaci&oacute;n<br>
-								<html:checkbox name="DelegateABM" property="canSign"/> Es firmante<html:errors property="delegate.canSign" /><br/>
+								<html:checkbox name="DelegateABM" property="typeOne"/> <%=ResourceBundleCache.get("documento", "tipoUno")%> <br />
+								<html:checkbox name="DelegateABM" property="typeTwo"/> <%=ResourceBundleCache.get("documento", "tipoDos")%> <br>
+								<html:checkbox name="DelegateABM" property="canSign"/> <%=ResourceBundleCache.get(getServletInfo(), "esFirmante")%><html:errors property="delegate.canSign" /><br/>
 								<!-- html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n--><html:errors property="delegate.canProposeParagraph" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right">Cargo:</td>
+								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "cargo")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="DelegateABM" property="job"/><html:errors property="delegate.job" /></td>
 							</tr>
@@ -121,18 +121,18 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25" align="center">
 															<logic:equal name="DelegateABM" property="id" value="0">
 																<html:submit property="operation">
-																	<bean:message key="delegateABM.create"/>
+																	<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 																</html:submit>
 															</logic:equal>
 																
 																<logic:notEqual name="DelegateABM" property="id" value="0">
 																	<html:submit property="operation">
-																	<bean:message key="delegateABM.modify"/>
+																	<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 																	</html:submit>
 																</logic:notEqual>
 																
 																<html:submit property="operation">
-																	<bean:message key="delegateABM.cancel"/>
+																	<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
 																</html:submit></td>
 							</tr>
 							<tr>
@@ -158,7 +158,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Listado de delegados</div></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -173,12 +173,12 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td width="200" height="20" align="left">Nombre</td>
-										<td align="left">Pa&iacute;s</td>
-										<td width="60" align="center">Permisos</td>
-										<td width="60" align="center">Firmante</td>
-										<td width="60" align="center">Firmo</td>
-										<!-- td width="60" align="center">Habilitado</td  -->
+										<td width="200" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%></td>
+										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "accesos")%></td>
+										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmante")%></td>
+										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmo")%></td>
+										<!-- td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "habilitado")%></td  -->
 										<td width="60"></td>
 										<td width="80"></td>
 										<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
@@ -196,12 +196,12 @@ if ( dw_scrollObj.isSupported() ) {
 												<% if (hasSignedCurrent) { %>
 													<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 														<tr>
-														<td>Si</td>
+														<td><%=ResourceBundleCache.get(getServletInfo(), "si")%></td>
 														<td><html:image property="delSignatureImages" indexed="true" value="id" src="images/buttons/borrar.png" border="0"></html:image></td>
 														</tr>
 													</table>
 												<% } else { %>
-													No
+													<%=ResourceBundleCache.get(getServletInfo(), "no")%>
 												<% } %>
 												</td>
 											

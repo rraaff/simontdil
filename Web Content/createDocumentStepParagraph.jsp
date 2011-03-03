@@ -14,7 +14,7 @@
 		<table border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Datos del documento</div></td>
+				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get("createDocument", "titulo")%></div></td>
 				<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 			</tr>
 			<tr>
@@ -26,13 +26,13 @@
 							<td colspan="11"><img src="images/null.gif" width="1" height="5"></td>
 						</tr>
 						<tr>
-							<td width="53" align="right">Titulo:</td>
+							<td width="53" align="right"><%=ResourceBundleCache.get("createDocument", "tituloDocumento")%>:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 							<td width="210" align="left"><html:text name="CreateDocumentForm" property="title" disabled="true" styleClass="textfield_effect"/></td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-							<td width="205" align="right">Versi&oacute;n: <bean:write name="CreateDocumentForm" property="versionNumber"/></td>
+							<td width="205" align="right"><%=ResourceBundleCache.get("createDocument", "version")%>: <bean:write name="CreateDocumentForm" property="versionNumber"/></td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td colspan="3" align="right">Nombre de la versi&oacute;n:</td>
+							<td colspan="3" align="right"><%=ResourceBundleCache.get("createDocument", "nombreVersion")%>:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 							<td><html:text name="CreateDocumentForm" property="versionName" disabled="true" styleClass="textfield_effect"/></td>
 						</tr>
@@ -42,9 +42,9 @@
 						<tr>
 							<td align="right"><html:checkbox name="CreateDocumentForm" property="principal" disabled="true"/></td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td align="left">Documento principal a negociar</td>
+							<td align="left"><%=ResourceBundleCache.get("createDocument", "documentoPrincipal")%></td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-							<td align="right">L&iacute;mite para obs.:</td>
+							<td align="right"><%=ResourceBundleCache.get("createDocument", "limiteObservaciones")%>:</td>
 							<td><img src="images/null.gif" width="7" height="1"></td>
 							<td width="359" align="left">
 								<html:text name="CreateDocumentForm" property="limitObservations" styleClass='date demo_vista' disabled="true"/>
@@ -55,9 +55,9 @@
 								</script>
 							</td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
-							<td width="160" align="right">Tipo de doc.:</td>
+							<td width="160" align="right"><%=ResourceBundleCache.get("createDocument", "tipoDocumento")%>:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td width="290" align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/>Propuesta de dec.&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/>Plan de Acción</td>
+							<td width="290" align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/><%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/><%=ResourceBundleCache.get("documento", "tipoDos")%></td>
 						</tr>
 						<tr>
 							<td colspan="11" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -96,10 +96,10 @@
 				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif">
 					<div id="blockTitle">
 					<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
-						Pre&aacute;mbulo (Paso 2 de 4)
+						<%=ResourceBundleCache.get("createDocument", "paso2")%>
 					</logic:equal>
 					<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
-						P&aacute;rrafos (Paso 3 de 4)
+						<%=ResourceBundleCache.get("createDocument", "paso3")%>
 					</logic:equal>
 					</div>
 				</td>
@@ -111,12 +111,12 @@
 				<td valign="top" align="center"><!-- corte tabla template -->
 					<table border="0" cellspacing="0" cellpadding="0">
 						<tr>
-							<td align="right">Párrafo:</td>
+							<td align="right"><%=ResourceBundleCache.get("createDocument", "parrafo")%>:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="left" id="parDisplay"><bean:write name="CreateDocumentForm" property="paragraphForDisplay" /></td>
-							<td align="right">Etiqueta: </td>
+							<td align="right"><%=ResourceBundleCache.get("createDocument", "etiqueta")%>: </td>
 							<td align="left" id="parDetail"><html:text name="CreateDocumentForm" property="currentDetail" styleClass="textfield_effect"/></td>
-							<td align="right">Cambiar al párrafo:</td>
+							<td align="right"><%=ResourceBundleCache.get("createDocument", "cambiarElParrafo")%>:</td>
 							<td width="10"><img src="images/null.gif" width="7" height="1"></td>
 							<td align="right">
 								<html:select name="CreateDocumentForm" property="goToParagraph">
@@ -126,7 +126,7 @@
 							<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
 							<td align="left">
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
-									<html:checkbox name="CreateDocumentForm" property="livePreview">Actualización en vivo</html:checkbox>
+									<html:checkbox name="CreateDocumentForm" property="livePreview"><%=ResourceBundleCache.get("createDocument", "actualizacionEnVivo")%></html:checkbox>
 								</logic:equal>
 							</td>
 						</tr>
@@ -144,13 +144,13 @@
 							<!-- Boton prev -->
 							<logic:notEqual name="CreateDocumentForm" property="backDisabled" value="true">
 								<html:submit property="operation">
-								<bean:message key="createDocument.paragraphs.back" />
+								<%=ResourceBundleCache.get(getServletInfo(), "anterior")%>
 								</html:submit>
 							</logic:notEqual>
 							<logic:equal name="CreateDocumentForm" property="backDisabled" value="true">
 								<span id="backButtonLayer">
 								<html:submit property="operation" disabled="true">
-								<bean:message key="createDocument.paragraphs.back" />
+								<%=ResourceBundleCache.get(getServletInfo(), "anterior")%>
 								</html:submit>
 								</span>
 							</logic:equal>
@@ -158,13 +158,13 @@
 							<!-- Boton Next -->
 							<logic:notEqual name="CreateDocumentForm" property="last" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.next"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "siguiente")%>
 								</html:submit>
 							</logic:notEqual>
 							<logic:equal name="CreateDocumentForm" property="last" value="true">
 								<span id="nextButtonLayer">
 								<html:submit property="operation" disabled="true">
-									<bean:message key="createDocument.paragraphs.next"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "siguiente")%>
 								</html:submit>
 								</span>
 							</logic:equal>
@@ -172,24 +172,24 @@
 							<!-- Boton Add before -->
 							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.addBefore"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "agregarAntes")%>
 								</html:submit>
 							</logic:equal>
 							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
 								<html:submit property="operation" disabled="true">
-									<bean:message key="createDocument.paragraphs.addBefore"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "agregarAntes")%>
 								</html:submit>
 							</logic:equal>
 							
 							<logic:equal name="CreateDocumentForm" property="last" value="true">
 								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 									<html:submit property="operation">
-										<bean:message key="createDocument.paragraphs.add"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "agregar")%>
 									</html:submit>
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
 									<html:submit property="operation" disabled="true">
-										<bean:message key="createDocument.paragraphs.add"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "agregar")%>
 									</html:submit>
 								</logic:equal>
 							</logic:equal>
@@ -197,12 +197,12 @@
 							<logic:notEqual name="CreateDocumentForm" property="last" value="true">
 								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 									<html:submit property="operation">
-										<bean:message key="createDocument.paragraphs.addAfter"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "agregarDespues")%>
 									</html:submit>
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
 									<html:submit property="operation" disabled="true">
-										<bean:message key="createDocument.paragraphs.addAfter"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "agregarDespues")%>
 									</html:submit>
 								</logic:equal>
 							</logic:notEqual>
@@ -210,12 +210,12 @@
 							<!-- Boton delete -->
 							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.delete"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "borrar")%>
 								</html:submit>
 							</logic:equal>
 							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="false">
 								<html:submit property="operation" disabled="true">
-									<bean:message key="createDocument.paragraphs.delete"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "borrar")%>
 								</html:submit>
 							</logic:equal>
 							
@@ -228,29 +228,29 @@
 							<td colspan="11" height="25" align="center">
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.modifyDocument"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "modificarDocumento")%>
 								</html:submit>
 							</logic:equal>
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "modificarIntroduccion")%>
 								</html:submit>
 							</logic:equal>
 							<%if (isModerator) { %>
 							<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.pushData"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "actualizarContenido")%>
 								</html:submit>
 							</logic:equal> 
 							<% } %>
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
 								<html:submit property="operation">
-									<bean:message key="createDocument.addParagraphs"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "agregarParrafos")%>
 								</html:submit>
 							</logic:equal>
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
 								<html:submit property="operation">
-									<bean:message key="createDocument.paragraphs.preview"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "previsualizar")%>
 								</html:submit>
 							</logic:equal>
 							</td>

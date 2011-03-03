@@ -14,11 +14,11 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.forms.CategoryABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class CategoryABMAction extends ABMAction {
 
@@ -57,14 +57,18 @@ public class CategoryABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
-		if (categoryABMForm.getOperation().equals(ApplicationResources.getMessage("categoryABM.cancel"))) {
+		if (categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			categoryABMForm.reset();
 		}
-		if (categoryABMForm.getOperation().equals(ApplicationResources.getMessage("categoryABM.create"))
-				|| categoryABMForm.getOperation().equals(ApplicationResources.getMessage("categoryABM.modify"))) {
+		if (categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
+				|| categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(categoryABMForm, request, mapping);
 		} 
 		return mapping.findForward("continue");
+	}
+
+	private String getServletInfo() {
+		return "categoryABM";
 	}
 
 	private static Logger getLog() {

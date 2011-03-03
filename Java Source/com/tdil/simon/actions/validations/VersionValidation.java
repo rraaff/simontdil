@@ -27,20 +27,20 @@ public class VersionValidation {
 	public static Date validateUpToCommentDate(String upToCommentDate, ValidationError validation) {
 		String result = upToCommentDate;
 		if (StringUtils.isEmpty(upToCommentDate)) {
-			validation.setFieldError("upToCommentDate", ValidationErrors.UP_TO_COMMENT_DATE_CANNOT_BE_NULL);
+			validation.setFieldError("upToCommentDate", "upToCommentDate."+ValidationErrors.UP_TO_COMMENT_DATE_CANNOT_BE_NULL);
 			return null;
 		} else {
 			result = upToCommentDate.trim();
-			DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 			try {
 				Date date = dateFormat.parse(result);
 				Date today = new Date();
 				if (date.before(today)) {
-					validation.setFieldError("upToCommentDate", ValidationErrors.UP_TO_COMMENT_DATE_BEFORE_TODAY);
+					validation.setFieldError("upToCommentDate", "upToCommentDate."+ValidationErrors.UP_TO_COMMENT_DATE_BEFORE_TODAY);
 				}
 				return date;
 			} catch (ParseException e) {
-				validation.setFieldError("upToCommentDate", ValidationErrors.INVALID_DATE);
+				validation.setFieldError("upToCommentDate", "upToCommentDate."+ValidationErrors.INVALID_DATE);
 				return null;
 			}
 			

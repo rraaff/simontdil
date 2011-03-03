@@ -1,4 +1,4 @@
-<%@ page info="listDocumentsForModerator"%>
+<%@ page info="listDocumentsForDesigner"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de Documentos</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get("listDocumentsForModerator", "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -61,15 +61,15 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">Documento</td>
-										<td>Versión</td>
-										<td align="left">Nombre de Versión</td>
-										<td align="left">Estado</td>
-										<td>Tiene Obs.</td>
-										<td># de obs.</td>
-										<td># nuevos solicitados</td>
+										<td height="20" align="left"><%=ResourceBundleCache.get("listDocumentsForModerator", "documento")%></td>
+										<td><%=ResourceBundleCache.get("listDocumentsForModerator", "version")%></td>
+										<td align="left"><%=ResourceBundleCache.get("listDocumentsForModerator", "nombreDeVerion")%></td>
+										<td align="left"><%=ResourceBundleCache.get("listDocumentsForModerator", "estado")%></td>
+										<td><%=ResourceBundleCache.get("listDocumentsForModerator", "tieneObservaciones")%></td>
+										<td><%=ResourceBundleCache.get("listDocumentsForModerator", "cantidadDeObservaciones")%></td>
+										<td><%=ResourceBundleCache.get("listDocumentsForModerator", "cantidadDeParrafosSolicitados")%></td>
 										<td width="80"> </td>
-										<td width="80">Versión en portugués</td>
+										<td width="80"><%=ResourceBundleCache.get(getServletInfo(), "versionEnIdiomaAlternativo")%></td>
 										<td width="5"> </td>
 									</tr>
 									<logic:iterate name="ListDocumentsForDesign" property="list" id="version" indexId="iterIndex"> 

@@ -68,17 +68,16 @@
       <forward name="continue" path="/createDocumentStepParagraph.jsp"/>
       <forward name="failure" path="/createDocumentStep1.jsp"/>
     </action>
-    <action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
+    <!-- action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
       <forward name="back" path="/createDocumentStep1.jsp"/>
       <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
       <forward name="failure" path="/createDocumentStep2.jsp"/>
-    </action>
+    </action-->
     <action path="/paragraphNavigation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ParagraphsNavigationAction" scope="session">
       <forward name="previous" path="/createDocumentStepParagraph.jsp"/>
       <forward name="next" path="/createDocumentStepParagraph.jsp"/>
       <forward name="preview" path="/previewDocument.jsp"/>
       <forward name="stay" path="/createDocumentStepParagraph.jsp"/>
-      <forward name="modifyIntroduction" path="/createDocumentStep2.jsp"/>
       <forward name="failure" path="/createDocumentStepParagraph.jsp"/>
       <forward name="modifyDocument" path="/createDocumentStep1.jsp"/>
     </action>

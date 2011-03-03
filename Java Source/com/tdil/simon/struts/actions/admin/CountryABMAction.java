@@ -16,12 +16,12 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.web.LogOnceListener;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class CountryABMAction extends ABMAction {
 
@@ -73,14 +73,18 @@ public class CountryABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
-		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.cancel"))) {
+		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			countryABMForm.reset();
 		}
-		if (countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.create"))
-				|| countryABMForm.getOperation().equals(ApplicationResources.getMessage("countryABM.modify"))) {
+		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
+				|| countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(countryABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");
+	}
+
+	private String getServletInfo() {
+		return "countryABM";
 	}
 
 

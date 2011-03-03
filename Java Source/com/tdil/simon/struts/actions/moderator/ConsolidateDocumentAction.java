@@ -9,10 +9,10 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.utils.EmailUtils;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class ConsolidateDocumentAction extends SimonAction {
 
@@ -28,11 +28,11 @@ public class ConsolidateDocumentAction extends SimonAction {
 			throws Exception {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.consolidate.cancel"))) {
+		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			return mapping.findForward("cancel");
 		}
 
-		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.consolidate.save"))) {
+		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "consolidar"))) {
 			ValidationError error = createDocumentForm.validateConsolidation(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -45,5 +45,9 @@ public class ConsolidateDocumentAction extends SimonAction {
 			}
 		}
 		return null;
+	}
+
+	private String getServletInfo() {
+		return "consolidateDocument";
 	}
 }
