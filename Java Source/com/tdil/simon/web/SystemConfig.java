@@ -75,6 +75,10 @@ public class SystemConfig {
 						if (!sign.exists()) {
 							FileUtils.forceMkdir(sign);
 						}
+						File logo = new File(getLogoStore());
+						if (!logo.exists()) {
+							FileUtils.forceMkdir(logo);
+						}
 						File log = new File(tempPath + "/log");
 						if (!log.exists()) {
 							FileUtils.forceMkdir(log);
@@ -169,6 +173,10 @@ public class SystemConfig {
 	
 	public static String getSignatureStore() {
 		return tempPath + "/sign/";
+	}
+	
+	public static String getLogoStore() {
+		return tempPath + "/logo/";
 	}
 
 	public static NotificationEmail getMailForNewPassword() {

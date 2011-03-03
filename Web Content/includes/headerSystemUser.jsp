@@ -38,9 +38,9 @@ input.date {
 <div id="header">
 	<div id="logo">
 		<% if (!isAdministrator && !isModerator && isDesigner) { %>
-				<html:link action="/goToListDocumentForDesign" ><img src="images/header/logo.gif" width="143" height="80" border="0"></html:link></div>
+				<html:link action="/goToListDocumentForDesign" ><img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></html:link></div>
 			<% } else { %>
-				<img src="images/header/logo.gif" width="143" height="80" border="0"></div>
+				<img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></div>
 			<% } %>
 	<div id="blockinHeader">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">

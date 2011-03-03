@@ -35,6 +35,7 @@
     <form-bean name="NotificationEmail" type="com.tdil.simon.struts.forms.NotificationEmailABMForm"/>
     <form-bean name="SysProperty" type="com.tdil.simon.struts.forms.SysPropertyABMForm"/>
     <form-bean name="ResourceBundleForm" type="com.tdil.simon.struts.forms.ResourceBundleForm"/>
+    <form-bean name="LogoABMForm" type="com.tdil.simon.struts.forms.LogoABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -68,11 +69,13 @@
       <forward name="continue" path="/createDocumentStepParagraph.jsp"/>
       <forward name="failure" path="/createDocumentStep1.jsp"/>
     </action>
-    <!-- action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
-      <forward name="back" path="/createDocumentStep1.jsp"/>
-      <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
-      <forward name="failure" path="/createDocumentStep2.jsp"/>
-    </action-->
+    <!--
+    action path="/createDocumentActionParagraph" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.CreateDocumentActionParagraph" scope="session">
+                                  <forward name="back" path="/createDocumentStep1.jsp"/>
+                                  <forward name="addParagraphs" path="/createDocumentStepParagraph.jsp"/>
+                                  <forward name="failure" path="/createDocumentStep2.jsp"/>
+                                </action
+    -->
     <action path="/paragraphNavigation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ParagraphsNavigationAction" scope="session">
       <forward name="previous" path="/createDocumentStepParagraph.jsp"/>
       <forward name="next" path="/createDocumentStepParagraph.jsp"/>
@@ -319,6 +322,16 @@
       <forward name="continue" path="/resourceBundle.jsp"/>
     </action>
     <action path="/saveResourceBundleAjax" type="com.tdil.simon.struts.actions.admin.AjaxSaveResourceBundleAction">
+    </action>
+    <action path="/editLogo" name="LogoABMForm" type="com.tdil.simon.struts.actions.moderator.EditLogoAction" scope="session">
+      <forward name="continue" path="/logoABM.jsp"/>
+    </action>
+    <action path="/logoABM" name="LogoABMForm" type="com.tdil.simon.struts.actions.moderator.LogoABMAction" scope="session">
+      <forward name="continue" path="/logoABM.jsp"/>
+      <forward name="failure" path="/logoABM.jsp"/>
+    </action>
+    <action path="/goToLogoABM" name="LogoABMForm" type="com.tdil.simon.struts.actions.moderator.GoToLogoABMAction" scope="session">
+      <forward name="continue" path="/logoABM.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

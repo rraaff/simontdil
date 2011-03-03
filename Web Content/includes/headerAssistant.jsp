@@ -30,7 +30,7 @@ a:active {width: auto;}
 </head>
 <body>
 <div id="header">
-	<div id="logo"><html:link action="/goToAssistantHome" ><img src="images/header/logo.gif" width="143" height="80" border="0"></html:link></div>
+	<div id="logo"><html:link action="/goToAssistantHome" ><img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></html:link></div>
 	<div id="blockinHeaderDelegate">
 		<table width="500" border="0" cellspacing="0" cellpadding="0">
 			<tr>

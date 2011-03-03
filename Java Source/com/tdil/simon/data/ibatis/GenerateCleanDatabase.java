@@ -1,6 +1,5 @@
 package com.tdil.simon.data.ibatis;
 
-import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -9,12 +8,21 @@ import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.text.ParseException;
 
+import org.apache.commons.io.IOUtils;
+
 import com.tdil.simon.data.model.Country;
+import com.tdil.simon.data.model.Logo;
 import com.tdil.simon.data.model.ResourceBundle;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 
 public class GenerateCleanDatabase {
+
+	private static String logos[] = { "mails.footer", "footer.png", "mails.header", "header.png",
+			"header.logo", "logo.png", "footer.logoCumbres",
+			"logoCumbres.png", "header.logoCumbresPDFsRTFs", "logoCumbresPDFsRTFs.png", "header.logoHeaderPDFsRTFs",
+			"logoHeaderPDFsRTFs.png", "header.logoSegibPDFsRTFs", "logoSegibPDFsRTFs.png",
+			"header.logoSegundoPDFsRTFs", "logoSegundoPDFsRTFs.png", "others.splashSegib", "splashSegib.png" };
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException, ParseException {
 		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml");
@@ -37,7 +45,7 @@ public class GenerateCleanDatabase {
 			sysUser.setUsername("Admin");
 			sysUser.setPassword("Admin");
 			sysUser.setDeleted(false);
-			SystemUserDAO.insertUser(sysUser);	
+			SystemUserDAO.insertUser(sysUser);
 		}
 		// Create sites
 		Site site = SiteDAO.getSite(Site.DELEGATE);
@@ -64,6 +72,23 @@ public class GenerateCleanDatabase {
 			site.setDeleted(false);
 			SiteDAO.insertSite(site);
 		}
+		
+		for (int i = 0; i < logos.length; i+=2) {
+			Logo logo = LogoDAO.getLogo(logos[i]);
+			if (logo == null) {
+				InputStream logoInput = GenerateCleanDatabase.class.getResourceAsStream(logos[i + 1]);
+				try {
+					byte data[] = IOUtils.toByteArray(logoInput);
+					logo = new Logo();
+					logo.setDeleted(false);
+					logo.setLogoKey(logos[i]);
+					logo.setLogoData(data);
+					LogoDAO.insertLogo(logo);
+				} finally {
+					logoInput.close();
+				}
+			}
+		}
 
 		InputStream rbs = GenerateCleanDatabase.class.getResourceAsStream("resourceBundle.txt");
 		BufferedReader bufferedRead = new BufferedReader(new InputStreamReader(rbs));
@@ -79,10 +104,10 @@ public class GenerateCleanDatabase {
 				rb.setRbKey(key);
 				rb.setRbValue(value);
 				ResourceBundleDAO.insertResourceBundle(rb);
-			} 
+			}
 			line = bufferedRead.readLine();
 		}
-		
+
 		IBatisManager.sqlMapper.commitTransaction();
 		try {
 			bufferedRead.close();
