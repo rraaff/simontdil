@@ -1,8 +1,20 @@
 Imagenes con texto deben volar
 Poner componente de fecha en busqueda de observaciones
 
-Seguir con la aplicacion de resource bundles
+Seguir con la aplicacion de resource bundles (voy por categoryABM.jsp)
+Ver tema de footer
 
 Modificar editor para borrar todo lo tachadado con un solo click
 
+Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
+faltaria ver para las imagenes)
+
+Resource bundle para los errores
+
+Resource bundle de los js
+
+Esta comentada la parte de propuesta de parrafo en delegateNegotiation.jsp, deberia activarse?
+
 Los textos en el flash de firma debe ser parametros
+
+Instalador (linux/windows)

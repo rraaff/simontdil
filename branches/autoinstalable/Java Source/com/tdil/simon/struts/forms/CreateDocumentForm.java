@@ -607,7 +607,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		DocumentValidation.validateTitle(this.title, validation);
 		VersionValidation.validateName(this.versionName, validation);
 		//DocumentValidation.validateIntroduction(this.introduction, validation);
-		//this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
+		VersionValidation.validateUpToCommentDate(this.limitObservations, validation);
 		boolean typeOneBoolean = this.isDocumentTypeOne();
 		boolean typeTwoBoolean = this.isDocumentTypeTwo();
 		if (!typeOneBoolean && !typeTwoBoolean) {

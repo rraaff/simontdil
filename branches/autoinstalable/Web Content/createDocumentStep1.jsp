@@ -16,7 +16,7 @@
 			<table border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="600" height="19" align="left"><div id="blockTitle">Edición de documentos (Paso 1 de 4)</div></td>
+					<td background="images/interfaces/topTitle.gif" width="600" height="19" align="left"><div id="blockTitle"><%=ResourceBundleCache.get("createDocument", "paso1")%></div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -28,7 +28,7 @@
 								<td height="25" colspan="3"><p align="left">&nbsp;</p></td>
 							</tr>
 							<tr>
-								<td align="right" width="192">T&iacute;tulo:</td>
+								<td align="right" width="192"><%=ResourceBundleCache.get("createDocument", "tituloDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="401" align="left">
 									<logic:equal name="CreateDocumentForm" property="portugues" value="false">
@@ -43,7 +43,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" width="192">Versi&oacute;n:</td>
+								<td align="right" width="192"><%=ResourceBundleCache.get("createDocument", "version")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="301" align="left"><bean:write name="CreateDocumentForm" property="versionNumber" /></td>
 							</tr>
@@ -51,7 +51,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Nombre de la versi&oacute;n:</td>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "nombreVersion")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="CreateDocumentForm" property="versionName" styleClass="textfield_effect"/><html:errors property="versionName" /></td>
 							</tr>
@@ -68,33 +68,24 @@
 									</logic:equal>
 									</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="301" align="left">Marcar como documento principal a negociar</td>
+								<td width="301" align="left"><%=ResourceBundleCache.get("createDocument", "documentoPrincipal")%></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Fecha l&iacute;mite para observaciones:</td>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "limiteObservaciones")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="7">
 									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
-										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' alt="{
-			dayChars:3,
-			dayNames:['Domingo', 'Lunes', 'Martes', 'Miercoles', 'Jueves', 'Viernes', 'Sabado'],
-			format:'dd-mm-yyyy',
-			startDay:1,
-			yearOrder:'desc',
-			monthNames:['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-			yearRange:1,
-			yearStart:2011
-		}"/>
+										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker'/><html:errors property="upToCommentDate" />
 									</logic:equal>
 									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
 										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' disabled="true"/>
 									</logic:equal>
 								</td>
 <script>
-
+document.forms['CreateDocumentForm'].elements['limitObservations'].alt = "{dayChars:3,dayNames:['<%=ResourceBundleCache.get("fecha", "domingo")%>', '<%=ResourceBundleCache.get("fecha", "lunes")%>', '<%=ResourceBundleCache.get("fecha", "martes")%>', '<%=ResourceBundleCache.get("fecha", "miercoles")%>', '<%=ResourceBundleCache.get("fecha", "jueves")%>', '<%=ResourceBundleCache.get("fecha", "viernes")%>', '<%=ResourceBundleCache.get("fecha", "sabado")%>'],format:'dd-mm-yyyy',startDay:1,yearOrder:'desc',monthNames:['<%=ResourceBundleCache.get("fecha", "enero")%>', '<%=ResourceBundleCache.get("fecha", "febrero")%>','<%=ResourceBundleCache.get("fecha", "marzo")%>', '<%=ResourceBundleCache.get("fecha", "abril")%>', '<%=ResourceBundleCache.get("fecha", "mayo")%>', '<%=ResourceBundleCache.get("fecha", "junio")%>','<%=ResourceBundleCache.get("fecha", "julio")%>','<%=ResourceBundleCache.get("fecha", "agosto")%>', '<%=ResourceBundleCache.get("fecha", "septiembre")%>', 	'<%=ResourceBundleCache.get("fecha", "octubre")%>',	'<%=ResourceBundleCache.get("fecha", "noviembre")%>', '<%=ResourceBundleCache.get("fecha", "diciembre")%>'],yearRange:1,yearStart:2011}";
 $$('input.slimpicker').each( function(el){
 	var picker = new SlimPicker(el);
 });
@@ -111,10 +102,10 @@ $$('input.slimpicker').each( function(el){
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> A&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> B
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> <%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> <%=ResourceBundleCache.get("documento", "tipoDos")%>
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> A&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> B
+									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> <%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> <%=ResourceBundleCache.get("documento", "tipoDos")%>
 								</logic:equal>
 								</td>
 							</tr>
@@ -131,7 +122,7 @@ $$('input.slimpicker').each( function(el){
 							<tr>
 								<td colspan="3" align="center">
 									<html:submit property="operation">
-										<bean:message key="createDocument.next"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "siguiente")%>
 									</html:submit></td>
 							</tr>
 						</table>					

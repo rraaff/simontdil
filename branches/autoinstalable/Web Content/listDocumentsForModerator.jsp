@@ -47,7 +47,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Listado de Documentos</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -62,16 +62,16 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">Documento</td>
-										<td>Versión</td>
-										<td align="left">Nombre de Versión</td>
-										<td align="left">Estado</td>
-										<td>Tiene Obs.</td>
-										<td># de obs.</td>
-										<td># nuevos solicitados</td>
+										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></td>
+										<td><%=ResourceBundleCache.get(getServletInfo(), "version")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombreDeVerion")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "estado")%></td>
+										<td><%=ResourceBundleCache.get(getServletInfo(), "tieneObservaciones")%></td>
+										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeObservaciones")%></td>
+										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeParrafosSolicitados")%></td>
 										<td width="60"> </td>
 										<td width="80"> </td>
-										<% if (isModerator) { %><td width="100">Ingreso de Obs.</td> <% } %>
+										<% if (isModerator) { %><td width="100"><%=ResourceBundleCache.get(getServletInfo(), "ingresoDeObservaciones")%></td> <% } %>
 										<td width="5"> </td>
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 

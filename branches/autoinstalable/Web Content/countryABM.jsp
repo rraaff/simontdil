@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Editar delegaciones</div></td>
+					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -58,7 +58,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td colspan="4" height="25"><img src="images/null.gif" width="1" height="25"></td>
 								</tr>
 								<tr>
-									<td width="163" align="right">Nombre:</td>
+									<td width="163" align="right"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%>:</td>
 									<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 									<td colspan="2" width="230" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/>
 											<html:errors property="country.name" /></td>
@@ -67,7 +67,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>
 								<tr>
-									<td align="right">Seleccionar im&aacute;gen:</td>
+									<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "seleccionarImagen")%>:</td>
 									<td><img src="images/null.gif" width="7" height="1"></td>
 									<td align="left"><html:file property="flag"/></td>
 									<td><html:errors property="country.flag" /></td>
@@ -78,16 +78,16 @@ if ( dw_scrollObj.isSupported() ) {
 								<tr>
 									<td colspan="4" height="25" align="center"><logic:equal name="CountryABMForm" property="id" value="0">
 											<html:submit property="operation">
-												<bean:message key="countryABM.create"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 											</html:submit>
 										</logic:equal>
 											<logic:notEqual name="CountryABMForm" property="id" value="0">
 												<html:submit property="operation">
-													<bean:message key="countryABM.modify"/>
+													<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 												</html:submit>
 											</logic:notEqual>
 											<html:submit property="operation">
-												<bean:message key="countryABM.cancel"/>
+												<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
 											</html:submit></td>
 								</tr>
 								<tr>
@@ -113,7 +113,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Listado de delegaciones</div></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -128,8 +128,8 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left">Nombre</td>
-										<td align="left">Usuarios</td>
+										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeUsuarios")%></td>
 										<td width="60"></td>
 										<td width="60"></td>
 										<td width="10"><img src="images/null.gif" width="10" height="1"></td>

@@ -1,11 +1,12 @@
 <%@ page info="index"%>
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -46,9 +47,9 @@
 	<div id="imageHolder"><img src="images/demo/caratula.gif" width="978" height="480"></div>
 	<table border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
-			<td><a class="button" href="login.jsp"><span>Ingresar al sitio</span></a></td>
+			<td><a class="button" href="login.jsp"><span><%=ResourceBundleCache.get(getServletInfo(), "ingresar")%></span></a></td>
 			<td>&nbsp;</td>
-			<td><a class="button" href="changePassword.jsp"><span>Usuarios nuevos</span></a></td>
+			<td><a class="button" href="changePassword.jsp"><span><%=ResourceBundleCache.get(getServletInfo(), "usuarioNuevo")%></span></a></td>
 		</tr>
 	</table>
 </div>

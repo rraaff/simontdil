@@ -15,12 +15,12 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.ImageSubmitData;
 import com.tdil.simon.utils.ImageTagUtil;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class DelegateABMAction extends ABMAction {
 
@@ -78,13 +78,17 @@ public class DelegateABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
-		if (delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.cancel"))) {
+		if (delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			delegateABMForm.reset();
 		}
-		if (delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.create"))
-				|| delegateABMForm.getOperation().equals(ApplicationResources.getMessage("delegateABM.modify"))) {
+		if (delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
+				|| delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(delegateABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");
+	}
+
+	private String getServletInfo() {
+		return "delegateABM";
 	}
 }

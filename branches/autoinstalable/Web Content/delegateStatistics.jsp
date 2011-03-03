@@ -22,7 +22,7 @@
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Estadísticas</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -36,9 +36,9 @@
 									<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr-->
 								<tr>
-									<td width="80" height="20" align="left">Fecha</td>
-									<td width="200" align="left">Acciones</td>
-									<td align="left" colspan="<bean:write name="StatisticsForm" property="countryCount"/>">Delegaciones</td>
+									<td width="80" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "fecha")%></td>
+									<td width="200" align="left"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></td>
+									<td align="left" colspan="<bean:write name="StatisticsForm" property="countryCount"/>"><%=ResourceBundleCache.get(getServletInfo(), "delegaciones")%></td>
 								</tr>
 								<tr>
 									<td height="20" bgcolor="#E6E6E6"><img src="images/null.gif" width="80" height="1"></td>
@@ -49,7 +49,7 @@
 								</tr>
 								<tr>
 									<td height="20" bgcolor="#CCCCCC">&nbsp;</td>
-									<td align="left" bgcolor="#CCCCCC">Último ingreso:</td>
+									<td align="left" bgcolor="#CCCCCC"><%=ResourceBundleCache.get(getServletInfo(), "ultimoIngreso")%>:</td>
 									<logic:iterate name="StatisticsForm" property="lastLogins" id="lastLogin"> 
 										<td align="left" bgcolor="#CCCCCC"><bean:write name="lastLogin"/></td>
 									</logic:iterate>

@@ -46,7 +46,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar categorías de librería</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -59,7 +59,7 @@ if ( dw_scrollObj.isSupported() ) {
 								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="93" align="right">Nombre:</td>
+								<td width="93" align="right"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="250" align="left"><html:text name="CategoryABMForm" property="name" styleClass="textfield_effect"/><html:errors property="category.name" /></td>
 							</tr>
@@ -70,16 +70,16 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="25" align="center">
 									<logic:equal name="CategoryABMForm" property="id" value="0">
 										<html:submit property="operation">
-											<bean:message key="categoryABM.create"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 										</html:submit>
 									</logic:equal>
 									<logic:notEqual name="CategoryABMForm" property="id" value="0">
 										<html:submit property="operation">
-										<bean:message key="categoryABM.modify"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 										</html:submit>
 									</logic:notEqual>
 									<html:submit property="operation">
-										<bean:message key="categoryABM.cancel"/>
+										<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
 									</html:submit></td>
 							</tr>
 							<tr>
@@ -105,7 +105,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle">Listado de categor&iacute;as</div></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -120,9 +120,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td width="70%" height="20" align="left">Nombre</td>
-										<td width="60">Editar</td>
-										<td width="60">Borrar/Reactivar</td>
+										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editar")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "borrarReactivar")%></td>
 									</tr> 
 									<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">

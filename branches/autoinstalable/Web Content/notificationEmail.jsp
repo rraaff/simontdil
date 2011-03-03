@@ -33,7 +33,7 @@ div#scrollbar {
 <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-		<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Editar email</div></td>
+		<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 		<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 	</tr>
 	<tr>
@@ -46,7 +46,7 @@ div#scrollbar {
 					<td colspan="3" height="75"><img src="images/null.gif" width="1" height="75"></td>
 				</tr>
 				<tr>
-					<td width="100">From:</td>
+					<td width="100"><%=ResourceBundleCache.get(getServletInfo(), "from")%>:</td>
 					<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 					<td width="300" align="left"><html:text name="NotificationEmail" property="emailFrom" styleClass="textfield_effect_300" /><html:errors property="email.from" /></td>
 				</tr>
@@ -55,7 +55,7 @@ div#scrollbar {
 					<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 				</tr>
 				<tr>
-					<td>To:</td>
+					<td><%=ResourceBundleCache.get(getServletInfo(), "to")%>:</td>
 					<td><img src="images/null.gif" width="7" height="1"></td>
 					<td><html:text name="NotificationEmail" property="emailTo" styleClass="textfield_effect_300" /><html:errors property="email.to" /></td>
 				</tr>
@@ -64,7 +64,7 @@ div#scrollbar {
 					<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 				</tr>
 				<tr>
-					<td>Subject:</td>
+					<td><%=ResourceBundleCache.get(getServletInfo(), "subject")%>:</td>
 					<td><img src="images/null.gif" width="7" height="1"></td>
 					<td><html:text name="NotificationEmail" property="emailSubject" styleClass="textfield_effect_300" /><html:errors property="email.subject" /></td>
 				</tr>
@@ -72,7 +72,7 @@ div#scrollbar {
 					<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
 				</tr>
 				<tr>
-					<td valign="top">Text:</td><!-- cols="100" rows="10" -->
+					<td valign="top"><%=ResourceBundleCache.get(getServletInfo(), "body")%>:</td><!-- cols="100" rows="10" -->
 					<td><img src="images/null.gif" width="7" height="1"></td>
 					<td><html:textarea name="NotificationEmail" property="emailText" styleClass="textfield_effect_area" /><html:errors property="email.text" /></td>
 				</tr>
@@ -83,7 +83,7 @@ div#scrollbar {
 					<td><img src="images/null.gif" width="1" height="1"></td>
 					<td><img src="images/null.gif" width="1" height="1"></td>
 					<td align="center"><html:submit property="operation">
-											<bean:message key="notificationEmail.modify"/>
+											<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 										</html:submit></td>
 				</tr>
 				<tr>

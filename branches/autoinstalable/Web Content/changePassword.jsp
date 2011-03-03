@@ -29,13 +29,13 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="25" colspan="3"><p align="left">Ingrese la clave provisoria que lleg&oacute; a su direcci&oacute;n de E-Mail. Es importante que todos los datos sean correctos. de lo contrario no podr&aacute; generar una nueva contrase&ntilde;a.</p></td>
+								<td height="25" colspan="3"><p align="left"><%=ResourceBundleCache.get(getServletInfo(), "ingreseClaveProvisoria")%></p></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" width="162">Usuario:</td>
+								<td align="right" width="162"><%=ResourceBundleCache.get(getServletInfo(), "usuario")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="251" align="left"><html:text name="ChangePassword" property="username" styleClass="textfield_effect"/></td>
 							</tr>
@@ -43,7 +43,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">E-Mail:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "email")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="ChangePassword" property="email" styleClass="textfield_effect"/></td>
 							</tr>
@@ -51,7 +51,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Clave provisoria:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "claveProvisoria")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="password" styleClass="textfield_effect"/></td>
 							</tr>
@@ -59,7 +59,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Nueva contraseña:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "nuevaContraseña")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="newPassword" styleClass="textfield_effect"/></td>
 							</tr>
@@ -67,7 +67,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right">Repetir contraseña:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "repetirNuevaContraseña")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="retypeNewPassword" styleClass="textfield_effect"/></td>
 							</tr>
@@ -77,7 +77,7 @@
 							<tr>
 								<td colspan="3" align="center">
 								<html:submit>
-									<bean:message key="changePassword.create"/>
+									<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 								</html:submit></td>
 							</tr>
 							<tr>

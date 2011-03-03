@@ -100,11 +100,8 @@ if ( dw_scrollObj.isSupported() ) {
 														<%=ResourceBundleCache.get(getServletInfo(), "delegacion")%>: <span class="dataDinamica"><bean:write name="observation" property="countryName" /></span><br>
 														<%=ResourceBundleCache.get(getServletInfo(), "parrafo")%>: <span class="dataDinamica"><bean:write name="observation" property="paragraphNumberForDisplay" /></span><br>
 														<%=ResourceBundleCache.get(getServletInfo(), "fecha")%>: <span class="dataDinamica"><bean:write name="observation" property="creationDateFormatted" /></span><br>
-														<logic:equal name="observation" property="addNewParagraph" value="false">
-																<bean:message key="listObservations.notNewParagraph" />
-															</logic:equal>
 															<logic:equal name="observation" property="addNewParagraph" value="true">
-																<span class="dataDinamica"><bean:message key="listObservations.newParagraph" /></span>
+																<span class="dataDinamica"><%=ResourceBundleCache.get(getServletInfo(), "solicitoNuevoParrafo")%></span>
 															</logic:equal><br>
 														<!-- Delegado: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>--></td>
 														<td width="9"><img src="images/null.gif" width="9" height="1"></td>

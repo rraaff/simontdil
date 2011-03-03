@@ -64,7 +64,7 @@ div#main{
 <script src="scripts/popup.js" type="text/javascript"></script>
 <script type="text/javascript">
 function openDocs(){
-	openPopupWindow('forcedDocs.jsp', 1024, 550, 0, 0, false, true, 'Documentos', false);
+	openPopupWindow('forcedDocs.jsp', 1024, 550, 0, 0, false, true, '<%=ResourceBundleCache.get(getServletInfo(), "tituloPopup")%>', false);
 }
 </script>
 <html:html>
@@ -74,7 +74,7 @@ function openDocs(){
 		if (pText.length == 0) {
 			notimooErrorManager.show({
 				title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
-				message: 'Debe ingresar el mensaje',
+				message: '<%=ResourceBundleCache.get(getServletInfo(), "mensajeVacio")%>',
 				 customClass:'alert_error',
 				 sticky: true
 			});
@@ -100,14 +100,14 @@ function openDocs(){
 	
 	function showOKMessage() {
 		notimooNormalManager.show({
-			title: 'Mensaje',
-			message: 'Su mensaje ha sido enviado exitosamente.'
+			title: '<%=ResourceBundleCache.get(getServletInfo(), "mensaje")%>',
+			message: '<%=ResourceBundleCache.get(getServletInfo(), "mensajeEnviado")%>'
 		});
 	}
 	function showErrorMessage() {
 		notimooErrorManager.show({
 			title: '<%=ResourceBundleCache.get("ventanaError", "titulo")%>',
-			message: 'Su mensaje no ha podido ser agregado.',
+			message: '<%=ResourceBundleCache.get(getServletInfo(), "mensajeNoEnviado")%>',
 			customClass:'alert_error',
 			 sticky: true
 		});
@@ -152,13 +152,13 @@ function openDocs(){
 				   	if (json.exists == 'true') {
 				   		//alert(json.translation);
 				   		box = new LightFace({ 
-				 			title: 'Tradução do parágrafo', 
+				 			title: '<%=ResourceBundleCache.get(getServletInfo(), "traduccionDeParrafo")%>', 
 							width: 700,
 							height: 500,
 				  			content: json.translation,
 				 			buttons: [
 								{
-									title: 'Fechar',
+									title: '<%=ResourceBundleCache.get(getServletInfo(), "cerrarTraduccionDeParrafo")%>',
 									event: function() { this.close(); }
 								}
 							]
@@ -283,7 +283,7 @@ function openDocs(){
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Texto de la &uacute;ltima versi&oacute;n consolidada</div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "ultimaConsolidada")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -296,8 +296,8 @@ function openDocs(){
 							<div class="clear"><img src="images/null.gif" width="1" height="10"></div>
 							<div class="tab-container">
 								<ul id="tabs1" class="tabs">
-									<li><a href="">Versi&oacute;n Consolidada</a></li>
-									<li><a href="">Previsualizaci&oacute;n</a></li>
+									<li><a href=""><%=ResourceBundleCache.get(getServletInfo(), "versionConsolidada")%></a></li>
+									<li><a href=""><%=ResourceBundleCache.get(getServletInfo(), "previsualizar")%></a></li>
 								</ul>
 							</div>
 							<div class="clear"><img src="images/null.gif" width="1" height="10"></div>
@@ -350,7 +350,7 @@ function openDocs(){
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documento: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - V <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "documento")%>: <bean:write name="DelegateNegotiationForm" property="versionVO.document.title" /> - V <bean:write name="DelegateNegotiationForm" property="versionVO.version.number" /> - <bean:write name="DelegateNegotiationForm" property="versionVO.version.name" /></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -371,11 +371,11 @@ function openDocs(){
 							</tr>
 							<% if (user.isCanProposeParagraph()) { %>
 							<!--tr>
-								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="Propuesta de párrafo" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
+								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "proponerParrafo")%>" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr -->
 							<% } %>
 							<tr>
-								<td height="30" align="center" valign="bottom"><input type="button" value="Abrir Documentos" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1"><input type="button" value="Ver en portugués" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+								<td height="30" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "abrirDocumentos")%>" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "verEnIdiomaAlternativo")%>" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template -->
@@ -412,7 +412,7 @@ function openDocs(){
 								<table width="920" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-										<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Firma en el documento</div></td>
+										<td width="600" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "firma")%></div></td>
 										<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -460,7 +460,7 @@ function openDocs(){
 								<table width="420" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 									<tr>
 										<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle">Propuesta de Párrafo</div></td>
+										<td background="images/interfaces/topTitle.gif" width="400" height="19" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "propuestaDeParrafo")%></div></td>
 										<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 									</tr>
 									<tr>
@@ -482,7 +482,7 @@ function openDocs(){
 													<td height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
-													<td align="center"><input type="button" onClick="doAdd()" value="Enviar" > <input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="Cancelar"></td>
+													<td align="center"><input type="button" onClick="doAdd()" value="<%=ResourceBundleCache.get(getServletInfo(), "enviar")%>" > <input type="button" onClick="document.getElementById('addCommentLayer').style.display = 'none';" value="<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>"></td>
 												<tr>
 											</table>
 											<!-- corte tabla template -->
