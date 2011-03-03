@@ -1,15 +1,15 @@
 Imagenes con texto deben volar
 Poner componente de fecha en busqueda de observaciones
 
-Seguir con la aplicacion de resource bundles (voy por categoryABM.jsp)
+Seguir con la aplicacion de resource bundles (falta sacar referencias a ApplicationResources)
+Resource bundle para los errores
 Ver tema de footer
+Ver tema de ayuda.jsp
 
 [Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
 
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
 faltaria ver para las imagenes)
-
-[Queda para la próxima versión] Resource bundle para los errores
 
 Resource bundle de los js
 
@@ -18,3 +18,5 @@ Resource bundle de los js
 [Queda para la próxima versión] Los textos en el flash de firma debe ser parametros
 
 Instalador (linux/windows)
+Ver tema de parametros en slqmap
+Ver de meter una imagen pixel null png para el pais para que no se queje
