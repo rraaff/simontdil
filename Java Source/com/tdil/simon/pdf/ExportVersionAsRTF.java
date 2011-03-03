@@ -2,9 +2,7 @@ package com.tdil.simon.pdf;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -17,14 +15,15 @@ import java.util.regex.Matcher;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
-import org.apache.commons.io.IOUtils;
 import org.jfor.jfor.converter.Converter;
 import org.w3c.tidy.Tidy;
 import org.xml.sax.InputSource;
 
 import com.tdil.simon.data.ibatis.DelegateAuditDAO;
+import com.tdil.simon.data.ibatis.LogoDAO;
 import com.tdil.simon.data.ibatis.ObservationDAO;
 import com.tdil.simon.data.ibatis.SignatureDAO;
+import com.tdil.simon.data.model.Logo;
 import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.SystemUser;
@@ -32,21 +31,18 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
 
 public class ExportVersionAsRTF {
 
 	public static void exportDocument(SystemUser user, VersionVO version, OutputStream output) throws Exception {
-		File file = new File(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png");
-		if (!file.exists()) {
-			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoHeaderPDFsRTFs.png");
-			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png"));
-		}
-		file = new File(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png");
-		if (!file.exists()) {
-			InputStream io = ExportVersionAsPDF.class.getResourceAsStream("logoSegundoPDFsRTFs.png");
-			IOUtils.copy(io, new FileOutputStream(SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png"));
-		}
+		Logo logo = LogoDAO.getLogo("header.logoHeaderPDFsRTFs");
+		UploadUtils.createFile(logo.getLogoData(), SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png");
+		
+		logo = LogoDAO.getLogo("header.logoSegundoPDFsRTFs");
+		UploadUtils.createFile(logo.getLogoData(), SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png");
+		
 		DelegateAuditDAO.registerDownloadVersion(user, version.getVersion());
 		StringBuffer buf = new StringBuffer();
 		buf.append("<html>");
