@@ -4,7 +4,7 @@
 
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -48,8 +48,8 @@ input.date {
 				<td colspan="5" height="5"><img src="images/null.gif" width="1" height="5"></td>
 			</tr>
 			<tr>
-				<td rowspan="2" align="left">Mod: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b><br>Del: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b><br>TV: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
-				<td width="280" align="right">Usuario: <span class="userLogged"><%= user.getName() %></span></td>
+				<td rowspan="2" align="left"><%=ResourceBundleCache.get("header", "sitioModerador")%>: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioDelegados")%>: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioPublico")%>: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
+				<td width="280" align="right"><%=ResourceBundleCache.get("header", "usuario")%>: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
 				<td rowspan="2" align="right" valign="bottom">
@@ -69,13 +69,13 @@ input.date {
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3" align="right"><html:link action="/logout" >Salir del sistema</html:link> - 
+				<td colspan="3" align="right"><html:link action="/logout" ><%=ResourceBundleCache.get("header", "salir")%></html:link> - 
 					<% 	if(eventMode && inNegotiation && isModerator) { 
 							if (com.tdil.simon.utils.PrivateMessageUtils.mustBeShownIn(this.getServletInfo())) {
 							%>
-							<html:link  action="/goToListPrivateObservations.st">Mensajes Privados: <span class="remarcado" id="privateMessagesCount"></span></html:link></span>
+							<html:link  action="/goToListPrivateObservations.st"><%=ResourceBundleCache.get("header", "mensajesPrivados")%>: <span class="remarcado" id="privateMessagesCount"></span></html:link></span>
 							<% } else { %>
-							Negociación en curso
+							<%=ResourceBundleCache.get("header", "negociacionEnCurso")%>
 							<% } %>
 					<% } else { %>
 						
@@ -110,8 +110,8 @@ input.date {
 							if("0" != privMessages.maxId && privMessages.maxId != maxId) {
 								maxId = privMessages.maxId;
 								notimooManager.show({
-									title: 'Mensajes Privados',
-									message: 'Usted ha recibido nuevo/s mensajes privados.'
+									title: '<%=ResourceBundleCache.get("header", "mensajesPrivados")%>',
+									message: '<%=ResourceBundleCache.get("header", "nuevoMensajesPrivado")%>'
 								});
 							}
 						}}).get({'full': '<%=getServletInfo().equals("createDocumentStepParagraph") ? "false" : "true"%>'});

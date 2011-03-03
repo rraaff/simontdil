@@ -1,7 +1,7 @@
 package com.tdil.simon.data.valueobjects;
 
 import com.tdil.simon.data.model.Version;
-import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class VersionForListVO extends Version {
 
@@ -28,9 +28,9 @@ public class VersionForListVO extends Version {
 	
 	public String getHasObservationText() {
 		if (this.getObservationCount() == 0) {
-			return ApplicationResources.getMessage("NO");
+			return ResourceBundleCache.get("general", "no");
 		} else {
-			return ApplicationResources.getMessage("YES");
+			return ResourceBundleCache.get("general", "si");
 		}
 	}
 	

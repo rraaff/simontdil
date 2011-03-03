@@ -10,7 +10,7 @@
 <html:html>
 <table width="980" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
-		<td align="center" valign="middle">Usuario T&eacute;cnico: seleccione una actividad del men&uacute;.</td>
+		<td align="center" valign="middle"><%=ResourceBundleCache.get(getServletInfo(), "seleccione")%></td>
 	</tr>
 </table>
 </html:html>
