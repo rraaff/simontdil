@@ -1,7 +1,7 @@
 package com.tdil.simon.data.valueobjects;
 
 import com.tdil.simon.data.model.SystemUser;
-import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class UserVO extends SystemUser {
 
@@ -39,35 +39,35 @@ public class UserVO extends SystemUser {
 		StringBuffer result = new StringBuffer();
 		boolean insertSeparator = false;
 		if (this.isAdministrator()) {
-			result.append(ApplicationResources.getMessage("admnistrator"));
+			result.append(ResourceBundleCache.get("usuario", "administrador"));
 			insertSeparator = true;
 		}
 		if (this.isModerator()) {
 			if (insertSeparator) {
 				result.append(", ");
 			}
-			result.append(ApplicationResources.getMessage("moderator"));
+			result.append(ResourceBundleCache.get("usuario", "moderador"));
 			insertSeparator = true;
 		}
 		if (this.isDesigner()) {
 			if (insertSeparator) {
 				result.append(", ");
 			}
-			result.append(ApplicationResources.getMessage("designer"));
+			result.append(ResourceBundleCache.get("usuario", "diseñador"));
 			insertSeparator = true;
 		}
 		if (this.isAssistant()) {
 			if (insertSeparator) {
 				result.append(", ");
 			}
-			result.append(ApplicationResources.getMessage("assistant"));
+			result.append(ResourceBundleCache.get("usuario", "asistente"));
 			insertSeparator = true;
 		}
 		if (this.isTranslator()) {
 			if (insertSeparator) {
 				result.append(", ");
 			}
-			result.append(ApplicationResources.getMessage("translator"));
+			result.append(ResourceBundleCache.get("usuario", "traductor"));
 			insertSeparator = true;
 		}
 		return result.toString();

@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.tdil.simon.data.ibatis.ResourceBundleDAO;
 import com.tdil.simon.data.model.ResourceBundle;
 
@@ -13,7 +15,12 @@ public class ResourceBundleCache {
 	private static ConcurrentMap<String, String> cache = new ConcurrentHashMap<String, String>();
 	
 	public static String get(String context, String key) {
-		return cache.get(context + "-" + key);
+		String result = cache.get(context + "-" + key);
+		if (result != null) {
+			result = StringUtils.replace(result, "\"", "&apos;");// TODO
+			result = StringUtils.replace(result, "\'", "&apos;");// TODO
+		}
+		return result;
 	}
 	
 	public static void put(String context, String key, String value) {

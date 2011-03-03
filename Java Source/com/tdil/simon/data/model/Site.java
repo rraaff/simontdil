@@ -3,7 +3,7 @@ package com.tdil.simon.data.model;
 import java.sql.SQLException;
 
 import com.tdil.simon.data.ibatis.SiteDAO;
-import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.web.ResourceBundleCache;
 
 /**
  * 
@@ -43,7 +43,7 @@ public class Site extends PersistentObject {
 	}
 	
 	public String getTranslatedStatus(){
-		return ApplicationResources.getMessage("site." + this.getName() + "." + this.getStatus());
+		return ResourceBundleCache.get("site." + this.getName(), this.getStatus());
 	}
 	public void setStatus(String status) {
 		this.status = status;

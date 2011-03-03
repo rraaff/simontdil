@@ -2,7 +2,7 @@ package com.tdil.simon.data.model;
 
 import java.util.Date;
 
-import com.tdil.simon.struts.ApplicationResources;
+import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class Version extends PersistentObject {
@@ -52,7 +52,7 @@ public class Version extends PersistentObject {
 	}
 	
 	public String getTranslatedStatus() {
-		return ApplicationResources.getMessage("version." + this.getStatus());
+		return ResourceBundleCache.get("version", this.getStatus());
 	}
 	
 	public String getStatus() {

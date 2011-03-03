@@ -1,9 +1,10 @@
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
 "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>SIMON - Sistema de modificación de notas</title>
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
@@ -39,7 +40,7 @@ a:active {width: auto;}
 				<td width="30" height="30"></td>
 			</tr>
 			<tr>
-				<td colspan="3" height="10" align="right"><a href="javascript:window.close();">Cerrar Ventana</a></td>
+				<td colspan="3" height="10" align="right"><a href="javascript:window.close();"><%=ResourceBundleCache.get("header", "cerrarVentana")%></a></td>
 			</tr>
 		</table>
 	</div>
