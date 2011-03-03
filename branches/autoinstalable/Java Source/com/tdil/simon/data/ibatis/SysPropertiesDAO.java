@@ -3,7 +3,6 @@ package com.tdil.simon.data.ibatis;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.SysProperties;
 
 public class SysPropertiesDAO {
@@ -16,6 +15,10 @@ public class SysPropertiesDAO {
 	public static String getPropertyByKey(String key) throws SQLException {
 		return (String)IBatisManager.sqlMapper.queryForObject(
 				"selectPropertyByKey", key);
+	}
+	
+	public static void insertProperty(SysProperties sysProperties) throws SQLException {
+		IBatisManager.sqlMapper.insert("insertSysproperty", sysProperties);
 	}
 	
 	public static void updateProperty(SysProperties sysProperties) throws SQLException {

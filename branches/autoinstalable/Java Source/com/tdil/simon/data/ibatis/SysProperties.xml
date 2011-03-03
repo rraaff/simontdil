@@ -24,6 +24,14 @@
     and deleted = 0
   </select>
   
+    <insert id="insertProperty" parameterClass="SysProperties">
+    insert into SYSPROPERTIES (
+      id, propKey, propValue, deleted
+    ) values (
+      #id#, #propKey#, #propValue#, #deleted#
+    )
+  </insert>
+  
   <update id="updateProperty" parameterClass="SysProperties">
     update SYSPROPERTIES set
       propValue = #propValue#

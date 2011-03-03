@@ -12,17 +12,27 @@ import org.apache.commons.io.IOUtils;
 
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.Logo;
+import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.ResourceBundle;
 import com.tdil.simon.data.model.Site;
+import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.data.model.SystemUser;
 
 public class GenerateCleanDatabase {
-
+	
+	private static String emailskeys[] = {"newpassword", "passworreset", "newversion", "newobservation"};
+	private static String emailsFrom[] = {"sejec@cancilleria.gob.ar", "sejec@cancilleria.gob.ar", "sejec@cancilleria.gob.ar" ,"sejec@cancilleria.gob.ar"};
+	private static String emailsTo[] = {"to", "sejec@cancilleria.gob.ar", "sejec@cancilleria.gob.ar", "sejec@cancilleria.gob.ar"};
+	private static String emailsSubject[] = {"Nueva clave de acceso", "Usuario solicito blanqueo de clave", "Nueva version consolidada", "Nueva observacion"};
+	
 	private static String logos[] = { "mails.footer", "footer.png", "mails.header", "header.png",
 			"header.logo", "logo.png", "footer.logoCumbres",
-			"logoCumbres.png", "header.logoCumbresPDFsRTFs", "logoCumbresPDFsRTFs.png", "header.logoHeaderPDFsRTFs",
-			"logoHeaderPDFsRTFs.png", "header.logoSegibPDFsRTFs", "logoSegibPDFsRTFs.png",
-			"header.logoSegundoPDFsRTFs", "logoSegundoPDFsRTFs.png", "others.splashSegib", "splashSegib.png" };
+			"logoCumbres.png", 
+			/*"header.logoCumbresPDFsRTFs", "logoCumbresPDFsRTFs.png", */
+			"header.logoHeaderPDFsRTFs", "logoHeaderPDFsRTFs.png",
+			/*"header.logoSegibPDFsRTFs", "logoSegibPDFsRTFs.png",*/
+			"header.logoSegundoPDFsRTFs", "logoSegundoPDFsRTFs.png", 
+			"others.splashSegib", "splashSegib.png" };
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException, ParseException {
 		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml");
@@ -71,6 +81,45 @@ public class GenerateCleanDatabase {
 			site.setStatus(Site.NORMAL);
 			site.setDeleted(false);
 			SiteDAO.insertSite(site);
+		}
+		
+		String propvalue = SysPropertiesDAO.getPropertyByKey("simon.server.name");
+		if (propvalue == null) {
+			SysProperties sysProperties = new SysProperties();
+			sysProperties.setPropKey("simon.server.name");
+			sysProperties.setPropValue("localhost"); // TODO PARAMETRO COMO EL RESTO
+			sysProperties.setDeleted(false);
+			SysPropertiesDAO.insertProperty(sysProperties);
+		}
+		propvalue = SysPropertiesDAO.getPropertyByKey("simon.tmp.subpath");
+		if (propvalue == null) {
+			SysProperties sysProperties = new SysProperties();
+			sysProperties.setPropKey("simon.tmp.subpath");
+			sysProperties.setPropValue("simon"); // TODO PARAMETRO COMO EL RESTO
+			sysProperties.setDeleted(false);
+			SysPropertiesDAO.insertProperty(sysProperties);
+		}
+		propvalue = SysPropertiesDAO.getPropertyByKey("simon.server.url");
+		if (propvalue == null) {
+			SysProperties sysProperties = new SysProperties();
+			sysProperties.setPropKey("simon.server.url");
+			sysProperties.setPropValue("http://localhost:8180/Simon"); // TODO PARAMETRO COMO EL RESTO
+			sysProperties.setDeleted(false);
+			SysPropertiesDAO.insertProperty(sysProperties);
+		}
+		
+		for (int i = 0; i < 4; i++) {
+			NotificationEmail email = NotificationEmailDAO.getEmail(emailskeys[i]);
+			if (email == null) {
+				email = new NotificationEmail();
+				email.setEmailKey(emailskeys[i]);
+				email.setEmailFrom(emailsFrom[i]);
+				email.setEmailSubject(emailsSubject[i]);
+				email.setEmailText(IOUtils.toString(GenerateCleanDatabase.class.getResourceAsStream(emailskeys[i] + ".txt")));
+				email.setEmailTo(emailsTo[i]);
+				email.setDeleted(false);
+				NotificationEmailDAO.insertEmail(email);
+			}
 		}
 		
 		for (int i = 0; i < logos.length; i+=2) {
