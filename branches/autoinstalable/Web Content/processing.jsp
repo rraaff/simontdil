@@ -39,7 +39,7 @@
 	<div id="content">
 		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center" valign="middle"><img src="images/others/splashSegib.gif" width="500" height="500"><br><br><%=ResourceBundleCache.get("ventana", "actualizandoDatos")%>.</td>
+				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"><br><br><%=ResourceBundleCache.get("ventana", "actualizandoDatos")%>.</td>
 			</tr>
 		</table>
 	</div>
