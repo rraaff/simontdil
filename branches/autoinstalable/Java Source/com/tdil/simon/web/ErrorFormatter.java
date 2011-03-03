@@ -17,7 +17,7 @@ public class ErrorFormatter {
 				for (java.util.Iterator it = ae.get(property); it.hasNext();) {
 					org.apache.struts.action.ActionMessage a = (org.apache.struts.action.ActionMessage) it.next();
 					String key = a.getKey();
-					result.append(key).append("<br/>");
+					result.append(ResourceBundleCache.get("mensajeDeError", key)).append("<br/>");
 				}
 			}
 		}
