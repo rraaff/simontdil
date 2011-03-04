@@ -124,7 +124,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<!-- Si esta en disenio -->
 									<logic:equal name="CreateDocumentForm" property="designer" value="true">
 										<html:submit property="operation">
-											<%=ResourceBundleCache.get(getServletInfo(), "grabarDiseño")%>
+											<%=ResourceBundleCache.get(getServletInfo(), "grabarDisenio")%>
 										</html:submit>
 									</logic:equal>
 								</logic:equal>

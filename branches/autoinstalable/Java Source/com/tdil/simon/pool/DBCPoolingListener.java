@@ -1,6 +1,7 @@
 package com.tdil.simon.pool;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -27,7 +28,7 @@ public class DBCPoolingListener implements ServletContextListener {
 			// Look up our data source
 			DataSource ds = (DataSource) envCtx.lookup("jdbc/SimonDB");
 			DatasourceManager.setDatasource(ds);
-			IBatisManager.init("SqlMapConfig-JNDI.xml");
+			IBatisManager.init("SqlMapConfig-JNDI.xml", new Properties());
 			DelegateSiteCache.refresh();
 			SystemConfig.init();
 		} catch (NamingException e) {

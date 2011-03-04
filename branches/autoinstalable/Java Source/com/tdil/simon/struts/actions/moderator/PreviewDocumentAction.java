@@ -49,7 +49,7 @@ public class PreviewDocumentAction extends SimonAction {
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
-		if (createDocumentForm.isDesigner() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarDiseño"))) {
+		if (createDocumentForm.isDesigner() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarDisenio"))) {
 			//createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			return mapping.findForward("designerHome");
