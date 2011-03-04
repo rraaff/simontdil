@@ -1,35 +1,28 @@
 Imagenes con texto deben volar
-Poner componente de fecha en busqueda de observaciones
+[Queda para la próxima versión] Poner componente de fecha en busqueda de observaciones
 
 Seguir con la aplicacion de resource bundles (falta sacar referencias a ApplicationResources)
-Resource bundle para los errores
-Ver tema de footer
-Ver tema de ayuda.jsp
 
 [Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
 
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
 
 IMAGENES GENÉRICAS
-Web Content\images\footer\logoCumbres.png
-Web Content\images\header\headerInternoCumbre.gif
+Web Content\images\footer\logoCumbres.png X
+Web Content\images\header\headerInternoCumbre.png
 Web Content\images\header\logo.png
 Web Content\images\header\logoCumbresPDFsRTFs.png
 Web Content\images\header\logoHeaderPDFsRTFs.png
 Web Content\images\header\logoSegibPDFsRTFs.png
 Web Content\images\header\logoSegundoPDFsRTFs.png
-Web Content\images\mails\header.png
-Web Content\images\mails\footer.png
-Web Content\images\others\splashSegib.png
+Web Content\images\mails\header.gif
+Web Content\images\mails\footer.gif
+Web Content\images\others\splashSegib.gif
 
 [Queda para la próxima versión] Resource bundle para los errores
 
-Resource bundle de los js
+[Queda para la próxima versión] Resource bundle de los js
 
 [Queda para la próxima versión] Esta comentada la parte de propuesta de parrafo en delegateNegotiation.jsp, deberia activarse?
 
 [Queda para la próxima versión] Los textos en el flash de firma debe ser parametros
-
-Instalador (linux/windows)
-Ver tema de parametros en slqmap
-Ver de meter una imagen pixel null png para el pais para que no se queje
