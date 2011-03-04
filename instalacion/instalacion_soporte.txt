@@ -1,30 +1,28 @@
-Instalacion de Software de Base (Instrucciones para Linux Debian)
+Instalación de Software de Base (Instrucciones para Linux Debian)
 
-Java 1.6
+1) Java 1.6
 
-Instalar java 1.6 con el siguiente comando:
-apt-get install sun-java6-jdk
+1.a) Instalar java 1.6 con el siguiente comando: apt-get install sun-java6-jdk
 
-Setear el JAVA_HOME
+1.b) Setear el JAVA_HOME 
 nano ~/.bashrc
 export JAVA_HOME=/usr/lib/jvm/java-6-sun
 
-Tomcat 6.0
+2) Tomcat 6.0
 
-Descomprimir el tomcat y moverlo a la ubicacion definitiva:
-tar -zxvf apache-tomcat-6.0.32.tar.gz
+2.a) Descomprimir el TOMCAT y moverlo a la ubicación definitiva: 
+ tar -zxvf apache-tomcat-6.0.32.tar.gz
 mv apache-tomcat-6.0.32/ /usr/local/tomcat
 
-Crear el grupo para el usuario tomcat
+2.b) Crear el grupo para el usuario tomcat
 groupadd tomcat
 useradd -g tomcat -d /usr/local/tomcat tomcat
 usermod -G www-data tomcat
 
-Ahora creamos un script en /etc/init.d
+2.c) Crear un script en /etc/init.d
 nano /etc/init.d/tomcat
 
-Setear el siguiente contenido y salvarlo:
-
+2.d)Configurar el siguiente contenido y salvarlo:
 # Tomcat auto-start
 # description: Auto-starts tomcat
 # processname: tomcat
@@ -44,21 +42,17 @@ restart)
 esac   
 exit 0
 
-Después debemos dar permisos de ejecución a ese script, con el siguiente comando:
+2.e) Dar permisos de ejecución al script del punto 2.d, con el siguiente comando:
 chmod 775 /etc/init.d/tomcat
 
-Agregarlo para auto-start en arranque
-
+2.f) Agregarlo para auto-start en arranque
 update-rc.d tomcat defaults
+Este script permitirá una vez terminada la configuración poder iniciar, parar o reiniciar el servicio, ejecutando los comandos: /etc/init.d/ start/stop/restart
 
-Este script permitira una vez terminada la configuración poder iniciar, parar o reiniciar el servicio, ejecutando el tipico /etc/init.d/ start/stop/restart
+3) MySQLConnector
 
-MySQLConnector
-
-Copiar el archivo mysql-connector-java-5.1.13-bin.jar al directorio lib/ext de donde se haya instalado java, por ejemplo:
+3.a) Copiar el archivo mysql-connector-java-5.1.13-bin.jar al directorio lib/ext donde se encuentre instalado java, por ejemplo:
 /usr/lib/jvm/java-6-sun-1.6.0.22/jre/lib/ext/
 
-MySQL
-
-Si no se tiene un mysql disonible se puede instalar con el siguiente comando:
-apt-get install mysql-server
+3.b) MySQL
+Si no se tiene un mysql disonible se puede instalar con el siguiente comando: apt-get install mysql-server

@@ -1,12 +1,12 @@
-Instalacion Simon
+Instalación Simón  para LINUX
 
-1) Creacion de base para Simon
-Ejecutar la instalacion con el siguiente comando:
-java -jar simon_install.jar y seguir las instrucciones.
-Esto generara un file en el directorio home del usuario que lo haya ejecutado con
-un ejemplo de como se debera modificar el archivo server.xml en el paso que sigue.
+1) Creación de base para Simón
+Ejecutar la instalación con el siguiente comando y seguir las instrucciones: java -jar simon_install.jar
+Esto generara un archivo en el directorio home del usuario que lo haya ejecutado con un ejemplo de cómo se deberá modificar el archivo server.xml en el paso que sigue.
 
-2) Modificacion del server.xml del tomcat para que tome el nuevo war con sus recursos
-Usar el archivo generado en el paso annterior.
+2) Modificación del server.xml del TOMCAT para que tome el nuevo war con sus recursos.
+Usar el archivo generado en el paso anterior.
 
-3) Descomprimir el war Simon_WEB.war en el directorio de webapps del tomcat
+3) Descomprimir el war (Simon_WEB.war) en el directorio de webapps del TOMCAT.
+
+FIN
