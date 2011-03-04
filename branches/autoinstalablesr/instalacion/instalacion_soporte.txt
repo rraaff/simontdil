@@ -1,0 +1,64 @@
+Instalacion de Software de Base (Instrucciones para Linux Debian)
+
+Java 1.6
+
+Instalar java 1.6 con el siguiente comando:
+apt-get install sun-java6-jdk
+
+Setear el JAVA_HOME
+nano ~/.bashrc
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+
+Tomcat 6.0
+
+Descomprimir el tomcat y moverlo a la ubicacion definitiva:
+tar -zxvf apache-tomcat-6.0.32.tar.gz
+mv apache-tomcat-6.0.32/ /usr/local/tomcat
+
+Crear el grupo para el usuario tomcat
+groupadd tomcat
+useradd -g tomcat -d /usr/local/tomcat tomcat
+usermod -G www-data tomcat
+
+Ahora creamos un script en /etc/init.d
+nano /etc/init.d/tomcat
+
+Setear el siguiente contenido y salvarlo:
+
+# Tomcat auto-start
+# description: Auto-starts tomcat
+# processname: tomcat
+# pidfile: /var/run/tomcat.pid
+export JAVA_HOME=/usr/lib/jvm/java-6-sun
+case $1 in
+start)
+  sh /usr/local/tomcat/bin/startup.sh
+  ;;
+stop)  
+  sh /usr/local/tomcat/bin/shutdown.sh
+  ;;
+restart)
+  sh /usr/local/tomcat/bin/shutdown.sh
+  sh /usr/local/tomcat/bin/startup.sh
+  ;;
+esac   
+exit 0
+
+Después debemos dar permisos de ejecución a ese script, con el siguiente comando:
+chmod 775 /etc/init.d/tomcat
+
+Agregarlo para auto-start en arranque
+
+update-rc.d tomcat defaults
+
+Este script permitira una vez terminada la configuración poder iniciar, parar o reiniciar el servicio, ejecutando el tipico /etc/init.d/ start/stop/restart
+
+MySQLConnector
+
+Copiar el archivo mysql-connector-java-5.1.13-bin.jar al directorio lib/ext de donde se haya instalado java, por ejemplo:
+/usr/lib/jvm/java-6-sun-1.6.0.22/jre/lib/ext/
+
+MySQL
+
+Si no se tiene un mysql disonible se puede instalar con el siguiente comando:
+apt-get install mysql-server
