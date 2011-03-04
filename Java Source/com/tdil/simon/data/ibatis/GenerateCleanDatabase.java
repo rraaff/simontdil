@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.Properties;
 
 import org.apache.commons.io.IOUtils;
 
@@ -17,6 +18,7 @@ import com.tdil.simon.data.model.ResourceBundle;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.utils.CryptoUtils;
 
 public class GenerateCleanDatabase {
 	
@@ -35,16 +37,32 @@ public class GenerateCleanDatabase {
 			"others.splashSegib", "splashSegib.png" };
 
 	public static void main(String[] args) throws SQLException, FileNotFoundException, IOException, ParseException {
-		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml");
+		createDataInDatabase("jdbc:mysql://localhost:3306/SIMON", "SIMON_USER", "SIMON_USER", "Argentina", "Admin", "simon");
+	}
+	
+	public static void createDataInDatabase(String connectionURL, String dbUser, String dbPassword, String countryHost, String adminPassword, 
+			String subpath) throws SQLException, IOException {
+		Properties p = new Properties(); 
+		p.setProperty("connectionURL", connectionURL);
+		p.setProperty("username", dbUser);  
+		p.setProperty("password", dbPassword);
+			  
+		IBatisManager.init("SqlMapConfig-JDBC-MYSQL.xml", p);
 		IBatisManager.sqlMapper.startTransaction();
 		// Create country default
-		Country c = CountryDAO.getCountry("Argentina");
+		Country c = CountryDAO.getCountryHost();
+		int countryId;
+		String countryDesc;
 		if (c == null) {
 			Country argentina = new Country();
-			argentina.setName("Argentina");
+			argentina.setName(countryHost);
 			argentina.setHost(true);
 			argentina.setDeleted(false);
-			CountryDAO.insertCountry(argentina);
+			countryId = CountryDAO.insertCountry(argentina);
+			countryDesc = countryHost;
+		} else {
+			countryId = c.getId();
+			countryDesc = c.getName();
 		}
 		// Create admin user
 		SystemUser sysUser = SystemUserDAO.getUser("Admin");
@@ -52,8 +70,10 @@ public class GenerateCleanDatabase {
 			sysUser = new SystemUser();
 			sysUser.setName("Admin");
 			sysUser.setAdministrator(true);
+			sysUser.setCountryId(countryId);
+			sysUser.setCountryDesc(countryDesc);
 			sysUser.setUsername("Admin");
-			sysUser.setPassword("Admin");
+			sysUser.setPassword(CryptoUtils.getHashedValue(adminPassword));
 			sysUser.setDeleted(false);
 			SystemUserDAO.insertUser(sysUser);
 		}
@@ -87,7 +107,7 @@ public class GenerateCleanDatabase {
 		if (propvalue == null) {
 			SysProperties sysProperties = new SysProperties();
 			sysProperties.setPropKey("simon.server.name");
-			sysProperties.setPropValue("localhost"); // TODO PARAMETRO COMO EL RESTO
+			sysProperties.setPropValue("localhost");
 			sysProperties.setDeleted(false);
 			SysPropertiesDAO.insertProperty(sysProperties);
 		}
@@ -95,7 +115,7 @@ public class GenerateCleanDatabase {
 		if (propvalue == null) {
 			SysProperties sysProperties = new SysProperties();
 			sysProperties.setPropKey("simon.tmp.subpath");
-			sysProperties.setPropValue("simon"); // TODO PARAMETRO COMO EL RESTO
+			sysProperties.setPropValue(subpath);
 			sysProperties.setDeleted(false);
 			SysPropertiesDAO.insertProperty(sysProperties);
 		}

@@ -53,7 +53,7 @@ public class UserVO extends SystemUser {
 			if (insertSeparator) {
 				result.append(", ");
 			}
-			result.append(ResourceBundleCache.get("usuario", "diseñador"));
+			result.append(ResourceBundleCache.get("usuario", "diseniador"));
 			insertSeparator = true;
 		}
 		if (this.isAssistant()) {

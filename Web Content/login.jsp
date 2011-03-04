@@ -35,7 +35,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "contraseña")%>:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "contrasenia")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td><html:password name="LoginForm" property="password" styleClass="textfield_effect"/></td>
 							</tr>
@@ -67,7 +67,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<!--tr>
-								<td colspan="3" align="center"><%=ResourceBundleCache.get(getServletInfo(), "pedirNuevaContraseña")%></td>
+								<td colspan="3" align="center"><%=ResourceBundleCache.get(getServletInfo(), "pedirNuevaContrasenia")%></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
@@ -77,7 +77,7 @@
 									<jsp:include page="./includes/button.jsp">
 											<jsp:param name="_form" value="LoginForm" />
 											<jsp:param name="_context" value="login" />
-											<jsp:param name="_key" value="pedirNuevaContraseña" />
+											<jsp:param name="_key" value="pedirNuevaContrasenia" />
 									</jsp:include>
 								</td>
 							</tr-->

@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Properties;
 
 import org.apache.log4j.Logger;
 
@@ -25,10 +26,10 @@ public class IBatisManager {
 		return LoggerProvider.getLogger(IBatisManager.class);
 	}
 	
-	public synchronized static void init(String configName) {
+	public synchronized static void init(String configName, Properties properties) {
 		try {
 			Reader reader = Resources.getResourceAsReader("com/tdil/simon/data/ibatis/" + configName);
-			sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader);
+			sqlMapper = SqlMapClientBuilder.buildSqlMapClient(reader, properties);
 			reader.close();
 		} catch (IOException e) {
 			getLog().error(e.getMessage(), e);

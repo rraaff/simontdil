@@ -59,7 +59,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "nuevaContraseña")%>:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "nuevaContrasenia")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="newPassword" styleClass="textfield_effect"/></td>
 							</tr>
@@ -67,7 +67,7 @@
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "repetirNuevaContraseña")%>:</td>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "repetirNuevaContrasenia")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:password name="ChangePassword" property="retypeNewPassword" styleClass="textfield_effect"/></td>
 							</tr>

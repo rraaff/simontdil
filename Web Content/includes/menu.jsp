@@ -11,8 +11,8 @@
 			<% if (isAdministrator) { %>
 			<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "administracionDeSistema")%></a>
 				<ul>
-					<li><html:link action="/editEmail?id=newpassword" ><%=ResourceBundleCache.get("menu", "emailNuevaContraseña")%></html:link></li>
-					<li><html:link action="/editEmail?id=passworreset" ><%=ResourceBundleCache.get("menu", "emailBlanqueoDeContraseña")%></html:link></li>
+					<li><html:link action="/editEmail?id=newpassword" ><%=ResourceBundleCache.get("menu", "emailNuevaContrasenia")%></html:link></li>
+					<li><html:link action="/editEmail?id=passworreset" ><%=ResourceBundleCache.get("menu", "emailBlanqueoDeContrasenia")%></html:link></li>
 					<li><html:link action="/editEmail?id=newversion" ><%=ResourceBundleCache.get("menu", "emailNuevaVersion")%></html:link></li>
 					<li><html:link action="/editEmail?id=newobservation" ><%=ResourceBundleCache.get("menu", "emailNuevaObservacion")%></html:link></li>
 					<li><html:link action="/editProperty?id=simon.server.name" ><%=ResourceBundleCache.get("menu", "nombreServidor")%></html:link></li>
@@ -28,10 +28,11 @@
 					<li><html:link action="/goToCountryABM" ><%=ResourceBundleCache.get("menu", "administrarDelegaciones")%></html:link></li>
 					<li><html:link action="/goToDelegateABM" ><%=ResourceBundleCache.get("menu", "administrarDelegados")%></html:link></li>
 					<li><html:link action="/goToSystemUserABM" ><%=ResourceBundleCache.get("menu", "administrarUsuarios")%></html:link></li>
-					<li><html:link action="/goToResetPassword" ><%=ResourceBundleCache.get("menu", "blanqueoDeContraseñas")%></html:link></li>
+					<li><html:link action="/goToResetPassword" ><%=ResourceBundleCache.get("menu", "blanqueoDeClaves")%></html:link></li>
 				</ul>
 			</li>
 			<% } %>
+			<% if (isModerator) { %>
 			<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "administracionDeDocumentos")%></a>
 				<ul>
 					<li><html:link action="/goToModeratorHome" ><%=ResourceBundleCache.get("menu", "inicioDocumentos")%></html:link></li>
@@ -42,10 +43,11 @@
 					<li><html:link action="/goToDelegateStats" ><%=ResourceBundleCache.get("menu", "panelDeControl")%></html:link></li>
 				</ul>
 			</li>
+			<% } %>
 			<% if (isDesigner) { %>
-			<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "diseñador")%></a>
+			<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "diseniador")%></a>
 				<ul>
-					<li><html:link action="/goToListDocumentForDesign" ><%=ResourceBundleCache.get("menu", "homeDiseñador")%></html:link></li>
+					<li><html:link action="/goToListDocumentForDesign" ><%=ResourceBundleCache.get("menu", "homeDiseniador")%></html:link></li>
 				</ul>
 			</li>
 			<% } %>

@@ -99,7 +99,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="designer"/></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
-								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "diseñador")%> <html:errors property="systemuser.administrator" /></td>
+								<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "diseniador")%> <html:errors property="systemuser.administrator" /></td>
 							</tr>
 							<tr>
 								<td height="24" align="right"><html:checkbox name="SystemUserABM" property="assistant"/></td>

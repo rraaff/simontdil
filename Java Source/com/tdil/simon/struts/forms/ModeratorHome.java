@@ -58,7 +58,7 @@ public class ModeratorHome extends ActionForm {
 	}
 
 	public void init() throws SQLException {
-		if (this.getLoggedUser().isModerator()) {
+		if (this.getLoggedUser().isModerator() || this.getLoggedUser().isAdministrator()) {
 			setTypeOne(VersionDAO.selectPrincipalVersion(true, false));
 			setTypeTwo(VersionDAO.selectPrincipalVersion(false, true));
 			setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome());
@@ -79,7 +79,7 @@ public class ModeratorHome extends ActionForm {
 				} else {
 					setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome(this.getLoggedUser().isTypeOne(), this.getLoggedUser().isTypeTwo()));
 				}
-			}
+			} 
 		}
 		setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome());
 	}
