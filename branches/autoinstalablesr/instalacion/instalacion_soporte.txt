@@ -49,10 +49,10 @@ chmod 775 /etc/init.d/tomcat
 update-rc.d tomcat defaults
 Este script permitirá una vez terminada la configuración poder iniciar, parar o reiniciar el servicio, ejecutando los comandos: /etc/init.d/ start/stop/restart
 
-3) MySQLConnector
+3) MySQL
 
 3.a) Copiar el archivo mysql-connector-java-5.1.13-bin.jar al directorio lib/ext donde se encuentre instalado java, por ejemplo:
 /usr/lib/jvm/java-6-sun-1.6.0.22/jre/lib/ext/
 
 3.b) MySQL
-Si no se tiene un mysql disonible se puede instalar con el siguiente comando: apt-get install mysql-server
+Si no se tiene un mysql disponible se puede instalar con el siguiente comando: apt-get install mysql-server

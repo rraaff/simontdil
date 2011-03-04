@@ -1,4 +1,4 @@
-Instalación Simón  para LINUX
+Instalación Simón
 
 1) Creación de base para Simón
 Ejecutar la instalación con el siguiente comando y seguir las instrucciones: java -jar simon_install.jar
