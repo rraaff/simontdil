@@ -46,7 +46,7 @@ a:active {width: auto;}
 				<td width="460" align="right"><%=ResourceBundleCache.get("header", "usuario")%>: <span class="userLogged"><%= user.getName() %></span></td>
 				<td width="10"><img src="images/null.gif" width="10" height="1"></td>
 				<td width="30" height="30"><img src="./download.do?action=flag&fileId=<%=user.getCountryId()%>" width="30" height="30"></td>
-				<td><div id="siteSeccion"><img src="images/header/zonaRestringida.gif" alt="Zona Restringida" width="168" height="60"></div></td>
+				<td><div id="siteSeccion"><img src="images/header/zonaRestringida.png" alt="Zona Restringida" width="168" height="60"></div></td>
 			</tr>
 			<tr>
 				<td colspan="4" height="10" align="right"><html:link action="/logout" ><%=ResourceBundleCache.get("header", "salir")%></html:link><!-- - <a href="ayuda.jsp">Ayuda</a--></td>

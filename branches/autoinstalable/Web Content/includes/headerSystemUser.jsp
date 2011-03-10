@@ -55,16 +55,16 @@ input.date {
 				<td rowspan="2" align="right" valign="bottom">
 					<% 	if(eventMode) { %>
 						<% 	if(inNegotiation) { %>
-							<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación y negociando -->
+							<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación y negociando -->
 						<% } else { %>
 							<% 	if(isSign) { %>
-								<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación firmando -->
+								<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación firmando -->
 							<% } else { %>
-								<img src="images/header/modoNegociacionDelegados.gif" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
+								<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
 							<% } %>
 						<% } %>
 					<% } else { %>
-						<img src="images/header/administradorModerador.gif" width="187" height="50">
+						<img src="images/header/administradorModerador.png" width="187" height="50">
 					<% } %>
 				</td>
 			</tr>

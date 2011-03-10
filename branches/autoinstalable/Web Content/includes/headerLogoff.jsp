@@ -34,6 +34,6 @@
 <div id="header">
 	<div id="logo"><img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></div>
 	<div id="blockinHeader"></div>
-	<div id="siteSeccion"><img src="images/header/zonaRestringida.gif" width="168" height="60"></div>
+	<div id="siteSeccion"><img src="images/header/zonaRestringida.png" width="168" height="60"></div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="10" height="5"></div>
 </div>
