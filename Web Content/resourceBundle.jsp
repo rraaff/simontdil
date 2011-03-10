@@ -36,9 +36,9 @@ window.addEvent('domready', function() {
 		//add double-click and blur events
 		el.addEvent('dblclick',function() {
 			//store "before" message
-			var before = el.get('html').trim();
+			var before = el.get('text').trim();
 			//erase current
-			el.set('html','');
+			el.set('text','');
 			//replace current text/content with input or textarea element
 			if(el.hasClass('textarea'))
 			{

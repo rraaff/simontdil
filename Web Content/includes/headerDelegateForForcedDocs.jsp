@@ -44,6 +44,6 @@ a:active {width: auto;}
 			</tr>
 		</table>
 	</div>
-	<div id="siteSeccion"><img src="images/header/zonaRestringida.gif" alt="Zona Restringida" width="168" height="60"></div>
+	<div id="siteSeccion"><img src="images/header/zonaRestringida.png" alt="Zona Restringida" width="168" height="60"></div>
 	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
 </div>
