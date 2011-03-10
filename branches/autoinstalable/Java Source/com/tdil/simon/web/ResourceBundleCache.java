@@ -17,8 +17,10 @@ public class ResourceBundleCache {
 	public static String get(String context, String key) {
 		String result = cache.get(context + "-" + key);
 		if (result != null) {
-			result = StringUtils.replace(result, "\"", "&apos;");// TODO
-			result = StringUtils.replace(result, "\'", "&apos;");// TODO
+			result = StringUtils.replace(result, "\"", "&apos;");
+			result = StringUtils.replace(result, "\'", "&apos;");
+			result = StringUtils.replace(result, "<", "&lt;");
+			result = StringUtils.replace(result, ">", "&gt;");
 		}
 		return result;
 	}
