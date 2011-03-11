@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReferenceDocument">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="ReferenceDocument" type="com.tdil.simon.data.model.ReferenceDocument"/>
+  <typeAlias alias="ReferenceDocumentVO" type="com.tdil.simon.data.valueobjects.ReferenceDocumentVO"/>
+  
+  <resultMap class="ReferenceDocument" id="ReferenceDocumentWithDocument">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="categoryId" property="categoryId" />
+   <result column="title" property="title" />
+   <result column="fileName" property="fileName" />
+   <result column="extension" property="extension" />
+   <result column="contentType" property="contentType" />
+   <result column="document" property="document" jdbcType="BLOB"/>
+   </resultMap>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
+    from REFERENCEDOCUMENT, CATEGORY
+    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
+    order by title
+  </select>
+  
+  <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
+    from REFERENCEDOCUMENT, CATEGORY
+    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
+    and REFERENCEDOCUMENT.deleted = 0
+    and CATEGORY.deleted = 0
+    order by CATEGORY.name, REFERENCEDOCUMENT.title
+  </select>
+  
+  <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocument">
+    select *
+   	from REFERENCEDOCUMENT, CATEGORY 
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	order by REFERENCEDOCUMENT.id desc
+   	LIMIT 11
+  </select>
+  
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeNoLimit" resultClass="ReferenceDocument">
+    select *
+   	from REFERENCEDOCUMENT, CATEGORY 
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	order by REFERENCEDOCUMENT.id desc
+  </select>
+  
+  <select id="selectAllReferenceDocumentsNotDeletedForCategory" parameterClass="int" resultClass="ReferenceDocument">
+    select *
+   	from REFERENCEDOCUMENT 
+   	WHERE deleted = 0
+   	and categoryId = #id#
+   	order by title
+  </select>
+  
+  <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where id = #id#
+  </select>
+  
+  <select id="selectReferenceDocumentByIdWithDocument" parameterClass="int" resultMap="ReferenceDocumentWithDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where id = #id#
+  </select>
+  
+  <select id="selectReferenceDocumentByTitle" parameterClass="java.lang.String" resultClass="ReferenceDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where title = #title#
+  </select>
+ 
+  <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
+    insert into REFERENCEDOCUMENT (
+      id, categoryId, title, fileName, extension, contentType, document, deleted
+    ) values (
+      #id#, #categoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #deleted#
+    )
+    <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+  
+  
+  <update id="updateReferenceDocument" parameterClass="ReferenceDocument">
+    update REFERENCEDOCUMENT set
+    	categoryId = #categoryId#,
+      title = #title#,
+      fileName = #fileName#,
+      extension = #extension#,
+      deleted = #deleted#,
+      contentType = #contentType#
+    where
+      ID = #id#
+  </update>
+
+  <update id="logDeleteReferenceDocument" parameterClass="ReferenceDocument">
+    update REFERENCEDOCUMENT set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
+
+</sqlMap>

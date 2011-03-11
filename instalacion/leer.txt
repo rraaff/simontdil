@@ -1,0 +1,9 @@
+Pablo:
+
+Lo primero que tenes que hacer es bajar los siguientes files y ponerlos en el directorio win32:
+1) jdk-6u21-windows-i586.exe 
+	te lo bajas de http://www.oracle.com/technetwork/java/javase/downloads/jdk6-jsp-136632.html 
+	eligiendo como plataforma windows
+2) mysql-5.5.9-win32.msi
+	te lo bajas de http://dev.mysql.com/downloads/mysql/#downloads eligiendo como plataforma Microsoft 
+	Windows y el file Windows (x86, 32-bit), MSI Installer

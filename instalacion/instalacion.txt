@@ -1,0 +1,39 @@
+Instalacion de Simon
+
+Se proveen dos instaladores, uno para windows 32 y otro para linux (ubuntu/debian).
+
+Instalacion en Windows
+
+La instalacion en Windows se ejecuta mediante el bat que se encuentra en win32/instalar.bat.
+Se debe abrir un cmd y ejecutar el bat desde el directorio win32.
+La instalacion es completamente automatica, y usa parametros definidos al comienzo del archivo, 
+los cuales pueden ser modificados (por ejemplo, el password del usuario root de mysql).
+El parametro dest_drive identifica el drive de instalacion, es decir, una sola letra: C por ejemplo.
+Al finalizar deja en el directorio de instalacion c:/simon un archivo con datos de como levantar 
+el tomcat.
+La instalacion por defecto instala simon en el path c:/simon.
+El password del usuario root de mysql es root.
+La base de datos para simon es SIMON.
+El usuario y password es SIMON_USER.
+El tomcat queda instalado en c:/simon/apache-tomcat-6.0.32.
+El usuario de simon es Admin y su password es Admin.
+
+Instalacion en Linux
+
+La instalacion en Linux se ejecuta mediante el sh que se encuentra en linux/instalar.sh y debera 
+ser ejecutada por un usuario administrador (ya que muchas de los comandos se ejecutan con sudo).
+Se debe abrir un terminal y ejecutar el sh desde el directorio linux.
+La instalacion de java y mysql requiere que el usuario acepte la instalacion de los mismos (escribiendo Y).
+Adicionalmente la instalacion de mysql requiere que el usario ingrese el password del usuario root, el cual
+debera volver a ser ingresado cuando el instalador lo requiera mediante la pregunta Ingrese el password del
+usuario root de mysql.
+Se usan parametros definidos despues de la parte que dice Parametros que pueden ser modificados.
+El parametro dest_drive identifica el path de instalacion, el default es /usr/local.
+Al igual que en la version Windows, dichos parametros pueden ser modificados.
+Al finalizar deja en el directorio de instalacion /usr/local/simon un archivo con datos de como levantar 
+el tomcat.
+La instalacion por defecto instala simon en el path /usr/local//simon.
+La base de datos para simon es SIMON.
+El usuario y password es SIMON_USER.
+El tomcat queda instalado en /usr/local/simon/apache-tomcat-6.0.32.
+El usuario de simon es Admin y su password es Admin.

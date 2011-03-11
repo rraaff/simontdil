@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DelegateAudit">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="DelegateAudit" type="com.tdil.simon.data.model.DelegateAudit"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllAudit" resultClass="DelegateAudit">
+    select *
+    from DELEGATEAUDIT
+  </select>
+  
+  <select id="selectLastLogins" resultClass="com.tdil.simon.data.valueobjects.LastLoginVO">
+    select MAX(creationDate) as lastLogin,
+    DELEGATEAUDIT.countryId as countryId,
+    (SELECT name from COUNTRY WHERE ID = DELEGATEAUDIT.countryId) as country
+    from DELEGATEAUDIT
+ 	where actionId = 0
+ 	group by countryId
+  </select>
+  
+  <select id="selectVersionStats" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ReadDownloadVersionStat">
+  	 SELECT DELEGATEAUDIT.countryId as countryId, COUNTRY.name as countryName,
+	    min(DELEGATEAUDIT.actionId) as minAction, max(DELEGATEAUDIT.actionId) as maxAction
+		FROM DELEGATEAUDIT, COUNTRY
+		WHERE DELEGATEAUDIT.objectId = #id#
+		AND DELEGATEAUDIT.countryId = COUNTRY.id
+		AND (DELEGATEAUDIT.actionId = 1 OR DELEGATEAUDIT.actionId = 3)
+		GROUP BY DELEGATEAUDIT.countryId, COUNTRY.name
+	</select>
+	
+	<select id="selectObservationStats" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.ObservationStatisticsRaw">
+	select OBSERVATION.id as observationId, OBSERVATION.creationDate as creationDate, COUNTRY.id as countryId, COUNTRY.name as countryName, 
+    min(DELEGATEAUDIT.actionId) as minAction, max(DELEGATEAUDIT.actionId) as maxAction
+	from PARAGRAPH, OBSERVATION, DELEGATEAUDIT, COUNTRY
+	where PARAGRAPH.versionId = #id#
+	and PARAGRAPH.id = OBSERVATION.paragraphId
+	and OBSERVATION.id = DELEGATEAUDIT.objectId
+	and DELEGATEAUDIT.countryId = COUNTRY.id
+	AND (DELEGATEAUDIT.actionId = 2 OR DELEGATEAUDIT.actionId = 4)
+	and OBSERVATION.deleted = 0
+	group by OBSERVATION.id, OBSERVATION.creationDate, COUNTRY.id, COUNTRY.name
+	order by OBSERVATION.id
+	</select>
+	
+
+  <insert id="insertAudit" parameterClass="DelegateAudit">
+    insert into DELEGATEAUDIT (
+      id, delegateId, countryId, objectId, creationDate, actionId, deleted
+    ) values (
+      #id#, #delegateId#, #countryId#, #objectId#, #creationDate#, #actionId#, #deleted#
+    )
+  </insert>
+
+</sqlMap>
