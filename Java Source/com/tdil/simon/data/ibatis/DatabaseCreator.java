@@ -196,7 +196,7 @@ public class DatabaseCreator {
 		context.append("</Context>\n\n");
 		File file = new File(installationPath+"/simon/apache-tomcat-6.0.32/bin/setclasspath.bat");
 		if (!file.exists()) {
-			System.out.println("ERROR: El path de instalacion es invalido\n");
+			System.out.println("ERROR: El path de instalacion es invalido. NO se pudo encontrar el archivo: "+installationPath+"/simon/apache-tomcat-6.0.32/bin/setclasspath.bat\n");
 			System.out.println("La instalacion ha fallado\n");
 			System.exit(-1);
 		} else {

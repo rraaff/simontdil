@@ -179,7 +179,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="username" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="systemPermissionsString" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="systemPermissionsString" filter="false" /></td>
 											<td><logic:equal name="iterUser" property="deleted" value="true"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal></td>
 											<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
