@@ -1,0 +1,48 @@
+<style type="text/css">
+<!--
+.fontMail{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color:#666666;
+	text-decoration: none;
+}
+.fontMail a, .fontMail a:hover{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight:bold;
+	color:#666666;
+	text-decoration: none;
+}
+-->
+</style>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#E6E6E6">
+	<tr>
+		<td align="center">
+			<table width="650" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
+				<tr>
+					<td width="650" colspan="5"><img src="{SERVER}/download.do?action=logo&fileId=mails.header" width="650" height="167"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
+					<td width="604" align="left" valign="top" class="fontMail"><p>Estimado <B>{FULLNAME}</B>,</p>
+					<p>La delegación de <B>{DELEGATION}</B>, ha creado una nueva observación al párrafo número <B>{PARAGRAPH}</B>, del documento: <B>{DOCUMENT_TITLE}</B>.</p>
+					<p>Para ingresar al sitio utilice el siguiente enlace:</p>
+					<p align="center"><a href="{SERVER}/index.jsp" target="_blank"><img src="{SERVER}/images/mails/botonIngresarAlSitio.gif" width="106" height="24" border="0"></a></p>
+					<p>Ante cualquier consulta o dificultad, comuníquese con la Mesa de Ayuda de la Cancillería Argentina Correo electrónico: <a href="ayuda@xxcumbreiberoamericana.mrecic.gov.ar">ayuda@xxcumbreiberoamericana.mrecic.gov.ar</a>.<br />
+					Telef&oacute;nos (+54 11) 4819 7658</p></td>
+					<td width="22"><img src="{SERVER}/images/null.gif" width="22" height="1"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+					<td colspan="3" height="20"><img src="{SERVER}/images/null.gif" width="10" height="20"></td>
+					<td width="1" bgcolor="#666666"><img src="{SERVER}/images/null.gif" width="1" height="1"></td>
+				</tr>
+				<tr>
+					<td colspan="5"><img src="{SERVER}/download.do?action=logo&fileId=mails.footer" width="650" height="84"></td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
