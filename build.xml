@@ -1,6 +1,9 @@
 <project name="Simon" default="makeWar" basedir=".">
 	
 	<target name="makeWar">
-		<war destfile="/home/mgodoy/Simon_WEB.war" basedir="../Simon_WEB/Web Content/" webxml="../Simon_WEB/Web Content/WEB-INF/web.xml"></war>
+		<war destfile="/home/mgodoy/Simon_WEB.war" basedir="../Simon_WEB/" webxml="../Simon_WEB/Web Content/WEB-INF/web.xml"></war>
+		<unwar src="/home/mgodoy/Simon_WEB.war" dest="/home/mgodoy/Simon_WEB/" overwrite="true"/>
+		<delete file="/home/mgodoy/Simon_WEB.war"></delete>
+		<delete dir="/home/mgodoy/Simon_WEB/WEB-INF"></delete>
 	</target>
 </project>
