@@ -7,18 +7,6 @@ Seguir con la aplicacion de resource bundles (falta sacar referencias a Applicat
 
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
 
-IMAGENES GENÉRICAS
-Web Content\images\footer\logoCumbres.png X
-Web Content\images\header\headerInternoCumbre.png
-Web Content\images\header\logo.png
-Web Content\images\header\logoCumbresPDFsRTFs.png
-Web Content\images\header\logoHeaderPDFsRTFs.png
-Web Content\images\header\logoSegibPDFsRTFs.png
-Web Content\images\header\logoSegundoPDFsRTFs.png
-Web Content\images\mails\header.gif
-Web Content\images\mails\footer.gif
-Web Content\images\others\splashSegib.gif
-
 [Queda para la próxima versión] Resource bundle para los errores
 
 [Queda para la próxima versión] Resource bundle de los js
