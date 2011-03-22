@@ -7,8 +7,6 @@ Seguir con la aplicacion de resource bundles (falta sacar referencias a Applicat
 
 Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
 
-[Queda para la próxima versión] Resource bundle para los errores
-
 [Queda para la próxima versión] Resource bundle de los js
 
 [Queda para la próxima versión] Esta comentada la parte de propuesta de parrafo en delegateNegotiation.jsp, deberia activarse?
