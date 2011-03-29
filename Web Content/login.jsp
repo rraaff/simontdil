@@ -61,7 +61,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" align="center"><span class="errorText"><html:errors property="general" /></span></td>
+								<td colspan="3" align="center"><span class="errorText"><%=com.tdil.simon.web.ErrorFormatter.getErrorFrom(request, "general")%></span></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

@@ -18,6 +18,7 @@ import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.valueobjects.CountryVO;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
 
@@ -68,7 +69,7 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 		this.setAllCountries(CountryDAO.selectAllCountriesVO());
 	}
 	public String getOperation() {
-		return operation;
+		return StringUtils.notNullValueOf(operation);
 	}
 	public void setOperation(String operation) {
 		this.operation = operation;

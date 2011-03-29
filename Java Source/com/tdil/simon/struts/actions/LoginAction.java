@@ -6,10 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionErrors;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessages;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
@@ -71,9 +71,16 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				}
 				return mapping.findForward("success");
 			} catch (ValidationException e) {
-				ActionErrors errors = new ActionErrors();
-				errors.add(e.asMessages());
-				addErrors(request, errors);
+				ValidationError error = e.getError();
+				ActionMessages msg = error.asMessages();
+				if (msg != null) {
+					request.setAttribute("hasError", "true");
+					addMessages(request, msg);
+				}
+				ActionMessages errors = error.asActionsErrors();
+				if (errors != null) {
+					addErrors(request, errors);	
+				}
 				return mapping.findForward("failure");
 			}
 		}

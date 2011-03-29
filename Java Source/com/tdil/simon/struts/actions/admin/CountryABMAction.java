@@ -73,6 +73,28 @@ public class CountryABMAction extends ABMAction {
 				return mapping.findForward("continue");
 			}
 		}
+		if (isIndexedOperation(request, "botones", "desactivar")) {
+			ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
+				public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
+					CountryABMForm countryABMForm = (CountryABMForm)form;
+					ValidationError error = countryABMForm.delete(getIndexClicked(request));
+					if (error != null && error.hasError()) {
+						return error;
+					} else {
+						countryABMForm.init();
+						return null;
+					}
+				}
+
+			}, countryABMForm);
+			if (error != null && error.hasError()) {
+				return redirectToFailure(error, request, mapping);
+			} else {
+				// desloguear si hay alguien logueado con un pais borrado
+				Set<Integer> deletedCountries = countryABMForm.getDeletedCountries();
+				LogOnceListener.logoutDelegatesFor(deletedCountries);
+			}
+		}
 		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			countryABMForm.reset();
 		}
@@ -83,6 +105,20 @@ public class CountryABMAction extends ABMAction {
 		return mapping.findForward("continue");
 	}
 
+	protected boolean isIndexedOperation(final HttpServletRequest request, String context, String key) {
+		String op = request.getParameter("indexOperation");
+		if (op == null || op.length() == 0) {
+			return false;
+		}
+		return op.equals(ResourceBundleCache.get(context, key));
+	}
+	protected int getIndexClicked(final HttpServletRequest request) {
+		return Integer.parseInt(request.getParameter("indexClicked"));
+	}
+	protected String getParamClicked(final HttpServletRequest request) {
+		return request.getParameter("indexClicked");
+	}
+	
 	private String getServletInfo() {
 		return "countryABM";
 	}

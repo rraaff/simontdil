@@ -55,6 +55,7 @@ public class SystemConfig {
 		try {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
+					mailServer = SysPropertiesDAO.getPropertyByKey(SysProperties.MAIL_SERVER);
 					server = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_NAME);
 					serverUrl = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_URL);
 					tempPath = System.getProperty("java.io.tmpdir") + "/" + SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_PATH);
@@ -148,7 +149,7 @@ public class SystemConfig {
 	}
 	
 	public static String getMailServer() {
-		return "localhost";
+		return mailServer;
 	}
 	
 	public static String getServerUrl() {
