@@ -164,3 +164,8 @@ CREATE  TABLE `LOGO` (
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
  /
+ CREATE TABLE `DEPLOYED_SCRIPTS` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `scriptId` VARCHAR(100) NULL ,
+  PRIMARY KEY (`id`) );
+/

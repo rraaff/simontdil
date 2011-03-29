@@ -1,0 +1,26 @@
+	
+8h	Imagenes con texto...hay que arreglarlas, ahora si se va a notar.
+
+1	Modificar tabla resource bundle agregando el idioma
+	Agregar idiomas
+1	Cambiar el login agregando un combo (cookie que guarde el ultimo usado)
+	Guardar en la session y usar un filtro combinado con un ThreadLocal para mandarlo abajo
+	Modificar el cache para que use esa data
+1	Pantalla de edicion de rb: mostrar en la tabla, filtrar por idioma, vacio en contexto
+1	Idioma por default seleccionable en el pais host (que pasa si recien instalo y no eligio?), seteo el del rb con id mas chiquito
+
+
+Listo
+1h	Meter tambien una sysproperty con el mail server y su correspondiente pantalla de edicion.
+1h	No se esta mostrando el error del login, ver otros que puedan faltar.
+1	Meter como sysproperty la version de simon
+	Corrida de scripts (incrementales) al levantar
+
+15 horas
+
+Para sql
+insertar mailserver localhost agregar a la inicializacion
+INSERT INTO SYSPROPERTIES (propKey, propValue, deleted) VALUES ('simon.mailserver', 'localhost', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('menu', 'servidorDeEmail', 'Servidor de Email', 0);
+/
