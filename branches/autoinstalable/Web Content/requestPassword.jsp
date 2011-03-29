@@ -50,7 +50,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td colspan="3" height="11"><span class="errorText"><html:errors property="general" /><img src="images/null.gif" width="1" height="11"></td>
+								<td colspan="3" height="11"><span class="errorText"><span class="errorText"><%=com.tdil.simon.web.ErrorFormatter.getErrorFrom(request, "general")%><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 						</table>					
 						<!-- corte tabla template -->

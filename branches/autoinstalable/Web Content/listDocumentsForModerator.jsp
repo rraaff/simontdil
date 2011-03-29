@@ -43,7 +43,6 @@ if ( dw_scrollObj.isSupported() ) {
 	<tr>
 		<td align="center">
 			<!-- inicio tabla template -->
-			<span class="errorText"><html:errors property="general" /></span>
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>

@@ -39,6 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/countryABM" enctype="multipart/form-data">
+<input type="hidden" name="indexOperation" value="pepe"/>
+<input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="45%">
@@ -142,6 +144,7 @@ if ( dw_scrollObj.isSupported() ) {
 												<img src="images/buttons/editar.png" width="50" height="24" border="0">
 											</html:link>
 											<td><logic:equal name="iterCountry" property="deleted" value="false">
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CountryABMForm","botones","desactivar", iterIndex)%><br/>
 													<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
 												</logic:equal>
 												<logic:equal name="iterCountry" property="deleted" value="true">
