@@ -16,6 +16,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public abstract class SimonAction extends Action {
 
@@ -64,6 +65,30 @@ public abstract class SimonAction extends Action {
 		return mapping.findForward("failure");
 	}
 	
+	protected boolean isIndexedOperation(final HttpServletRequest request, String context, String key) {
+		String op = request.getParameter("indexOperation");
+		if (op == null || op.length() == 0) {
+			return false;
+		}
+		return op.equals(ResourceBundleCache.get(context, key));
+	}
+	
+	protected boolean isIndexedOperationByKey(final HttpServletRequest request, String context, String key) {
+		String op = request.getParameter("indexOperation");
+		if (op == null || op.length() == 0) {
+			return false;
+		}
+		return op.equals(context + "-" + key);
+	}
+
+	protected int getIndexClicked(final HttpServletRequest request) {
+		return Integer.parseInt(request.getParameter("indexClicked"));
+	}
+
+	protected String getParamClicked(final HttpServletRequest request) {
+		return request.getParameter("indexClicked");
+	}
+
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(SimonAction.class);
 	}

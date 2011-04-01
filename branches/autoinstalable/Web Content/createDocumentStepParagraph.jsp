@@ -10,6 +10,8 @@
 <html:html>
 <div id="content">
 <html:form method="POST" action="/paragraphNavigation">
+<input type="hidden" name="indexOperation" value=""/>
+<input type="hidden" name="indexClicked"/>
 	<div id="alcien" style="height:130px;">
 		<table border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
@@ -62,18 +64,7 @@
 						<tr>
 							<td colspan="11" height="11"><img src="images/null.gif" width="1" height="11"></td>
 						</tr>
-						<!-- tr>
-							<td colspan="11" align="center"><logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
-									<html:submit property="operation">
-										<bean:message key="createDocument.paragraphs.modifyDocument"/>
-									</html:submit>
-								</logic:equal>
-									<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
-										<html:submit property="operation">
-											<bean:message key="createDocument.paragraphs.modifyIntroduction"/>
-										</html:submit>
-									</logic:equal></td>
-						</tr -->
+						
 						<tr>
 							<td colspan="11" height="5"><img src="images/null.gif" width="1" height="5"></td>
 						</tr>
@@ -123,7 +114,9 @@
 									<html:optionsCollection name="CreateDocumentForm" property="allParagraphNumbers" value="paragraphNumber" label="paragraphNumberForDisplay"/>
 								</html:select></td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td align="left"><html:image property="jumpTo" value="jumpTo"  src="images/buttons/ir.png"></html:image></td>
+							<td align="left">
+								<%=com.tdil.simon.web.ButtonGenerator.getIndexedButtonByKey("CreateDocumentForm","botones","ir", 0)%>
+							</td>
 							<td align="left">
 								<logic:equal name="CreateDocumentForm" property="versionNegotiated" value="true">
 									<html:checkbox name="CreateDocumentForm" property="livePreview"><%=ResourceBundleCache.get("createDocument", "actualizacionEnVivo")%></html:checkbox>

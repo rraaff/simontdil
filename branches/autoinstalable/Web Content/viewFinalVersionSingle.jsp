@@ -248,18 +248,18 @@ if ( dw_scrollObj.isSupported() ) {
 						<td align="center">
 							<% if (isDelegate) { %>
 								<logic:equal name="ViewVersion" property="hasTranslation" value="true">
-									<html:link page="/viewFinalVersion.jsp"><img src="images/buttons/volver.png" border="0"/></html:link>
+									<html:link page="/viewFinalVersion.jsp"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 								</logic:equal>
 								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
-									<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+									<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 								</logic:equal >
 							<% } %>
 							<% if (isModerator) { %>
 							<logic:equal name="ViewVersion" property="hasTranslation" value="true">
-									<html:link page="/viewFinalVersion.jsp"><img src="images/buttons/volver.png" border="0"/></html:link>
+									<html:link page="/viewFinalVersion.jsp"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 								</logic:equal>
 								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
-									<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+									<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 								</logic:equal >
 							<% } %>
 						</td>

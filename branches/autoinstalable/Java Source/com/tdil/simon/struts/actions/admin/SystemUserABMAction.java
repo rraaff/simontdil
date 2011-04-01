@@ -15,8 +15,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.SystemUserABMForm;
-import com.tdil.simon.utils.ImageSubmitData;
-import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class SystemUserABMAction extends ABMAction {
@@ -29,33 +27,30 @@ public class SystemUserABMAction extends ABMAction {
 	}
 
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final SystemUserABMForm systemUserABMForm = (SystemUserABMForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null) {
-			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
-			if (imageSubmitData.isParsed())  {
-				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							systemUserABMForm.delete(imageSubmitData.getPosition());
-							systemUserABMForm.init();
-						}
-					});
+		if (isIndexedOperation(request, "botones", "desactivar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					systemUserABMForm.delete(getIndexClicked(request));
+					systemUserABMForm.init();
 				}
-				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							systemUserABMForm.reactivate(imageSubmitData.getPosition());
-							systemUserABMForm.init();
-						}
-					});
-				}
-				return mapping.findForward("continue");
-			}
+			});
+			return mapping.findForward("continue");
 		}
+		if (isIndexedOperation(request, "botones", "activar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					systemUserABMForm.reactivate(getIndexClicked(request));
+					systemUserABMForm.init();
+				}
+			});
+			return mapping.findForward("continue");
+		}
+		
+		
 		if (systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "cancelar"))) {
 			systemUserABMForm.reset();
 		}

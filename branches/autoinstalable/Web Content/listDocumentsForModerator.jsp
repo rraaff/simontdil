@@ -39,6 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/documentABM">
+<input type="hidden" name="indexOperation" value=""/>
+<input type="hidden" name="indexClicked"/>
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td align="center">
@@ -83,22 +85,24 @@ if ( dw_scrollObj.isSupported() ) {
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="newParagraphCountText" /></td>
 										<% if (((com.tdil.simon.data.model.Version)version).canBeEdited()) { %>  
-											<td><html:link  action="editVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+											<td><html:link  action="editVersion.st?" paramName="version" paramProperty="id" paramId="id">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+											</html:link>
 										<% } else { %>  
 											<td>-</td>
 										<% } %> 
 										<td><logic:equal name="version" property="deleted" value="false">
-												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ListDocument","botones","desactivar", iterIndex)%>
 											</logic:equal>
 											<logic:equal name="version" property="deleted" value="true">
-												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ListDocument","botones","activar", iterIndex)%>
 											</logic:equal></td>
 										<% if (isModerator) { %><td width="80">
 											<logic:equal name="version" property="commentsEnabled" value="true">
-												<html:image property="disableCommentsImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButtonByKey("ListDocument","botones","desactivarComentarios", iterIndex)%>
 											</logic:equal>
 											<logic:equal name="version" property="commentsEnabled" value="false">
-												<html:image property="enableCommentsImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButtonByKey("ListDocument","botones","activarComentarios", iterIndex)%>
 											</logic:equal></td>
 										<% } %> 
 										<td width="5"> </td>

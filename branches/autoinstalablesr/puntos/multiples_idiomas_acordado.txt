@@ -1,6 +1,8 @@
 	
 8h	Imagenes con texto...hay que arreglarlas, ahora si se va a notar.
 
+Ver porque el boton de ir no se muestra blanco 
+
 1	Modificar tabla resource bundle agregando el idioma
 	Agregar idiomas
 1	Cambiar el login agregando un combo (cookie que guarde el ultimo usado)

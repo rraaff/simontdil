@@ -211,10 +211,10 @@ if ( dw_scrollObj.isSupported() ) {
 								</tr>
 							</table -->
 					<% if (isDelegate) { %>
-						<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+						<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 					<% } %>
 					<% if (isModerator) { %>
-						<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" border="0"/></html:link>
+						<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 					<% } %>
 					</tr>
 					<tr>
@@ -246,7 +246,9 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td align="center" valign="middle">
 							<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
-								<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+								<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id">
+								<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+								</html:link>
 							</logic:equal></td>
 					</tr>
 					<% } %>

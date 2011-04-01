@@ -16,8 +16,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ListForm;
-import com.tdil.simon.utils.ImageSubmitData;
-import com.tdil.simon.utils.ImageTagUtil;
 
 public class DocumentABMAction extends SimonAction {
 
@@ -27,54 +25,48 @@ public class DocumentABMAction extends SimonAction {
 	protected UserTypeValidation[] getPermissions() {
 		return permissions;
 	}
-	
+
 	@Override
-	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
+	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request,
+			HttpServletResponse response) throws Exception {
 		final ListForm versionListForm = (ListForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null) {
-			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
-			if (imageSubmitData.isParsed())  {
-				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					try {
-						TransactionProvider.executeInTransaction(new TransactionalAction() {
-							public void executeInTransaction() throws SQLException, ValidationException {
-								versionListForm.deleteVersion(imageSubmitData.getPosition());
-							}
-						});
-					} catch (ValidationException e) {
-						ActionErrors errors = new ActionErrors();
-						errors.add(e.asMessages());
-						addErrors(request, errors);
+		if (isIndexedOperation(request, "botones", "desactivar")) {
+			try {
+				TransactionProvider.executeInTransaction(new TransactionalAction() {
+					public void executeInTransaction() throws SQLException, ValidationException {
+						versionListForm.deleteVersion(getIndexClicked(request));
 					}
-				}
-				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							versionListForm.reactivateVersion(imageSubmitData.getPosition());
-						}
-					});
-				}
-				if ("disableCommentsImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							versionListForm.disableCommentsForVersion(imageSubmitData.getPosition());
-						}
-					});
-				}
-				if ("enableCommentsImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							versionListForm.enableCommentsForVersion(imageSubmitData.getPosition());
-						}
-					});
-				}
-				return mapping.findForward("continue");
+				});
+			} catch (ValidationException e) {
+				ActionErrors errors = new ActionErrors();
+				errors.add(e.asMessages());
+				addErrors(request, errors);
 			}
 		}
-		return null;
+		if (isIndexedOperation(request, "botones", "activar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					versionListForm.reactivateVersion(getIndexClicked(request));
+				}
+			});
+		}
+		
+		if (isIndexedOperationByKey(request, "botones", "activarComentarios")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					versionListForm.enableCommentsForVersion(getIndexClicked(request));
+				}
+			});
+		}
+		if (isIndexedOperationByKey(request, "botones", "desactivarComentarios")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					versionListForm.disableCommentsForVersion(getIndexClicked(request));
+				}
+			});
+		}
+		return mapping.findForward("continue");
 	}
 
 }

@@ -18,8 +18,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
-import com.tdil.simon.utils.ImageSubmitData;
-import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.web.LogOnceListener;
 import com.tdil.simon.web.ResourceBundleCache;
 
@@ -37,42 +35,6 @@ public class CountryABMAction extends ABMAction {
 			throws Exception {
 		final CountryABMForm countryABMForm = (CountryABMForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null) {
-			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
-			if (imageSubmitData.isParsed())  {
-				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
-						public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-							CountryABMForm countryABMForm = (CountryABMForm)form;
-							ValidationError error = countryABMForm.delete(imageSubmitData.getPosition());
-							if (error != null && error.hasError()) {
-								return error;
-							} else {
-								countryABMForm.init();
-								return null;
-							}
-						}
-					}, countryABMForm);
-					if (error != null && error.hasError()) {
-						return redirectToFailure(error, request, mapping);
-					} else {
-						// desloguear si hay alguien logueado con un pais borrado
-						Set<Integer> deletedCountries = countryABMForm.getDeletedCountries();
-						LogOnceListener.logoutDelegatesFor(deletedCountries);
-					}
-				}
-				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							countryABMForm.reactivate(imageSubmitData.getPosition());
-							countryABMForm.init();
-						}
-					});
-				}
-				return mapping.findForward("continue");
-			}
-		}
 		if (isIndexedOperation(request, "botones", "desactivar")) {
 			ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
 				public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
@@ -94,6 +56,16 @@ public class CountryABMAction extends ABMAction {
 				Set<Integer> deletedCountries = countryABMForm.getDeletedCountries();
 				LogOnceListener.logoutDelegatesFor(deletedCountries);
 			}
+			return mapping.findForward("continue");
+		}
+		if (isIndexedOperation(request, "botones", "activar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					countryABMForm.reactivate(getIndexClicked(request));
+					countryABMForm.init();
+				}
+			});
+			return mapping.findForward("continue");
 		}
 		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			countryABMForm.reset();
@@ -105,20 +77,6 @@ public class CountryABMAction extends ABMAction {
 		return mapping.findForward("continue");
 	}
 
-	protected boolean isIndexedOperation(final HttpServletRequest request, String context, String key) {
-		String op = request.getParameter("indexOperation");
-		if (op == null || op.length() == 0) {
-			return false;
-		}
-		return op.equals(ResourceBundleCache.get(context, key));
-	}
-	protected int getIndexClicked(final HttpServletRequest request) {
-		return Integer.parseInt(request.getParameter("indexClicked"));
-	}
-	protected String getParamClicked(final HttpServletRequest request) {
-		return request.getParameter("indexClicked");
-	}
-	
 	private String getServletInfo() {
 		return "countryABM";
 	}

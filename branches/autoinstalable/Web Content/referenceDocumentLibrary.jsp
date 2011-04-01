@@ -72,7 +72,9 @@ if ( dw_scrollObj.isSupported() ) {
 											<td height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
-											<td><a href="./download.do?action=refdoc&fileId=<bean:write name="iterRefDoc" property="id" />"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+											<td><a href="./download.do?action=refdoc&fileId=<bean:write name="iterRefDoc" property="id" />">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%>
+											</a></td>
 										</tr> 
 									</logic:iterate>
 									<tr>
@@ -100,10 +102,10 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 				<tr>
 					<% if (isDelegate) { %>
-						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
 					<% } %>
 					<% if (isModerator) { %>
-						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0" /></html:link></td>
+						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
 					<% } %>
 				</tr>
 			</table>

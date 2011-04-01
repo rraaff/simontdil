@@ -141,7 +141,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td height="28" align="left"><bean:write name="iterLogo" property="logoKey" /></td>
 											<td><html:link  action="editLogo.st?" paramName="iterLogo" paramProperty="logoKey" paramId="id">
-												<img src="images/buttons/editar.png" width="50" height="24" border="0">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
 										</tr> 
 									</logic:iterate>
