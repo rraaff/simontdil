@@ -81,9 +81,13 @@ if ( dw_scrollObj.isSupported() ) {
 										<td><bean:write name="version" property="hasObservationText" /></td>
 										<td><bean:write name="version" property="observationCountText" /></td>
 										<td><bean:write name="version" property="newParagraphCountText" /></td>
-										<td><html:link  action="designVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link></td>
+										<td><html:link  action="designVersion.st?" paramName="version" paramProperty="id" paramId="id">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+											</html:link></td>
 										<% if (((com.tdil.simon.data.model.Version)version).isFinal()) { %>  
-											<td><html:link  action="editPortuguesVersion.st?" paramName="version" paramProperty="id" paramId="id"><img src="images/buttons/editar.png" width="50" height="24" border="0"></html:link>
+											<td><html:link  action="editPortuguesVersion.st?" paramName="version" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+											</html:link>
 										<% } else { %>  
 											<td>-</td>
 										<% } %> 

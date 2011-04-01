@@ -18,7 +18,6 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.utils.DelegateSiteCache;
-import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.utils.NegotiationUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
@@ -36,8 +35,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			throws Exception {
 		final CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null && "jumpTo".equals(image)) {
+		if (isIndexedOperationByKey(request, "botones", "ir")) {
 			createDocumentForm.save();
 			createDocumentForm.setParagraph(Integer.valueOf(createDocumentForm.getGoToParagraph()) - 1);
 			boolean inNegotiation = NegotiationUtils.isInNegotiation(createDocumentForm);

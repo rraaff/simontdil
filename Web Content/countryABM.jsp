@@ -39,7 +39,7 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/countryABM" enctype="multipart/form-data">
-<input type="hidden" name="indexOperation" value="pepe"/>
+<input type="hidden" name="indexOperation" value=""/>
 <input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -140,15 +140,14 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="userCount" /></td>
-											<td><html:link  action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
-												<img src="images/buttons/editar.png" width="50" height="24" border="0">
+											<td><html:link action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
 											<td><logic:equal name="iterCountry" property="deleted" value="false">
-													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CountryABMForm","botones","desactivar", iterIndex)%><br/>
-													<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CountryABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>
 												<logic:equal name="iterCountry" property="deleted" value="true">
-													<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CountryABMForm","botones","activar", iterIndex)%>
 												</logic:equal></td>
 											<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
 										</tr> 

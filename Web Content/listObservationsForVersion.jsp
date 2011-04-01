@@ -166,13 +166,13 @@ if ( dw_scrollObj.isSupported() ) {
 				<logic:equal name="ViewVersion" property="hasObservations" value="false">
 					<table width="400" height="120" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
-							<td height="50" align="center" valign="middle"><bean:message key="listObservations.empty"/></td>
+							<td height="50" align="center" valign="middle"><%=ResourceBundleCache.get("listObservationsSearchResult", "busquedaVacia")%></td>
 						</tr>
 						<tr>
 							<td align="center">
 								<html:form action="/viewVersionAction">
 									<html:submit property="operation">
-										<bean:message key="listObservations.back"/>
+										<%=ResourceBundleCache.get("listObservationsSearchResult", "volver")%>
 									</html:submit>
 								</html:form >
 							</td>

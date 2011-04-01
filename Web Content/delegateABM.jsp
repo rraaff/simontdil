@@ -39,6 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/delegateABM">
+<input type="hidden" name="indexOperation" value=""/>
+<input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="45%">
@@ -197,7 +199,9 @@ if ( dw_scrollObj.isSupported() ) {
 													<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 														<tr>
 														<td><%=ResourceBundleCache.get(getServletInfo(), "si")%></td>
-														<td><html:image property="delSignatureImages" indexed="true" value="id" src="images/buttons/borrar.png" border="0"></html:image></td>
+														<td>
+															<%=com.tdil.simon.web.ButtonGenerator.getIndexedButtonByKey("DelegateABM","botones","borrarFirma", iterIndex)%>
+															</td>
 														</tr>
 													</table>
 												<% } else { %>
@@ -207,13 +211,13 @@ if ( dw_scrollObj.isSupported() ) {
 											
 											<!-- td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal><logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td -->
 											<td><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
-												<img src="images/buttons/editar.png" width="50" height="24" border="0">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
 											<td><logic:equal name="iterUser" property="deleted" value="false">
-													<html:image property="deleteImages" indexed="true" value="id" src="images/buttons/desactivar.png" border="0"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DelegateABM","botones","desactivar", iterIndex)%>
 												</logic:equal>
 												<logic:equal name="iterUser" property="deleted" value="true">
-													<html:image property="reactivateImages" indexed="true" value="id" src="images/buttons/activar.png" border="0"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DelegateABM","botones","activar", iterIndex)%>
 												</logic:equal></td>
 											<td width="10" bgcolor="#FFFFFF"><img src="images/null.gif" width="10" height="1"></td>
 										</tr> 

@@ -197,7 +197,9 @@
 				<tr>
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
-					<td height="20" align="center" valign="middle"><html:link  action="/goToReferenceDocLibrary.st"><img src="images/buttons/irallistado.png" title="Ver Documentos Informativos" width="91" height="24" border="0"></html:link></td>
+					<td height="20" align="center" valign="middle"><html:link  action="/goToReferenceDocLibrary.st">
+						<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","iralistado")%>
+						</html:link></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>

@@ -18,8 +18,6 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.DelegateSiteCache;
-import com.tdil.simon.utils.ImageSubmitData;
-import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class DelegateABMAction extends ABMAction {
@@ -32,52 +30,48 @@ public class DelegateABMAction extends ABMAction {
 	}
 
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final DelegateABMForm delegateABMForm = (DelegateABMForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null) {
-			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
-			if (imageSubmitData.isParsed())  {
-				if ("delSignatureImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							delegateABMForm.deleteSignature(imageSubmitData.getPosition());
-							delegateABMForm.init();
-						}
-					});
-					DelegateSiteCache.refresh();
+		if (isIndexedOperationByKey(request, "botones", "borrarFirma")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					delegateABMForm.deleteSignature(getIndexClicked(request));
+					delegateABMForm.init();
 				}
-				
-				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							delegateABMForm.delete(imageSubmitData.getPosition());
-							delegateABMForm.init();
-						}
-					});
+			});
+			DelegateSiteCache.refresh();
+			return mapping.findForward("continue");
+		}
+		if (isIndexedOperation(request, "botones", "desactivar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					delegateABMForm.delete(getIndexClicked(request));
+					delegateABMForm.init();
 				}
-				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
-						public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-							DelegateABMForm delegateABMForm = (DelegateABMForm)form;
-							ValidationError error = delegateABMForm.reactivate(imageSubmitData.getPosition());
-							if (error != null && error.hasError()) {
-								return error;
-							} else {
-								delegateABMForm.init();
-								return null;
-							}
-						}
-					}, delegateABMForm);
+			});
+			return mapping.findForward("continue");
+		}
+		if (isIndexedOperation(request, "botones", "activar")) {
+			ValidationError error = (ValidationError)TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
+				public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
+					DelegateABMForm delegateABMForm = (DelegateABMForm)form;
+					ValidationError error = delegateABMForm.reactivate(getIndexClicked(request));
 					if (error != null && error.hasError()) {
-						return redirectToFailure(error, request, mapping);
+						return error;
+					} else {
+						delegateABMForm.init();
+						return null;
 					}
 				}
-				return mapping.findForward("continue");
+			}, delegateABMForm);
+			if (error != null && error.hasError()) {
+				return redirectToFailure(error, request, mapping);
 			}
+			return mapping.findForward("continue");
 		}
+		
 		if (delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			delegateABMForm.reset();
 		}

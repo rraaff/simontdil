@@ -39,6 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/systemUserABM">
+<input type="hidden" name="indexOperation" value=""/>
+<input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="35%">
@@ -183,13 +185,13 @@ if ( dw_scrollObj.isSupported() ) {
 											<td><logic:equal name="iterUser" property="deleted" value="true"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal></td>
 											<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
-												<img src="images/buttons/editar.png" width="50" height="24" border="0">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
 											<td><logic:equal name="iterUser" property="deleted" value="false">
-													<html:image property="deleteImages" indexed="true" value="id" src="images/buttons/desactivar.png" border="0"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("SystemUserABM","botones","desactivar", iterIndex)%>
 												</logic:equal>
 												<logic:equal name="iterUser" property="deleted" value="true">
-													<html:image property="reactivateImages" indexed="true" value="id" src="images/buttons/activar.png" border="0"></html:image>
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("SystemUserABM","botones","activar", iterIndex)%>
 												</logic:equal></td>
 										</tr> 
 									</logic:iterate>

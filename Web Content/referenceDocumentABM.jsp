@@ -39,6 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <div id="content">
 <html:form method="POST" action="/referenceDocumentABM" enctype="multipart/form-data">
+<input type="hidden" name="indexOperation" value=""/>
+<input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="35%">
@@ -154,13 +156,13 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
-												<img src="images/buttons/editar.png" width="50" height="24" border="0">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
 											<td><logic:equal name="iterRefDoc" property="deleted" value="false">
-												<html:image property="deleteImages" indexed="true" value="id"  src="images/buttons/desactivar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ReferenceDocumentABMForm","botones","desactivar", iterIndex)%>
 											</logic:equal>
 											<logic:equal name="iterRefDoc" property="deleted" value="true">
-												<html:image property="reactivateImages" indexed="true" value="id"  src="images/buttons/activar.png"></html:image>
+												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ReferenceDocumentABMForm","botones","activar", iterIndex)%>
 											</logic:equal></td>
 										</tr> 
 									</logic:iterate>

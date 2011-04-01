@@ -147,7 +147,9 @@ div#main2 {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td height="28" align="left"><%=ref.getTitle()%></td>
 											<td align="left"><%=ref.getFileName()%></td>
-											<td width="80"><a href="./download.do?action=refdoc&fileId=<%=ref.getId()%>"><img src="images/buttons/descargar.png" width="74" height="24" border="0"></a></td>
+											<td width="80"><a href="./download.do?action=refdoc&fileId=<%=ref.getId()%>">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%>
+												</a></td>
 										</tr> 
 									<% iterIndex = iterIndex + 1;
 										} %>

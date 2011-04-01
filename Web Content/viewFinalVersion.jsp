@@ -174,10 +174,10 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" align="right"><div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 					<div id="buttonContainer">
 						<% if (isDelegate) { %>
-							<html:link action="/goToDelegateHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0"/></html:link>
+							<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 						<% } %>
 						<% if (isModerator) { %>
-							<html:link action="/goToModeratorHome" ><img src="images/buttons/volver.png" width="50" height="24" border="0"/></html:link>
+							<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 						<% } %>
 					</div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>

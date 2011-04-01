@@ -14,8 +14,6 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
-import com.tdil.simon.utils.ImageSubmitData;
-import com.tdil.simon.utils.ImageTagUtil;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ReferenceDocumentABMAction extends ABMAction {
@@ -28,33 +26,29 @@ public class ReferenceDocumentABMAction extends ABMAction {
 	}
 
 	@Override
-	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final ReferenceDocumentABMForm referenceDocumentABMForm = (ReferenceDocumentABMForm) form;
 
-		String image = ImageTagUtil.getName(request);
-		if (image != null) {
-			final ImageSubmitData imageSubmitData = new ImageSubmitData(image);
-			if (imageSubmitData.isParsed())  {
-				if ("deleteImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							referenceDocumentABMForm.delete(imageSubmitData.getPosition());
-							referenceDocumentABMForm.init();
-						}
-					});
+		if (isIndexedOperation(request, "botones", "desactivar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					referenceDocumentABMForm.delete(getIndexClicked(request));
+					referenceDocumentABMForm.init();
 				}
-				if ("reactivateImages".equals(imageSubmitData.getProperty())) {
-					TransactionProvider.executeInTransaction(new TransactionalAction() {
-						public void executeInTransaction() throws SQLException, ValidationException {
-							referenceDocumentABMForm.reactivate(imageSubmitData.getPosition());
-							referenceDocumentABMForm.init();
-						}
-					});
-				}
-				return mapping.findForward("continue");
-			}
+			});
+			return mapping.findForward("continue");
 		}
+		if (isIndexedOperation(request, "botones", "activar")) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					referenceDocumentABMForm.reactivate(getIndexClicked(request));
+					referenceDocumentABMForm.init();
+				}
+			});
+			return mapping.findForward("continue");
+		}
+		
 		if (referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "cancelar"))) {
 			referenceDocumentABMForm.reset();
 		}
