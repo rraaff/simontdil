@@ -16,6 +16,7 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	private String operation;
 	
 	private int id;
+	private String rbLanguage;
 	private String rbContext;
 	private String rbKey;
 	private String rbValue;
@@ -23,6 +24,7 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	private String rbSearchValue;
 	
 	private List<ContextBean> allContext;
+	private List<LanguageBean> allLanguage;
 	
 	private List<ResourceBundle> searchResult;
 	
@@ -45,6 +47,7 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	 */
 	public void reset() throws SQLException {
 		this.id = 0;
+		this.rbLanguage = null;
 		this.rbKey= null;
 		this.rbValue= null;
 		this.rbContext = null;
@@ -57,10 +60,18 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	 */
 	public void init() throws SQLException {
 		List<ContextBean> allContexts = new ArrayList<ContextBean>();
+		allContexts.add(new ContextBean(""));
 		for (String context : ResourceBundleDAO.selectAvailabeContexts()) {
 			allContexts.add(new ContextBean(context));
 		}
 		this.setAllContext(allContexts);
+		
+		List<LanguageBean> allLanguage = new ArrayList<LanguageBean>();
+		allLanguage.add(new LanguageBean(""));
+		for (String lang : ResourceBundleDAO.selectAvailabeLanguages()) {
+			allLanguage.add(new LanguageBean(lang));
+		}
+		this.setAllLanguage(allLanguage);
 	}
 	
 	public void initWith(int userId) throws SQLException {
@@ -89,11 +100,11 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	}
 	
 	public void search() throws SQLException {
-		this.setSearchResult(ResourceBundleDAO.searchResourceBundle(this.getRbContext(), this.getRbSearchValue()));
+		this.setSearchResult(ResourceBundleDAO.searchResourceBundle(this.getRbLanguage(), this.getRbContext(), this.getRbSearchValue()));
 	}
 	
 	private void modifyResourceBundle() throws SQLException {
-		ResourceBundle resourceBundle = ResourceBundleDAO.getResourceBundle(this.getRbContext(), this.getRbKey());
+		ResourceBundle resourceBundle = ResourceBundleDAO.getResourceBundle(this.getRbLanguage(), this.getRbContext(), this.getRbKey());
 		resourceBundle.setRbValue(this.getRbValue());
 		ResourceBundleDAO.updateResourceBundle(resourceBundle);
 	}
@@ -133,5 +144,17 @@ public class ResourceBundleForm extends TransactionalValidationForm implements A
 	}
 	public void setRbSearchValue(String rbSearchValue) {
 		this.rbSearchValue = rbSearchValue;
+	}
+	public String getRbLanguage() {
+		return rbLanguage;
+	}
+	public void setRbLanguage(String rbLanguage) {
+		this.rbLanguage = rbLanguage;
+	}
+	public List<LanguageBean> getAllLanguage() {
+		return allLanguage;
+	}
+	public void setAllLanguage(List<LanguageBean> allLanguage) {
+		this.allLanguage = allLanguage;
 	}
 }

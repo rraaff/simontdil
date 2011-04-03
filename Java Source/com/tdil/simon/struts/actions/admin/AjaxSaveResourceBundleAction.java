@@ -29,10 +29,12 @@ public class AjaxSaveResourceBundleAction extends AjaxSimonAction implements Tra
 	
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
+		String rbLanguage=request.getParameter("rbLanguage");
 		String rbContext=request.getParameter("rbContext");
 		String rbKey=request.getParameter("rbKey");
 		String rbValue=request.getParameter("rbValue");
 		ResourceBundleForm resourceBundleForm = new ResourceBundleForm();
+		resourceBundleForm.setRbLanguage(rbLanguage);
 		resourceBundleForm.setRbContext(rbContext);
 		resourceBundleForm.setRbKey(rbKey);
 		resourceBundleForm.setRbValue(rbValue);

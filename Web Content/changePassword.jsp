@@ -16,7 +16,7 @@
 			<table width="440" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="420" height="19" align="center"><img src="images/titles/blanqueoDeContrasena.gif" alt="Ingreso al Sitio" width="178" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="420" height="19" align="center"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>

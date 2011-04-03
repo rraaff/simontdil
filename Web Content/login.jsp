@@ -6,6 +6,23 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
 
+<%
+String cookieName = com.tdil.simon.web.SetLanguageFilter.USER_LANGUAGE;
+Cookie cookies [] = request.getCookies ();
+Cookie myCookie = null;
+if (cookies != null)
+{
+for (int i = 0; i < cookies.length; i++) 
+{
+if (cookies [i].getName().equals (cookieName))
+{
+myCookie = cookies[i];
+break;
+}
+}
+}
+%>
+
 <div id="content">
 <html:form method="POST" action="/login">
 <html:hidden name="LoginForm" property="operation" value=""/>
@@ -15,7 +32,7 @@
 			<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="320" height="19" align="center"><img src="images/titles/ingresoAlSitio.gif" alt="Ingreso al Sitio" width="109" height="19"></td>
+					<td background="images/interfaces/topTitle.gif" width="320" height="19" align="center"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -38,6 +55,27 @@
 								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "contrasenia")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td><html:password name="LoginForm" property="password" styleClass="textfield_effect"/></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get(getServletInfo(), "lenguage")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td><html:select property="language" styleClass="textfield_effect">
+							        <html:optionsCollection name="LoginForm" property="allLanguage" value="language" label="language"/>
+									</html:select>
+									<% if (myCookie != null) { %>
+									<script>
+										var langSelObject = document.forms['LoginForm'].elements['language'];
+										for( var i = langSelObject.options.length-1;i>=0; i-- ){
+											if(langSelObject.options[i].value=='<%=myCookie.getValue()%>') {
+												langSelObject.selectedIndex=i;
+											}
+										}
+									</script>
+									<% } %>
+									</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>

@@ -13,6 +13,10 @@ public class ResourceBundleDAO {
 		return (List<String>)IBatisManager.sqlMapper.queryForList("selectAvailableContext");
 	}
 	
+	public static List<String> selectAvailabeLanguages() throws SQLException {
+		return (List<String>)IBatisManager.sqlMapper.queryForList("selectAvailableLanguage");
+	}
+	
 	public static void updateResourceBundle(ResourceBundle resourceBundle) throws SQLException {
 		IBatisManager.sqlMapper.update("updateResourceBundle", resourceBundle);
 	}
@@ -21,16 +25,18 @@ public class ResourceBundleDAO {
 		IBatisManager.sqlMapper.insert("insertResourceBundle", resourceBundle);
 	}
 	
-	public static ResourceBundle getResourceBundle(String context, String key) throws SQLException {
+	public static ResourceBundle getResourceBundle(String language, String context, String key) throws SQLException {
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("rbLanguage", language);
 		params.put("rbContext", context);
 		params.put("rbKey", key);
 		return (ResourceBundle) IBatisManager.sqlMapper.queryForObject("selectResourceBundleByContextAndKey", params);
 	}
 	
-	public static List searchResourceBundle(String context, String value) throws SQLException {
+	public static List searchResourceBundle(String language, String context, String value) throws SQLException {
 		Map<String, String> params = new HashMap<String, String>();
-		params.put("rbContext", context);
+		params.put("rbLanguage", org.apache.commons.lang.StringUtils.isEmpty(language) ? null : language);
+		params.put("rbContext", org.apache.commons.lang.StringUtils.isEmpty(context) ? null : context);
 		params.put("rbValue", value != null ? "%" + value.toUpperCase() + "%" : value);
 		return IBatisManager.sqlMapper.queryForList("searchResourceBundleByContextAndValue", params);
 	}

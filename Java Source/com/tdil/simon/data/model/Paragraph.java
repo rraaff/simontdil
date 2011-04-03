@@ -1,6 +1,5 @@
 package com.tdil.simon.data.model;
 
-import com.tdil.simon.struts.ApplicationResources;
 
 public class Paragraph extends PersistentObject {
 
@@ -52,20 +51,8 @@ public class Paragraph extends PersistentObject {
 		}
 	}
 	
-	public String getParagraphNumberForDiplayAndDiscriminator() {
-		return GetParagraphNumberForDisplayAndDiscriminator(this.getParagraphNumber() - 1);
-	}
-	
 	public String getParagraphNumberForDisplay() {
 		return GetParagraphNumberForDisplay(this.getParagraphNumber() - 1);
-	}
-	
-	public static String GetParagraphNumberForDisplayAndDiscriminator(int paragraphNumber) {
-		if (paragraphNumber < INTRODUCTION_LIMIT) {
-			return GetParagraphNumberForDisplay(paragraphNumber) + " - " + ApplicationResources.getMessage("Paragraph.introduction");
-		} else {
-			return GetParagraphNumberForDisplay(paragraphNumber) + " - " + ApplicationResources.getMessage("Paragraph.paragraph");
-		}
 	}
 	
 	public static String GetParagraphNumberForDisplay(int paragraphNumber) {

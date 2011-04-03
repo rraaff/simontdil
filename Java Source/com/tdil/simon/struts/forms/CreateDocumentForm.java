@@ -33,8 +33,8 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.database.TransactionProvider;
-import com.tdil.simon.struts.ApplicationResources;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class CreateDocumentForm extends ActionForm implements TransactionalActionWithValue {
@@ -319,21 +319,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		}
 	}
 	
-	public String getAddOrSave() {
-		if (StringUtils.isEmpty(this.paragraphTexts[this.paragraph ])) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.add");
-		} else {
-			return ApplicationResources.getMessage("createDocument.paragraphs.save");
-		}
-	}
-	
-	public String getHideOrUnhide() {
-		if (this.getParagraphHidden()) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.unhide");
-		} else {
-			return ApplicationResources.getMessage("createDocument.paragraphs.hide");
-		}
-	}
 	public int getStep() {
 		return step;
 	}
@@ -914,7 +899,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		Version version = VersionDAO.getVersion(versionID);
 		this.paragraphStatus = new boolean[1000];
 		this.paragraphTexts = new String[1000];
-		String initial = ApplicationResources.getMessage("createDocument.paragraphs.portuguesInit");
+		String initial = ResourceBundleCache.get("createDocument", "textoInicialParrafoIdiomaAlternativo");
 		{
 			List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
 			for (Paragraph p : paragraphs) {
@@ -1137,20 +1122,20 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	public String validateMove() {
 		int dest = Paragraph.extractParagraphNumberFromDisplay(this.destination);
 		if (dest == -1) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.INVALID_DESTINATION_PARAGRAPH);
+			return ResourceBundleCache.get("mensajeDeError", "createDocument.paragraphs.move." + ValidationErrors.INVALID_DESTINATION_PARAGRAPH);
 		}
 		boolean append = Boolean.valueOf(this.append);
 		if (dest == this.getParagraph()) { // TODO ver si este chequeo esta bien
-			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_CANNOT_BE_ORIGIN);
+			return ResourceBundleCache.get("mensajeDeError", "createDocument.paragraphs.move." + ValidationErrors.DESTINATION_CANNOT_BE_ORIGIN);
 		}
 		if (dest > this.getLastParagraph(dest >= Paragraph.INTRODUCTION_LIMIT? Paragraph.INTRODUCTION_LIMIT : 0)) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DESTINATION_UPPER_LIMIT_ERROR);
+			return ResourceBundleCache.get("mensajeDeError", "createDocument.paragraphs.move." + ValidationErrors.DESTINATION_UPPER_LIMIT_ERROR);
 		}
 		if (this.getDetail().length() > 100) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.DETAIL_TOO_LONG_ERROR);
+			return ResourceBundleCache.get("mensajeDeError", "createDocument.paragraphs.move." + ValidationErrors.DETAIL_TOO_LONG_ERROR);
 		}
 		if (append && StringUtils.isEmpty(this.paragraphTexts[dest])) {
-			return ApplicationResources.getMessage("createDocument.paragraphs.move." + ValidationErrors.EMPTY_DESTINATION);
+			return ResourceBundleCache.get("mensajeDeError", "createDocument.paragraphs.move." + ValidationErrors.EMPTY_DESTINATION);
 		}
 		return null;
 	}

@@ -33,3 +33,19 @@ INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('botones
 /
 INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('botones', 'volver', 'Volver', 0);
 /
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('changePassword', 'titulo', 'Blanqueo de contrase&ntilde;a', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('login', 'titulo', 'Ingreso al sitio', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('resourceBundle', 'lenguage', 'Lenguage', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('login', 'lenguage', 'Lenguage', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('createDocument', 'textoInicialParrafoIdiomaAlternativo', '(Inserte el texto aqu&iacute;)', 0);
+/
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('resourceBundle', 'ayuda', 'Haga doble clic para editar el texto.', 0);
+/
+ALTER TABLE RESOURCEBUNDLE ADD rbLanguage VARCHAR(100) NULL;
+/
+update RESOURCEBUNDLE set rbLanguage = 'castellano';
+/
