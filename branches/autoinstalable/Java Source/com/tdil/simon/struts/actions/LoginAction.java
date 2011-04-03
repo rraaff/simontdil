@@ -24,7 +24,6 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.forms.LoginForm;
 import com.tdil.simon.utils.CryptoUtils;
 import com.tdil.simon.web.LogOnceListener;
-import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SetLanguageFilter;
 
 public class LoginAction extends Action implements TransactionalActionWithValue {
@@ -32,13 +31,13 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		LoginForm login = (LoginForm) form;
-		if (login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "pedirNuevaContraseña"))) {
+		if (SimonAction.isIndexedOperationByKey(login.getOperation(), getServletInfo(), "pedirNuevaContraseña")) {
 			return mapping.findForward("requestPassword");
 		}
-		if (login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "ingresar")) || 
-				login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "desloguearEIngresar"))) {
+		if (SimonAction.isIndexedOperationByKey(login.getOperation(), getServletInfo(), "ingresar") || 
+				SimonAction.isIndexedOperationByKey(login.getOperation(), getServletInfo(), "desloguearEIngresar")) {
 			try {
-				boolean logout = login.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "desloguearEIngresar"));
+				boolean logout = SimonAction.isIndexedOperationByKey(login.getOperation(), getServletInfo(), "desloguearEIngresar");
 				SystemUser user = (SystemUser) TransactionProvider.executeInTransaction(this, form);
 				if (login.isRedirectToChangePassword()) {
 					request.setAttribute("username", user.getUsername());

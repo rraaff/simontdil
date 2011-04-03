@@ -29,9 +29,11 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 	private String operation;
 	
 	private int id;
+	private boolean host = false;
 	private String name;
 	private FormFile flag;
 	private byte [] flagBytes;
+	private String language;
 	
 	private List<CountryVO> allCountries;
 	
@@ -64,8 +66,10 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 		this.id = 0;
 		this.name = null;
 		this.flag = null;
+		this.host = false;
 	}
 	public void init() throws SQLException {
+		this.setHost(false);
 		this.setAllCountries(CountryDAO.selectAllCountriesVO());
 	}
 	public String getOperation() {
@@ -80,6 +84,9 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 		if (country != null) {
 			this.id = userId;
 			this.name = country.getName();
+			this.host = country.isHost();
+		} else {
+			this.host = false;
 		}
 	}
 	
@@ -122,6 +129,9 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 		if (this.flagBytes != null) {
 			country.setFlag(this.flagBytes);
 		}
+		if (country.isHost()) {
+			country.setLanguage(this.getLanguage());
+		}
 		CountryDAO.updateCountry(country);
 		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + this.getId() + ".png");
 	}
@@ -160,5 +170,21 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 			}
 		}
 		return result;
+	}
+	
+	public List<LanguageBean> getAllLanguage() {
+		return SystemConfig.getAllLanguage();
+	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+	public boolean isHost() {
+		return host;
+	}
+	public void setHost(boolean host) {
+		this.host = host;
 	}
 }

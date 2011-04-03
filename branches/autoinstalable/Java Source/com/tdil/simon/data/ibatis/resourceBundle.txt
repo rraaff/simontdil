@@ -488,3 +488,4 @@ castellano-resourceBundle-lenguage=Lenguage
 castellano-login-lenguage=Lenguage
 castellano-resourceBundle-ayuda=Haga doble clic para editar el texto.
 castellano-createDocument-textoInicialParrafoIdiomaAlternativo=(Inserte el texto aqu&iacute;)
+castellano-countryABM-lenguajeDelSistema=Idioma del sistema

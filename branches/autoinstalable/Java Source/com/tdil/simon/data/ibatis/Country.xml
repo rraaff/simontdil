@@ -14,6 +14,7 @@
    <result column="deleted" property="deleted" />
    <result column="name" property="name" />
    <result column="host" property="host" />
+   <result column="language" property="language" />
    <result column="flag" property="flag" jdbcType="BLOB"/>
    </resultMap>
 
@@ -78,9 +79,9 @@
  
   <insert id="insertCountry" parameterClass="Country">
     insert into COUNTRY (
-      id, name, flag, host, deleted
+      id, name, flag, host, language, deleted
     ) values (
-      #id#, #name#, #flag#, #host#, #deleted#
+      #id#, #name#, #flag#, #host#, #language#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -91,6 +92,7 @@
     update COUNTRY set
       name = #name#,
       flag = #flag#,
+      language = #language#,
       deleted = #deleted#
     where
       id = #id#

@@ -10,4 +10,5 @@ delete from RESOURCEBUNDLE where rbContext= 'login' and rbKey = 'lenguage';
 delete from RESOURCEBUNDLE where rbContext= 'createDocument', and rbKey = 'textoInicialParrafoIdiomaAlternativo';
 delete from RESOURCEBUNDLE where rbLanguage != 'castellano';
 ALTER TABLE RESOURCEBUNDLE DROP rbLanguage;
+ALTER TABLE COUNTRY DROP language;
 commit;
