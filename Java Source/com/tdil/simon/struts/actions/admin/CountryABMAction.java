@@ -20,6 +20,7 @@ import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
 import com.tdil.simon.web.LogOnceListener;
 import com.tdil.simon.web.ResourceBundleCache;
+import com.tdil.simon.web.SystemConfig;
 
 public class CountryABMAction extends ABMAction {
 
@@ -72,7 +73,11 @@ public class CountryABMAction extends ABMAction {
 		}
 		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
 				|| countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
-			return this.validateAndSave(countryABMForm, request, mapping);
+			ActionForward result = this.validateAndSave(countryABMForm, request, mapping);
+			if (countryABMForm.isHost()) {
+				SystemConfig.loadPropertiesFromDB();
+			}
+			return result;
 		}
 		return mapping.findForward("continue");
 	}

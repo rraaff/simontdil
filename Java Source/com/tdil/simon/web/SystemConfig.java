@@ -20,9 +20,11 @@ import org.apache.log4j.Logger;
 import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.NotificationEmailDAO;
 import com.tdil.simon.data.ibatis.ResourceBundleDAO;
 import com.tdil.simon.data.ibatis.SysPropertiesDAO;
+import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.database.TransactionProvider;
@@ -75,6 +77,8 @@ public class SystemConfig {
 						allLanguage1.add(new LanguageBean(lang));
 					}
 					allLanguage = allLanguage1;
+					Country host = CountryDAO.getCountryHost();
+					systemLanguage = host.getLanguage();
 					try {
 						File file = new File(tempPath);
 						if (!file.exists()) {

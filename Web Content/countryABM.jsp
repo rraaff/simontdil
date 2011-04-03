@@ -65,6 +65,19 @@ if ( dw_scrollObj.isSupported() ) {
 									<td colspan="2" width="230" align="left"><html:text name="CountryABMForm" property="name" styleClass="textfield_effect"/>
 											<html:errors property="country.name" /></td>
 								</tr>
+								<logic:equal name="CountryABMForm" property="host" value="true">
+								<tr>
+									<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
+								</tr>
+								<tr>
+									<td width="163" align="right"><%=ResourceBundleCache.get(getServletInfo(), "lenguajeDelSistema")%>:</td>
+									<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+									<td colspan="2" width="230" align="left">
+									<html:select property="language" styleClass="textfield_effect">
+							        <html:optionsCollection name="CountryABMForm" property="allLanguage" value="language" label="language"/>
+									</html:select></td>
+								</tr>
+								</logic:equal>
 								<tr>
 									<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 								</tr>

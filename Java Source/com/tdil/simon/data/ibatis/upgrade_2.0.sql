@@ -45,7 +45,13 @@ INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('createD
 /
 INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('resourceBundle', 'ayuda', 'Haga doble clic para editar el texto.', 0);
 /
+INSERT INTO RESOURCEBUNDLE (rbContext, rbKey, rbValue, deleted) VALUES ('countryABM', 'lenguajeDelSistema', 'Idioma del sistema', 0);
+/
 ALTER TABLE RESOURCEBUNDLE ADD rbLanguage VARCHAR(100) NULL;
 /
 update RESOURCEBUNDLE set rbLanguage = 'castellano';
+/
+ALTER TABLE COUNTRY ADD language VARCHAR(100) NULL;
+/
+update COUNTRY set language = 'castellano' where host = 1;
 /

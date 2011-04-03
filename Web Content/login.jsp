@@ -74,6 +74,15 @@ break;
 											}
 										}
 									</script>
+									<% } else { %>
+										<script>
+										var langSelObject = document.forms['LoginForm'].elements['language'];
+										for( var i = langSelObject.options.length-1;i>=0; i-- ){
+											if(langSelObject.options[i].value=='<%=com.tdil.simon.web.SystemConfig.getSystemLanguage()%>') {
+												langSelObject.selectedIndex=i;
+											}
+										}
+										</script>
 									<% } %>
 									</td>
 							</tr>

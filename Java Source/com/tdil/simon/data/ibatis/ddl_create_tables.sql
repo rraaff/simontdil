@@ -3,6 +3,7 @@ CREATE  TABLE `COUNTRY` (
   `name` VARCHAR(100) NOT NULL ,
   `flag` MEDIUMBLOB NULL ,
   `host` INT NULL ,
+  `language` VARCHAR(100) NULL,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /
