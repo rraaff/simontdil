@@ -1,6 +1,7 @@
 package com.tdil.simon.struts.forms;
 
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -16,6 +17,7 @@ import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.web.SystemConfig;
 
 public class LoginForm extends ActionForm {
 
@@ -26,6 +28,7 @@ public class LoginForm extends ActionForm {
 
 	private String username;
 	private String password;
+	private String language;
 	private String operation;
 	private boolean canForce = false;
 	
@@ -51,6 +54,7 @@ public class LoginForm extends ActionForm {
 		super.reset(mapping, request);
 		username = null;
 		password = null;
+		language = null;
 		redirectToNegotiation = false;
 		redirectToChangePassword = false;
 		canForce = false;
@@ -129,5 +133,14 @@ public class LoginForm extends ActionForm {
 	public void setCanForce(boolean canForce) {
 		this.canForce = canForce;
 	}
+	public String getLanguage() {
+		return language;
+	}
+	public void setLanguage(String language) {
+		this.language = language;
+	}
 
+	public List<LanguageBean> getAllLanguage() {
+		return SystemConfig.getAllLanguage();
+	}
 }

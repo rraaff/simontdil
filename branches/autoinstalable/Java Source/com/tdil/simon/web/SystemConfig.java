@@ -8,6 +8,8 @@ import java.io.InputStream;
 import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -19,10 +21,12 @@ import com.tdil.simon.actions.TransactionalAction;
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.NotificationEmailDAO;
+import com.tdil.simon.data.ibatis.ResourceBundleDAO;
 import com.tdil.simon.data.ibatis.SysPropertiesDAO;
 import com.tdil.simon.data.model.NotificationEmail;
 import com.tdil.simon.data.model.SysProperties;
 import com.tdil.simon.database.TransactionProvider;
+import com.tdil.simon.struts.forms.LanguageBean;
 import com.tdil.simon.utils.LoggerProvider;
 
 public class SystemConfig {
@@ -33,6 +37,13 @@ public class SystemConfig {
 	private static String serverUrl;
 	private static String tempPath;
 	
+	private static String systemLanguage = "castellano"; // TODO 
+	private static List<LanguageBean> allLanguage;
+	
+	public static List<LanguageBean> getAllLanguage() {
+		return allLanguage;
+	}
+
 	private static Logger getLog() {
 		return LoggerProvider.getLogger(SystemConfig.class);
 	}
@@ -59,6 +70,11 @@ public class SystemConfig {
 					server = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_NAME);
 					serverUrl = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_URL);
 					tempPath = System.getProperty("java.io.tmpdir") + "/" + SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_PATH);
+					List<LanguageBean> allLanguage1 = new ArrayList<LanguageBean>();
+					for (String lang : ResourceBundleDAO.selectAvailabeLanguages()) {
+						allLanguage1.add(new LanguageBean(lang));
+					}
+					allLanguage = allLanguage1;
 					try {
 						File file = new File(tempPath);
 						if (!file.exists()) {
@@ -237,4 +253,9 @@ public class SystemConfig {
 	public static String getServer() {
 		return server;
 	}
+
+	public static String getSystemLanguage() {
+		return systemLanguage;
+	}
+
 }

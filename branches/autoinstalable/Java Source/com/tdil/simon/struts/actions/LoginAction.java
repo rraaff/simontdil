@@ -2,6 +2,7 @@ package com.tdil.simon.struts.actions;
 
 import java.sql.SQLException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -24,6 +25,7 @@ import com.tdil.simon.struts.forms.LoginForm;
 import com.tdil.simon.utils.CryptoUtils;
 import com.tdil.simon.web.LogOnceListener;
 import com.tdil.simon.web.ResourceBundleCache;
+import com.tdil.simon.web.SetLanguageFilter;
 
 public class LoginAction extends Action implements TransactionalActionWithValue {
 
@@ -48,6 +50,8 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				user.setPassword(null);
 				LogOnceListener.userHasLogged(login, user.getUsername(), user.getCountryId(), user.isModerator(), request.getSession(), logout);
 				request.getSession().setAttribute("user", user);
+				request.getSession().setAttribute(SetLanguageFilter.USER_LANGUAGE, login.getLanguage());
+				response.addCookie(new Cookie(SetLanguageFilter.USER_LANGUAGE, login.getLanguage()));
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
 				}

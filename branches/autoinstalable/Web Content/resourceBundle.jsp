@@ -69,7 +69,7 @@ window.addEvent('domready', function() {
 				   	var error = json.error;
 				   	showErrorMessage();
 				   }
-				}}).post({'rbContext': el.get('rbContext'), 'rbKey': el.get('rbKey'), 'rbValue':el.get('text')});
+				}}).post({'rbLanguage': el.get('rbLanguage'),'rbContext': el.get('rbContext'), 'rbKey': el.get('rbKey'), 'rbValue':el.get('text')});
 			});
 		});
 	});
@@ -100,14 +100,21 @@ function showErrorMessage() {
 						<!-- corte tabla template -->
 						<table border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="9" height="75"><img src="images/null.gif" width="1" height="75"></td>
+								<td colspan="12" height="75"><img src="images/null.gif" width="1" height="75"></td>
 							</tr>
 							<tr>
+								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "lenguage")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td><html:select property="rbLanguage" styleClass="textfield_effect_300">
+							        <html:optionsCollection name="ResourceBundleForm" property="allLanguage" value="language" label="language"/>
+									</html:select>
+								</td>
 								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "contexto")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td><html:select property="rbContext" styleClass="textfield_effect_300">
-														        <html:optionsCollection name="ResourceBundleForm" property="allContext" value="context" label="context"/>
-															</html:select></td>
+							        <html:optionsCollection name="ResourceBundleForm" property="allContext" value="context" label="context"/>
+									</html:select>
+								</td>
 								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
@@ -118,27 +125,29 @@ function showErrorMessage() {
 																			</html:submit></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="10"><img src="images/null.gif" width="1" height="10"></td>
+								<td colspan="12" height="10"><img src="images/null.gif" width="1" height="10"></td>
 							</tr>
 							<tr>
-								<td colspan="9" align="center"><i>Haga doble clic para editar el texto.</i></td>
+								<td colspan="12" align="center"><i><%=ResourceBundleCache.get(getServletInfo(), "ayuda")%></i></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="10"><img src="images/null.gif" width="1" height="10"></td>
+								<td colspan="12" height="10"><img src="images/null.gif" width="1" height="10"></td>
 							</tr>
 							<tr>
-								<td colspan="9" height="25" align="center">
+								<td colspan="12" height="25" align="center">
 									<table width="100%" border="0">
 										<tr class="d1">
+											<td><%=ResourceBundleCache.get(getServletInfo(), "lenguage")%></td>
 											<td><%=ResourceBundleCache.get(getServletInfo(), "contexto")%></td>
 											<td><%=ResourceBundleCache.get(getServletInfo(), "clave")%></td>
 											<td><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%></td>
 										</tr> 
 										<logic:iterate name="ResourceBundleForm" property="searchResult" id="iterResourceBundle" indexId="iterIndex"> 
 											<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
+												<td><bean:write name="iterResourceBundle" property="rbLanguage" /></td>
 												<td><bean:write name="iterResourceBundle" property="rbContext" /></td>
 												<td><bean:write name="iterResourceBundle" property="rbKey" /></td>
-												<td><p class="editable textarea" rbContext="<bean:write name="iterResourceBundle" property="rbContext" />" rbKey="<bean:write name="iterResourceBundle" property="rbKey" />"><bean:write name="iterResourceBundle" property="rbValue" /></p></td>
+												<td><p class="editable textarea" rbLanguage="<bean:write name="iterResourceBundle" property="rbLanguage" />" rbContext="<bean:write name="iterResourceBundle" property="rbContext" />" rbKey="<bean:write name="iterResourceBundle" property="rbKey" />"><bean:write name="iterResourceBundle" property="rbValue" /></p></td>
 											</tr> 
 										</logic:iterate>
 									</table>

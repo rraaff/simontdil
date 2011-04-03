@@ -163,12 +163,16 @@ public class GenerateCleanDatabase {
 		BufferedReader bufferedRead = new BufferedReader(new InputStreamReader(rbs));
 		String line = bufferedRead.readLine();
 		while (line != null) {
-			String context = line.substring(0, line.indexOf('-'));
-			String key = line.substring(line.indexOf('-') + 1, line.indexOf('='));
+			int first = line.indexOf('-');
+			String lang = line.substring(0, first);
+			int second = line.indexOf('-', first + 1);
+			String context = line.substring(first + 1, second);
+			String key = line.substring(second + 1, line.indexOf('='));
 			String value = line.substring(line.indexOf('=') + 1);
-			ResourceBundle rb = ResourceBundleDAO.getResourceBundle(context, key);
+			ResourceBundle rb = ResourceBundleDAO.getResourceBundle(lang, context, key);
 			if (rb == null) {
 				rb = new ResourceBundle();
+				rb.setRbLanguage(lang);
 				rb.setRbContext(context);
 				rb.setRbKey(key);
 				rb.setRbValue(value);

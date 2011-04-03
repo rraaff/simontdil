@@ -2,6 +2,7 @@ package com.tdil.simon.data.model;
 
 public class ResourceBundle extends PersistentObject {
 
+	private String rbLanguage;
 	private String rbContext;
 	private String rbKey;
 	private String rbValue;
@@ -23,6 +24,12 @@ public class ResourceBundle extends PersistentObject {
 	}
 	public void setRbValue(String value) {
 		this.rbValue = value;
+	}
+	public String getRbLanguage() {
+		return rbLanguage;
+	}
+	public void setRbLanguage(String rbLanguage) {
+		this.rbLanguage = rbLanguage;
 	}
 
 }
