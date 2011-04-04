@@ -66,11 +66,7 @@ public abstract class SimonAction extends Action {
 	}
 	
 	protected boolean isIndexedOperation(final HttpServletRequest request, String context, String key) {
-		String op = request.getParameter("indexOperation");
-		if (op == null || op.length() == 0) {
-			return false;
-		}
-		return op.equals(ResourceBundleCache.get(context, key));
+		return isIndexedOperationByKey(request, context, key);
 	}
 	
 	public static boolean isIndexedOperationByKey(final HttpServletRequest request, String context, String key) {
