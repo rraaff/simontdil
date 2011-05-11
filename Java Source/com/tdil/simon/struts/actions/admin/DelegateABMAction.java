@@ -18,6 +18,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.DelegateABMForm;
 import com.tdil.simon.utils.DelegateSiteCache;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class DelegateABMAction extends ABMAction {
@@ -72,10 +73,10 @@ public class DelegateABMAction extends ABMAction {
 			return mapping.findForward("continue");
 		}
 		
-		if (delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
+		if (StringUtils.equalsUnescaped(delegateABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			delegateABMForm.reset();
 		}
-		if (delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
+		if (StringUtils.equalsUnescaped(delegateABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "crear"))
 				|| delegateABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(delegateABMForm, request, mapping);
 		}

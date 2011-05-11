@@ -10,6 +10,7 @@ import org.apache.struts.action.ActionMapping;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.SearchObservationsForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ListObservationsSearchResult extends SimonAction {
@@ -26,7 +27,7 @@ public class ListObservationsSearchResult extends SimonAction {
 	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		SearchObservationsForm searchObservationsForm = (SearchObservationsForm)form;
-		if (searchObservationsForm.getOperation().equals(ResourceBundleCache.get("listObservationsSearchResult", "volver"))) {
+		if (StringUtils.equalsUnescaped(searchObservationsForm.getOperation(),ResourceBundleCache.get("listObservationsSearchResult", "volver"))) {
 			return mapping.findForward("goToSearch");
 		}
 		return null;

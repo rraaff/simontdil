@@ -28,8 +28,6 @@ CREATE  TABLE `SYSTEMUSER` (
   `administrator` INT NULL ,
   `moderator` INT NULL ,
   `delegate` INT NULL ,
-  `typeOne` INT NULL ,
-  `typeTwo` INT NULL ,
   `canSign` INT NULL ,
   `designer` INT NULL ,
   `passwordResetRequest` INT NULL ,
@@ -46,8 +44,7 @@ CREATE  TABLE `DOCUMENT` (
   `title` VARCHAR(100) NOT NULL ,
   `introduction` MEDIUMTEXT NULL ,
   `principal` INT NULL ,
-  `typeOne` INT NULL ,
-  `typeTwo` INT NULL ,
+  `documentTypeId` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /
@@ -100,7 +97,7 @@ CREATE  TABLE `SITE` (
 /
 CREATE  TABLE `REFERENCEDOCUMENT` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `categoryId` INT NULL ,
+  `subCategoryId` INT NULL ,
   `title` VARCHAR(100) NULL ,
   `fileName` VARCHAR(100) NULL ,
   `extension` VARCHAR(10) NULL ,
@@ -171,3 +168,40 @@ CREATE  TABLE `LOGO` (
   `scriptId` VARCHAR(100) NULL ,
   PRIMARY KEY (`id`) );
 /
+CREATE  TABLE `DOCUMENTTYPE` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(100) NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+/ 
+CREATE  TABLE `USERGROUP` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(100) NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+/ 
+CREATE  TABLE `SUBCATEGORY` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `categoryId` INT NULL ,
+  `name` VARCHAR(100) NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+/ 
+CREATE  TABLE `GROUPPERMISSION` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `groupId` INT NULL ,
+  `objectId` INT NULL ,
+  `objectType` VARCHAR(100) NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+/ 
+CREATE  TABLE `GROUPMEMBER` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `groupId` INT NULL ,
+  `systemUserId` INT NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+  /
+INSERT INTO SYSPROPERTIES (propKey, propValue, deleted) VALUES ('simon.mayorVersion', '2', 0);
+/
+INSERT INTO SYSPROPERTIES (propKey, propValue, deleted) VALUES ('simon.minorVersion', '0', 0);

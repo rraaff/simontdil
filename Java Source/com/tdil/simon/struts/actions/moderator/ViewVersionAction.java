@@ -27,6 +27,7 @@ import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.struts.forms.ViewVersionForm;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ViewVersionAction extends SimonAction implements TransactionalActionWithValue {
@@ -50,8 +51,8 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return mapping.findForward("invalidAction");
 		}
 		final ViewVersionForm viewForm = (ViewVersionForm) form;
-		if (!viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf"))) {
-			if (!viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
+		if (!StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf"))) {
+			if (!StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
 				if (this.getLoggedUser(request).isDelegate()) {
 					if (Site.IN_NEGOTIATION.equals(Site.getDELEGATE_SITE().getStatus())) {
 						return mapping.findForward("goToDelegateNegotiation");
@@ -68,7 +69,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 
 		final ViewVersionForm viewForm = (ViewVersionForm) form;
 		viewForm.setUser(this.getLoggedUser(request));
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewVersion", "finalizarFirmas"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewVersion", "finalizarFirmas"))) {
 			// Custom check for shared page and action
 			if (UserTypeValidation.isValid(this.getLoggedUser(request), new UserTypeValidation[] { UserTypeValidation.MODERATOR})) {
 				TransactionProvider.executeInTransaction(new TransactionalAction() {
@@ -90,7 +91,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 				return mapping.findForward("invalidAction");
 			}
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewVersion", "negociar"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewVersion", "negociar"))) {
 			// Custom check for shared page and action
 			if (UserTypeValidation.isValid(this.getLoggedUser(request), new UserTypeValidation[] { UserTypeValidation.MODERATOR})) {
 				Integer newVersionId = (Integer)TransactionProvider.executeInTransaction(this, form);
@@ -102,27 +103,27 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 				return mapping.findForward("invalidAction");
 			}
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewVersion", "buscarObservaciones"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewVersion", "buscarObservaciones"))) {
 			request.setAttribute("versionId", String.valueOf(viewForm.getVersion().getVersion().getId()));
 			return mapping.findForward("goToSearchObservations");
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf"))) {
 			request.getSession().setAttribute("downloadPDF", viewForm);
 			return mapping.findForward("downloadPdf");
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersion", "verIdiomaDefault"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersion", "verIdiomaDefault"))) {
 			viewForm.setShowSpanish(true);
 			return mapping.findForward("viewSingleVersion");
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersion", "verIdiomaAlternativo"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersion", "verIdiomaAlternativo"))) {
 			viewForm.setShowSpanish(false);
 			return mapping.findForward("viewSingleVersion");
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
 			request.getSession().setAttribute("downloadRTF", viewForm);
 			return mapping.findForward("downloadRtf");
 		}
-		if (viewForm.getOperation().equals(ResourceBundleCache.get("viewVersion", "listarObservaciones"))) {
+		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewVersion", "listarObservaciones"))) {
 			TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {
 				public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 					ViewVersionForm viewVersionForm = (ViewVersionForm) form;

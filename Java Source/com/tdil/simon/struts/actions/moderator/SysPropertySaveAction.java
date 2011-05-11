@@ -12,6 +12,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.struts.forms.ABMForm;
 import com.tdil.simon.struts.forms.SysPropertyABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
@@ -29,7 +30,7 @@ public class SysPropertySaveAction extends ABMAction {
 			throws Exception {
 		final SysPropertyABMForm sysForm = (SysPropertyABMForm) form;
 
-		if (sysForm.getOperation().equals(ResourceBundleCache.get("sysProperty", "modificar"))) {
+		if (StringUtils.equalsUnescaped(sysForm.getOperation(),ResourceBundleCache.get("sysProperty", "modificar"))) {
 			return this.validateAndSave(sysForm, request, mapping);
 		} 
 		return mapping.findForward("continue");

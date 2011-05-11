@@ -1,9 +1,9 @@
 package com.tdil.simon.data.ibatis;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
+import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.SystemUser;
 
 public class SystemUserDAO {
@@ -29,25 +29,12 @@ public class SystemUserDAO {
 		return (Integer) IBatisManager.sqlMapper.queryForObject("selectSystemUserCount", countryId);
 	}
 
-	public static Integer selectCountCanSignFor(Integer countryId, boolean typeOne, boolean typeTwo) throws SQLException {
-		int count = 0;
-		if (typeOne) {
-			count = count + (Integer) IBatisManager.sqlMapper.queryForObject("selectSystemUserCanSignCountTypeOne", countryId);
-		}
-		if (typeTwo) {
-			count = count + (Integer) IBatisManager.sqlMapper.queryForObject("selectSystemUserCanSignCountTypeTwo", countryId);
-		}
-		return count;
+	public static Integer selectCountCanSignFor(Integer countryId) throws SQLException {
+		return (Integer) IBatisManager.sqlMapper.queryForObject("selectSystemUserCanSignCount", countryId);
 	}
 	
-	public static List selectDelegateUsers(boolean typeOne, boolean typeTwo) throws SQLException {
-		if (typeOne) {
-			return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersTypeOne");
-		}
-		if (typeTwo) {
-			return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersTypeTwo");
-		}
-		return new ArrayList();
+	public static List selectDelegateUsersThatCanAccess(Document document) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersThatCanAccessDocumenType", document.getDocumentTypeId());
 	}
 	
 	public static List selectModerators() throws SQLException {

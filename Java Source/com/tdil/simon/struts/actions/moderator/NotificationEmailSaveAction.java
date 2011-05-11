@@ -11,6 +11,7 @@ import org.apache.struts.action.ActionMapping;
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.struts.forms.NotificationEmailABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class NotificationEmailSaveAction extends ABMAction {
@@ -27,7 +28,7 @@ public class NotificationEmailSaveAction extends ABMAction {
 			throws Exception {
 		final NotificationEmailABMForm notificationEmailABMForm = (NotificationEmailABMForm) form;
 
-		if (notificationEmailABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
+		if (StringUtils.equalsUnescaped(notificationEmailABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(notificationEmailABMForm, request, mapping);
 		} 
 		return mapping.findForward("continue");

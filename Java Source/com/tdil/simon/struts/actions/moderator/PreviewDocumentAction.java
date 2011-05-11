@@ -12,6 +12,7 @@ import com.tdil.simon.data.model.Version;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.utils.DelegateSiteCache;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class PreviewDocumentAction extends SimonAction {
@@ -28,52 +29,52 @@ public class PreviewDocumentAction extends SimonAction {
 			throws Exception {
 		CreateDocumentForm createDocumentForm = (CreateDocumentForm) form;
 
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "editarParrafos"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "editarParrafos"))) {
 			request.getSession().setAttribute("paragraphNegotiated", "true");
 			return mapping.findForward("editParagraphs");
 		}
-		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
+		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
 			createDocumentForm.setVersionStatus(Version.DRAFT);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
 		
-		if (createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
+		if (createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
 			createDocumentForm.setVersionStatus(Version.DRAFT);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
 
-		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarYContinuar"))) {
+		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarYContinuar"))) {
 			createDocumentForm.setVersionStatus(Version.IN_NEGOTIATION);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
-		if (createDocumentForm.isDesigner() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarDisenio"))) {
+		if (createDocumentForm.isDesigner() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarDisenio"))) {
 			//createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			return mapping.findForward("designerHome");
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "ponerEnFirma"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "ponerEnFirma"))) {
 			createDocumentForm.setVersionStatus(Version.IN_SIGN);
 			createDocumentForm.save();
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
-		if (!createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "finalizar"))) {
+		if (!createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "finalizar"))) {
 			createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
 		
-		if (createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "grabarIdiomaAlternativo"))) {
+		if (createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarIdiomaAlternativo"))) {
 			createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			return mapping.findForward("designerHome");
 		}
 		
-		if (!createDocumentForm.isPortugues() && createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "consolidar"))) {
+		if (!createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "consolidar"))) {
 			return mapping.findForward("consolidate");
 		}
 		return null;

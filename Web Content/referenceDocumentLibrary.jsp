@@ -64,6 +64,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
 										<td width="80"><img src="images/null.gif" width="1" height="1"></td>
 									</tr> 
@@ -71,6 +72,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
+											<td align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
 											<td><a href="./download.do?action=refdoc&fileId=<bean:write name="iterRefDoc" property="id" />">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%>

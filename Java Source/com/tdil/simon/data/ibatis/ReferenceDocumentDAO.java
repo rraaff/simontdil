@@ -6,6 +6,7 @@ import java.util.List;
 import com.tdil.simon.data.model.Category;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
+import com.tdil.simon.data.model.SystemUser;
 
 public class ReferenceDocumentDAO {
 
@@ -18,19 +19,26 @@ public class ReferenceDocumentDAO {
 	public static List selectNotDeletedReferenceDocument() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocumentsNotDeleted");
 	}
+	public static List selectNotDeletedReferenceDocument(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocumentsNotDeletedForUser", user.getId());
+	}
 	
 	public static List selectNotDeletedReferenceDocumentForModeratorHome() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHome");
+	}
+	
+	public static List selectNotDeletedReferenceDocumentForModeratorHome(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeForUser", user.getId());
 	}
 	
 	public static List selectNotDeletedReferenceDocumentForModeratorHomeNoLimit() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeNoLimit");
 	}
 	
-	public static List selectAllReferenceDocumentForCategory(Category category) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectAllReferenceDocumentsNotDeletedForCategory", category.getId());
+	public static List selectNotDeletedReferenceDocumentForModeratorHomeNoLimit(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeForUserNoLimit", user.getId());
 	}
-
+	
 	public static ReferenceDocument getReferenceDocument(int id) throws SQLException {
 		return (ReferenceDocument) IBatisManager.sqlMapper.queryForObject(
 				"selectReferenceDocumentById", id);

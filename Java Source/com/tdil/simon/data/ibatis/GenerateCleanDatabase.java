@@ -58,6 +58,7 @@ public class GenerateCleanDatabase {
 			argentina.setName(countryHost);
 			argentina.setHost(true);
 			argentina.setDeleted(false);
+			argentina.setLanguage("castellano");
 			countryId = CountryDAO.insertCountry(argentina);
 			countryDesc = countryHost;
 		} else {
@@ -102,8 +103,15 @@ public class GenerateCleanDatabase {
 			site.setDeleted(false);
 			SiteDAO.insertSite(site);
 		}
-		
-		String propvalue = SysPropertiesDAO.getPropertyByKey("simon.server.name");
+		String propvalue = SysPropertiesDAO.getPropertyByKey("simon.mailserver");
+		if (propvalue == null) {
+			SysProperties sysProperties = new SysProperties();
+			sysProperties.setPropKey("simon.mailserver");
+			sysProperties.setPropValue("localhost");
+			sysProperties.setDeleted(false);
+			SysPropertiesDAO.insertProperty(sysProperties);
+		}
+		propvalue = SysPropertiesDAO.getPropertyByKey("simon.server.name");
 		if (propvalue == null) {
 			SysProperties sysProperties = new SysProperties();
 			sysProperties.setPropKey("simon.server.name");

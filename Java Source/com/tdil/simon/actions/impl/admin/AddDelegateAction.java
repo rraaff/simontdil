@@ -51,12 +51,12 @@ public class AddDelegateAction extends DelegateAction implements TransactionalAc
 		if (country == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
 		}
-//		if (this.canSignBoolean) {
-//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-//			if (canSignCount != 0) {
-//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-//			}
-//		}
+		if (this.canSignBoolean) {
+			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
+			if (canSignCount != 0) {
+				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
+			}
+		}
 		String generatedPassword = SystemUser.generateRandomPassword();
 		SystemUser user = new SystemUser();
 		user.setUsername(this.username);
@@ -65,8 +65,8 @@ public class AddDelegateAction extends DelegateAction implements TransactionalAc
 		user.setEmail(this.email);
 		user.setCountryId(this.countryIdInt);
 		user.setDelegate(true);
-		user.setTypeOne(this.typeOneBoolean);
-		user.setTypeTwo(this.typeTwoBoolean);
+//		user.setTypeOne(this.typeOneBoolean);
+//		user.setTypeTwo(this.typeTwoBoolean);
 		user.setAdministrator(false);
 		user.setModerator(false);
 		user.setDesigner(false);

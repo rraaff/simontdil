@@ -59,11 +59,7 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 			return result;
 		}
 		Document doc = DelegateSiteCache.getDocumentUnderWork();
-		if (doc.isTypeOne() && loggedUserForm.getUser().isDelegate() && !loggedUserForm.getUser().isTypeOne()) {
-			result.put("sitestatus", Site.NORMAL);
-			return result;
-		}
-		if (doc.isTypeTwo() && loggedUserForm.getUser().isDelegate() && !loggedUserForm.getUser().isTypeTwo()) {
+		if (loggedUserForm.getUser().isDelegate() && !loggedUserForm.getUser().hasPermissionFor(doc)) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}

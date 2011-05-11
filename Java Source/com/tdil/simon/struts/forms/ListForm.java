@@ -11,6 +11,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 
 public class ListForm extends ActionForm {
@@ -20,6 +21,7 @@ public class ListForm extends ActionForm {
 	private Map<String, String> params = new HashMap<String, String>();
 	private List list;
 	
+	private SystemUser user;
 	private String operation;
 
 	public List getList() {
@@ -75,6 +77,14 @@ public class ListForm extends ActionForm {
 		Version version = (Version)this.getList().get(position);
 		version.setCommentsEnabled(true);
 		VersionDAO.enableComments(version);
+	}
+
+	public SystemUser getUser() {
+		return user;
+	}
+
+	public void setUser(SystemUser user) {
+		this.user = user;
 	}
 	
 }

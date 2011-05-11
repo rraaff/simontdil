@@ -45,7 +45,19 @@ public abstract class SimonAction extends Action {
 		if (DelegateSiteCache.shouldProceedToNegotiation(this.getLoggedUser(request))){
 			return mapping.findForward("goToDelegateNegotiation");
 		} 
-		return this.basicExecute(mapping, form, request, response);
+		try {
+			return this.basicExecute(mapping, form, request, response);
+		} catch (RuntimeException e) {
+			if (e instanceof UnAuthorizedAccessException) {
+				UnAuthorizedAccessException ex = (UnAuthorizedAccessException)e;
+				ex.setAction(this.getClass());
+				getLog().error(ex.getMessage(), ex);
+				return mapping.findForward("invalidAction");
+			} else {
+				// TODO doc_type
+				return mapping.findForward("invalidAction");
+			}
+		}
 	}
 	
 	protected abstract UserTypeValidation[] getPermissions();

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import com.tdil.simon.data.model.Document;
+import com.tdil.simon.data.model.SystemUser;
 
 public class DocumentDAO {
 
@@ -24,18 +25,12 @@ public class DocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsNoLimit");
 	}
 	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHome(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
-		HashMap params = new HashMap();
-		params.put("typeOne", documentTypeOne);
-		params.put("typeTwo", documentTypeTwo);
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypes", params);
+	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHome(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypes", user.getId());
 	}
 	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
-		HashMap params = new HashMap();
-		params.put("typeOne", documentTypeOne);
-		params.put("typeTwo", documentTypeTwo);
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit", params);
+	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit", user.getId());
 	}
 	
 	
@@ -43,13 +38,6 @@ public class DocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDocumentWithConsolidatedVersions");
 	}
 
-	public static Document selectPrincipalDocument(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
-		HashMap params = new HashMap();
-		params.put("typeOne", documentTypeOne);
-		params.put("typeTwo", documentTypeTwo);
-		return (Document)IBatisManager.sqlMapper.queryForObject("selectPrincipalDocument", params);
-	}
-	
 	public static Document getDocumentForNegotiation() throws SQLException {
 		return (Document) IBatisManager.sqlMapper.queryForObject(
 				"selectDocumentForNegotiation");
@@ -77,16 +65,12 @@ public class DocumentDAO {
 		IBatisManager.sqlMapper.update("removeAllPrincipal");
 	}
 
-	public static void markNotPrincipal(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
-		HashMap params = new HashMap();
-		params.put("typeOne", documentTypeOne);
-		params.put("typeTwo", documentTypeTwo);
-		IBatisManager.sqlMapper.update("updateAllAsNotPrincipal", params);
+	public static void markNotPrincipal(int documentTypeId) throws SQLException {
+		IBatisManager.sqlMapper.update("updateAllAsNotPrincipal", documentTypeId);
 	}
 
 	public static Document getDocumentUnderWork() throws SQLException {
 		return (Document) IBatisManager.sqlMapper.queryForObject("getDocumentUnderWork");
 	}
-
 
 }

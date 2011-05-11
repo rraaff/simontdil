@@ -116,6 +116,7 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 			throw new ValidationException(new ValidationError(ValidationErrors.GENERAL_ERROR_TRY_AGAIN));
 		}
 		if (exists.isDelegate()) {
+			exists.initPermissionCache();
 			DelegateAuditDAO.registerAction(exists.getId(), exists.getCountryId(), exists.getId(), DelegateAudit.LOGIN);
 		}
 		loginform.init(exists);

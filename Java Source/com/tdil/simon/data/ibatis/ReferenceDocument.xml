@@ -13,7 +13,7 @@
   <resultMap class="ReferenceDocument" id="ReferenceDocumentWithDocument">
    <result column="id" property="id" />
    <result column="deleted" property="deleted" />
-   <result column="categoryId" property="categoryId" />
+   <result column="subCategoryId" property="subCategoryId" />
    <result column="title" property="title" />
    <result column="fileName" property="fileName" />
    <result column="extension" property="extension" />
@@ -23,46 +23,104 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
-    from REFERENCEDOCUMENT, CATEGORY
-    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
     order by title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName
-    from REFERENCEDOCUMENT, CATEGORY
-    where REFERENCEDOCUMENT.categoryId = CATEGORY.id
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
     and CATEGORY.deleted = 0
+    and SUBCATEGORY.deleted = 0
     order by CATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
+  <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
+    and REFERENCEDOCUMENT.deleted = 0
+    and CATEGORY.deleted = 0
+    and SUBCATEGORY.deleted = 0
+    AND SUBCATEGORY.id IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+    )
+    order by CATEGORY.name, REFERENCEDOCUMENT.title
+  </select>
+  
+  
   <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocument">
     select *
-   	from REFERENCEDOCUMENT, CATEGORY 
+   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND CATEGORY.deleted = 0
-   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	and SUBCATEGORY.deleted = 0
+   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
+   	order by REFERENCEDOCUMENT.id desc
+   	LIMIT 11
+  </select>
+  
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocument">
+    select *
+   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	and SUBCATEGORY.deleted = 0
+   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
+    AND SUBCATEGORY.id IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+    )
    	order by REFERENCEDOCUMENT.id desc
    	LIMIT 11
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHomeNoLimit" resultClass="ReferenceDocument">
     select *
-   	from REFERENCEDOCUMENT, CATEGORY 
+   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY 
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND CATEGORY.deleted = 0
-   	AND REFERENCEDOCUMENT.categoryId = CATEGORY.id
+   	and SUBCATEGORY.deleted = 0
+   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
    	order by REFERENCEDOCUMENT.id desc
   </select>
   
-  <select id="selectAllReferenceDocumentsNotDeletedForCategory" parameterClass="int" resultClass="ReferenceDocument">
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUserNoLimit" parameterClass="int" resultClass="ReferenceDocument">
     select *
-   	from REFERENCEDOCUMENT 
-   	WHERE deleted = 0
-   	and categoryId = #id#
-   	order by title
+   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY 
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND CATEGORY.deleted = 0
+   	and SUBCATEGORY.deleted = 0
+   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
+    and SUBCATEGORY.categoryId = CATEGORY.id
+    AND SUBCATEGORY.id IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+    )
+   	order by REFERENCEDOCUMENT.id desc
   </select>
   
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
@@ -88,9 +146,9 @@
  
   <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
     insert into REFERENCEDOCUMENT (
-      id, categoryId, title, fileName, extension, contentType, document, deleted
+      id, subCategoryId, title, fileName, extension, contentType, document, deleted
     ) values (
-      #id#, #categoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #deleted#
+      #id#, #subCategoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #deleted#
     )
     <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -100,7 +158,7 @@
   
   <update id="updateReferenceDocument" parameterClass="ReferenceDocument">
     update REFERENCEDOCUMENT set
-    	categoryId = #categoryId#,
+    	subCategoryId = #subCategoryId#,
       title = #title#,
       fileName = #fileName#,
       extension = #extension#,

@@ -14,6 +14,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.forms.ReferenceDocumentABMForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ReferenceDocumentABMAction extends ABMAction {
@@ -49,10 +50,10 @@ public class ReferenceDocumentABMAction extends ABMAction {
 			return mapping.findForward("continue");
 		}
 		
-		if (referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "cancelar"))) {
+		if (StringUtils.equalsUnescaped(referenceDocumentABMForm.getOperation(),ResourceBundleCache.get("referenceDocumentABM", "cancelar"))) {
 			referenceDocumentABMForm.reset();
 		}
-		if (referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "crear"))
+		if (StringUtils.equalsUnescaped(referenceDocumentABMForm.getOperation(),ResourceBundleCache.get("referenceDocumentABM", "crear"))
 				|| referenceDocumentABMForm.getOperation().equals(ResourceBundleCache.get("referenceDocumentABM", "modificar"))) {
 			return this.validateAndSave(referenceDocumentABMForm, request, mapping);
 		}

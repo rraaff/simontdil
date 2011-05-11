@@ -2,7 +2,7 @@ package com.tdil.simon.data.model;
 
 public class ReferenceDocument extends PersistentObject {
 	
-	private int categoryId;
+	private int subCategoryId;
 	private String title;
 	private String fileName;
 	private String extension;
@@ -28,11 +28,11 @@ public class ReferenceDocument extends PersistentObject {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public int getCategoryId() {
-		return categoryId;
+	public int getSubCategoryId() {
+		return subCategoryId;
 	}
-	public void setCategoryId(int categoryId) {
-		this.categoryId = categoryId;
+	public void setSubCategoryId(int categoryId) {
+		this.subCategoryId = categoryId;
 	}
 	public String getExtension() {
 		return extension;

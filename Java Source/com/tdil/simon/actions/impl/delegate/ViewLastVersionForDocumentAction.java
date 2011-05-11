@@ -39,9 +39,9 @@ public class ViewLastVersionForDocumentAction extends AbstractAction implements 
 	
 	public void executeInTransaction() throws SQLException, ValidationException {
 		Document doc = DocumentDAO.getDocument(this.oid);
-		if (!doc.canAccess(this.user)) {
-			throw new ValidationException(new ValidationError(ValidationErrors.DOCUMENT_NOT_FOR_USER));
-		}
+//		if (!doc.canAccess(this.user)) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.DOCUMENT_NOT_FOR_USER));
+//		}
 		Version version = VersionDAO.getLastVersionForDocument(this.oid);
 		if (version == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.VERSION_DOES_NOT_EXISTS));

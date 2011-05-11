@@ -51,7 +51,7 @@ public class NewObservationNotification {
 	public void init() throws NumberFormatException, SQLException {
 		this.version = VersionDAO.getVersion(Integer.valueOf(this.getVersionId()));
 		this.document = DocumentDAO.getDocument(this.version.getDocumentId());
-		this.toNotify = SystemUserDAO.selectDelegateUsers(this.document.isTypeOne(), this.document.isTypeTwo());
+		this.toNotify = SystemUserDAO.selectDelegateUsersThatCanAccess(this.document);
 		this.toNotify.addAll(SystemUserDAO.selectModerators());
 		this.country = CountryDAO.getCountry(this.user.getCountryId());
 	}

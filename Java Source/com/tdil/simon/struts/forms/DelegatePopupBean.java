@@ -17,8 +17,8 @@ import com.tdil.simon.database.TransactionProvider;
 public class DelegatePopupBean {
 
 	private SystemUser loggedUser;
-	private VersionForListVO typeOne;
-	private VersionForListVO typeTwo;
+	
+	private List<VersionForListVO> principalVersions;
 	
 	private List<Document> otherDocumentsList;
 	
@@ -31,22 +31,9 @@ public class DelegatePopupBean {
 	public void init() throws SQLException, ValidationException {
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
-				if (DelegatePopupBean.this.getLoggedUser().isTypeOne()) {
-					setTypeOne(VersionDAO.selectPrincipalVersion(true, false));
-				} else {
-					setTypeOne(null);
-				}
-				if (DelegatePopupBean.this.getLoggedUser().isTypeTwo()) {
-					setTypeTwo(VersionDAO.selectPrincipalVersion(false, true));
-				} else {
-					setTypeTwo(null);
-				}
-				if (DelegatePopupBean.this.getLoggedUser().isTypeOne() && DelegatePopupBean.this.getLoggedUser().isTypeTwo()) {
-					setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit());
-				} else {
-					setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(DelegatePopupBean.this.getLoggedUser().isTypeOne(), DelegatePopupBean.this.getLoggedUser().isTypeTwo()));
-				}
-				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHomeNoLimit());
+				setPrincipalVersions(VersionDAO.selectPrincipalVersions(DelegatePopupBean.this.getLoggedUser()));
+				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(DelegatePopupBean.this.getLoggedUser()));
+				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHomeNoLimit(DelegatePopupBean.this.getLoggedUser()));
 			}
 		});
 	}
@@ -57,22 +44,6 @@ public class DelegatePopupBean {
 
 	public void setLoggedUser(SystemUser loggedUser) {
 		this.loggedUser = loggedUser;
-	}
-
-	public VersionForListVO getTypeOne() {
-		return typeOne;
-	}
-
-	public void setTypeOne(VersionForListVO typeOne) {
-		this.typeOne = typeOne;
-	}
-
-	public VersionForListVO getTypeTwo() {
-		return typeTwo;
-	}
-
-	public void setTypeTwo(VersionForListVO typeTwo) {
-		this.typeTwo = typeTwo;
 	}
 
 	public List<Document> getOtherDocumentsList() {
@@ -90,4 +61,13 @@ public class DelegatePopupBean {
 	public void setReferenceList(List<ReferenceDocument> referenceList) {
 		this.referenceList = referenceList;
 	}
+	
+	public List<VersionForListVO> getPrincipalVersions() {
+		return principalVersions;
+	}
+
+	public void setPrincipalVersions(List<VersionForListVO> principalVersions) {
+		this.principalVersions = principalVersions;
+	}
+
 }

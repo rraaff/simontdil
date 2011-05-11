@@ -1,5 +1,7 @@
 package com.tdil.simon.utils;
 
+import org.apache.commons.lang.StringEscapeUtils;
+
 public class StringUtils {
 
 	public static String notNullValueOf(String st) {
@@ -8,5 +10,11 @@ public class StringUtils {
 		} else {
 			return st;
 		}
+	}
+	
+	public static boolean equalsUnescaped(String first, String second) {
+		String firstToCompare = StringEscapeUtils.unescapeHtml(first);
+		String secondToCompare = StringEscapeUtils.unescapeHtml(second);
+		return firstToCompare.equals(secondToCompare);
 	}
 }

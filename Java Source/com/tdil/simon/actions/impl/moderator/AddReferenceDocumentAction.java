@@ -78,7 +78,7 @@ public class AddReferenceDocumentAction extends AbstractAction implements Transa
 			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
 		}
 		ReferenceDocument ref = new ReferenceDocument();
-		ref.setCategoryId(category.getId());
+		ref.setSubCategoryId(category.getId());
 		ref.setTitle(this.title);
 		ref.setFileName(this.docNameAndType[0]);
 		ref.setExtension(this.docNameAndType[1]);

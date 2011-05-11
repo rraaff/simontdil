@@ -15,6 +15,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.SearchObservationsForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class SearchObservationsAction extends SimonAction implements TransactionalActionWithValue {
@@ -31,11 +32,11 @@ public class SearchObservationsAction extends SimonAction implements Transaction
 	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		SearchObservationsForm searchObservationsForm = (SearchObservationsForm)form;
-		if (searchObservationsForm.getOperation().equals(ResourceBundleCache.get("searchObservations", "buscar"))) {
+		if (StringUtils.equalsUnescaped(searchObservationsForm.getOperation(),ResourceBundleCache.get("searchObservations", "buscar"))) {
 			TransactionProvider.executeInTransaction(this, form);
 			return mapping.findForward("continue");
 		}
-		if (searchObservationsForm.getOperation().equals(ResourceBundleCache.get("searchObservations", "volver"))) {
+		if (StringUtils.equalsUnescaped(searchObservationsForm.getOperation(),ResourceBundleCache.get("searchObservations", "volver"))) {
 			return mapping.findForward("back");
 		}
 		return null;

@@ -17,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.ResourceBundleForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ResourceBundleSaveAction extends ABMAction {
@@ -32,7 +33,7 @@ public class ResourceBundleSaveAction extends ABMAction {
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		final ResourceBundleForm resourceBundleForm = (ResourceBundleForm) form;
-		if (resourceBundleForm.getOperation().equals(ResourceBundleCache.get("resourceBundle", "buscar"))) {
+		if (StringUtils.equalsUnescaped(resourceBundleForm.getOperation(),ResourceBundleCache.get("resourceBundle", "buscar"))) {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
 					resourceBundleForm.search();

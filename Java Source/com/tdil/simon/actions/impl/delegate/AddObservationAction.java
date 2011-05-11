@@ -55,7 +55,7 @@ public class AddObservationAction extends AbstractAction implements Transactiona
 		if (version == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.VERSION_DOES_NOT_EXISTS));
 		}
-		VersionValidation.validateDocumentAndUserType(version, this.user);
+//		VersionValidation.validateDocumentAndUserType(version, this.user);
 		Date today = new Date();
 		if (today.after(version.getUpToCommentDate())) {
 			throw new ValidationException(new ValidationError(ValidationErrors.VERSION_NOT_COMMENTABLE));
