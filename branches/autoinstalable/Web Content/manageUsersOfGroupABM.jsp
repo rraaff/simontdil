@@ -41,12 +41,6 @@ if ( dw_scrollObj.isSupported() ) {
 <html:form method="POST" action="/manageUsersOfGroupABM">
 <input type="hidden" name="indexOperation" value=""/>
 <input type="hidden" name="indexClicked"/>
-
-<!-- TODO_PABLO-->
-<html:link  action="editUserGroup.st?" paramName="ManageUsersOfGroupABMForm" paramProperty="userGroupId" paramId="id">
-	<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%>
-</html:link>
-
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td width="35%">
@@ -173,7 +167,13 @@ if ( dw_scrollObj.isSupported() ) {
 		<!-- fin tabla template -->
 		</td>
 	</tr>
+	<tr>
+		<td colspan="3" align="center"><html:link  action="editUserGroup.st?" paramName="ManageUsersOfGroupABMForm" paramProperty="userGroupId" paramId="id">
+			<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%>
+		</html:link></td>
+	</tr>
 </table>
+
 </html:form>
 </div>
 <%@ include file="includes/footer.jsp" %>
