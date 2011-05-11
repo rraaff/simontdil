@@ -166,6 +166,7 @@ public class DownloadController extends HttpServlet {
 		});
 	}
 
+	// TODO doc_type chequear permisos
 	private void downloadRefDoc(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Integer id = Integer.parseInt(req.getParameter("fileId"));
 		String fileName = getServerRefDocFileNameFor("flag", id);

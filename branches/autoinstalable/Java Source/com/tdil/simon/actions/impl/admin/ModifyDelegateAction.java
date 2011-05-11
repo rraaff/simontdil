@@ -69,8 +69,8 @@ public class ModifyDelegateAction extends DelegateAction implements Transactiona
 		toModify.setName(this.name);
 		toModify.setEmail(this.email);
 		toModify.setCountryId(this.countryIdInt);
-		toModify.setTypeOne(this.typeOneBoolean);
-		toModify.setTypeTwo(this.typeTwoBoolean);
+//		toModify.setTypeOne(this.typeOneBoolean);
+//		toModify.setTypeTwo(this.typeTwoBoolean);
 		toModify.setCanSign(this.canSignBoolean);
 		toModify.setJob(this.job);
 		toModify.setCountryDesc(this.countryDesc);

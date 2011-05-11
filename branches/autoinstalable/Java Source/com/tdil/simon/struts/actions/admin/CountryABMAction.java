@@ -18,6 +18,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.CountryABMForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.LogOnceListener;
 import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
@@ -68,11 +69,11 @@ public class CountryABMAction extends ABMAction {
 			});
 			return mapping.findForward("continue");
 		}
-		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
+		if (StringUtils.equalsUnescaped(countryABMForm.getOperation(), ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			countryABMForm.reset();
 		}
-		if (countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
-				|| countryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
+		if (StringUtils.equalsUnescaped(countryABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "crear"))
+				|| StringUtils.equalsUnescaped(countryABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			ActionForward result = this.validateAndSave(countryABMForm, request, mapping);
 			if (countryABMForm.isHost()) {
 				SystemConfig.loadPropertiesFromDB();

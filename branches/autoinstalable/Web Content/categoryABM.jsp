@@ -124,6 +124,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editar")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editarSubCategorias")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "borrarReactivar")%></td>
 									</tr> 
 									<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
@@ -131,7 +132,10 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="name" /></td>
 											<td><html:link  action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											</html:link></td>
+											<td><html:link  action="goToSubCategoryABM.st?" paramName="iterCategory" paramProperty="id" paramId="categoryId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editarSubCategorias")%>
+											</html:link></td>
 											<td><logic:equal name="iterCategory" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CategoryABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>
@@ -168,6 +172,7 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
+		<td>
 	</tr>
 </table>
 </html:form>

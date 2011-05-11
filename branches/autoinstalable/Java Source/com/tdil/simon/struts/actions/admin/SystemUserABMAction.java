@@ -15,6 +15,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.SystemUserABMForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class SystemUserABMAction extends ABMAction {
@@ -51,10 +52,10 @@ public class SystemUserABMAction extends ABMAction {
 		}
 		
 		
-		if (systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "cancelar"))) {
+		if (StringUtils.equalsUnescaped(systemUserABMForm.getOperation(),ResourceBundleCache.get("systemUserABM", "cancelar"))) {
 			systemUserABMForm.reset();
 		}
-		if (systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "crear"))
+		if (StringUtils.equalsUnescaped(systemUserABMForm.getOperation(),ResourceBundleCache.get("systemUserABM", "crear"))
 				|| systemUserABMForm.getOperation().equals(ResourceBundleCache.get("systemUserABM", "modificar"))) {
 			return this.validateAndSave(systemUserABMForm, request, mapping);
 		}

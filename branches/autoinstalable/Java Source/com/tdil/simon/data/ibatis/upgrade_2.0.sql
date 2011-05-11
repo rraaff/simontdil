@@ -55,3 +55,9 @@ ALTER TABLE COUNTRY ADD language VARCHAR(100) NULL;
 /
 update COUNTRY set language = 'castellano' where host = 1;
 /
+CREATE TABLE IF NOT EXISTS `DOCUMENTTYPE` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(100) NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );
+/

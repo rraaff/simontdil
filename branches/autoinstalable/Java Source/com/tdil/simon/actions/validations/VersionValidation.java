@@ -55,20 +55,5 @@ public class VersionValidation {
 			return "";
 		}
 	}
-	public static void validateDocumentAndUserType(Version version, SystemUser user) throws SQLException, ValidationException {
-		Document doc = DocumentDAO.getDocument(version.getDocumentId());
-		boolean typeOk = false;
-		if (doc.isTypeOne()) {
-			if(user.isTypeOne()) {
-				typeOk = true;
-			} else {
-				throw new ValidationException(new ValidationError(ValidationErrors.DOCUMENT_NOT_FOR_USER));
-			}
-		}
-		if (!typeOk) {
-			if (doc.isTypeTwo() && !user.isTypeTwo()) {
-				throw new ValidationException(new ValidationError(ValidationErrors.DOCUMENT_NOT_FOR_USER));
-			}
-		}
-	}
+
 }

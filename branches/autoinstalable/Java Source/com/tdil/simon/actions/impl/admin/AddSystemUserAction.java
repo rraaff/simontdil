@@ -54,8 +54,8 @@ public class AddSystemUserAction extends SystemUserAction implements Transaction
 		user.setEmail(this.email);
 		user.setCountryId(country.getId());
 		user.setDelegate(false);
-		user.setTypeOne(false);
-		user.setTypeTwo(false);
+//		user.setTypeOne(false);
+//		user.setTypeTwo(false);
 		user.setAdministrator(this.administratorBoolean);
 		user.setModerator(this.moderatorBoolean);
 		user.setDesigner(this.designerBoolean);

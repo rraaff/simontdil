@@ -106,8 +106,6 @@ public class SystemUserABMForm extends TransactionalValidationForm implements AB
 		user.setEmail(this.email.toLowerCase());
 		user.setCountryId(this.getHost().getId());
 		user.setDelegate(false);
-		user.setTypeOne(false);
-		user.setTypeTwo(false);
 		user.setAdministrator(this.isAdministrator());
 		user.setModerator(this.isModerator());
 		user.setDesigner(this.isDesigner());

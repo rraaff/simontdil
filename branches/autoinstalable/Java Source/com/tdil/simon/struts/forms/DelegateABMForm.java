@@ -1,7 +1,6 @@
 package com.tdil.simon.struts.forms;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -37,8 +36,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	private String username;
 	private String countryId;
 	private String email;
-	private boolean typeOne;
-	private boolean typeTwo;
 	private boolean canSign;
 	private boolean canProposeParagraph;
 	private String job;
@@ -84,18 +81,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public boolean isTypeOne() {
-		return typeOne;
-	}
-	public void setTypeOne(boolean typeOne) {
-		this.typeOne = typeOne;
-	}
-	public boolean isTypeTwo() {
-		return typeTwo;
-	}
-	public void setTypeTwo(boolean typeTwo) {
-		this.typeTwo = typeTwo;
-	}
 	public boolean isCanSign() {
 		return canSign;
 	}
@@ -129,27 +114,10 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	
 	private void modifyUser() throws SQLException {
 		SystemUser toModify = SystemUserDAO.getUser(this.id);
-//		if (toModify == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_DOES_NOT_EXISTS));
-//		}
-//		if (!toModify.isDelegate()) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.USER_DOES_NOT_EXISTS));
-//		}
 		Country country = CountryDAO.getCountry(Integer.valueOf(this.countryId));
-//		if (country == null) {
-//			throw new ValidationException(new ValidationError(ValidationErrors.COUNTRY_DOES_NOT_EXISTS));
-//		}
-//		if (this.canSignBoolean && !toModify.isCanSign()) {
-//			int canSignCount = SystemUserDAO.selectCountCanSignFor(country.getId());
-//			if (canSignCount != 0) {
-//				throw new ValidationException(new ValidationError(ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN));
-//			}
-//		}
 		toModify.setName(this.name);
 		toModify.setEmail(this.email.toLowerCase());
 		toModify.setCountryId(country.getId());
-		toModify.setTypeOne(this.isTypeOne());
-		toModify.setTypeTwo(this.isTypeTwo());
 		toModify.setCanSign(this.isCanSign());
 		toModify.setJob(this.job);
 		toModify.setCanProposeParagraph(this.isCanProposeParagraph());
@@ -167,8 +135,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		user.setEmail(this.email.toLowerCase());
 		user.setCountryId(country.getId());
 		user.setDelegate(true);
-		user.setTypeOne(this.isTypeOne());
-		user.setTypeTwo(this.isTypeTwo());
 		user.setAdministrator(false);
 		user.setModerator(false);
 		user.setDesigner(false);
@@ -193,8 +159,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		this.username = null;
 		this.countryId = null;
 		this.email = null;
-		this.typeOne = false;
-		this.typeTwo = false;
 		this.canSign = false;
 		this.canProposeParagraph = false;
 		this.job = null;
@@ -224,8 +188,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			this.username = systemUser.getUsername();
 			this.countryId = String.valueOf(systemUser.getCountryId());
 			this.email = systemUser.getEmail();
-			this.typeOne = systemUser.isTypeOne();
-			this.typeTwo = systemUser.isTypeTwo();
 			this.canSign = systemUser.isCanSign();
 			this.job = systemUser.getJob();
 			this.canProposeParagraph = systemUser.isCanProposeParagraph();
@@ -239,9 +201,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		SystemUserValidation.validateName(this.name, "delegate.name", validation);
 		SystemUserValidation.validateEmail(this.email, "delegate.email", validation);
 		SystemUserValidation.validateJob(this.job, "delegate.job", validation);
-		if (!this.isTypeOne() && !this.isTypeTwo()) {
-			validation.setFieldError("delegate.typeOne", "delegate.typeOne." + ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
-		}
 		return validation;
 	}
 	
@@ -256,7 +215,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			validationError.setFieldError("delegate.email", "delegate.email." + ValidationErrors.USER_ALREADY_EXISTS);
 		}
 		if (this.isCanSign()) {
-			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()), this.isTypeOne(), this.isTypeTwo());
+			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(this.getCountryId()));
 			if (canSignCount != 0 && (exists == null || exists.getId() != this.getId())) {
 				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);
 			}
@@ -265,9 +224,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
-//		super.reset(mapping, request);
-		this.typeOne = false;
-		this.typeTwo = false;
 		this.canSign = false;
 		this.canProposeParagraph = false;
 	}
@@ -299,7 +255,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	public ValidationError reactivate(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
 		if (systemUser.isCanSign()) {
-			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(systemUser.getCountryId()), systemUser.isTypeOne(), systemUser.isTypeTwo());
+			int canSignCount = SystemUserDAO.selectCountCanSignFor(Integer.valueOf(systemUser.getCountryId()));
 			if (canSignCount != 0) {
 				ValidationError validationError = new ValidationError();
 				validationError.setFieldError("delegate.canSign","delegate.canSign." + ValidationErrors.ONLY_ONE_DELEGATE_CAN_SIGN);

@@ -52,34 +52,48 @@
   
   
   
-  <select id="selectNotDeletedNotPrincipalDocumentsUsingTypes" parameterClass="java.util.Map" resultClass="Document">
+  <select id="selectNotDeletedNotPrincipalDocumentsUsingTypes" parameterClass="int" resultClass="Document">
     select *
    	from DOCUMENT 
    	WHERE deleted = 0
    	AND principal = 0
-    and DOCUMENT.typeOne = #typeOne#
-    and DOCUMENT.typeTwo = #typeTwo#
-       	AND EXISTS (SELECT * 
-   				FROM VERSION 
-   				WHERE VERSION.documentId = DOCUMENT.id 
-   				AND VERSION.deleted = 0
-   				AND VERSION.status = 'CONSOLIDATED')
+    AND DOCUMENT.documentTypeId IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+    )
+    AND EXISTS (
+    	SELECT * 
+   		FROM VERSION 
+   		WHERE VERSION.documentId = DOCUMENT.id 
+   		AND VERSION.deleted = 0
+   		AND VERSION.status = 'CONSOLIDATED')
    	order by id desc
    	LIMIT 11
   </select>
   
-  <select id="selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit" parameterClass="java.util.Map" resultClass="Document">
+  <select id="selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit" parameterClass="int" resultClass="Document">
     select *
    	from DOCUMENT 
    	WHERE deleted = 0
    	AND principal = 0
-    and DOCUMENT.typeOne = #typeOne#
-    and DOCUMENT.typeTwo = #typeTwo#
-       	AND EXISTS (SELECT * 
-   				FROM VERSION 
-   				WHERE VERSION.documentId = DOCUMENT.id 
-   				AND VERSION.deleted = 0
-   				AND VERSION.status = 'CONSOLIDATED')
+    AND DOCUMENT.documentTypeId IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+    )
+    AND EXISTS (
+    	SELECT * 
+   		FROM VERSION 
+   		WHERE VERSION.documentId = DOCUMENT.id 
+   		AND VERSION.deleted = 0
+   		AND VERSION.status = 'CONSOLIDATED')
    	order by id desc
   </select>
   
@@ -107,16 +121,6 @@
     where id = #id#
   </select>
 
-    <select id="selectPrincipalDocument" parameterClass="java.util.Map" resultClass="Document">
-    select
-      DOCUMENT.*
-    from DOCUMENT
-    where DOCUMENT.principal = 1
-    and DOCUMENT.deleted = 0
-    and DOCUMENT.typeOne = #typeOne#
-    and DOCUMENT.typeTwo = #typeTwo#
-  </select>
-   
     <select id="selectDocumentForNegotiation" resultClass="Document">
     select
       DOCUMENT.*
@@ -132,9 +136,9 @@
   
   <insert id="insertDocument" parameterClass="Document">
     insert into DOCUMENT (
-      id, title, introduction, principal, typeOne, typeTwo, deleted
+      id, title, introduction, principal, documentTypeId, deleted
     ) values (
-      #id#, #title#, #introduction#,#principal#,#typeOne#, #typeTwo#, #deleted#
+      #id#, #title#, #introduction#,#principal#,#documentTypeId#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -146,8 +150,7 @@
       title= #title#, 
 	introduction = #introduction#,
 	principal= #principal#,
-	typeOne = #typeOne#, 
-	typeTwo = #typeTwo#, 
+	documentTypeId = #documentTypeId#, 
 	deleted = #deleted#
     where
       ID = #id#
@@ -160,12 +163,11 @@
       principal = 1
   </update>
   
-  <update id="updateAllAsNotPrincipal" parameterClass="java.util.Map">
+  <update id="updateAllAsNotPrincipal" parameterClass="int">
     update DOCUMENT set
       principal = 0
     where principal = 1
-    and typeOne = #typeOne#
-    and typeTwo = #typeTwo#
+    and documentTypeId = #documentTypeId#
   </update>
 
   <update id="logDeleteDocument" parameterClass="Document">

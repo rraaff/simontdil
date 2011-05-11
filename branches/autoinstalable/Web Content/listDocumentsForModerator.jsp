@@ -87,7 +87,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<% if (((com.tdil.simon.data.model.Version)version).canBeEdited()) { %>  
 											<td><html:link  action="editVersion.st?" paramName="version" paramProperty="id" paramId="id">
 											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											</html:link></td>
 										<% } else { %>  
 											<td>-</td>
 										<% } %> 

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.VersionForListVO;
 
@@ -28,11 +29,13 @@ public class VersionDAO {
 	public static Version getVersionUnderNegotiation() throws SQLException {
 		return (Version)IBatisManager.sqlMapper.queryForObject("selectVersionUnderNegotiation");
 	}
-	public static VersionForListVO selectPrincipalVersion(boolean documentTypeOne, boolean documentTypeTwo) throws SQLException {
-		HashMap params = new HashMap();
-		params.put("typeOne", documentTypeOne);
-		params.put("typeTwo", documentTypeTwo);
-		return (VersionForListVO)IBatisManager.sqlMapper.queryForObject("selectPrincipalVersion", params);
+	
+	public static List<VersionForListVO> selectPrincipalVersions() throws SQLException {
+		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectPrincipalVersions");
+	}
+	
+	public static List<VersionForListVO> selectPrincipalVersions(SystemUser user) throws SQLException {
+		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectPrincipalVersionsForDelegate", user.getId());
 	}
 	
 	public static Version getVersionForDocumentAndNumber(int documentId, int number) throws SQLException {

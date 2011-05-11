@@ -59,7 +59,11 @@
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 							<td width="160" align="right"><%=ResourceBundleCache.get("createDocument", "tipoDocumento")%>:</td>
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-							<td width="290" align="left"><html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/><%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;<html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/><%=ResourceBundleCache.get("documento", "tipoDos")%></td>
+							<td width="290" align="left">
+								<html:select name="CreateDocumentForm" property="documentTypeId" styleClass="textfield_effect" disabled="true">
+									<html:optionsCollection name="CreateDocumentForm" property="allDocumentType" value="id" label="name"/>
+								</html:select>
+							</td>
 						</tr>
 						<tr>
 							<td colspan="11" height="11"><img src="images/null.gif" width="1" height="11"></td>

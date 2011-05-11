@@ -99,9 +99,9 @@ public class AddDocumentAction extends AbstractAction implements TransactionalAc
 		this.upToCommentDateDate = VersionValidation.validateUpToCommentDate(this.upToCommentDate, validation);
 		this.typeOneBoolean = FieldValidation.validateBoolean(this.typeOne, validation);
 		this.typeTwoBoolean = FieldValidation.validateBoolean(this.typeTwo, validation);
-		if (!this.typeOneBoolean && !this.typeTwoBoolean) {
-			validation.setFieldError("typeOne", ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
-		}
+//		if (!this.typeOneBoolean && !this.typeTwoBoolean) {
+//			validation.setFieldError("typeOne", ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
+//		}
 		this.consolidatedBoolean = FieldValidation.validateBoolean(this.consolidated, validation);
 		this.consolidatedComment = VersionValidation.validateConsolidatedComment(this.consolidatedComment, this.consolidatedBoolean, validation);
 		ParagraphValidation.validateParagraphs(this.paragraphs, validation);

@@ -31,7 +31,7 @@
 </script>
 <div id="content">
 	<div id="alcien" style="height:200px; padding-top:20px;">
-		<div id="alcincuentaLeft" style="width:45%; height:200px;">
+		<div id="alcincuentaLeft" style="height:200px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
@@ -48,12 +48,12 @@
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
 					<td height="100%">
 						<div id="contentDocumentoPrincipal">
-							<!-- New code -->
-							<logic:equal name="ModeratorHome" property="hasTypeOne" value="true">
-								<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeOne.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeOne.documentTitle" /></html:link></div>
-								<%=ResourceBundleCache.get(getServletInfo(), "version")%>: <bean:write name="ModeratorHome" property="typeOne.number" /> - <bean:write name="ModeratorHome" property="typeOne.name" /><br>
-								<%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ModeratorHome" property="typeOne.limitObservationsString" />
-							</logic:equal>
+							<!-- TODO_PABLO-->
+							<logic:iterate name="ModeratorHome" property="principalVersions" id="doc" indexId="principalIndex">
+								<div class="titleDocInHome"><html:link  action="/goToViewVersion.st?" paramName="doc" paramProperty="id" paramId="versionID"><bean:write name="doc" property="documentTitle" /></html:link></div>
+								<%=ResourceBundleCache.get(getServletInfo(), "version")%>: <bean:write name="doc" property="number" /> - <bean:write name="doc" property="name" /><br>
+								<%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="doc" property="limitObservationsString" />
+							</logic:iterate>
 						</div>
 						<!-- corte tabla template --></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
@@ -67,48 +67,6 @@
 				</tr>
 				<tr>
 					<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-				</tr>
-			</table>
-		</div>
-		<div id="alcincuentaRight" style="width:45%; height:200px;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-				<tr>
-					<td width="10" height="19" background="images/interfaces/topLeftTitleDocB.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
-					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				</tr>
-				<tr>
-					<td width="10" height="20" background="images/interfaces/middleLeftDocB.gif"><img src="images/null.gif" width="1" height="20"></td>
-					<td></td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td width="10" height="1" background="images/interfaces/middleLeftDocB.gif"><img src="images/null.gif" width="10" height="1"></td>
-					<td height="100%">
-						<!-- corte tabla template -->
-						<div id="contentDocumentoPrincipal">
-							<logic:equal name="ModeratorHome" property="hasTypeTwo" value="true"> 
-								<div class="titleDocInModule"><html:link  action="/goToViewVersion.st?" paramName="ModeratorHome" paramProperty="typeTwo.id" paramId="versionID"><bean:write name="ModeratorHome" property="typeTwo.documentTitle" /></html:link></div>
-								<%=ResourceBundleCache.get(getServletInfo(), "version")%>: <bean:write name="ModeratorHome" property="typeTwo.number" /> - <bean:write name="ModeratorHome" property="typeTwo.name" /><br>
-								<%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ModeratorHome" property="typeTwo.limitObservationsString" />
-							</logic:equal>
-						</div>
-						<!-- corte tabla template -->
-					</td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td width="10" height="20" background="images/interfaces/middleLeftDocB.gif"><img src="images/null.gif" width="1" height="20"></td>
-					<td></td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td background="images/interfaces/bottomLeftDocB.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>
@@ -198,7 +156,7 @@
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
 					<td height="20" align="center" valign="middle"><html:link  action="/goToReferenceDocLibrary.st">
-						<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","iralistado")%>
+						<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","irallistado")%>
 						</html:link></td>
 					<td><img src="images/null.gif" width="9" height="1"></td>
 					<td bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>

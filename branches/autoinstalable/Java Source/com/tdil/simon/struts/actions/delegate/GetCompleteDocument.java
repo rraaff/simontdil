@@ -52,11 +52,7 @@ public class GetCompleteDocument extends AjaxSimonAction {
 			return result;
 		}
 		Document doc = DelegateSiteCache.getDocumentUnderWork();
-		if (doc.isTypeOne() && !loggedUserForm.getUser().isTypeOne()) {
-			result.put("sitestatus", Site.NORMAL);
-			return result;
-		}
-		if (doc.isTypeTwo() && !loggedUserForm.getUser().isTypeTwo()) {
+		if (!loggedUserForm.getUser().hasPermissionFor(doc)) {
 			result.put("sitestatus", Site.NORMAL);
 			return result;
 		}

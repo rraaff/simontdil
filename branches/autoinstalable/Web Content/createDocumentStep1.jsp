@@ -102,10 +102,14 @@ $$('input.slimpicker').each( function(el){
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne"/><html:errors property="title" /> <%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> <%=ResourceBundleCache.get("documento", "tipoDos")%>
+									<html:select name="CreateDocumentForm" property="documentTypeId" styleClass="textfield_effect">
+										<html:optionsCollection name="CreateDocumentForm" property="allDocumentType" value="id" label="name"/>
+									</html:select><html:errors property="title" />
 								</logic:equal>
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
-									<html:radio name="CreateDocumentForm" property="documentType" value="typeOne" disabled="true"/> <%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;&nbsp;&nbsp;<br/><html:radio name="CreateDocumentForm" property="documentType" value="typeTwo" disabled="true"/> <%=ResourceBundleCache.get("documento", "tipoDos")%>
+									<html:select name="CreateDocumentForm" property="documentTypeId" styleClass="textfield_effect" disabled="true">
+										<html:optionsCollection name="CreateDocumentForm" property="allDocumentType" value="id" label="name"/>
+									</html:select>
 								</logic:equal>
 								</td>
 							</tr>

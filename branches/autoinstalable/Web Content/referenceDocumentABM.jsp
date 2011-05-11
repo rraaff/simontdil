@@ -77,11 +77,19 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%>:</td>
+								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left">
-									<html:select name="ReferenceDocumentABMForm" property="categoryId" styleClass="textfield_effect">
-										<html:optionsCollection name="ReferenceDocumentABMForm" property="allCategories" value="id" label="name"/>
+									<html:select name="ReferenceDocumentABMForm" property="subCategoryId" styleClass="textfield_effect">
+										<% String lastCategory = "";%>
+										<logic:iterate name="ReferenceDocumentABMForm" property="allSubCategories" id="iterSubCat"> 
+											<% com.tdil.simon.data.valueobjects.SubCategoryVO sub = (com.tdil.simon.data.valueobjects.SubCategoryVO)iterSubCat; %>
+											<% if (!sub.getCategoryName().equals(lastCategory)) { %>
+												<optgroup label="<%=sub.getCategoryName()%>"></optgroup>
+											<% lastCategory = sub.getCategoryName();
+											} %>
+											<option value="<%=sub.getId()%>"><%=sub.getName()%></option>
+										</logic:iterate>
 									</html:select><html:errors property="refDoc.category" /></td>
 							</tr>
 							<tr>
@@ -147,6 +155,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%></td>
 										<td width="60"> </td>
 										<td width="60"> </td>
 									</tr> 
@@ -155,6 +164,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
 											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>

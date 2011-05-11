@@ -9,6 +9,7 @@ import org.apache.struts.action.ActionMapping;
 
 import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.struts.forms.LogoABMForm;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class LogoABMAction extends ABMAction {
@@ -25,10 +26,10 @@ public class LogoABMAction extends ABMAction {
 			throws Exception {
 		final LogoABMForm logoABMForm = (LogoABMForm) form;
 
-		if (logoABMForm.getOperation().equals(ResourceBundleCache.get("logoABM", "cancelar"))) {
+		if (StringUtils.equalsUnescaped(logoABMForm.getOperation(),ResourceBundleCache.get("logoABM", "cancelar"))) {
 			logoABMForm.reset();
 		}
-		if (logoABMForm.getOperation().equals(ResourceBundleCache.get("logoABM", "modificar"))) {
+		if (StringUtils.equalsUnescaped(logoABMForm.getOperation(),ResourceBundleCache.get("logoABM", "modificar"))) {
 			return this.validateAndSave(logoABMForm, request, mapping);
 		}
 		return mapping.findForward("continue");

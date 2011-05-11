@@ -1,6 +1,7 @@
 package com.tdil.simon.data.model;
 
 import java.io.Serializable;
+import java.sql.SQLException;
 
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -30,8 +31,7 @@ public class SystemUser extends PersistentObject implements Serializable{
 	private boolean administrator = false;
 	private boolean moderator = false;
 	private boolean delegate = false;
-	private boolean typeOne = false;
-	private boolean typeTwo = false;
+	
 	private boolean canSign = false;
 	private boolean designer = false;
 	private boolean assistant = false;
@@ -41,6 +41,9 @@ public class SystemUser extends PersistentObject implements Serializable{
 	private boolean temporaryPassword = false;
 	
 	private boolean canProposeParagraph = false;
+	
+	// generated at login time
+	private PermissionCache permissionCache;
 
 	public static String generateRandomPassword() {
 		return RandomStringUtils.randomAlphanumeric(20);
@@ -151,22 +154,6 @@ public class SystemUser extends PersistentObject implements Serializable{
 		this.passwordResetRequest = passwordResetRequest;
 	}
 
-	public boolean isTypeOne() {
-		return typeOne;
-	}
-
-	public void setTypeOne(boolean typeOne) {
-		this.typeOne = typeOne;
-	}
-
-	public boolean isTypeTwo() {
-		return typeTwo;
-	}
-
-	public void setTypeTwo(boolean typeTwo) {
-		this.typeTwo = typeTwo;
-	}
-
 	public boolean isTemporaryPassword() {
 		return temporaryPassword;
 	}
@@ -197,6 +184,26 @@ public class SystemUser extends PersistentObject implements Serializable{
 
 	public void setTranslator(boolean translator) {
 		this.translator = translator;
+	}
+
+	public PermissionCache getPermissionCache() {
+		return permissionCache;
+	}
+
+	public void setPermissionCache(PermissionCache permissionCache) {
+		this.permissionCache = permissionCache;
+	}
+
+	public void initPermissionCache() throws SQLException {
+		setPermissionCache(new PermissionCache(this));
+	}
+
+	public boolean hasPermissionFor(Document document) {
+		if (this.isDelegate()) {
+			return this.getPermissionCache().canAccess(document);
+		} else {
+			return true;
+		}
 	}
 
 }

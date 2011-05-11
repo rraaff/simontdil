@@ -25,10 +25,12 @@ import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
 import com.tdil.simon.data.ibatis.DocumentDAO;
+import com.tdil.simon.data.ibatis.DocumentTypeDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SiteDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
+import com.tdil.simon.data.model.DocumentType;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
@@ -83,7 +85,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	private boolean principal;
-	private String documentType;
+	private int documentTypeId;
 	
 	// Segundo paso
 	private String introduction;
@@ -111,6 +113,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String detail;
 	private String append;
 	private String newParagraphText;
+	
+	private List<DocumentType> allDocumentType;
 	
 	static {
 		allMonths = new ArrayList<MonthOption>();
@@ -148,7 +152,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsDay= null;
 		//this.limitObservationsMonth= null;
 		this.limitObservations = null;
-		this.documentType = null;
+		this.documentTypeId = 0;
 		this.introduction= null;
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -160,6 +164,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.versionStatus = Version.DRAFT;
 		this.isInNegotiation = false;
 		this.portugues = false;
+		try {
+			this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public List<MonthOption> getMonths() {
@@ -368,7 +378,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		if (!this.isPortugues() && this.isPrincipal()) {
-			DocumentDAO.markNotPrincipal(this.isDocumentTypeOne(), this.isDocumentTypeTwo());
+			DocumentDAO.markNotPrincipal(this.getDocumentTypeId());
 		}
 		if (this.getDocumentId() == 0) {
 			Document document = new Document();
@@ -581,8 +591,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		document.setTitle(this.title);
 		document.setIntroduction(this.introduction);
 		document.setPrincipal(this.isPrincipal());
-		document.setTypeOne(this.isDocumentTypeOne());
-		document.setTypeTwo(this.isDocumentTypeTwo());
+		document.setDocumentTypeId(this.getDocumentTypeId());
 		document.setDeleted(false);
 		// TODO lanzar errores
 	}
@@ -593,10 +602,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		VersionValidation.validateName(this.versionName, validation);
 		//DocumentValidation.validateIntroduction(this.introduction, validation);
 		VersionValidation.validateUpToCommentDate(this.limitObservations, validation);
-		boolean typeOneBoolean = this.isDocumentTypeOne();
-		boolean typeTwoBoolean = this.isDocumentTypeTwo();
-		if (!typeOneBoolean && !typeTwoBoolean) {
-			validation.setFieldError("typeOne", "typeOne" + "." + ValidationErrors.SELECT_TYPE_ONE_OR_TWO);
+		if (this.getDocumentTypeId() == 0) {
+			validation.setFieldError("type", "type" + "." + ValidationErrors.SELECT_DOCUMENT_TYPE);
 		}
 		if (this.isPrincipal()) {
 			if (!Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
@@ -604,10 +611,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 				if (doc != null) {
 					Version version = VersionDAO.getVersionUnderWork();
 					if (version.getId() != this.versionId) {
-						if (doc.isTypeOne() && this.isDocumentTypeOne()) {
-							validation.setFieldError("principal", "principal" + "." + ValidationErrors.DOCUMENT_IN_NEGOTIATION);
-						}
-						if (doc.isTypeTwo() && this.isDocumentTypeTwo()) {
+						if (doc.getDocumentTypeId() == this.getDocumentTypeId()) {
 							validation.setFieldError("principal", "principal" + "." + ValidationErrors.DOCUMENT_IN_NEGOTIATION);
 						}
 					}
@@ -647,15 +651,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.consolidated = consolidated;
 	}
 	
-	public boolean isDocumentTypeOne() {
-		return "typeOne".equals(this.getDocumentType());
-	}
-	
-	public boolean isDocumentTypeTwo() {
-		return "typeTwo".equals(this.getDocumentType());
-	}
-
 	public void initWith(int versionID) throws SQLException {
+		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(false);
 		Version version = VersionDAO.getVersion(versionID);
 		Document document = DocumentDAO.getDocument(version.getDocumentId());
@@ -686,7 +683,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
+		this.documentTypeId = document.getDocumentTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -703,12 +700,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.consolidateText= null;
 	}
 
-	public String getDocumentType() {
-		return documentType;
+	public int getDocumentTypeId() {
+		return documentTypeId;
 	}
 
-	public void setDocumentType(String documentType) {
-		this.documentType = documentType;
+	public void setDocumentTypeId(int documentType) {
+		this.documentTypeId = documentType;
 	}
 
 	public int getTemporaryVersionId() {
@@ -893,6 +890,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForPortuguesWith(int versionID) throws SQLException {
+		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(true);
 		setDesigner(false);
 		// con esta saco datos base
@@ -937,7 +935,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
+		this.documentTypeId = document.getDocumentTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphIds = new int[1000];
@@ -1002,6 +1000,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForDesignWith(int versionID) throws SQLException {
+		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(false);
 		setDesigner(true);
 		Version version = VersionDAO.getVersion(versionID);
@@ -1020,7 +1019,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentType = document.isTypeOne() ? "typeOne" : "typeTwo";
+		this.documentTypeId = document.getDocumentTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -1167,5 +1166,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	@Override
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		this.livePreview = false;
+	}
+
+	public List<DocumentType> getAllDocumentType() {
+		return allDocumentType;
+	}
+
+	public void setAllDocumentType(List<DocumentType> allDocumentType) {
+		this.allDocumentType = allDocumentType;
 	}
 }

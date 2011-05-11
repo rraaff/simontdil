@@ -76,11 +76,7 @@ public class LoginForm extends ActionForm {
 				this.redirectToNegotiation = false;
 				return;
 			}
-			if (doc.isTypeOne() && !user.isTypeOne()) {
-				this.redirectToNegotiation = false;
-				return;
-			}
-			if (doc.isTypeTwo() && !user.isTypeTwo()) {
+			if (!user.hasPermissionFor(doc)) {
 				this.redirectToNegotiation = false;
 				return;
 			}

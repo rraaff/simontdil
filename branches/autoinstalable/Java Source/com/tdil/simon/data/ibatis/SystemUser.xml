@@ -23,8 +23,6 @@
 		SYSTEMUSER.administrator,
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
-		SYSTEMUSER.typeOne,
-		SYSTEMUSER.typeTwo,
 		SYSTEMUSER.canSign,
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
@@ -53,8 +51,6 @@
 		SYSTEMUSER.administrator,
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
-		SYSTEMUSER.typeOne,
-		SYSTEMUSER.typeTwo,
 		SYSTEMUSER.canSign,
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
@@ -83,8 +79,6 @@
 		SYSTEMUSER.administrator,
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
-		SYSTEMUSER.typeOne,
-		SYSTEMUSER.typeTwo,
 		SYSTEMUSER.canSign,
 		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
@@ -105,8 +99,6 @@
 		SYSTEMUSER.name,
 		SYSTEMUSER.countryId,
 		SYSTEMUSER.delegate,
-		SYSTEMUSER.typeOne,
-		SYSTEMUSER.typeTwo,
 		SYSTEMUSER.canSign,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
@@ -135,24 +127,14 @@
 		and deleted = 0
   </select>
 
-	<select id="selectSystemUserCanSignCountTypeOne" resultClass="java.lang.Integer" parameterClass="int">
+	<select id="selectSystemUserCanSignCount" resultClass="java.lang.Integer" parameterClass="int">
 		select count(1)
 		from SYSTEMUSER
 		where countryId = #countryId#
 		and canSign = 1
 		and deleted = 0
-		and typeOne = 1
   </select>
   
-  	<select id="selectSystemUserCanSignCountTypeTwo" resultClass="java.lang.Integer" parameterClass="int">
-		select count(1)
-		from SYSTEMUSER
-		where countryId = #countryId#
-		and canSign = 1
-		and deleted = 0
-		and typeTwo = 1
-  </select>
-
 	<select id="selectUserByUsername" parameterClass="java.lang.String"
 		resultClass="SystemUser">
 		select
@@ -169,24 +151,20 @@
 		where LOWER(email) = #email#
   </select>
   
-  <select id="selectNotDeletedDelegateUsersTypeOne" resultClass="SystemUser">
+  <select id="selectNotDeletedDelegateUsersThatCanAccessDocumenType" parameterClass="int"  resultClass="SystemUser">
 		select
-		*
-		from SYSTEMUSER
-		where delegate = 1
-		and typeOne = 1
-		and deleted = 0
+			SYSTEMUSER.*
+		from SYSTEMUSER, GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		where GROUPMEMBER.systemUserId = SYSTEMUSER.id
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+		AND GROUPPERMISSION.objectId = #documentTypeId#
+		and SYSTEMUSER.delegate = 1
+		and SYSTEMUSER.deleted = 0
+		and USERGROUP.deleted = 0
   </select>
   
-  <select id="selectNotDeletedDelegateUsersTypeTwo" resultClass="SystemUser">
-		select
-		*
-		from SYSTEMUSER
-		where delegate = 1
-		and typeTwo = 1
-		and deleted = 0
-  </select>
-
   <select id="selectNotDeletedModerators" resultClass="SystemUser">
 		select
 		*
@@ -210,11 +188,11 @@
 	<insert id="insertUser" parameterClass="SystemUser">
 		insert into SYSTEMUSER (
 		id,username,password,name,email, job, countryDesc,
-		countryId,administrator,moderator,delegate,typeOne,typeTwo,canSign,designer,passwordResetRequest,temporaryPassword,canProposeParagraph,
+		countryId,administrator,moderator,delegate,canSign,designer,passwordResetRequest,temporaryPassword,canProposeParagraph,
 		assistant, translator, deleted
 		) values (
 		#id#,#username#,#password#,#name#,#email#,#job#,#countryDesc#,
-		#countryId#,#administrator#,#moderator#,#delegate#,#typeOne#,#typeTwo#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,
+		#countryId#,#administrator#,#moderator#,#delegate#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,
 		#assistant#, #translator#, #deleted#
 		)
   </insert>
@@ -230,8 +208,6 @@
 		administrator = #administrator#,
 		moderator =	#moderator#,
 		delegate = #delegate#,
-		typeOne = #typeOne#,
-		typeTwo = #typeTwo#,
 		canSign = #canSign#,
 		designer = #designer#,
 		passwordResetRequest = #passwordResetRequest#,

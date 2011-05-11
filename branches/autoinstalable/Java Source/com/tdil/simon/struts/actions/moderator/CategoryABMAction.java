@@ -16,6 +16,7 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.forms.CategoryABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class CategoryABMAction extends ABMAction {
@@ -51,10 +52,10 @@ public class CategoryABMAction extends ABMAction {
 			return mapping.findForward("continue");
 		}
 		
-		if (categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
+		if (StringUtils.equalsUnescaped(categoryABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			categoryABMForm.reset();
 		}
-		if (categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "crear"))
+		if (StringUtils.equalsUnescaped(categoryABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "crear"))
 				|| categoryABMForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificar"))) {
 			return this.validateAndSave(categoryABMForm, request, mapping);
 		} 

@@ -38,7 +38,7 @@
   </select>
   
   
-  <select id="selectPrincipalVersion" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+  <select id="selectPrincipalVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
    select VERSION.*, DOCUMENT.title as documentTitle
     from VERSION, DOCUMENT
     where VERSION.documentId = DOCUMENT.id
@@ -47,8 +47,26 @@
     and VERSION.spanishVersion = 1
     and DOCUMENT.principal = 1
     and DOCUMENT.deleted = 0
-    and DOCUMENT.typeOne = #typeOne#
-    and DOCUMENT.typeTwo = #typeTwo#
+    and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
+  </select>
+  
+  <select id="selectPrincipalVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+   select VERSION.*, DOCUMENT.title as documentTitle
+    from VERSION, DOCUMENT
+    where VERSION.documentId = DOCUMENT.id
+    and VERSION.deleted = 0
+    and VERSION.status != 'DRAFT'
+    and VERSION.spanishVersion = 1
+    and DOCUMENT.principal = 1
+    and DOCUMENT.deleted = 0
+    AND DOCUMENT.documentTypeId IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+    )
     and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
   </select>
   

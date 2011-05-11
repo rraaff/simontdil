@@ -100,11 +100,9 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td height="24" align="right" valign="top"><html:errors property="delegate.typeOne" /><%=ResourceBundleCache.get(getServletInfo(), "accesos")%>:</td>
+								<td height="24" align="right" valign="top"></td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
-								<html:checkbox name="DelegateABM" property="typeOne"/> <%=ResourceBundleCache.get("documento", "tipoUno")%> <br />
-								<html:checkbox name="DelegateABM" property="typeTwo"/> <%=ResourceBundleCache.get("documento", "tipoDos")%> <br>
 								<html:checkbox name="DelegateABM" property="canSign"/> <%=ResourceBundleCache.get(getServletInfo(), "esFirmante")%><html:errors property="delegate.canSign" /><br/>
 								<!-- html:checkbox name="DelegateABM" property="canProposeParagraph"/> Habilitado para proponer p&aacute;rrafo en negociaci&oacute;n--><html:errors property="delegate.canProposeParagraph" /></td>
 							</tr>
@@ -177,7 +175,6 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td width="200" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%></td>
-										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "accesos")%></td>
 										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmante")%></td>
 										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmo")%></td>
 										<!-- td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "habilitado")%></td  -->
@@ -189,7 +186,6 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUser" property="countryName" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><bean:write name="iterUser" property="permissionsString" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
 											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
 											

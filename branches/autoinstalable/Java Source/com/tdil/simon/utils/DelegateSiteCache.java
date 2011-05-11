@@ -133,13 +133,7 @@ public class DelegateSiteCache {
 			if (doc == null) {
 				return false;
 			} else {
-				if (doc.isTypeOne() && user.isTypeOne()) {
-					return true;
-				}
-				if (doc.isTypeTwo() && user.isTypeTwo()) {
-					return true;
-				}
-				return false;
+				return user.hasPermissionFor(doc);
 			}
 		} else {
 			return false;

@@ -31,7 +31,8 @@ div#main2 {
 
 <div id="content" style="height:350px;">
 	<div id="alcien" style="height:60px; padding-top:5px;">
-	<% if (delegatePopupBean.getTypeOne() != null) { %>
+	<!-- TODO_PABLO-->
+	<% for (com.tdil.simon.data.valueobjects.VersionForListVO principal : delegatePopupBean.getPrincipalVersions()) { %>
 		<div id="alcincuentaLeft" style="width:47%">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
@@ -41,36 +42,13 @@ div#main2 {
 				</tr>
 				<tr>
 					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td height="100%"><div id="contentDocumentoPrincipal"><div class="titleDocInModule"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=delegatePopupBean.getTypeOne().getDocumentId()%>"><%=delegatePopupBean.getTypeOne().getDocumentTitle()%></a></div></div>
+					<td height="100%"><div id="contentDocumentoPrincipal"><div class="titleDocInModule"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=principal.getDocumentId()%>"><%=principal.getDocumentTitle()%></a></div></div>
 					</td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				</tr>
 				<tr>
 					<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-				</tr>
-			</table>
-		</div>
-	<% } %>
-	<% if (delegatePopupBean.getTypeTwo() != null) { %>
-		<div id="alcincuentaRight" style="width:47%; height:inherit;">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-				<tr>
-					<td width="10" height="19" background="images/interfaces/topLeftTitleDocB.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
-					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				</tr>
-				<tr>
-					<td width="10" height="1" background="images/interfaces/middleLeftDocB.gif"><img src="images/null.gif" width="10" height="1"></td>
-					<td height="100%"><div id="contentDocumentoPrincipal"><div class="titleDocInModule"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=delegatePopupBean.getTypeTwo().getDocumentId()%>"><%=delegatePopupBean.getTypeTwo().getDocumentTitle()%></a></div></div>
-					</td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td background="images/interfaces/bottomLeftDocB.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
 					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
 				</tr>

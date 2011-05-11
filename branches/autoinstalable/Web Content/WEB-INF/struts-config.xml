@@ -36,6 +36,12 @@
     <form-bean name="SysProperty" type="com.tdil.simon.struts.forms.SysPropertyABMForm"/>
     <form-bean name="ResourceBundleForm" type="com.tdil.simon.struts.forms.ResourceBundleForm"/>
     <form-bean name="LogoABMForm" type="com.tdil.simon.struts.forms.LogoABMForm"/>
+    <form-bean name="DocumentTypeABMForm" type="com.tdil.simon.struts.forms.DocumentTypeABMForm"/>
+    <form-bean name="UserGroupABMForm" type="com.tdil.simon.struts.forms.UserGroupABMForm"/>
+    <form-bean name="SubCategoryABMForm" type="com.tdil.simon.struts.forms.SubCategoryABMForm"/>
+    <form-bean name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.forms.SubCategoryPermissionABMForm"/>
+    <form-bean name="DocumentTypePermissionABMForm" type="com.tdil.simon.struts.forms.DocumentTypePermissionABMForm"/>
+    <form-bean name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.forms.ManageUsersOfGroupABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -120,9 +126,6 @@
     </action>
     <action path="/selectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.SelectPrincipalDocumentAction" scope="request">
       <forward name="home" path="/moderatorHome.jsp"/>
-    </action>
-    <action path="/goToSelectPrincipalDocument" name="SelectPrincipalDocument" type="com.tdil.simon.struts.actions.moderator.GoToSelectPrincipalDocument" scope="request">
-      <forward name="continue" path="/selectPrincipalDocument.jsp"/>
     </action>
     <action path="/initSign" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction">
       <forward name="continue" path="/moderatorHome.jsp"/>
@@ -325,6 +328,57 @@
     </action>
     <action path="/goToLogoABM" name="LogoABMForm" type="com.tdil.simon.struts.actions.moderator.GoToLogoABMAction" scope="session">
       <forward name="continue" path="/logoABM.jsp"/>
+    </action>
+    <action path="/goToDocumentTypeABM" name="DocumentTypeABMForm" type="com.tdil.simon.struts.actions.moderator.GoToDocumentTypeABMAction" scope="session">
+      <forward name="continue" path="/documentTypeABM.jsp"/>
+    </action>
+    <action path="/documentTypeABM" name="DocumentTypeABMForm" type="com.tdil.simon.struts.actions.moderator.DocumentTypeABMAction" scope="session">
+      <forward name="continue" path="/documentTypeABM.jsp"/>
+      <forward name="failure" path="/documentTypeABM.jsp"/>
+    </action>
+    <action path="/editDocumentType" name="DocumentTypeABMForm" type="com.tdil.simon.struts.actions.moderator.EditDocumentTypeAction" scope="session">
+      <forward name="continue" path="/documentTypeABM.jsp"/>
+    </action>
+    <action path="/goToUserGroupABM" name="UserGroupABMForm" type="com.tdil.simon.struts.actions.admin.GoToUserGroupABMAction" scope="session">
+      <forward name="continue" path="/userGroupABM.jsp"/>
+    </action>
+    <action path="/userGroupABM" name="UserGroupABMForm" type="com.tdil.simon.struts.actions.admin.UserGroupABMAction" scope="session">
+      <forward name="continue" path="/userGroupABM.jsp"/>
+      <forward name="failure" path="/userGroupABM.jsp"/>
+    </action>
+    <action path="/editUserGroup" name="UserGroupABMForm" type="com.tdil.simon.struts.actions.admin.EditUserGroupAction" scope="session">
+      <forward name="continue" path="/userGroupABM.jsp"/>
+    </action>
+    <action path="/goToSubCategoryABM" name="SubCategoryABMForm" type="com.tdil.simon.struts.actions.moderator.GoToSubCategoryABMAction" scope="session">
+      <forward name="continue" path="/subCategoryABM.jsp"/>
+    </action>
+    <action path="/subCategoryABM" name="SubCategoryABMForm" type="com.tdil.simon.struts.actions.moderator.SubCategoryABMAction" scope="session">
+      <forward name="continue" path="/subCategoryABM.jsp"/>
+      <forward name="failure" path="/subCategoryABM.jsp"/>
+    </action>
+    <action path="/editSubCategory" name="SubCategoryABMForm" type="com.tdil.simon.struts.actions.moderator.EditSubCategoryAction" scope="session">
+      <forward name="continue" path="/subCategoryABM.jsp"/>
+    </action>
+    <action path="/goToSubCategoryPermissionABM" name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.actions.admin.GoToSubCategoryPermissionABMAction" scope="session">
+      <forward name="continue" path="/subCategoryPermissionABM.jsp"/>
+    </action>
+    <action path="/subCategoryPermissionABM" name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.actions.admin.SubCategoryPermissionABMAction" scope="session">
+      <forward name="continue" path="/subCategoryPermissionABM.jsp"/>
+      <forward name="failure" path="/subCategoryPermissionABM.jsp"/>
+    </action>
+    <action path="/goToDocumentTypePermissionABM" name="DocumentTypePermissionABMForm" type="com.tdil.simon.struts.actions.admin.GoToDocumentTypePermissionABMAction" scope="session">
+      <forward name="continue" path="/documentTypePermissionABM.jsp"/>
+    </action>
+    <action path="/documentTypePermissionABM" name="DocumentTypePermissionABMForm" type="com.tdil.simon.struts.actions.admin.DocumentTypePermissionABMAction" scope="session">
+      <forward name="continue" path="/documentTypePermissionABM.jsp"/>
+      <forward name="failure" path="/documentTypePermissionABM.jsp"/>
+    </action>
+    <action path="/goToManageUsersOfGroupABM" name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.actions.admin.GoToManageUsersOfGroupABMAction" scope="session">
+      <forward name="continue" path="/manageUsersOfGroupABM.jsp"/>
+    </action>
+    <action path="/manageUsersOfGroupABM" name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.actions.admin.ManageUsersOfGroupABMAction" scope="session">
+      <forward name="continue" path="/manageUsersOfGroupABM.jsp"/>
+      <forward name="failure" path="/manageUsersOfGroupABM.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

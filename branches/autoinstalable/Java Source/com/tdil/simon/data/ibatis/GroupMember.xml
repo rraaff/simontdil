@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GroupMember">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="GroupMember" type="com.tdil.simon.data.model.GroupMember"/>
+  <typeAlias alias="GroupMemberVO" type="com.tdil.simon.data.valueobjects.GroupMemberVO"/>
+  
+  <select id="selectGroupMemberByGroup" parameterClass="int" resultClass="GroupMemberVO">
+    select GROUPMEMBER.*, SYSTEMUSER.name as systemUserName, COUNTRY.name as countryName
+   	from GROUPMEMBER, SYSTEMUSER, COUNTRY
+   	WHERE GROUPMEMBER.groupId = #groupId#
+   	AND GROUPMEMBER.systemUserId = SYSTEMUSER.id
+   	AND SYSTEMUSER.countryId = COUNTRY.id
+   	order by SYSTEMUSER.name 
+  </select>
+  
+  <select id="selectGroupMemberBySystemUser" parameterClass="int" resultClass="GroupMemberVO">
+    select GROUPMEMBER.*, USERGROUP.name as groupName
+   	from GROUPMEMBER, USERGROUP
+   	WHERE GROUPMEMBER.groupId = USERGROUP.id
+   	AND GROUPMEMBER.systemUserId = #systemUserId#
+   	order by USERGROUP.name 
+  </select>
+  
+  <insert id="insertGroupMember" parameterClass="GroupMember">
+    insert into GROUPMEMBER (
+      id, groupId, systemUserId, deleted
+    ) values (
+      #id#, #groupId#, #systemUserId#, #deleted#
+    )
+  </insert>
+  
+  <update id="deleteGroupMember" parameterClass="GroupMember">
+    delete from GROUPMEMBER
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

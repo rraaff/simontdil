@@ -11,28 +11,16 @@ public class UserVO extends SystemUser {
 	
 	private int completed = 0;
 
+	public String getNameAndCountry() {
+		return this.getName() + " - " + this.getCountryName();
+	}
+	
 	public String getCountryName() {
 		return countryName;
 	}
 
 	public void setCountryName(String countryName) {
 		this.countryName = countryName;
-	}
-	
-	public String getPermissionsString() {
-		if (this.isTypeOne() && this.isTypeTwo()) {
-			return "A, B";
-		} else {
-			if (this.isTypeOne()) {
-				return "A";
-			} else {
-				if (this.isTypeTwo()) {
-					return "B";
-				} else {
-					return "";
-				}
-			}
-		}
 	}
 	
 	public String getSystemPermissionsString() {

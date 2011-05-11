@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="UserGroup">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="UserGroup" type="com.tdil.simon.data.model.UserGroup"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllUserGroup" resultClass="UserGroup">
+    select *
+    from USERGROUP
+    order by name
+  </select>
+  
+  <select id="selectAllUserGroupNotDeleted" resultClass="UserGroup">
+    select *
+   	from USERGROUP
+   	WHERE deleted = 0
+   	order by name
+  </select>
+
+  <select id="selectUserGroupById" parameterClass="int" resultClass="UserGroup">
+    select
+      *
+    from USERGROUP
+    where id = #id#
+  </select>
+
+  <select id="selectUserGroupByName" parameterClass="java.lang.String" resultClass="UserGroup">
+    select
+      *
+    from USERGROUP
+    where name = #name#
+  </select>
+  
+  <insert id="insertUserGroup" parameterClass="UserGroup">
+    insert into USERGROUP (
+      id, name, deleted
+    ) values (
+      #id#, #name#, #deleted#
+    )
+  </insert>
+
+  <update id="updateUserGroup" parameterClass="UserGroup">
+    update USERGROUP set
+      name = #name#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteUserGroup" parameterClass="UserGroup">
+    update USERGROUP set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

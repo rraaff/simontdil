@@ -19,6 +19,7 @@ import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.NegotiationUtils;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class ParagraphsNavigationAction extends SimonAction {
@@ -53,7 +54,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			return mapping.findForward("next");
 		}
 		
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "anterior"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "anterior"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -77,7 +78,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 			return mapping.findForward("previous");
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "siguiente"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "siguiente"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -99,12 +100,12 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 			return mapping.findForward("next");
 		}
-//		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.save"))) {
+//		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ApplicationResources.getMessage("createDocument.paragraphs.save"))) {
 //			createDocumentForm.save();
 //			return mapping.findForward("stay");
 //		}
 
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "actualizarContenido"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "actualizarContenido"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -123,7 +124,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 			return mapping.findForward("stay");
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "agregarParrafos"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregarParrafos"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForLength(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -144,7 +145,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 		}
 
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "agregar"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregar"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -162,7 +163,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 		}
 		
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "agregarAntes"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregarAntes"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -179,7 +180,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return mapping.findForward("stay");
 			}
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "borrar"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "borrar"))) {
 			createDocumentForm.deleteCurrent();
 			if (NegotiationUtils.isInNegotiation(createDocumentForm)) {
 				TransactionProvider.executeInTransaction(new TransactionalAction() {
@@ -192,7 +193,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 			return mapping.findForward("stay");
 		}
 		
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "agregarDespues"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregarDespues"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraph(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -210,18 +211,18 @@ public class ParagraphsNavigationAction extends SimonAction {
 			}
 		}
 		
-//		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.hide"))) {
+//		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ApplicationResources.getMessage("createDocument.paragraphs.hide"))) {
 //			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = true;
 //			createDocumentForm.save();
 //			return mapping.findForward("stay");
 //		}
-//		if (createDocumentForm.getOperation().equals(ApplicationResources.getMessage("createDocument.paragraphs.unhide"))) {
+//		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ApplicationResources.getMessage("createDocument.paragraphs.unhide"))) {
 //			createDocumentForm.getParagraphStatus()[createDocumentForm.getParagraph()] = false;
 //			createDocumentForm.save();
 //			return mapping.findForward("stay");
 //		}
 
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificarIntroduccion"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "modificarIntroduccion"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -241,7 +242,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return mapping.findForward("stay");
 			}
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "modificarDocumento"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "modificarDocumento"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForBack(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);
@@ -251,7 +252,7 @@ public class ParagraphsNavigationAction extends SimonAction {
 				return mapping.findForward("modifyDocument");
 			}
 		}
-		if (createDocumentForm.getOperation().equals(ResourceBundleCache.get(getServletInfo(), "previsualizar"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "previsualizar"))) {
 			ValidationError error = createDocumentForm.validateCurrentParagraphForLength(mapping, request);
 			if(error.hasError()) {
 				return redirectToFailure(error, request, mapping);

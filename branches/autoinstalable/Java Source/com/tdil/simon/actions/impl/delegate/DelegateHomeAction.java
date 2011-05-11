@@ -28,20 +28,20 @@ public class DelegateHomeAction extends AbstractAction {
 		DelegateHomeVO delegateHomeVO = new DelegateHomeVO();
 		// TODO listar por tipo de acceso
 		List documents = DocumentDAO.selectNotDeletedDocument();
-		for (Object obj : documents) {
-			Document doc = (Document)obj;
-			if (doc.canAccess(this.user)) {
-				if (doc.isPrincipal()) {
-					delegateHomeVO.setPrincipal(doc);
-				} else {
-					delegateHomeVO.getSecundary().add(doc);
-				}
-			}
-		}
+//		for (Object obj : documents) {
+//			Document doc = (Document)obj;
+//			if (doc.canAccess(this.user)) {
+//				if (doc.isPrincipal()) {
+//					delegateHomeVO.setPrincipal(doc);
+//				} else {
+//					delegateHomeVO.getSecundary().add(doc);
+//				}
+//			}
+//		}
 		List<CategoryVO> categories = CategoryDAO.selectAllCategoriesNotDeletedVO();
-		for (CategoryVO cat : categories) {
-			cat.setDocuments(ReferenceDocumentDAO.selectAllReferenceDocumentForCategory(cat));
-		}
+//		for (CategoryVO cat : categories) {
+//			cat.setDocuments(ReferenceDocumentDAO.selectAllReferenceDocumentForCategory(cat));
+//		}
 		delegateHomeVO.setCategories(categories);
 		return ActionResponse.newOKResponse(delegateHomeVO);
 	}

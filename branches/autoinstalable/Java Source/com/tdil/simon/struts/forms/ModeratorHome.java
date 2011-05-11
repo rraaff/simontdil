@@ -18,28 +18,19 @@ public class ModeratorHome extends ActionForm {
 	private static final long serialVersionUID = 742145918256896811L;
 	
 	private SystemUser loggedUser;
-	private VersionForListVO typeOne;
-	private VersionForListVO typeTwo;
+	private List<VersionForListVO> principalVersions;
 	
+	public List<VersionForListVO> getPrincipalVersions() {
+		return principalVersions;
+	}
+
+	public void setPrincipalVersions(List<VersionForListVO> principalVersions) {
+		this.principalVersions = principalVersions;
+	}
+
 	private List<Document> otherDocumentsList;
 	
 	private List<ReferenceDocument> referenceList;
-
-	public VersionForListVO getTypeOne() {
-		return typeOne;
-	}
-
-	public void setTypeOne(VersionForListVO typeOne) {
-		this.typeOne = typeOne;
-	}
-
-	public VersionForListVO getTypeTwo() {
-		return typeTwo;
-	}
-
-	public void setTypeTwo(VersionForListVO typeTwo) {
-		this.typeTwo = typeTwo;
-	}
 
 	public List<Document> getOtherDocumentsList() {
 		return otherDocumentsList;
@@ -59,37 +50,16 @@ public class ModeratorHome extends ActionForm {
 
 	public void init() throws SQLException {
 		if (this.getLoggedUser().isModerator() || this.getLoggedUser().isAdministrator()) {
-			setTypeOne(VersionDAO.selectPrincipalVersion(true, false));
-			setTypeTwo(VersionDAO.selectPrincipalVersion(false, true));
+			setPrincipalVersions(VersionDAO.selectPrincipalVersions());
 			setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome());
+			setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome());
 		} else {
 			if (this.getLoggedUser().isDelegate()) {
-				if (this.getLoggedUser().isTypeOne()) {
-					setTypeOne(VersionDAO.selectPrincipalVersion(true, false));
-				} else {
-					setTypeOne(null);
-				}
-				if (this.getLoggedUser().isTypeTwo()) {
-					setTypeTwo(VersionDAO.selectPrincipalVersion(false, true));
-				} else {
-					setTypeTwo(null);
-				}
-				if (this.getLoggedUser().isTypeOne() && this.getLoggedUser().isTypeTwo()) {
-					setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome());
-				} else {
-					setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome(this.getLoggedUser().isTypeOne(), this.getLoggedUser().isTypeTwo()));
-				}
+				setPrincipalVersions(VersionDAO.selectPrincipalVersions(this.getLoggedUser()));
+				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome(this.getLoggedUser()));
+				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome(this.getLoggedUser()));
 			} 
 		}
-		setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome());
-	}
-	
-	public boolean getHasTypeOne() {
-		return this.getTypeOne() != null;
-	}
-
-	public boolean getHasTypeTwo() {
-		return this.getTypeTwo() != null;
 	}
 
 	public SystemUser getLoggedUser() {

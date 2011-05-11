@@ -30,13 +30,19 @@ public class GoToReferenceDocumentList extends SimonAction implements Transactio
 	@Override
 	protected ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
+		ListForm listForm = (ListForm) form;
+		listForm.setUser(this.getLoggedUser(request));
 		TransactionProvider.executeInTransaction(this, form);
 		return mapping.findForward("continue");
 	}
 
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		ListForm listForm = (ListForm) form;
-		listForm.setList(ReferenceDocumentDAO.selectNotDeletedReferenceDocument());
+		if (listForm.getUser().isDelegate()) {
+			listForm.setList(ReferenceDocumentDAO.selectNotDeletedReferenceDocument(listForm.getUser()));
+		} else {
+			listForm.setList(ReferenceDocumentDAO.selectNotDeletedReferenceDocument());
+		}
 		return null;
 	}
 	

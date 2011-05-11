@@ -20,6 +20,7 @@ import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionNumberVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
+import com.tdil.simon.struts.actions.UnAuthorizedAccessException;
 import com.tdil.simon.utils.DelegateSiteCache;
 
 public class ViewVersionForm extends ActionForm {
@@ -77,13 +78,16 @@ public class ViewVersionForm extends ActionForm {
 		this.signatures = signatures;
 	}
 	
-	public void init(int versionID) throws SQLException {
+	public void init(int versionID) throws SQLException, UnAuthorizedAccessException {
 		Version version = VersionDAO.getVersion(versionID);
 		VersionVO versionVO = new VersionVO();
 		versionVO.setVersion(version);
 		versionVO.setAllVersions(VersionDAO.getAllVersionNumbersFor(version.getDocumentId()));
 		versionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(versionID));
 		versionVO.setDocument(DocumentDAO.getDocument(version.getDocumentId()));
+		if (!this.getUser().hasPermissionFor(versionVO.getDocument())) {
+			throw new UnAuthorizedAccessException(this.getUser());
+		}
 		setVersion(versionVO);
 		if (version.isFinal()) {
 			setSignatures(SignatureDAO.selectSignaturesFor(version.getId()));

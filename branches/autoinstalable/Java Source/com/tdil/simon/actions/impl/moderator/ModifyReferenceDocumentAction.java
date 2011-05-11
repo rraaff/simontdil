@@ -85,7 +85,7 @@ public class ModifyReferenceDocumentAction extends AbstractAction implements Tra
 		if (category == null) {
 			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
 		}
-		toModify.setCategoryId(category.getId());
+		toModify.setSubCategoryId(category.getId());
 		toModify.setTitle(this.title);
 		if (docNameAndType != null) {
 			toModify.setFileName(this.docNameAndType[0]);
