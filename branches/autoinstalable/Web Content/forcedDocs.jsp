@@ -29,34 +29,34 @@ div#main2 {
 	delegatePopupBean.init(); 
 %>
 
-<div id="content" style="height:350px;">
-	<div id="alcien" style="height:60px; padding-top:5px;">
-	<!-- TODO_PABLO-->
-	<% for (com.tdil.simon.data.valueobjects.VersionForListVO principal : delegatePopupBean.getPrincipalVersions()) { %>
-		<div id="alcincuentaLeft" style="width:47%">
-			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-				<tr>
-					<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
-					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-				</tr>
-				<tr>
-					<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
-					<td height="100%"><div id="contentDocumentoPrincipal"><div class="titleDocInModule"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=principal.getDocumentId()%>"><%=principal.getDocumentTitle()%></a></div></div>
-					</td>
-					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
-				</tr>
-				<tr>
-					<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-					<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
-					<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
-				</tr>
-			</table>
-		</div>
-	<% } %>
-	</div>
-	<div id="alcien" style="height:200px; padding-bottom:10px;">
+<div id="content" style="height:420px;">
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+	<tr>
+		<td background="images/focalae_set/middle_left.gif" width="20"><img src="images/null.gif" width="20" height="1"></td>
+		<td width="100%">
+		<% for (com.tdil.simon.data.valueobjects.VersionForListVO principal : delegatePopupBean.getPrincipalVersions()) { %>
+			<div id="alcincuentaLeft" style="width:47%">
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+					<tr>
+						<td background="images/interfaces/topLeftTitleDoc.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+						<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
+						<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
+					</tr>
+					<tr>
+						<td background="images/interfaces/middleLeftDoc.gif" width="10" height="1"><img src="images/null.gif" width="10" height="1"></td>
+						<td height="100%"><div id="contentDocumentoPrincipal"><div class="titleDocInModule"><a href="./goToViewLastVersionOfDocumentPopup.st?documentID=<%=principal.getDocumentId()%>"><%=principal.getDocumentTitle()%></a></div></div>
+						</td>
+						<td width="9"><img src="images/null.gif" width="9" height="1"></td>
+						<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
+					</tr>
+					<tr>
+						<td background="images/interfaces/bottomLeftDoc.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+						<td background="images/interfaces/bottomCenter.gif" width="320" height="10"><img src="images/null.gif" width="1" height="10"></td>
+						<td colspan="2" background="images/interfaces/bottomRight.gif" width="10" height="10"><img src="images/null.gif" width="10" height="10"></td>
+					</tr>
+				</table>
+			</div>
+		<% } %>
 		<div id="alcincuentaLeft" style="width:47%; height:200px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
@@ -156,12 +156,31 @@ div#main2 {
 				</tr>
 			</table>
 		</div>
-	</div>
+		</td>
+		<td background="images/focalae_set/middle_right.gif" width="20"><img src="images/null.gif" width="20" height="1"></td>
+	</tr>
+</table>
 </div>
 <div id="footer">
-	<div id="copyright">SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
-	<div id="logoCumbres"><img src="./download.do?action=logo&fileId=footer.logoCumbres" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
-	<div style="width:150px;font-size:10px; color:#999999; float:left; margin-top: -60px; margin-left: 10px;"> - El servidor utiliza GMT - </div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="20" height="2" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="2"></td>
+			<td colspan="3" height="2" background="images/focalae_set/line_sutil.gif"><img src="images/null.gif" width="1" height="2"></td>
+			<td width="20" height="2" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="2"></td>
+		</tr>
+		<tr>
+			<td width="20" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="1"></td>
+			<td width="220" align="right"><img src="images/focalae_set/logo_focalae.gif" width="200" height="71"></td>
+			<td width="100%" align="center"><div id="copyright"><strong>Foro de Cooperaci&oacute;n Am&eacute;rica Latina - Asia del Este</strong><br/>Esmeralda 1212, C1007ABR, Buenos Aires, Argentina - Tel. +54 (11) 4310-8397<br/><br/><%=ResourceBundleCache.get("footer", "GMT")%></div></td>
+			<td width="220" align="left"><img src="images/focalae_set/logo_mrcic.gif" width="200" height="71"></td>
+			<td width="20" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="1"></td>
+		</tr>
+		<tr>
+			<td width="20" height="20"><img src="images/focalae_set/bottom_left.gif" width="20" height="20"></td>
+			<td colspan="3" background="images/focalae_set/bottom_center.gif"><img src="images/null.gif" width="20" height="20"></td>
+			<td width="20" height="20"><img src="images/focalae_set/bottom_right.gif" width="20" height="20"></td>
+		</tr>
+	</table>
 </div>
 </body>
 </html>

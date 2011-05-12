@@ -6,13 +6,9 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
 <html:html>
-<table width="980" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-	<tr>
-		<td align="center" valign="middle"><%=ResourceBundleCache.get(getServletInfo(), "seleccione")%></td>
-	</tr>
-</table>
+		<td width="100%" align="center" valign="middle"><%=ResourceBundleCache.get(getServletInfo(), "seleccione")%></td>
 </html:html>
-</div>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

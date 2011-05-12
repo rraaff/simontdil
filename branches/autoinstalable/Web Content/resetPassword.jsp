@@ -35,7 +35,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/resetPasswordAction">
 <html:hidden name="ResetPassword" property="operation" value=""/>
 	<div id="alcien" style="height:500px; padding-top:10px;">
@@ -147,5 +148,6 @@ if ( dw_scrollObj.isSupported() ) {
 		</table>
 	</div>
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

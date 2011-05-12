@@ -5,13 +5,13 @@ element that is centered on the page, if you so desire. It can even go inside a 
 It carries a background image for aesthetics.
 */
 #menuwrapper {
-	border-bottom: 1px solid 40708c;
-	background-color: #dcebf4;
+	/*border-bottom: 1px solid 015398;*/
+	background-color: #FFFFFF;
 	background-repeat: repeat-x;
 	width: auto;
-	margin-right:22px;
+	/*margin-right:22px;
 	margin-left:22px;
-	border-bottom: 1px solid #40708c;
+	border-bottom: 1px solid #40708c;*/
 }
 /*Clears the floated menu items.
 Assigned to a BR tag placed just before
@@ -44,7 +44,7 @@ Font color is set to light gray.
 	display: block;
 	text-decoration: none;
 	padding: 5px 10px 5px 10px;
-	font-size: 1.2em;
+	font-size: 1.0em;
 	color: #FFFFFF;
 }
 /*
@@ -68,7 +68,7 @@ to ensure it is wide enough to accomodate all text.
 #p7menubar li {
 	float: left;
 	width: 9em;
-	background-color: #7fc7ec;
+	background-color: #166ca2;
 }
 /*
 Sets width for Sub-Menu box and the List Items inside - in proportional em units. 

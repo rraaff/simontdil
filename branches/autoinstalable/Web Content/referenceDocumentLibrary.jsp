@@ -39,7 +39,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td align="center">
@@ -115,5 +116,6 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 </table>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>
