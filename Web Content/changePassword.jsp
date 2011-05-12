@@ -5,9 +5,9 @@
 <%@ taglib uri="/tags/struts-html" prefix="html" %>
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/headerLogoff.jsp" %>
-
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:html>
-<div id="content">
 <html:form method="POST" action="/changePassword">
 <table width="100%" height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -98,12 +98,29 @@
 	</tr>
 </table>
 </html:form>
-</div>
 </html:html>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <div id="footer">
-	<div id="copyright">SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
-	<div id="logoCumbres"><img src="./download.do?action=logo&fileId=footer.logoCumbres" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
-	<div style="width:150px;font-size:10px; color:#999999; float:left; margin-top: -60px; margin-left: 10px;"> - El servidor utiliza GMT - </div>
+	<table width="100%" border="0" cellspacing="0" cellpadding="0">
+		<tr>
+			<td width="20" height="2" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="2"></td>
+			<td colspan="3" height="2" background="images/focalae_set/line_sutil.gif"><img src="images/null.gif" width="1" height="2"></td>
+			<td width="20" height="2" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="2"></td>
+		</tr>
+		<tr>
+			<td width="20" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="1"></td>
+			<td width="220" align="right"><img src="images/focalae_set/logo_focalae.gif" width="200" height="71"></td>
+			<td width="100%" align="center"><div id="copyright"><strong>Foro de Cooperaci&oacute;n Am&eacute;rica Latina - Asia del Este</strong><br/>Esmeralda 1212, C1007ABR, Buenos Aires, Argentina - Tel. +54 (11) 4310-8397<br/><br/><%=ResourceBundleCache.get("footer", "GMT")%></div></td>
+			<td width="220" align="left"><img src="images/focalae_set/logo_mrcic.gif" width="200" height="71"></td>
+			<td width="20" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="1"></td>
+		</tr>
+		<tr>
+			<td width="20" height="20"><img src="images/focalae_set/bottom_left.gif" width="20" height="20"></td>
+			<td colspan="3" background="images/focalae_set/bottom_center.gif"><img src="images/null.gif" width="20" height="20"></td>
+			<td width="20" height="20"><img src="images/focalae_set/bottom_right.gif" width="20" height="20"></td>
+		</tr>
+	</table>
 </div>
 </body>
 </html>

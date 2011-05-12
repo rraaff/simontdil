@@ -8,7 +8,8 @@
 <%@ include file="includes/menu.jsp" %>
 
 <html:html>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/paragraphNavigation">
 <input type="hidden" name="indexOperation" value=""/>
 <input type="hidden" name="indexClicked"/>
@@ -298,6 +299,7 @@
 		</logic:equal>
 </script>
 </html:form>
-</div>
 </html:html>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

@@ -7,7 +7,8 @@
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
 <html:html>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:errors property="general" />
 <html:form method="POST" action="/createDocumentActionStep2">
 <table width="100%" height="590" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -158,6 +159,7 @@ $$('input.slimpicker').each( function(el){
 </script>
 </logic:equal>
 </html:form>
-</div>
 </html:html>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

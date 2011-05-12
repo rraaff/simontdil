@@ -23,7 +23,8 @@ break;
 }
 %>
 
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/login">
 <html:hidden name="LoginForm" property="operation" value=""/>
 <table height="590" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -146,5 +147,6 @@ break;
 	</tr>
 </table>
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footerClean.jsp" %>

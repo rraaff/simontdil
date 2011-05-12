@@ -145,7 +145,8 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isModerator) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form action="/viewVersionAction">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
@@ -200,7 +201,8 @@ if ( dw_scrollObj.isSupported() ) {
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
 				<div id="blockTitle2"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
-				<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<p>
+				<table width="240" border="0" cellspacing="0" cellpadding="0">
 					<tr>
 						<td align="center">
 							<!--table border="0" cellspacing="0" cellpadding="0">
@@ -216,6 +218,7 @@ if ( dw_scrollObj.isSupported() ) {
 					<% if (isModerator) { %>
 						<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
 					<% } %>
+						</td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -402,7 +405,7 @@ if ( dw_scrollObj.isSupported() ) {
 						<td align="center">
 							<html:submit property="operation">
 								<%=ResourceBundleCache.get(getServletInfo(), "buscarObservaciones")%>
-							</html:submit>							</td>
+							</html:submit></td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
@@ -411,12 +414,12 @@ if ( dw_scrollObj.isSupported() ) {
 						<td align="center">
 							<html:submit property="operation">
 								<%=ResourceBundleCache.get(getServletInfo(), "listarObservaciones")%>
-							</html:submit>							</td>
+							</html:submit></td>
 					</tr>
 					<tr>
 						<td><img src="images/null.gif" width="1" height="10"></td>
 					</tr>
-				</table>
+				</table></p>
 			</div>
 		</div>
 		<%if (isModerator) { %>
@@ -544,5 +547,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</tr>
 		</table>
 	</div>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

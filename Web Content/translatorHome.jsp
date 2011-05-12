@@ -140,7 +140,8 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isAdministrator || isDesigner) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <form name="refreshForm" action="goToTranslatorHome.st">
 </form>
 	<div id="alcien" style="height:560px; padding-top:20px;">
@@ -333,6 +334,10 @@ if ( dw_scrollObj.isSupported() ) {
 			<div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 		</div>
 	</div>
+		</td>
+		<td background="images/focalae_set/middle_right.gif" width="20"><img src="images/null.gif" width="20" height="1"></td>
+	</tr>
+</table>
 </div>
 <div id="outerdiv" style="display: none;">
 	<div id="innerdiv"></div>

@@ -28,25 +28,32 @@ input.date {
 </style>
 <![endif]-->
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
-<link href="styles/tdil.css" rel="stylesheet" type="text/css">
+<!-- link href="styles/tdil.css" rel="stylesheet" type="text/css" -->
+<link href="styles/focalae.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <link href="styles/slimpicker.css" rel="stylesheet" type="text/css">
 <link href="styles/sexyalertbox.css" rel="stylesheet" type="text/css">
 </head>
 <body onLoad="P7_ExpMenu();">
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+	<tr>
+		<td width="20" height="20"><img src="images/focalae_set/top_left.gif" width="20" height="20"></td>
+		<td width="100%" background="images/focalae_set/top_center.gif"><img src="images/null.gif" width="20" height="20"></td>
+		<td width="20" height="20"><img src="images/focalae_set/top_right.gif" width="20" height="20"></td>
+	</tr>
+	<tr>
+		<td width="20" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="1"></td>
+		<td width="100%" align="center">
 <div id="header">
 	<div id="logo">
 		<% if (!isAdministrator && !isModerator && isDesigner) { %>
-				<html:link action="/goToListDocumentForDesign" ><img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></html:link></div>
+				<html:link action="/goToListDocumentForDesign" ><img src="./download.do?action=logo&fileId=header.logo" border="0"></html:link></div>
 			<% } else { %>
-				<img src="./download.do?action=logo&fileId=header.logo" width="143" height="80" border="0"></div>
+				<img src="./download.do?action=logo&fileId=header.logo" border="0"></div>
 			<% } %>
 	<div id="blockinHeader">
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tr>
-				<td colspan="5" height="5"><img src="images/null.gif" width="1" height="5"></td>
-			</tr>
 			<tr>
 				<td rowspan="2" align="left"><%=ResourceBundleCache.get("header", "sitioModerador")%>: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioDelegados")%>: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioPublico")%>: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
 				<td width="280" align="right"><%=ResourceBundleCache.get("header", "usuario")%>: <span class="userLogged"><%= user.getName() %></span></td>
@@ -55,16 +62,16 @@ input.date {
 				<td rowspan="2" align="right" valign="bottom">
 					<% 	if(eventMode) { %>
 						<% 	if(inNegotiation) { %>
-							<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación y negociando -->
+							<img src="images/header/modoNegociacionDelegados.png"><!-- Modo Modo negociación y negociando -->
 						<% } else { %>
 							<% 	if(isSign) { %>
-								<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación firmando -->
+								<img src="images/header/modoNegociacionDelegados.png"><!-- Modo Modo negociación firmando -->
 							<% } else { %>
-								<img src="images/header/modoNegociacionDelegados.png" width="187" height="50"><!-- Modo Modo negociación aun no negociando -->
+								<img src="images/header/modoNegociacionDelegados.png"><!-- Modo Modo negociación aun no negociando -->
 							<% } %>
 						<% } %>
 					<% } else { %>
-						<img src="images/header/administradorModerador.png" width="187" height="50">
+						<img src="images/header/administradorModerador.png">
 					<% } %>
 				</td>
 			</tr>
@@ -120,5 +127,8 @@ input.date {
 				</script>
 			<% } %>
 	<% } %>
-	<div id="rayitaHeader"><img src="images/null.gif" width="936" height="5"></div>
 </div>
+		</td>
+		<td width="20" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="1"></td>
+	</tr>
+</table>

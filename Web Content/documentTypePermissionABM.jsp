@@ -37,7 +37,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/documentTypePermissionABM">
 <input type="hidden" name="indexOperation" value=""/>
 <input type="hidden" name="indexClicked"/>
@@ -172,5 +173,6 @@ if ( dw_scrollObj.isSupported() ) {
 	</tr>
 </table>
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

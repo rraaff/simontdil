@@ -84,7 +84,8 @@ function showErrorMessage() {
 		});
 	}
 </script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/saveResourceBundle">
 			<!-- inicio tabla template -->
 			<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -118,11 +119,11 @@ function showErrorMessage() {
 								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 								<td width="150"><%=ResourceBundleCache.get(getServletInfo(), "traduccion")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td><html:text name="ResourceBundleForm" property="rbSearchValue" styleClass="textfield_effect_300"/></td>
+								<td><html:text name="ResourceBundleForm" property="rbSearchValue" styleClass="textfield_effect"/></td>
 								<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 								<td><html:submit property="operation">
-																				<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
-																			</html:submit></td>
+										<%=ResourceBundleCache.get(getServletInfo(), "buscar")%>
+									</html:submit></td>
 							</tr>
 							<tr>
 								<td colspan="12" height="10"><img src="images/null.gif" width="1" height="10"></td>
@@ -167,5 +168,6 @@ function showErrorMessage() {
 			</table>
 		<!-- fin tabla template -->
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

@@ -22,11 +22,12 @@
 <script src="scripts/menu.js" type="text/javascript"></script>
 
 <link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
-<link href="styles/tdil.css" rel="stylesheet" type="text/css">
+<!-- link href="styles/tdil.css" rel="stylesheet" type="text/css" -->
+<link href="styles/focalae.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 #content {
-	height:700px;
+	height:100%;
 	border-bottom-width: 1px;
 	border-bottom-style: solid;
 	border-bottom-color: #808080;
@@ -126,16 +127,16 @@
 %>
 <div id="splashLayer" <%= com.tdil.simon.data.model.Site.NORMAL.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
 	<div id="content">
-		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
+		<table width="95%" height="600" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
-				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"></td>
+				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib"></td>
 			</tr>
 		</table>
 	</div>
 </div>
 <div id="negotiationLayer" <%= com.tdil.simon.data.model.Site.IN_NEGOTIATION.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
 	<div id="content">
-		<table width="95%" cellpadding="0" cellspacing="0" border="0" align="center">
+		<table width="95%" height="100%" cellpadding="0" cellspacing="0" border="0" align="center">
 			<tr>
 				<td><img src="images/null.gif" width="1" height="17"></td>
 			</tr>
@@ -213,7 +214,7 @@
 </div>
 <div id="inSignLayer" <%= com.tdil.simon.data.model.Site.IN_SIGN.equals(status) ? "style='display: block;'" : "style='display: none;'"%>>
 	<div id="content">
-		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
+		<table width="95%" height="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
 			<tr>
 				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"><br><br><%=ResourceBundleCache.get(getServletInfo(), "documentoEnFirma")%>.</td>
 			</tr>

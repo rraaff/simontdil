@@ -115,7 +115,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 </script>
 </head>
 <body>
-<div id="content" style="height:530px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;">
+<!-- div id="content" style="height:530px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;"  -->
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form action="/viewVersionActionPopup">
 	<div id="alcien" style="height:510px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:510px;">
@@ -182,7 +184,8 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 		</div>
 	</div>
 	</html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <div id="outerdiv" style="display: none;">
 	<div id="innerdiv"></div>
 	<div id="contentTableComment">

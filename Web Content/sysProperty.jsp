@@ -24,10 +24,8 @@ div#scrollbar {
 <script src="scripts/dw_scroll.js" type="text/javascript"></script>
 <script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
 <script src="scripts/scroll_controls.js" type="text/javascript"></script>
-<script type="text/javascript">
-
-</script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form method="POST" action="/saveProperty">
 <!-- inicio tabla template -->
 <table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -75,5 +73,6 @@ div#scrollbar {
 </table>
 <!-- fin tabla template -->
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

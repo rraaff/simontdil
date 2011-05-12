@@ -98,7 +98,8 @@ if ( dw_scrollObj.isSupported() ) {
 <%if (isModerator) { %>
 	<%@ include file="includes/menu.jsp" %>
 <% } %>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 <html:form action="/viewVersionAction">
 <table width="95%" height="500" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
@@ -193,7 +194,7 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 </table>
-
 </html:form>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

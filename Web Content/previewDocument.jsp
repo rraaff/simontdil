@@ -33,9 +33,10 @@ if ( dw_scrollObj.isSupported() ) {
 	dw_Event.add( window, 'resize', init_dw_Scroll);
 }
 </script>
-<div id="content">
-	<div id="alcien" style="height:130px; padding-top:10px;">
-		<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
+	<!-- div id="alcien" style="height:130px; padding-top:10px;" -->
+		<table width="95%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td>
 					<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -154,6 +155,7 @@ if ( dw_scrollObj.isSupported() ) {
 				</td>
 			</tr>
 		</table>
-	</div>
-</div>
+	<!-- /div -->
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footer.jsp" %>

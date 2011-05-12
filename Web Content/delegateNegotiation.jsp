@@ -277,7 +277,8 @@ function openDocs(){
 		var tabset = new TabSet($$('#tabs1 li a'),$$('#contents1 li'));
 	});
 </script>
-<div id="content">
+<%@ include file="includes/leftContent.jsp" %>
+<td width="100%">
 	<div id="alcien" style="height:560px; padding-top:10px;">
 		<div id="alcincuentaLeft" style="width:47%; height:560px;">
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -392,7 +393,8 @@ function openDocs(){
 		<!-- fin tabla template -->
 		</div>
 	</div>
-</div>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 </html:html>
 <% 	if(isDelegate && isSign && user.isCanSign()) { %>
 <script type="text/javascript">
