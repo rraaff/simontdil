@@ -42,12 +42,12 @@ public class DatabaseCreator {
 		}
 		
 		if (server == null) {
-			System.out.println("Ingrese el server de la base:");
+			System.out.println("Ingrese el nombre del servidor o IP del equipo que tiene la base de datos mysql:");
 			server = stdin.readLine();
 		}
 
 		if (port == null) {
-			System.out.println("Ingrese el port del server de la base:");
+			System.out.println("Ingrese el puerto del server de la base (ej. 3306):");
 			port = stdin.readLine();
 		}
 
@@ -57,12 +57,12 @@ public class DatabaseCreator {
 		}
 
 		if (base == null) {
-			System.out.println("Ingrese el nombre de la base a crear:");
+			System.out.println("Ingrese el nombre de la base a crear (ej. SIMON):");
 			base = stdin.readLine();
 		}
 
 		if (user == null) {
-			System.out.println("Ingrese el usuario de la base a crear:");
+			System.out.println("Ingrese el usuario de la base a crear (ej. SIMON_USER):");
 			user = stdin.readLine();
 		}
 
@@ -77,13 +77,13 @@ public class DatabaseCreator {
 		}
 
 		if (adminPassword == null) {
-			System.out.println("Ingrese el password del usuario Admin:");
+			System.out.println("Ingrese el password del usuario Administrador:");
 			adminPassword = stdin.readLine();
 		}
 
 		if (subpath == null) {
 			System.out
-					.println("Ingrese el subpath para el directorio temporal(debe ser unico para cada instalacion de simon):");
+					.println("Ingrese el subpath para el directorio temporal(debe ser único para cada instalación de Simón, ej. Simon_1):");
 			subpath = stdin.readLine();
 		}
 		
