@@ -6,7 +6,7 @@ public class Document extends PersistentObject {
 	private String title;
 	private String introduction;
 	private boolean principal;
-	private int documentTypeId;
+	private int documentSubTypeId;
 	
 	public String getTitle() {
 		return title;
@@ -27,10 +27,10 @@ public class Document extends PersistentObject {
 		this.principal = principal;
 	}
 
-	public int getDocumentTypeId() {
-		return documentTypeId;
+	public int getDocumentSubTypeId() {
+		return documentSubTypeId;
 	}
-	public void setDocumentTypeId(int documentTypeId) {
-		this.documentTypeId = documentTypeId;
+	public void setDocumentSubTypeId(int documentTypeId) {
+		this.documentSubTypeId = documentTypeId;
 	}
 }

@@ -158,8 +158,8 @@
 		where GROUPMEMBER.systemUserId = SYSTEMUSER.id
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
-		AND GROUPPERMISSION.objectId = #documentTypeId#
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+		AND GROUPPERMISSION.objectId = #documentSubTypeId#
 		and SYSTEMUSER.delegate = 1
 		and SYSTEMUSER.deleted = 0
 		and USERGROUP.deleted = 0

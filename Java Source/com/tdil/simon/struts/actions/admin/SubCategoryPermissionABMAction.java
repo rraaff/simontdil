@@ -17,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.SubCategoryPermissionABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.PermissionCache;
 import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
@@ -41,13 +42,16 @@ public class SubCategoryPermissionABMAction extends ABMAction {
 					subCategoryPermissionABMForm.init();
 				}
 			});
+			PermissionCache.refresh();
 			return mapping.findForward("continue");
 		}
 		if (StringUtils.equalsUnescaped(subCategoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			subCategoryPermissionABMForm.reset();
 		}
 		if (StringUtils.equalsUnescaped(subCategoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregar"))) {
-			return this.validateAndSave(subCategoryPermissionABMForm, request, mapping);
+			ActionForward result = this.validateAndSave(subCategoryPermissionABMForm, request, mapping);
+			PermissionCache.refresh();
+			return result;
 		} 
 		return mapping.findForward("continue");
 	}

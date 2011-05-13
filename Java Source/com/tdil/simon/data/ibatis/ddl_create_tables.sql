@@ -44,7 +44,7 @@ CREATE  TABLE `DOCUMENT` (
   `title` VARCHAR(100) NOT NULL ,
   `introduction` MEDIUMTEXT NULL ,
   `principal` INT NULL ,
-  `documentTypeId` INT NULL ,
+  `documentSubTypeId` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /
@@ -205,3 +205,10 @@ CREATE  TABLE `GROUPMEMBER` (
 INSERT INTO SYSPROPERTIES (propKey, propValue, deleted) VALUES ('simon.mayorVersion', '2', 0);
 /
 INSERT INTO SYSPROPERTIES (propKey, propValue, deleted) VALUES ('simon.minorVersion', '0', 0);
+/
+CREATE  TABLE `DOCUMENTSUBTYPE` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `name` VARCHAR(100) NULL ,
+  `documentTypeId` INT NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`) );

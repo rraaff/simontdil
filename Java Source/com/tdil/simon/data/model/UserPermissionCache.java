@@ -9,18 +9,18 @@ import java.util.Set;
 
 import com.tdil.simon.data.ibatis.GroupPermissionDAO;
 
-public class PermissionCache {
+public class UserPermissionCache {
 
 	private Map<String, Set<Integer>> permissions;
 	
-	protected PermissionCache(SystemUser user) throws SQLException {
+	public UserPermissionCache(SystemUser user) throws SQLException {
 		super();
 		this.build(user);
 	}
 	
 	protected void build(SystemUser user) throws SQLException {
 		permissions = new HashMap<String, Set<Integer>>();
-		permissions.put(GroupPermission.DOCUMENT_TYPE, new HashSet<Integer>());
+		permissions.put(GroupPermission.DOCUMENT_SUB_TYPE, new HashSet<Integer>());
 		permissions.put(GroupPermission.SUBCATEGORY, new HashSet<Integer>());
 		List<GroupPermission> list = GroupPermissionDAO.selectGroupPermissionForUser(user);
 		for (GroupPermission permission : list) {
@@ -29,11 +29,11 @@ public class PermissionCache {
 	}
 	
 	public boolean canAccess(Document document) {
-		return this.canAccessDocumentType(document.getDocumentTypeId());
+		return this.canAccessDocumentType(document.getDocumentSubTypeId());
 	}
 
 	public boolean canAccessDocumentType(int documentTypeId) {
-		return permissions.get(GroupPermission.DOCUMENT_TYPE).contains(documentTypeId);
+		return permissions.get(GroupPermission.DOCUMENT_SUB_TYPE).contains(documentTypeId);
 	}
 	
 	

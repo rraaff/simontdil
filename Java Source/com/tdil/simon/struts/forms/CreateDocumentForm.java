@@ -25,6 +25,7 @@ import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
 import com.tdil.simon.data.ibatis.DocumentDAO;
+import com.tdil.simon.data.ibatis.DocumentSubTypeDAO;
 import com.tdil.simon.data.ibatis.DocumentTypeDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SiteDAO;
@@ -34,6 +35,7 @@ import com.tdil.simon.data.model.DocumentType;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.web.ResourceBundleCache;
@@ -85,7 +87,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	private boolean principal;
-	private int documentTypeId;
+	private int documentSubTypeId;
 	
 	// Segundo paso
 	private String introduction;
@@ -114,7 +116,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String append;
 	private String newParagraphText;
 	
-	private List<DocumentType> allDocumentType;
+	private List<DocumentSubTypeVO> allDocumentSubType;
 	
 	static {
 		allMonths = new ArrayList<MonthOption>();
@@ -152,7 +154,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsDay= null;
 		//this.limitObservationsMonth= null;
 		this.limitObservations = null;
-		this.documentTypeId = 0;
+		this.documentSubTypeId = 0;
 		this.introduction= null;
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -165,7 +167,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.isInNegotiation = false;
 		this.portugues = false;
 		try {
-			this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
+			this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -378,7 +380,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
 		if (!this.isPortugues() && this.isPrincipal()) {
-			DocumentDAO.markNotPrincipal(this.getDocumentTypeId());
+			DocumentDAO.markNotPrincipal(this.getDocumentSubTypeId());
 		}
 		if (this.getDocumentId() == 0) {
 			Document document = new Document();
@@ -591,7 +593,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		document.setTitle(this.title);
 		document.setIntroduction(this.introduction);
 		document.setPrincipal(this.isPrincipal());
-		document.setDocumentTypeId(this.getDocumentTypeId());
+		document.setDocumentSubTypeId(this.getDocumentSubTypeId());
 		document.setDeleted(false);
 		// TODO lanzar errores
 	}
@@ -602,8 +604,8 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		VersionValidation.validateName(this.versionName, validation);
 		//DocumentValidation.validateIntroduction(this.introduction, validation);
 		VersionValidation.validateUpToCommentDate(this.limitObservations, validation);
-		if (this.getDocumentTypeId() == 0) {
-			validation.setFieldError("type", "type" + "." + ValidationErrors.SELECT_DOCUMENT_TYPE);
+		if (this.getDocumentSubTypeId() == 0) {
+			validation.setFieldError("type", "type" + "." + ValidationErrors.SELECT_DOCUMENT_SUB_TYPE);
 		}
 		if (this.isPrincipal()) {
 			if (!Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
@@ -611,7 +613,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 				if (doc != null) {
 					Version version = VersionDAO.getVersionUnderWork();
 					if (version.getId() != this.versionId) {
-						if (doc.getDocumentTypeId() == this.getDocumentTypeId()) {
+						if (doc.getDocumentSubTypeId() == this.getDocumentSubTypeId()) {
 							validation.setFieldError("principal", "principal" + "." + ValidationErrors.DOCUMENT_IN_NEGOTIATION);
 						}
 					}
@@ -652,7 +654,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public void initWith(int versionID) throws SQLException {
-		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
 		setPortugues(false);
 		Version version = VersionDAO.getVersion(versionID);
 		Document document = DocumentDAO.getDocument(version.getDocumentId());
@@ -683,7 +685,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentTypeId = document.getDocumentTypeId();
+		this.documentSubTypeId = document.getDocumentSubTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -700,12 +702,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.consolidateText= null;
 	}
 
-	public int getDocumentTypeId() {
-		return documentTypeId;
+	public int getDocumentSubTypeId() {
+		return documentSubTypeId;
 	}
 
-	public void setDocumentTypeId(int documentType) {
-		this.documentTypeId = documentType;
+	public void setDocumentSubTypeId(int documentType) {
+		this.documentSubTypeId = documentType;
 	}
 
 	public int getTemporaryVersionId() {
@@ -890,7 +892,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForPortuguesWith(int versionID) throws SQLException {
-		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
 		setPortugues(true);
 		setDesigner(false);
 		// con esta saco datos base
@@ -935,7 +937,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentTypeId = document.getDocumentTypeId();
+		this.documentSubTypeId = document.getDocumentSubTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphIds = new int[1000];
@@ -1000,7 +1002,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForDesignWith(int versionID) throws SQLException {
-		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
 		setPortugues(false);
 		setDesigner(true);
 		Version version = VersionDAO.getVersion(versionID);
@@ -1019,7 +1021,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
 		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentTypeId = document.getDocumentTypeId();
+		this.documentSubTypeId = document.getDocumentSubTypeId();
 		this.introduction= document.getIntroduction();
 		this.paragraph = 0;
 		this.paragraphTexts = new String[1000];
@@ -1168,11 +1170,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.livePreview = false;
 	}
 
-	public List<DocumentType> getAllDocumentType() {
-		return allDocumentType;
+	public List<DocumentSubTypeVO> getAllDocumentSubType() {
+		for (DocumentSubTypeVO vo : allDocumentSubType) {
+			vo.setSelectedId(this.getDocumentSubTypeId());
+		}
+		return allDocumentSubType;
 	}
 
-	public void setAllDocumentType(List<DocumentType> allDocumentType) {
-		this.allDocumentType = allDocumentType;
+	public void setAllDocumentSubType(List<DocumentSubTypeVO> allDocumentType) {
+		this.allDocumentSubType = allDocumentType;
 	}
 }

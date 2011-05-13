@@ -125,6 +125,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editar")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editarSubTipos")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "borrarReactivar")%></td>
 									</tr> 
 									<logic:iterate name="DocumentTypeABMForm" property="allDocumentType" id="iterDocumentType" indexId="iterIndex"> 
@@ -132,7 +133,10 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentType" property="name" /></td>
 											<td><html:link  action="editDocumentType.st?" paramName="iterDocumentType" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											</html:link></td>
+											<td><html:link  action="goToDocumentSubTypeABM.st?" paramName="iterDocumentType" paramProperty="id" paramId="documentTypeId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editarSubTipos")%>
+											</html:link></td>
 											<td><logic:equal name="iterDocumentType" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentTypeABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>

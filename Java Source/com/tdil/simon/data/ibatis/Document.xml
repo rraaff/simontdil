@@ -57,13 +57,13 @@
    	from DOCUMENT 
    	WHERE deleted = 0
    	AND principal = 0
-    AND DOCUMENT.documentTypeId IN (
+    AND DOCUMENT.documentSubTypeId IN (
     	SELECT GROUPPERMISSION.objectId
 		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
     )
     AND EXISTS (
     	SELECT * 
@@ -80,13 +80,13 @@
    	from DOCUMENT 
    	WHERE deleted = 0
    	AND principal = 0
-    AND DOCUMENT.documentTypeId IN (
+    AND DOCUMENT.documentSubTypeId IN (
     	SELECT GROUPPERMISSION.objectId
 		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
     )
     AND EXISTS (
     	SELECT * 
@@ -136,9 +136,9 @@
   
   <insert id="insertDocument" parameterClass="Document">
     insert into DOCUMENT (
-      id, title, introduction, principal, documentTypeId, deleted
+      id, title, introduction, principal, documentSubTypeId, deleted
     ) values (
-      #id#, #title#, #introduction#,#principal#,#documentTypeId#, #deleted#
+      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -150,7 +150,7 @@
       title= #title#, 
 	introduction = #introduction#,
 	principal= #principal#,
-	documentTypeId = #documentTypeId#, 
+	documentSubTypeId = #documentSubTypeId#, 
 	deleted = #deleted#
     where
       ID = #id#
@@ -167,7 +167,7 @@
     update DOCUMENT set
       principal = 0
     where principal = 1
-    and documentTypeId = #documentTypeId#
+    and documentSubTypeId = #documentSubTypeId#
   </update>
 
   <update id="logDeleteDocument" parameterClass="Document">

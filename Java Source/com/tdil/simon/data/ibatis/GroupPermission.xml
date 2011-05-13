@@ -9,7 +9,7 @@
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="GroupPermission" type="com.tdil.simon.data.model.GroupPermission"/>
   <typeAlias alias="SubCategoryPermissionVO" type="com.tdil.simon.data.valueobjects.SubCategoryPermissionVO"/>
-  <typeAlias alias="DocumentTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentTypePermissionVO"/>
+  <typeAlias alias="DocumentSubTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentSubTypePermissionVO"/>
   
   <select id="selectGroupPermissionForUser" parameterClass="int" resultClass="GroupPermission">
  	 SELECT GROUPPERMISSION.*
@@ -29,13 +29,14 @@
    	order by CATEGORY.name, SUBCATEGORY.name 
   </select>
   
-  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentTypePermissionVO">
-    select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName
-   	from GROUPPERMISSION, DOCUMENTTYPE
+  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentSubTypePermissionVO">
+    select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+   	from GROUPPERMISSION, DOCUMENTTYPE, DOCUMENTSUBTYPE
    	WHERE GROUPPERMISSION.groupId = #groupId#
-   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
-   	AND GROUPPERMISSION.objectId = DOCUMENTTYPE.id
-   	order by DOCUMENTTYPE.name 
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+   	AND GROUPPERMISSION.objectId = DOCUMENTSUBTYPE.id
+   	and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name
   </select>
 
   <insert id="insertGroupPermission" parameterClass="GroupPermission">
