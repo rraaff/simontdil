@@ -68,7 +68,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle">Documentos</div></td>
+					<td colspan="2" width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "Documentos")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="4" class="titles"></td>
 									</tr>
 									<logic:iterate name="ModeratorHome" property="principalVersions" id="doc" indexId="principalIndex">
-										<tr class="<%= (principalIndex % 2 == 0) ? "d0" : "d1" %>">
+										<tr class="row<%= (principalIndex % 2 == 0) ? "ODD" : "EVEN" %>">
 											<td height="22" align="left"><html:link  action="/goToViewVersion.st?" paramName="doc" paramProperty="id" paramId="versionID"><bean:write name="doc" property="documentTitle" /></html:link></td>
 											<td><bean:write name="doc" property="number" /></td>
 											<td><bean:write name="doc" property="name" /></td>
