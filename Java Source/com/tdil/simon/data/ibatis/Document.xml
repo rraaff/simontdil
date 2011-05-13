@@ -33,7 +33,7 @@
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
-   	order by id desc
+   	order by title
    	LIMIT 11
   </select>
   
@@ -47,7 +47,7 @@
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status = 'CONSOLIDATED')
-   	order by id desc
+   	order by title
   </select>
   
   
@@ -71,7 +71,7 @@
    		WHERE VERSION.documentId = DOCUMENT.id 
    		AND VERSION.deleted = 0
    		AND VERSION.status = 'CONSOLIDATED')
-   	order by id desc
+   	order by title
    	LIMIT 11
   </select>
   
@@ -94,7 +94,7 @@
    		WHERE VERSION.documentId = DOCUMENT.id 
    		AND VERSION.deleted = 0
    		AND VERSION.status = 'CONSOLIDATED')
-   	order by id desc
+   	order by title
   </select>
   
   <select id="getDocumentUnderWork" resultClass="Document">
