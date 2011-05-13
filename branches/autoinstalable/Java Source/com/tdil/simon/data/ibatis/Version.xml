@@ -50,6 +50,7 @@
     and DOCUMENT.principal = 1
     and DOCUMENT.deleted = 0
     and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
+    order by DOCUMENT.title
   </select>
   
   <select id="selectPrincipalVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
@@ -72,6 +73,7 @@
 		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
     )
     and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
+    order by DOCUMENT.title
   </select>
   
  <select id="selectVersionUnderNegotiation" resultClass="Version">
