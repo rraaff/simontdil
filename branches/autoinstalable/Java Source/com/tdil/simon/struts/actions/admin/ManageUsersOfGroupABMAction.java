@@ -17,6 +17,7 @@ import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
 import com.tdil.simon.struts.forms.ManageUsersOfGroupABMForm;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.PermissionCache;
 import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
@@ -41,13 +42,16 @@ public class ManageUsersOfGroupABMAction extends ABMAction {
 					manageUsersOfGroupABMForm.init();
 				}
 			});
+			PermissionCache.refresh();
 			return mapping.findForward("continue");
 		}
 		if (StringUtils.equalsUnescaped(manageUsersOfGroupABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
 			manageUsersOfGroupABMForm.reset();
 		}
 		if (StringUtils.equalsUnescaped(manageUsersOfGroupABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregar"))) {
-			return this.validateAndSave(manageUsersOfGroupABMForm, request, mapping);
+			ActionForward result = this.validateAndSave(manageUsersOfGroupABMForm, request, mapping);
+			PermissionCache.refresh();
+			return result;
 		} 
 		return mapping.findForward("continue");
 	}

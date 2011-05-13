@@ -42,6 +42,7 @@
     <form-bean name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.forms.SubCategoryPermissionABMForm"/>
     <form-bean name="DocumentTypePermissionABMForm" type="com.tdil.simon.struts.forms.DocumentTypePermissionABMForm"/>
     <form-bean name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.forms.ManageUsersOfGroupABMForm"/>
+    <form-bean name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.forms.DocumentSubTypeABMForm"/>
   </form-beans>
   <global-forwards>
     <forward name="ajaxReturn" path="/empty.jsp"/>
@@ -379,6 +380,17 @@
     <action path="/manageUsersOfGroupABM" name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.actions.admin.ManageUsersOfGroupABMAction" scope="session">
       <forward name="continue" path="/manageUsersOfGroupABM.jsp"/>
       <forward name="failure" path="/manageUsersOfGroupABM.jsp"/>
+    </action>
+    
+    <action path="/goToDocumentSubTypeABM" name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.actions.moderator.GoToDocumentSubTypeABMAction" scope="session">
+      <forward name="continue" path="/documentSubTypeABM.jsp"/>
+    </action>
+    <action path="/documentSubTypeABM" name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.actions.moderator.DocumentSubTypeABMAction" scope="session">
+      <forward name="continue" path="/documentSubTypeABM.jsp"/>
+      <forward name="failure" path="/documentSubTypeABM.jsp"/>
+    </action>
+    <action path="/editDocumentSubType" name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.actions.moderator.EditDocumentSubTypeAction" scope="session">
+      <forward name="continue" path="/documentSubTypeABM.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

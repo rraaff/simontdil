@@ -85,20 +85,20 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></td>
 										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "version")%></td>
-										<td class="titles">Nombre de Versi&oacute;n</td>
+										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "nombreDeVersion")%></td>
 										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%></td>
-										<td class="titles">Categor&iacute;a de documento</td>
-										<td class="titles">Subcategor&iacute;a de documento</td>
+										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "tipoDeDocumento")%></td>
+										<td class="titles"><%=ResourceBundleCache.get(getServletInfo(), "subTipoDeDocumento")%></td>
 										<td colspan="4" class="titles"></td>
 									</tr>
 									<logic:iterate name="ModeratorHome" property="principalVersions" id="doc" indexId="principalIndex">
-										<tr><!-- MARCOS metele el iterador de color -->
+										<tr class="<%= (principalIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td height="22" align="left"><html:link  action="/goToViewVersion.st?" paramName="doc" paramProperty="id" paramId="versionID"><bean:write name="doc" property="documentTitle" /></html:link></td>
 											<td><bean:write name="doc" property="number" /></td>
 											<td><bean:write name="doc" property="name" /></td>
 											<td><bean:write name="doc" property="limitObservationsString" /></td>
-											<td></td>
-											<td></td>
+											<td><bean:write name="doc" property="documentTypeName" /></td>
+											<td><bean:write name="doc" property="documentSubTypeName" /></td>
 											<td colspan="4"></td>
 										</tr>
 									</logic:iterate>

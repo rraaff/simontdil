@@ -15,6 +15,7 @@ import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
 import com.tdil.simon.data.ibatis.SubCategoryDAO;
 import com.tdil.simon.data.model.ReferenceDocument;
+import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
 import com.tdil.simon.data.valueobjects.ReferenceDocumentVO;
 import com.tdil.simon.data.valueobjects.SubCategoryVO;
 import com.tdil.simon.utils.LoggerProvider;
@@ -149,6 +150,9 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		this.allReferenceDocuments = allReferenceDocuments;
 	}
 	public List<SubCategoryVO> getAllSubCategories() {
+		for (SubCategoryVO vo : allSubCategories) {
+			vo.setSelectedId(this.getSubCategoryId());
+		}
 		return allSubCategories;
 	}
 	public void setAllSubCategories(List<SubCategoryVO> allCategories) {

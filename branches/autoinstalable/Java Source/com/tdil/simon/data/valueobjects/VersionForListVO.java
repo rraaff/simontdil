@@ -8,6 +8,8 @@ public class VersionForListVO extends Version {
 	private String documentTitle;
 	private int observationCount;
 	private int newParagraphCount;
+	private String documentTypeName;
+	private String documentSubTypeName;
 	
 	public String getDocumentTitle() {
 		return documentTitle;
@@ -54,5 +56,17 @@ public class VersionForListVO extends Version {
 		} else {
 			return String.valueOf(this.getNewParagraphCount());
 		}
+	}
+	public String getDocumentTypeName() {
+		return documentTypeName;
+	}
+	public void setDocumentTypeName(String documentTypeName) {
+		this.documentTypeName = documentTypeName;
+	}
+	public String getDocumentSubTypeName() {
+		return documentSubTypeName;
+	}
+	public void setDocumentSubTypeName(String documentSubTypeName) {
+		this.documentSubTypeName = documentSubTypeName;
 	}
 }

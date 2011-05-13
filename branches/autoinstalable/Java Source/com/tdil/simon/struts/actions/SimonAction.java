@@ -55,6 +55,7 @@ public abstract class SimonAction extends Action {
 				return mapping.findForward("invalidAction");
 			} else {
 				// TODO doc_type
+				getLog().error(e.getMessage(), e);
 				return mapping.findForward("invalidAction");
 			}
 		}

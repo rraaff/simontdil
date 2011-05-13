@@ -34,7 +34,7 @@ public class SystemUserDAO {
 	}
 	
 	public static List selectDelegateUsersThatCanAccess(Document document) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersThatCanAccessDocumenType", document.getDocumentTypeId());
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDelegateUsersThatCanAccessDocumenType", document.getDocumentSubTypeId());
 	}
 	
 	public static List selectModerators() throws SQLException {

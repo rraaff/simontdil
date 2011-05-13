@@ -2,7 +2,7 @@ package com.tdil.simon.data.model;
 
 public class GroupPermission extends PersistentObject {
 
-	public static String DOCUMENT_TYPE = "DOCUMENT_TYPE";
+	public static String DOCUMENT_SUB_TYPE = "DOCUMENT_SUB_TYPE";
 	public static String SUBCATEGORY = "SUBCATEGORY";
 	
 	private int groupId;

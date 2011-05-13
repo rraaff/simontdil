@@ -34,6 +34,7 @@
   <sqlMap resource="com/tdil/simon/data/ibatis/ResourceBundle.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/Logo.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/DocumentType.xml"/>
+  <sqlMap resource="com/tdil/simon/data/ibatis/DocumentSubType.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/UserGroup.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/SubCategory.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/GroupPermission.xml"/>

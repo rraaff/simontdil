@@ -65,18 +65,11 @@ public class SubCategoryPermissionABMForm extends TransactionalValidationForm im
 	
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
-		// TODO chequeo de existencia
-//		DocumentTypeValidation.validateName(this.name, "documentType.name", validation);
 		return validation;
 	}
 	
 	@Override
 	public void validateInTransaction(ValidationError validationError) throws SQLException {
-		// TODO chequeo de existencia
-//		DocumentType exists = DocumentTypeDAO.getDocumentType(this.name);
-//		if (exists != null && exists.getId() != this.getId()) {
-//			// TODO agregar rb
-//			validationError.setFieldError("documentType.name", "documentType.name." + ValidationErrors.DOCUMENT_TYPE_ALREADY_EXISTS);
 //		}
 	}
 	

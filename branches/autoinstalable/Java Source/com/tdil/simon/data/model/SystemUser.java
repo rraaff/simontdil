@@ -5,6 +5,8 @@ import java.sql.SQLException;
 
 import org.apache.commons.lang.RandomStringUtils;
 
+import com.tdil.simon.utils.PermissionCache;
+
 /**
  * 
  * @author mgodoy
@@ -42,9 +44,6 @@ public class SystemUser extends PersistentObject implements Serializable{
 	
 	private boolean canProposeParagraph = false;
 	
-	// generated at login time
-	private PermissionCache permissionCache;
-
 	public static String generateRandomPassword() {
 		return RandomStringUtils.randomAlphanumeric(20);
 	}
@@ -186,21 +185,18 @@ public class SystemUser extends PersistentObject implements Serializable{
 		this.translator = translator;
 	}
 
-	public PermissionCache getPermissionCache() {
-		return permissionCache;
-	}
-
-	public void setPermissionCache(PermissionCache permissionCache) {
-		this.permissionCache = permissionCache;
-	}
-
-	public void initPermissionCache() throws SQLException {
-		setPermissionCache(new PermissionCache(this));
+	public UserPermissionCache getPermissionCache() {
+		return PermissionCache.getUserPermissionCache(this);
 	}
 
 	public boolean hasPermissionFor(Document document) {
 		if (this.isDelegate()) {
-			return this.getPermissionCache().canAccess(document);
+			UserPermissionCache userPermissionCache = this.getPermissionCache();
+			if (userPermissionCache == null) {
+				return false;
+			} else {
+				return this.getPermissionCache().canAccess(document);
+			}
 		} else {
 			return true;
 		}

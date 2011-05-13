@@ -22,6 +22,7 @@ import com.tdil.simon.data.ibatis.DatabaseCreator;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.utils.DelegateSiteCache;
 import com.tdil.simon.utils.LoggerProvider;
+import com.tdil.simon.utils.PermissionCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class DBCPoolingListener implements ServletContextListener {
@@ -40,6 +41,7 @@ public class DBCPoolingListener implements ServletContextListener {
 			upgradeDb(ds);
 			
 			IBatisManager.init("SqlMapConfig-JNDI.xml", new Properties());		
+			PermissionCache.refresh();
 			DelegateSiteCache.refresh();
 			SystemConfig.init();
 		} catch (NamingException e) {

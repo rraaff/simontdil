@@ -1,4 +1,4 @@
-<%@ page info="referenceDocumentABM"%>
+<%@ page info="documentSubTypeABM"%>
 <%@ page contentType="text/html; charset=ISO-8859-1" %>
 <%@ taglib uri="/tags/struts-bean" prefix="bean" %>
 <%@ taglib uri="/tags/struts-logic" prefix="logic" %>
@@ -13,7 +13,7 @@ div#main {
 	# width:100%;
 	* width:100%;
 	width:inherit;
-	height:440px;
+	height:290px;
 	font-size: 10px;
 }
 div#scrollbar {
@@ -37,9 +37,8 @@ if ( dw_scrollObj.isSupported() ) {
     dw_Event.add( window, 'load', init_dw_Scroll);
 }
 </script>
-<%@ include file="includes/leftContent.jsp" %>
-<td width="100%">
-<html:form method="POST" action="/referenceDocumentABM" enctype="multipart/form-data">
+<div id="content">
+<html:form method="POST" action="/documentSubTypeABM">
 <input type="hidden" name="indexOperation" value=""/>
 <input type="hidden" name="indexClicked"/>
 <table width="95%" height="560" border="0" cellspacing="0" cellpadding="0" align="center">
@@ -49,71 +48,49 @@ if ( dw_scrollObj.isSupported() ) {
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
+					<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></div></td>
 					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td height="460" valign="top">
-					<!-- corte tabla template -->
+					<td height="500" valign="top">
+						<!-- corte tabla template -->
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
 							<tr>
-								<td colspan="3" height="25"><img src="images/null.gif" width="1" height="25"></td>
+								<td height="25" colspan="3"><img src="images/null.gif" width="1" height="25"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%>:</td>
+								<td width="93" align="right"><%=ResourceBundleCache.get(getServletInfo(), "tipoDeDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="240" align="left"><html:text name="ReferenceDocumentABMForm" property="title" styleClass="textfield_effect"/><html:errors property="refDoc.title" /></td>
+								<td width="250" align="left"><bean:write name="DocumentSubTypeABMForm" property="documentTypeName" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "elegirArchivo")%>:</td>
+								<td width="93" align="right"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="240" align="left"><html:file property="document" styleClass="textfield_effect"/><html:errors property="refDoc.document" /></td>
+								<td width="250" align="left"><html:text name="DocumentSubTypeABMForm" property="name" styleClass="textfield_effect"/><html:errors property="documentSubType.name" /></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
-							</tr>
-							<tr>
-								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%>:</td>
-								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
-								<td width="240" align="left">
-									<html:select name="ReferenceDocumentABMForm" property="subCategoryId" styleClass="textfield_effect">
-										<% String lastCategory = "";%>
-										<logic:iterate name="ReferenceDocumentABMForm" property="allSubCategories" id="iterSubCat"> 
-											<% com.tdil.simon.data.valueobjects.SubCategoryVO sub = (com.tdil.simon.data.valueobjects.SubCategoryVO)iterSubCat; %>
-											<% if (!sub.getCategoryName().equals(lastCategory)) { %>
-												<optgroup label="<%=sub.getCategoryName()%>"></optgroup>
-											<% lastCategory = sub.getCategoryName();
-											} %>
-											<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
-										</logic:iterate>
-									</html:select><html:errors property="refDoc.category" /></td>
-							</tr>
-							<tr>
-								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="25" align="center">
-									<logic:equal name="ReferenceDocumentABMForm" property="id" value="0">
+									<logic:equal name="DocumentSubTypeABMForm" property="id" value="0">
 										<html:submit property="operation">
 											<%=ResourceBundleCache.get(getServletInfo(), "crear")%>
 										</html:submit>
 									</logic:equal>
-										
-									<logic:notEqual name="ReferenceDocumentABMForm" property="id" value="0">
+									<logic:notEqual name="DocumentSubTypeABMForm" property="id" value="0">
 										<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "modificar")%>
 										</html:submit>
 									</logic:notEqual>
-									
 									<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>
-									</html:submit>
-								</td>
+									</html:submit></td>
 							</tr>
 							<tr>
 								<td colspan="3" height="16"><img src="images/null.gif" width="1" height="16"></td>
@@ -137,48 +114,43 @@ if ( dw_scrollObj.isSupported() ) {
 			<!-- inicio tabla template -->
 			<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td width="10" height="19" colspan="2" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-					<td width="100%" height="19" align="left" colspan="2" background="images/interfaces/topTitle.gif"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
-					<td width="10" height="19" colspan="2" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
+					<td colspan="2" width="100%" height="19" background="images/interfaces/topTitle.gif" align="left"><div id="blockTitle"><%=ResourceBundleCache.get(getServletInfo(), "tituloListado")%></div></td>
+					<td colspan="2" width="10" height="19" background="images/interfaces/topRightTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="100%" height="460" valign="top">
+					<td width="100%" height="500" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
-										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tituloDocumento")%></td>
-										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
-										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
-										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%></td>
-										<td width="60"> </td>
-										<td width="60"> </td>
+										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editar")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "borrarReactivar")%></td>
 									</tr> 
-									<logic:iterate name="ReferenceDocumentABMForm" property="allReferenceDocuments" id="iterRefDoc" indexId="iterIndex"> 
+									<logic:iterate name="DocumentSubTypeABMForm" property="allDocumentSubType" id="iterDocumentSubType" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterRefDoc" property="title" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
-											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentSubType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentSubType" property="name" /></td>
+											<td><html:link  action="editDocumentSubType.st?" paramName="iterDocumentSubType" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>
-											<td><logic:equal name="iterRefDoc" property="deleted" value="false">
-												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ReferenceDocumentABMForm","botones","desactivar", iterIndex)%>
-											</logic:equal>
-											<logic:equal name="iterRefDoc" property="deleted" value="true">
-												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ReferenceDocumentABMForm","botones","activar", iterIndex)%>
-											</logic:equal></td>
+											<td><logic:equal name="iterDocumentSubType" property="deleted" value="false">
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentSubTypeABMForm","botones","desactivar", iterIndex)%>
+												</logic:equal>
+												<logic:equal name="iterDocumentSubType" property="deleted" value="true">
+													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentSubTypeABMForm","botones","activar", iterIndex)%>
+												</logic:equal>
+											</td>
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="5" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>
 							<!-- corte tabla template -->
@@ -186,9 +158,9 @@ if ( dw_scrollObj.isSupported() ) {
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" style="width:20px; height:430px; float:right;">
+					<div id="scrollbar" style="width:20px; height:460px; float:right;">
 					<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track" style="height:406px;">
+						<div id="track" style="height:436px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -205,8 +177,12 @@ if ( dw_scrollObj.isSupported() ) {
 		<!-- fin tabla template -->
 		</td>
 	</tr>
+	<tr>
+		<td colspan="3" align="center"><html:link  action="editDocumentType.st?" paramName="DocumentSubTypeABMForm" paramProperty="documentTypeId" paramId="id">
+				<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%>
+			</html:link></td>
+	</tr>
 </table>
 </html:form>
-</td>
-<%@ include file="includes/rightContent.jsp" %>
+</div>
 <%@ include file="includes/footer.jsp" %>
