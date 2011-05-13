@@ -6,7 +6,9 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <html:html>
-<div id="content"><img src="images/null.gif" width="1" height="340"></div>
+<%@ include file="includes/leftContent.jsp" %>
+		<td width="100%" align="center" valign="middle"><img src="images/null.gif" width="1" height="340"></td>
+<%@ include file="includes/rightContent.jsp" %>
 <div id="outerdiv">
 <html:form method="POST" action="/consolidateDocument">
 	<div id="innerdiv"></div>
