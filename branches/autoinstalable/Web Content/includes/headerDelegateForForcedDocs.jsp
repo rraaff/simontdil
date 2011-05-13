@@ -36,7 +36,7 @@ a:active {width: auto;}
 	</tr>
 	<tr>
 		<td width="20" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="100%" align="center" bgcolor="#FFFFFF"><a href="javascript:window.close();"><%=ResourceBundleCache.get("header", "cerrarVentana")%></a></td>
+		<td width="100%" align="center" bgcolor="#FFFFFF"><div id="closeWindow"><a href="javascript:window.close();"><%=ResourceBundleCache.get("header", "cerrarVentana")%></a></div></td>
 		<td width="20" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="1"></td>
 	</tr>
 </table>

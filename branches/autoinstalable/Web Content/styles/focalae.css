@@ -223,6 +223,15 @@ div#main {
 	margin-left: 0px;
 	clear: right;
 }
+
+
+#closeWindow {
+
+}
+
+#closeWindow a, #closeWindow a:link, #closeWindow a:visited, #closeWindow a:hover {
+	color:#c72c49;
+}
 #alcien a {
 	color: #666;
 	text-decoration:none;

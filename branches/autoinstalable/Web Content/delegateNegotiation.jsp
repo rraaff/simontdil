@@ -406,7 +406,7 @@ function openDocs(){
 	<div id="contentTableComment">
 		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
-				<td align="center" valign="middle">
+				<td align="center" valign="middle"><br/><br/><br/><br/><br/><br/>
 					<table width="940" height="640" border="0" cellspacing="0" cellpadding="0" align="center" bgcolor="#FFFFFF">
 						<tr>
 							<td width="940" align="center" valign="top">
