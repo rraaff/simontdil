@@ -104,14 +104,15 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<logic:iterate name="ModeratorHome" property="referenceList" id="ref" indexId="referenceListIndex"> 
 										<tr> 
-											<td colspan="10" height="22" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
+											<td colspan="9" height="30" class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><bean:write name="ref" property="title" /></td>
+											<td class="row<%=referenceListIndex%2 == 0 ? "ODD" : "EVEN"%>"><a href="./download.do?action=refdoc&fileId=<bean:write name="ref" property="id" />"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%></a></td>
 										</tr>
 									</logic:iterate>
-									<tr>
+									<!--tr>
 										<td colspan="10" height="40" align="center"><html:link  action="/goToReferenceDocLibrary.st">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","irallistado")%>
+											< %=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","irallistado")% >
 										</html:link></td>
-									</tr>
+									</tr -->
 									<tr>
 										<td colspan="10" height="1" bgcolor="#333333"><img src="images/null.gif" width="1" height="1"></td>
 									</tr>
