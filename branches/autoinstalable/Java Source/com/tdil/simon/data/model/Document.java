@@ -7,6 +7,10 @@ public class Document extends PersistentObject {
 	private String introduction;
 	private boolean principal;
 	private int documentSubTypeId;
+	private int relevance;
+	
+	public static final int DEFAULT_RELEVANT = 10;
+	public static final int NO_RELEVANT = 0;
 	
 	public String getTitle() {
 		return title;
@@ -32,5 +36,11 @@ public class Document extends PersistentObject {
 	}
 	public void setDocumentSubTypeId(int documentTypeId) {
 		this.documentSubTypeId = documentTypeId;
+	}
+	public int getRelevance() {
+		return relevance;
+	}
+	public void setRelevance(int relevance) {
+		this.relevance = relevance;
 	}
 }

@@ -3,6 +3,7 @@ package com.tdil.simon.data.ibatis;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.SystemUser;
@@ -17,22 +18,13 @@ public class DocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectAllDocumentsNotDeleted");
 	}
 	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHome() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocuments");
+	public static List selectNotDeletedNotRelevantDocumentsForModeratorHome() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotRelevantDocuments");
 	}
 	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsNoLimit");
+	public static List selectNotDeletedNotRelevantDocumentsForModeratorHome(SystemUser user) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotRelevantDocumentsUsingTypes", user.getId());
 	}
-	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHome(SystemUser user) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypes", user.getId());
-	}
-	
-	public static List selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(SystemUser user) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedNotPrincipalDocumentsUsingTypesNoLimit", user.getId());
-	}
-	
 	
 	public static List selectNotDeletedDocumentWithConsolidatedVersions() throws SQLException {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedDocumentWithConsolidatedVersions");
@@ -54,6 +46,13 @@ public class DocumentDAO {
 	
 	public static void updateDocument(Document document) throws SQLException {
 		IBatisManager.sqlMapper.update("updateDocument", document);
+	}
+	
+	public static void updateDocumentRelevance(int docId, int relevance) throws SQLException {
+		Map<String, Integer> params = new HashMap<String, Integer>();
+		params.put("id", docId);
+		params.put("relevance", relevance);
+		IBatisManager.sqlMapper.update("updateDocumentRelevance", params);
 	}
 
 	public static void logicallyDeleteDocument(Document document)

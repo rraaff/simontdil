@@ -30,12 +30,12 @@ public class VersionDAO {
 		return (Version)IBatisManager.sqlMapper.queryForObject("selectVersionUnderNegotiation");
 	}
 	
-	public static List<VersionForListVO> selectPrincipalVersions() throws SQLException {
-		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectPrincipalVersions");
+	public static List<VersionForListVO> selectRelevantVersions() throws SQLException {
+		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectRelevantVersions");
 	}
 	
-	public static List<VersionForListVO> selectPrincipalVersions(SystemUser user) throws SQLException {
-		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectPrincipalVersionsForDelegate", user.getId());
+	public static List<VersionForListVO> selectRelevantVersions(SystemUser user) throws SQLException {
+		return (List<VersionForListVO>)IBatisManager.sqlMapper.queryForList("selectRelevantVersionsForDelegate", user.getId());
 	}
 	
 	public static Version getVersionForDocumentAndNumber(int documentId, int number) throws SQLException {

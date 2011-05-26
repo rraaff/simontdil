@@ -19,6 +19,8 @@ public class ModeratorHome extends ActionForm {
 	
 	private SystemUser loggedUser;
 	private List<VersionForListVO> principalVersions;
+	private List<Document> otherDocumentsList;
+	private List<ReferenceDocument> referenceList;
 	
 	public List<VersionForListVO> getPrincipalVersions() {
 		return principalVersions;
@@ -28,9 +30,6 @@ public class ModeratorHome extends ActionForm {
 		this.principalVersions = principalVersions;
 	}
 
-	private List<Document> otherDocumentsList;
-	
-	private List<ReferenceDocument> referenceList;
 
 	public List<Document> getOtherDocumentsList() {
 		return otherDocumentsList;
@@ -50,13 +49,13 @@ public class ModeratorHome extends ActionForm {
 
 	public void init() throws SQLException {
 		if (this.getLoggedUser().isModerator() || this.getLoggedUser().isAdministrator()) {
-			setPrincipalVersions(VersionDAO.selectPrincipalVersions());
-			setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome());
+			setPrincipalVersions(VersionDAO.selectRelevantVersions());
+			setOtherDocumentsList(DocumentDAO.selectNotDeletedNotRelevantDocumentsForModeratorHome());
 			setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome());
 		} else {
 			if (this.getLoggedUser().isDelegate()) {
-				setPrincipalVersions(VersionDAO.selectPrincipalVersions(this.getLoggedUser()));
-				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHome(this.getLoggedUser()));
+				setPrincipalVersions(VersionDAO.selectRelevantVersions(this.getLoggedUser()));
+				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotRelevantDocumentsForModeratorHome(this.getLoggedUser()));
 				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome(this.getLoggedUser()));
 			} 
 		}

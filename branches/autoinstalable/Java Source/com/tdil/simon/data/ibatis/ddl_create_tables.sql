@@ -45,6 +45,7 @@ CREATE  TABLE `DOCUMENT` (
   `introduction` MEDIUMTEXT NULL ,
   `principal` INT NULL ,
   `documentSubTypeId` INT NULL ,
+  `relevance` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /

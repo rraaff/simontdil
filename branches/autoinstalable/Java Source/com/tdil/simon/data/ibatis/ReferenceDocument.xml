@@ -23,7 +23,7 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
     from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
     where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
@@ -31,7 +31,7 @@
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
     from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
     where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
@@ -42,7 +42,7 @@
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
     from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
     where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
@@ -61,20 +61,19 @@
   </select>
   
   
-  <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocument">
-    select *
+  <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
    	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND CATEGORY.deleted = 0
    	and SUBCATEGORY.deleted = 0
    	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
-   	order by REFERENCEDOCUMENT.id desc
-   	LIMIT 11
+   	order by CATEGORY.name as categoryName, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
-  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocument">
-    select *
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
    	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND CATEGORY.deleted = 0
@@ -89,38 +88,7 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
 		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
     )
-   	order by REFERENCEDOCUMENT.id desc
-   	LIMIT 11
-  </select>
-  
-  <select id="selectNotDeletedReferenceDocumentForModeratorHomeNoLimit" resultClass="ReferenceDocument">
-    select *
-   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY 
-   	WHERE REFERENCEDOCUMENT.DELETED = 0
-   	AND CATEGORY.deleted = 0
-   	and SUBCATEGORY.deleted = 0
-   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
-   	order by REFERENCEDOCUMENT.id desc
-  </select>
-  
-  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUserNoLimit" parameterClass="int" resultClass="ReferenceDocument">
-    select *
-   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY 
-   	WHERE REFERENCEDOCUMENT.DELETED = 0
-   	AND CATEGORY.deleted = 0
-   	and SUBCATEGORY.deleted = 0
-   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
-    AND SUBCATEGORY.id IN (
-    	SELECT GROUPPERMISSION.objectId
-		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
-		WHERE GROUPMEMBER.systemUserId = #systemUserId#
-		AND GROUPMEMBER.groupId = USERGROUP.id
-		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
-    )
-   	order by REFERENCEDOCUMENT.id desc
+   	order by CATEGORY.name as categoryName, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">

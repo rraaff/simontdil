@@ -64,10 +64,12 @@ if ( dw_scrollObj.isSupported() ) {
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
+										<td height="20">&nbsp;</td>
 										<td height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "version")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombreDeVerion")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "estado")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "relevante")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "tieneObservaciones")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeObservaciones")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeParrafosSolicitados")%></td>
@@ -78,10 +80,17 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<logic:iterate name="ListDocument" property="list" id="version" indexId="iterIndex"> 
 									<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
+										<td height="28">
+										<!-- TODO MARCOS inactivo si deleted -->
+										<html:multibox name="ListDocument" property="selectedIds">
+											<bean:write name="version" property="documentId"/>
+										</html:multibox>
+										</td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="version" property="documentTitle" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="versionWithSubversion" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="name" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="translatedStatus" /></td> 
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="relevanceStatus" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="hasObservationText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="newParagraphCountText" /></td>
@@ -112,6 +121,16 @@ if ( dw_scrollObj.isSupported() ) {
 									<tr>
 										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
+									<tr>
+									<td colspan="10" height="25" align="center">
+										<html:submit property="operation">
+											<%=ResourceBundleCache.get(getServletInfo(), "marcarComoRelevantes")%>
+										</html:submit>
+										<html:submit property="operation">
+											<%=ResourceBundleCache.get(getServletInfo(), "marcarComoNoRelevantes")%>
+										</html:submit>
+									</td>
+								</tr>
 								</table>	
 							<!-- corte tabla template -->
 							</div>
