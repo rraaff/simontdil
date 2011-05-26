@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DocumentType">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="DocumentType" type="com.tdil.simon.data.model.DocumentType"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllDocumentType" resultClass="DocumentType">
+    select *
+    from DOCUMENTTYPE
+    order by name
+  </select>
+  
+  <select id="selectAllDocumentTypeNotDeleted" resultClass="DocumentType">
+    select *
+   	from DOCUMENTTYPE
+   	WHERE deleted = 0
+   	order by name
+  </select>
+
+  <select id="selectDocumentTypeById" parameterClass="int" resultClass="DocumentType">
+    select
+      *
+    from DOCUMENTTYPE
+    where id = #id#
+  </select>
+
+  <select id="selectDocumentTypeByName" parameterClass="java.lang.String" resultClass="DocumentType">
+    select
+      *
+    from DOCUMENTTYPE
+    where name = #name#
+  </select>
+  
+  <insert id="insertDocumentType" parameterClass="DocumentType">
+    insert into DOCUMENTTYPE (
+      id, name, deleted
+    ) values (
+      #id#, #name#, #deleted#
+    )
+  </insert>
+
+  <update id="updateDocumentType" parameterClass="DocumentType">
+    update DOCUMENTTYPE set
+      name = #name#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteDocumentType" parameterClass="DocumentType">
+    update DOCUMENTTYPE set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

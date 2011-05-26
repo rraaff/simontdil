@@ -1,0 +1,59 @@
+@charset "utf-8";
+/* CSS Document */
+
+body{
+	font-family:Verdana, Geneva, sans-serif;
+	font-size:12px;
+	line-height:18px;}
+
+#contenedor{
+	width:auto;
+	margin:0 auto;
+	padding-left: 10px;
+	padding-right: 10px;
+	}
+#contenedor #menu{
+	/*background-color:#CCC;*/
+	}	
+	
+#contenedor #menu ul li{
+	list-style:disc;}
+	
+#contenedor #menu ul li a{
+	color:#40708c;
+	text-decoration:none;
+	font-weight:bold;
+	
+	}
+	
+#contenedor #menu ul li a:hover{
+	color:#82caee;
+	text-decoration:none;
+	font-weight:bold;
+	}
+	
+#contenedor #item #titulo{
+	color:#40708c;
+	font-weight:bold;
+	padding-bottom:10px;
+	border-top:1px dotted #40708c;
+	margin-top:20px;
+	padding-top:5px;
+	}
+	
+#contenedor #item #cuerpo #imagen{
+	font-style:italic;
+	text-decoration:underline;
+	padding-top:20px;
+	margin:0 auto;
+	width:980px;
+	}
+#contenedor #item #subir a{
+	color:#40708c;
+	font-weight:bold;
+	}
+	
+#contenedor #item #texto a{
+	color:#40708c;
+	font-weight:bold;
+	}

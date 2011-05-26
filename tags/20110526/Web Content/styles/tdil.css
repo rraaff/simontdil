@@ -1,0 +1,743 @@
+/* CSS Document */
+
+/*  
+Theme Name: That Day in London
+Theme URI: http://www.thatdayinlondon.com
+Description: That Day in London Theme
+Version: 1.0
+Author: Pablo Agustin Mendoza
+Author URI: http://www.thatdayinlondon.com
+*/
+
+html, body {
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	color:#808080;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 11px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	margin: 0px;
+	padding: 0px;
+	line-height: normal;
+	letter-spacing: normal;
+	word-spacing: normal;
+	background-color: #CCCCCC;
+}
+
+a {
+	color: #FFFFFF;
+	text-decoration:none;
+}
+a:link, a:visited {
+	color: #E8F7FF;
+}
+a:hover {
+	color: #E8F7FF;
+	text-decoration: underline;
+}
+p a:link, p a:visited {
+	color: #E8F7FF;
+}
+.textLink{
+	color:#666666;
+}
+.article{
+	font-size: 12px;
+	line-height: 20px;	
+}
+.newButton{
+	color:#FFFFFF;
+}
+.newButton a, .newButton a:link, .newButton a:visited, .newButton a:hover{
+/* No anda */
+	color:#E6F4FF;
+}
+h1 {
+	margin:0 0 0 0;
+	color:	#666666;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 18px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+}
+h1 a {
+	background:url(images/ri_logo.gif) no-repeat;
+	width:185px;
+	height:45px;
+	text-indent:-9000px;
+	margin:0 30px 0 0;
+	overflow:hidden;
+	float:left;
+}
+
+h1 a:hover {
+	background:url(images/ri_logo.gif) no-repeat 0 -45px; 
+}
+
+h2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-style: normal;
+	font-variant: normal;
+	color: #666666;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+h3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-variant: normal;
+	color: #666666;
+	text-decoration: none;
+	font-weight: 500;
+}
+
+div#main {
+	font-size:12px;
+	line-height:normal;
+	background-color:#eee;
+	width:578px;
+	height:284px;
+}
+
+#header {
+	background-color: #FFFFFF;
+	height: 90px;
+	width: auto;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+	float: none;
+	position: relative;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #808080;
+	border-right-color: #808080;
+	border-left-color: #808080;
+	padding-right: 22px;
+	padding-left: 22px;
+
+}
+#header #blockinHeader {
+	/*	background-color: #edf4f8; */
+	height: 20px;
+	width: 800px;
+	float: right;
+	position: relative;
+}
+
+#header #blockinHeaderDelegate {
+	background-color: #FFFFFF;
+	height: 50px;
+	width: 500px;
+	float: right;
+	position: relative;
+}
+
+#header a {
+	color: #666666;
+	text-decoration:none;
+}
+#header a:link, #header a:visited {
+	color: #666666;
+}
+#header a:hover {
+	color: #666666;
+	text-decoration: underline;
+}
+#header p a:link, #header p a:visited {
+	color: #666666;
+}
+/* ### Buttons ###*/
+#header #blockinHeader .clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+#header #blockinHeader a.button {
+	background: transparent url('../images/buttons/bg_button_a2.gif') no-repeat scroll top right;
+	display: block;
+	float: left;
+	font-family: "Trebuchet MS", Tahoma, Verdana, Arial;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+	height: 24px;
+	margin-right: 10px;
+	padding-right: 18px; /* sliding doors padding */
+	text-decoration: none;
+}
+
+#header #blockinHeader a.button span {
+    background: transparent url('../images/buttons/bg_button_span2.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+#header #blockinHeader #userLogued {
+	font-size: 10px;
+	color: #999999;
+	height: 30px;
+	width: 420px;
+}
+
+#header #logo {
+	width:197px;
+	height:85px;
+	margin: 0px;
+	padding: 0px;
+	float: left;
+}
+
+#header #siteSeccion {
+	width:187px;
+	height:60px;
+	padding: 0px;
+	float: right;
+	text-align: right;
+	position: relative;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	clear: right;
+}
+#alcien a {
+	color: #666666;
+	text-decoration:none;
+}
+#alcien a:link, #alcien a:visited {
+	color: #666666;
+}
+#alcien a:hover {
+	color: #666666;
+	text-decoration: underline;
+}
+#alcien p a:link, #alcien p a:visited {
+	color: #666666;
+}
+
+#rayitaHeader {
+	background-color: #40708C;
+	height: 5px;
+	width: auto;
+	position: relative;
+	margin-right: 0px;
+	margin-left: 0px;
+	float: none;
+	clear: both;
+}
+
+#amMenu {
+	background-color: #FFFFFF;
+	height: 30px;
+	width: auto;
+	margin-right: 10px;
+	margin-left: 10px;
+	color: #000000;
+	position: relative;
+	z-index: 99999;
+	border-right: 1px solid #808080;
+	border-left: 1px solid #808080;
+}
+
+#centrador {
+	height: 25px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	position: relative;
+}
+/* ### Content ### */
+#content {
+	width:auto;
+	padding:0px;
+	position: relative;
+	background-color: #FFFFFF;
+	height: 560px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-right-color: #808080;
+	border-left-color: #808080;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	margin-left: 10px;
+}
+#content #alcien{
+	width: auto;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 0px;
+	margin-bottom: 0px;
+/*	padding-top: 20px;*/
+	height: auto;
+}
+
+#content #alcincuentaLeft{
+	float: left;
+	margin-right:10px;
+	width: 49%;	
+}
+#content #alcincuentaRight{
+	float: right;
+	margin-left:10px;
+	width: 49%;
+}
+#content #documentoCompleto {
+	width:100%;
+	height:510px;
+	overflow:scroll;
+	position:relative;
+	background-color: #F8F8F8;
+}
+
+#content #previewDocumento {
+	height: 290px;
+	width: 880px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: scroll;
+	position: relative;
+	background-color: #F8F8F8;
+}
+#portaTabla  {
+	height: 290px;
+	margin-right: auto;
+	margin-left: auto;
+	overflow: scroll;
+	position: relative;
+}
+#blockTitle {
+	background-color: #FFFFFF;
+	width: auto;
+	position:relative;
+	height: 15px;
+	float: left;
+	padding-top: 4px;
+	padding-right: 4px;
+	padding-left: 4px;
+}
+#content #portaVersiones {
+	font-size: 12px;
+	color: #FFFFFF;
+	line-height: 30px;
+	text-decoration: none;
+	background-image: url(../images/others/versions.gif);
+	letter-spacing: 8px;
+	height: 30px;
+	width: 187px;
+	padding-left: 8px;
+}
+#content #contentDocumentoPrincipal {
+	font-size: 14px;
+	color: #666666;
+	margin-left: 20px;
+	line-height: 24px;
+	text-align: left;
+}
+#content #contentDocumentoSecundarios {
+	font-size: 9px;
+	color: #666666;
+	line-height: 15px;
+	text-align: left;
+	list-style-image: url(../images/others/bullet.gif);
+	list-style-type: circle;
+	padding: 0px;
+	margin: 0px;
+	height: 260px;
+}
+
+#content .titleDocInModule {
+	font-size: 15px;
+	line-height: 20px;
+	color:#333333;
+}
+#content .titleDocInHome {
+	font-size: 16px;
+	line-height: 24px;
+	font-weight:bold;
+	color:#333333;
+}
+#content .titleDocInModule a {
+	color:#333333;
+}
+#content .titleDocInModule a:hover {
+	color:#333333;
+}
+
+#content #simpleButtonContainer{
+	margin-right: auto;
+	margin-left: auto;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+
+#bullet{
+	background-image: url(../images/bullet1.gif);
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 15px;
+	width: 10px;
+	float: left;
+}
+.userLogged{
+	font-size: 10px;
+	color: #333333;
+	text-decoration: none;	
+}
+.dataDinamica{
+	font-size: 11px;
+	line-height:15px;
+	color:#333333;
+}
+.address{
+	font-size: 11px;
+	color: #848484;
+	line-height: 15px;
+}
+.errorText{
+	color: #be1e2d;
+}
+.notActive{
+	color: #CCCCCC;
+	text-decoration: line-through;
+}
+/* ### Fields and Forms ### */
+input, textarea {	border:1px solid #ccc; }
+label {color:#999;}
+
+.remarcado {
+	color: #333333;
+}
+
+/* ### Buttons ###*/
+.clear { /* generic container (i.e. div) for floating buttons */
+    overflow: hidden;
+    width: 100%;
+}
+
+a.button {
+    background: transparent url('../images/buttons/bg_button_a.gif') no-repeat scroll top right;
+    display: block;
+    float: left;
+    font-family: "Trebuchet MS", Tahoma, Verdana, Arial;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-decoration: none;
+    height: 24px;
+    margin-right: 6px;
+    padding-right: 18px; /* sliding doors padding */
+    text-decoration: none;
+}
+
+a.button span {
+    background: transparent url('../images/buttons/bg_button_span.gif') no-repeat;
+    display: block;
+    line-height: 14px;
+    padding: 5px 0 5px 18px;
+}
+
+/* ### Footer ### */
+
+#footer {
+	color:#808080;
+	height:65px;
+	width: auto;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	position: relative;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-left: 10px;
+	background-color: #E6E6E6;
+	z-index: 9999;
+	text-decoration: none;
+	background-image: url(../images/footer/bgfoot.gif);
+	background-repeat: repeat-x;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #666666;
+	border-bottom-color: #666666;
+	border-left-color: #666666;
+	padding: 0px;
+	margin-top: 0px;
+}
+
+#copyright{
+	width: 450px;
+	height: 60px;
+	position: relative;
+	line-height:13px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	float: both;
+	padding-top: 5px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	text-align: center;
+}
+#logoCumbres{
+	float: right;
+	position: relative;
+	height: 49px;
+	margin-top: -64px;
+	width: 103px;
+}
+
+#imageContainer{
+	padding: 10px;
+}
+
+#imageContainer img {
+	border:1px dotted #ddd;
+}
+
+.errorInText{
+	font-size: 11px;
+	color: #BE1E2D;
+	
+}
+
+
+/* ### text fields ### */
+.textfield_effect {
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_field.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 200px;
+	height: 23px;
+	line-height:23px;
+	padding: 0px; margin: 0px
+}
+.textfield_effect_corto {
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_field.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 120px;
+	height: 23px;
+	line-height:23px;
+	padding: 0px; margin: 0px
+}
+
+.textfield_effect_day{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_field.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 60px;
+	height: 23px;
+	line-height:23px;
+	padding: 0px; margin: 0px
+}
+
+.textfield_effect_area{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_area300.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+	width: 300px;
+	height: 140px;
+	line-height:20px;
+	padding: 0px; margin: 0px
+}
+
+.textfield_effect_area_big{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_area300.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 13px;
+	color: #333333;
+	width: 400px;
+	height: 140px;
+	line-height:20px;
+	padding: 0px; margin: 0px
+}
+
+.textfield_effect_month{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_field.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 117px;
+	height: 23px;
+	line-height:23px;
+	padding: 0px; margin: 0px
+}
+.textfield_effect_300{
+	/*we will first set the border styles.*/
+	border-width: 1px;
+	border-style: solid;
+	border-color: #999999;
+	/*we are now going to add in the shadow image that we created earlier*/
+	background-image: url('../images/back_field.gif');
+	background-repeat: repeat-x;
+	/*I am going to add some text formatting of my own*/
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #333333;
+	width: 300px;
+	height: 23px;
+	line-height:23px;
+	padding: 0px; margin: 0px
+}
+/*we are now going to style how the <strong class="highlight">textfield</strong> will look when we
+hover over it and when we actually have it selected*/
+
+.textfield_effect:hover {
+	border-color: #64acd8;
+	border-width: 1px;
+}
+
+.textfield_effect:focus {
+	border-color: #64acd8;
+	border-width: 1px;
+}
+
+/*you may also like to add some styles for the rest of the form*/
+
+.fieldset {
+	width: 300px;
+	height: 100px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #036399;
+	margin-left: auto;
+	margin-right: auto;
+	background-color: #F5F5F5;
+}
+.fieldset:hover {
+	border-color: #0ca0ff;
+}
+legend {
+	font-family: sans-serif;
+	font-size: 18px;
+	color: #097bc3;
+	font-weight: bold;
+}
+
+/* ### Tables ### */
+tr.d0 td {
+	background-color: #E5E5E5;
+}
+tr.d1 td {
+	background-color: #F2F2F2;
+}
+
+.rowODD {
+	background-color:#E5E5E5;
+}
+.rowEVEN {
+	background-color:#F2F2F2;
+}
+
+/* ### Tooltips ### */
+#outerdiv {
+	position:absolute;
+	overflow:show;
+	z-index:100000;
+	margin-right: auto;
+	margin-left: auto;
+	width: 100%;
+	height: 100%;
+	margin-top: -720px;
+}
+#addCommentLayer {
+	position:relative;
+	overflow:show;
+	z-index:100000;
+	margin-right: auto;
+	margin-left: auto;
+	height: 699px;
+	margin-top: -720px;
+}
+#innerdiv {position:absolute; width:100%; height:100%; background:#006699; }
+#innerdiv {filter: alpha(opacity=90);filter: progid:DXImageTransform.Microsoft.Alpha(opacity=90);-moz-opacity: 0.90; opacity:0.9;}
+#contentTableComment {
+	position:relative;
+	clip: rect(0px,0px,0px,0px);
+	margin-right: auto;
+	margin-left: auto;
+	vertical-align: middle;
+	height: 780px;
+	width: auto;
+}

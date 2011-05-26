@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SystemUser">
+
+	<!-- Use type aliases to avoid typing the full classname every time. -->
+	<typeAlias alias="SystemUser" type="com.tdil.simon.data.model.SystemUser" />
+	<typeAlias alias="UserVO" type="com.tdil.simon.data.valueobjects.UserVO" />
+
+	<select id="selectSystemUsers" resultClass="UserVO">
+		select
+		SYSTEMUSER.id,
+		SYSTEMUSER.username,
+		SYSTEMUSER.password,
+		SYSTEMUSER.name,
+		SYSTEMUSER.email,
+		SYSTEMUSER.job,
+		SYSTEMUSER.countryDesc,
+		SYSTEMUSER.countryId,
+		SYSTEMUSER.administrator,
+		SYSTEMUSER.moderator,
+		SYSTEMUSER.delegate,
+		SYSTEMUSER.canSign,
+		SYSTEMUSER.designer,
+		SYSTEMUSER.passwordResetRequest,
+		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
+		SYSTEMUSER.assistant,
+		SYSTEMUSER.translator,
+		SYSTEMUSER.deleted,
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
+		WHERE SYSTEMUSER.delegate = 0
+		AND SYSTEMUSER.countryId = COUNTRY.id
+		order by SYSTEMUSER.name
+  </select>
+
+	<select id="selectDelegateUsers" resultClass="UserVO">
+		select
+		SYSTEMUSER.id,
+		SYSTEMUSER.username,
+		SYSTEMUSER.password,
+		SYSTEMUSER.name,
+		SYSTEMUSER.email,
+		SYSTEMUSER.job,
+		SYSTEMUSER.countryDesc,
+		SYSTEMUSER.countryId,
+		SYSTEMUSER.administrator,
+		SYSTEMUSER.moderator,
+		SYSTEMUSER.delegate,
+		SYSTEMUSER.canSign,
+		SYSTEMUSER.designer,
+		SYSTEMUSER.passwordResetRequest,
+		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
+		SYSTEMUSER.assistant,
+		SYSTEMUSER.translator,
+		SYSTEMUSER.deleted,
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
+		WHERE SYSTEMUSER.delegate = 1
+		AND SYSTEMUSER.countryId = COUNTRY.id
+		order by COUNTRY.name, SYSTEMUSER.name
+  </select>
+  
+  	<select id="selectNotDeletedUsers" resultClass="UserVO">
+		select
+		SYSTEMUSER.id,
+		SYSTEMUSER.username,
+		SYSTEMUSER.password,
+		SYSTEMUSER.name,
+		SYSTEMUSER.email,
+		SYSTEMUSER.job,
+		SYSTEMUSER.countryDesc,
+		SYSTEMUSER.countryId,
+		SYSTEMUSER.administrator,
+		SYSTEMUSER.moderator,
+		SYSTEMUSER.delegate,
+		SYSTEMUSER.canSign,
+		SYSTEMUSER.designer,
+		SYSTEMUSER.passwordResetRequest,
+		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
+		SYSTEMUSER.deleted,
+		COUNTRY.NAME as countryName
+		from SYSTEMUSER, COUNTRY
+		WHERE SYSTEMUSER.deleted = 0
+		AND SYSTEMUSER.countryId = COUNTRY.id
+		order by SYSTEMUSER.name
+  </select>
+
+	<select id="selectNotDeletedDelegateUsersForCountry"
+		parameterClass="int" resultClass="UserVO">
+		select
+		SYSTEMUSER.id,
+		SYSTEMUSER.name,
+		SYSTEMUSER.countryId,
+		SYSTEMUSER.delegate,
+		SYSTEMUSER.canSign,
+		SYSTEMUSER.passwordResetRequest,
+		SYSTEMUSER.temporaryPassword,
+		SYSTEMUSER.canProposeParagraph,
+		SYSTEMUSER.assistant,
+		SYSTEMUSER.translator
+		from SYSTEMUSER
+		WHERE SYSTEMUSER.DELETED = 0
+		AND SYSTEMUSER.delegate = 1
+		AND SYSTEMUSER.countryId = #id#
+		order by SYSTEMUSER.name
+  </select>
+
+	<select id="selectUserById" parameterClass="int" resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where id = #id#
+  </select>
+
+	<select id="selectSystemUserCount" resultClass="java.lang.Integer"
+		parameterClass="int">
+		select count(1)
+		from SYSTEMUSER
+		where countryId = #value#
+		and deleted = 0
+  </select>
+
+	<select id="selectSystemUserCanSignCount" resultClass="java.lang.Integer" parameterClass="int">
+		select count(1)
+		from SYSTEMUSER
+		where countryId = #countryId#
+		and canSign = 1
+		and deleted = 0
+  </select>
+  
+	<select id="selectUserByUsername" parameterClass="java.lang.String"
+		resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where username = #username#
+  </select>
+  
+  <select id="selectUserByEmail" parameterClass="java.lang.String"
+		resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where LOWER(email) = #email#
+  </select>
+  
+  <select id="selectNotDeletedDelegateUsersThatCanAccessDocumenType" parameterClass="int"  resultClass="SystemUser">
+		select
+			SYSTEMUSER.*
+		from SYSTEMUSER, GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		where GROUPMEMBER.systemUserId = SYSTEMUSER.id
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+		AND GROUPPERMISSION.objectId = #documentSubTypeId#
+		and SYSTEMUSER.delegate = 1
+		and SYSTEMUSER.deleted = 0
+		and USERGROUP.deleted = 0
+  </select>
+  
+  <select id="selectNotDeletedModerators" resultClass="SystemUser">
+		select
+		*
+		from SYSTEMUSER
+		where moderator = 1
+		and deleted = 0
+  </select>  
+  
+
+	<select id="selectUserByUsernameForLogin" parameterClass="java.lang.String"
+		resultClass="SystemUser">
+		select
+		SYSTEMUSER.*
+		from SYSTEMUSER, COUNTRY
+		where UPPER(SYSTEMUSER.username) = #username#
+		and SYSTEMUSER.deleted = 0
+		and SYSTEMUSER.countryId = COUNTRY.id
+		and COUNTRY.deleted = 0
+  </select>
+
+	<insert id="insertUser" parameterClass="SystemUser">
+		insert into SYSTEMUSER (
+		id,username,password,name,email, job, countryDesc,
+		countryId,administrator,moderator,delegate,canSign,designer,passwordResetRequest,temporaryPassword,canProposeParagraph,
+		assistant, translator, deleted
+		) values (
+		#id#,#username#,#password#,#name#,#email#,#job#,#countryDesc#,
+		#countryId#,#administrator#,#moderator#,#delegate#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,
+		#assistant#, #translator#, #deleted#
+		)
+  </insert>
+
+	<update id="updateUser" parameterClass="SystemUser">
+		update SYSTEMUSER set
+		username = #username#,
+		name = #name#,
+		email = #email#,
+		job = #job#,
+		countryDesc = #countryDesc#,
+		countryId = #countryId#,
+		administrator = #administrator#,
+		moderator =	#moderator#,
+		delegate = #delegate#,
+		canSign = #canSign#,
+		designer = #designer#,
+		passwordResetRequest = #passwordResetRequest#,
+		canProposeParagraph = #canProposeParagraph#,
+		assistant = #assistant#, 
+		translator = #translator#,
+		deleted = #deleted#
+		where
+		ID = #id#
+  </update>
+
+	<update id="updatePassword" parameterClass="SystemUser">
+			update SYSTEMUSER set
+			password = #password#,
+			passwordResetRequest = #passwordResetRequest#,
+			temporaryPassword = #temporaryPassword#
+			where
+			ID = #id#
+	  </update>
+
+	<update id="reactivateUser" parameterClass="SystemUser">
+			update SYSTEMUSER set
+			deleted = 0
+			where
+			ID = #id#
+	  </update>
+
+	<update id="logDeleteUser" parameterClass="SystemUser">
+		update SYSTEMUSER set
+		deleted = 1
+		where
+		ID = #id#
+  </update>
+
+</sqlMap>

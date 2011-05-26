@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GroupPermission">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="GroupPermission" type="com.tdil.simon.data.model.GroupPermission"/>
+  <typeAlias alias="SubCategoryPermissionVO" type="com.tdil.simon.data.valueobjects.SubCategoryPermissionVO"/>
+  <typeAlias alias="DocumentSubTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentSubTypePermissionVO"/>
+  
+  <select id="selectGroupPermissionForUser" parameterClass="int" resultClass="GroupPermission">
+ 	 SELECT GROUPPERMISSION.*
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+  </select>
+  
+  <select id="selectSubCategoryPermission" parameterClass="int" resultClass="SubCategoryPermissionVO">
+    select GROUPPERMISSION.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+   	from GROUPPERMISSION, SUBCATEGORY, CATEGORY
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+   	AND GROUPPERMISSION.objectId = SUBCATEGORY.id
+   	AND SUBCATEGORY.categoryId = CATEGORY.id
+   	order by CATEGORY.name, SUBCATEGORY.name 
+  </select>
+  
+  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentSubTypePermissionVO">
+    select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+   	from GROUPPERMISSION, DOCUMENTTYPE, DOCUMENTSUBTYPE
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+   	AND GROUPPERMISSION.objectId = DOCUMENTSUBTYPE.id
+   	and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name
+  </select>
+
+  <insert id="insertGroupPermission" parameterClass="GroupPermission">
+    insert into GROUPPERMISSION (
+      id, groupId, objectId, objectType, deleted
+    ) values (
+      #id#, #groupId#, #objectId#, #objectType#, #deleted#
+    )
+  </insert>
+  
+  <update id="deleteGroupPermission" parameterClass="GroupPermission">
+    delete from GROUPPERMISSION
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>
