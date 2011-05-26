@@ -16,6 +16,8 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
 import com.tdil.simon.struts.forms.ListForm;
+import com.tdil.simon.utils.StringUtils;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class DocumentABMAction extends SimonAction {
 
@@ -66,7 +68,27 @@ public class DocumentABMAction extends SimonAction {
 				}
 			});
 		}
+		
+		if (StringUtils.equalsUnescaped(versionListForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "marcarComoRelevantes"))) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					versionListForm.selectAsRelevant();
+				}
+			});
+		}
+		if (StringUtils.equalsUnescaped(versionListForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "marcarComoNoRelevantes"))) {
+			TransactionProvider.executeInTransaction(new TransactionalAction() {
+				public void executeInTransaction() throws SQLException, ValidationException {
+					versionListForm.deselectAsRelevant();
+				}
+			});
+		}
+		
 		return mapping.findForward("continue");
+	}
+
+	private String getServletInfo() {
+		return "listDocumentsForModerator";
 	}
 
 }

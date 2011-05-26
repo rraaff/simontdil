@@ -31,9 +31,9 @@ public class DelegatePopupBean {
 	public void init() throws SQLException, ValidationException {
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
-				setPrincipalVersions(VersionDAO.selectPrincipalVersions(DelegatePopupBean.this.getLoggedUser()));
-				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotPrincipalDocumentsForModeratorHomeNoLimit(DelegatePopupBean.this.getLoggedUser()));
-				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHomeNoLimit(DelegatePopupBean.this.getLoggedUser()));
+				setPrincipalVersions(VersionDAO.selectRelevantVersions(DelegatePopupBean.this.getLoggedUser()));
+				setOtherDocumentsList(DocumentDAO.selectNotDeletedNotRelevantDocumentsForModeratorHome(DelegatePopupBean.this.getLoggedUser()));
+				setReferenceList(ReferenceDocumentDAO.selectNotDeletedReferenceDocumentForModeratorHome(DelegatePopupBean.this.getLoggedUser()));
 			}
 		});
 	}

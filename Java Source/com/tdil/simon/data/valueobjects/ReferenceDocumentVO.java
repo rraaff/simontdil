@@ -3,7 +3,8 @@ package com.tdil.simon.data.valueobjects;
 import com.tdil.simon.data.model.ReferenceDocument;
 
 public class ReferenceDocumentVO extends ReferenceDocument {
-
+	
+	private int categoryId;
 	private String categoryName;
 	private String subCategoryName;
 
@@ -21,5 +22,13 @@ public class ReferenceDocumentVO extends ReferenceDocument {
 
 	public void setSubCategoryName(String subCategoryName) {
 		this.subCategoryName = subCategoryName;
+	}
+
+	public int getCategoryId() {
+		return categoryId;
+	}
+
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 }

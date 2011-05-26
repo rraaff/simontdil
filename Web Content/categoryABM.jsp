@@ -131,7 +131,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="name" /></td>
-											<td><html:link  action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
+											<td><html:link action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link></td>
 											<td><html:link  action="goToSubCategoryABM.st?" paramName="iterCategory" paramProperty="id" paramId="categoryId">

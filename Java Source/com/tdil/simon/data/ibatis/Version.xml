@@ -38,8 +38,8 @@
   </select>
   
   
-  <select id="selectPrincipalVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName  
+  <select id="selectRelevantVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName  
     from VERSION, DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE
     where VERSION.documentId = DOCUMENT.id
     and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
@@ -47,14 +47,14 @@
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
     and VERSION.spanishVersion = 1
-    and DOCUMENT.principal = 1
+    and DOCUMENT.relevance > 1
     and DOCUMENT.deleted = 0
     and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
     order by DOCUMENT.title
   </select>
   
-  <select id="selectPrincipalVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+  <select id="selectRelevantVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
     from VERSION, DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE
     where VERSION.documentId = DOCUMENT.id
     and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
@@ -62,7 +62,7 @@
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
     and VERSION.spanishVersion = 1
-    and DOCUMENT.principal = 1
+    and DOCUMENT.relevance > 1
     and DOCUMENT.deleted = 0
     AND DOCUMENT.documentSubTypeId IN (
     	SELECT GROUPPERMISSION.objectId
@@ -146,7 +146,7 @@
   </select>
   
   <select id="selectVersionsVOForList" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 
     	WHERE OBSERVATION.privateObservation = 0 
@@ -165,7 +165,7 @@
   </select>
   
   <select id="selectVersionsVOForDesigner" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 
     	WHERE OBSERVATION.privateObservation = 0 

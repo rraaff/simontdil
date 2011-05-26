@@ -31,14 +31,6 @@ public class ReferenceDocumentDAO {
 		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeForUser", user.getId());
 	}
 	
-	public static List selectNotDeletedReferenceDocumentForModeratorHomeNoLimit() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeNoLimit");
-	}
-	
-	public static List selectNotDeletedReferenceDocumentForModeratorHomeNoLimit(SystemUser user) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectNotDeletedReferenceDocumentForModeratorHomeForUserNoLimit", user.getId());
-	}
-	
 	public static ReferenceDocument getReferenceDocument(int id) throws SQLException {
 		return (ReferenceDocument) IBatisManager.sqlMapper.queryForObject(
 				"selectReferenceDocumentById", id);

@@ -10,7 +10,9 @@ import org.apache.struts.action.ActionForm;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.ValidationErrors;
+import com.tdil.simon.data.ibatis.DocumentDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
+import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.Version;
 
@@ -23,6 +25,7 @@ public class ListForm extends ActionForm {
 	
 	private SystemUser user;
 	private String operation;
+	private String selectedIds[];
 
 	public List getList() {
 		return list;
@@ -30,6 +33,7 @@ public class ListForm extends ActionForm {
 
 	public void setList(List list) {
 		this.list = list;
+		selectedIds = new String[list.size()];
 	}
 	
 	public void addParam(String key, String o) {
@@ -87,4 +91,23 @@ public class ListForm extends ActionForm {
 		this.user = user;
 	}
 	
+	public String[] getSelectedIds() {
+		return selectedIds;
+	}
+
+	public void setSelectedIds(String[] selectedIds) {
+		this.selectedIds = selectedIds;
+	}
+
+	public void selectAsRelevant() throws NumberFormatException, SQLException {
+		for (String id  : selectedIds) {
+			DocumentDAO.updateDocumentRelevance(Integer.parseInt(id), Document.DEFAULT_RELEVANT);
+		}
+	}
+
+	public void deselectAsRelevant() throws NumberFormatException, SQLException {
+		for (String id  : selectedIds) {
+			DocumentDAO.updateDocumentRelevance(Integer.parseInt(id), Document.NO_RELEVANT);
+		}
+	}
 }
