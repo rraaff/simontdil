@@ -27,7 +27,7 @@
     from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
     where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
-    order by title
+    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
@@ -38,7 +38,7 @@
     and REFERENCEDOCUMENT.deleted = 0
     and CATEGORY.deleted = 0
     and SUBCATEGORY.deleted = 0
-    order by CATEGORY.name, REFERENCEDOCUMENT.title
+    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
@@ -57,7 +57,7 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
 		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
     )
-    order by CATEGORY.name, REFERENCEDOCUMENT.title
+    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   
@@ -69,7 +69,7 @@
    	and SUBCATEGORY.deleted = 0
    	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
     and SUBCATEGORY.categoryId = CATEGORY.id
-   	order by CATEGORY.name as categoryName, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+   	order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
@@ -88,7 +88,7 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
 		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
     )
-   	order by CATEGORY.name as categoryName, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+   	order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
