@@ -710,6 +710,15 @@ tr.d1 td {
 	background-color:#F2F2F2;
 }
 
+.specialRowODD {
+	font-size:14px;
+	background-color:#E5E5E5;
+}
+.specialRowEVEN {
+	font-size:14px;
+	background-color:#F2F2F2;
+}
+
 /* ### Tooltips ### */
 #outerdiv {
 	position:absolute;
