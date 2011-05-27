@@ -7,6 +7,7 @@ import com.tdil.simon.data.valueobjects.ReferenceDocumentVO;
 
 public class CategoryTreeBuilder {
 
+	private boolean idsFixed = false;
 	private List<CategoryTree> trees = new ArrayList<CategoryTree>();
 	
 	public void insert(ReferenceDocumentVO documentVO) {
@@ -26,7 +27,12 @@ public class CategoryTreeBuilder {
 	}
 
 	public List<CategoryTree> getTrees() {
-		// TODO sort
+		if (!idsFixed) {
+			for (CategoryTree documentTypeTree : trees) {
+				documentTypeTree.fixSubTypesIds();
+			}
+			idsFixed = true;
+		}
 		return trees;
 	}
 }
