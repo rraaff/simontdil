@@ -7,4 +7,4 @@
 	</tr>
 	<tr>
 		<td background="images/focalae_set/middle_left.gif" width="20"><img src="images/null.gif" width="20" height="1"></td>
-		<td width="100%">
+		<td width="100%" valign="top">

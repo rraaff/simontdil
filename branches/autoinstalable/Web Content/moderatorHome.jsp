@@ -6,18 +6,6 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <style type="text/css">
-/* hide from incapable browsers */
-div#main {
-	background-color:#FFFFFF;
-	# width:100%;
-	* width:100%;
-	width:inherit;
-	height:200px;
-	font-size: 10px;
-}
-div#scrollbar {
-	display:none;
-}
 /* ### New Homes ### */
 #newHomeBlock{
 	border:1px solid #c6c6c6;
@@ -53,7 +41,7 @@ div#scrollbar {
 #newHomeBlockHalf{
 	border:1px solid #c6c6c6;
 	width:100%;
-	height:150px;
+	height:350px;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	float: left;
 }
@@ -73,48 +61,33 @@ div#scrollbar {
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	font-size:12px;
 }
-
+.documentTD a, .documentTD a:hover, .documentTD visited {
+	color:#454545;
+}
 </style>
-<script src="scripts/dw_event.js" type="text/javascript"></script>
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
 <script type="text/javascript">
-function init_dw_Scroll() {
-    var wndo = new dw_scrollObj('main', 'lyr1');
-    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-    wndo.setUpScrollControls('scrollbar');
-}
-
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-}
-</script>
-	<script>
-		function toggleChild(parent) {
-			var child = document.getElementById("child-" + parent);
-			if (child.style.display == 'none') {
-				document.getElementById("f-" + parent).src="images/icons/folderopen.gif";
-				document.getElementById("p-" + parent).src="images/icons/minus.gif";
-				child.style.display = 'block';
-			} else {
-				document.getElementById("f-" + parent).src="images/icons/folder.gif";
-				document.getElementById("p-" + parent).src="images/icons/plus.gif";
-				child.style.display = 'none';
-			}
-			init_dw_Scroll();
+	function toggleChild(parent) {
+		var child = document.getElementById("child-" + parent);
+		if (child.style.display == 'none') {
+			document.getElementById("f-" + parent).src="images/icons/folderopen.gif";
+			document.getElementById("p-" + parent).src="images/icons/minus.gif";
+			child.style.display = 'block';
+		} else {
+			document.getElementById("f-" + parent).src="images/icons/folder.gif";
+			document.getElementById("p-" + parent).src="images/icons/plus.gif";
+			child.style.display = 'none';
 		}
-	</script>
+		init_dw_Scroll();
+	}
+</script>
 <%@ include file="includes/menu.jsp" %>
 <%@ include file="includes/leftContentModerator.jsp" %>
-	<table width="100%" border="1" cellspacing="0" cellpadding="0" align="center">
+	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
-			<td colspan="2"><img src="images/null.gif" width="1" height="20"></td>
+			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>
 		<tr>
-			<td colspan="2">
+			<td colspan="3">
 				<div id="newHomeBlock">
 					<table width="95%" cellspacing="0" cellpadding="15" align="center">
 						<tr>
@@ -146,95 +119,82 @@ if ( dw_scrollObj.isSupported() ) {
 			</td>
 		</tr>
 		<tr>
-			<td colspan="2"><img src="images/null.gif" width="1" height="20"></td>
+			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>
 		<tr>
 			<td width="50%">
 				<div id="newHomeBlockHalf">
-					<table width="98%" cellspacing="0" cellpadding="0" align="center">
+					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
 						<tr>
-							<td colspan="3"><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosEspecificos")%></span></td>
+							<td><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosEspecificos")%></span></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div id="main">
-									<div id="lyr1" style="width:inherit;">
-										<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
-										<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
-											<tr>
-												<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/plus.gif"></td>
-												<td onclick="toggleChild('<bean:write name="docTree" property="id"/>')" width="44"><img id="f-<bean:write name="docTree" property="id"/>" src="images/icons/folder.gif"></td>
-												<td width="100%" onclick="toggleChild('<bean:write name="docTree" property="id"/>')" class="categoryTD"><bean:write name="docTree" property="name"/></td>
-											</tr>
-											<tr>
-												<td background="images/icons/line.gif"></td>
-												<td></td>
-												<td colspan="1">
-													<div id="child-<bean:write name="docTree" property="id"/>" style="display: none;">
-														<table border="0" cellpadding="0" cellspacing="0">
-															<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
-																<tr>
-																	<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/plus.gif"></td>
-																	<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" width="44"><img id="f-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/folder.gif"></td>
-																	<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" class="categoryTD"><bean:write name="docSubTypeTree" property="name"/></td>
-																</tr>
-																<tr>
-																	<td background="images/icons/line.gif"></td>
-																	<td></td>
-																	<td colspan="1">
-																		<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: none;">
-																			<table border="0" cellpadding="0" cellspacing="0">
-																				<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
-																				<tr>
-																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																					<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
-																						<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
-																						</html:link></td>
-																				</tr>
-																				</logic:iterate>
-																			</table>
-																		</div>
-																	</td>
-																</tr>
-															</logic:iterate>
-														</table>
-													</div>
-												</td>
-											</tr>
-										</logic:iterate>
-										</table>
-									<!-- corte tabla template -->
-									</div>
-								</div>
-							</td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td width="30">
-								<div id="scrollbar" style="width:20px; height:240px; float:right;">
-									<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-									<div id="track" style="height:216px;">
-										<div id="dragBar"></div>
-									</div>
-									<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
+								<div style="width:100%; height:280px; overflow:auto;">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+									<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
+										<tr>
+											<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/minus.gif"></td>
+											<td onclick="toggleChild('<bean:write name="docTree" property="id"/>')" width="44"><img id="f-<bean:write name="docTree" property="id"/>" src="images/icons/folder.gif"></td>
+											<td width="100%" onclick="toggleChild('<bean:write name="docTree" property="id"/>')" class="categoryTD"><bean:write name="docTree" property="name"/></td>
+										</tr>
+										<tr>
+											<td background="images/icons/line.gif"></td>
+											<td></td>
+											<td colspan="1">
+												<div id="child-<bean:write name="docTree" property="id"/>" style="display: block;">
+													<table border="0" cellpadding="0" cellspacing="0">
+														<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
+															<tr>
+																<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/minus.gif"></td>
+																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" width="44"><img id="f-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/folder.gif"></td>
+																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" class="categoryTD"><bean:write name="docSubTypeTree" property="name"/></td>
+															</tr>
+															<tr>
+																<td background="images/icons/line.gif"></td>
+																<td></td>
+																<td colspan="1">
+																	<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: block;">
+																		<table border="0" cellpadding="0" cellspacing="0">
+																			<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
+																			<tr>
+																				<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
+																				<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
+																					<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
+																					</html:link></td>
+																			</tr>
+																			</logic:iterate>
+																		</table>
+																	</div>
+																</td>
+															</tr>
+														</logic:iterate>
+													</table>
+												</div>
+											</td>
+										</tr>
+									</logic:iterate>
+									</table>
 								</div>
 							</td>
 						</tr>
 					</table>
 				</div>
 			</td>
+			<td><img src="images/null.gif" width="20" height="1"></td>
 			<td width="50%">
 				<div id="newHomeBlockHalf">
-					<table width="98%" cellspacing="0" cellpadding="0" align="center" border="1">
+					<table width="98%" border="0" cellspacing="0" cellpadding="15" align="center">
 						<tr>
 							<td colspan="3"><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosInformativos")%></span></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div id="main2">
-									<div id="lyr2" style="width:inherit;">
-										<table width="98%" border="0" cellspacing="0" cellpadding="0" align="center">
+								<div style="width:100%; height:280px; overflow:auto;">
+									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<logic:iterate name="ModeratorHome" property="referenceDocumentTree" id="catTree">
 											<tr>
-												<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')"><img id="p-r<bean:write name="catTree" property="id"/>" src="images/icons/plus.gif"></td>
+												<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')"><img id="p-r<bean:write name="catTree" property="id"/>" src="images/icons/minus.gif"></td>
 												<td onclick="toggleChild('r<bean:write name="catTree" property="id"/>')" width="44"><img id="f-r<bean:write name="catTree" property="id"/>" src="images/icons/folder.gif"></td>
 												<td width="100%" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')" class="categoryTD"><bean:write name="catTree" property="name"/></td>
 											</tr>
@@ -242,11 +202,11 @@ if ( dw_scrollObj.isSupported() ) {
 												<td background="images/icons/line.gif"></td>
 												<td></td>
 												<td colspan="1">
-													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: none;">
+													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: block;">
 														<table border="0" cellpadding="0" cellspacing="0">
 															<logic:iterate name="catTree" property="documentSubTypes" id="subCatTree">
 																<tr>
-																	<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')"><img id="p-r<bean:write name="subCatTree" property="id"/>" src="images/icons/plus.gif"></td>
+																	<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')"><img id="p-r<bean:write name="subCatTree" property="id"/>" src="images/icons/minus.gif"></td>
 																	<td onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')" width="44"><img id="f-r<bean:write name="subCatTree" property="id"/>" src="images/icons/folder.gif"></td>
 																	<td onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')" class="categoryTD"><bean:write name="subCatTree" property="name"/></td>
 																</tr>
@@ -254,14 +214,13 @@ if ( dw_scrollObj.isSupported() ) {
 																	<td background="images/icons/line.gif"></td>
 																	<td></td>
 																	<td colspan="1">
-																		<div id="child-r<bean:write name="subCatTree" property="id"/>" style="display: none;">
+																		<div id="child-r<bean:write name="subCatTree" property="id"/>" style="display: block;">
 																			<table border="0" cellpadding="0" cellspacing="0">
 																				<logic:iterate name="subCatTree" property="documents" id="refLeaf">
 																				<tr>
 																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
 																					<td class="documentTD">
-																						<a href="./download.do?action=refdoc&fileId=<bean:write name="refLeaf" property="id" />"><bean:write name="refLeaf" property="title" /></a>
-																					</td>
+																						<a href="./download.do?action=refdoc&fileId=<bean:write name="refLeaf" property="id" />"><bean:write name="refLeaf" property="title" /></a>																					</td>
 																				</tr>
 																				</logic:iterate>
 																			</table>
@@ -274,19 +233,7 @@ if ( dw_scrollObj.isSupported() ) {
 												</td>
 											</tr>
 										</logic:iterate>
-										</table>	
-									<!-- corte tabla template -->
-									</div>
-								</div>
-							</td>
-							<td width="10"><img src="images/null.gif" width="10" height="1"></td>
-							<td>
-								<div id="scrollbar2" style="width:20px; height:440px; float:right;">
-									<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-									<div id="track" style="height:416px;">
-										<div id="dragBar"></div>
-									</div>
-									<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
+									</table>	
 								</div>
 							</td>
 						</tr>
