@@ -52,6 +52,13 @@ public class CategoryTree {
 		this.id = documentTypeId;
 	}
 
+	public void fixSubTypesIds() {
+		for (SubCategoryTree subTypeTree : documentSubTypes) {
+			subTypeTree.setId(subTypeTree.getId() + 1000000);
+		}
+		
+	}
+
 	
 }
 
