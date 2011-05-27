@@ -11,7 +11,13 @@ import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.data.valueobjects.DocumentVO;
+import com.tdil.simon.data.valueobjects.ReferenceDocumentVO;
 import com.tdil.simon.data.valueobjects.VersionForListVO;
+import com.tdil.simon.struts.forms.tree.CategoryTree;
+import com.tdil.simon.struts.forms.tree.CategoryTreeBuilder;
+import com.tdil.simon.struts.forms.tree.DocumentTreeBuilder;
+import com.tdil.simon.struts.forms.tree.DocumentTypeTree;
 
 public class ModeratorHome extends ActionForm {
 
@@ -33,6 +39,22 @@ public class ModeratorHome extends ActionForm {
 
 	public List<Document> getOtherDocumentsList() {
 		return otherDocumentsList;
+	}
+	
+	public List<DocumentTypeTree> getOtherDocumentsTree() {
+		DocumentTreeBuilder documentTreeBuilder = new DocumentTreeBuilder();
+		for (Document doc : getOtherDocumentsList()) {
+			documentTreeBuilder.insert((DocumentVO)doc);
+		}
+		return documentTreeBuilder.getTrees();
+	}
+	
+	public List<CategoryTree> getReferenceDocumentTree() {
+		CategoryTreeBuilder documentTreeBuilder = new CategoryTreeBuilder();
+		for (ReferenceDocument doc : getReferenceList()) {
+			documentTreeBuilder.insert((ReferenceDocumentVO)doc);
+		}
+		return documentTreeBuilder.getTrees();
 	}
 
 	public void setOtherDocumentsList(List<Document> otherDocumentsList) {
