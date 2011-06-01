@@ -51,8 +51,10 @@
 							<li><html:link action="/goToListDocument" ><%=ResourceBundleCache.get("menu", "listaDocumentos")%></html:link></li>
 							<li><html:link action="/goToDocumentTypeABM" ><%=ResourceBundleCache.get("menu", "tiposDeDocumento")%></html:link></li>
 							<li><html:link action="/createDocument" ><%=ResourceBundleCache.get("menu", "crearDocumento")%></html:link></li>
+							<li>&nbsp;</li>
 							<li><html:link action="/goToCategoryABM" ><%=ResourceBundleCache.get("menu", "categorias")%></html:link></li>
 							<li><html:link action="/goToReferenceDocumentABM" ><%=ResourceBundleCache.get("menu", "documentosDeConsulta")%></html:link></li>
+							<li>&nbsp;</li>
 							<li><html:link action="/goToDelegateStats" ><%=ResourceBundleCache.get("menu", "panelDeControl")%></html:link></li>
 						</ul>
 					</li>

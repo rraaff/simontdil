@@ -9,9 +9,10 @@
 /* ### New Homes ### */
 #newHomeBlock{
 	border:1px solid #c6c6c6;
-	width:100%;
-	height:150px;
+	width:1053px;
+	height:200px;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
+	overflow:auto;
 }
 #newHomeBlock a, #newHomeBlock a:hover, #newHomeBlock visited{
 	font-size:12px;
@@ -41,7 +42,7 @@
 #newHomeBlockHalf{
 	border:1px solid #c6c6c6;
 	width:100%;
-	height:350px;
+	height:300px;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	float: left;
 }
@@ -130,7 +131,7 @@
 						</tr>
 						<tr>
 							<td valign="top">
-								<div style="width:100%; height:280px; overflow:auto;">
+								<div style="width:100%; height:220px; overflow:auto;">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
 										<tr>
@@ -200,7 +201,7 @@
 						</tr>
 						<tr>
 							<td valign="top">
-								<div style="width:100%; height:280px; overflow:auto;">
+								<div style="width:100%; height:220px; overflow:auto;">
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<logic:iterate name="ModeratorHome" property="referenceDocumentTree" id="catTree">
 											<tr>
