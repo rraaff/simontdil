@@ -9,7 +9,7 @@
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="GroupPermission" type="com.tdil.simon.data.model.GroupPermission"/>
   <typeAlias alias="SubCategoryPermissionVO" type="com.tdil.simon.data.valueobjects.SubCategoryPermissionVO"/>
-  <typeAlias alias="DocumentSubTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentSubTypePermissionVO"/>
+  <typeAlias alias="DocumentTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentTypePermissionVO"/>
   
   <select id="selectGroupPermissionForUser" parameterClass="int" resultClass="GroupPermission">
  	 SELECT GROUPPERMISSION.*
@@ -17,6 +17,14 @@
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
+  </select>
+  
+  <select id="selectDocumentPermissionForGroupAndDocumentType" parameterClass="java.util.Map" resultClass="GroupPermission">
+  	select GROUPPERMISSION.*
+   	from GROUPPERMISSION
+   	WHERE GROUPPERMISSION.groupId = #userGroupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+   	AND GROUPPERMISSION.objectId = #documentTypeId#
   </select>
   
   <select id="selectSubCategoryPermission" parameterClass="int" resultClass="SubCategoryPermissionVO">
@@ -29,14 +37,20 @@
    	order by CATEGORY.name, SUBCATEGORY.name 
   </select>
   
-  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentSubTypePermissionVO">
-    select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
-   	from GROUPPERMISSION, DOCUMENTTYPE, DOCUMENTSUBTYPE
+  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentTypePermissionVO">
+  	select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName
+   	from GROUPPERMISSION, (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
    	WHERE GROUPPERMISSION.groupId = #groupId#
-   	AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+   	AND GROUPPERMISSION.objectId = DOCUMENTTYPE.id
+   	UNION
+    select GROUPPERMISSION.*, Concat(DOCUMENTTYPE.name, ' > ', DOCUMENTSUBTYPE.name) as documentTypeName
+   	from GROUPPERMISSION, (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
    	AND GROUPPERMISSION.objectId = DOCUMENTSUBTYPE.id
-   	and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
-   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name
+   	and DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id
+   	order by documentTypeName
   </select>
 
   <insert id="insertGroupPermission" parameterClass="GroupPermission">

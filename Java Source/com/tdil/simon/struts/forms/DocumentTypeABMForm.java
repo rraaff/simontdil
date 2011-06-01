@@ -57,7 +57,7 @@ public class DocumentTypeABMForm extends TransactionalValidationForm implements 
 	 * @see com.tdil.simon.struts.forms.ABMForm#init()
 	 */
 	public void init() throws SQLException {
-		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentType());
+		this.setAllDocumentType(DocumentTypeDAO.selectAllRootDocumentType());
 	}
 	
 	public void initWith(int userId) throws SQLException {

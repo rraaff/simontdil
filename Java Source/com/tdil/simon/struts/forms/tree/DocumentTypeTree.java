@@ -3,12 +3,16 @@ package com.tdil.simon.struts.forms.tree;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
+
+import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.valueobjects.DocumentVO;
 
 public class DocumentTypeTree {
 
 	private int id;
 	private String name;
+	private List<Document> documents = new ArrayList<Document>();
 	private List<DocumentSubTypeTree> documentSubTypes = new ArrayList<DocumentSubTypeTree>();
 	
 	public DocumentTypeTree(DocumentVO documentVO) {
@@ -18,13 +22,17 @@ public class DocumentTypeTree {
 	}
 
 	public void insert(DocumentVO documentVO) {
-		DocumentSubTypeTree tree = getTreeFor(documentVO);
-		tree.insert(documentVO);
+		if (StringUtils.isEmpty(documentVO.getDocumentSubTypeName())) {
+			documents.add(documentVO);
+		} else {
+			DocumentSubTypeTree tree = getTreeFor(documentVO);
+			tree.insert(documentVO);
+		}
 	}
 	
 	private DocumentSubTypeTree getTreeFor(DocumentVO documentVO) {
 		for (DocumentSubTypeTree documentSubTypeTree : documentSubTypes) {
-			if (documentSubTypeTree.getId() == documentVO.getDocumentSubTypeId()) {
+			if (documentSubTypeTree.getName().equals(documentVO.getDocumentSubTypeName())) {
 				return documentSubTypeTree;
 			}
 		}
@@ -57,6 +65,14 @@ public class DocumentTypeTree {
 			subTypeTree.setId(subTypeTree.getId() + 1000000);
 		}
 		
+	}
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
 	}
 
 	

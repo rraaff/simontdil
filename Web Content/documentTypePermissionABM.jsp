@@ -74,14 +74,13 @@ if ( dw_scrollObj.isSupported() ) {
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left">
 									<html:select name="DocumentTypePermissionABMForm" property="documentTypeId" styleClass="textfield_effect">
-										<% String lastDocumentType = "";%>
-										<logic:iterate name="DocumentTypePermissionABMForm" property="allDocumentTypeFiltered" id="iterSubCat"> 
-										<% com.tdil.simon.data.valueobjects.DocumentSubTypeVO sub = (com.tdil.simon.data.valueobjects.DocumentSubTypeVO)iterSubCat; %>
-											<% if (!sub.getDocumentTypeName().equals(lastDocumentType)) { %>
-												<optgroup label="<%=sub.getDocumentTypeName()%>"></optgroup>
-											<% lastDocumentType = sub.getDocumentTypeName();
-											} %>
-											<option value="<%=sub.getId()%>"><%=sub.getName()%></option>
+										<logic:iterate name="DocumentTypePermissionABMForm" property="allDocumentType" id="iterSubCat"> 
+										<% com.tdil.simon.data.model.DocumentType sub = (com.tdil.simon.data.model.DocumentType)iterSubCat; %>
+											<% if (sub.getParentId() == 0) { %>
+												<option value="<%=sub.getId()%>"><%=sub.getName()%></option>
+											<% } else { %>
+												<option value="<%=sub.getId()%>">&nbsp;&nbsp;&nbsp;<%=sub.getName()%></option>
+											<% } %>
 										</logic:iterate>
 									</html:select></td>
 							</tr>
@@ -135,13 +134,11 @@ if ( dw_scrollObj.isSupported() ) {
 									</tr>
 									<tr>
 										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "tipoDeDocumento")%></td>
-										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "subTipoDeDocumento")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "quitar")%></td>
 									</tr> 
 									<logic:iterate name="DocumentTypePermissionABMForm" property="allPermission" id="iterDocumentTypePermission" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td align="left"><bean:write name="iterDocumentTypePermission" property="documentTypeName" /></td>
-											<td align="left"><bean:write name="iterDocumentTypePermission" property="documentSubTypeName" /></td>
 											<td><logic:equal name="iterDocumentTypePermission" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentTypePermissionABMForm","botones","quitar", iterIndex)%>
 												</logic:equal>

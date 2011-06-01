@@ -2,18 +2,19 @@ package com.tdil.simon.struts.forms;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.data.ibatis.DocumentSubTypeDAO;
+import com.tdil.simon.data.ibatis.DocumentTypeDAO;
 import com.tdil.simon.data.ibatis.GroupPermissionDAO;
 import com.tdil.simon.data.ibatis.UserGroupDAO;
+import com.tdil.simon.data.model.DocumentType;
 import com.tdil.simon.data.model.GroupPermission;
 import com.tdil.simon.data.model.UserGroup;
-import com.tdil.simon.data.valueobjects.DocumentSubTypePermissionVO;
-import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
+import com.tdil.simon.data.valueobjects.DocumentTypePermissionVO;
 
 public class DocumentTypePermissionABMForm extends TransactionalValidationForm implements ABMForm {
 
@@ -25,8 +26,8 @@ public class DocumentTypePermissionABMForm extends TransactionalValidationForm i
 	private int userGroupId;
 	private int documentTypeId;
 	
-	private List<DocumentSubTypeVO> allDocumentSubType;
-	private List<DocumentSubTypePermissionVO> allPermission;
+	private List<DocumentType> allDocumentSubType;
+	private List<DocumentTypePermissionVO> allPermission;
 	
 	public String getOperation() {
 		return operation;
@@ -48,7 +49,7 @@ public class DocumentTypePermissionABMForm extends TransactionalValidationForm i
 	public void init() throws SQLException {
 		UserGroup userGroup = UserGroupDAO.getUserGroup(this.getUserGroupId());
 		this.setUserGroupName(userGroup.getName());
-		this.setAllDocumentType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
+		this.setAllDocumentType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		this.setAllPermission(GroupPermissionDAO.selectDocumentTypePermission(userGroup));
 	}
 	
@@ -73,42 +74,32 @@ public class DocumentTypePermissionABMForm extends TransactionalValidationForm i
 	}
 	
 	private void addPermission() throws SQLException {
-		GroupPermission permission = new GroupPermission();
-		permission.setGroupId(this.getUserGroupId());
-		permission.setObjectId(this.getDocumentTypeId());
-		permission.setObjectType(GroupPermission.DOCUMENT_SUB_TYPE);
-		GroupPermissionDAO.insertGroupPermission(permission);
+		// TODO verificar si ya existe no agrego
+		GroupPermission exists = GroupPermissionDAO.selectDocumentTypePermission(this.getUserGroupId(), this.getDocumentTypeId());
+		if (exists == null) {
+			GroupPermission permission = new GroupPermission();
+			permission.setGroupId(this.getUserGroupId());
+			permission.setObjectId(this.getDocumentTypeId());
+			permission.setObjectType(GroupPermission.DOCUMENT_TYPE);
+			GroupPermissionDAO.insertGroupPermission(permission);
+		}
 	}
 	
 	public void delete(int position) throws SQLException {
-		DocumentSubTypePermissionVO permissionVO = this.getAllPermission().get(position);
+		DocumentTypePermissionVO permissionVO = this.getAllPermission().get(position);
 		GroupPermissionDAO.deleteGroupPermission(permissionVO);
 	}
 	
-	public List<DocumentSubTypeVO> getAllDocumentTypeFiltered() {
-		Set<Integer> granted = new HashSet<Integer>();
-		for (DocumentSubTypePermissionVO vo : getAllPermission()) {
-			granted.add(vo.getObjectId());
-		}
-		List<DocumentSubTypeVO> result = new ArrayList<DocumentSubTypeVO>();
-		for (DocumentSubTypeVO vo : getAllDocumentType()) {
-			if (!granted.contains(vo.getId())) {
-				result.add(vo);
-			}
-		}
-		return result;
-	}
-	
-	public List<DocumentSubTypeVO> getAllDocumentType() {
+	public List<DocumentType> getAllDocumentType() {
 		return allDocumentSubType;
 	}
-	public void setAllDocumentType(List<DocumentSubTypeVO> allDocumentType) {
+	public void setAllDocumentType(List<DocumentType> allDocumentType) {
 		this.allDocumentSubType = allDocumentType;
 	}
-	public List<DocumentSubTypePermissionVO> getAllPermission() {
+	public List<DocumentTypePermissionVO> getAllPermission() {
 		return allPermission;
 	}
-	public void setAllPermission(List<DocumentSubTypePermissionVO> allPermission) {
+	public void setAllPermission(List<DocumentTypePermissionVO> allPermission) {
 		this.allPermission = allPermission;
 	}
 	public int getUserGroupId() {

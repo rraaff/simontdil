@@ -24,38 +24,50 @@
   </select>
   
   <select id="selectNotDeletedNotRelevantDocuments" resultClass="com.tdil.simon.data.valueobjects.DocumentVO">
-    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
-   	from DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE,
+   	from DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
    	WHERE DOCUMENT.deleted = 0
    	AND DOCUMENT.relevance = 0
    	AND DOCUMENT.id = LAST_VERSIONS.documentId
-   	and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
-    and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
    	AND EXISTS (SELECT * 
    				FROM VERSION 
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status != 'DRAFT')
-   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name, DOCUMENT.title
+   	order by DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.title
   </select>
   
   <select id="selectNotDeletedNotRelevantDocumentsUsingTypes" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.DocumentVO">
-    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
-   	from DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE,
+   	from DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
    	WHERE DOCUMENT.deleted = 0
    	AND DOCUMENT.relevance = 0
    	AND DOCUMENT.id = LAST_VERSIONS.documentId
+   	AND DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
     AND DOCUMENT.documentSubTypeId IN (
     	SELECT GROUPPERMISSION.objectId
 		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
     )
     AND EXISTS (
     	SELECT * 
@@ -63,7 +75,7 @@
    		WHERE VERSION.documentId = DOCUMENT.id 
    		AND VERSION.deleted = 0
    		AND VERSION.status != 'DRAFT')
-   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name, DOCUMENT.title
+   	order by DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.title
   </select>
   
   <select id="getDocumentUnderWork" resultClass="Document">
