@@ -15,6 +15,7 @@ div#main {
 	width:inherit;
 	height:480px;
 	font-size: 10px;
+	overflow:auto;
 }
 div#scrollbar {
 	display:none;
@@ -136,6 +137,7 @@ function showErrorMessage() {
 							</tr>
 							<tr>
 								<td colspan="12" height="25" align="center">
+									<div style="height:400px; overflow:auto;">
 									<table width="100%" border="0">
 										<tr class="d1">
 											<td><%=ResourceBundleCache.get(getServletInfo(), "lenguage")%></td>
@@ -152,6 +154,7 @@ function showErrorMessage() {
 											</tr> 
 										</logic:iterate>
 									</table>
+									</div>
 								</td>
 							</tr>
 						</table>					
