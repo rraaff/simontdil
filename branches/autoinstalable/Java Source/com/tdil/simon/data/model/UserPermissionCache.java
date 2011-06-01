@@ -20,7 +20,7 @@ public class UserPermissionCache {
 	
 	protected void build(SystemUser user) throws SQLException {
 		permissions = new HashMap<String, Set<Integer>>();
-		permissions.put(GroupPermission.DOCUMENT_SUB_TYPE, new HashSet<Integer>());
+		permissions.put(GroupPermission.DOCUMENT_TYPE, new HashSet<Integer>());
 		permissions.put(GroupPermission.SUBCATEGORY, new HashSet<Integer>());
 		List<GroupPermission> list = GroupPermissionDAO.selectGroupPermissionForUser(user);
 		for (GroupPermission permission : list) {
@@ -33,7 +33,7 @@ public class UserPermissionCache {
 	}
 
 	public boolean canAccessDocumentType(int documentTypeId) {
-		return permissions.get(GroupPermission.DOCUMENT_SUB_TYPE).contains(documentTypeId);
+		return permissions.get(GroupPermission.DOCUMENT_TYPE).contains(documentTypeId);
 	}
 	
 	

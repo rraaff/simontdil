@@ -36,6 +36,7 @@ import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
+import com.tdil.simon.data.valueobjects.DocumentTypeVO;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.web.ResourceBundleCache;
@@ -116,7 +117,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String append;
 	private String newParagraphText;
 	
-	private List<DocumentSubTypeVO> allDocumentSubType;
+	private List<DocumentTypeVO> allDocumentSubType;
 	
 	static {
 		allMonths = new ArrayList<MonthOption>();
@@ -167,7 +168,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.isInNegotiation = false;
 		this.portugues = false;
 		try {
-			this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
+			this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -654,7 +655,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public void initWith(int versionID) throws SQLException {
-		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(false);
 		Version version = VersionDAO.getVersion(versionID);
 		Document document = DocumentDAO.getDocument(version.getDocumentId());
@@ -892,7 +893,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForPortuguesWith(int versionID) throws SQLException {
-		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(true);
 		setDesigner(false);
 		// con esta saco datos base
@@ -1002,7 +1003,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 
 	public void initForDesignWith(int versionID) throws SQLException {
-		this.setAllDocumentSubType(DocumentSubTypeDAO.selectAllDocumentSubTypeNotDeleted());
+		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		setPortugues(false);
 		setDesigner(true);
 		Version version = VersionDAO.getVersion(versionID);
@@ -1170,14 +1171,14 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.livePreview = false;
 	}
 
-	public List<DocumentSubTypeVO> getAllDocumentSubType() {
-		for (DocumentSubTypeVO vo : allDocumentSubType) {
+	public List<DocumentTypeVO> getAllDocumentSubType() {
+		for (DocumentTypeVO vo : allDocumentSubType) {
 			vo.setSelectedId(this.getDocumentSubTypeId());
 		}
 		return allDocumentSubType;
 	}
 
-	public void setAllDocumentSubType(List<DocumentSubTypeVO> allDocumentType) {
+	private void setAllDocumentSubType(List<DocumentTypeVO> allDocumentType) {
 		this.allDocumentSubType = allDocumentType;
 	}
 }

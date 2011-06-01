@@ -144,6 +144,16 @@
 											<td colspan="1">
 												<div id="child-<bean:write name="docTree" property="id"/>" style="display: block;">
 													<table border="0" cellpadding="0" cellspacing="0">
+														<logic:iterate name="docTree" property="documents" id="docLeafTop">
+														<tr>
+															<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
+															<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
+																<bean:write name="docLeafTop" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeafTop" property="lastVersionNumber" /> - <bean:write name="docLeafTop" property="lastVersionName" />
+																</html:link></td>
+														</tr>
+														</logic:iterate>
+													</table>
+													<table border="0" cellpadding="0" cellspacing="0">
 														<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
 															<tr>
 																<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/minus.gif"></td>

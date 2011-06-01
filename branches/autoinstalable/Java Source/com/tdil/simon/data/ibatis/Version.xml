@@ -39,11 +39,16 @@
   
   
   <select id="selectRelevantVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName  
-    from VERSION, DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE
+   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName  
+    from VERSION, DOCUMENT, 
+    	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
     where VERSION.documentId = DOCUMENT.id
-    and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
-    and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+    and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
     and VERSION.spanishVersion = 1
@@ -54,11 +59,16 @@
   </select>
   
   <select id="selectRelevantVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
-    from VERSION, DOCUMENT, DOCUMENTTYPE, DOCUMENTSUBTYPE
+   select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName
+    from VERSION, DOCUMENT, 
+    	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
     where VERSION.documentId = DOCUMENT.id
-    and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
-    and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+    and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
     and VERSION.deleted = 0
     and VERSION.status != 'DRAFT'
     and VERSION.spanishVersion = 1
@@ -70,7 +80,7 @@
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'DOCUMENT_SUB_TYPE'
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
     )
     and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
     order by DOCUMENT.title
@@ -146,7 +156,7 @@
   </select>
   
   <select id="selectVersionsVOForList" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 
     	WHERE OBSERVATION.privateObservation = 0 
@@ -156,16 +166,21 @@
     	WHERE OBSERVATION.privateObservation = 0 
     	AND OBSERVATION.addNewParagraph = 1
     	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
-   	from VERSION, DOCUMENT,DOCUMENTTYPE, DOCUMENTSUBTYPE
+   	from VERSION, DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
    	WHERE VERSION.documentId = DOCUMENT.id
-   	and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
-    and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
    	and VERSION.spanishVersion = 1
    	order by DOCUMENT.title, VERSION.number DESC
   </select>
   
   <select id="selectVersionsVOForDesigner" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
-    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+    select VERSION.*, DOCUMENT.title as documentTitle, DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 
     	WHERE OBSERVATION.privateObservation = 0 
@@ -175,10 +190,15 @@
     	WHERE OBSERVATION.privateObservation = 0 
     	AND OBSERVATION.addNewParagraph = 1
     	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
-   	from VERSION, DOCUMENT,DOCUMENTTYPE, DOCUMENTSUBTYPE
+   	from VERSION, DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
    	WHERE VERSION.documentId = DOCUMENT.id
-   	and DOCUMENT.documentSubTypeId = DOCUMENTSUBTYPE.id
-    and DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
    	and VERSION.spanishVersion = 1
    	and VERSION.status IN ('CONSOLIDATED', 'FINAL')
    	order by DOCUMENT.title, VERSION.number DESC

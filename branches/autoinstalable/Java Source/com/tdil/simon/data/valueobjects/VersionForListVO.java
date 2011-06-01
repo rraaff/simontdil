@@ -2,6 +2,7 @@ package com.tdil.simon.data.valueobjects;
 
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Version;
+import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class VersionForListVO extends Version {
@@ -75,6 +76,9 @@ public class VersionForListVO extends Version {
 		this.documentTypeName = documentTypeName;
 	}
 	public String getDocumentSubTypeName() {
+		if (org.apache.commons.lang.StringUtils.isEmpty(documentSubTypeName)) {
+			return "-";
+		}
 		return documentSubTypeName;
 	}
 	public void setDocumentSubTypeName(String documentSubTypeName) {

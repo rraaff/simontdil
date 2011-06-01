@@ -172,6 +172,7 @@ CREATE  TABLE `LOGO` (
 CREATE  TABLE `DOCUMENTTYPE` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL ,
+  `parentId` INT NULL,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 / 

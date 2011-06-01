@@ -62,15 +62,14 @@
 							<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 							<td width="290" align="left">
 								<html:select name="CreateDocumentForm" property="documentSubTypeId" styleClass="textfield_effect" disabled="true">
-									<% String lastDocumentType = "";%>
 									<logic:iterate name="CreateDocumentForm" property="allDocumentSubType" id="iterSubCat"> 
-									<% com.tdil.simon.data.valueobjects.DocumentSubTypeVO sub = (com.tdil.simon.data.valueobjects.DocumentSubTypeVO)iterSubCat; %>
-										<% if (!sub.getDocumentTypeName().equals(lastDocumentType)) { %>
-											<optgroup label="<%=sub.getDocumentTypeName()%>"></optgroup>
-										<% lastDocumentType = sub.getDocumentTypeName();
-										} %>
-										<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
-									</logic:iterate>
+											<% com.tdil.simon.data.valueobjects.DocumentTypeVO sub = (com.tdil.simon.data.valueobjects.DocumentTypeVO)iterSubCat; %>
+											<% if (sub.getParentId() == 0) { %>
+												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
+											<% } else { %>
+												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>">&nbsp;&nbsp;&nbsp;<%=sub.getName()%></option>
+											<% } %>
+										</logic:iterate>
 								</html:select>
 							</td>
 						</tr>

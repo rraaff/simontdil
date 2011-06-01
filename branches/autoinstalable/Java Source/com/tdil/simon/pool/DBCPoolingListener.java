@@ -48,6 +48,9 @@ public class DBCPoolingListener implements ServletContextListener {
 			getLog().error(e.getMessage(), e);
 		} catch (IOException e) {
 			getLog().error(e.getMessage(), e);
+		} catch (Exception e) {
+			e.printStackTrace(System.out);
+			getLog().error(e.getMessage(), e);
 		}
 	}
 	

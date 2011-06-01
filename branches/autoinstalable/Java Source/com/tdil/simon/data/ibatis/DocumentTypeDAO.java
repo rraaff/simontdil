@@ -1,14 +1,16 @@
 package com.tdil.simon.data.ibatis;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tdil.simon.data.model.DocumentType;
 
 public class DocumentTypeDAO {
 
-	public static List selectAllDocumentType() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectAllDocumentType");
+	public static List selectAllRootDocumentType() throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectAllRootDocumentType");
 	}
 	
 	public static List selectAllDocumentTypeNotDeleted() throws SQLException {
@@ -36,6 +38,17 @@ public class DocumentTypeDAO {
 	public static void logicallyDeleteDocumentType(DocumentType documentType)
 			throws SQLException {
 		IBatisManager.sqlMapper.update("logDeleteDocumentType", documentType);
+	}
+
+	public static List<DocumentType> selectAllDocumentTypeByParentId(int parentId) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectAllDocumentTypeByParentId", parentId);
+	}
+
+	public static DocumentType getDocumentType(String name, int parentId) throws SQLException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		params.put("parentId", parentId);
+		return (DocumentType) IBatisManager.sqlMapper.queryForObject("selectDocumentypeByNameAndParentId", params);
 	}
 
 
