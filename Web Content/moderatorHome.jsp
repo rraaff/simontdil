@@ -87,38 +87,41 @@
 		<tr>
 			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>
-		<tr>
-			<td colspan="3">
-				<div id="newHomeBlock">
-					<table width="95%" cellspacing="0" cellpadding="15" align="center">
-						<tr>
-							<td><span class="newHomeTitle"><%=ResourceBundleCache.get(getServletInfo(), "Documentos")%></span></td>
-						</tr>
-						<tr>
-							<td>
-								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-									<tr>
-										<logic:iterate name="ModeratorHome" property="principalVersions" id="doc" indexId="principalIndex">
-											<td>
-												<table width="370" border="0" cellspacing="0" cellpadding="0">
-													<tr>
-														<td width="74"><img src="images/icons/documento.gif" width="64" height="76"></td>
-														<td><span class="mainDocsCategory"><bean:write name="doc" property="documentTypeName" /></span><br/>
-															<span class="mainDocsSubCategory"><bean:write name="doc" property="documentSubTypeName" /></span><br/>
-															<span class="mainDocsName"><html:link  action="/goToViewVersion.st?" paramName="doc" paramProperty="id" paramId="versionID"><bean:write name="doc" property="documentTitle" /></html:link></span><br/>
-															<span class="mainDocsData"><%=ResourceBundleCache.get(getServletInfo(), "version")%>: <bean:write name="doc" property="number" /> - <bean:write name="doc" property="name" /></span></td>
-													</tr>
-												</table>
-											</td>
-										</logic:iterate>
-									</tr>
-								</table>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</td>
-		</tr>
+		<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
+			<tr>
+				<td colspan="3">
+					<div id="newHomeBlock">
+						<table width="95%" cellspacing="0" cellpadding="15" align="center">
+							<tr>
+								<td><span class="newHomeTitle"><%=ResourceBundleCache.get(getServletInfo(), "Documentos")%></span></td>
+							</tr>
+							<tr>
+								<td>
+									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+										<tr>
+											<logic:iterate name="ModeratorHome" property="principalVersions" id="doc" indexId="principalIndex">
+												<td>
+													<table width="370" border="0" cellspacing="0" cellpadding="0">
+														<tr>
+															<td width="74"><img src="images/icons/documento.gif" width="64" height="76"></td>
+															<td><span class="mainDocsCategory"><bean:write name="doc" property="documentTypeName" /></span><br/>
+																<span class="mainDocsSubCategory"><bean:write name="doc" property="documentSubTypeName" /></span><br/>
+																<span class="mainDocsName"><html:link  action="/goToViewVersion.st?" paramName="doc" paramProperty="id" paramId="versionID"><bean:write name="doc" property="documentTitle" /></html:link></span><br/>
+																<span class="mainDocsData"><%=ResourceBundleCache.get(getServletInfo(), "version")%>: <bean:write name="doc" property="number" /> - <bean:write name="doc" property="name" /></span></td>
+														</tr>
+													</table>
+												</td>
+											</logic:iterate>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							
+						</table>
+					</div>
+				</td>
+			</tr>
+		</logic:equal>
 		<tr>
 			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>

@@ -58,7 +58,7 @@ public class GenerateCleanDatabase {
 			argentina.setName(countryHost);
 			argentina.setHost(true);
 			argentina.setDeleted(false);
-			argentina.setLanguage("castellano");
+			argentina.setLanguage("Español");
 			countryId = CountryDAO.insertCountry(argentina);
 			countryDesc = countryHost;
 		} else {

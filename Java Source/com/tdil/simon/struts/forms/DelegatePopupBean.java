@@ -44,6 +44,10 @@ public class DelegatePopupBean {
 		});
 	}
 	
+	public boolean getHasPrincipalVersions() {
+		return this.getPrincipalVersions() != null && !this.getPrincipalVersions().isEmpty(); 
+	}
+	
 	public List<DocumentTypeTree> getOtherDocumentsTree() {
 		DocumentTreeBuilder documentTreeBuilder = new DocumentTreeBuilder();
 		for (Document doc : getOtherDocumentsList()) {
