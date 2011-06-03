@@ -35,6 +35,10 @@ public class ModeratorHome extends ActionForm {
 	public void setPrincipalVersions(List<VersionForListVO> principalVersions) {
 		this.principalVersions = principalVersions;
 	}
+	
+	public boolean getHasPrincipalVersions() {
+		return this.getPrincipalVersions() != null && !this.getPrincipalVersions().isEmpty(); 
+	}
 
 
 	public List<Document> getOtherDocumentsList() {
