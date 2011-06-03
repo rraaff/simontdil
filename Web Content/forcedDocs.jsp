@@ -39,11 +39,15 @@
 	font-size:11px;
 	color:#888888;
 }
-
 #newHomeBlockHalf{
 	border:1px solid #c6c6c6;
 	width:100%;
+<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
 	height:300px;
+</logic:equal>
+<logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
+	height:460px;
+</logic:notEqual>
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	float: left;
 }
@@ -106,10 +110,10 @@ if ( dw_scrollObj.isSupported() ) {
 %>
 <%@ include file="includes/leftContentModerator.jsp" %>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-		<tr>
-			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
-		</tr>
 		<% if (delegatePopupBean.getHasPrincipalVersions()) {%>
+			<tr>
+				<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
+			</tr>
 			<tr>
 				<td colspan="3">
 					<div id="newHomeBlock">
@@ -155,7 +159,11 @@ if ( dw_scrollObj.isSupported() ) {
 						</tr>
 						<tr>
 							<td valign="top">
-								<div style="width:100%; height:220px; overflow:auto;">
+								<% if (delegatePopupBean.getHasPrincipalVersions()) {%>
+									<div style="width:100%; height:220px; overflow:auto;">
+								<% } else { %>
+									<div style="width:100%; height:400px; overflow:auto;">
+								<% } %>
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<logic:iterate name="delegatePopupBean" property="otherDocumentsTree" id="docTree">
 										<tr>
@@ -219,13 +227,17 @@ if ( dw_scrollObj.isSupported() ) {
 			<td><img src="images/null.gif" width="20" height="1"></td>
 			<td width="50%">
 				<div id="newHomeBlockHalf">
-					<table width="98%" border="0" cellspacing="0" cellpadding="15" align="center">
+					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
 						<tr>
 							<td colspan="3"><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosInformativos")%></span></td>
 						</tr>
 						<tr>
 							<td valign="top">
-								<div style="width:100%; height:220px; overflow:auto;">
+								<% if (delegatePopupBean.getHasPrincipalVersions()) {%>
+									<div style="width:100%; height:220px; overflow:auto;">
+								<% } else { %>
+									<div style="width:100%; height:400px; overflow:auto;">
+								<% } %>
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<logic:iterate name="delegatePopupBean" property="referenceDocumentTree" id="catTree">
 											<tr>
