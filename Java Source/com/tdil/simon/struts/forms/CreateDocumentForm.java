@@ -21,6 +21,7 @@ import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.DocumentValidation;
+import com.tdil.simon.actions.validations.FieldValidation;
 import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
@@ -78,6 +79,12 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	// TODO mejora
 	private String limitObservations;
+	
+	// Focalae
+	private String documentDate;
+	private String topic;
+	private String tag1;
+	private String tag2;
 	
 	public String getLimitObservations() {
 		return limitObservations;
@@ -167,6 +174,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.versionStatus = Version.DRAFT;
 		this.isInNegotiation = false;
 		this.portugues = false;
+		this.documentDate = null;
+		this.topic = null;
+		this.tag1 = null;
+		this.tag2 = null;
 		try {
 			this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		} catch (SQLException e) {
@@ -596,6 +607,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		document.setPrincipal(this.isPrincipal());
 		document.setDocumentSubTypeId(this.getDocumentSubTypeId());
 		document.setDeleted(false);
+		document.setDocumentDate(this.getDocumentDate());
+		document.setTopic(this.getTopic());
+		document.setTag1(this.getTag1());
+		document.setTag2(this.getTag2());
 		// TODO lanzar errores
 	}
 	
@@ -604,6 +619,11 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		DocumentValidation.validateTitle(this.title, validation);
 		VersionValidation.validateName(this.versionName, validation);
 		//DocumentValidation.validateIntroduction(this.introduction, validation);
+		FieldValidation.validateTextForLength(this.documentDate, "documentDate", 400000, validation);
+		FieldValidation.validateTextForLength(this.topic, "topic", 400000, validation);
+		FieldValidation.validateTextForLength(this.tag1, "tag1", 400000, validation);
+		FieldValidation.validateTextForLength(this.tag2, "tag2", 400000, validation);
+		
 		VersionValidation.validateUpToCommentDate(this.limitObservations, validation);
 		if (this.getDocumentSubTypeId() == 0) {
 			validation.setFieldError("type", "type" + "." + ValidationErrors.SELECT_DOCUMENT_SUB_TYPE);
@@ -680,6 +700,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.versionStatus = version.getStatus();
 		this.designerText = version.getDesignerText();
 		this.title = document.getTitle();
+		this.documentDate = document.getDocumentDate();
+		this.topic = document.getTopic();
+		this.tag1 = document.getTag1();
+		this.tag2 = document.getTag2();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -931,7 +955,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.version = version.getNumber();
 		this.versionStatus = version.getStatus();
 		this.title = document.getTitle();
-		
+		this.documentDate = document.getDocumentDate();
+		this.topic = document.getTopic();
+		this.tag1 = document.getTag1();
+		this.tag2 = document.getTag2();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -1016,6 +1043,10 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.versionStatus = version.getStatus();
 		this.designerText = version.getDesignerText();
 		this.title = document.getTitle();
+		this.documentDate = document.getDocumentDate();
+		this.topic = document.getTopic();
+		this.tag1 = document.getTag1();
+		this.tag2 = document.getTag2();
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -1180,5 +1211,37 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	private void setAllDocumentSubType(List<DocumentTypeVO> allDocumentType) {
 		this.allDocumentSubType = allDocumentType;
+	}
+
+	public String getDocumentDate() {
+		return documentDate;
+	}
+
+	public void setDocumentDate(String documentDate) {
+		this.documentDate = documentDate;
+	}
+
+	public String getTopic() {
+		return topic;
+	}
+
+	public void setTopic(String topic) {
+		this.topic = topic;
+	}
+
+	public String getTag1() {
+		return tag1;
+	}
+
+	public void setTag1(String tag1) {
+		this.tag1 = tag1;
+	}
+
+	public String getTag2() {
+		return tag2;
+	}
+
+	public void setTag2(String tag2) {
+		this.tag2 = tag2;
 	}
 }

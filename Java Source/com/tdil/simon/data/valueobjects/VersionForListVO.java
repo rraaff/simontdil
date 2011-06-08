@@ -2,12 +2,15 @@ package com.tdil.simon.data.valueobjects;
 
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.Version;
-import com.tdil.simon.utils.StringUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 
 public class VersionForListVO extends Version {
 
 	private String documentTitle;
+	private String documentDate;
+	private String documentTopic;
+	private String documentTag1;
+	private String documentTag2;
 	private int documentRelevance;
 	private int observationCount;
 	private int newParagraphCount;
@@ -91,5 +94,37 @@ public class VersionForListVO extends Version {
 
 	public void setDocumentRelevance(int documentRelevance) {
 		this.documentRelevance = documentRelevance;
+	}
+
+	public String getDocumentDate() {
+		return documentDate;
+	}
+
+	public void setDocumentDate(String documentDate) {
+		this.documentDate = documentDate;
+	}
+
+	public String getDocumentTopic() {
+		return documentTopic;
+	}
+
+	public void setDocumentTopic(String documentTopic) {
+		this.documentTopic = documentTopic;
+	}
+
+	public String getDocumentTag1() {
+		return documentTag1;
+	}
+
+	public void setDocumentTag1(String documentTag1) {
+		this.documentTag1 = documentTag1;
+	}
+
+	public String getDocumentTag2() {
+		return documentTag2;
+	}
+
+	public void setDocumentTag2(String documentTag2) {
+		this.documentTag2 = documentTag2;
 	}
 }
