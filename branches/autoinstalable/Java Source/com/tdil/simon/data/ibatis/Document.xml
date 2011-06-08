@@ -117,9 +117,9 @@
   
   <insert id="insertDocument" parameterClass="Document">
     insert into DOCUMENT (
-      id, title, introduction, principal, documentSubTypeId, relevance, deleted
+      id, title, introduction, principal, documentSubTypeId, relevance, documentDate, topic, tag1, tag2, deleted
     ) values (
-      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #relevance#, #deleted#
+      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #relevance#, #documentDate#, #topic#, #tag1#, #tag2#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -132,6 +132,10 @@
 	introduction = #introduction#,
 	principal= #principal#,
 	documentSubTypeId = #documentSubTypeId#, 
+	documentDate= #documentDate#, 
+	topic = #topic#, 
+	tag1 = #tag1#, 
+	tag2 = #tag2#,
 	deleted = #deleted#
     where
       id = #id#

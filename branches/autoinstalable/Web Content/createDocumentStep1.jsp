@@ -99,7 +99,7 @@ $$('input.slimpicker').each( function(el){
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
-								<td align="right" valign="top">Tipo de documento:</td>
+								<td align="right" valign="top"><%=ResourceBundleCache.get("createDocument", "tipoDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
 								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
@@ -128,6 +128,42 @@ $$('input.slimpicker').each( function(el){
 								</logic:equal>
 								</td>
 							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "fechaDocumento")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="documentDate" styleClass="textfield_effect"/><html:errors property="documentDate" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "topico")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="topic" styleClass="textfield_effect"/><html:errors property="topic" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "tag1")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="tag1" styleClass="textfield_effect"/><html:errors property="tag1" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "tag2")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="tag2" styleClass="textfield_effect"/><html:errors property="tag2" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							
 							<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
 								<tr>
 									<td colspan="4">

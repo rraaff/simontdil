@@ -39,6 +39,15 @@ import com.tdil.simon.web.SystemConfig;
 public class ExportVersionAsPDF {
 
 	public static void exportDocument(SystemUser user, VersionVO version, OutputStream output) throws SQLException, IOException, ParserConfigurationException, DocumentException, SAXException {
+		// TODO PABLO ejemplos
+		// Ejemplo con if para ver si esta vacio o no
+		if (!org.apache.commons.lang.StringUtils.isEmpty(version.getDocument().getDocumentDate())) {
+			System.out.println(version.getDocument().getDocumentDate());
+		}
+		System.out.println(version.getDocument().getTopic());
+		System.out.println(version.getDocument().getTag1());
+		System.out.println(version.getDocument().getTag2());
+		
 		Logo logo = LogoDAO.getLogo("header.logoHeaderPDFsRTFs");
 		UploadUtils.createFile(logo.getLogoData(), SystemConfig.getTempPath() + "/logoHeaderPDFsRTFs.png");
 		
