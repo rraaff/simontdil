@@ -30,17 +30,20 @@ break;
 <table height="590" border="0" cellspacing="0" cellpadding="0" align="center">
 	<tr>
 		<td valign="middle">
-			<table width="400" border="0" cellspacing="0" cellpadding="0" align="center">
+			<table width="500" border="0" cellspacing="0" cellpadding="0" align="center">
+				<tr>
+					<td colspan="3">Los pa&iacute;ses miembros deber&iacute;an hacer uso del  registro en l&iacute;nea a fin de registrar sus delegados a la Reuni&oacute;n. Solamente el  Punto Focal de cada pa&iacute;s o personas autorizadas por &eacute;l podr&aacute;n acceder a esta  secci&oacute;n con su clave personal. Se solicita encarecidamente registrarse por esta  v&iacute;a, de modo de evitar demoras al momento de la apertura de la reuni&oacute;n.</td>
+				</tr>
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
-					<td background="images/interfaces/topTitle.gif" width="320" height="19" align="center"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></td>
+					<td background="images/interfaces/topTitle.gif" width="480" height="19" align="center"><%=ResourceBundleCache.get(getServletInfo(), "titulo")%></td>
 					<td colspan="2" background="images/interfaces/topRightTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
 				</tr>
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="380"><!-- corte tabla template -->
-						<table width="380" border="0" cellspacing="0" cellpadding="0">
+					<td width="480"><!-- corte tabla template -->
+						<table width="480" border="0" cellspacing="0" cellpadding="0">
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>

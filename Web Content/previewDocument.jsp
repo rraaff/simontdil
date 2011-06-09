@@ -134,9 +134,9 @@ if ( dw_scrollObj.isSupported() ) {
 									<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "grabarYContinuar")%>
 									</html:submit>
-									<html:submit property="operation">
-										<%=ResourceBundleCache.get(getServletInfo(), "ponerEnFirma")%>
-									</html:submit>
+									<!-- html:submit property="operation">
+										< % = ResourceBundleCache.get(getServletInfo(), "ponerEnFirma") % >
+									< / h t m l  : s u b m i t  -->
 									
 									<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "finalizar")%>

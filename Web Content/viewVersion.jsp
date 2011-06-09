@@ -41,7 +41,9 @@ div#main{
 #mainDocContainer {
 	border: 1px solid #c6c6c6;
 	position: relative;
+	width:100%;
 	height: 200px;
+	display:block;
 }
 lyr1{
 	
@@ -200,226 +202,220 @@ if ( dw_scrollObj.isSupported() ) {
 				</table>
 			</div>
 			<div id="mainDocContainer" style="margin-top:20px;">
-				<div id="blockTitle2"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
-				<p>
-				<table width="240" border="0" cellspacing="0" cellpadding="0">
-					<tr>
-						<td align="center">
-							<!--table border="0" cellspacing="0" cellpadding="0">
-								<tr>
-									<td width="13" height="24"><img src="images/buttons/buttonLeft.gif" width="13" height="24" border="0"></td>
-									<td background="images/buttons/buttonCenter.gif" align="center" valign="middle"><a href="#" class="newButton">Volver</a></td>
-									<td width="13" height="24"><img src="images/buttons/buttonRight.gif" width="13" height="24" border="0"></td>
-								</tr>
-							</table -->
-					<% if (isDelegate) { %>
-						<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
-					<% } %>
-					<% if (isModerator) { %>
-						<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
-					<% } %>
-						</td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<%if (isModerator) { %>
-					<tr>
-						<td align="center" valign="middle">
-							<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
-								<html:submit property="operation">
-									<%=ResourceBundleCache.get(getServletInfo(), "negociar")%>
-								</html:submit>
-							</logic:equal></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center" valign="middle">
-							<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
-								<html:submit property="operation">
-									<%=ResourceBundleCache.get(getServletInfo(), "finalizarFirmas")%>
-								</html:submit>
-							</logic:equal></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center" valign="middle">
-							<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
-								<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id">
-								<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-								</html:link>
-							</logic:equal></td>
-					</tr>
-					<% } %>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<% if (isDelegate) { %>
-					<tr>
-						<td align="center">
-						<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
-									<script type="text/javascript">
-										var notimooAddManager = new Notimoo();
-										var alreadyReplaced = false;
-										var editor;
-										
-										function refreshEditorContents(selectObj) {
-											var paragraphtext = document.getElementById('p_' + selectObj.value).innerHTML;
-											editor.setData(extractParagraphContent(paragraphtext));
-										}
-										
-										function extractParagraphContent(content) {
-											return content.substring(content.indexOf('.') + 1, content.length);
-										}
-										
-										function clickNewPar(chkObj) {
-											if (chkObj.checked) {
-												document.getElementById('newParTextTD').style.display = 'block';
-												document.getElementById('newParTextTDLabel').style.display = 'block';
-											} else {
+				<div id="blockTitle2" style="float:left;"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
+				<div>
+					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td align="center">
+								<% if (isDelegate) { %>
+									<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
+								<% } %>
+								<% if (isModerator) { %>
+									<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
+								<% } %>
+							</td>
+						</tr>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<%if (isModerator) { %>
+						<tr>
+							<td align="center" valign="middle">
+								<logic:equal name="ViewVersion" property="versionCanBeNegotiated" value="true">
+									<html:submit property="operation">
+										<%=ResourceBundleCache.get(getServletInfo(), "negociar")%>
+									</html:submit>
+								</logic:equal></td>
+						</tr>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<tr>
+							<td align="center" valign="middle">
+								<logic:equal name="ViewVersion" property="versionIsInSign" value="true">
+									<html:submit property="operation">
+										<%=ResourceBundleCache.get(getServletInfo(), "finalizarFirmas")%>
+									</html:submit>
+								</logic:equal></td>
+						</tr>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<tr>
+							<td align="center" valign="middle">
+								<logic:equal name="ViewVersion" property="versionCanBeEdited" value="true">
+									<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id">
+									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+									</html:link>
+								</logic:equal></td>
+						</tr>
+						<% } %>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<% if (isDelegate) { %>
+						<tr>
+							<td align="center">
+							<logic:equal name="ViewVersion" property="versionCanBeCommented" value="true">
+										<script type="text/javascript">
+											var notimooAddManager = new Notimoo();
+											var alreadyReplaced = false;
+											var editor;
+											
+											function refreshEditorContents(selectObj) {
+												var paragraphtext = document.getElementById('p_' + selectObj.value).innerHTML;
+												editor.setData(extractParagraphContent(paragraphtext));
+											}
+											
+											function extractParagraphContent(content) {
+												return content.substring(content.indexOf('.') + 1, content.length);
+											}
+											
+											function clickNewPar(chkObj) {
+												if (chkObj.checked) {
+													document.getElementById('newParTextTD').style.display = 'block';
+													document.getElementById('newParTextTDLabel').style.display = 'block';
+												} else {
+													document.getElementById('newParTextTD').style.display = 'none';
+													document.getElementById('newParTextTDLabel').style.display = 'none';
+												}
+											}
+											
+											function addObservation() {
+												document.getElementById('pNewParagraph').checked = false;
 												document.getElementById('newParTextTD').style.display = 'none';
-												document.getElementById('newParTextTDLabel').style.display = 'none';
+												document.getElementById('newParText').value = '';
+												if ( editor )
+													return;
+												editor = CKEDITOR.appendTo( 'editor', {
+													// Defines a simpler toolbar to be used in this sample.
+													// Note that we have added out "MyButton" button here.
+													toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+													height:"400", width:"800",
+													baseFloatZIndex: 100002
+												});
+												document.getElementById('outerdiv').style.display = '';
+												refreshEditorContents(document.getElementById('pNumber'));
 											}
-										}
-										
-										function addObservation() {
-											document.getElementById('pNewParagraph').checked = false;
-											document.getElementById('newParTextTD').style.display = 'none';
-											document.getElementById('newParText').value = '';
-											if ( editor )
-												return;
-											editor = CKEDITOR.appendTo( 'editor', {
-												// Defines a simpler toolbar to be used in this sample.
-												// Note that we have added out "MyButton" button here.
-												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
-												height:"400", width:"800",
-												baseFloatZIndex: 100002
-											});
-											document.getElementById('outerdiv').style.display = '';
-											refreshEditorContents(document.getElementById('pNumber'));
-										}
-										
-										function addObservationFor(pObj, pNumber) {
-											document.getElementById('pNewParagraph').checked = false;
-											document.getElementById('newParTextTD').style.display = 'none';
-											document.getElementById('newParText').value = '';
-											if ( editor )
-												return;
-											editor = CKEDITOR.appendTo( 'editor', {
-												// Defines a simpler toolbar to be used in this sample.
-												// Note that we have added out "MyButton" button here.
-												toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
-												height:"400", width:"800",
-												baseFloatZIndex: 100002
-											}, extractParagraphContent(pObj.innerHTML));
-											var pNumberObj = document.getElementById('pNumber');
-											var opts = pNumberObj.options;
-											var index = 0;
-											while(opts[index].value != pNumber) {
-												index = index + 1;
+											
+											function addObservationFor(pObj, pNumber) {
+												document.getElementById('pNewParagraph').checked = false;
+												document.getElementById('newParTextTD').style.display = 'none';
+												document.getElementById('newParText').value = '';
+												if ( editor )
+													return;
+												editor = CKEDITOR.appendTo( 'editor', {
+													// Defines a simpler toolbar to be used in this sample.
+													// Note that we have added out "MyButton" button here.
+													toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
+													height:"400", width:"800",
+													baseFloatZIndex: 100002
+												}, extractParagraphContent(pObj.innerHTML));
+												var pNumberObj = document.getElementById('pNumber');
+												var opts = pNumberObj.options;
+												var index = 0;
+												while(opts[index].value != pNumber) {
+													index = index + 1;
+												}
+												opts[index].selected = true;
+												document.getElementById('outerdiv').style.display = '';
 											}
-											opts[index].selected = true;
-											document.getElementById('outerdiv').style.display = '';
-										}
-										
-										function cancelAdd() {
-											document.getElementById('outerdiv').style.display = 'none';
-											editor.destroy();
-											editor = null;
-										}
-										
-										function doAdd() {
-											var pText = editor.getData();
-											if (pText.length == 0) {
-												Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionVacia")%>');
-												return;
+											
+											function cancelAdd() {
+												document.getElementById('outerdiv').style.display = 'none';
+												editor.destroy();
+												editor = null;
 											}
-											Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmeObservacion")%>', { onComplete: 
-										        function(returnvalue) {
-										          if(returnvalue) {
-										            basicDoAdd();
-										          } 
-										        }
-										      });
-										}
-									
-										function basicDoAdd() {
-											var paragraphNumber = document.getElementById('pNumber').value;
-											var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
-											var pText = editor.getData();
-											if (document.getElementById('pNewParagraph').checked) {
-												pText = document.getElementById('newParText').value + " - " + pText;
-											}
-											var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
-											var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
-												var errorResult = json.error;
-												if ('notLogged' == errorResult) {
-													window.location='<html:rewrite page="/login.jsp"/>';
+											
+											function doAdd() {
+												var pText = editor.getData();
+												if (pText.length == 0) {
+													Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionVacia")%>');
 													return;
 												}
-												var result = json.result;
-											   if ('OK' == result) {
-											   editor.destroy();
-											   editor = null;
-											   document.getElementById('pNumber').selectedIndex = 0;
-											   document.getElementById('pNewParagraph').checked = false;
-												document.getElementById('outerdiv').style.display = 'none';
-												showOKMessage();
-											   } else {
-												var error = json.error;
-												showErrorMessage();
+												Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmeObservacion")%>', { onComplete: 
+													function(returnvalue) {
+													  if(returnvalue) {
+														basicDoAdd();
+													  } 
+													}
+												  });
 											}
-											}}).post({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
-						
-										}
-										var notimooObservationManager = new Notimoo();
 										
-										function showOKMessage() {
-											Sexy.info('<%=ResourceBundleCache.get(getServletInfo(), "observacionAgregada")%>');
-										}
-										
-										function showErrorMessage() {
-											Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionNoAgregada")%>');
-										}
-									</script>
-									<input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>" onclick="addObservation();">
-								</logic:equal></td>
-					</tr>
-					<tr>
-						<td align="center">
-						<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
-							<html:submit property="operation" disabled="true">
-								<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>
-							</html:submit>
-						</logic:notEqual></td>
-					</tr>
-					<% } %>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center">
-							<html:submit property="operation">
-								<%=ResourceBundleCache.get(getServletInfo(), "buscarObservaciones")%>
-							</html:submit></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-					<tr>
-						<td align="center">
-							<html:submit property="operation">
-								<%=ResourceBundleCache.get(getServletInfo(), "listarObservaciones")%>
-							</html:submit></td>
-					</tr>
-					<tr>
-						<td><img src="images/null.gif" width="1" height="10"></td>
-					</tr>
-				</table></p>
+											function basicDoAdd() {
+												var paragraphNumber = document.getElementById('pNumber').value;
+												var newPar = document.getElementById('pNewParagraph').checked ? "true" : "false";
+												var pText = editor.getData();
+												if (document.getElementById('pNewParagraph').checked) {
+													pText = document.getElementById('newParText').value + " - " + pText;
+												}
+												var pVersion = '<bean:write name="ViewVersion" property="version.version.id" />';
+												var jsonRequest = new Request.JSON({url: '<html:rewrite page="/addObservation.st"/>', onSuccess: function(json, responseText){
+													var errorResult = json.error;
+													if ('notLogged' == errorResult) {
+														window.location='<html:rewrite page="/login.jsp"/>';
+														return;
+													}
+													var result = json.result;
+												   if ('OK' == result) {
+												   editor.destroy();
+												   editor = null;
+												   document.getElementById('pNumber').selectedIndex = 0;
+												   document.getElementById('pNewParagraph').checked = false;
+													document.getElementById('outerdiv').style.display = 'none';
+													showOKMessage();
+												   } else {
+													var error = json.error;
+													showErrorMessage();
+												}
+												}}).post({'pNumber':paragraphNumber, 'newPar':newPar, 'pText':pText, 'pVersion':pVersion});
+							
+											}
+											var notimooObservationManager = new Notimoo();
+											
+											function showOKMessage() {
+												Sexy.info('<%=ResourceBundleCache.get(getServletInfo(), "observacionAgregada")%>');
+											}
+											
+											function showErrorMessage() {
+												Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionNoAgregada")%>');
+											}
+										</script>
+										<input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>" onclick="addObservation();">
+									</logic:equal></td>
+						</tr>
+						<tr>
+							<td align="center">
+							<logic:notEqual name="ViewVersion" property="versionCanBeCommented" value="true">
+								<html:submit property="operation" disabled="true">
+									<%=ResourceBundleCache.get(getServletInfo(), "agregarObservacion")%>
+								</html:submit>
+							</logic:notEqual></td>
+						</tr>
+						<% } %>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<html:submit property="operation">
+									<%=ResourceBundleCache.get(getServletInfo(), "buscarObservaciones")%>
+								</html:submit></td>
+						</tr>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+						<tr>
+							<td align="center">
+								<html:submit property="operation">
+									<%=ResourceBundleCache.get(getServletInfo(), "listarObservaciones")%>
+								</html:submit></td>
+						</tr>
+						<tr>
+							<td><img src="images/null.gif" width="1" height="5"></td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		<%if (isModerator) { %>
@@ -428,7 +424,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<div>
 				<div id="main" style="height:460px;">
 		<% } else { %>
-		<div id="alcincuentaRight" style="border:1px solid #c6c6c6;">
+		<div id="alcincuentaRight" style="float:left; border:1px solid #c6c6c6;">
 			<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documento")%></div>
 			<div>
 				<div id="main">

@@ -290,7 +290,7 @@ function openDocs(){
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="100%" height="500" align="left" valign="top" bordercolor="#00CC00">
+					<td width="100%" height="450" align="left" valign="top" bordercolor="#00CC00">
 					<!-- corte tabla template -->
 						<!--div id="main">
 							<div id="lyr1" -->
@@ -375,9 +375,9 @@ function openDocs(){
 								<td colspan="2" height="32" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "proponerParrafo")%>" id="addPrivateComment" disabled="true" onClick="document.getElementById('addCommentLayer').style.display = '';"></td>
 							</tr -->
 							<% } %>
-							<tr>
-								<td height="30" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "abrirDocumentos")%>" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "verEnIdiomaAlternativo")%>" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
-							</tr>
+							<!-- tr>
+								<td height="30" align="center" valign="bottom"><!-- input type="button" value="< % = ResourceBundleCache.get(getServletInfo(), "abrirDocumentos") % >" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1">< input type="button" value="< % =ResourceBundleCache.get(getServletInfo(), "verEnIdiomaAlternativo") % >" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+							</tr-->
 						</table>
 						<!-- corte tabla template -->
 					</td>
