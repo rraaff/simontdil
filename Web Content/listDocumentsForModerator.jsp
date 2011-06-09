@@ -55,7 +55,7 @@ if ( dw_scrollObj.isSupported() ) {
 				<tr>
 					<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>
-					<td width="100%" height="500" valign="top">
+					<td width="100%" height="470" valign="top">
 					<!-- corte tabla template -->
 						<div id="main">
 							<div id="lyr1" style="width:inherit;">
@@ -118,28 +118,15 @@ if ( dw_scrollObj.isSupported() ) {
 										<td width="5"> </td>
 									</tr> 
 									</logic:iterate>
-									<tr>
-										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
-									</tr>
-									<tr>
-									<td colspan="10" height="25" align="center">
-										<html:submit property="operation">
-											<%=ResourceBundleCache.get(getServletInfo(), "marcarComoRelevantes")%>
-										</html:submit>
-										<html:submit property="operation">
-											<%=ResourceBundleCache.get(getServletInfo(), "marcarComoNoRelevantes")%>
-										</html:submit>
-									</td>
-								</tr>
 								</table>	
 							<!-- corte tabla template -->
 							</div>
 						</div>
 					</td>
 					<td width="30" align="right">
-					<div id="scrollbar" style="width:20px; height:440px; float:right;">
+					<div id="scrollbar" style="width:20px; height:470px; float:right;">
 						<div id="up"><a class="mouseover_up" href=""><img src="images/btn-up.gif" width="11" height="11" alt="" border="0" /></a></div>
-						<div id="track" style="height:416px;">
+						<div id="track" style="height:446px;">
 							<div id="dragBar"></div>
 						</div>
 						<div id="down"><a class="mouseover_down" href=""><img src="images/btn-dn.gif" width="11" height="11" alt="" border="0" /></a></div>
@@ -154,6 +141,16 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 			</table>
 		<!-- fin tabla template -->
+		</td>
+	</tr>
+	<tr>
+		<td height="40" align="center" valign="middle">
+			<html:submit property="operation">
+				<%=ResourceBundleCache.get(getServletInfo(), "marcarComoRelevantes")%>
+			</html:submit>
+			<html:submit property="operation">
+				<%=ResourceBundleCache.get(getServletInfo(), "marcarComoNoRelevantes")%>
+			</html:submit>
 		</td>
 	</tr>
 </table>

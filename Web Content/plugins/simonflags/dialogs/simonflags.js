@@ -195,7 +195,7 @@ CKEDITOR.dialog.add( 'simonflags', function( editor )
 	};
 
 	return {
-		title : 'Seleccione la delegación',
+		title : 'Choose delagacy',
 		minWidth : 270,
 		minHeight : 120,
 		contents : [
