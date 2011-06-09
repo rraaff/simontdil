@@ -3,15 +3,15 @@ Marcos Godoy
 */
 function showMoveOKMessage() {
 		notimooNormalManager.show({
-			title: 'Mensaje',
-			message: 'El texto ha sido copiado exitosamente.',
+			title: 'Message',
+			message: 'Text has been copied succesfully.',
 			 sticky: true
 		});
 	}
 	function showMoveErrorMessage(errText) {
 		notimooErrorManager.show({
 			title: 'Error',
-			message: 'El texto no ha podido ser copiado, error: ' + errText,
+			message: 'Text has not been copied. Error: ' + errText,
 			customClass:'alert_error',
 			 sticky: true
 		});
@@ -20,7 +20,7 @@ function showMoveOKMessage() {
 CKEDITOR.dialog.add( 'moveto', function( editor )
 {
 	return {
-		title : 'Copiar contenido seleccionado a párrafo',
+		title : 'Copy selected content to paragraph',
 		minWidth : 400,
 		minHeight : 200,
 		contents : [
@@ -33,17 +33,17 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 					{
 						id : 'input1',
 						type : 'text',
-						label : 'Como párrafo'
+						label : 'as paragraph'
 					},
 					{
 						id : 'detail',
 						type : 'text',
-						label : 'Detalle'
+						label : 'Detail'
 					},
 						{
 						id : 'input2',
 						type : 'checkbox',
-						label : 'Agregar al existente'
+						label : 'Add to actual paragraph'
 					}
 				]
 			}
@@ -62,7 +62,7 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 				if (newParagraphText.length == 0) {
 					notimooErrorManager.show({
 						title: 'Error',
-						message: 'No ha seleccionado nada para copiar',
+						message: 'There is no text selected to copy',
 						customClass:'alert_error',
 						sticky: true
 					});
@@ -73,7 +73,7 @@ CKEDITOR.dialog.add( 'moveto', function( editor )
 				if (pText.length == 0) {
 					notimooErrorManager.show({
 						title: 'Error',
-						message: 'Debe ingresar el párrafo destino',
+						message: 'Must indicate destination paragraph for the text',
 						customClass:'alert_error',
 						sticky: true
 					});
