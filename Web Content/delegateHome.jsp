@@ -186,7 +186,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
 										<tr>
-											<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/minus.gif"></td>
+											<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/plus.gif"></td>
 											<td onclick="toggleChild('<bean:write name="docTree" property="id"/>')" width="44"><img id="f-<bean:write name="docTree" property="id"/>" src="images/icons/folder.gif"></td>
 											<td width="100%" onclick="toggleChild('<bean:write name="docTree" property="id"/>')" class="categoryTD"><bean:write name="docTree" property="name"/></td>
 										</tr>
@@ -194,7 +194,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td background="images/icons/line.gif"></td>
 											<td></td>
 											<td colspan="1">
-												<div id="child-<bean:write name="docTree" property="id"/>" style="display: block;">
+												<div id="child-<bean:write name="docTree" property="id"/>" style="display: none;">
 													<table border="0" cellpadding="0" cellspacing="0">
 														<logic:iterate name="docTree" property="documents" id="docLeafTop">
 														<tr>
@@ -208,7 +208,7 @@ if ( dw_scrollObj.isSupported() ) {
 													<table border="0" cellpadding="0" cellspacing="0">
 														<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
 															<tr>
-																<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/minus.gif"></td>
+																<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/plus.gif"></td>
 																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" width="44"><img id="f-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/folder.gif"></td>
 																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" class="categoryTD"><bean:write name="docSubTypeTree" property="name"/></td>
 															</tr>
@@ -216,7 +216,7 @@ if ( dw_scrollObj.isSupported() ) {
 																<td background="images/icons/line.gif"></td>
 																<td></td>
 																<td colspan="1">
-																	<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: block;">
+																	<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: none;">
 																		<table border="0" cellpadding="0" cellspacing="0">
 																			<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
 																			<tr>
@@ -261,7 +261,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<logic:iterate name="ModeratorHome" property="referenceDocumentTree" id="catTree">
 											<tr>
-												<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')"><img id="p-r<bean:write name="catTree" property="id"/>" src="images/icons/minus.gif"></td>
+												<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')"><img id="p-r<bean:write name="catTree" property="id"/>" src="images/icons/plus.gif"></td>
 												<td onclick="toggleChild('r<bean:write name="catTree" property="id"/>')" width="44"><img id="f-r<bean:write name="catTree" property="id"/>" src="images/icons/folder.gif"></td>
 												<td width="100%" onclick="toggleChild('r<bean:write name="catTree" property="id"/>')" class="categoryTD"><bean:write name="catTree" property="name"/></td>
 											</tr>
@@ -269,11 +269,11 @@ if ( dw_scrollObj.isSupported() ) {
 												<td background="images/icons/line.gif"></td>
 												<td></td>
 												<td colspan="1">
-													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: block;">
+													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: none;">
 														<table border="0" cellpadding="0" cellspacing="0">
 															<logic:iterate name="catTree" property="documentSubTypes" id="subCatTree">
 																<tr>
-																	<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')"><img id="p-r<bean:write name="subCatTree" property="id"/>" src="images/icons/minus.gif"></td>
+																	<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')"><img id="p-r<bean:write name="subCatTree" property="id"/>" src="images/icons/plus.gif"></td>
 																	<td onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')" width="44"><img id="f-r<bean:write name="subCatTree" property="id"/>" src="images/icons/folder.gif"></td>
 																	<td onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')" class="categoryTD"><bean:write name="subCatTree" property="name"/></td>
 																</tr>
@@ -281,7 +281,7 @@ if ( dw_scrollObj.isSupported() ) {
 																	<td background="images/icons/line.gif"></td>
 																	<td></td>
 																	<td colspan="1">
-																		<div id="child-r<bean:write name="subCatTree" property="id"/>" style="display: block;">
+																		<div id="child-r<bean:write name="subCatTree" property="id"/>" style="display: none;">
 																			<table border="0" cellpadding="0" cellspacing="0">
 																				<logic:iterate name="subCatTree" property="documents" id="refLeaf">
 																				<tr>

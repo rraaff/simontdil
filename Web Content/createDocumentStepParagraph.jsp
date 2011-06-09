@@ -24,7 +24,7 @@
 				<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 				<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 				<td>
-					<table width="100%" border="0" cellspacing="0" cellpadding="0">
+					<table border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td colspan="11"><img src="images/null.gif" width="1" height="5"></td>
 						</tr>
@@ -93,10 +93,10 @@
 		</table>
 	</div>
 	<div id="alcien" style="height:410px;">
-		<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+		<table height="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 			<tr>
 				<td colspan="2" width="10" height="19" background="images/interfaces/topLeftTitle.gif"><img src="images/null.gif" width="10" height="19"></td>
-				<td width="100%" height="19" align="left" background="images/interfaces/topTitle.gif">
+				<td height="19" align="left" background="images/interfaces/topTitle.gif">
 					<div id="blockTitle">
 					<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
 						<%=ResourceBundleCache.get("createDocument", "paso2")%>
@@ -281,7 +281,7 @@
 					// Defines a simpler toolbar to be used in this sample.
 					// Note that we have added out "MyButton" button here.
 					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor'],['simonflags','moveto']],
-					height:"220", width:"960"
+					height:"220", width:"890"
 					
 				});
 				
