@@ -13,6 +13,15 @@ public class StringUtils {
 	}
 	
 	public static boolean equalsUnescaped(String first, String second) {
+		if (first == null && second != null) {
+			return false;
+		}
+		if (first != null && second == null) {
+			return false;
+		}
+		if (first == null && second == null) {
+			return true;
+		}
 		String firstToCompare = StringEscapeUtils.unescapeHtml(first);
 		String secondToCompare = StringEscapeUtils.unescapeHtml(second);
 		return firstToCompare.equals(secondToCompare);
