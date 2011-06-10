@@ -48,7 +48,7 @@ CKEDITOR.plugins.add( 'simonflags',
  *     'broken_heart.gif','kiss.gif','envelope.gif'];
  */
 CKEDITOR.config.simonflags_images = [
-	'andorra.png','argentina.png','bolivia.png','brasil.png','chile.png','colombia.png','costarica.png','cuba.png','dominicana.png','ecuadr.png','elsalvador.png','espana.png','guatemala.png','honduras.png','mexico.png','nicaragua.png','paraguay.png','peru.png','portugal.png','uruguay.png','venezuela.png','segib.png'];
+	'argentina.png','australia.png','bolivia.png','brasil.png','BRUNEI-DARUSSALAM.png','camboya.png','chile.png','china.png','colombia.png','corea.png','costarica.png','cuba.png','dominicana.png','ecuadr.png','elsalvador.png','filipinas.png','guatemala.png','indonesia.png','Japon.png','laos.png','malasia.png','mexico.png','myanmar.png','nicaragua.png','nuevazelanda.png','panama.png','paraguay.png','peru.png','singapur.png','tailandia.png','uruguay.png','venezuela.png','vietnam.png'];
 /**
  * The description to be used for each of the smileys defined in the
  * {@link CKEDITOR.config.simonflags_images} setting. Each entry in this array list
@@ -75,7 +75,7 @@ CKEDITOR.config.simonflags_images = [
  */
 CKEDITOR.config.simonflags_descriptions =
 	[
-		'ANDORRA','ARGENTINA','BOLIVIA','BRASIL','CHILE','COLOMBIA','COSTARICA','CUBA','DOMINICANA','ECUADR','ELSALVADOR','ESPANA','GUATEMALA','HONDURAS','MEXICO','NICARAGUA','PARAGUAY','PERU','PORTUGAL','URUGUAY','VENEZUELA','SEGIB'
+		'ARGENTINA','AUSTRALIA','BOLIVIA','BRAZIL','BRUNEI-DARUSSALAM','CAMBODIA','CHILE','CHINA','COLOMBIA','CHOREA','COSTARICA','CUBA','DOMINICAN','ECUADOR','ELSALVADOR','PHILIPPINES','GUATEMALA','INDONESIA','JAPAN','LAOS','MALAYSIA','MEXICO','MYANMAR','NICARAGUA','NEW ZEALAND','PANAMA','PARAGUAY','PERU','SINGAPORE','THAILAND','URUGUAY','VENEZUELA','VIETNAM'
 	];
 
 /**
