@@ -17,7 +17,7 @@ public class CategoryTreeBuilder {
 	
 	private CategoryTree getTreeFor(ReferenceDocumentVO documentVO) {
 		for (CategoryTree documentTypeTree : trees) {
-			if (documentTypeTree.getId() == documentVO.getCategoryId()) {
+			if (documentTypeTree.getName().equals(documentVO.getCategoryName())) {
 				return documentTypeTree;
 			}
 		}

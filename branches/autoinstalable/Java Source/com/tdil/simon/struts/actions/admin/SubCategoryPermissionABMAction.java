@@ -15,7 +15,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.moderator.ABMAction;
-import com.tdil.simon.struts.forms.SubCategoryPermissionABMForm;
+import com.tdil.simon.struts.forms.CategoryPermissionABMForm;
 import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.utils.PermissionCache;
 import com.tdil.simon.utils.StringUtils;
@@ -33,23 +33,23 @@ public class SubCategoryPermissionABMAction extends ABMAction {
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, final HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		final SubCategoryPermissionABMForm subCategoryPermissionABMForm = (SubCategoryPermissionABMForm) form;
+		final CategoryPermissionABMForm categoryPermissionABMForm = (CategoryPermissionABMForm) form;
 
 		if (isIndexedOperation(request, "botones", "quitar")) {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
-					subCategoryPermissionABMForm.delete(getIndexClicked(request));
-					subCategoryPermissionABMForm.init();
+					categoryPermissionABMForm.delete(getIndexClicked(request));
+					categoryPermissionABMForm.init();
 				}
 			});
 			PermissionCache.refresh();
 			return mapping.findForward("continue");
 		}
-		if (StringUtils.equalsUnescaped(subCategoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
-			subCategoryPermissionABMForm.reset();
+		if (StringUtils.equalsUnescaped(categoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "cancelar"))) {
+			categoryPermissionABMForm.reset();
 		}
-		if (StringUtils.equalsUnescaped(subCategoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregar"))) {
-			ActionForward result = this.validateAndSave(subCategoryPermissionABMForm, request, mapping);
+		if (StringUtils.equalsUnescaped(categoryPermissionABMForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "agregar"))) {
+			ActionForward result = this.validateAndSave(categoryPermissionABMForm, request, mapping);
 			PermissionCache.refresh();
 			return result;
 		} 

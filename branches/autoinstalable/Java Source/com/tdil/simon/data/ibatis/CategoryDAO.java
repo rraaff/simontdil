@@ -1,15 +1,18 @@
 package com.tdil.simon.data.ibatis;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.tdil.simon.data.model.Category;
+import com.tdil.simon.data.model.DocumentType;
 
 public class CategoryDAO {
 
 	// TODO VER los selects que no se bajen la banderaaa
 	public static List selectAllCategories() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectAllCategories");
+		return IBatisManager.sqlMapper.queryForList("selectAllRootCategories");
 	}
 	
 	public static List selectAllCategoriesNotDeleted() throws SQLException {
@@ -43,5 +46,14 @@ public class CategoryDAO {
 		IBatisManager.sqlMapper.update("logDeleteCategory", category);
 	}
 
+	public static List<Category> selectAllCategoriesByParentId(int parentId) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectAllCategoriesByParentId", parentId);
+	}
 
+	public static Category getCategory(String name, int parentId) throws SQLException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		params.put("parentId", parentId);
+		return (Category) IBatisManager.sqlMapper.queryForObject("selectCategoriesByNameAndParentId", params);
+	}
 }

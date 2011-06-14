@@ -23,72 +23,89 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
-    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
-    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
-    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
-    and CATEGORY.deleted = 0
-    and SUBCATEGORY.deleted = 0
-    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-    from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
-    where REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
-    and CATEGORY.deleted = 0
-    and SUBCATEGORY.deleted = 0
-    AND SUBCATEGORY.id IN (
+    AND CATEGORY.id IN (
     	SELECT GROUPPERMISSION.objectId
 		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+		AND GROUPPERMISSION.objectType = 'CATEGORY'
     )
-    order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
   </select>
   
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+   	from REFERENCEDOCUMENT, 
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
-   	AND CATEGORY.deleted = 0
-   	and SUBCATEGORY.deleted = 0
-   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
-   	order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+   	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+   	order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-   	from REFERENCEDOCUMENT, CATEGORY, SUBCATEGORY
+    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+   	from REFERENCEDOCUMENT, 
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
-   	AND CATEGORY.deleted = 0
-   	and SUBCATEGORY.deleted = 0
-   	and REFERENCEDOCUMENT.subCategoryId = SUBCATEGORY.id
-    and SUBCATEGORY.categoryId = CATEGORY.id
-    AND SUBCATEGORY.id IN (
+   	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    AND CATEGORY.id IN (
     	SELECT GROUPPERMISSION.objectId
 		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
 		WHERE GROUPMEMBER.systemUserId = #systemUserId#
 		AND GROUPMEMBER.groupId = USERGROUP.id
 		AND USERGROUP.id = GROUPPERMISSION.groupId
-		AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+		AND GROUPPERMISSION.objectType = 'CATEGORY'
     )
-   	order by CATEGORY.name, SUBCATEGORY.name, REFERENCEDOCUMENT.title
+   	order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">

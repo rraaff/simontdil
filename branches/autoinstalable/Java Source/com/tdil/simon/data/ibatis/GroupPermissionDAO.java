@@ -15,8 +15,8 @@ public class GroupPermissionDAO {
 		return IBatisManager.sqlMapper.queryForList("selectGroupPermissionForUser", user.getId());
 	}
 	
-	public static List selectSubCategoryPermission(UserGroup userGroup) throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectSubCategoryPermission", userGroup.getId());
+	public static List selectCategoryPermission(UserGroup userGroup) throws SQLException {
+		return IBatisManager.sqlMapper.queryForList("selectCategoryPermission", userGroup.getId());
 	}
 	
 	public static List selectDocumentTypePermission(UserGroup userGroup) throws SQLException {
@@ -30,6 +30,13 @@ public class GroupPermissionDAO {
 	public static void deleteGroupPermission(GroupPermission userGroup)
 			throws SQLException {
 		IBatisManager.sqlMapper.update("deleteGroupPermission", userGroup);
+	}
+	
+	public static GroupPermission selectCategoryPermission(int userGroupId, int categorId) throws SQLException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userGroupId", userGroupId);
+		params.put("categoryId", categorId);
+		return (GroupPermission) IBatisManager.sqlMapper.queryForObject("selectCategoryPermissionForGroupAndCategory", params);
 	}
 
 	public static GroupPermission selectDocumentTypePermission(int userGroupId, int documentTypeId) throws SQLException {

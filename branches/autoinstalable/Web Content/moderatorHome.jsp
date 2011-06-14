@@ -232,6 +232,15 @@
 												<td colspan="1">
 													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: block;">
 														<table border="0" cellpadding="0" cellspacing="0">
+															<logic:iterate name="catTree" property="documents" id="catLeafTop">
+															<tr>
+																<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
+																<td class="documentTD">
+																	<a href="./download.do?action=refdoc&fileId=<bean:write name="catLeafTop" property="id" />"><bean:write name="catLeafTop" property="title" /></a>																					</td>
+															</tr>
+															</logic:iterate>
+														</table>
+														<table border="0" cellpadding="0" cellspacing="0">
 															<logic:iterate name="catTree" property="documentSubTypes" id="subCatTree">
 																<tr>
 																	<td background="images/icons/line.gif" onclick="toggleChild('r<bean:write name="subCatTree" property="id"/>')"><img id="p-r<bean:write name="subCatTree" property="id"/>" src="images/icons/minus.gif"></td>

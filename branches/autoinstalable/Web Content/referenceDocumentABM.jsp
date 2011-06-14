@@ -81,17 +81,17 @@ if ( dw_scrollObj.isSupported() ) {
 								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left">
-									<html:select name="ReferenceDocumentABMForm" property="subCategoryId" styleClass="textfield_effect">
-										<% String lastCategory = "";%>
-										<logic:iterate name="ReferenceDocumentABMForm" property="allSubCategories" id="iterSubCat"> 
-											<% com.tdil.simon.data.valueobjects.SubCategoryVO sub = (com.tdil.simon.data.valueobjects.SubCategoryVO)iterSubCat; %>
-											<% if (!sub.getCategoryName().equals(lastCategory)) { %>
-												<optgroup label="<%=sub.getCategoryName()%>"></optgroup>
-											<% lastCategory = sub.getCategoryName();
-											} %>
-											<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
+									<html:select name="ReferenceDocumentABMForm" property="categoryId" styleClass="textfield_effect">
+										<logic:iterate name="ReferenceDocumentABMForm" property="allCategories" id="iterSubCat"> 
+											<% com.tdil.simon.data.valueobjects.CategorySelectionVO sub = (com.tdil.simon.data.valueobjects.CategorySelectionVO)iterSubCat; %>
+											<% if (sub.getParentId() == 0) { %>
+												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
+											<% } else { %>
+												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>">&nbsp;&nbsp;&nbsp;<%=sub.getName()%></option>
+											<% } %>
 										</logic:iterate>
-									</html:select><html:errors property="refDoc.category" /></td>
+									</html:select><html:errors property="refDoc.category" />
+								</td>
 							</tr>
 							<tr>
 								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>

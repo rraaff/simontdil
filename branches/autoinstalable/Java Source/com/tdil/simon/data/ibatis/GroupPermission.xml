@@ -8,7 +8,7 @@
 
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="GroupPermission" type="com.tdil.simon.data.model.GroupPermission"/>
-  <typeAlias alias="SubCategoryPermissionVO" type="com.tdil.simon.data.valueobjects.SubCategoryPermissionVO"/>
+  <typeAlias alias="CategoryPermissionVO" type="com.tdil.simon.data.valueobjects.CategoryPermissionVO"/>
   <typeAlias alias="DocumentTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentTypePermissionVO"/>
   
   <select id="selectGroupPermissionForUser" parameterClass="int" resultClass="GroupPermission">
@@ -19,7 +19,15 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
   </select>
   
-  <select id="selectDocumentPermissionForGroupAndDocumentType" parameterClass="java.util.Map" resultClass="GroupPermission">
+  <select id="selectCategoryPermissionForGroupAndCategory" parameterClass="java.util.Map" resultClass="GroupPermission">
+  	select GROUPPERMISSION.*
+   	from GROUPPERMISSION
+   	WHERE GROUPPERMISSION.groupId = #userGroupId#
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
+   	AND GROUPPERMISSION.objectId = #categoryId#
+  </select>
+  
+   <select id="selectDocumentPermissionForGroupAndDocumentType" parameterClass="java.util.Map" resultClass="GroupPermission">
   	select GROUPPERMISSION.*
    	from GROUPPERMISSION
    	WHERE GROUPPERMISSION.groupId = #userGroupId#
@@ -27,14 +35,20 @@
    	AND GROUPPERMISSION.objectId = #documentTypeId#
   </select>
   
-  <select id="selectSubCategoryPermission" parameterClass="int" resultClass="SubCategoryPermissionVO">
-    select GROUPPERMISSION.*, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
-   	from GROUPPERMISSION, SUBCATEGORY, CATEGORY
+  <select id="selectCategoryPermission" parameterClass="int" resultClass="CategoryPermissionVO">
+   	select GROUPPERMISSION.*, CATEGORY.name as categoryName
+   	from GROUPPERMISSION, (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
    	WHERE GROUPPERMISSION.groupId = #groupId#
-   	AND GROUPPERMISSION.objectType = 'SUBCATEGORY'
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
+   	AND GROUPPERMISSION.objectId = CATEGORY.id
+   	UNION
+    select GROUPPERMISSION.*, Concat(CATEGORY.name, ' > ', SUBCATEGORY.name) as categoryName
+   	from GROUPPERMISSION, (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
    	AND GROUPPERMISSION.objectId = SUBCATEGORY.id
-   	AND SUBCATEGORY.categoryId = CATEGORY.id
-   	order by CATEGORY.name, SUBCATEGORY.name 
+   	and SUBCATEGORY.parentId = CATEGORY.id
+   	order by categoryName
   </select>
   
   <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentTypePermissionVO">

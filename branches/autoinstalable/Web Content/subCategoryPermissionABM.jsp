@@ -73,15 +73,14 @@ if ( dw_scrollObj.isSupported() ) {
 								<td width="103" align="right"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="240" align="left">
-									<html:select name="SubCategoryPermissionABMForm" property="subCategoryId" styleClass="textfield_effect">
-										<% String lastCategory = "";%>
-										<logic:iterate name="SubCategoryPermissionABMForm" property="allSubCategoriesFiltered" id="iterSubCat"> 
-											<% com.tdil.simon.data.valueobjects.SubCategoryVO sub = (com.tdil.simon.data.valueobjects.SubCategoryVO)iterSubCat; %>
-											<% if (!sub.getCategoryName().equals(lastCategory)) { %>
-												<optgroup label="<%=sub.getCategoryName()%>"></optgroup>
-											<% lastCategory = sub.getCategoryName();
-											} %>
-											<option value="<%=sub.getId()%>"><%=sub.getName()%></option>
+									<html:select name="SubCategoryPermissionABMForm" property="categoryId" styleClass="textfield_effect">
+										<logic:iterate name="SubCategoryPermissionABMForm" property="allCategories" id="iterSubCat"> 
+											<% com.tdil.simon.data.model.Category sub = (com.tdil.simon.data.model.Category)iterSubCat; %>
+											<% if (sub.getParentId() == 0) { %>
+												<option value="<%=sub.getId()%>"><%=sub.getName()%></option>
+											<% } else { %>
+												<option value="<%=sub.getId()%>">&nbsp;&nbsp;&nbsp;<%=sub.getName()%></option>
+											<% } %>
 										</logic:iterate>
 									</html:select><html:errors property="subCategoryPermission.subCategory" /></td>
 							</tr>
@@ -131,17 +130,15 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="2" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
-										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "quitar")%></td>
 									</tr> 
 									<logic:iterate name="SubCategoryPermissionABMForm" property="allPermission" id="iterSubCategoryPermission" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td align="left"><bean:write name="iterSubCategoryPermission" property="categoryName" /></td>
-											<td align="left"><bean:write name="iterSubCategoryPermission" property="subCategoryName" /></td>
 											<td><logic:equal name="iterSubCategoryPermission" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("SubCategoryPermissionABMForm","botones","quitar", iterIndex)%>
 												</logic:equal>
@@ -149,7 +146,7 @@ if ( dw_scrollObj.isSupported() ) {
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="2" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>
 							<!-- corte tabla template -->

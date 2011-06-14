@@ -1,11 +1,7 @@
 package com.tdil.simon.struts.forms;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.data.ibatis.DocumentTypeDAO;
