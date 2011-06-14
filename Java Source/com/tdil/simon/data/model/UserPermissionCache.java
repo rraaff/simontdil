@@ -21,7 +21,7 @@ public class UserPermissionCache {
 	protected void build(SystemUser user) throws SQLException {
 		permissions = new HashMap<String, Set<Integer>>();
 		permissions.put(GroupPermission.DOCUMENT_TYPE, new HashSet<Integer>());
-		permissions.put(GroupPermission.SUBCATEGORY, new HashSet<Integer>());
+		permissions.put(GroupPermission.CATEGORY, new HashSet<Integer>());
 		List<GroupPermission> list = GroupPermissionDAO.selectGroupPermissionForUser(user);
 		for (GroupPermission permission : list) {
 			permissions.get(permission.getObjectType()).add(permission.getObjectId());

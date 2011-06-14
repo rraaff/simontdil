@@ -7,9 +7,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.validations.CategoryValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
-import com.tdil.simon.data.ibatis.SubCategoryDAO;
 import com.tdil.simon.data.model.Category;
-import com.tdil.simon.data.model.SubCategory;
 
 public class SubCategoryABMForm extends TransactionalValidationForm implements ABMForm {
 
@@ -22,7 +20,7 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	private int id;
 	private String name;
 	
-	private List<SubCategory> allSubCategory;
+	private List<Category> allSubCategory;
 	
 	public String getCategoryName() {
 		return categoryName;
@@ -54,10 +52,10 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<SubCategory> getAllSubCategory() {
+	public List<Category> getAllSubCategory() {
 		return allSubCategory;
 	}
-	public void setAllSubCategory(List<SubCategory> allSubCategory) {
+	public void setAllSubCategory(List<Category> allSubCategory) {
 		this.allSubCategory = allSubCategory;
 	}
 	
@@ -75,11 +73,11 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	public void init() throws SQLException {
 		Category category = CategoryDAO.getCategory(this.getCategoryId());
 		setCategoryName(category.getName());
-		this.setAllSubCategory(SubCategoryDAO.selectAllSubCategoryByCategoryId(this.getCategoryId()));
+		this.setAllSubCategory(CategoryDAO.selectAllCategoriesByParentId(this.getCategoryId()));
 	}
 	
 	public void initWith(int subCategoryId) throws SQLException {
-		SubCategory subCategory = SubCategoryDAO.getSubCategory(subCategoryId);
+		Category subCategory = CategoryDAO.getCategory(subCategoryId);
 		if (subCategory != null) {
 			this.id = subCategoryId;
 			this.name = subCategory.getName();
@@ -105,32 +103,32 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	
 	@Override
 	public void validateInTransaction(ValidationError validationError) throws SQLException {
-		SubCategory exists = SubCategoryDAO.getSubCategory(this.name, this.getCategoryId());
+		Category exists = CategoryDAO.getCategory(this.name, this.getCategoryId());
 		if (exists != null && exists.getId() != this.getId()) {
 			validationError.setFieldError("subCategory.name", "subCategory.name." + ValidationErrors.SUB_CATEGORY_ALREADY_EXISTS);
 		}
 	}
 	
 	private void modifySubCategory() throws SQLException {
-		SubCategory subCategory = SubCategoryDAO.getSubCategory(this.getId());
+		Category subCategory = CategoryDAO.getCategory(this.getId());
 		subCategory.setName(this.getName());
-		SubCategoryDAO.updateSubCategory(subCategory);
+		CategoryDAO.updateCategory(subCategory);
 	}
 	private void addSubCategory() throws SQLException {
-		SubCategory subCategory = new SubCategory();
-		subCategory.setCategoryId(this.getCategoryId());
+		Category subCategory = new Category();
+		subCategory.setParentId(this.getCategoryId());
 		subCategory.setName(this.getName());
-		SubCategoryDAO.insertSubCategory(subCategory);
+		CategoryDAO.insertCategory(subCategory);
 	}
 	public void delete(int position) throws SQLException {
 		// TODO se puede borrar uno usado?? borrar es que no se puede asociar mas, pero si ya esta fue
-		SubCategory subCategory = this.getAllSubCategory().get(position);
+		Category subCategory = this.getAllSubCategory().get(position);
 		subCategory.setDeleted(true);
-		SubCategoryDAO.logicallyDeleteSubCategory(subCategory);
+		CategoryDAO.logicallyDeleteCategory(subCategory);
 	}
 	public void reactivate(int position) throws SQLException {
-		SubCategory subCategory = this.getAllSubCategory().get(position);
+		Category subCategory = this.getAllSubCategory().get(position);
 		subCategory.setDeleted(false);
-		SubCategoryDAO.updateSubCategory(subCategory);
+		CategoryDAO.updateCategory(subCategory);
 	}
 }

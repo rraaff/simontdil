@@ -8,15 +8,32 @@
 
   <!-- Use type aliases to avoid typing the full classname every time. -->
   <typeAlias alias="Category" type="com.tdil.simon.data.model.Category"/>
+  <typeAlias alias="CategorySelectionVO" type="com.tdil.simon.data.valueobjects.CategorySelectionVO"/>
 
   <!-- Select with no parameters. -->
-  <select id="selectAllCategories" resultClass="Category">
+  <select id="selectAllRootCategories" resultClass="Category">
     select *
     from CATEGORY
+    where parentId = 0
     order by name
   </select>
   
-  <select id="selectAllCategoriesNotDeleted" resultClass="Category">
+   <select id="selectAllCategoriesByParentId" parameterClass="int"  resultClass="Category">
+    select *
+    from CATEGORY
+    where parentId = #parentId#
+    order by name
+  </select>
+  
+  <select id="selectCategoriesByNameAndParentId" parameterClass="java.util.Map" resultClass="Category">
+    select
+      *
+    from CATEGORY
+    where name = #name#
+    and parentId = #parentId#
+  </select>
+  
+  <select id="selectAllCategoriesNotDeleted" resultClass="CategorySelectionVO">
     select *
    	from CATEGORY
    	WHERE deleted = 0
@@ -46,9 +63,9 @@
   
   <insert id="insertCategory" parameterClass="Category">
     insert into CATEGORY (
-      id, name, deleted
+      id, name, parentId, deleted
     ) values (
-      #id#, #name#, #deleted#
+      #id#, #name#, #parentId#, #deleted#
     )
   </insert>
 

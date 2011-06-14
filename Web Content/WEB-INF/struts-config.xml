@@ -39,7 +39,7 @@
     <form-bean name="DocumentTypeABMForm" type="com.tdil.simon.struts.forms.DocumentTypeABMForm"/>
     <form-bean name="UserGroupABMForm" type="com.tdil.simon.struts.forms.UserGroupABMForm"/>
     <form-bean name="SubCategoryABMForm" type="com.tdil.simon.struts.forms.SubCategoryABMForm"/>
-    <form-bean name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.forms.SubCategoryPermissionABMForm"/>
+    <form-bean name="SubCategoryPermissionABMForm" type="com.tdil.simon.struts.forms.CategoryPermissionABMForm"/>
     <form-bean name="DocumentTypePermissionABMForm" type="com.tdil.simon.struts.forms.DocumentTypePermissionABMForm"/>
     <form-bean name="ManageUsersOfGroupABMForm" type="com.tdil.simon.struts.forms.ManageUsersOfGroupABMForm"/>
     <form-bean name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.forms.DocumentSubTypeABMForm"/>
@@ -381,7 +381,6 @@
       <forward name="continue" path="/manageUsersOfGroupABM.jsp"/>
       <forward name="failure" path="/manageUsersOfGroupABM.jsp"/>
     </action>
-    
     <action path="/goToDocumentSubTypeABM" name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.actions.moderator.GoToDocumentSubTypeABMAction" scope="session">
       <forward name="continue" path="/documentSubTypeABM.jsp"/>
     </action>
@@ -391,6 +390,15 @@
     </action>
     <action path="/editDocumentSubType" name="DocumentSubTypeABMForm" type="com.tdil.simon.struts.actions.moderator.EditDocumentSubTypeAction" scope="session">
       <forward name="continue" path="/documentSubTypeABM.jsp"/>
+    </action>
+    <action path="/genericNavigation1" type="com.tdil.simon.struts.actions.moderator.GenericNavigationAction">
+      <forward name="continue" path="/genericPage1.jsp"/>
+    </action>
+    <action path="/genericNavigation2" type="com.tdil.simon.struts.actions.moderator.GenericNavigationAction">
+      <forward name="continue" path="/genericPage2.jsp"/>
+    </action>
+    <action path="/genericNavigation3" type="com.tdil.simon.struts.actions.moderator.GenericNavigationAction">
+      <forward name="continue" path="/genericPage3.jsp"/>
     </action>
   </action-mappings>
   <controller processorClass="org.apache.struts.tiles.TilesRequestProcessor"/>

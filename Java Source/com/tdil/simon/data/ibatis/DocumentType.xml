@@ -18,7 +18,7 @@
     order by name
   </select>
   
-  <select id="selectAllDocumentTypeByParentId" resultClass="DocumentType">
+  <select id="selectAllDocumentTypeByParentId" parameterClass="int"  resultClass="DocumentType">
     select *
     from DOCUMENTTYPE
     where parentId = #parentId#

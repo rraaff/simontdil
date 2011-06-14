@@ -12,12 +12,11 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.ReferenceDocumentValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
+import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.ReferenceDocumentDAO;
-import com.tdil.simon.data.ibatis.SubCategoryDAO;
 import com.tdil.simon.data.model.ReferenceDocument;
-import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
+import com.tdil.simon.data.valueobjects.CategorySelectionVO;
 import com.tdil.simon.data.valueobjects.ReferenceDocumentVO;
-import com.tdil.simon.data.valueobjects.SubCategoryVO;
 import com.tdil.simon.utils.LoggerProvider;
 import com.tdil.simon.utils.UploadUtils;
 import com.tdil.simon.web.SystemConfig;
@@ -29,12 +28,12 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	private String operation;
 	
 	private int id;
-	private int subCategoryId;
+	private int categoryId;
 	private String title;
 	private FormFile document;
 	private byte [] documentBytes;
 	
-	private List<SubCategoryVO> allSubCategories;
+	private List<CategorySelectionVO> allCategories;
 	private List<ReferenceDocumentVO> allReferenceDocuments;
 	
 	public int getId() {
@@ -46,7 +45,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 
 	public void init() throws SQLException {
 		this.setAllReferenceDocuments(ReferenceDocumentDAO.selectAllReferenceDocument());
-		this.setAllSubCategories(SubCategoryDAO.selectAllSubCategoryNotDeleted());
+		this.setAllCategories(CategoryDAO.selectAllCategoriesNotDeleted());
 	}
 	public String getOperation() {
 		return operation;
@@ -60,7 +59,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		if (reference != null) {
 			this.id = reference.getId();
 			this.title = reference.getTitle();
-			this.subCategoryId = reference.getSubCategoryId();
+			this.categoryId = reference.getSubCategoryId();
 		}
 	}
 	
@@ -85,13 +84,13 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	public void reset() throws SQLException {
 		this.id = 0;
 		this.title = null;
-		this.subCategoryId = 0;
+		this.categoryId = 0;
 	}
 	
 	private void modifyReferenceDocument() throws SQLException, FileNotFoundException, IOException {
 		ReferenceDocument reference = ReferenceDocumentDAO.getReferenceDocument(this.getId());
 		reference.setTitle(this.title);
-		reference.setSubCategoryId(this.getSubCategoryId());
+		reference.setSubCategoryId(this.getCategoryId());
 		String contentType = this.document.getContentType();
         String fileName    = this.document.getFileName();
         int fileSize       = this.document.getFileSize();
@@ -109,7 +108,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	private void addReferenceDocument() throws SQLException, FileNotFoundException, IOException {
 		ReferenceDocument reference = new ReferenceDocument();
 		reference.setTitle(this.title);
-		reference.setSubCategoryId(this.getSubCategoryId());
+		reference.setSubCategoryId(this.getCategoryId());
 		reference.setDocument(this.documentBytes);
 		int docId = ReferenceDocumentDAO.insertReferenceDocument(reference);
 		String contentType = this.document.getContentType();
@@ -125,11 +124,11 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
         }
         ReferenceDocumentDAO.updateReferenceDocument(reference);
 	}
-	public int getSubCategoryId() {
-		return subCategoryId;
+	public int getCategoryId() {
+		return categoryId;
 	}
-	public void setSubCategoryId(int categoryId) {
-		this.subCategoryId = categoryId;
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
 	}
 	public String getTitle() {
 		return title;
@@ -149,14 +148,14 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	public void setAllReferenceDocuments(List<ReferenceDocumentVO> allReferenceDocuments) {
 		this.allReferenceDocuments = allReferenceDocuments;
 	}
-	public List<SubCategoryVO> getAllSubCategories() {
-		for (SubCategoryVO vo : allSubCategories) {
-			vo.setSelectedId(this.getSubCategoryId());
+	public List<CategorySelectionVO> getAllCategories() {
+		for (CategorySelectionVO vo : allCategories) {
+			vo.setSelectedId(this.getCategoryId());
 		}
-		return allSubCategories;
+		return allCategories;
 	}
-	public void setAllSubCategories(List<SubCategoryVO> allCategories) {
-		this.allSubCategories = allCategories;
+	public void setAllCategories(List<CategorySelectionVO> allCategories) {
+		this.allCategories = allCategories;
 	}
 	
 	public void delete(int position) throws SQLException {
@@ -180,7 +179,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		ValidationError validation = new ValidationError();
 		ReferenceDocumentValidation.validateTitle(this.title, "refDoc.title", validation);
 		this.documentBytes = ReferenceDocumentValidation.validateDocument(this.document, "refDoc.document", this.id == 0, validation);
-		if (this.subCategoryId == 0){
+		if (this.categoryId == 0){
 			validation.setFieldError("refDoc.category", ValidationErrors.CANNOT_BE_EMPTY);
 		}
 		return validation;

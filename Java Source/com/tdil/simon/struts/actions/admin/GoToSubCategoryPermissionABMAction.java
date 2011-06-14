@@ -14,7 +14,7 @@ import com.tdil.simon.actions.UserTypeValidation;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.struts.actions.SimonAction;
-import com.tdil.simon.struts.forms.SubCategoryPermissionABMForm;
+import com.tdil.simon.struts.forms.CategoryPermissionABMForm;
 
 public class GoToSubCategoryPermissionABMAction extends SimonAction {
 
@@ -28,7 +28,7 @@ public class GoToSubCategoryPermissionABMAction extends SimonAction {
 	@Override
 	public ActionForward basicExecute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		final SubCategoryPermissionABMForm anABMForm = (SubCategoryPermissionABMForm) form;
+		final CategoryPermissionABMForm anABMForm = (CategoryPermissionABMForm) form;
 		final int userGroupId = Integer.parseInt(request.getParameter("userGroupId"));
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
