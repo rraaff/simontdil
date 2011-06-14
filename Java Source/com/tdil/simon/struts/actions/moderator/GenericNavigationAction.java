@@ -12,7 +12,7 @@ import com.tdil.simon.struts.actions.SimonAction;
 
 public class GenericNavigationAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR,
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.ADMINISTRATOR, UserTypeValidation.MODERATOR,
 			UserTypeValidation.DELEGATE };
 
 	@Override
