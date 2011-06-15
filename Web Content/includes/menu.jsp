@@ -29,6 +29,7 @@
 							<li><html:link action="/editProperty?id=simon.server.url" ><%=ResourceBundleCache.get("menu", "urlServidor")%></html:link></li>
 							<li><html:link action="/editProperty?id=simon.tmp.subpath" ><%=ResourceBundleCache.get("menu", "subpathTemporal")%></html:link></li>
 							<li><html:link action="/editProperty?id=simon.mailserver" ><%=ResourceBundleCache.get("menu", "servidorDeEmail")%></html:link></li>
+							<li><html:link action="/editProperty?id=simon.externalLink1" ><%=ResourceBundleCache.get("menu", "externalLink1")%></html:link></li>
 							<li><html:link action="/goToResourceBundle" ><%=ResourceBundleCache.get("menu", "textosDelSitio")%></html:link></li>
 							<li><html:link action="/goToLogoABM" ><%=ResourceBundleCache.get("menu", "logos")%></html:link></li>
 						</ul>

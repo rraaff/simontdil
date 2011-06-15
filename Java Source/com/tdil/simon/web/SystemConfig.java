@@ -39,6 +39,8 @@ public class SystemConfig {
 	private static String serverUrl;
 	private static String tempPath;
 	
+	private static String externalLink1;
+	
 	private static String systemLanguage = "castellano"; // TODO 
 	private static List<LanguageBean> allLanguage;
 	
@@ -72,6 +74,7 @@ public class SystemConfig {
 					server = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_NAME);
 					serverUrl = SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_URL);
 					tempPath = System.getProperty("java.io.tmpdir") + "/" + SysPropertiesDAO.getPropertyByKey(SysProperties.SERVER_PATH);
+					externalLink1 = SysPropertiesDAO.getPropertyByKey(SysProperties.EXTERNAL_LINK1);
 					List<LanguageBean> allLanguage1 = new ArrayList<LanguageBean>();
 					for (String lang : ResourceBundleDAO.selectAvailabeLanguages()) {
 						allLanguage1.add(new LanguageBean(lang));
@@ -260,6 +263,10 @@ public class SystemConfig {
 
 	public static String getSystemLanguage() {
 		return systemLanguage;
+	}
+
+	public static String getExternalLink1() {
+		return externalLink1;
 	}
 
 }
