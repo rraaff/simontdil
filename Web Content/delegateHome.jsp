@@ -69,13 +69,6 @@
 .documentTD a, .documentTD a:hover, .documentTD visited {
 	color:#454545;
 }
-
-
-.redredwine a, .redredwine a:hover, .redredwine visited, .redredwine a:active {
-	color:#CC0000;
-	size:18px;
-	font-weight:bold;
-}
 </style>
 <script type="text/javascript">
 	function toggleChild(parent) {
@@ -135,12 +128,12 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <%@ include file="includes/leftContentModerator.jsp" %>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-			<tr>
-				<td colspan="3" align="center" valign="middle"><div class="redredwine"><a href="http://desa.focalae-acreditacion.mrec.ar/index.php?ac=f" class="redredwine">Official Registration Form</a></div></td>
-			</tr>
+		<tr>
+			<td colspan="3"><%@ include file="includes/extraLinks.jsp" %><!-- div class="redredwine"><a href="http://desa.focalae-acreditacion.mrec.ar/index.php?ac=f" class="redredwine">Official Registration Form</a></div--></td>
+		</tr>
 		<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
 			<tr>
-				<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
+				<td colspan="3"><img src="images/null.gif" width="1" height="10"></td>
 			</tr>
 			<tr>
 				<td colspan="3">
@@ -176,91 +169,92 @@ if ( dw_scrollObj.isSupported() ) {
 			</tr>
 		</logic:equal>
 		<tr>
-			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
+			<td colspan="3"><img src="images/null.gif" width="1" height="10"></td>
 		</tr>
 		<tr>
-			<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
-			<td width="50%">
-				<div id="newHomeBlockHalf">
-					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
-						<tr>
-							<td><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosEspecificos")%></span></td>
-						</tr>
-						<tr>
-							<td valign="top">
-								<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
-									<div style="width:100%; height:220px; overflow:auto;">
-								</logic:equal>
-								<logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
-									<div style="width:100%; height:440px; overflow:auto;">
-								</logic:notEqual>
-									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
-									<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
-										<tr>
-											<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/plus.gif"></td>
-											<td onclick="toggleChild('<bean:write name="docTree" property="id"/>')" width="44"><img id="f-<bean:write name="docTree" property="id"/>" src="images/icons/folder.gif"></td>
-											<td width="100%" onclick="toggleChild('<bean:write name="docTree" property="id"/>')" class="categoryTD"><bean:write name="docTree" property="name"/></td>
-										</tr>
-										<tr>
-											<td background="images/icons/line.gif"></td>
-											<td></td>
-											<td colspan="1">
-												<div id="child-<bean:write name="docTree" property="id"/>" style="display: none;">
-													<table border="0" cellpadding="0" cellspacing="0">
-														<logic:iterate name="docTree" property="documents" id="docLeafTop">
-														<tr>
-															<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-															<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
-																<bean:write name="docLeafTop" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeafTop" property="lastVersionNumber" /> - <bean:write name="docLeafTop" property="lastVersionName" />
-																</html:link></td>
-														</tr>
-														</logic:iterate>
-													</table>
-													<table border="0" cellpadding="0" cellspacing="0">
-														<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
+			<logic:equal name="ModeratorHome" property="hasOtherDocuments" value="true">
+				<td width="50%">
+					<div id="newHomeBlockHalf">
+						<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
+							<tr>
+								<td><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosEspecificos")%></span></td>
+							</tr>
+							<tr>
+								<td valign="top">
+									<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
+										<div style="width:100%; height:200px; overflow:auto;">
+									</logic:equal>
+									<logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
+										<div style="width:100%; height:400px; overflow:auto;">
+									</logic:notEqual>
+										<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+										<logic:iterate name="ModeratorHome" property="otherDocumentsTree" id="docTree">
+											<tr>
+												<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docTree" property="id"/>')"><img id="p-<bean:write name="docTree" property="id"/>" src="images/icons/plus.gif"></td>
+												<td onclick="toggleChild('<bean:write name="docTree" property="id"/>')" width="44"><img id="f-<bean:write name="docTree" property="id"/>" src="images/icons/folder.gif"></td>
+												<td width="100%" onclick="toggleChild('<bean:write name="docTree" property="id"/>')" class="categoryTD"><bean:write name="docTree" property="name"/></td>
+											</tr>
+											<tr>
+												<td background="images/icons/line.gif"></td>
+												<td></td>
+												<td colspan="1">
+													<div id="child-<bean:write name="docTree" property="id"/>" style="display: none;">
+														<table border="0" cellpadding="0" cellspacing="0">
+															<logic:iterate name="docTree" property="documents" id="docLeafTop">
 															<tr>
-																<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/plus.gif"></td>
-																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" width="44"><img id="f-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/folder.gif"></td>
-																<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" class="categoryTD"><bean:write name="docSubTypeTree" property="name"/></td>
+																<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
+																<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
+																	<bean:write name="docLeafTop" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeafTop" property="lastVersionNumber" /> - <bean:write name="docLeafTop" property="lastVersionName" />
+																	</html:link></td>
 															</tr>
-															<tr>
-																<td background="images/icons/line.gif"></td>
-																<td></td>
-																<td colspan="1">
-																	<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: none;">
-																		<table border="0" cellpadding="0" cellspacing="0">
-																			<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
-																			<tr>
-																				<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																				<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
-																					<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
-																					</html:link></td>
-																			</tr>
-																			</logic:iterate>
-																		</table>
-																	</div>
-																</td>
-															</tr>
-														</logic:iterate>
-													</table>
-												</div>
-											</td>
-										</tr>
-									</logic:iterate>
-									</table>
-								</div>
-							</td>
-						</tr>
-					</table>
-				</div>
-			</td>
-			<td><img src="images/null.gif" width="20" height="1"></td>
-			<td width="50%">
-				<div id="newHomeBlockHalf">
+															</logic:iterate>
+														</table>
+														<table border="0" cellpadding="0" cellspacing="0">
+															<logic:iterate name="docTree" property="documentSubTypes" id="docSubTypeTree">
+																<tr>
+																	<td background="images/icons/line.gif" onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')"><img id="p-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/plus.gif"></td>
+																	<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" width="44"><img id="f-<bean:write name="docSubTypeTree" property="id"/>" src="images/icons/folder.gif"></td>
+																	<td onclick="toggleChild('<bean:write name="docSubTypeTree" property="id"/>')" class="categoryTD"><bean:write name="docSubTypeTree" property="name"/></td>
+																</tr>
+																<tr>
+																	<td background="images/icons/line.gif"></td>
+																	<td></td>
+																	<td colspan="1">
+																		<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: none;">
+																			<table border="0" cellpadding="0" cellspacing="0">
+																				<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
+																				<tr>
+																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
+																					<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
+																						<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
+																						</html:link></td>
+																				</tr>
+																				</logic:iterate>
+																			</table>
+																		</div>
+																	</td>
+																</tr>
+															</logic:iterate>
+														</table>
+													</div>
+												</td>
+											</tr>
+										</logic:iterate>
+										</table>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+				</td>
+				<td><img src="images/null.gif" width="20" height="1"></td>
+				<td width="50%">
+					<div id="newHomeBlockHalf">
 			</logic:equal>
-			<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="false">
-
-			<!-- end if -->
+			<logic:equal name="ModeratorHome" property="hasOtherDocuments" value="false">
+				<td colspan="3" width="100%">
+					<div id="newHomeBlockHalf">
+			</logic:equal>
 					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
 						<tr>
 							<td colspan="3"><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosInformativos")%></span></td>
@@ -268,10 +262,10 @@ if ( dw_scrollObj.isSupported() ) {
 						<tr>
 							<td valign="top">
 								<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
-									<div style="width:100%; height:220px; overflow:auto;">
+									<div style="width:100%; height:200px; overflow:auto;">
 								</logic:equal>
 								<logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
-									<div style="width:100%; height:440px; overflow:auto;">
+									<div style="width:100%; height:400px; overflow:auto;">
 								</logic:notEqual>
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 										<logic:iterate name="ModeratorHome" property="referenceDocumentTree" id="catTree">
@@ -329,7 +323,6 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
-				</logic:equal>
 				</div>
 			</td>
 		</tr>

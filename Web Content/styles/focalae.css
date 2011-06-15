@@ -752,3 +752,19 @@ tr.d1 td {
 	height: 780px;
 	width: auto;
 }
+#extraLinks {
+	font-size: 16px;
+	color: #CC0000;
+	width: 490px;
+	margin-top: 10px;
+	margin-right: auto;
+	margin-left: auto;
+	position: relative;
+}
+#extraLinks #extraLinkBlock {
+	float: left;
+	width: 150px;
+	height: 50px;
+	background-color: #0099FF;
+	margin-right: 20px;
+}
