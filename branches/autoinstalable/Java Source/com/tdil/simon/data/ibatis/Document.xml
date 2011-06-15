@@ -27,10 +27,12 @@
     select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
    	from DOCUMENT, 
-   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
+   			DOCUMENTTYPE.orderNumber as o1, -1 as o2
 		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
 		UNION
-		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
 		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
 		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
@@ -43,17 +45,19 @@
    				WHERE VERSION.documentId = DOCUMENT.id 
    				AND VERSION.deleted = 0
    				AND VERSION.status != 'DRAFT')
-   	order by DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.title
+   	order by DOCUMENTTYPE.o1, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.o2, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.orderNumber, DOCUMENT.title
   </select>
   
   <select id="selectNotDeletedNotRelevantDocumentsUsingTypes" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.DocumentVO">
     select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
    	from DOCUMENT, 
-   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, -1 as o2
 		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
 		UNION
-		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
 		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
 		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
@@ -75,7 +79,7 @@
    		WHERE VERSION.documentId = DOCUMENT.id 
    		AND VERSION.deleted = 0
    		AND VERSION.status != 'DRAFT')
-   	order by DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.title
+   	order by DOCUMENTTYPE.o1, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.o2, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.orderNumber, DOCUMENT.title
   </select>
   
   <select id="getDocumentUnderWork" resultClass="Document">
@@ -117,9 +121,9 @@
   
   <insert id="insertDocument" parameterClass="Document">
     insert into DOCUMENT (
-      id, title, introduction, principal, documentSubTypeId, relevance, documentDate, topic, tag1, tag2, deleted
+      id, title, introduction, principal, documentSubTypeId, relevance, documentDate, topic, tag1, tag2, orderNumber, deleted
     ) values (
-      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #relevance#, #documentDate#, #topic#, #tag1#, #tag2#, #deleted#
+      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #relevance#, #documentDate#, #topic#, #tag1#, #tag2#, #orderNumber#, #deleted#
     )
    <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -136,6 +140,7 @@
 	topic = #topic#, 
 	tag1 = #tag1#, 
 	tag2 = #tag2#,
+	orderNumber = #orderNumber#,
 	deleted = #deleted#
     where
       id = #id#

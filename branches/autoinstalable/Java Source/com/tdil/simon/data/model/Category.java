@@ -4,6 +4,15 @@ public class Category extends PersistentObject {
 
 	private String name;
 	private int parentId;
+	private int orderNumber;
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
+	}
 
 	public String getName() {
 		return name;

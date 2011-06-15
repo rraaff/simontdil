@@ -1,6 +1,5 @@
 package com.tdil.simon.actions.validations;
 
-import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,11 +8,6 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import com.tdil.simon.actions.response.ValidationError;
-import com.tdil.simon.actions.response.ValidationException;
-import com.tdil.simon.data.ibatis.DocumentDAO;
-import com.tdil.simon.data.model.Document;
-import com.tdil.simon.data.model.SystemUser;
-import com.tdil.simon.data.model.Version;
 
 public class VersionValidation {
 

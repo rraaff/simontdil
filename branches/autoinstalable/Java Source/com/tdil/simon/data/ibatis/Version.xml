@@ -40,7 +40,7 @@
   
   <select id="selectRelevantVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
    select VERSION.*, DOCUMENT.title as documentTitle, 
-   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2,
+   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
    	DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName  
     from VERSION, DOCUMENT, 
     	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
@@ -62,7 +62,7 @@
   
   <select id="selectRelevantVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
    select VERSION.*, DOCUMENT.title as documentTitle, 
-   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2,
+   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
    	DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName
     from VERSION, DOCUMENT, 
     	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
@@ -161,7 +161,7 @@
   
   <select id="selectVersionsVOForList" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
     select VERSION.*, DOCUMENT.title as documentTitle, 
-    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2,
+    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
     DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 
@@ -187,7 +187,7 @@
   
   <select id="selectVersionsVOForDesigner" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
     select VERSION.*, DOCUMENT.title as documentTitle, 
-    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2,
+    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
     DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
     (SELECT count(1) 
     	FROM OBSERVATION 

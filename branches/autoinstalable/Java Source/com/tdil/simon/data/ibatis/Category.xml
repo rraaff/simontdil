@@ -63,16 +63,17 @@
   
   <insert id="insertCategory" parameterClass="Category">
     insert into CATEGORY (
-      id, name, parentId, deleted
+      id, name, parentId, orderNumber, deleted
     ) values (
-      #id#, #name#, #parentId#, #deleted#
+      #id#, #name#, #parentId#, #orderNumber#, #deleted#
     )
   </insert>
 
   <update id="updateCategory" parameterClass="Category">
     update CATEGORY set
       name = #name#,
-      deleted = #deleted#
+      deleted = #deleted#,
+      orderNumber = #orderNumber#
     where
       ID = #id#
   </update>

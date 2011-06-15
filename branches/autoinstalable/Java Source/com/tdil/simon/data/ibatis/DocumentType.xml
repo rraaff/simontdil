@@ -64,15 +64,16 @@
   
   <insert id="insertDocumentType" parameterClass="DocumentType">
     insert into DOCUMENTTYPE (
-      id, name, parentId, deleted
+      id, name, parentId, orderNumber, deleted
     ) values (
-      #id#, #name#, #parentId#, #deleted#
+      #id#, #name#, #parentId#, #orderNumber#, #deleted#
     )
   </insert>
 
   <update id="updateDocumentType" parameterClass="DocumentType">
     update DOCUMENTTYPE set
       name = #name#,
+      orderNumber = #orderNumber#,
       deleted = #deleted#
     where
       ID = #id#
