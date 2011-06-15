@@ -1232,3 +1232,5 @@ Español-genericPage1-Documento=Documento
 English-genericPage1-Documento=Document
 Español-genericPage1-Actions=Acciones Disponibles
 English-genericPage1-Actions=Available Action
+Español-menu-externalLink1=Link externo1
+English-menu-externalLink1=External link1
