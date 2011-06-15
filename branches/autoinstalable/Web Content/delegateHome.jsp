@@ -129,7 +129,7 @@ if ( dw_scrollObj.isSupported() ) {
 <%@ include file="includes/leftContentModerator.jsp" %>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<tr>
-			<td colspan="3"><%@ include file="includes/extraLinks.jsp" %><!-- div class="redredwine"><a href="http://desa.focalae-acreditacion.mrec.ar/index.php?ac=f" class="redredwine">Official Registration Form</a></div--></td>
+			<td colspan="3"><%@ include file="includes/extraLinks.jsp" %></td>
 		</tr>
 		<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
 			<tr>
