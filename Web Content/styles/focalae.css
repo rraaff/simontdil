@@ -755,7 +755,7 @@ tr.d1 td {
 #extraLinks {
 	font-size: 16px;
 	color: #CC0000;
-	width: 490px;
+	width: 685px;
 	margin-top: 10px;
 	margin-right: auto;
 	margin-left: auto;
@@ -763,8 +763,10 @@ tr.d1 td {
 }
 #extraLinks #extraLinkBlock {
 	float: left;
-	width: 150px;
+	width: 215px;
 	height: 50px;
-	background-color: #0099FF;
 	margin-right: 20px;
+	text-align: center;
+	vertical-align: middle;
+	display: block;
 }
