@@ -179,7 +179,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>
 		<tr>
-			<!-- IF doc > 0 -->
+			<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
 			<td width="50%">
 				<div id="newHomeBlockHalf">
 					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
@@ -257,7 +257,8 @@ if ( dw_scrollObj.isSupported() ) {
 			<td><img src="images/null.gif" width="20" height="1"></td>
 			<td width="50%">
 				<div id="newHomeBlockHalf">
-			<!-- else -->
+			</logic:equal>
+			<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="false">
 
 			<!-- end if -->
 					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
@@ -328,6 +329,7 @@ if ( dw_scrollObj.isSupported() ) {
 							</td>
 						</tr>
 					</table>
+				</logic:equal>
 				</div>
 			</td>
 		</tr>
