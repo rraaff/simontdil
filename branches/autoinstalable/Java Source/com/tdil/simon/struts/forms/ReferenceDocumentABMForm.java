@@ -194,10 +194,11 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	
 	@Override
 	public void validateInTransaction(ValidationError validationError) throws SQLException {
-		ReferenceDocument exists = ReferenceDocumentDAO.getReferenceDocument(this.title);
-		if (exists != null && exists.getId() != this.getId()) {
-			validationError.setFieldError("refDoc.title", "refDoc.title." + ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS);
-		}
+//	TODO se quita la validacion 
+//		ReferenceDocument exists = ReferenceDocumentDAO.getReferenceDocument(this.title);
+//		if (exists != null && exists.getId() != this.getId()) {
+//			validationError.setFieldError("refDoc.title", "refDoc.title." + ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS);
+//		}
 	}
 	public String getOrderNumber() {
 		return orderNumber;
