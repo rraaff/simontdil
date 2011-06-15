@@ -54,7 +54,7 @@
 	</table>
 </div>
 <div id="footer">
-	<div id="copyright">SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
+	<div id="copyright">Member countries should make use of online registration to register their delegates to the meeting. Only the Focal Point of each country or persons authorized by him may access this section with personal password. Are strongly encouraged to register for this road, way to avoid delays when opening the meeting.SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br><br><br>Esmeralda 1212, Ciudad Autónoma de Buenos Aires.<br>Código Postal: C1007ABR. República Argentina<br>Tel&eacute;fonos: +54 11 4819 7520 / +54 11 4819 7521</div>
 	<div id="logoCumbres"><img src="./download.do?action=logo&fileId=footer.logoCumbres" alt="Cumbres Iberoamericanas" width="103" height="49"></div>
 	<div style="width:150px;font-size:10px; color:#999999; float:left; margin-top: -60px; margin-left: 10px;"> - El servidor utiliza GMT - </div>
 </div>
