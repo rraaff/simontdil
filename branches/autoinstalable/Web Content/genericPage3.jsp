@@ -39,7 +39,7 @@
 			<td colspan="3"><img src="images/null.gif" width="1" height="10"></td>
 		</tr>
 		<tr>
-			<td colspan="3">CONTENIUDOSSSSSSS</td>
+			<td colspan="3">disponible</td>
 		</tr>
 		<tr>
 			<td colspan="3" height="40" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>

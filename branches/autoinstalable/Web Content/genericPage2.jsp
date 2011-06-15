@@ -39,7 +39,24 @@
 			<td colspan="3"><img src="images/null.gif" width="1" height="10"></td>
 		</tr>
 		<tr>
-			<td colspan="3">CONTENIUDOSSSSSSS</td>
+			<td colspan="3">
+				<div style="width:100%; height:450px; overflow:auto;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="5">
+						<tr>
+							<td><%=ResourceBundleCache.get("genericPage1", "Documento")%></td>
+							<td width="150"><%=ResourceBundleCache.get("genericPage1", "Actions")%></td>
+						</tr>
+						<tr class="rowODD">
+							<td>Security_arrangements.doc</td>
+							<td><a href="other/Security_arrangements.doc" target="_blank"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%></a></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td>-</td>
+							<td>-</td>
+						</tr>
+					</table>
+				</div>
+			</td>
 		</tr>
 		<tr>
 			<td colspan="3" height="40" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
