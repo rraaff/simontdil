@@ -8,7 +8,7 @@
 		<tr>
 			<td width="20" background="images/focalae_set/middle_left.gif"><img src="images/null.gif" width="20" height="1"></td>
 			<td width="220" align="right"><img src="images/focalae_set/logo_focalae.gif" width="200" height="71"></td>
-			<td width="100%" align="center"><div id="copyright"><br/><br/><%=ResourceBundleCache.get("footer", "GMT")%></div></td>
+			<td width="100%" align="center"><div id="copyright"><br/><br/><br/><%=ResourceBundleCache.get("footer", "GMT")%></div></td>
 			<td width="220" align="left"><img src="images/focalae_set/logo_fealac.gif" width="200" height="71"></td>
 			<td width="20" background="images/focalae_set/middle_right.gif"><img src="images/null.gif" width="20" height="1"></td>
 		</tr>
