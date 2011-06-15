@@ -69,6 +69,13 @@
 .documentTD a, .documentTD a:hover, .documentTD visited {
 	color:#454545;
 }
+
+
+.redredwine a, .redredwine a:hover, .redredwine visited, .redredwine a:active {
+	color:#CC0000;
+	size:18px;
+	font-weight:bold;
+}
 </style>
 <script type="text/javascript">
 	function toggleChild(parent) {
@@ -128,6 +135,9 @@ if ( dw_scrollObj.isSupported() ) {
 </script>
 <%@ include file="includes/leftContentModerator.jsp" %>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+			<tr>
+				<td colspan="3" align="center" valign="middle"><div class="redredwine"><a href="http://desa.focalae-acreditacion.mrec.ar/index.php?ac=f" class="redredwine">Official Registration Form</a></div></td>
+			</tr>
 		<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
 			<tr>
 				<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
@@ -169,6 +179,7 @@ if ( dw_scrollObj.isSupported() ) {
 			<td colspan="3"><img src="images/null.gif" width="1" height="20"></td>
 		</tr>
 		<tr>
+			<!-- IF doc > 0 -->
 			<td width="50%">
 				<div id="newHomeBlockHalf">
 					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
@@ -246,6 +257,9 @@ if ( dw_scrollObj.isSupported() ) {
 			<td><img src="images/null.gif" width="20" height="1"></td>
 			<td width="50%">
 				<div id="newHomeBlockHalf">
+			<!-- else -->
+
+			<!-- end if -->
 					<table width="98%" border="0" cellspacing="0" cellpadding="10" align="center">
 						<tr>
 							<td colspan="3"><span class="title"><%=ResourceBundleCache.get(getServletInfo(), "documentosInformativos")%></span></td>
