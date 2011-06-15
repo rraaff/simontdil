@@ -136,6 +136,15 @@ public class GenerateCleanDatabase {
 			SysPropertiesDAO.insertProperty(sysProperties);
 		}
 		
+		propvalue = SysPropertiesDAO.getPropertyByKey(SysProperties.EXTERNAL_LINK1);
+		if (propvalue == null) {
+			SysProperties sysProperties = new SysProperties();
+			sysProperties.setPropKey(SysProperties.EXTERNAL_LINK1);
+			sysProperties.setPropValue("<a href=\"http://desa.focalae-acreditacion.mrec.ar/index.php?ac=f\" target=\"_blank\">");
+			sysProperties.setDeleted(false);
+			SysPropertiesDAO.insertProperty(sysProperties);
+		}
+		
 		for (int i = 0; i < 4; i++) {
 			NotificationEmail email = NotificationEmailDAO.getEmail(emailskeys[i]);
 			if (email == null) {
