@@ -39,7 +39,14 @@ public class ModeratorHome extends ActionForm {
 	public boolean getHasPrincipalVersions() {
 		return this.getPrincipalVersions() != null && !this.getPrincipalVersions().isEmpty(); 
 	}
+	
+	public boolean getHasOtherDocumentsList() {
+		return this.getOtherDocumentsList() != null && !this.getOtherDocumentsList().isEmpty(); 
+	}
 
+	public boolean getHasReferenceList() {
+		return this.getReferenceList() != null && !this.getReferenceList().isEmpty(); 
+	}
 
 	public List<Document> getOtherDocumentsList() {
 		return otherDocumentsList;
