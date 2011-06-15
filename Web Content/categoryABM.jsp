@@ -70,6 +70,14 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
+								<td width="93" align="right"><%=ResourceBundleCache.get(getServletInfo(), "orden")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="250" align="left"><html:text name="CategoryABMForm" property="orderNumber" styleClass="textfield_effect"/><html:errors property="category.orderNumber" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
 								<td colspan="3" height="25" align="center">
 									<logic:equal name="CategoryABMForm" property="id" value="0">
 										<html:submit property="operation">
@@ -120,10 +128,11 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td width="70%" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
+										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "orden")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editar")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "editarSubCategorias")%></td>
 										<td width="60"><%=ResourceBundleCache.get(getServletInfo(), "borrarReactivar")%></td>
@@ -131,6 +140,7 @@ if ( dw_scrollObj.isSupported() ) {
 									<logic:iterate name="CategoryABMForm" property="allCategories" id="iterCategory" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="name" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="orderNumber" /></td>
 											<td><html:link action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link></td>
@@ -147,7 +157,7 @@ if ( dw_scrollObj.isSupported() ) {
 										</tr> 
 									</logic:iterate>
 									<tr>
-										<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="4" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 								</table>
 							<!-- corte tabla template -->

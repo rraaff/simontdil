@@ -16,7 +16,7 @@ public class VersionForListVO extends Version {
 	private int newParagraphCount;
 	private String documentTypeName;
 	private String documentSubTypeName;
-	
+	private String orderNumber;
 	
 	public String getRelevanceStatus() {
 		if (getDocumentRelevance() > Document.NO_RELEVANT) {
@@ -126,5 +126,13 @@ public class VersionForListVO extends Version {
 
 	public void setDocumentTag2(String documentTag2) {
 		this.documentTag2 = documentTag2;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

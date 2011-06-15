@@ -7,6 +7,7 @@ public class ReferenceDocument extends PersistentObject {
 	private String fileName;
 	private String extension;
 	private String contentType;
+	private int orderNumber;
 	
 	private byte[] document;
 
@@ -45,5 +46,11 @@ public class ReferenceDocument extends PersistentObject {
 	}
 	public void setContentType(String contentType) {
 		this.contentType = contentType;
+	}
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

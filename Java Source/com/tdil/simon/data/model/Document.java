@@ -13,6 +13,7 @@ public class Document extends PersistentObject {
 	private String topic;
 	private String tag1;
 	private String tag2;
+	private int orderNumber;
 	
 	public static final int DEFAULT_RELEVANT = 10;
 	public static final int NO_RELEVANT = 0;
@@ -71,5 +72,11 @@ public class Document extends PersistentObject {
 	}
 	public void setTag2(String tag2) {
 		this.tag2 = tag2;
+	}
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

@@ -18,6 +18,7 @@
    <result column="fileName" property="fileName" />
    <result column="extension" property="extension" />
    <result column="contentType" property="contentType" />
+   <result column="orderNumber" property="orderNumber" />
    <result column="document" property="document" jdbcType="BLOB"/>
    </resultMap>
 
@@ -25,37 +26,43 @@
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
     select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
-    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
 		UNION
-		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
     where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
-    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
     select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
-    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
 		UNION
-		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
     where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
-    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
     select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
-    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
 		UNION
-		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
     where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
@@ -68,31 +75,35 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
 		AND GROUPPERMISSION.objectType = 'CATEGORY'
     )
-    order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
   </select>
   
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocumentVO">
     select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
    	from REFERENCEDOCUMENT, 
-   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
 		UNION
-		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
-   	order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
+   	order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
     select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
    	from REFERENCEDOCUMENT, 
-   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
 		UNION
-		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
 		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
@@ -105,7 +116,7 @@
 		AND USERGROUP.id = GROUPPERMISSION.groupId
 		AND GROUPPERMISSION.objectType = 'CATEGORY'
     )
-   	order by CATEGORY.categoryName, CATEGORY.subCategoryName, REFERENCEDOCUMENT.title
+   	order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
   </select>
   
   <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
@@ -131,9 +142,9 @@
  
   <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
     insert into REFERENCEDOCUMENT (
-      id, subCategoryId, title, fileName, extension, contentType, document, deleted
+      id, subCategoryId, title, fileName, extension, contentType, document, orderNumber, deleted
     ) values (
-      #id#, #subCategoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #deleted#
+      #id#, #subCategoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #orderNumber#, #deleted#
     )
     <selectKey resultClass="int" keyProperty="id">
      SELECT LAST_INSERT_ID() AS id
@@ -148,7 +159,8 @@
       fileName = #fileName#,
       extension = #extension#,
       deleted = #deleted#,
-      contentType = #contentType#
+      contentType = #contentType#,
+      orderNumber = #orderNumber#
     where
       ID = #id#
   </update>

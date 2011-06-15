@@ -5,6 +5,7 @@ public class DocumentType extends PersistentObject {
 	
 	private String name;
 	private int parentId;
+	private int orderNumber;
 
 	public String getName() {
 		return name;
@@ -20,5 +21,13 @@ public class DocumentType extends PersistentObject {
 
 	public void setParentId(int parentId) {
 		this.parentId = parentId;
+	}
+
+	public int getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

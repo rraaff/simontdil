@@ -13,16 +13,20 @@ public class IdValidation {
 	public static Integer validate(String id, boolean requiered, String field, ValidationError validation) {
 		if (StringUtils.isEmpty(id)) {
 			if (requiered) {
-				validation.setFieldError(field, ValidationErrors.CANNOT_BE_EMPTY);
+				validation.setFieldError(field, field + "." + ValidationErrors.CANNOT_BE_EMPTY);
 			} else {
 				return null;
 			}
 		} else {
 			String idToValidate = id.trim();
 			try {
-				return Integer.parseInt(idToValidate);
+				int result = Integer.parseInt(idToValidate);
+				if (result < 0) {
+					validation.setFieldError(field, field + "." + ValidationErrors.INVALID_NUMBER);
+				} 
+				return result;
 			} catch (NumberFormatException e) {
-				validation.setFieldError(field, ValidationErrors.INVALID_NUMBER);
+				validation.setFieldError(field, field + "." + ValidationErrors.INVALID_NUMBER);
 			}
 		}
 		return 0;

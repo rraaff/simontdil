@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.validations.DocumentTypeValidation;
+import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.DocumentTypeDAO;
 import com.tdil.simon.data.model.DocumentType;
@@ -19,6 +20,7 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 	private int documentTypeId;
 	private int id;
 	private String name;
+	private String orderNumber;
 	
 	private List<DocumentType> allDocumentSubType;
 	
@@ -65,6 +67,7 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 	public void reset() throws SQLException {
 		this.id = 0;
 		this.name = null;
+		this.orderNumber = null;
 	}
 	
 	/* (non-Javadoc)
@@ -81,6 +84,7 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 		if (documentSubType != null) {
 			this.id = documentSubTypeId;
 			this.name = documentSubType.getName();
+			this.orderNumber = String.valueOf(documentSubType.getOrderNumber());
 		}
 	}
 	
@@ -98,6 +102,7 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		DocumentTypeValidation.validateName(this.name, "documentSubType.name", validation);
+		IdValidation.validate(this.orderNumber, true, "documentType.orderNumber", validation);
 		return validation;
 	}
 	
@@ -112,12 +117,14 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 	private void modifyDocumentSubType() throws SQLException {
 		DocumentType subType = DocumentTypeDAO.getDocumentType(this.getId());
 		subType.setName(this.getName());
+		subType.setOrderNumber(Integer.parseInt(this.orderNumber));
 		DocumentTypeDAO.updateDocumentType(subType);
 	}
 	private void addDocumentSubType() throws SQLException {
 		DocumentType subType = new DocumentType();
 		subType.setParentId(this.getDocumentTypeId());
 		subType.setName(this.getName());
+		subType.setOrderNumber(Integer.parseInt(this.orderNumber));
 		DocumentTypeDAO.insertDocumentType(subType);
 	}
 	public void delete(int position) throws SQLException {
@@ -130,5 +137,11 @@ public class DocumentSubTypeABMForm extends TransactionalValidationForm implemen
 		DocumentType documentSubType = this.getAllDocumentSubType().get(position);
 		documentSubType.setDeleted(false);
 		DocumentTypeDAO.updateDocumentType(documentSubType);
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

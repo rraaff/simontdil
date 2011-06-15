@@ -3,8 +3,6 @@ package com.tdil.simon.data.ibatis;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.tdil.simon.data.model.Category;
-import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.ReferenceDocument;
 import com.tdil.simon.data.model.SystemUser;
 

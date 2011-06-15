@@ -163,6 +163,14 @@ $$('input.slimpicker').each( function(el){
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
+							<tr>
+								<td align="right"><%=ResourceBundleCache.get("createDocument", "orden")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left"><html:text name="CreateDocumentForm" property="orderNumber" styleClass="textfield_effect"/><html:errors property="orderNumber" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
 							
 							<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
 								<tr>

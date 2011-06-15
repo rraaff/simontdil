@@ -50,6 +50,7 @@ CREATE  TABLE `DOCUMENT` (
   `topic` MEDIUMTEXT NULL ,
   `tag1` MEDIUMTEXT NULL ,
   `tag2` MEDIUMTEXT NULL ,
+  `orderNumber` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /
@@ -108,6 +109,7 @@ CREATE  TABLE `REFERENCEDOCUMENT` (
   `extension` VARCHAR(10) NULL ,
   `contentType` VARCHAR(100) NULL ,
   `document` MEDIUMBLOB NULL ,
+  `orderNumber` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 /
@@ -126,6 +128,7 @@ CREATE  TABLE `CATEGORY` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL ,
   `parentId` INT NULL,
+  `orderNumber` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 / 
@@ -178,6 +181,7 @@ CREATE  TABLE `DOCUMENTTYPE` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `name` VARCHAR(100) NULL ,
   `parentId` INT NULL,
+  `orderNumber` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 / 

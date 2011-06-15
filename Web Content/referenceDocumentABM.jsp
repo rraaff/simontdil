@@ -97,6 +97,14 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="30"><img src="images/null.gif" width="1" height="30"></td>
 							</tr>
 							<tr>
+								<td width="93" align="right"><%=ResourceBundleCache.get(getServletInfo(), "orden")%>:</td>
+								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
+								<td width="250" align="left"><html:text name="ReferenceDocumentABMForm" property="orderNumber" styleClass="textfield_effect"/><html:errors property="refDoc.orderNumber" /></td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
 								<td colspan="3" height="25" align="center">
 									<logic:equal name="ReferenceDocumentABMForm" property="id" value="0">
 										<html:submit property="operation">
@@ -157,6 +165,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "archivo")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "categoria")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "subCategoria")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "orden")%></td>
 										<td width="60"> </td>
 										<td width="60"> </td>
 									</tr> 
@@ -166,6 +175,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="orderNumber" /></td>
 											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
 											</html:link>

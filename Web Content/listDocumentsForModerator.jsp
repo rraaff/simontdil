@@ -61,7 +61,7 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="11" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td height="20">&nbsp;</td>
@@ -70,6 +70,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombreDeVerion")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "estado")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "relevante")%></td>
+										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "orden")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "tieneObservaciones")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeObservaciones")%></td>
 										<td><%=ResourceBundleCache.get(getServletInfo(), "cantidadDeParrafosSolicitados")%></td>
@@ -91,6 +92,7 @@ if ( dw_scrollObj.isSupported() ) {
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="name" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="translatedStatus" /></td> 
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="relevanceStatus" /></td>
+										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="version" property="orderNumber" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="hasObservationText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="observationCountText" /></td>
 										<td <%= ((com.tdil.simon.data.model.PersistentObject)version).isDeleted() ? "class=\"notActive\"" : "" %>><bean:write name="version" property="newParagraphCountText" /></td>

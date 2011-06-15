@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.validations.CategoryValidation;
+import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.model.Category;
@@ -19,6 +20,7 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	private int categoryId;
 	private int id;
 	private String name;
+	private String orderNumber;
 	
 	private List<Category> allSubCategory;
 	
@@ -65,6 +67,7 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	public void reset() throws SQLException {
 		this.id = 0;
 		this.name = null;
+		this.orderNumber = null;
 	}
 	
 	/* (non-Javadoc)
@@ -81,6 +84,7 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 		if (subCategory != null) {
 			this.id = subCategoryId;
 			this.name = subCategory.getName();
+			this.orderNumber = String.valueOf(subCategory.getOrderNumber());
 		}
 	}
 	
@@ -98,6 +102,7 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		CategoryValidation.validateName(this.name, "subCategory.name", validation);
+		IdValidation.validate(this.orderNumber, true, "category.orderNumber", validation);
 		return validation;
 	}
 	
@@ -112,12 +117,14 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 	private void modifySubCategory() throws SQLException {
 		Category subCategory = CategoryDAO.getCategory(this.getId());
 		subCategory.setName(this.getName());
+		subCategory.setOrderNumber(Integer.parseInt(this.orderNumber));
 		CategoryDAO.updateCategory(subCategory);
 	}
 	private void addSubCategory() throws SQLException {
 		Category subCategory = new Category();
 		subCategory.setParentId(this.getCategoryId());
 		subCategory.setName(this.getName());
+		subCategory.setOrderNumber(Integer.parseInt(this.orderNumber));
 		CategoryDAO.insertCategory(subCategory);
 	}
 	public void delete(int position) throws SQLException {
@@ -130,5 +137,11 @@ public class SubCategoryABMForm extends TransactionalValidationForm implements A
 		Category subCategory = this.getAllSubCategory().get(position);
 		subCategory.setDeleted(false);
 		CategoryDAO.updateCategory(subCategory);
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

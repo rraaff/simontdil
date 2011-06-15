@@ -10,6 +10,7 @@ import org.apache.struts.upload.FormFile;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
+import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ReferenceDocumentValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
@@ -32,6 +33,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 	private String title;
 	private FormFile document;
 	private byte [] documentBytes;
+	private String orderNumber;
 	
 	private List<CategorySelectionVO> allCategories;
 	private List<ReferenceDocumentVO> allReferenceDocuments;
@@ -60,6 +62,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 			this.id = reference.getId();
 			this.title = reference.getTitle();
 			this.categoryId = reference.getSubCategoryId();
+			this.orderNumber = String.valueOf(reference.getOrderNumber());
 		}
 	}
 	
@@ -85,12 +88,14 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		this.id = 0;
 		this.title = null;
 		this.categoryId = 0;
+		this.orderNumber = null;
 	}
 	
 	private void modifyReferenceDocument() throws SQLException, FileNotFoundException, IOException {
 		ReferenceDocument reference = ReferenceDocumentDAO.getReferenceDocument(this.getId());
 		reference.setTitle(this.title);
 		reference.setSubCategoryId(this.getCategoryId());
+		reference.setOrderNumber(Integer.parseInt(this.orderNumber));
 		String contentType = this.document.getContentType();
         String fileName    = this.document.getFileName();
         int fileSize       = this.document.getFileSize();
@@ -109,6 +114,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		ReferenceDocument reference = new ReferenceDocument();
 		reference.setTitle(this.title);
 		reference.setSubCategoryId(this.getCategoryId());
+		reference.setOrderNumber(Integer.parseInt(this.orderNumber));
 		reference.setDocument(this.documentBytes);
 		int docId = ReferenceDocumentDAO.insertReferenceDocument(reference);
 		String contentType = this.document.getContentType();
@@ -182,6 +188,7 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		if (this.categoryId == 0){
 			validation.setFieldError("refDoc.category", ValidationErrors.CANNOT_BE_EMPTY);
 		}
+		IdValidation.validate(this.orderNumber, true, "refDoc.orderNumber", validation);
 		return validation;
 	}
 	
@@ -191,5 +198,11 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
 		if (exists != null && exists.getId() != this.getId()) {
 			validationError.setFieldError("refDoc.title", "refDoc.title." + ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS);
 		}
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

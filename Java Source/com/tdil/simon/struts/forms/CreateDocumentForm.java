@@ -22,6 +22,7 @@ import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.actions.validations.DocumentValidation;
 import com.tdil.simon.actions.validations.FieldValidation;
+import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
@@ -85,6 +86,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	private String topic;
 	private String tag1;
 	private String tag2;
+	private String orderNumber;
 	
 	public String getLimitObservations() {
 		return limitObservations;
@@ -178,6 +180,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.topic = null;
 		this.tag1 = null;
 		this.tag2 = null;
+		this.orderNumber = null;
 		try {
 			this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
 		} catch (SQLException e) {
@@ -611,6 +614,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		document.setTopic(this.getTopic());
 		document.setTag1(this.getTag1());
 		document.setTag2(this.getTag2());
+		document.setOrderNumber(Integer.parseInt(this.orderNumber));
 		// TODO lanzar errores
 	}
 	
@@ -623,6 +627,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		FieldValidation.validateTextForLength(this.topic, "topic", 400000, validation);
 		FieldValidation.validateTextForLength(this.tag1, "tag1", 400000, validation);
 		FieldValidation.validateTextForLength(this.tag2, "tag2", 400000, validation);
+		IdValidation.validate(this.orderNumber, true, "orderNumber", validation);
 		
 		VersionValidation.validateUpToCommentDate(this.limitObservations, validation);
 		if (this.getDocumentSubTypeId() == 0) {
@@ -704,6 +709,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.topic = document.getTopic();
 		this.tag1 = document.getTag1();
 		this.tag2 = document.getTag2();
+		this.orderNumber = String.valueOf(document.getOrderNumber());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -959,6 +965,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.topic = document.getTopic();
 		this.tag1 = document.getTag1();
 		this.tag2 = document.getTag2();
+		this.orderNumber = String.valueOf(document.getOrderNumber());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -1047,6 +1054,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.topic = document.getTopic();
 		this.tag1 = document.getTag1();
 		this.tag2 = document.getTag2();
+		this.orderNumber = String.valueOf(document.getOrderNumber());
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(version.getUpToCommentDate());
 		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
@@ -1243,5 +1251,13 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setTag2(String tag2) {
 		this.tag2 = tag2;
+	}
+
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }

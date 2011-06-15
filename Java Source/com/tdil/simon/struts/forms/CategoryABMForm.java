@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tdil.simon.actions.response.ValidationError;
 import com.tdil.simon.actions.validations.CategoryValidation;
+import com.tdil.simon.actions.validations.IdValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.model.Category;
@@ -17,6 +18,7 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 	
 	private int id;
 	private String name;
+	private String orderNumber;
 	
 	private List<Category> allCategories;
 	
@@ -51,6 +53,7 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 	public void reset() throws SQLException {
 		this.id = 0;
 		this.name = null;
+		this.orderNumber = null;
 	}
 	
 	/* (non-Javadoc)
@@ -65,6 +68,7 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 		if (category != null) {
 			this.id = userId;
 			this.name = category.getName();
+			this.orderNumber = String.valueOf(category.getOrderNumber());
 		}
 	}
 	
@@ -82,6 +86,7 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 	public ValidationError basicValidate() {
 		ValidationError validation = new ValidationError();
 		CategoryValidation.validateName(this.name, "category.name", validation);
+		IdValidation.validate(this.orderNumber, true, "category.orderNumber", validation);
 		return validation;
 	}
 	
@@ -97,11 +102,13 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 	private void modifyCategory() throws SQLException {
 		Category category = CategoryDAO.getCategory(this.getId());
 		category.setName(this.getName());
+		category.setOrderNumber(Integer.parseInt(this.orderNumber));
 		CategoryDAO.updateCategory(category);
 	}
 	private void addCategory() throws SQLException {
 		Category category = new Category();
 		category.setName(this.getName());
+		category.setOrderNumber(Integer.parseInt(this.orderNumber));
 		CategoryDAO.insertCategory(category);
 	}
 	public void delete(int position) throws SQLException {
@@ -113,5 +120,11 @@ public class CategoryABMForm extends TransactionalValidationForm implements ABMF
 		Category category = this.getAllCategories().get(position);
 		category.setDeleted(false);
 		CategoryDAO.updateCategory(category);
+	}
+	public String getOrderNumber() {
+		return orderNumber;
+	}
+	public void setOrderNumber(String orderNumber) {
+		this.orderNumber = orderNumber;
 	}
 }
