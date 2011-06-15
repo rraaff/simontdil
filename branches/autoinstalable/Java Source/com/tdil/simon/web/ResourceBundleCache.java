@@ -43,8 +43,8 @@ public class ResourceBundleCache {
 		return result;
 	}
 	
-	public static void put(String context, String key, String value) {
-		cache.put(context + "-" + key, value);
+	public static void put(String lang, String context, String key, String value) {
+		cache.put(lang + "-" + context + "-" + key, value);
 	}
 	
 	public static void reload() throws SQLException {

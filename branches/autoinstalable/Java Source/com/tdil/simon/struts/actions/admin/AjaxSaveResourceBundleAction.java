@@ -40,7 +40,7 @@ public class AjaxSaveResourceBundleAction extends AjaxSimonAction implements Tra
 		resourceBundleForm.setRbValue(rbValue);
 		try {
 			HashMap<String, String> result = (HashMap<String, String>)TransactionProvider.executeInTransaction(this, resourceBundleForm);
-			ResourceBundleCache.put(rbContext, rbKey, rbValue);
+			ResourceBundleCache.put(rbLanguage, rbContext, rbKey, rbValue);
 			this.writeJsonResponse(result, response);
 		} catch (Exception e) {
 			HashMap<String, String> result = new HashMap<String, String>();
