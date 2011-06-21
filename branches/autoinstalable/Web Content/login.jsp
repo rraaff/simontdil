@@ -32,7 +32,7 @@ break;
 		<td valign="middle">
 			<table width="500" border="0" cellspacing="0" cellpadding="0" align="center">
 				<tr>
-					<td colspan="3">Member countries should make use of online registration to register their delegates to the meeting. Only the Focal Point of each country or persons authorized by him may access this section with personal password. Are strongly encouraged to register for this road, way to avoid delays when opening the meeting.SEJEC Secretar&iacute;a Ejecutiva XX Cumbre Iberoamericana<br><br><br>Los pa&iacute;ses miembros deber&iacute;an hacer uso del  registro en l&iacute;nea a fin de registrar sus delegados a la Reuni&oacute;n. Solamente el  Punto Focal de cada pa&iacute;s o personas autorizadas por &eacute;l podr&aacute;n acceder a esta  secci&oacute;n con su clave personal. Se solicita encarecidamente registrarse por esta  v&iacute;a, de modo de evitar demoras al momento de la apertura de la reuni&oacute;n.</td>
+					<td colspan="3">Member countries should make use of online registration to register their delegates to the meetings. Only the Focal Point of each country or persons authorized by him may access this section with personal password. Delegates are strongly encouraged to register in  this maner in order to avoid delays.<br><br><br>Los pa&iacute;ses miembros deber&iacute;an hacer uso del  registro en l&iacute;nea a fin de registrar a sus delegados a las Reuniones. Solamente el  Punto Focal de cada pa&iacute;s o personas autorizadas por &eacute;l podr&aacute;n acceder a esta  secci&oacute;n con su clave personal.</td>
 				</tr>
 				<tr>
 					<td colspan="2" background="images/interfaces/topLeftTitle.gif" width="10" height="19"><img src="images/null.gif" width="10" height="19"></td>
