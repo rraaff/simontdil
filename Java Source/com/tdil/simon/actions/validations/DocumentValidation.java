@@ -5,7 +5,7 @@ import com.tdil.simon.actions.response.ValidationError;
 public class DocumentValidation {
 
 	public static String validateTitle(String title, ValidationError validation) {
-		return FieldValidation.validateText(title, "title", 100, validation);
+		return FieldValidation.validateText(title, "title", 255, validation);
 	}
 	
 	public static String validateIntroduction(String introduction, ValidationError validation) {

@@ -20,7 +20,7 @@ CREATE  TABLE `SYSTEMUSER` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `username` VARCHAR(20) NULL ,
   `password` VARCHAR(4000) NULL ,
-  `name` VARCHAR(150) NULL ,
+  `name` VARCHAR(255) NULL ,
   `email` VARCHAR(100) NULL ,
   `job` VARCHAR(100) NULL ,
   `countryDesc` VARCHAR(150) NULL ,
@@ -35,13 +35,14 @@ CREATE  TABLE `SYSTEMUSER` (
   `canProposeParagraph` INT NULL ,
   `assistant` INT NULL ,
   `translator` INT NULL ,
+  `canComment` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `UNAME` (`username` ASC) );
 /  
 CREATE  TABLE `DOCUMENT` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `title` VARCHAR(100) NOT NULL ,
+  `title` VARCHAR(255) NOT NULL ,
   `introduction` MEDIUMTEXT NULL ,
   `principal` INT NULL ,
   `documentSubTypeId` INT NULL ,
@@ -104,7 +105,7 @@ CREATE  TABLE `SITE` (
 CREATE  TABLE `REFERENCEDOCUMENT` (
   `id` INT NOT NULL AUTO_INCREMENT ,
   `subCategoryId` INT NULL ,
-  `title` VARCHAR(100) NULL ,
+  `title` VARCHAR(255) NULL ,
   `fileName` VARCHAR(100) NULL ,
   `extension` VARCHAR(10) NULL ,
   `contentType` VARCHAR(100) NULL ,
@@ -126,7 +127,7 @@ CREATE  TABLE `DELEGATEAUDIT` (
 /
 CREATE  TABLE `CATEGORY` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(100) NULL ,
+  `name` VARCHAR(255) NULL ,
   `parentId` INT NULL,
   `orderNumber` INT NULL ,
   `deleted` INT NULL ,
@@ -179,7 +180,7 @@ CREATE  TABLE `LOGO` (
 /
 CREATE  TABLE `DOCUMENTTYPE` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(100) NULL ,
+  `name` VARCHAR(255) NULL ,
   `parentId` INT NULL,
   `orderNumber` INT NULL ,
   `deleted` INT NULL ,
@@ -187,7 +188,7 @@ CREATE  TABLE `DOCUMENTTYPE` (
 / 
 CREATE  TABLE `USERGROUP` (
   `id` INT NOT NULL AUTO_INCREMENT ,
-  `name` VARCHAR(100) NULL ,
+  `name` VARCHAR(255) NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
 / 

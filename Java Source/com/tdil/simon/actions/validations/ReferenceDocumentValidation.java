@@ -20,7 +20,7 @@ public class ReferenceDocumentValidation {
 	}
 	
 	public static String validateTitle(String text, String fieldName, ValidationError validation) {
-		return FieldValidation.validateText(text, fieldName, 100, validation);
+		return FieldValidation.validateText(text, fieldName, 255, validation);
 	}
 	
 	public static String[] validateDocument(FileItem fileItem, String fieldName, boolean add, ValidationError validation) {
