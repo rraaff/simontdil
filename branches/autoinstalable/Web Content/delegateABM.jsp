@@ -111,6 +111,16 @@ if ( dw_scrollObj.isSupported() ) {
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							<tr>
+								<td height="24" align="right" valign="top"></td>
+								<td><img src="images/null.gif" width="7" height="1"></td>
+								<td align="left">
+								<html:checkbox name="DelegateABM" property="canComment"/><%=ResourceBundleCache.get(getServletInfo(), "puedeEmitirComentarios")%><br/>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
+							</tr>
+							<tr>
 								<td height="24" align="right"><%=ResourceBundleCache.get(getServletInfo(), "cargo")%>:</td>
 								<td><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left"><html:text name="DelegateABM" property="job"/><html:errors property="delegate.job" /></td>
@@ -171,11 +181,12 @@ if ( dw_scrollObj.isSupported() ) {
 							<div id="lyr1" style="width:inherit;">
 								<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 									<tr>
-										<td colspan="7" height="11"><img src="images/null.gif" width="1" height="11"></td>
+										<td colspan="8" height="11"><img src="images/null.gif" width="1" height="11"></td>
 									</tr>
 									<tr>
 										<td width="200" height="20" align="left"><%=ResourceBundleCache.get(getServletInfo(), "nombre")%></td>
 										<td align="left"><%=ResourceBundleCache.get(getServletInfo(), "delegacion")%></td>
+										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "puedeComentar")%></td>
 										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmante")%></td>
 										<td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "firmo")%></td>
 										<!-- td width="60" align="center"><%=ResourceBundleCache.get(getServletInfo(), "habilitado")%></td  -->
@@ -187,8 +198,10 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> height="28" align="left"><bean:write name="iterUser" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUser" property="countryName" /></td>
-											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true">Si</logic:equal>
-											<logic:equal name="iterUser" property="canSign" value="false">No</logic:equal></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canComment" value="true"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal>
+											<logic:equal name="iterUser" property="canComment" value="false"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal></td>
+											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center"><logic:equal name="iterUser" property="canSign" value="true"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal>
+											<logic:equal name="iterUser" property="canSign" value="false"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal></td>
 											
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %> align="center">
 												<% boolean hasSignedCurrent = com.tdil.simon.struts.forms.DelegateABMForm.hasSigned((com.tdil.simon.data.model.SystemUser)iterUser);%>

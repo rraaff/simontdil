@@ -38,6 +38,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	private String email;
 	private boolean canSign;
 	private boolean canProposeParagraph;
+	private boolean canComment;
 	private String job;
 	
 	private List<UserVO> allUsers;
@@ -121,6 +122,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		toModify.setCanSign(this.isCanSign());
 		toModify.setJob(this.job);
 		toModify.setCanProposeParagraph(this.isCanProposeParagraph());
+		toModify.setCanComment(this.isCanComment());
 //		toModify.setCountryDesc(this.countryDesc);
 //		toModify.setDeleted(false);
 		SystemUserDAO.updateUser(toModify);
@@ -144,6 +146,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		user.setPasswordResetRequest(false);
 		user.setTemporaryPassword(true);
 		user.setCanProposeParagraph(this.isCanProposeParagraph());
+		user.setCanComment(this.isCanComment());
 		user.setDeleted(false);
 		SystemUserDAO.insertUser(user);
 		try {
@@ -161,6 +164,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		this.email = null;
 		this.canSign = false;
 		this.canProposeParagraph = false;
+		this.canComment = false;
 		this.job = null;
 	}
 	public void init() throws SQLException {
@@ -191,6 +195,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 			this.canSign = systemUser.isCanSign();
 			this.job = systemUser.getJob();
 			this.canProposeParagraph = systemUser.isCanProposeParagraph();
+			this.canComment = systemUser.isCanComment();
 		}
 	}
 	
@@ -226,6 +231,7 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 	public void reset(ActionMapping mapping, HttpServletRequest request) {
 		this.canSign = false;
 		this.canProposeParagraph = false;
+		this.canComment = false;
 	}
 	public void delete(int position) throws SQLException {
 		SystemUser systemUser = this.getAllUsers().get(position);
@@ -277,6 +283,14 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 
 	public void setCanProposeParagraph(boolean canProposeParagraph) {
 		this.canProposeParagraph = canProposeParagraph;
+	}
+
+	public boolean isCanComment() {
+		return canComment;
+	}
+
+	public void setCanComment(boolean canComment) {
+		this.canComment = canComment;
 	}
 	
 	

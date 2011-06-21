@@ -1,7 +1,6 @@
 package com.tdil.simon.data.model;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 
 import org.apache.commons.lang.RandomStringUtils;
 
@@ -42,6 +41,7 @@ public class SystemUser extends PersistentObject implements Serializable{
 	private boolean passwordResetRequest = false;
 	private boolean temporaryPassword = false;
 	
+	private boolean canComment = false;
 	private boolean canProposeParagraph = false;
 	
 	public static String generateRandomPassword() {
@@ -200,6 +200,14 @@ public class SystemUser extends PersistentObject implements Serializable{
 		} else {
 			return true;
 		}
+	}
+
+	public boolean isCanComment() {
+		return canComment;
+	}
+
+	public void setCanComment(boolean canComment) {
+		this.canComment = canComment;
 	}
 
 }

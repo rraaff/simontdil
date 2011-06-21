@@ -219,6 +219,9 @@ public class ViewVersionForm extends ActionForm {
 		if (!version.isCommentsEnabled()) {
 			return false;
 		}
+		if (!this.getUser().isCanComment()) {
+			return false;
+		}
 		if (Version.CONSOLIDATED.equals(version.getStatus())) {
 			Date today = new Date();
 			if (today.after(version.getUpToCommentDate())) {

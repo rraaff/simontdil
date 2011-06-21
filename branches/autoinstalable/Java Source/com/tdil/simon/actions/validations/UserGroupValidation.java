@@ -12,7 +12,7 @@ public class UserGroupValidation {
 	}
 	
 	public static String validateName(String text, String fieldName, ValidationError validation) {
-		return FieldValidation.validateText(text, fieldName, 100, validation);
+		return FieldValidation.validateText(text, fieldName, 255, validation);
 	}
 	
 }
