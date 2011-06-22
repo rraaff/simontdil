@@ -69,11 +69,13 @@ break;
 								<td><html:select property="language" styleClass="textfield_effect">
 							        <html:optionsCollection name="LoginForm" property="allLanguage" value="language" label="language"/>
 									</html:select>
-									<% if (myCookie != null) { %>
+									<% if (myCookie != null) { 
+										String cookieValue = new String(new sun.misc.BASE64Decoder().decodeBuffer(myCookie.getValue()));
+									%>
 									<script>
 										var langSelObject = document.forms['LoginForm'].elements['language'];
 										for( var i = langSelObject.options.length-1;i>=0; i-- ){
-											if(langSelObject.options[i].value=='<%=myCookie.getValue()%>') {
+											if(langSelObject.options[i].value=='<%=cookieValue%>') {
 												langSelObject.selectedIndex=i;
 											}
 										}

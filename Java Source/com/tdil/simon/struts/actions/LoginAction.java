@@ -6,11 +6,14 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionMessages;
+
+import sun.misc.BASE64Encoder;
 
 import com.tdil.simon.actions.TransactionalActionWithValue;
 import com.tdil.simon.actions.response.ValidationError;
@@ -50,8 +53,7 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				LogOnceListener.userHasLogged(login, user.getUsername(), user.getCountryId(), user.isModerator(), request.getSession(), logout);
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute(SetLanguageFilter.USER_LANGUAGE, login.getLanguage());
-				Cookie cookie = new Cookie(SetLanguageFilter.USER_LANGUAGE, login.getLanguage());
-				cookie.setVersion(1);
+				Cookie cookie = new Cookie(SetLanguageFilter.USER_LANGUAGE, new BASE64Encoder().encode(login.getLanguage().getBytes()));
 				response.addCookie(cookie);
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
