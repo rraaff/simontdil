@@ -50,7 +50,9 @@ public class LoginAction extends Action implements TransactionalActionWithValue 
 				LogOnceListener.userHasLogged(login, user.getUsername(), user.getCountryId(), user.isModerator(), request.getSession(), logout);
 				request.getSession().setAttribute("user", user);
 				request.getSession().setAttribute(SetLanguageFilter.USER_LANGUAGE, login.getLanguage());
-				response.addCookie(new Cookie(SetLanguageFilter.USER_LANGUAGE, login.getLanguage()));
+				Cookie cookie = new Cookie(SetLanguageFilter.USER_LANGUAGE, login.getLanguage());
+				cookie.setVersion(1);
+				response.addCookie(cookie);
 				if (user.isAdministrator()) {
 					return mapping.findForward("admin");
 				}
