@@ -1,8 +1,8 @@
 package com.tdil.simon.web;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionEvent;
@@ -18,8 +18,8 @@ import com.tdil.simon.utils.LoggerProvider;
 
 public class LogOnceListener implements HttpSessionListener {
 	
-	private static Map<String, HttpSession> allSessions = new HashMap<String, HttpSession>();
-	private static Map<HttpSession, UserAndCountry> sessionToUsernames = new HashMap<HttpSession, UserAndCountry>();
+	private static Map<String, HttpSession> allSessions = new ConcurrentHashMap<String, HttpSession>();
+	private static Map<String, UserAndCountry> sessionToUsernames = new ConcurrentHashMap<String, UserAndCountry>();
 	private static HttpSession moderatorSession;
 
 	
@@ -29,7 +29,8 @@ public class LogOnceListener implements HttpSessionListener {
 
 	public void sessionDestroyed(HttpSessionEvent event) {
 		synchronized (allSessions) {
-			String username = sessionToUsernames.get(event.getSession()).getUsername();
+			UserAndCountry user = sessionToUsernames.get(event.getSession().getId());
+			String username = user != null ? user.getUsername() : null;
 			if (event.getSession() == moderatorSession) {
 				if (username != null) {
 					getLog().fatal("User " + username + " has log out, moderator = true");
@@ -40,9 +41,36 @@ public class LogOnceListener implements HttpSessionListener {
 					getLog().fatal("User " + username + " has log out, moderator = false");
 				}
 			}
-			sessionToUsernames.remove(event.getSession());
-			allSessions.remove(username);
+			if (event.getSession() != null) {
+				sessionToUsernames.remove(event.getSession().getId());
+			}
+			if (username != null) {
+				allSessions.remove(username);
+			}
 	    }
+	}
+	
+	public static void logout(HttpSession session) {
+		synchronized (allSessions) {
+			UserAndCountry user = sessionToUsernames.get(session.getId());
+			String username = user != null ? user.getUsername() : null;
+			if (session == moderatorSession) {
+				if (username != null) {
+					getLog().fatal("User " + username + " has log out, moderator = true, session = " + session.getId());
+				}
+				moderatorSession = null;
+			} else {
+				if (username != null) {
+					getLog().fatal("User " + username + " has log out, moderator = false, session = " + session.getId());
+				}
+			}
+			if (session != null) {
+				sessionToUsernames.remove(session.getId());
+			}
+			if (username != null) {
+				allSessions.remove(username);
+			}
+		}
 	}
 	
 	public static void userHasLogged(LoginForm form, String username, int countryId, boolean moderator, HttpSession session, boolean forceLogout) throws ValidationException {
@@ -52,6 +80,7 @@ public class LogOnceListener implements HttpSessionListener {
 	    		if (forceLogout) {
 		    		try {
 		    			getLog().fatal("Invalidating previous session for user " + username);
+		    			logout(previousSession);
 		    			previousSession.invalidate();
 					} catch (Exception e) {}
 	    		} else {
@@ -62,10 +91,11 @@ public class LogOnceListener implements HttpSessionListener {
 	    	}
 	    	if (moderator) {
 	    		if (moderatorSession != null) {
-	    			String other = sessionToUsernames.get(moderatorSession).getUsername();
+	    			String other = sessionToUsernames.get(moderatorSession.getId()).getUsername();
 	    			if (forceLogout) {
 		    			try {
 		    				getLog().fatal("Invalidating previous session for moderator " + other + " because moderator " + username + " is loging in");
+		    				logout(moderatorSession);
 		    				moderatorSession.invalidate();
 		    			} catch (Exception e) {}
 	    			} else {
@@ -77,8 +107,8 @@ public class LogOnceListener implements HttpSessionListener {
 	    		moderatorSession = session;
 	    	}
 	    	allSessions.put(username, session);
-	    	sessionToUsernames.put(session, new UserAndCountry(countryId, username));
-	    	getLog().fatal("User " + username + " has log in, moderator = " + String.valueOf(moderator));
+	    	sessionToUsernames.put(session.getId(), new UserAndCountry(countryId, username));
+	    	getLog().fatal("User " + username + " has log in, moderator = " + String.valueOf(moderator) + " session = " + session.getId());
 	    }
 	}
 	
@@ -88,11 +118,12 @@ public class LogOnceListener implements HttpSessionListener {
 
 	public static void logoutDelegatesFor(Set<Integer> deletedCountries) {
 		synchronized (allSessions) {
-			for (Map.Entry<HttpSession, UserAndCountry> session : sessionToUsernames.entrySet()) {
+			for (Map.Entry<String, UserAndCountry> session : sessionToUsernames.entrySet()) {
 				if (deletedCountries.contains(session.getValue().getCountry())) {
 					try {
 						getLog().fatal("Invalidating previous session for user because country deleted " + session.getValue().getUsername());
-						session.getKey().invalidate(); // TODO falta algo
+						HttpSession ses = allSessions.get(session.getValue().getUsername());
+						ses.invalidate(); // TODO falta algo
 					} catch (Exception e) {}
 				}
 			}

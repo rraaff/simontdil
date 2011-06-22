@@ -9,12 +9,15 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
+import com.tdil.simon.web.LogOnceListener;
+
 public class LogoutAction extends Action {
 
 	public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
+			LogOnceListener.logout(session);
 			session.invalidate();
 		}
 		return mapping.findForward("notLogged");
