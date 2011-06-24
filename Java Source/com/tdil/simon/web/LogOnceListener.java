@@ -24,7 +24,7 @@ public class LogOnceListener implements HttpSessionListener {
 
 	
 	public void sessionCreated(HttpSessionEvent event) {
-	    System.out.println("session created");
+	    //System.out.println("session created");
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {

@@ -43,11 +43,11 @@
     from REFERENCEDOCUMENT, 
     	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
 		UNION
 		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
 			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
     where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
@@ -59,11 +59,11 @@
     from REFERENCEDOCUMENT, 
     	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
 		UNION
 		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
 			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
     where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
     and REFERENCEDOCUMENT.deleted = 0
@@ -84,11 +84,11 @@
    	from REFERENCEDOCUMENT, 
    		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
 		UNION
 		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
 			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
@@ -100,11 +100,11 @@
    	from REFERENCEDOCUMENT, 
    		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
 		UNION
 		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
 			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
-		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
 		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
    	WHERE REFERENCEDOCUMENT.DELETED = 0
    	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id

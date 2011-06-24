@@ -29,11 +29,11 @@
    	from DOCUMENT, 
    		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
    			DOCUMENTTYPE.orderNumber as o1, -1 as o2
-		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE
 		UNION
 		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
 			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
-		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0 and deleted = 0) DOCUMENTSUBTYPE
 		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
    	WHERE DOCUMENT.deleted = 0
@@ -54,11 +54,11 @@
    	from DOCUMENT, 
    		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
 			DOCUMENTTYPE.orderNumber as o1, -1 as o2
-		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE
 		UNION
 		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
 			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
-		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0 and deleted = 0) DOCUMENTSUBTYPE
 		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
    	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
    	WHERE DOCUMENT.deleted = 0
