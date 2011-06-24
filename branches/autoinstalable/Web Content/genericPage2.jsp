@@ -47,12 +47,12 @@
 							<td width="150"><%=ResourceBundleCache.get("genericPage1", "Actions")%></td>
 						</tr>
 						<tr class="rowODD">
-							<td>Security_arrangements.doc</td>
-							<td><a href="other/Security_arrangements.doc" target="_blank"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%></a></td>
+							<td><!--Security_arrangements.doc--></td>
+							<td><!-- a href="other/Security_arrangements.doc" target="_blank"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%></a--></td>
 						</tr>
 						<tr class="rowEVEN">
-							<td>-</td>
-							<td>-</td>
+							<td></td>
+							<td></td>
 						</tr>
 					</table>
 				</div>
