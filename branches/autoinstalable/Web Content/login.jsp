@@ -7,19 +7,22 @@
 <%@ include file="includes/headerLogoff.jsp" %>
 
 <%
-String cookieName = com.tdil.simon.web.SetLanguageFilter.USER_LANGUAGE;
-Cookie cookies [] = request.getCookies ();
-Cookie myCookie = null;
-if (cookies != null)
-{
-for (int i = 0; i < cookies.length; i++) 
-{
-if (cookies [i].getName().equals (cookieName))
-{
-myCookie = cookies[i];
-break;
-}
-}
+String cookieValue = request.getParameter("language");
+if (cookieValue == null || org.apache.commons.lang.StringUtils.isEmpty(cookieValue)) {
+	String cookieName = com.tdil.simon.web.SetLanguageFilter.USER_LANGUAGE;
+	Cookie cookies [] = request.getCookies ();
+	Cookie myCookie = null;
+	if (cookies != null) {
+		for (int i = 0; i < cookies.length; i++) {
+			if (cookies [i].getName().equals (cookieName)) {
+				myCookie = cookies[i];
+				break;
+			}
+		}
+	}
+	if (myCookie != null) { 
+		cookieValue = new String(new sun.misc.BASE64Decoder().decodeBuffer(myCookie.getValue()));
+	}
 }
 %>
 
@@ -69,9 +72,7 @@ break;
 								<td><html:select property="language" styleClass="textfield_effect">
 							        <html:optionsCollection name="LoginForm" property="allLanguage" value="language" label="language"/>
 									</html:select>
-									<% if (myCookie != null) { 
-										String cookieValue = new String(new sun.misc.BASE64Decoder().decodeBuffer(myCookie.getValue()));
-									%>
+									<% if (cookieValue != null) { %>
 									<script>
 										var langSelObject = document.forms['LoginForm'].elements['language'];
 										for( var i = langSelObject.options.length-1;i>=0; i-- ){
