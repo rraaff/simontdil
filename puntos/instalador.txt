@@ -1,0 +1,45 @@
+Aca tendriamos que evaluar cual es la idea final de esto, si es poder mostrar facil lo nuevo, 
+o que quede como manera de instalar la aplicacion.
+
+A lo mejor podemos pensar dos esquemas, por ejemplo, una opcion 2 o 3 para windows y una opcion 1 
+para linux (y windows).
+
+Opciones de mas simples a mas complejas
+
+1) War solo
+La idea seria tener un war que si no se puede conectar a la base que levante de todas formas pero 
+que habilite un modo creacion, donde uno pondria datos de la base a crear y simon la crearia. 
+Luego se deberia reiniciar el tomcat.
+Bajo esta opcion se podria entregar en el cd el software se base, pero sera responsabilidad del 
+usuario instalarlo.
+Para windows se podria entregar un software preinstalado.
+Pros:
+Desarrollo mediamente sencillo
+Multi sistema operativo
+Funcionaria si la maquina ya tiene cosas instaladas.
+Contras:
+El usuario tendria que instalar por su cuenta java, mysql y tomcat.
+El usuario tendria que configurar el datasource del tomcat.
+La maquina tendria que tener sofware de base compatible.
+
+2) Empaquetado
+La idea seria entregar un cd que tenga todo instalado, de forma que la instalacion sea el copiado 
+del contenido al disco local y el levantado del mysql y del tomcat.
+Pros:
+En windows creo que se puede dejar instalado java y mysql en un directorio, de forma que el copiado
+del mismo se pueda levantar.
+Seria medianamente sencillo.
+Contras:
+El usuario tendria que ejecutar el script de start del mysql (o agregarlo como servicio o algo asi).
+El usuario tendria que ejecutar el script de start del tomcat.
+No se si es posible hacer eso en ubuntu (copiar una version instalada).
+Tendriamos problemas si la maquina ya tiene cosas instaladas (ejemplo: mysql).
+Que esta opcion sea solo windows simplificaria, pero tambien se deberia mantener el esquema 1.
+
+3) Instalador:
+La idea seria entregar un instalador que sea capaz de instalar java, mysql, tomcat, el war y 
+configurar todo. Esto fue lo que se intento hacer.
+Este instalador tendria que ser multiplataforma?
+Esta es la opciones mas complicada de las tres.
+Quizas haciendolo solo para windows se simplificaria, pero se tendria que manejar la opcion 1 para
+ linux.

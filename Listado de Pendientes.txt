@@ -1,14 +1,19 @@
-Imagenes con texto deben volar
+Agregar un build number que se pueda ver con el admin
+
 [Queda para la próxima versión] Poner componente de fecha en busqueda de observaciones
 
-Seguir con la aplicacion de resource bundles (falta sacar referencias a ApplicationResources)
+[Queda para la próxima versión] Resource bundle de los js
+Plugins multiidioma, banderitas del plugin simonflags generadas desde la base.
 
 [Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
-
-Solucionar el tema del boton generico (en index.jsp esta la solucion, la hizo pablo para los links, 
-
-[Queda para la próxima versión] Resource bundle de los js
 
 [Queda para la próxima versión] Esta comentada la parte de propuesta de parrafo en delegateNegotiation.jsp, deberia activarse?
 
 [Queda para la próxima versión] Los textos en el flash de firma debe ser parametros
+
+Logos por idioma?
+
+Reflotar instalacion de cero (instalacion de cero).
+
+Poder bajarse el log o el ultimo pedazo del mismo con el admin (o algo asi).
+Esquema de cea con categoria aparte que guarde x cant de excepciones.
