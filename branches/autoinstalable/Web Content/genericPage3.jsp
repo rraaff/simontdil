@@ -39,7 +39,26 @@
 			<td colspan="3"><img src="images/null.gif" width="1" height="10"></td>
 		</tr>
 		<tr>
-			<td colspan="3">disponible</td>
+			<td colspan="3">
+			<!-- /// Ejemplo de tabla
+				<div style="width:100%; height:450px; overflow:auto;">
+					<table width="100%" border="0" cellspacing="0" cellpadding="5">
+						<tr>
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rowODD">
+							<td></td>
+							<td></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td></td>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+				-->
+			</td>
 		</tr>
 		<tr>
 			<td colspan="3" height="40" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>

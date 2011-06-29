@@ -4,8 +4,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
-<meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
-<meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
@@ -26,7 +26,7 @@ input.date {
 }
 </style>
 <![endif]-->
-<link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <!--link href="styles/tdil.css" rel="stylesheet" type="text/css"-->
 <link href="styles/focalae.css" rel="stylesheet" type="text/css">
 <link href="styles/menu.css" rel="stylesheet" type="text/css">
