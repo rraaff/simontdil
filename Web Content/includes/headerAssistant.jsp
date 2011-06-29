@@ -5,8 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
-<meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
-<meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="keywords" content="" />
+<meta name="description" content="" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
 <script type="text/javascript" src="./scripts/notimoo.js" ></script>
@@ -22,7 +22,7 @@
 a:active {width: auto;}
 </style>
 <![endif]-->
-<link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
+<link rel="shortcut icon" href="images/favicon.ico">
 <!-- link href="styles/tdil.css" rel="stylesheet" type="text/css" -->
 <link href="styles/focalae.css" rel="stylesheet" type="text/css">
 <link href="styles/notimoo.css" rel="stylesheet" type="text/css">
