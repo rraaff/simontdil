@@ -119,7 +119,7 @@
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="3" align="left">
 													<html:select name="SearchObservationsForm" property="paragraphNumber" styleClass="textfield_effect_day">
-														<option value="">Todos</option>
+														<option value=""><%=ResourceBundleCache.get(getServletInfo(), "todos")%></option>
 														<html:optionsCollection name="SearchObservationsForm" property="allParagraphs" value="paragraphNumber" label="paragraphNumberForDisplay"/>
 													</html:select></td>
 												</tr>
