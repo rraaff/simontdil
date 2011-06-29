@@ -19,6 +19,7 @@ import com.tdil.simon.data.model.Observation;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.valueobjects.ObservationVO;
+import com.tdil.simon.web.ResourceBundleCache;
 
 public class SearchObservationsForm extends ActionForm {
 
@@ -50,26 +51,11 @@ public class SearchObservationsForm extends ActionForm {
 	private List<Country> allCountries;
 	private List<String> allParagraphs;
 
-	private static List<MonthOption> allMonths;
 	private static List<DayOption> allDays;
 
 	private SystemUser user;
 
 	static {
-		allMonths = new ArrayList<MonthOption>();
-		allMonths.add(new MonthOption("1", "Enero"));
-		allMonths.add(new MonthOption("2", "Febrero"));
-		allMonths.add(new MonthOption("3", "Marzo"));
-		allMonths.add(new MonthOption("4", "Abril"));
-		allMonths.add(new MonthOption("5", "Mayo"));
-		allMonths.add(new MonthOption("6", "Junio"));
-		allMonths.add(new MonthOption("7", "Julio"));
-		allMonths.add(new MonthOption("8", "Agosto"));
-		allMonths.add(new MonthOption("9", "Septiembre"));
-		allMonths.add(new MonthOption("10", "Octubre"));
-		allMonths.add(new MonthOption("11", "Noviembre"));
-		allMonths.add(new MonthOption("12", "Diciembre"));
-
 		allDays = new ArrayList<DayOption>(31);
 		for (int i = 1; i <= 31; i++) {
 			allDays.add(new DayOption(String.valueOf(i)));
@@ -90,6 +76,19 @@ public class SearchObservationsForm extends ActionForm {
 	}
 
 	public List<MonthOption> getMonths() {
+		List<MonthOption> allMonths = new ArrayList<MonthOption>();
+		allMonths.add(new MonthOption("1", ResourceBundleCache.get("fecha", "enero")));
+		allMonths.add(new MonthOption("2", ResourceBundleCache.get("fecha", "febrero")));
+		allMonths.add(new MonthOption("3", ResourceBundleCache.get("fecha", "marzo")));
+		allMonths.add(new MonthOption("4", ResourceBundleCache.get("fecha", "abril")));
+		allMonths.add(new MonthOption("5", ResourceBundleCache.get("fecha", "mayo")));
+		allMonths.add(new MonthOption("6", ResourceBundleCache.get("fecha", "junio")));
+		allMonths.add(new MonthOption("7", ResourceBundleCache.get("fecha", "julio")));
+		allMonths.add(new MonthOption("8", ResourceBundleCache.get("fecha", "agosto")));
+		allMonths.add(new MonthOption("9", ResourceBundleCache.get("fecha", "septiembre")));
+		allMonths.add(new MonthOption("10", ResourceBundleCache.get("fecha", "octubre")));
+		allMonths.add(new MonthOption("11", ResourceBundleCache.get("fecha", "noviembre")));
+		allMonths.add(new MonthOption("12", ResourceBundleCache.get("fecha", "diciembre")));
 		return allMonths;
 	}
 
