@@ -24,7 +24,9 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted, 
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
     	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
@@ -39,7 +41,9 @@
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
     	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
@@ -55,7 +59,9 @@
   </select>
   
   <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
     from REFERENCEDOCUMENT, 
     	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
@@ -80,7 +86,9 @@
   
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
    	from REFERENCEDOCUMENT, 
    		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
@@ -96,7 +104,9 @@
   </select>
   
   <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
-    select REFERENCEDOCUMENT.*, CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
    	from REFERENCEDOCUMENT, 
    		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
    			CATEGORY.orderNumber as o1, -1 as o2
