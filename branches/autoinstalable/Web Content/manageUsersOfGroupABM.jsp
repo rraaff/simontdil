@@ -13,7 +13,7 @@ div#main {
 	# width:100%;
 	* width:100%;
 	width:inherit;
-	height:290px;
+	height:470px;
 	font-size: 10px;
 }
 div#scrollbar {
