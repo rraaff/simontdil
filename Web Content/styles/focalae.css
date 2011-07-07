@@ -754,9 +754,8 @@ tr.d1 td {
 }
 #extraLinks {
 	font-size: 16px;
-	background-color:#00CC33;
 	color: #CC0000;
-	/* width: 920px; */
+	width: 920px;
 	width: 688px;
 	margin-top: 10px;
 	margin-right: auto;

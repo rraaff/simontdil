@@ -60,13 +60,14 @@
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	font-size:12px;
 }
-.documentTD{
-	height:44px;
+#documentTD{
+	height:29px;
 	color:#454545;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	font-size:12px;
+	padding-top: 15px;
 }
-.documentTD a, .documentTD a:hover, .documentTD visited {
+#documentTD a, #documentTD a:hover, #documentTD visited {
 	color:#454545;
 }
 </style>
@@ -82,25 +83,7 @@
 			document.getElementById("p-" + parent).src="images/icons/plus.gif";
 			child.style.display = 'none';
 		}
-		init_dw_Scroll();
 	}
-</script>
-<script src="scripts/dw_event.js" type="text/javascript"></script>
-<script src="scripts/dw_scroll.js" type="text/javascript"></script>
-<script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
-<script src="scripts/scroll_controls.js" type="text/javascript"></script>
-<script type="text/javascript">
-function init_dw_Scroll() {
-    var wndo = new dw_scrollObj('main', 'lyr1');
-    wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
-    wndo.setUpScrollControls('scrollbar');
-}
-
-// if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
-    dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
-    dw_Event.add( window, 'load', init_dw_Scroll);
-}
 </script>
 <html:html>
 <script type="text/javascript">
@@ -203,9 +186,9 @@ if ( dw_scrollObj.isSupported() ) {
 															<logic:iterate name="docTree" property="documents" id="docLeafTop">
 															<tr>
 																<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
+																<td><div id="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
 																	<bean:write name="docLeafTop" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeafTop" property="lastVersionNumber" /> - <bean:write name="docLeafTop" property="lastVersionName" />
-																	</html:link></td>
+																	</html:link></div></td>
 															</tr>
 															</logic:iterate>
 														</table>
@@ -225,9 +208,9 @@ if ( dw_scrollObj.isSupported() ) {
 																				<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
 																				<tr>
 																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																					<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
+																					<td><div id="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
 																						<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get(getServletInfo(), "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
-																						</html:link></td>
+																						</html:link></div></td>
 																				</tr>
 																				</logic:iterate>
 																			</table>
@@ -283,8 +266,7 @@ if ( dw_scrollObj.isSupported() ) {
 															<logic:iterate name="catTree" property="documents" id="catLeafTop">
 															<tr>
 																<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																<td class="documentTD">
-																	<a href="./download.do?action=refdoc&fileId=<bean:write name="catLeafTop" property="id" />"><bean:write name="catLeafTop" property="title" /></a>																					</td>
+																<td><div id="documentTD"><a href="./download.do?action=refdoc&fileId=<bean:write name="catLeafTop" property="id" />"><bean:write name="catLeafTop" property="title" /></a></div></td>
 															</tr>
 															</logic:iterate>
 														</table>
@@ -304,8 +286,7 @@ if ( dw_scrollObj.isSupported() ) {
 																				<logic:iterate name="subCatTree" property="documents" id="refLeaf">
 																				<tr>
 																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																					<td class="documentTD">
-																						<a href="./download.do?action=refdoc&fileId=<bean:write name="refLeaf" property="id" />"><bean:write name="refLeaf" property="title" /></a>																					</td>
+																					<td><div id="documentTD"><a href="./download.do?action=refdoc&fileId=<bean:write name="refLeaf" property="id" />" class="documentTD"><bean:write name="refLeaf" property="title" /></a></div></td>
 																				</tr>
 																				</logic:iterate>
 																			</table>
