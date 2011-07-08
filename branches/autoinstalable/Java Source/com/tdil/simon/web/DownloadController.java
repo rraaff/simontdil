@@ -170,7 +170,7 @@ public class DownloadController extends HttpServlet {
 	private void downloadRefDoc(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		Integer id = Integer.parseInt(req.getParameter("fileId"));
 		String fileName = getServerRefDocFileNameFor("flag", id);
-		res.setHeader("Pragma", "no-cache");
+		//res.setHeader("Pragma", "no-cache");
 		res.setDateHeader("Expires", 0);
 		File flag = new File(fileName);
 		if (!flag.exists()) {
@@ -194,7 +194,7 @@ public class DownloadController extends HttpServlet {
 		}
 		if (getDocumentAction.getReferenceDocument() != null) {
 //			res.setHeader("Cache-Control", "no-store");
-			res.setHeader("Pragma", "no-cache");
+//			res.setHeader("Pragma", "no-cache");
 			res.setDateHeader("Expires", 0);
 			if (!StringUtils.isEmpty(fileName)) {
 				res.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(getDocumentAction.getReferenceDocument().getFileName(), "UTF-8"));
