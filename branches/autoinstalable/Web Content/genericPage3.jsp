@@ -40,24 +40,91 @@
 		</tr>
 		<tr>
 			<td colspan="3">
-			<!-- /// Ejemplo de tabla
-				<div style="width:100%; height:450px; overflow:auto;">
+			<div style="width:100%; height:450px; overflow:auto;">
 					<table width="100%" border="0" cellspacing="0" cellpadding="5">
-						<tr>
-							<td></td>
-							<td></td>
-						</tr>
-						<tr class="rowODD">
-							<td></td>
-							<td></td>
+						
+				    <tr class="rowODD">
+							<td><a href="other/Circular-4-V-FMM-Esp.pdf" target="_blank">FMM/2011/INF/4<br />
+						    SOM/2011/INF4<br />
+						    POL/2011/INF/4<br />
+						    ECON/2011/INF/4<br />
+						    ST/2011/INF/4<br />
+						    SWGT/2011/INF/4 Circular Informativa 4</a></td>
 						</tr>
 						<tr class="rowEVEN">
-							<td></td>
-							<td></td>
+							<td><a href="other/Circular-4-V-FMM-ingles.pdf" target="_blank">FMM/2011/INF/4<br />
+						    SOM/2011/INF/4<br />
+						    POL/2011/INF/4<br />
+						    ECON/2011/INF/4<br />
+						    ST/2011/INF/4<br />
+						    SWGT/2011/INF/4 Informative Circular 4</a></td>
+						</tr>
+						<tr class="rowODD">
+							<td><a href="other/Circular-6-V-FMM-esp-(seguridad).pdf" target="_blank">FMM/2011/INF/6<br />
+  SOM/2011/INF/6<br />
+  POL/2011/INF/6<br />
+  ECON/2011/INF/6<br />
+  ST/2011/INF/6<br />
+  SWGT/2011/INF/6  Circular Informativa 6</a></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td><a href="other/Circular-6-V-FMM-ingles-(seguridad).pdf" target="_blank">FMM/2011/INF/6<br />
+SOM/2011/INF/6<br />
+POL/2011/INF/6<br />
+ECON/2011/INF/6<br />
+ST/2011/INF/6<br />
+SWGT/2011/INF/6 Informative Circular 6</a></td>
+						</tr>
+						<tr class="rowODD">
+							<td><a href="other/circular-7-V-FMM-esp-(protocolo).pdf" target="_blank">FMM/2011/INF/7<br />
+  SOM/2011/INF/7<br />
+  POL/2011/INF/7<br />
+  ECON/2011/INF/7<br />
+  ST/2011/INF/7<br />
+  SWGT/2011/INF/7 Circular Informativa 7</a></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td><a href="other/circular-7-V-FMM-ingles.pdf" target="_blank">FMM/2011/INF/7<br />
+SOM/2011/INF/7<br />
+POL/2011/INF/7<br />
+ECON/2011/INF/7<br />
+ST/2011/INF/7<br />
+SWGT/2011/INF/7 Informative Circular 7</a></td>
+						</tr>
+						<tr class="rowODD">
+							<td><a href="other/circular-8-V-FMM-esp-(nota cargos rotativos).pdf" target="_blank">FMM/2011/INF/8<br />
+  SOM/2011/INF/8<br />
+  POL/2011/INF/8<br />
+  ECON/2011/INF/8<br />
+  ST/2011/INF/8<br />
+  SWGT/2011/INF/8 Circular Informativa 8</a></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td><a href="other/circular-8-V-FMM-ingles-(nota cargos rotativos).pdf" target="_blank">FMM/2011/INF/8<br />
+SOM/2011/INF/8<br />
+POL/2011/INF/8<br />
+ECON/2011/INF/8<br />
+ST/2011/INF/8<br />
+SWGT/2011/INF/8 Informative Circular 8</a></td>
+						</tr>
+						<tr class="rowODD">
+							<td><a href="other/circular-9-V-FMM-esp-(especialistas).pdf" target="_blank">FMM/2011/INF/9<br />
+  SOM/2011/INF/9<br />
+  POL/2011/INF/9<br />
+  ECON/2011/INF/9<br />
+  ST/2011/INF/9<br />
+  SWGT/2011/INF/9 Circular Informativa 9</a></td>
+						</tr>
+						<tr class="rowEVEN">
+							<td><a href="other/circular-9-V-FMM-ingles-(especialistas).pdf" target="_blank">FMM/2011/INF/9<br />
+SOM/2011/INF/9<br />
+POL/2011/INF/9<br />
+ECON/2011/INF/9<br />
+ST/2011/INF/9<br />
+SWGT/2011/INF/9 Informative Circular 9</a></td>
 						</tr>
 					</table>
 				</div>
-				-->
 			</td>
 		</tr>
 		<tr>
