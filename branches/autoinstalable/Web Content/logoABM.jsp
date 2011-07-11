@@ -141,9 +141,9 @@ if ( dw_scrollObj.isSupported() ) {
 									<logic:iterate name="LogoABMForm" property="allLogos" id="iterLogo" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td height="28" align="left"><bean:write name="iterLogo" property="logoKey" /></td>
-											<td><html:link  action="editLogo.st?" paramName="iterLogo" paramProperty="logoKey" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editLogo.st?" paramName="iterLogo" paramProperty="logoKey" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 										</tr> 
 									</logic:iterate>
 									<tr>

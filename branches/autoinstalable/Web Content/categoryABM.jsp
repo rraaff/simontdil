@@ -141,12 +141,12 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCategory).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCategory" property="orderNumber" /></td>
-											<td><html:link action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link></td>
-											<td><html:link  action="goToSubCategoryABM.st?" paramName="iterCategory" paramProperty="id" paramId="categoryId">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editarSubCategorias")%>
-											</html:link></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="editCategory.st?" paramName="iterCategory" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="goToSubCategoryABM.st?" paramName="iterCategory" paramProperty="id" paramId="categoryId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editarSubCategorias")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 											<td><logic:equal name="iterCategory" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CategoryABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>

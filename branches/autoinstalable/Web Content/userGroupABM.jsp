@@ -133,18 +133,18 @@ if ( dw_scrollObj.isSupported() ) {
 									<logic:iterate name="UserGroupABMForm" property="allUserGroup" id="iterUserGroup" indexId="iterIndex"> 
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUserGroup).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterUserGroup" property="name" /></td>
-											<td><html:link  action="editUserGroup.st?" paramName="iterUserGroup" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link></td>
-											<td><html:link  action="goToManageUsersOfGroupABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","usuarios")%>
-											</html:link></td>
-											<td><html:link  action="goToDocumentTypePermissionABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","permisosTiposDeDocumento")%>
-											</html:link></td>
-											<td><html:link  action="goToSubCategoryPermissionABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","permisosSubCategorias")%>
-											</html:link></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editUserGroup.st?" paramName="iterUserGroup" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="goToManageUsersOfGroupABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","usuarios")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="goToDocumentTypePermissionABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","permisosTiposDeDocumento")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="goToSubCategoryPermissionABM.st?" paramName="iterUserGroup" paramProperty="id" paramId="userGroupId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","permisosSubCategorias")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 											<td><logic:equal name="iterUserGroup" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("UserGroupABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>

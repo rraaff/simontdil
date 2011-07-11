@@ -82,13 +82,13 @@ if ( dw_scrollObj.isSupported() ) {
 										<td><bean:write name="version" property="hasObservationText" /></td>
 										<td><bean:write name="version" property="observationCountText" /></td>
 										<td><bean:write name="version" property="newParagraphCountText" /></td>
-										<td><html:link  action="designVersion.st?" paramName="version" paramProperty="id" paramId="id">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link></td>
+										<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="designVersion.st?" paramName="version" paramProperty="id" paramId="id">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 										<% if (((com.tdil.simon.data.model.Version)version).isFinal()) { %>  
-											<td><html:link  action="editPortuguesVersion.st?" paramName="version" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editPortuguesVersion.st?" paramName="version" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 										<% } else { %>  
 											<td>-</td>
 										<% } %> 

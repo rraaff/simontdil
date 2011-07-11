@@ -153,7 +153,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					</tr>
 					<tr>
 						<td width="10" height="30"><img src="images/null.gif" width="10" height="1"></td>
-						<td colspan="3" align="center"><a href="./forcedDocs.jsp" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></a></td>
+						<td colspan="3" align="center"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><a href="./forcedDocs.jsp" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></a><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 					</tr>
 				</table>
 			</div>

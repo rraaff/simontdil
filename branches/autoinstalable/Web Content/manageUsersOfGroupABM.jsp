@@ -169,9 +169,9 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3" align="center"><html:link  action="editUserGroup.st?" paramName="ManageUsersOfGroupABMForm" paramProperty="userGroupId" paramId="id">
-			<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%>
-		</html:link></td>
+		<td colspan="3" align="center"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editUserGroup.st?" paramName="ManageUsersOfGroupABMForm" paramProperty="userGroupId" paramId="id">
+			<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%>
+		</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 	</tr>
 </table>
 </html:form>

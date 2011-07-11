@@ -92,9 +92,9 @@ if ( dw_scrollObj.isSupported() ) {
 													<!-- <%=ResourceBundleCache.get(getServletInfo(), "delegado")%>: <span class="dataDinamica"><bean:write name="observation" property="name" /></span><br>-->
 													
 													<div style="height:25px; margin-top:10px;">
-													<html:link  action="deletePrivateObservation.st?" paramName="observation" paramProperty="id" paramId="id">
-														<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","borrar")%>
-													</html:link></div></td>
+													<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="deletePrivateObservation.st?" paramName="observation" paramProperty="id" paramId="id">
+														<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","borrar")%>
+													</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></div></td>
 													<td width="9"><img src="images/null.gif" width="9" height="1"></td>
 													<td width="1" bgcolor="#c6c6c6"><img src="images/null.gif" width="1" height="1"></td>
 													<td width="20" bgcolor="#<%= (iterIndex % 2 == 0) ? "E5E5E5" : "F2F2F2" %>"><img src="images/null.gif" width="20" height="19"></td>

@@ -180,7 +180,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					<div id="leftObject">
 						<table align="center">
 							<tr>
-								<td><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
+								<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 							</tr>
 						</table>
 					</div>
@@ -189,7 +189,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 					<div id="leftObject">
 						<table align="center">
 							<tr>
-								<td><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
+								<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 							</tr>
 						</table>
 					</div>
@@ -207,9 +207,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 						<div id="leftObject">
 							<table align="center">
 								<tr>
-									<td>
+									<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%>
 										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
 										</html:link>
 									</td>
 								</tr>
