@@ -185,9 +185,9 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterUser).isDeleted() ? "class=\"notActive\"" : "" %>> <bean:write name="iterUser" property="systemPermissionsString" filter="false" /></td>
 											<td><logic:equal name="iterUser" property="deleted" value="true"><%=ResourceBundleCache.get(getServletInfo(), "no")%></logic:equal>
 											<logic:equal name="iterUser" property="deleted" value="false"><%=ResourceBundleCache.get(getServletInfo(), "si")%></logic:equal></td>
-											<td><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editSystemUser.st?" paramName="iterUser" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 											<td><logic:equal name="iterUser" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("SystemUserABM","botones","desactivar", iterIndex)%>
 												</logic:equal>

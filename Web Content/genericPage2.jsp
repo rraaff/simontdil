@@ -48,7 +48,7 @@
 						</tr>
 						<tr class="rowODD">
 							<td><!--Security_arrangements.doc--></td>
-							<td><!-- a href="other/Security_arrangements.doc" target="_blank"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%></a--></td>
+							<td><!-- a href="other/Security_arrangements.doc" target="_blank"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","descargar")%></a--></td>
 						</tr>
 						<tr class="rowEVEN">
 							<td></td>
@@ -59,7 +59,7 @@
 			</td>
 		</tr>
 		<tr>
-			<td colspan="3" height="40" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
+			<td colspan="3" height="40" align="center" valign="middle"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 		</tr>
 	</table>
 <%@ include file="includes/rightContent.jsp" %>

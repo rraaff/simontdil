@@ -175,10 +175,10 @@ if ( dw_scrollObj.isSupported() ) {
 					<td colspan="2" align="right"><div id="sizer"><a class="increase" href="#" title="Aumentar tamaño del texto"><img src="images/buttons/plus.gif" alt="" border="0" /></a><a class="decrease" href="#" title="Reducir tamaño del texto"><img src="images/buttons/minus.gif" alt="" border="0" /></a><a class="reset" href="#" title="Tamaño normal"><img src="images/buttons/reset.gif" alt="" border="0" /></a></div>
 					<div id="buttonContainer">
 						<% if (isDelegate) { %>
-							<html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
+							<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 						<% } %>
 						<% if (isModerator) { %>
-							<html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link>
+							<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 						<% } %>
 					</div></td>
 					<td width="9"><img src="images/null.gif" width="9" height="1"></td>

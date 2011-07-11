@@ -154,9 +154,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterCountry).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterCountry" property="userCount" /></td>
-											<td><html:link action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="editCountry.st?" paramName="iterCountry" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 											<td><logic:equal name="iterCountry" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("CountryABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>

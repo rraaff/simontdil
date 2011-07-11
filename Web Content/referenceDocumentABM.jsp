@@ -176,9 +176,9 @@ if ( dw_scrollObj.isSupported() ) {
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterRefDoc).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterRefDoc" property="orderNumber" /></td>
-											<td><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editReferenceDocument.st?" paramName="iterRefDoc" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 											<td><logic:equal name="iterRefDoc" property="deleted" value="false">
 												<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("ReferenceDocumentABMForm","botones","desactivar", iterIndex)%>
 											</logic:equal>

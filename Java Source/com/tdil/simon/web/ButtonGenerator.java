@@ -61,4 +61,29 @@ public class ButtonGenerator {
 		button.append("</table>");
 		return button.toString();
 	}
+	
+	// TODO arreglar
+	public static String getNoOPButtonStart() {
+		StringBuffer button = new StringBuffer();
+		button.append("<table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">");
+		button.append("<tr>");
+		button.append("<td width=\"13\" height=\"24\"><img src=\"images/buttons/buttonLeft.png\" width=\"13\" height=\"24\" border=\"0\"></td>");
+		button.append("<td background=\"images/buttons/buttonCenter.gif\" align=\"center\" valign=\"middle\" nowrap><span class=\"newButton\">");
+		return button.toString();
+	}
+	
+	public static String getNoOPButtonMiddle(String context, String key) {
+		return ResourceBundleCache.get(context, key);
+	}
+
+	public static String getNoOPButtonEnd() {
+		StringBuffer button = new StringBuffer();
+		button.append("</span></td>");
+		button.append("<td width=\"13\" height=\"24\"><img src=\"images/buttons/buttonRight.png\" width=\"13\" height=\"24\" border=\"0\"></td>");
+		button.append("</tr>");
+		button.append("</table>");
+		return button.toString();
+	}
+	
+
 }

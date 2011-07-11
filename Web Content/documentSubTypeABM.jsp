@@ -148,9 +148,9 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentSubType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentSubType" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentSubType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentSubType" property="orderNumber" /></td>
-											<td><html:link  action="editDocumentSubType.st?" paramName="iterDocumentSubType" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editDocumentSubType.st?" paramName="iterDocumentSubType" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 											<td><logic:equal name="iterDocumentSubType" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentSubTypeABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>
@@ -189,9 +189,9 @@ if ( dw_scrollObj.isSupported() ) {
 		</td>
 	</tr>
 	<tr>
-		<td colspan="3" align="center"><html:link  action="editDocumentType.st?" paramName="DocumentSubTypeABMForm" paramProperty="documentTypeId" paramId="id">
-				<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%>
-			</html:link></td>
+		<td colspan="3" align="center"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editDocumentType.st?" paramName="DocumentSubTypeABMForm" paramProperty="documentTypeId" paramId="id">
+				<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%>
+			</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 	</tr>
 </table>
 </html:form>

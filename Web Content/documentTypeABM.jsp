@@ -141,12 +141,12 @@ if ( dw_scrollObj.isSupported() ) {
 										<tr class="<%= (iterIndex % 2 == 0) ? "d0" : "d1" %>">
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentType" property="name" /></td>
 											<td <%= ((com.tdil.simon.data.model.PersistentObject)iterDocumentType).isDeleted() ? "class=\"notActive\"" : "" %> align="left"><bean:write name="iterDocumentType" property="orderNumber" /></td>
-											<td><html:link  action="editDocumentType.st?" paramName="iterDocumentType" paramProperty="id" paramId="id">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editar")%>
-											</html:link></td>
-											<td><html:link  action="goToDocumentSubTypeABM.st?" paramName="iterDocumentType" paramProperty="id" paramId="documentTypeId">
-											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","editarSubTipos")%>
-											</html:link></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editDocumentType.st?" paramName="iterDocumentType" paramProperty="id" paramId="id">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="goToDocumentSubTypeABM.st?" paramName="iterDocumentType" paramProperty="id" paramId="documentTypeId">
+											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editarSubTipos")%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 											<td><logic:equal name="iterDocumentType" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DocumentTypeABMForm","botones","desactivar", iterIndex)%>
 												</logic:equal>

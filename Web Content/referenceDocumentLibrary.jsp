@@ -75,9 +75,9 @@ if ( dw_scrollObj.isSupported() ) {
 											<td align="left"><bean:write name="iterRefDoc" property="categoryName" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="subCategoryName" /></td>
 											<td align="left"><bean:write name="iterRefDoc" property="fileName" /></td>
-											<td><a href="./download.do?action=refdoc&fileId=<bean:write name="iterRefDoc" property="id" />">
-												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","descargar")%>
-											</a></td>
+											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><a href="./download.do?action=refdoc&fileId=<bean:write name="iterRefDoc" property="id" />">
+												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","descargar")%>
+											</a><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 										</tr> 
 									</logic:iterate>
 									<tr>
@@ -105,10 +105,10 @@ if ( dw_scrollObj.isSupported() ) {
 				</tr>
 				<tr>
 					<% if (isDelegate) { %>
-						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
+						<td colspan="6" height="30" align="center" valign="middle"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 					<% } %>
 					<% if (isModerator) { %>
-						<td colspan="6" height="30" align="center" valign="middle"><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButton("botones","volver")%></html:link></td>
+						<td colspan="6" height="30" align="center" valign="middle"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 					<% } %>
 				</tr>
 			</table>
