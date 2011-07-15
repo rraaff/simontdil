@@ -50,7 +50,7 @@ public class NewVersionNotification {
 	}
 	private void sendEmail(SystemUser user2) {
 		try {
-			NotificationEmail notificationEmail = SystemConfig.getMailForNewObservation();
+			NotificationEmail notificationEmail = SystemConfig.getMailForNewVersion();
 			String body = notificationEmail.getEmailText();
 			body = body.replace("{DOCUMENT_TITLE}", document.getTitle());
 			body = body.replace("{VERSION_NUMBER}", String.valueOf(version.getNumber()));
