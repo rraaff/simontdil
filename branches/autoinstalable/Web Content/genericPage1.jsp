@@ -190,7 +190,7 @@
 						</tr>
 						<tr class="rowODD">
 							<td>M&Eacute;XICO</td>
-							<td>Ministro Armando Ivarez Reina</td>
+							<td>Ministro Armando &Aacute;lvarez Reina</td>
 							<td>Alto Funcionario de M&eacute;xico para FOCALAE - Director General para Asia-Pac&iacute;fico - Punto Focal / Focal Point</td>
 							<td><a href="mailto:aalvarez@sre.gob.mx">aalvarez@sre.gob.mx</a></td>
 							<td>Tel: (52) (55) 3686-5946</td>
