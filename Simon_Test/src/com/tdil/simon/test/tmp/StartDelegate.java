@@ -1,4 +1,5 @@
-package com.tdil.simon.test;
+package com.tdil.simon.test.tmp;
+
 
 public class StartDelegate {
 

@@ -1,1 +1,79 @@
 Pruebas Funcionales
+
+Se debera partir de una base con datos para la prueba.
+Delegaciones
+Usuarios
+
+Casos a probar
+
+Moderador
+
+Sitio normal
+Alta de categoria
+Baja de categoria
+Modificacion de categoria
+Alta de subcategoria
+Baja de subcategoria
+Modificacion de subcategoria
+
+Alta de doc de referencia
+Modificacion de doc de referencia
+Baja de doc de referencia
+
+Alta de tipo de documento
+Baja de tipo de documento
+Alta de subtipo de documento
+Baja de subtipo de documento
+
+Alta de documento
+Edicion de documento consolidando
+Edicion de documento no consolidando
+Edicion de documento no consolidado
+
+Alta de delegado
+Modificacion de delegado
+Baja de delegado
+
+Alta de grupo
+Modificacion de grupo
+Baja de grupo
+Alta de categoria y subcategoria al grupo
+Baja de categoria y subcategoria al grupo
+Alta de tipo y subtipo de documento al grupo
+Baja de tipo y subtipo de documento al grupo
+Alta de usuario a	l grupo
+Baja de usuario del grupo
+
+Delegado
+
+Sitio normal
+Testera el login con usuario con clave temporal y cambio de password
+Testear el tema de los permisos de la home y las desactivaciones.
+Con y sin permiso de categoria
+Con y sin permiso de subcategoria
+Con y sin permiso de tipo de doc
+Con y sin permiso de sub tipo de doc
+Con y sin pertenecer al grupo
+Con categoria desactivada
+Con sub categoria desactivada
+Con doc de referencia desactivado
+Con tipo desactivado
+Con sub tipo desactivado
+Con doc desactivado
+Probar el bajado
+Probar el ir a ver la version
+	Con draft posterior
+	Sin draft posterior pero mas de una version
+Agregar comentario 
+	Probar con permisos
+	Probar con permiso pero el doc lo tiene desactivado
+	Probar sin permiso pero el doc lo tiene activado
+Buscar comentarios de la version
+Bajar el pdf
+Bajar el rtf
+
+
+Pruebas raras raras
+Estas habria que hacerlas si o si, porque sino nos vamos a olvidar...
+Traductor
+Asistente
