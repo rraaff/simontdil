@@ -22,5 +22,6 @@
 	<classpathentry kind="lib" path="xulrunner-linux64.jar"/>
 	<classpathentry kind="lib" path="xulrunner-mac.jar"/>
 	<classpathentry kind="lib" path="xulrunner-windows.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/Simon_WEB"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
