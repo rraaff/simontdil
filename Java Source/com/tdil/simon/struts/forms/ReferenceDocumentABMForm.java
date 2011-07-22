@@ -103,11 +103,14 @@ public class ReferenceDocumentABMForm extends TransactionalValidationForm implem
         	reference.setExtension(fileName.substring(fileName.lastIndexOf('.') + 1).toUpperCase());
         }
         if (fileSize != 0) {
+        	reference.setDocument(this.documentBytes);
         	reference.setFileName(fileName);
         	reference.setContentType(contentType);
         	UploadUtils.uploadFileTo(this.document, SystemConfig.getReferenceDocumentStore() + "/" + this.getId());
+        	ReferenceDocumentDAO.updateReferenceDocumentWithDocument(reference);
+        } else {
+        	ReferenceDocumentDAO.updateReferenceDocument(reference);
         }
-        ReferenceDocumentDAO.updateReferenceDocument(reference);
 	}
 	
 	private void addReferenceDocument() throws SQLException, FileNotFoundException, IOException {

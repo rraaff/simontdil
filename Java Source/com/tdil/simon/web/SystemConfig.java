@@ -108,9 +108,15 @@ public class SystemConfig {
 							FileUtils.forceMkdir(log);
 						}
 						File log4j = new File(tempPath + "/log/log4j.xml");
-						if (!log4j.exists()) {
+						if(log4j.exists() && log4j.length() < 1400) {
+							log4j.delete();
 							InputStream io = SystemConfig.class.getResourceAsStream("log4j.xml");
 							IOUtils.copy(io, new FileOutputStream(tempPath + "/log/log4j.xml"));
+						} else {
+							if (!log4j.exists()) {
+								InputStream io = SystemConfig.class.getResourceAsStream("log4j.xml");
+								IOUtils.copy(io, new FileOutputStream(tempPath + "/log/log4j.xml"));
+							}
 						}
 						File xhtml2fo = new File(tempPath + "/xhtml-to-xslfo.xsl");
 						if (!xhtml2fo.exists()) {

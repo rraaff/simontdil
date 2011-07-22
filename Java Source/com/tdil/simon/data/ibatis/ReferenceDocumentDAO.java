@@ -46,6 +46,10 @@ public class ReferenceDocumentDAO {
 	public static void updateReferenceDocument(ReferenceDocument document) throws SQLException {
 		IBatisManager.sqlMapper.update("updateReferenceDocument", document);
 	}
+	
+	public static void updateReferenceDocumentWithDocument(ReferenceDocument document) throws SQLException {
+		IBatisManager.sqlMapper.update("updateReferenceDocumentWithDocument", document);
+	}
 
 	public static void logicallyDeleteReferenceDocument(ReferenceDocument document)
 			throws SQLException {

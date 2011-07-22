@@ -22,16 +22,20 @@
 			<param name="ConversionPattern" value="%d %-5p [%t] [%c] - %m%n" />
 		</layout>
 	</appender>
+	
+	<appender name="LoggerMonitorAppender" class="com.tdil.simon.log4j.LoggerMonitorAppender" />
 
 	<category name="com.tdil" additivity="false">
 		<priority value="error" />
 		<appender-ref ref="FileAppenderAsync" />
 		<appender-ref ref="ConsoleAppender" />
+		<appender-ref ref="LoggerMonitorAppender" />
 	</category>
 	
 	<root>
 		<priority value="ERROR"/>
         <appender-ref ref="FileAppenderAsync"/>
         <appender-ref ref="ConsoleAppender"/>
+        <appender-ref ref="LoggerMonitorAppender" />
 	</root>
 </log4j:configuration>
