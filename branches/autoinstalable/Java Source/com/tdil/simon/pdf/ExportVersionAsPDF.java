@@ -161,7 +161,7 @@ public class ExportVersionAsPDF {
 					buf.append("</TR><TR>");
 					buf.append("<TD>"+ResourceBundleCache.get("print", "pais")+": <b>").append(vo.getCountryName()).append("</b></TD>");
 					buf.append("</TR></TABLE></TD>");
-					buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
+					buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(convertObservationForPdf(vo.getObservationText())).append("</TD>");
 				}
 				buf.append("</table>");
 			}
@@ -183,6 +183,10 @@ public class ExportVersionAsPDF {
 		renderer.setDocument( doc,  null);
 		renderer.layout();
 		renderer.createPDF(output);
+	}
+	
+	private static Object convertObservationForPdf(String observationText) {
+		return observationText.replaceAll("\\<img.*?>","");
 	}
 	
 	private static Paragraph getParagraph(List<Paragraph> paragraphs, int paragraphId) {
