@@ -296,6 +296,9 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 								Sexy.error('<%=ResourceBundleCache.get(getServletInfo(), "observacionVacia")%>');
 								return;
 							}
+							if (pText.indexOf("<img ") != -1) {
+								pText = pText.replace(/<img/g, '&lt;img');
+							}
 							Sexy.confirm('<%=ResourceBundleCache.get(getServletInfo(), "confirmeObservacion")%>', { onComplete: 
 								function(returnvalue) {
 								  if(returnvalue) {
