@@ -2,6 +2,7 @@ package com.tdil.simon.web;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
@@ -54,9 +55,9 @@ public class VersionPDFDownloadController extends HttpServlet {
 		try {
 			TransactionProvider.executeInTransaction(new TransactionalAction() {
 				public void executeInTransaction() throws SQLException, ValidationException {
-					Integer count = ObservationDAO.countNotDeletedObservationsForVersion(version.getVersion().getId());
-					res.setHeader("Content-disposition", "attachment; filename=" + version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + "." + count + ".pdf");
 					try {
+						Integer count = ObservationDAO.countNotDeletedObservationsForVersion(version.getVersion().getId());
+						res.setHeader("Content-disposition", "attachment; filename=" + URLEncoder.encode(version.getDocument().getTitle() + "-" + version.getVersion().getName() + "-" + version.getVersion().getNumber() + "." + count + ".pdf", "UTF-8"));
 						ExportVersionAsPDF.exportDocument(user, version, outputStream);
 					} catch (IOException e) {
 						getLog().error(e.getMessage(), e);
