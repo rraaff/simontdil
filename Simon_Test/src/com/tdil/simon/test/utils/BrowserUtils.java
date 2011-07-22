@@ -38,4 +38,9 @@ public class BrowserUtils {
 		button.click();
 	}
 
+	public static void setFile(String fieldName, String fileName, WebSpec spec) {
+		//spec.record.file().set(fileName).ok();
+		spec.find.input().with.name(fieldName).set.value("/home/mgodoy/icarus/workspace/simon/Simon_Test/resources/argentina.png");//click();
+	}
+
 }

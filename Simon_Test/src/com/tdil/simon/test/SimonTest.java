@@ -6,13 +6,16 @@ import junit.framework.TestCase;
 
 public class SimonTest extends TestCase {
 
+	public static String SERVER_URL = "http://localhost:8180/Simon/";
+	public static String ADMIN_PASS = "Admin";
+	
 	private static WebSpec spec;
 
 	public synchronized static WebSpec getSpec() {
 		if (spec == null) {
 			spec = createWebSpec();
 		} else {
-			spec.open("http://localhost:8180/Simon/logout.st");
+			spec.open(SimonTest.SERVER_URL + "logout.st");
 		}
 		return spec;
 	}
@@ -22,6 +25,7 @@ public class SimonTest extends TestCase {
 		WebSpec.window_height = 800;
 		return new WebSpec().mozilla();
 	}
+
 
 	
 }

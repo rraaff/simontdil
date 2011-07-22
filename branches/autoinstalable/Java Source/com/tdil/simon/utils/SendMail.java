@@ -26,12 +26,24 @@ import org.apache.commons.lang.StringUtils;
 /**
  * Insert the type's description here. Creation date: (4/9/2002 11:51:29 AM)
  * 
- * @author: Ariel Pablo Klein
  */
 public class SendMail {
 	// Represents the mail Session used to send mails
 	private Session mailSession = null;
 	private String mailSMTPHost = null;
+	public static String mailSMTPPORT;
+
+	public static String getMailSMTPPORT() {
+		if (mailSMTPPORT == null) {
+			String sysProp = System.getProperty("mail.smtp.port");
+			if (sysProp != null && sysProp.length() > 0) {
+				mailSMTPPORT = sysProp;
+			} else {
+				mailSMTPPORT = "25";
+			}
+		}
+		return mailSMTPPORT;
+	}
 
 	/**
 	 * Constructor
@@ -109,12 +121,12 @@ public class SendMail {
 	private void initializeMailSession(boolean debug) {
 		Properties props = new Properties();
 		props.put("mail.smtp.host", this.getMailSMTPHost());
-
+		props.put("mail.smtp.port", getMailSMTPPORT());
 		this.setMailSession(Session.getInstance(props, null));
 		this.getMailSession().setDebug(debug);
-
 		if (this.getMailSession().getProperties().isEmpty()) {
 			this.getMailSession().getProperties().put("mail.smtp.host", this.getMailSMTPHost());
+			this.getMailSession().getProperties().put("mail.smtp.port", getMailSMTPPORT()); 
 		}
 	}
 
