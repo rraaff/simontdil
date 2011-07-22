@@ -73,31 +73,31 @@ public class ModifyReferenceDocumentAction extends AbstractAction implements Tra
 	}
 	
 	public void executeInTransaction() throws SQLException, ValidationException {
-		ReferenceDocument toModify = ReferenceDocumentDAO.getReferenceDocument(oid);
-		if (toModify == null) {
-			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_DOES_NOT_EXISTS));
-		}
-		ReferenceDocument exist = ReferenceDocumentDAO.getReferenceDocument(this.title);
-		if (exist != null && exist.getId() != toModify.getId()) {
-			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS));
-		}
-		Category category = CategoryDAO.getCategory(this.categoryIdInt);
-		if (category == null) {
-			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
-		}
-		toModify.setSubCategoryId(category.getId());
-		toModify.setTitle(this.title);
-		if (docNameAndType != null) {
-			toModify.setFileName(this.docNameAndType[0]);
-			toModify.setExtension(this.docNameAndType[1]);
-			try {
-				ReferenceDocumentUtils.writeDocumentToDisk(toModify.getId(), this.fileItem);
-			} catch (IOException e) {
-				throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_CANNOT_BE_WRITTEN));
-			}
-		}
-		toModify.setDeleted(false);
-		ReferenceDocumentDAO.updateReferenceDocument(toModify);
+//		ReferenceDocument toModify = ReferenceDocumentDAO.getReferenceDocument(oid);
+//		if (toModify == null) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_DOES_NOT_EXISTS));
+//		}
+//		ReferenceDocument exist = ReferenceDocumentDAO.getReferenceDocument(this.title);
+//		if (exist != null && exist.getId() != toModify.getId()) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS));
+//		}
+//		Category category = CategoryDAO.getCategory(this.categoryIdInt);
+//		if (category == null) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
+//		}
+//		toModify.setSubCategoryId(category.getId());
+//		toModify.setTitle(this.title);
+//		if (docNameAndType != null) {
+//			toModify.setFileName(this.docNameAndType[0]);
+//			toModify.setExtension(this.docNameAndType[1]);
+//			try {
+//				ReferenceDocumentUtils.writeDocumentToDisk(toModify.getId(), this.fileItem);
+//			} catch (IOException e) {
+//				throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_CANNOT_BE_WRITTEN));
+//			}
+//		}
+//		toModify.setDeleted(false);
+//		ReferenceDocumentDAO.updateReferenceDocument(toModify);
 		
 	}
 	

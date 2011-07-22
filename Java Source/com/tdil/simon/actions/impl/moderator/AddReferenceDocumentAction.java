@@ -69,26 +69,26 @@ public class AddReferenceDocumentAction extends AbstractAction implements Transa
 	}
 	
 	public void executeInTransaction() throws SQLException, ValidationException {
-		ReferenceDocument exist = ReferenceDocumentDAO.getReferenceDocument(this.title);
-		if (exist != null) {
-			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS));
-		}
-		Category category = CategoryDAO.getCategory(this.categoryIdInt);
-		if (category == null) {
-			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
-		}
-		ReferenceDocument ref = new ReferenceDocument();
-		ref.setSubCategoryId(category.getId());
-		ref.setTitle(this.title);
-		ref.setFileName(this.docNameAndType[0]);
-		ref.setExtension(this.docNameAndType[1]);
-		ref.setDeleted(false);
-		int id = ReferenceDocumentDAO.insertReferenceDocument(ref);
-		try {
-			ReferenceDocumentUtils.writeDocumentToDisk(id, this.fileItem);
-		} catch (IOException e) {
-			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_CANNOT_BE_WRITTEN));
-		}
+//		ReferenceDocument exist = ReferenceDocumentDAO.getReferenceDocument(this.title);
+//		if (exist != null) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_ALREADY_EXISTS));
+//		}
+//		Category category = CategoryDAO.getCategory(this.categoryIdInt);
+//		if (category == null) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.CATEGORY_DOES_NOT_EXISTS));
+//		}
+//		ReferenceDocument ref = new ReferenceDocument();
+//		ref.setSubCategoryId(category.getId());
+//		ref.setTitle(this.title);
+//		ref.setFileName(this.docNameAndType[0]);
+//		ref.setExtension(this.docNameAndType[1]);
+//		ref.setDeleted(false);
+//		int id = ReferenceDocumentDAO.insertReferenceDocument(ref);
+//		try {
+//			ReferenceDocumentUtils.writeDocumentToDisk(id, this.fileItem);
+//		} catch (IOException e) {
+//			throw new ValidationException(new ValidationError(ValidationErrors.REFERENCE_DOCUMENT_CANNOT_BE_WRITTEN));
+//		}
 		
 	}
 	
