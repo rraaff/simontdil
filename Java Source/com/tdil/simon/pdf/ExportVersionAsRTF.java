@@ -32,6 +32,7 @@ import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.utils.UploadUtils;
+import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class ExportVersionAsRTF {
@@ -59,12 +60,12 @@ public class ExportVersionAsRTF {
 		}
 		buf.append("<h4>").append(designerText).append("</h4>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
-		buf.append("<h4>Preámbulo</h4>");
+		buf.append("<h4>"+ResourceBundleCache.get("print", "preambulo")+"</h4>");
 		for (Paragraph p : introduction) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(convertForRtf(p.getParagraphText())).append("</p>");
 		}
 		List<Paragraph> paragraphs = version.getParagraphs().subList(introduction.size(), version.getParagraphs().size());
-		buf.append("<br/><h4>Párrafos</h4>");
+		buf.append("<br/><h4>"+ResourceBundleCache.get("print", "parrafos")+"</h4>");
 		for (Paragraph p : paragraphs) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(convertForRtf(p.getParagraphText())).append("</p>");
 		}
@@ -80,10 +81,10 @@ public class ExportVersionAsRTF {
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;
 				buf.append("<TR><TD>");
-				buf.append("Delegado: ").append(signatureVO.getDelegateName()).append("<br/>");
+				buf.append(ResourceBundleCache.get("print", "delegado")+": ").append(signatureVO.getDelegateName()).append("<br/>");
 				buf.append("");
-				buf.append("Delegación: ").append(signatureVO.getCountryDescription()).append("<br/>");
-				buf.append("Cargo: ").append(signatureVO.getJob()).append("<br/>");
+				buf.append(ResourceBundleCache.get("print", "pais")+": ").append(signatureVO.getCountryDescription()).append("<br/>");
+				buf.append(ResourceBundleCache.get("print", "cargo")+": ").append(signatureVO.getJob()).append("<br/>");
 				buf.append("</TD>");
 				buf.append("<TD valign=\"top\">").append("<img width=\"1806px\" height=\"891px\" src=\"").append(SystemConfig.getSignatureStore() + "/" +signatureVO.getSignatureFileName()).append("\"></TD>");
 				buf.append("</TR>");
@@ -94,7 +95,7 @@ public class ExportVersionAsRTF {
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
 			if (!observations.isEmpty()) {
 				DateFormat simpleDateFormat = SystemConfig.getDateFormatWithMinutes();
-				buf.append("<h4>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</h4>");
+				buf.append("<h4>"+ResourceBundleCache.get("print", "observacionesALaFecha")+": ").append(simpleDateFormat.format(new Date())).append("</h4>");
 				buf.append("<table cols=\"200 200pt\" border=\"0\">");
 				for (Observation o : observations) {
 					if (o.getParagraphId() != lastParagraphId) {
@@ -104,7 +105,7 @@ public class ExportVersionAsRTF {
 						buf.append("</td>");
 						buf.append("</tr>");
 						buf.append("<tr>");
-						buf.append("<td colspan=\"2\">Párrafo original: <br/>");
+						buf.append("<td colspan=\"2\">"+ResourceBundleCache.get("print", "parrafoOriginal")+": <br/>");
 						buf.append(p.getParagraphNumberForDisplay()).append(". ");
 						buf.append(convertForRtf(p.getParagraphText()));
 						buf.append("</td>");
@@ -115,10 +116,10 @@ public class ExportVersionAsRTF {
 					ObservationVO vo = (ObservationVO)o;
 					buf.append("<tr>");
 					buf.append("<td>");
-					buf.append("Párrafo: ").append(vo.getParagraphNumberForDisplay()).append("<br/>");
-					buf.append("Fecha de observación: ").append(simpleDateFormat.format(vo.getCreationDate())).append("<br/>");
-					buf.append("Delegado: ").append(vo.getName()).append("<br/>");
-					buf.append("Delegación: ").append(vo.getCountryName()).append("<br/>");
+					buf.append(ResourceBundleCache.get("print", "parrafo")+": ").append(vo.getParagraphNumberForDisplay()).append("<br/>");
+					buf.append(ResourceBundleCache.get("print", "fechaDeObservacion")+": ").append(simpleDateFormat.format(vo.getCreationDate())).append("<br/>");
+					buf.append(ResourceBundleCache.get("print", "delegado")+": ").append(vo.getName()).append("<br/>");
+					buf.append(ResourceBundleCache.get("print", "pais")+": ").append(vo.getCountryName()).append("<br/>");
 					buf.append("</td>");
 					buf.append("<td>").append(convertForRtf(vo.getObservationText())).append("</td>");
 					buf.append("</tr>");

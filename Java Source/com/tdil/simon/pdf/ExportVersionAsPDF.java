@@ -34,6 +34,7 @@ import com.tdil.simon.data.valueobjects.ObservationVO;
 import com.tdil.simon.data.valueobjects.SignatureVO;
 import com.tdil.simon.data.valueobjects.VersionVO;
 import com.tdil.simon.utils.UploadUtils;
+import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
 public class ExportVersionAsPDF {
@@ -100,12 +101,12 @@ public class ExportVersionAsPDF {
 		buf.append("<TD width=\"150\"><img width=\"150\" height=\"77\" src=\""+SystemConfig.getTempPath() + "/logoSegundoPDFsRTFs.png"+"\"></TD></TR></TABLE>");
 		buf.append("<H1>").append(version.getDocument().getTitle()).append("</H1>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
-		buf.append("<H2>Preámbulo</H2>");
+		buf.append("<H2>" + ResourceBundleCache.get("print", "preambulo") + "</H2>");
 		for (Paragraph p : introduction) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(p.getParagraphText()).append("</p>");
 		}
 		List<Paragraph> paragraphs = version.getParagraphs().subList(introduction.size(), version.getParagraphs().size());
-		buf.append("<H2>Párrafos</H2>");
+		buf.append("<H2>"+ResourceBundleCache.get("print", "parrafos")+"</H2>");
 		for (Paragraph p : paragraphs) {
 			buf.append("<p>").append(p.getParagraphNumberForDisplay()).append(". ").append(p.getParagraphText()).append("</p>");
 		}
@@ -137,12 +138,12 @@ public class ExportVersionAsPDF {
 			List<Observation> observations = ObservationDAO.selectNotDeletedObservationsForVersion(version.getVersion().getId());
 			if (!observations.isEmpty()) {
 				DateFormat simpleDateFormat = SystemConfig.getDateFormatWithMinutes();
-				buf.append("<H2>Observaciones a la fecha: ").append(simpleDateFormat.format(new Date())).append("</H2>");
+				buf.append("<H2>"+ResourceBundleCache.get("print", "observacionesALaFecha")+": ").append(simpleDateFormat.format(new Date())).append("</H2>");
 				buf.append("<table width=\"100%\" cellspacing=\"0\" cellpadding=\"4\" border=\"0\">");
 				for (Observation o : observations) {
 					if (o.getParagraphId() != lastParagraphId) {
 						Paragraph p = getParagraph(version.getParagraphs(), o.getParagraphId());
-						buf.append("<TR><TD colspan=\"2\" width=\"100%\"><b>Párrafo original:</b><br/>");
+						buf.append("<TR><TD colspan=\"2\" width=\"100%\"><b>"+ResourceBundleCache.get("print", "parrafoOriginal")+":</b><br/>");
 						buf.append(p.getParagraphNumberForDisplay()).append(". ");
 						buf.append(p.getParagraphText());
 						buf.append("<br/></TD>");
@@ -152,13 +153,13 @@ public class ExportVersionAsPDF {
 					DelegateAuditDAO.registerDownloadObservation(user, o);
 					ObservationVO vo = (ObservationVO)o;
 					buf.append("<TR><TD><TABLE width=\"100%\"><TR>");
-					buf.append("<TD>Párrafo: <b>").append(vo.getParagraphNumberForDisplay()).append("</b></TD>");
+					buf.append("<TD>"+ResourceBundleCache.get("print", "parrafo")+": <b>").append(vo.getParagraphNumberForDisplay()).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Fecha de observación: <b>").append(simpleDateFormat.format(vo.getCreationDate())).append("</b></TD>");
+					buf.append("<TD>"+ResourceBundleCache.get("print", "fechaDeObservacion")+": <b>").append(simpleDateFormat.format(vo.getCreationDate())).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Delegado: <b>").append(vo.getName()).append("</b></TD>");
+					buf.append("<TD>"+ResourceBundleCache.get("print", "delegado")+": <b>").append(vo.getName()).append("</b></TD>");
 					buf.append("</TR><TR>");
-					buf.append("<TD>Delegación: <b>").append(vo.getCountryName()).append("</b></TD>");
+					buf.append("<TD>"+ResourceBundleCache.get("print", "pais")+": <b>").append(vo.getCountryName()).append("</b></TD>");
 					buf.append("</TR></TABLE></TD>");
 					buf.append("<TD width=\"70%\" valign=\"top\" bgcolor=\"#EEEEEE\">").append(vo.getObservationText()).append("</TD>");
 				}
