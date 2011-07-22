@@ -121,7 +121,7 @@ public class ExportVersionAsRTF {
 					buf.append(ResourceBundleCache.get("print", "delegado")+": ").append(vo.getName()).append("<br/>");
 					buf.append(ResourceBundleCache.get("print", "pais")+": ").append(vo.getCountryName()).append("<br/>");
 					buf.append("</td>");
-					buf.append("<td>").append(convertForRtf(vo.getObservationText())).append("</td>");
+					buf.append("<td>").append(convertObservationForRtf(vo.getObservationText())).append("</td>");
 					buf.append("</tr>");
 				}
 				buf.append("</table>");
@@ -158,6 +158,12 @@ public class ExportVersionAsRTF {
 				inputStream.close();
 			}
 		}
+	}
+
+	private static Object convertObservationForRtf(String observationText) {
+		String temporary = convertForRtf(observationText);
+		temporary = temporary.replaceAll("\\<img.*?>","");
+		return temporary;
 	}
 
 	private static Paragraph getParagraph(List<Paragraph> paragraphs, int paragraphId) {
