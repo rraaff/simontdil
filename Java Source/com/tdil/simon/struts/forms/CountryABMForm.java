@@ -126,14 +126,16 @@ public class CountryABMForm extends TransactionalValidationForm implements ABMFo
 	private void modifyCountry() throws SQLException, FileNotFoundException, IOException {
 		Country country = CountryDAO.getCountryWithFlag(this.getId());
 		country.setName(this.getName());
-		if (this.flagBytes != null) {
-			country.setFlag(this.flagBytes);
-		}
 		if (country.isHost()) {
 			country.setLanguage(this.getLanguage());
 		}
-		CountryDAO.updateCountry(country);
-		UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + this.getId() + ".png");
+		if (this.flagBytes != null) {
+			country.setFlag(this.flagBytes);
+			CountryDAO.updateCountryWithFlag(country);
+			UploadUtils.uploadFileTo(this.flag, SystemConfig.getFlagStore() + "/" + this.getId() + ".png");
+		} else {
+			CountryDAO.updateCountry(country);
+		}
 	}
 	private void addCountry() throws SQLException, FileNotFoundException, IOException {
 		Country country = new Country();

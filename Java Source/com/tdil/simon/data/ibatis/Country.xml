@@ -21,36 +21,28 @@
 
   <!-- Select with no parameters. -->
   <select id="selectAllCountries" resultClass="Country">
-    select *
+    select id, name, host, language, deleted
     from COUNTRY
     order by name
   </select>
   
   <select id="selectAllCountriesNotDeleted" resultClass="Country">
-    select *
+    select id, name, host, language, deleted
    	from COUNTRY 
    	WHERE DELETED = 0
    	order by name
   </select>
   
   <select id="selectAllCountriesVO" resultClass="com.tdil.simon.data.valueobjects.CountryVO">
-    select COUNTRY.*,
+    select COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted,
       (SELECT count(1) FROM SYSTEMUSER WHERE SYSTEMUSER.deleted = 0 AND SYSTEMUSER.countryId = COUNTRY.id) as userCount
    	from COUNTRY
-   	order by COUNTRY.name
-  </select>
-  
-  <select id="selectAllCountriesVONotDeleted" resultClass="com.tdil.simon.data.valueobjects.CountryVO">
-    select COUNTRY.*,
-      (SELECT count(1) FROM SYSTEMUSER WHERE SYSTEMUSER.deleted = 0 AND SYSTEMUSER.countryId = COUNTRY.id) as userCount
-   	from COUNTRY
-   	WHERE COUNTRY.deleted = 0
    	order by COUNTRY.name
   </select>
   
   <select id="selectCountryHost" resultClass="Country">
     select
-      *
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
     from COUNTRY
     where HOST = 1
     and deleted = 0
@@ -58,14 +50,14 @@
   
   <select id="selectCountryByName" parameterClass="java.lang.String" resultClass="Country">
     select
-      *
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
     from COUNTRY
     where name = #name#
   </select>
   
   <select id="selectCountryById" parameterClass="int" resultClass="Country">
     select
-      *
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
     from COUNTRY
     where id = #id#
   </select>
@@ -89,6 +81,15 @@
   </insert>
 
   <update id="updateCountry" parameterClass="Country">
+    update COUNTRY set
+      name = #name#,
+      language = #language#,
+      deleted = #deleted#
+    where
+      id = #id#
+  </update>
+  
+  <update id="updateCountryWithFlag" parameterClass="Country">
     update COUNTRY set
       name = #name#,
       flag = #flag#,
