@@ -30,7 +30,7 @@
 -->
 </style>
 </head>
-<body>
+<body id="jsp-<%=getServletInfo()%>">
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	<tr>
 		<td width="20" height="20"><img src="images/focalae_set/top_left.gif" width="20" height="20"></td>
