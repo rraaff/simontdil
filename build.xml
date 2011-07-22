@@ -1,9 +1,17 @@
 <project name="Simon" default="makeWar" basedir=".">
 	
 	<target name="makeWar">
-		<war destfile="/home/mgodoy/Simon_WEB.war" basedir="../Simon_WEB/" webxml="../Simon_WEB/Web Content/WEB-INF/web.xml"></war>
+		<delete dir="/home/mgodoy/Simon_WEB"></delete>
+		<delete file="/home/mgodoy/Simon_WEB.war"></delete>
+		<delete file="/home/mgodoy/Simon_WEB.zip"></delete>
+		<war destfile="/home/mgodoy/Simon_WEB.war" basedir="${workspace_loc}/Simon_WEB/" webxml="${workspace_loc}/Simon_WEB/Web Content/WEB-INF/web.xml"></war>
 		<unwar src="/home/mgodoy/Simon_WEB.war" dest="/home/mgodoy/Simon_WEB/" overwrite="true"/>
 		<delete file="/home/mgodoy/Simon_WEB.war"></delete>
 		<delete dir="/home/mgodoy/Simon_WEB/WEB-INF"></delete>
+		<tstamp>
+			<format property="hora" pattern="yyyyMMddHHmm"/>
+		</tstamp>
+		<zip destfile="/home/mgodoy/Simon_WEB_${hora}.zip" basedir="/home/mgodoy/" includes="Simon_WEB/**"></zip>
+		<delete dir="/home/mgodoy/Simon_WEB"></delete>
 	</target>
 </project>
