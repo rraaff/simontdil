@@ -20,10 +20,6 @@ public class CountryDAO {
 		return IBatisManager.sqlMapper.queryForList("selectAllCountriesNotDeleted");
 	}
 	
-	public static List selectNotDeletedCountriesVO() throws SQLException {
-		return IBatisManager.sqlMapper.queryForList("selectAllCountriesVONotDeleted");
-	}
-
 	public static Country getCountryHost() throws SQLException {
 		return (Country) IBatisManager.sqlMapper.queryForObject(
 				"selectCountryHost");
@@ -51,6 +47,10 @@ public class CountryDAO {
 
 	public static void updateCountry(Country country) throws SQLException {
 		IBatisManager.sqlMapper.update("updateCountry", country);
+	}
+	
+	public static void updateCountryWithFlag(Country country) throws SQLException {
+		IBatisManager.sqlMapper.update("updateCountryWithFlag", country);
 	}
 
 	public static void logicallyDeleteCountry(Country country)

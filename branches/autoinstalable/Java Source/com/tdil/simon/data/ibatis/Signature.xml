@@ -20,7 +20,8 @@
   <!-- Select with no parameters. -->
  
  <select id="selectSignaturesForVersion" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.SignatureVO">
-    select SIGNATURE.*, SYSTEMUSER.name as delegateName, COUNTRY.name as countryDescription, COUNTRY.id as countryId, SYSTEMUSER.job as job
+    select SIGNATURE.id, SIGNATURE.versionId, SIGNATURE.userId, SIGNATURE.deleted, 
+    	SYSTEMUSER.name as delegateName, COUNTRY.name as countryDescription, COUNTRY.id as countryId, SYSTEMUSER.job as job
     from SIGNATURE, SYSTEMUSER, COUNTRY
     where SIGNATURE.versionId = #id#
     AND SIGNATURE.userId = SYSTEMUSER.id
@@ -29,7 +30,8 @@
   </select>
   
   <select id="selectSignaturesForPortugues" parameterClass="java.util.Map" resultClass="com.tdil.simon.data.valueobjects.SignatureVO">
-    select SIGNATURE.*, SYSTEMUSER.name as delegateName, COUNTRY.name as countryDescription, COUNTRY.id as countryId, SYSTEMUSER.job as job
+    select SIGNATURE.id, SIGNATURE.versionId, SIGNATURE.userId, SIGNATURE.deleted, 
+    	SYSTEMUSER.name as delegateName, COUNTRY.name as countryDescription, COUNTRY.id as countryId, SYSTEMUSER.job as job
     from SIGNATURE, SYSTEMUSER, COUNTRY, VERSION
     where SIGNATURE.versionId = VERSION.id
     AND VERSION.documentId = #docID#
@@ -41,13 +43,13 @@
   </select>
  
     <select id="getSignatureByVersionIdAndUserId" parameterClass="Signature">
-    SELECT * FROM SIGNATURE 
+    SELECT SIGNATURE.id, SIGNATURE.versionId, SIGNATURE.userId, SIGNATURE.deleted FROM SIGNATURE 
     WHERE versionId = #versionId#
     AND userId = #userId#
     </select>
     
     <select id="getSignatureBy" parameterClass="java.util.Map" resultClass="Signature">
-    SELECT * FROM SIGNATURE 
+    SELECT id, versionId, userId, deleted FROM SIGNATURE 
     WHERE versionId = #versionId#
     AND userId = #userId#
     </select>
@@ -72,6 +74,5 @@
     delete from SIGNATURE
     where id = #id#
   </delete>
-
 
 </sqlMap>
