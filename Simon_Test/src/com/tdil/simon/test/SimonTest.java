@@ -2,6 +2,8 @@ package com.tdil.simon.test;
 
 import org.watij.webspec.dsl.WebSpec;
 
+import com.tdil.simon.test.utils.SimonTestInit;
+
 import junit.framework.TestCase;
 
 public class SimonTest extends TestCase {
@@ -18,6 +20,12 @@ public class SimonTest extends TestCase {
 			spec.open(SimonTest.SERVER_URL + "logout.st");
 		}
 		return spec;
+	}
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		SimonTestInit.init();
 	}
 
 	private static WebSpec createWebSpec() {
