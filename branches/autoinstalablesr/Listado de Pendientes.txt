@@ -1,9 +1,13 @@
+[Queda para la próxima versión] Resource bundle de los js
+	moveto
+	simonflags
+
+banderitas y paises del plugin simonflags generadas desde la base.
+
 Agregar un build number que se pueda ver con el admin
 
 [Queda para la próxima versión] Poner componente de fecha en busqueda de observaciones
 
-[Queda para la próxima versión] Resource bundle de los js
-Plugins multiidioma, banderitas del plugin simonflags generadas desde la base.
 
 [Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
 
@@ -14,6 +18,3 @@ Plugins multiidioma, banderitas del plugin simonflags generadas desde la base.
 Logos por idioma?
 
 Reflotar instalacion de cero (instalacion de cero).
-
-Poder bajarse el log o el ultimo pedazo del mismo con el admin (o algo asi).
-Esquema de cea con categoria aparte que guarde x cant de excepciones.
