@@ -1,5 +1,7 @@
 <project name="Simon" default="makeWar" basedir=".">
 	
+	<property name="workspace_loc" value="../"></property>
+	
 	<target name="makeWar">
 		<delete dir="/home/mgodoy/Simon_WEB"></delete>
 		<delete file="/home/mgodoy/Simon_WEB.war"></delete>
