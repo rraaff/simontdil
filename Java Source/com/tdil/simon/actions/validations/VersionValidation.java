@@ -8,6 +8,7 @@ import java.util.Date;
 import org.apache.commons.lang.StringUtils;
 
 import com.tdil.simon.actions.response.ValidationError;
+import com.tdil.simon.utils.DateUtils;
 
 public class VersionValidation {
 
@@ -27,7 +28,7 @@ public class VersionValidation {
 			result = upToCommentDate.trim();
 			DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
 			try {
-				Date date = dateFormat.parse(result);
+				Date date = DateUtils.date2LastMomentOfDate(dateFormat.parse(result));
 				Date today = new Date();
 				if (date.before(today)) {
 					validation.setFieldError("upToCommentDate", "upToCommentDate."+ValidationErrors.UP_TO_COMMENT_DATE_BEFORE_TODAY);
