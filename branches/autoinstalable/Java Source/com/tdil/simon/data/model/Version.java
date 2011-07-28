@@ -2,6 +2,7 @@ package com.tdil.simon.data.model;
 
 import java.util.Date;
 
+import com.tdil.simon.utils.DateUtils;
 import com.tdil.simon.web.ResourceBundleCache;
 import com.tdil.simon.web.SystemConfig;
 
@@ -45,10 +46,10 @@ public class Version extends PersistentObject {
 		this.creationDate = creationDate;
 	}
 	public Date getUpToCommentDate() {
-		return upToCommentDate;
+		return DateUtils.date2LastMomentOfDate(upToCommentDate);
 	}
 	public void setUpToCommentDate(Date upToCommentDate) {
-		this.upToCommentDate = upToCommentDate;
+		this.upToCommentDate = DateUtils.date2LastMomentOfDate(upToCommentDate);
 	}
 	
 	public String getTranslatedStatus() {

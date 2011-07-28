@@ -15,6 +15,7 @@ public class SimonTest extends TestCase {
 
 	public synchronized static WebSpec getSpec() {
 		if (spec == null) {
+			WebSpec.webspec_home = "/home/mgodoy/simon/webspec/web_spec/webspec_1.3.1";
 			spec = createWebSpec();
 		} else {
 			spec.open(SimonTest.SERVER_URL + "logout.st");

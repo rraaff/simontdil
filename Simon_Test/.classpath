@@ -16,7 +16,6 @@
 	<classpathentry kind="lib" path="slf4j-api-1.5.8.jar"/>
 	<classpathentry kind="lib" path="slf4j-log4j12-1.5.8.jar"/>
 	<classpathentry kind="lib" path="tuxpack-0.2.jar"/>
-	<classpathentry kind="lib" path="webspec.jar"/>
 	<classpathentry kind="lib" path="winpack-3.8.jar"/>
 	<classpathentry kind="lib" path="xulrunner-linux.jar"/>
 	<classpathentry kind="lib" path="xulrunner-linux64.jar"/>
@@ -24,5 +23,7 @@
 	<classpathentry kind="lib" path="xulrunner-windows.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Simon_WEB"/>
 	<classpathentry kind="lib" path="/Simon_WEB/Web Content/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/WebSpec"/>
+	<classpathentry kind="lib" path="/Simon_WEB/Web Content/WEB-INF/lib/struts.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

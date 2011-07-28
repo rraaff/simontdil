@@ -13,6 +13,7 @@ public class AllTest {
 		suite.addTestSuite(TestSystemUserABM.class);
 		suite.addTestSuite(TestDelegateABM.class);
 		suite.addTestSuite(TestCategoryABM.class);
+		suite.addTestSuite(TestCreateDocument.class);
 		//suite.addTestSuite(TestCountryABM.class);
 		return suite;
 	}
