@@ -211,10 +211,10 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 										<html:link  action="editVersion.st?" paramName="ViewVersion" paramProperty="version.version.id" paramId="id">
 											<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
 										</html:link>
+										<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 									</td>
 								</tr>
 							</table>
-						
 						</div>
 					</logic:equal>
 				<% } %>
