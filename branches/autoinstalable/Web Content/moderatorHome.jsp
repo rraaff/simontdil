@@ -55,17 +55,14 @@
 	color:#888888;
 }
 .categoryTD{
-	height:44px;
 	color:#666;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	font-size:12px;
 }
 #documentTD{
-	height:29px;
 	color:#454545;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	font-size:12px;
-	padding-top: 15px;
 }
 #documentTD a, #documentTD a:hover, #documentTD visited {
 	color:#454545;
@@ -156,7 +153,7 @@
 											<td></td>
 											<td colspan="1">
 												<div id="child-<bean:write name="docTree" property="id"/>" style="display: block;">
-													<table border="0" cellpadding="0" cellspacing="0">
+													<table border="0" cellpadding="0" cellspacing="5">
 														<logic:iterate name="docTree" property="documents" id="docLeafTop">
 														<tr>
 															<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
@@ -178,7 +175,7 @@
 																<td></td>
 																<td colspan="1">
 																	<div id="child-<bean:write name="docSubTypeTree" property="id"/>" style="display: block;">
-																		<table border="0" cellpadding="0" cellspacing="0">
+																		<table border="0" cellpadding="0" cellspacing="5">
 																			<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
 																			<tr>
 																				<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
@@ -231,7 +228,7 @@
 												<td></td>
 												<td colspan="1">
 													<div id="child-r<bean:write name="catTree" property="id"/>" style="display: block;">
-														<table border="0" cellpadding="0" cellspacing="0">
+														<table border="0" cellpadding="0" cellspacing="5">
 															<logic:iterate name="catTree" property="documents" id="catLeafTop">
 															<tr>
 																<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
@@ -251,7 +248,7 @@
 																	<td></td>
 																	<td colspan="1">
 																		<div id="child-r<bean:write name="subCatTree" property="id"/>" style="display: block;">
-																			<table border="0" cellpadding="0" cellspacing="0">
+																			<table border="0" cellpadding="0" cellspacing="5">
 																				<logic:iterate name="subCatTree" property="documents" id="refLeaf">
 																				<tr>
 																					<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
