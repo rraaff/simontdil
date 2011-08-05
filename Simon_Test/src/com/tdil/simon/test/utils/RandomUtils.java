@@ -17,7 +17,7 @@ public class RandomUtils {
 		return prefix + nextNumerator();
 	}
 
-	private static long nextNumerator() {
+	public static long nextNumerator() {
 		return numerator++;
 	}
 	
