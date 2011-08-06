@@ -42,10 +42,10 @@
 	border:1px solid #c6c6c6;
 	width:100%;
 <logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
-	height:300px;
+	height:100%;
 </logic:equal>
 <logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
-	height:500px;
+	height:100%;
 </logic:notEqual>
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	float: left;
