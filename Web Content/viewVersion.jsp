@@ -45,11 +45,16 @@ div#main{
 	height:230px;
 	text-align:center;
 }
-
+#mainDocContainer #internalRow {
+	width:100%;
+	height:25px;
+	text-align:center;
+	padding-top:10px;
+}
 #mainDocContainer #leftObject {
 	/*background-color:#00FF00;*/
 	width:100%;
-	height:30px;
+	height:25px;
 	text-align:center;
 	padding-top:10px;
 	float:left;
@@ -140,7 +145,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 <html:form action="/viewVersionAction">
 	<div id="alcien" style="height:560px; padding-top:20px;">
 		<div id="alcincuentaLeft" style="width:24%; height:540px;">
-			<div id="mainDocContainer" style="height:250px; margin-top:13px; padding-left:10px;">
+			<div id="mainDocContainer" style="height:270px; margin-top:13px; padding-left:10px;">
 				<div id="blockTitle1"><%=ResourceBundleCache.get(getServletInfo(), "documentoPrincipal")%></div>
 				<div id="leftObject" style=" text-align:left;"><span class="titleDocInModule"><bean:write name="ViewVersion" property="version.document.title" /></span>
 				<div id="leftObject" style="text-align:left;"><%=ResourceBundleCache.get(getServletInfo(), "version")%>: <span class="titleDocInModule"><bean:write name="ViewVersion" property="version.version.number" /> <bean:write name="ViewVersion" property="version.version.name" /></span></div>
@@ -162,19 +167,21 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 						</tr>
 					</table>
 				</div>
-				<div id="leftObject" style="text-align:left;"><%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /></div>
+				<div id="leftObject" style="text-align:left;"><%=ResourceBundleCache.get(getServletInfo(), "limiteObservaciones")%>: <bean:write name="ViewVersion" property="version.version.limitObservationsString" /> - <%=ResourceBundleCache.get(getServletInfo(), "aclaracionHorario")%></div>
 				<div id="leftObject">
-					<html:submit property="operation">
-						<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf")%>
-					</html:submit>
-				</div>
-				<div id="leftObject">
-					<html:submit property="operation">
-						<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf")%>
-					</html:submit></div>
+					<div style="float:left;">
+						<html:submit property="operation">
+							<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf")%>
+						</html:submit>
+					</div>
+					<div style="float:right; padding-right:10px;">
+						<html:submit property="operation">
+							<%=ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf")%>
+						</html:submit></div>
+					</div>
 				</div>
 			</div>
-			<div id="mainDocContainer" style="margin-top:20px; padding-left:10px;">
+			<div id="mainDocContainer" style="height:211px;margin-top:20px; padding-left:10px;">
 				<div id="blockTitle2" style="float:left;"><%=ResourceBundleCache.get(getServletInfo(), "acciones")%></div>
 				<% if (isDelegate) { %>
 					<div id="leftObject">
