@@ -26,6 +26,7 @@ public class SimonTestInit {
 		p.load(AllTest.class.getResourceAsStream("test.properties"));
 		SimonTest.SERVER_URL = p.getProperty("serverURL");
 		SimonTest.ADMIN_PASS = p.getProperty("adminPassword");
+		SimonTest.NAVIGATION_DELAY = p.getProperty("navigation.delay");
 	}
 
 	private static void initDatabaseConnection() throws IOException {

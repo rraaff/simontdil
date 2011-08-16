@@ -20,22 +20,22 @@ public class TestDelegateABM extends SimonTest {
 		SMTPServer.cleanAllMailsReceived();
 		// login
 		spec.open(SimonTest.SERVER_URL);
-		BrowserUtils.waitUntilPage("jsp-login", spec);
-		BrowserUtils.setInput("username", "Admin", spec);
-		BrowserUtils.setInput("password", "Admin", spec);
+		BrowserUtils.waitUntilPage("jsp-login");
+		BrowserUtils.setInput("username", "Admin");
+		BrowserUtils.setInput("password", "Admin");
 		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
-		BrowserUtils.waitUntilPage("jsp-adminHome", spec);
+		BrowserUtils.waitUntilPage("jsp-adminHome");
 		// ir a system user
 		spec.open(SimonTest.SERVER_URL + "goToDelegateABM.st");
-		BrowserUtils.waitUntilPage("jsp-delegateABM", spec);
+		BrowserUtils.waitUntilPage("jsp-delegateABM");
 		// lleno datos
-		BrowserUtils.setInput("name", RandomUtils.randomString("Delegate"), spec);
+		BrowserUtils.setInput("name", RandomUtils.randomString("Delegate"));
 		String username = RandomUtils.randomString("del");
-		BrowserUtils.setInput("username", username, spec);
+		BrowserUtils.setInput("username", username);
 		String email = RandomUtils.randomEmail("del", "domain.com");
-		BrowserUtils.setInput("email", email, spec);
-		BrowserUtils.setInput("job", "Job", spec);
-		BrowserUtils.clickButton("operation", "Create", spec);
+		BrowserUtils.setInput("email", email);
+		BrowserUtils.setInput("job", "Job");
+		BrowserUtils.clickButton("operation", "Create");
 		
 		// assert de que esta
 		IBatisManager.beginTransaction();

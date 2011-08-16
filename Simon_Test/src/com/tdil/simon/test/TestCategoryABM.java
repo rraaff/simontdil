@@ -21,18 +21,18 @@ public class TestCategoryABM extends SimonTest {
 		SMTPServer.cleanAllMailsReceived();
 		// login
 		spec.open(SimonTest.SERVER_URL);
-		BrowserUtils.waitUntilPage("jsp-login", spec);
-		BrowserUtils.setInput("username", systemUser.getUsername(), spec);
-		BrowserUtils.setInput("password", "mod_act", spec);
+		BrowserUtils.waitUntilPage("jsp-login");
+		BrowserUtils.setInput("username", systemUser.getUsername());
+		BrowserUtils.setInput("password", "mod_act");
 		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
-		BrowserUtils.waitUntilPage("jsp-moderatorHome", spec);
+		BrowserUtils.waitUntilPage("jsp-moderatorHome");
 		// alta de categoria
 		spec.open(SimonTest.SERVER_URL + "goToCategoryABM.st");
-		BrowserUtils.waitUntilPage("jsp-categoryABM", spec);
+		BrowserUtils.waitUntilPage("jsp-categoryABM");
 		String catName = RandomUtils.randomString("Categoria 1-");
-		BrowserUtils.setInput("name", catName, spec);
-		BrowserUtils.setInput("orderNumber", "1", spec);
-		BrowserUtils.clickButton("operation", "Create", spec);
+		BrowserUtils.setInput("name", catName);
+		BrowserUtils.setInput("orderNumber", "1");
+		BrowserUtils.clickButton("operation", "Create");
 		IBatisManager.beginTransaction();
 		Category category = CategoryDAO.getCategory(catName);
 		assertNotNull(category);
@@ -42,11 +42,11 @@ public class TestCategoryABM extends SimonTest {
 		IBatisManager.commitTransaction();
 		// edicion de categoria
 		spec.open(SimonTest.SERVER_URL + "editCategory.st?&id=" + category.getId());
-		BrowserUtils.waitUntilPage("jsp-categoryABM", spec);
+		BrowserUtils.waitUntilPage("jsp-categoryABM");
 		String editedCatName = RandomUtils.randomString("Categoria 1X-");
-		BrowserUtils.setInput("name", editedCatName, spec);
-		BrowserUtils.setInput("orderNumber", "2", spec);
-		BrowserUtils.clickButton("operation", "Modify", spec);
+		BrowserUtils.setInput("name", editedCatName);
+		BrowserUtils.setInput("orderNumber", "2");
+		BrowserUtils.clickButton("operation", "Modify");
 		IBatisManager.beginTransaction();
 		category = CategoryDAO.getCategory(catName);
 		assertNull(category);
@@ -59,11 +59,11 @@ public class TestCategoryABM extends SimonTest {
 		
 		// alta de subcategoria
 		spec.open(SimonTest.SERVER_URL + "goToSubCategoryABM.st?&categoryId=" + category.getId());
-		BrowserUtils.waitUntilPage("jsp-subCategoryABM", spec);
+		BrowserUtils.waitUntilPage("jsp-subCategoryABM");
 		String subcatName = RandomUtils.randomString("Subcategoria 1-");
-		BrowserUtils.setInput("name", subcatName, spec);
-		BrowserUtils.setInput("orderNumber", "1", spec);
-		BrowserUtils.clickButton("operation", "Create", spec);
+		BrowserUtils.setInput("name", subcatName);
+		BrowserUtils.setInput("orderNumber", "1");
+		BrowserUtils.clickButton("operation", "Create");
 		IBatisManager.beginTransaction();
 		Category subcategory = CategoryDAO.getCategory(subcatName);
 		assertNotNull(subcategory);
@@ -74,11 +74,11 @@ public class TestCategoryABM extends SimonTest {
 		IBatisManager.commitTransaction();
 		// edicion de subcategoria
 		spec.open(SimonTest.SERVER_URL + "editSubCategory.st?&id=" + subcategoryId);
-		BrowserUtils.waitUntilPage("jsp-subCategoryABM", spec);
+		BrowserUtils.waitUntilPage("jsp-subCategoryABM");
 		String editedSubCatName = RandomUtils.randomString("Subcategoria 1X-");
-		BrowserUtils.setInput("name", editedSubCatName, spec);
-		BrowserUtils.setInput("orderNumber", "2", spec);
-		BrowserUtils.clickButton("operation", "Modify", spec);
+		BrowserUtils.setInput("name", editedSubCatName);
+		BrowserUtils.setInput("orderNumber", "2");
+		BrowserUtils.clickButton("operation", "Modify");
 		IBatisManager.beginTransaction();
 		category = CategoryDAO.getCategory(subcatName);
 		assertNull(category);

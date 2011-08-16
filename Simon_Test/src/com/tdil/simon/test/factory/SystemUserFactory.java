@@ -5,8 +5,11 @@ import java.sql.SQLException;
 import com.tdil.simon.data.ibatis.CountryDAO;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
+import com.tdil.simon.data.ibatis.UserGroupDAO;
 import com.tdil.simon.data.model.Country;
 import com.tdil.simon.data.model.SystemUser;
+import com.tdil.simon.data.model.UserGroup;
+import com.tdil.simon.test.utils.RandomUtils;
 import com.tdil.simon.utils.CryptoUtils;
 
 public class SystemUserFactory {
@@ -30,5 +33,31 @@ public class SystemUserFactory {
 		IBatisManager.commitTransaction();
 		return sysUser;
 	}
+	
+	public static SystemUser getNewDelegate() throws SQLException {
+		SystemUser sysUser = new SystemUser();
+		String username = RandomUtils.randomString("Neg ");
+		IBatisManager.beginTransaction();
+		// Create
+		Country c = CountryDAO.getCountryHost();
+		sysUser.setName(RandomUtils.randomString("Neg "));
+		sysUser.setDelegate(true);
+		sysUser.setCountryId(c.getId());
+		sysUser.setCountryDesc(c.getName());
+		sysUser.setUsername(username);
+		sysUser.setPassword(CryptoUtils.getHashedValue("negociador"));
+		sysUser.setDeleted(false);
+		SystemUserDAO.insertUser(sysUser);
+		sysUser = SystemUserDAO.getUser(username);
+		IBatisManager.commitTransaction();
+		return sysUser;
+	}
 
+	public static SystemUser getSystemUserByUsername(String userName) throws SQLException {
+		SystemUser result = null;
+		IBatisManager.beginTransaction();
+		result = SystemUserDAO.getUser(userName);
+		IBatisManager.commitTransaction();
+		return result;
+	}
 }

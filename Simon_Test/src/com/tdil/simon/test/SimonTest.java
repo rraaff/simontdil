@@ -8,6 +8,8 @@ import junit.framework.TestCase;
 
 public class SimonTest extends TestCase {
 
+	public static String NAVIGATION_DELAY = "0";
+	
 	public static String SERVER_URL = "http://localhost:8180/Simon/";
 	public static String ADMIN_PASS = "Admin";
 	
@@ -17,8 +19,6 @@ public class SimonTest extends TestCase {
 		if (spec == null) {
 			WebSpec.webspec_home = "/home/mgodoy/simon/webspec/web_spec/webspec_1.3.1";
 			spec = createWebSpec();
-		} else {
-			spec.open(SimonTest.SERVER_URL + "logout.st");
 		}
 		return spec;
 	}
@@ -35,6 +35,8 @@ public class SimonTest extends TestCase {
 		return new WebSpec().mozilla();
 	}
 
+	public static int getNavigationDelay() {
+		return Integer.valueOf(NAVIGATION_DELAY);
+	}
 
-	
 }

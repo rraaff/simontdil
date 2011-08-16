@@ -15,18 +15,18 @@ public class TestCountryABM extends SimonTest {
 		SMTPServer.cleanAllMailsReceived();
 		// login
 		spec.open(SimonTest.SERVER_URL);
-		BrowserUtils.waitUntilPage("jsp-login", spec);
-		BrowserUtils.setInput("username", "Admin", spec);
-		BrowserUtils.setInput("password", "Admin", spec);
+		BrowserUtils.waitUntilPage("jsp-login");
+		BrowserUtils.setInput("username", "Admin");
+		BrowserUtils.setInput("password", "Admin");
 		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
-		BrowserUtils.waitUntilPage("jsp-adminHome", spec);
+		BrowserUtils.waitUntilPage("jsp-adminHome");
 		// ir a system user
 		spec.open(SimonTest.SERVER_URL + "goToCountryABM.st");
-		BrowserUtils.waitUntilPage("jsp-countryABM", spec);
+		BrowserUtils.waitUntilPage("jsp-countryABM");
 		// lleno datos
-		BrowserUtils.setInput("name", RandomUtils.randomString("Country"), spec);
-		BrowserUtils.setFile("flag", "/home/mgodoy/icarus/workspace/simon/Simon_Test/resources/argentina.png", spec);
-		BrowserUtils.clickButton("operation", "Create", spec);
+		BrowserUtils.setInput("name", RandomUtils.randomString("Country"));
+		BrowserUtils.setFile("flag", "/home/mgodoy/icarus/workspace/simon/Simon_Test/resources/argentina.png");
+		BrowserUtils.clickButton("operation", "Create");
 		
 		// assert de que esta
 //		IBatisManager.beginTransaction();

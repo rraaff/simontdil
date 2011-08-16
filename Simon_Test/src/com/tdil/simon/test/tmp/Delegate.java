@@ -30,18 +30,18 @@ public class Delegate extends Thread{
 		WebSpec.window_height = 800;
 		WebSpec spec = new WebSpec().mozilla();
 		spec.open(SimonTest.SERVER_URL + "");
-		BrowserUtils.waitUntilPage("jsp-login", spec);
+		BrowserUtils.waitUntilPage("jsp-login");
 		Tag username = spec.find.input().with.name("username");
 		username.set.value(this.username);
 		Tag password = spec.find.input().with.name("password");
 		password.set.value("123123");
 		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
-		BrowserUtils.waitUntilPage("jsp-delegateHome", spec);
+		BrowserUtils.waitUntilPage("jsp-delegateHome");
 		for (int i = 0; i < 10; i++) {
 			spec.open(SimonTest.SERVER_URL + "goToDelegateHome.st");
-			BrowserUtils.waitUntilPage("jsp-delegateHome", spec);
+			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			spec.open(SimonTest.SERVER_URL + "goToViewLastVersionOfDocument.st?&documentID=5");
-			BrowserUtils.waitUntilPage("jsp-viewVersion", spec);
+			BrowserUtils.waitUntilPage("jsp-viewVersion");
 		}
 		spec.open(SimonTest.SERVER_URL + "logout.st");
 		spec.close();
