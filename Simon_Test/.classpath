@@ -2,28 +2,25 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="engine-gecko.jar"/>
-	<classpathentry kind="lib" path="engine-ie.jar"/>
-	<classpathentry kind="lib" path="engine-webkit.jar"/>
-	<classpathentry kind="lib" path="jniwrap-native.jar"/>
-	<classpathentry kind="lib" path="junit-4.8.2.jar"/>
-	<classpathentry kind="lib" path="jxbrowser-2.5.jar"/>
-	<classpathentry kind="lib" path="log4j-1.2.15.jar"/>
-	<classpathentry kind="lib" path="MozillaGlue.jar"/>
-	<classpathentry kind="lib" path="MozillaInterfaces.jar"/>
-	<classpathentry kind="lib" path="mshtml.jar"/>
-	<classpathentry kind="lib" path="runtime.jar"/>
-	<classpathentry kind="lib" path="slf4j-api-1.5.8.jar"/>
-	<classpathentry kind="lib" path="slf4j-log4j12-1.5.8.jar"/>
-	<classpathentry kind="lib" path="tuxpack-0.2.jar"/>
-	<classpathentry kind="lib" path="winpack-3.8.jar"/>
-	<classpathentry kind="lib" path="xulrunner-linux.jar"/>
-	<classpathentry kind="lib" path="xulrunner-linux64.jar"/>
-	<classpathentry kind="lib" path="xulrunner-mac.jar"/>
-	<classpathentry kind="lib" path="xulrunner-windows.jar"/>
 	<classpathentry combineaccessrules="false" kind="src" path="/Simon_WEB"/>
-	<classpathentry kind="lib" path="/Simon_WEB/Web Content/WEB-INF/lib/commons-lang.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/commons-codec-1.4.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/commons-collections-3.2.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/commons-io-2.0.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/commons-lang-2.6.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/cssparser-0.9.5.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/htmlunit-2.9.jar" sourcepath="/home/mgodoy/simon/htmlunit-2.9 (2)/src/main"/>
+	<classpathentry kind="lib" path="lib_htmlunit/htmlunit-core-js-2.9.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/httpclient-4.1.2.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/httpcore-4.1.2.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/httpmime-4.1.2.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/nekohtml-1.9.15.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/sac-1.3.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/serializer-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/xalan-2.7.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/xercesImpl-2.9.1.jar"/>
+	<classpathentry kind="lib" path="lib_htmlunit/xml-apis-1.3.04.jar"/>
+	<classpathentry kind="lib" path="lib_junit/junit-4.8.2.jar"/>
 	<classpathentry kind="lib" path="/Simon_WEB/Web Content/WEB-INF/lib/struts.jar"/>
-	<classpathentry kind="lib" path="webspec.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -1,35 +1,30 @@
 package com.tdil.simon.test.utils;
 
-import org.watij.webspec.dsl.Tag;
-import org.watij.webspec.dsl.WebSpec;
-
 import com.tdil.simon.test.SimonTest;
 
 public class BrowserUtils {
 
-	public static void waitUntilPage(String string) {
-		WebSpec spec = SimonTest.getSpec();
-		int retries = 10;
-		Tag tag = spec.findWithId(string);
-		while (tag == null && retries >= 0) {
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-			retries = retries - 1;
-			tag = spec.find.div(string);
-		}
-		if (tag == null) {
-			throw new RuntimeException("timeout waiting for page " + string);
-		}
-		delay();
+	private static Browser browser = new BrowserUtilsHtmlUnit();
+	
+	public static void useHtmlUnit() {
+		browser = new BrowserUtilsHtmlUnit();
 	}
 	
-	public static void open(String url) {
-		WebSpec spec = SimonTest.getSpec();
-		spec.open(SimonTest.SERVER_URL + url);
-		delay();
+	public static void waitUntilPage(String string) {
+		browser.waitUntilPage(string);
+	}
+	
+	public static void open(String url) throws Exception {
+		browser.open(SimonTest.SERVER_URL + url);
+	}
+	
+	public static void waitFor(long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private static void delay() {
@@ -44,49 +39,46 @@ public class BrowserUtils {
 	}
 
 	public static void setInput(String inputName, String value) {
-		WebSpec spec = SimonTest.getSpec();
-		Tag username = spec.find.input().with.name(inputName);
-		username.set.value(value);
+		browser.setInput(inputName, value);
 	}
 	
 	public static void setTextArea(String inputName, String value) {
-		WebSpec spec = SimonTest.getSpec();
-		Tag username = spec.find.textArea().with.name(inputName);
-		username.set.value(value);
+		browser.setTextArea(inputName, value);
 	}
 
 	public static void setSelect(String select, String value) {
-		WebSpec spec = SimonTest.getSpec();
-		Tag username = spec.find.select().with.name(select);
-		username.set.value(value);
+		browser.setSelect(select, value);
 	}
 
 	public static void setSetChecked(String checkboxName, boolean checked) {
-		WebSpec spec = SimonTest.getSpec();
-		Tag username = spec.find.input().with.name(checkboxName);
-		username.set.checked(checked);
+		browser.setSetChecked(checkboxName, checked);
 	}
 
 	public static void clickButton(String inputName, String value) {
-		WebSpec spec = SimonTest.getSpec();
-		//Tag button =  spec.find("input").with.type("submit").at(0);
-		Tag button =  spec.find("input").with.value(value).at(0);
-		button.click();
-		delay();
+		browser.clickButton(inputName, value);
 	}
-
+	public static void clickButtonById(String string) {
+		browser.clickButtonById(string);
+	}
+	
 	public static void setFile(String fieldName, String fileName) {
-		WebSpec spec = SimonTest.getSpec();
-		spec.record.file().set(fileName).ok();
-		spec.find.input().with.type("file").click();
-		spec.find.input().with.name("flag").click();
-		//spec.find.input().with.name(fieldName).set.value("/home/mgodoy/icarus/workspace/simon/Simon_Test/resources/argentina.png");//click();
+		browser.setFile(fieldName, fileName);
 	}
 
 	public static void execute(String script) {
-		WebSpec spec = SimonTest.getSpec();
-		spec.execute(script);
-		delay();
+		browser.execute(script);
 	}
 
+	public static void close() {
+		browser.close();
+	}
+
+	public static void executeNoMove(String script) {
+		browser.executeNoMove(script);
+	}
+
+	public static String getDivHtmlContentById(String id) {
+		// TODO Auto-generated method stub
+		return browser.getDivHtmlContentById(id);
+	}
 }

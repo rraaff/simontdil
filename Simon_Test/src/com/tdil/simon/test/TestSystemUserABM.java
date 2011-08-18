@@ -2,8 +2,6 @@ package com.tdil.simon.test;
 
 import java.sql.SQLException;
 
-import org.watij.webspec.dsl.WebSpec;
-
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.SystemUser;
@@ -15,18 +13,17 @@ import com.tdil.simon.test.utils.RandomUtils;
 
 public class TestSystemUserABM extends SimonTest {
 
-	public void testCreateSystemUsers() throws SQLException {
-		WebSpec spec = getSpec();
+	public void testCreateSystemUsers() throws Exception {
 		SMTPServer.cleanAllMailsReceived();
 		// login
-		spec.open(SimonTest.SERVER_URL);
+		BrowserUtils.open("");
 		BrowserUtils.waitUntilPage("jsp-login");
 		BrowserUtils.setInput("username", "Admin");
 		BrowserUtils.setInput("password", "Admin");
-		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
+		BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 		BrowserUtils.waitUntilPage("jsp-adminHome");
 		// ir a system user
-		spec.open(SimonTest.SERVER_URL + "goToSystemUserABM.st");
+		BrowserUtils.open("goToSystemUserABM.st");
 		BrowserUtils.waitUntilPage("jsp-systemUserABM");
 		// lleno datos para admin
 		{
@@ -134,7 +131,7 @@ public class TestSystemUserABM extends SimonTest {
 			assertTrue(emailObj.getMessage().contains(systemUser.getPassword()));
 		}
 		// logout
-		spec.open(SimonTest.SERVER_URL + "logout.st");
+		BrowserUtils.open("logout.st");
 	}
 
 

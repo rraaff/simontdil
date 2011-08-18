@@ -2,8 +2,6 @@ package com.tdil.simon.test;
 
 import java.sql.SQLException;
 
-import org.watij.webspec.dsl.WebSpec;
-
 import com.tdil.simon.data.ibatis.CategoryDAO;
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.data.model.Category;
@@ -15,19 +13,18 @@ import com.tdil.simon.test.utils.RandomUtils;
 
 public class TestCategoryABM extends SimonTest {
 
-	public void testCategories() throws SQLException {
+	public void testCategories() throws Exception {
 		SystemUser systemUser = SystemUserFactory.getModeratorActive();
-		WebSpec spec = getSpec();
 		SMTPServer.cleanAllMailsReceived();
 		// login
-		spec.open(SimonTest.SERVER_URL);
+		BrowserUtils.open("");
 		BrowserUtils.waitUntilPage("jsp-login");
 		BrowserUtils.setInput("username", systemUser.getUsername());
 		BrowserUtils.setInput("password", "mod_act");
-		spec.execute("doOperationSubmit('LoginForm','login-ingresar')");
+		BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 		BrowserUtils.waitUntilPage("jsp-moderatorHome");
 		// alta de categoria
-		spec.open(SimonTest.SERVER_URL + "goToCategoryABM.st");
+		BrowserUtils.open("goToCategoryABM.st");
 		BrowserUtils.waitUntilPage("jsp-categoryABM");
 		String catName = RandomUtils.randomString("Categoria 1-");
 		BrowserUtils.setInput("name", catName);
@@ -41,7 +38,7 @@ public class TestCategoryABM extends SimonTest {
 		assertEquals(1, category.getOrderNumber());
 		IBatisManager.commitTransaction();
 		// edicion de categoria
-		spec.open(SimonTest.SERVER_URL + "editCategory.st?&id=" + category.getId());
+		BrowserUtils.open("editCategory.st?&id=" + category.getId());
 		BrowserUtils.waitUntilPage("jsp-categoryABM");
 		String editedCatName = RandomUtils.randomString("Categoria 1X-");
 		BrowserUtils.setInput("name", editedCatName);
@@ -58,7 +55,7 @@ public class TestCategoryABM extends SimonTest {
 		IBatisManager.commitTransaction();
 		
 		// alta de subcategoria
-		spec.open(SimonTest.SERVER_URL + "goToSubCategoryABM.st?&categoryId=" + category.getId());
+		BrowserUtils.open("goToSubCategoryABM.st?&categoryId=" + category.getId());
 		BrowserUtils.waitUntilPage("jsp-subCategoryABM");
 		String subcatName = RandomUtils.randomString("Subcategoria 1-");
 		BrowserUtils.setInput("name", subcatName);
@@ -73,7 +70,7 @@ public class TestCategoryABM extends SimonTest {
 		assertEquals(categoryId, subcategory.getParentId());
 		IBatisManager.commitTransaction();
 		// edicion de subcategoria
-		spec.open(SimonTest.SERVER_URL + "editSubCategory.st?&id=" + subcategoryId);
+		BrowserUtils.open("editSubCategory.st?&id=" + subcategoryId);
 		BrowserUtils.waitUntilPage("jsp-subCategoryABM");
 		String editedSubCatName = RandomUtils.randomString("Subcategoria 1X-");
 		BrowserUtils.setInput("name", editedSubCatName);
@@ -89,7 +86,7 @@ public class TestCategoryABM extends SimonTest {
 		assertEquals(subcategoryId, category.getId());
 		assertEquals(categoryId, subcategory.getParentId());
 		IBatisManager.commitTransaction();
-		spec.open(SimonTest.SERVER_URL + "logout.st");
+		BrowserUtils.open("logout.st");
 	}
 
 

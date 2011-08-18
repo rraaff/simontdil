@@ -14,7 +14,7 @@ public class AllTest {
 		suite.addTestSuite(TestCreateDocument.class);
 		suite.addTestSuite(TestReferenceDocumentABM.class);
 		suite.addTestSuite(TestNegotiationDelegate.class);
-		//suite.addTestSuite(TestCountryABM.class);
+		suite.addTestSuite(TestCountryABM.class);
 		return suite;
 	}
 	

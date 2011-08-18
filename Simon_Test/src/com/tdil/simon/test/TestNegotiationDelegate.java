@@ -1,36 +1,35 @@
 package com.tdil.simon.test;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.watij.webspec.dsl.WebSpec;
 
 import com.tdil.simon.data.model.Document;
 import com.tdil.simon.data.model.DocumentType;
 import com.tdil.simon.data.model.SystemUser;
 import com.tdil.simon.data.model.UserGroup;
+import com.tdil.simon.data.model.Version;
 import com.tdil.simon.test.factory.DocumentFactory;
 import com.tdil.simon.test.factory.DocumentTypeFactory;
 import com.tdil.simon.test.factory.SystemUserFactory;
 import com.tdil.simon.test.factory.UserGroupFactory;
+import com.tdil.simon.test.factory.VersionFactory;
 import com.tdil.simon.test.utils.BrowserUtils;
 import com.tdil.simon.test.utils.RandomUtils;
 
 public class TestNegotiationDelegate extends SimonTest {
 
-	public void testDelegateAccess() throws SQLException {
-		WebSpec spec = getSpec();
+	public void testDelegateAccess() throws Exception {
 		try {
 
 			List<SystemUser> delegates = new ArrayList<SystemUser>();
 
 			DocumentType docType = DocumentTypeFactory.newDocumentType();
 			for (int i = 0; i < 3; i++) {
-				delegates.add(SystemUserFactory.getNewDelegate());
+				delegates.add(SystemUserFactory.getDelegate("del" + i));
 			}
+			SystemUser translator = SystemUserFactory.getTranslatorActive();
 			// login
-			BrowserUtils.open("");
+			BrowserUtils.open("login.jsp");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", "Admin");
 			BrowserUtils.setInput("password", "Admin");
@@ -67,6 +66,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("setModSiteNormal.st");
 			
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 
 			SystemUser systemUser = SystemUserFactory.getModeratorActive();
 			// Login del moderador
@@ -88,9 +88,9 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.setInput("orderNumber", "1");
 
 			BrowserUtils.clickButton("operation", "Next (Preamble)");
-			BrowserUtils.execute("editor.setData('texto')");
+			BrowserUtils.executeNoMove("editor.setData('preambulo')");
 			BrowserUtils.clickButton("operation", "Next (Add paragraphs)");
-			BrowserUtils.execute("editor.setData('texto')");
+			BrowserUtils.executeNoMove("editor.setData('parrafo')");
 			BrowserUtils.clickButton("operation", "Next (Preview document)");
 			BrowserUtils.clickButton("operation", "Save and Publish");
 
@@ -98,6 +98,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.clickButton("operation", "Save and publish");
 
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Admin pone el sitio en negociacion
 			BrowserUtils.open("");
@@ -108,7 +109,8 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.waitUntilPage("jsp-adminHome");
 			BrowserUtils.open("setModSiteEvent.st");
 			BrowserUtils.open("logout.st");
-
+			BrowserUtils.close();
+			
 			// Moderador pone el documento en negociacion
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
@@ -121,57 +123,140 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("goToViewLastVersionOfDocument.st?&documentID=" + document.getId());
 			BrowserUtils.clickButton("operation", "Discuss document");
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Aca logueo los delegados y veo si van a la negociacion o no
 			// el 1 debe ir a la negociacion
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(0).getUsername());
-			BrowserUtils.setInput("password", "negociador");
+			BrowserUtils.setInput("password", "neg");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// el 2 debe estar con el sitio normal
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(1).getUsername());
-			BrowserUtils.setInput("password", "negociador");
+			BrowserUtils.setInput("password", "neg");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// el 3 debe estar con el sitio normal
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(2).getUsername());
-			BrowserUtils.setInput("password", "negociador");
+			BrowserUtils.setInput("password", "neg");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
-			// TODO
-			// LOgueo el moderador y avanzo hasta el preambulo
+			// Logueo el moderador y avanzo hasta el preambulo
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", systemUser.getUsername());
+			BrowserUtils.setInput("password", "mod_act");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-moderatorHome");
+			// Avanzo al preambulo
+			Version version = VersionFactory.getLastVersionForDocument(document);
+			BrowserUtils.open("editVersion.st?&id=" + version.getId());
+			BrowserUtils.setInput("versionName", RandomUtils.randomString("versionName "));
+			BrowserUtils.clickButtonById("next");
+			BrowserUtils.waitUntilPage("jsp-createDocumentStepParagraph");
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Logueo el delegado y que vea el preambulo
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", delegates.get(0).getUsername());
+			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
+			BrowserUtils.waitFor(5000); //espero por el ajax
+			String innerHtml = BrowserUtils.getDivHtmlContentById("lastParagraphText");
+			System.out.println(innerHtml);
+			assertTrue(innerHtml.contains("a. preambulo"));
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
-			// LOgueo el moderador y avanzo hasta el parrafo
+			// Logueo el moderador y avanzo hasta el parrafo
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", systemUser.getUsername());
+			BrowserUtils.setInput("password", "mod_act");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-moderatorHome");
+			// Avanzo hasta el parrafo
+			BrowserUtils.open("editVersion.st?&id=" + version.getId());
+			BrowserUtils.setInput("versionName", RandomUtils.randomString("versionName "));
+			BrowserUtils.clickButtonById("next");
+			BrowserUtils.waitUntilPage("jsp-createDocumentStepParagraph");
+			BrowserUtils.executeNoMove("editor.setData('preambulo')");
+			BrowserUtils.clickButtonById("next");
+			BrowserUtils.waitUntilPage("jsp-createDocumentStepParagraph");
+			BrowserUtils.executeNoMove("editor.setData('parrafo')");
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Logueo el delegado y que vea el parrafo
-			
-			// logueo un traductor y doy de alta una traduccion
-			
-			// Logueo un delegado y veo la traduccion
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", delegates.get(0).getUsername());
+			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
+			BrowserUtils.waitFor(5000); //espero por el ajax
+			innerHtml = BrowserUtils.getDivHtmlContentById("lastParagraphText");
+			System.out.println(innerHtml);
+			assertTrue(innerHtml.contains("1. parrafo"));
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Finalizo el documento sin firmas
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", systemUser.getUsername());
+			BrowserUtils.setInput("password", "mod_act");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-moderatorHome");
+			// Avanzo hasta el parrafo
+			BrowserUtils.open("editVersion.st?&id=" + version.getId());
+			BrowserUtils.setInput("versionName", RandomUtils.randomString("versionName "));
+			BrowserUtils.clickButtonById("next");
+			BrowserUtils.waitUntilPage("jsp-createDocumentStepParagraph");
+			BrowserUtils.clickButtonById("next");
+			BrowserUtils.waitUntilPage("jsp-createDocumentStepParagraph");
+			BrowserUtils.clickButtonById("preview");
+			BrowserUtils.waitUntilPage("jsp-previewDocument");
+			BrowserUtils.clickButtonById("finish");
+			BrowserUtils.waitUntilPage("jsp-moderatorHome");
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Logueo el delegado y veo la version final
+			BrowserUtils.open("");
+			BrowserUtils.waitUntilPage("jsp-login");
+			BrowserUtils.setInput("username", delegates.get(0).getUsername());
+			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
+			BrowserUtils.waitUntilPage("jsp-delegateHome");
+			BrowserUtils.open("logout.st");
+			BrowserUtils.close();
 			
 			// Logueo un traductor y traduzco todo
 			
 			// Logueo el delegado y veo la version final traducida
 			
-			
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw e;
 		} finally {
 			BrowserUtils.open("logout.st");
 		}
