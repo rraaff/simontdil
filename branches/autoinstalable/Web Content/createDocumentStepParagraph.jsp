@@ -51,11 +51,7 @@
 							<td><img src="images/null.gif" width="7" height="1"></td>
 							<td width="359" align="left">
 								<html:text name="CreateDocumentForm" property="limitObservations" styleClass='date demo_vista' disabled="true"/>
-								<script>
-									window.addEvent('load', function() {
-										new DatePicker('.demo_vista', { pickerClass: 'datepicker_vista' });
-									});
-								</script>
+								
 							</td>
 							<td width="20"><img src="images/null.gif" width="20" height="1"></td>
 							<td width="160" align="right"><%=ResourceBundleCache.get("createDocument", "tipoDocumento")%>:</td>
@@ -249,12 +245,12 @@
 							</logic:equal> 
 							<% } %>
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="true">
-								<html:submit property="operation">
+								<html:submit property="operation" styleId="next">
 									<%=ResourceBundleCache.get(getServletInfo(), "agregarParrafos")%>
 								</html:submit>
 							</logic:equal>
 							<logic:equal name="CreateDocumentForm" property="introductoryParagraph" value="false">
-								<html:submit property="operation">
+								<html:submit property="operation" styleId="preview">
 									<%=ResourceBundleCache.get(getServletInfo(), "previsualizar")%>
 								</html:submit>
 							</logic:equal>

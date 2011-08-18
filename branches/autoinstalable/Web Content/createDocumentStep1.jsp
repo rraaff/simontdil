@@ -184,7 +184,7 @@ $$('input.slimpicker').each( function(el){
 							</tr>
 							<tr>
 								<td colspan="3" align="center">
-									<html:submit property="operation">
+									<html:submit property="operation" styleId="next">
 										<%=ResourceBundleCache.get(getServletInfo(), "siguiente")%>
 									</html:submit></td>
 							</tr>

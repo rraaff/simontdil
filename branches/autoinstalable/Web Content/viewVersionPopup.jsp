@@ -14,7 +14,6 @@
 <meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
-<script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <link href="styles/tdil.css" rel="stylesheet" type="text/css">
 <style type="text/css">
 /* hide from incapable browsers */

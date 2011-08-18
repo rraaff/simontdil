@@ -10,7 +10,6 @@
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
 <script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
 <script type="text/javascript" src="./scripts/notimoo.js" ></script>
-<script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/simon.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
 <script type="text/javascript" src="ckeditor.js"></script>
