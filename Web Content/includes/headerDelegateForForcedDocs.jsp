@@ -8,7 +8,6 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
-<script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/simon.js" type="text/javascript"></script>
 <script src="scripts/menu.js" type="text/javascript"></script>
 <%	com.tdil.simon.data.model.SystemUser user = (com.tdil.simon.data.model.SystemUser)session.getAttribute("user");

@@ -9,7 +9,6 @@
 <meta name="keywords" content="" />
 <meta name="description" content="" />
 <meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
-<script src="scripts/AC_RunActiveContent.js" type="text/javascript"></script>
 <script src="scripts/simon.js" type="text/javascript"></script>
 <link rel="shortcut icon" href="images/favicon.ico">
 <!-- link href="styles/tdil.css" rel="stylesheet" type="text/css" -->

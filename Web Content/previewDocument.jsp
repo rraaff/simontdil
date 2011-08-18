@@ -138,7 +138,7 @@ if ( dw_scrollObj.isSupported() ) {
 										< % = ResourceBundleCache.get(getServletInfo(), "ponerEnFirma") % >
 									< / h t m l  : s u b m i t  -->
 									
-									<html:submit property="operation">
+									<html:submit property="operation" styleId="finish">
 										<%=ResourceBundleCache.get(getServletInfo(), "finalizar")%>
 									</html:submit>
 								</logic:equal>
