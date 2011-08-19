@@ -1,4 +1,4 @@
-package com.tdil.simon.test.tmp;
+package com.tdil.simon.test.simulation;
 
 public class Start {
 
