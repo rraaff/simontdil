@@ -12,6 +12,8 @@ import com.tdil.simon.utils.CryptoUtils;
 
 public class SystemUserFactory {
 
+	public static final String DELEGATE_PASSWORD = "delegate";
+
 	public static SystemUser getModeratorActive() throws SQLException {
 		IBatisManager.beginTransaction();
 		// Create
@@ -65,7 +67,7 @@ public class SystemUserFactory {
 			sysUser.setCountryId(c.getId());
 			sysUser.setCountryDesc(c.getName());
 			sysUser.setUsername(name);
-			sysUser.setPassword(CryptoUtils.getHashedValue("neg"));
+			sysUser.setPassword(CryptoUtils.getHashedValue(DELEGATE_PASSWORD));
 			sysUser.setDeleted(false);
 			SystemUserDAO.insertUser(sysUser);
 			sysUser = SystemUserDAO.getUser(name);
@@ -86,7 +88,7 @@ public class SystemUserFactory {
 		sysUser.setCountryId(c.getId());
 		sysUser.setCountryDesc(c.getName());
 		sysUser.setUsername(username);
-		sysUser.setPassword(CryptoUtils.getHashedValue("negociador"));
+		sysUser.setPassword(CryptoUtils.getHashedValue(DELEGATE_PASSWORD));
 		sysUser.setDeleted(false);
 		SystemUserDAO.insertUser(sysUser);
 		sysUser = SystemUserDAO.getUser(username);

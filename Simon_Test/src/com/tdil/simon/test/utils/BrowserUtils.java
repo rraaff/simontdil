@@ -14,6 +14,10 @@ public class BrowserUtils {
 		browser.waitUntilPage(string);
 	}
 	
+	public static String getPageName() {
+		return browser.getPageName();
+	}
+	
 	public static void open(String url) throws Exception {
 		browser.open(SimonTest.SERVER_URL + url);
 	}

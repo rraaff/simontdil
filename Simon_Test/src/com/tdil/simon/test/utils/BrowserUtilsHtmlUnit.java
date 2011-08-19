@@ -29,6 +29,11 @@ public class BrowserUtilsHtmlUnit implements Browser {
 		Assert.assertEquals(string, element.getId());
 	}
 	
+	public String getPageName() {
+		HtmlElement element = getCurrPage().getBody();
+		return element.getId();
+	}
+	
 	public void open(String url) throws Exception {
 		if (webClient == null) {
 			webClient = new WebClient(BrowserVersion.FIREFOX_3_6);
@@ -111,11 +116,11 @@ public class BrowserUtilsHtmlUnit implements Browser {
 
 	private void setCurrPage(HtmlPage currPage) {
 		this.currPage = currPage;
-		HtmlElement element = currPage.getBody();
-		System.out.println();
-		System.out.println("***********************");
-		System.out.println("current page is " + element.getId());
-		System.out.println(currPage.asXml());
+//		HtmlElement element = currPage.getBody();
+//		System.out.println();
+//		System.out.println("***********************");
+//		System.out.println("current page is " + element.getId());
+//		System.out.println(currPage.asXml());
 	}
 
 	private HtmlPage getCurrPage() {

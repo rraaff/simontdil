@@ -27,4 +27,6 @@ public interface Browser {
 	public void close();
 
 	public String getDivHtmlContentById(String id);
+
+	public String getPageName();
 }

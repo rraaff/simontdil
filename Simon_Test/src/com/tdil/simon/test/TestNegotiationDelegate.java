@@ -181,7 +181,6 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.waitFor(5000); //espero por el ajax
 			String innerHtml = BrowserUtils.getDivHtmlContentById("lastParagraphText");
-			System.out.println(innerHtml);
 			assertTrue(innerHtml.contains("a. preambulo"));
 			BrowserUtils.open("logout.st");
 			BrowserUtils.close();
@@ -214,7 +213,6 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.waitFor(5000); //espero por el ajax
 			innerHtml = BrowserUtils.getDivHtmlContentById("lastParagraphText");
-			System.out.println(innerHtml);
 			assertTrue(innerHtml.contains("1. parrafo"));
 			BrowserUtils.open("logout.st");
 			BrowserUtils.close();
