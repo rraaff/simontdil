@@ -57,12 +57,14 @@ public class GoToViewLastVersionOfDocumentPopup extends SimonAction {
 		final int documentID = Integer.parseInt(request.getParameter("documentID"));
 		TransactionProvider.executeInTransaction(new TransactionalAction() {
 			public void executeInTransaction() throws SQLException, ValidationException {
-				Version version = VersionDAO.getVersionForNegotiation(documentID);
+				Version version = VersionDAO.getLastVersionForDocument(documentID);
+				if (version.isDraft()) {
+					version = VersionDAO.getVersionForNegotiation(documentID);
+				}
 				viewVersionForm.init(version.getId());
 				DelegateAuditDAO.registerViewVersion(viewVersionForm.getUser(), viewVersionForm.getVersion().getVersion());
 			}
 		});
-
 		return mapping.findForward("continue");
 	}
 
