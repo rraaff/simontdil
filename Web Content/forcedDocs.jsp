@@ -42,12 +42,7 @@
 #newHomeBlockHalf{
 	border:1px solid #c6c6c6;
 	width:100%;
-<logic:equal name="ModeratorHome" property="hasPrincipalVersions" value="true">
-	height:300px;
-</logic:equal>
-<logic:notEqual name="ModeratorHome" property="hasPrincipalVersions" value="true">
-	height:460px;
-</logic:notEqual>
+	height:100%;
 	font-family:"Trebuchet MS", Tahoma, Verdana, Arial;
 	float: left;
 }
@@ -108,7 +103,6 @@ if ( dw_scrollObj.isSupported() ) {
 	delegatePopupBean.setLoggedUser(user);
 	delegatePopupBean.init(); 
 %>
-<%@ include file="includes/leftContentModerator.jsp" %>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<% if (delegatePopupBean.getHasPrincipalVersions()) {%>
 			<tr>
@@ -298,5 +292,4 @@ if ( dw_scrollObj.isSupported() ) {
 			</td>
 		</tr>
 	</table>
-<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footerClean.jsp" %>
