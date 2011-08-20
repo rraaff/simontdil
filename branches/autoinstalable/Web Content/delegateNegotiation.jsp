@@ -154,7 +154,7 @@ function openDocs(){
 				   		box = new LightFace({ 
 				 			title: '<%=ResourceBundleCache.get(getServletInfo(), "traduccionDeParrafo")%>', 
 							width: 700,
-							height: 500,
+							height: 380,
 				  			content: json.translation,
 				 			buttons: [
 								{
