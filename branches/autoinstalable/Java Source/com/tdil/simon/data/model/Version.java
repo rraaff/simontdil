@@ -99,6 +99,9 @@ public class Version extends PersistentObject {
 	public boolean isFinal() {
 		return FINAL.equals(this.getStatus());
 	}
+	public boolean isDraft() {
+		return DRAFT.equals(this.getStatus());
+	}
 	public boolean isCommentsEnabled() {
 		return commentsEnabled;
 	}

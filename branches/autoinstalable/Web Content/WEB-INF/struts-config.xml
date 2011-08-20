@@ -259,6 +259,8 @@
     </action>
     <action path="/goToViewLastVersionOfDocument" name="ViewVersion" type="com.tdil.simon.struts.actions.delegate.GoToViewLastVersionOfDocument" scope="session">
       <forward name="continue" path="/viewVersion.jsp"/>
+       <forward name="goToFinalVersion" path="/viewFinalVersion.jsp"/>
+      <forward name="goToFinalVersionSingle" path="/viewFinalVersionSingle.jsp"/>
     </action>
     <action path="/documentABM" name="ListDocument" type="com.tdil.simon.struts.actions.moderator.DocumentABMAction" scope="session">
       <forward name="continue" path="/goToListDocument.st"/>
