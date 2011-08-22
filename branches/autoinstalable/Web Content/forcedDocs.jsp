@@ -174,7 +174,7 @@ if ( dw_scrollObj.isSupported() ) {
 														<logic:iterate name="docTree" property="documents" id="docLeafTop">
 														<tr>
 															<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-															<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
+															<td class="documentTD"><html:link action="/goToViewLastVersionOfDocumentPopup.st?" paramName="docLeafTop" paramProperty="id" paramId="documentID">
 																<bean:write name="docLeafTop" property="title" /> - <%=ResourceBundleCache.get("delegateHome", "version")%> <bean:write name="docLeafTop" property="lastVersionNumber" /> - <bean:write name="docLeafTop" property="lastVersionName" />
 																</html:link></td>
 														</tr>
@@ -196,7 +196,7 @@ if ( dw_scrollObj.isSupported() ) {
 																			<logic:iterate name="docSubTypeTree" property="documents" id="docLeaf">
 																			<tr>
 																				<td width="50" align="center"><img src="images/icons/leaf.gif"></td>
-																				<td class="documentTD"><html:link action="/goToViewLastVersionOfDocument.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
+																				<td class="documentTD"><html:link action="/goToViewLastVersionOfDocumentPopup.st?" paramName="docLeaf" paramProperty="id" paramId="documentID">
 																					<bean:write name="docLeaf" property="title" /> - <%=ResourceBundleCache.get("delegateHome", "version")%> <bean:write name="docLeaf" property="lastVersionNumber" /> - <bean:write name="docLeaf" property="lastVersionName" />
 																					</html:link></td>
 																			</tr>
