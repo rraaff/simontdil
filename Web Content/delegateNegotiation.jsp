@@ -64,7 +64,7 @@ div#main{
 <script src="scripts/popup.js" type="text/javascript"></script>
 <script type="text/javascript">
 function openDocs(){
-	openPopupWindow('forcedDocs.jsp', 1024, 550, 0, 0, false, true, '<%=ResourceBundleCache.get(getServletInfo(), "tituloPopup")%>', false);
+	openPopupWindow('forcedDocs.jsp', 1024, 690, 0, 0, false, true, '<%=ResourceBundleCache.get(getServletInfo(), "tituloPopup")%>', false);
 }
 </script>
 <html:html>

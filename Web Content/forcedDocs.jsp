@@ -103,6 +103,8 @@ if ( dw_scrollObj.isSupported() ) {
 	delegatePopupBean.setLoggedUser(user);
 	delegatePopupBean.init(); 
 %>
+<%@ include file="includes/leftContent.jsp" %>
+<td>
 	<table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
 		<% if (delegatePopupBean.getHasPrincipalVersions()) {%>
 			<tr>
@@ -292,4 +294,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</td>
 		</tr>
 	</table>
+</td>
+<%@ include file="includes/rightContent.jsp" %>
 <%@ include file="includes/footerClean.jsp" %>
