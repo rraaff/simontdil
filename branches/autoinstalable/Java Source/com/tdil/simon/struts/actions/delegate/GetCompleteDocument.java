@@ -36,7 +36,6 @@ public class GetCompleteDocument extends AjaxSimonAction {
 		loggedUserForm.setUser(this.getLoggedUser(request));
 		HashMap<String, String> result = (HashMap<String, String>) executeInTransaction(loggedUserForm);
 //		System.out.println(result);
-		System.out.println("getCompleteDocument");
 		this.writeJsonResponse(result, response);
 		return null;
 	}
