@@ -222,7 +222,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<!-- td align="center"><logic:equal name="iterUser" property="deleted" value="true">No</logic:equal><logic:equal name="iterUser" property="deleted" value="false">Si</logic:equal></td -->
 											<td><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link  action="editDelegate.st?" paramName="iterUser" paramProperty="id" paramId="id">
 												<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","editar")%>
-											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
+											</html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%></td>
 											<td><logic:equal name="iterUser" property="deleted" value="false">
 													<%=com.tdil.simon.web.ButtonGenerator.getIndexedButton("DelegateABM","botones","desactivar", iterIndex)%>
 												</logic:equal>

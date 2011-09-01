@@ -365,7 +365,7 @@ if ( dw_scrollObj.isSupported() ) {
 											<table width="940" border="0" cellspacing="0" cellpadding="0">
 												<tr>
 													<td colspan="10" id="error"></td>
-												<tr>
+												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
@@ -393,13 +393,13 @@ if ( dw_scrollObj.isSupported() ) {
 													<td align="right" valign="top"><%=ResourceBundleCache.get(getServletInfo(), "texto")%>:</td>
 													<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 													<td colspan="8" align="left"><div id="editor"></div></td>
-												<tr>
+												</tr>
 												<tr>
 													<td colspan="10" height="11"><img src="images/null.gif" width="1" height="11"></td>
 												</tr>
 												<tr>
 													<td colspan="10" align="center"><input type="button" onclick="doAdd()" value="<%=ResourceBundleCache.get(getServletInfo(), "agregar")%>"> <input type="button" onclick="cancelAdd();" value="<%=ResourceBundleCache.get(getServletInfo(), "cancelar")%>"></td>
-												<tr>
+												</tr>
 											</table>
 										<!-- corte tabla template -->
 										</td>

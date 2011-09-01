@@ -217,7 +217,7 @@ $$('input.slimpicker').each( function(el){
 </script>
 </logic:equal>
 </html:form>
-</html:html>
 </td>
 <%@ include file="includes/rightContent.jsp" %>
+</html:html>
 <%@ include file="includes/footer.jsp" %>

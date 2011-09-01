@@ -69,7 +69,7 @@
 						</tr>
 					</table>
 				</td>
-			<tr>
+			</tr>
 		</table>
 	</div>
 </html:form>

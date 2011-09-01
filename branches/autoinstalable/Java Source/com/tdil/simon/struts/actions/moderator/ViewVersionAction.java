@@ -109,7 +109,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarPdf"))) {
 			request.getSession().setAttribute("downloadPDF", viewForm);
-			return mapping.findForward("downloadPdf");
+			return new ActionForward("/downloadPDF.do", true);
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersion", "verIdiomaDefault"))) {
 			viewForm.setShowSpanish(true);
@@ -121,7 +121,7 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
 			request.getSession().setAttribute("downloadRTF", viewForm);
-			return mapping.findForward("downloadRtf");
+			return new ActionForward("/downloadRTF.do", true);
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewVersion", "listarObservaciones"))) {
 			TransactionProvider.executeInTransaction(new TransactionalActionWithValue() {

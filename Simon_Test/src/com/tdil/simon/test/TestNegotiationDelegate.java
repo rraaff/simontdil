@@ -89,8 +89,10 @@ public class TestNegotiationDelegate extends SimonTest {
 
 			BrowserUtils.clickButton("operation", "Next (Preamble)");
 			BrowserUtils.executeNoMove("editor.setData('preambulo')");
+			BrowserUtils.waitFor(500);
 			BrowserUtils.clickButton("operation", "Next (Add paragraphs)");
 			BrowserUtils.executeNoMove("editor.setData('parrafo')");
+			BrowserUtils.waitFor(500);
 			BrowserUtils.clickButton("operation", "Next (Preview document)");
 			BrowserUtils.clickButton("operation", "Save and Publish");
 
@@ -130,7 +132,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(0).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.open("logout.st");
@@ -140,7 +142,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(1).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			BrowserUtils.open("logout.st");
@@ -150,7 +152,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(2).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			BrowserUtils.open("logout.st");
@@ -176,7 +178,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(0).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.waitFor(5000); //espero por el ajax
@@ -208,12 +210,18 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(0).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateNegotiation");
 			BrowserUtils.waitFor(5000); //espero por el ajax
 			innerHtml = BrowserUtils.getDivHtmlContentById("lastParagraphText");
 			assertTrue(innerHtml.contains("1. parrafo"));
+			
+			// ahora abro la pantalla forced docs, no es igual pero
+			BrowserUtils.open("forcedDocs.jsp");
+			BrowserUtils.waitUntilPage("jsp-forcedDocs");
+			BrowserUtils.open("goToViewLastVersionOfDocumentPopup.st?documentID=" + document.getId());
+			BrowserUtils.waitUntilPage("jsp-viewVersionPopup");
 			BrowserUtils.open("logout.st");
 			BrowserUtils.close();
 			
@@ -242,7 +250,7 @@ public class TestNegotiationDelegate extends SimonTest {
 			BrowserUtils.open("");
 			BrowserUtils.waitUntilPage("jsp-login");
 			BrowserUtils.setInput("username", delegates.get(0).getUsername());
-			BrowserUtils.setInput("password", "neg");
+			BrowserUtils.setInput("password", "delegate");
 			BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 			BrowserUtils.waitUntilPage("jsp-delegateHome");
 			BrowserUtils.open("logout.st");

@@ -183,7 +183,6 @@ if ( dw_scrollObj.isSupported() ) {
 			</table>
 		<!-- fin tabla template -->
 		</td>
-		<td>
 	</tr>
 </table>
 </html:form>
