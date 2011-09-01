@@ -86,17 +86,17 @@
 <script src="scripts/dw_scrollbar.js" type="text/javascript"></script>
 <script src="scripts/scroll_controls.js" type="text/javascript"></script>
 <script type="text/javascript">
-function init_dw_Scroll() {
+/*function init_dw_Scroll() {
     var wndo = new dw_scrollObj('main', 'lyr1');
     wndo.setUpScrollbar("dragBar", "track", "v", 1, 1);
     wndo.setUpScrollControls('scrollbar');
 }
-
+*/
 // if code supported, link in the style sheet and call the init function onload
-if ( dw_scrollObj.isSupported() ) {
+/*if ( dw_scrollObj.isSupported() ) {
     dw_Util.writeStyleSheet('styles/scrollbar_demo.css')
     dw_Event.add( window, 'load', init_dw_Scroll);
-}
+}*/
 </script>
 <jsp:useBean id="delegatePopupBean" scope="session" class="com.tdil.simon.struts.forms.DelegatePopupBean"/>
 <% 

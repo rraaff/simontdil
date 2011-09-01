@@ -6,7 +6,6 @@
 <%@ taglib uri="/tags/struts-nested" prefix="nested" %>
 <%@ include file="includes/header.jsp" %>
 <%@ include file="includes/menu.jsp" %>
-
 <html:html>
 <%@ include file="includes/leftContent.jsp" %>
 <td width="100%">
@@ -302,7 +301,7 @@
 		</logic:equal>
 </script>
 </html:form>
-</html:html>
 </td>
 <%@ include file="includes/rightContent.jsp" %>
+</html:html>
 <%@ include file="includes/footer.jsp" %>
