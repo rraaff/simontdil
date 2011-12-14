@@ -1,0 +1,36 @@
+2h Crear entidad tipo de documento
+
+4h Crear entidad role con relacion a los tipos de documentos
+
+2h Agregar campo al documento que relacione con el tipo, quitar los dos campos actuales.
+Migrar los datos actuales
+
+3h Agregarle roles a los usuarios, quitar los campos actuales
+Migrar los datos actuales
+
+Rediseñar la home para que pueda hacer n documentos principales en la misma.
+X Diseño pablo
+2h Luego ver que hago yo, minimo modificar el bean para que tenga n en lugar de dos
+
+8hs Revisar logica que usa los campos actuales
+Revisar que no se puedan poner dos documentos en negociacion a la vez
+
+1h Escribir casos de uso y cambios
+2h Testear todo
+
+Duda
+Los grupos y permisos de accesos para subcategorias y tipos de documento valen para delegados y 
+moderadores o solo para los delegados?
+Es decir, los grupos seran para delegados y moderadores o solo delegados y que los moderadores
+tengan acceso a todos.
+
+borrar rb
+ <%=ResourceBundleCache.get("documento", "tipoUno")%>&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+ <html:radio name="CreateDocumentForm" property="documentType" value="typeTwo"/> <%=ResourceBundleCache.get("documento", "tipoDos")%>
+ 
+ Testear exportacion a excel y rtf
+ 
+ ///////
+ bajar y probar algun par de trees
+ rediseñar la home
+ probar boton en explorer

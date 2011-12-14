@@ -1,0 +1,25 @@
+delete from CATEGORY;
+delete from DELEGATEAUDIT;
+delete from DOCUMENT;
+delete from DOCUMENTSUBTYPE;
+delete from DOCUMENTTYPE;
+delete from GROUPMEMBER;
+delete from GROUPPERMISSION;
+delete from OBSERVATION;
+delete from PARAGRAPH;
+delete from REFERENCEDOCUMENT; 
+delete from RESOURCEBUNDLE;
+delete from SIGNATURE;
+delete from SUBCATEGORY;
+delete from TRACKCHANGE;
+delete from USERGROUP;
+delete from VERSION;
+delete from SYSTEMUSER where username <> 'Admin';
+update SITE set status = 'NORMAL';
+COMMIT;
+
+update systemuser set
+password = '123',
+temporaryPassword = 0
+where delegate = 1;
+COMMIT;
