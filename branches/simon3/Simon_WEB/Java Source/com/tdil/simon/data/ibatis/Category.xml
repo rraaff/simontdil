@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Category">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Category" type="com.tdil.simon.data.model.Category"/>
+  <typeAlias alias="CategorySelectionVO" type="com.tdil.simon.data.valueobjects.CategorySelectionVO"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllRootCategories" resultClass="Category">
+    select *
+    from CATEGORY
+    where parentId = 0
+    order by name
+  </select>
+  
+   <select id="selectAllCategoriesByParentId" parameterClass="int"  resultClass="Category">
+    select *
+    from CATEGORY
+    where parentId = #parentId#
+    order by name
+  </select>
+  
+  <select id="selectCategoriesByNameAndParentId" parameterClass="java.util.Map" resultClass="Category">
+    select
+      *
+    from CATEGORY
+    where name = #name#
+    and parentId = #parentId#
+  </select>
+  
+  <select id="selectAllCategoriesNotDeleted" resultClass="CategorySelectionVO">
+   select CATEGORY.id, CATEGORY.name, CATEGORY.parentId, CATEGORY.deleted
+	FROM (
+	select CATEGORY.*, CATEGORY.NAME AS FIRST, '' as SECOND
+	from CATEGORY
+	WHERE deleted = 0
+	and parentId = 0
+	UNION
+	select SUBCATEGORY.*, CATEGORY.NAME AS FIRST, SUBCATEGORY.NAME AS SECOND
+	from (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY, 
+	(SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
+	WHERE SUBCATEGORY.parentId = CATEGORY.id
+	order by FIRST, SECOND) CATEGORY;
+  </select>
+  
+  <select id="selectAllCategoriesNotDeletedVO" resultClass="com.tdil.simon.data.valueobjects.CategoryVO">
+    select *
+   	from CATEGORY
+   	WHERE deleted = 0
+   	order by name
+  </select>
+
+  <select id="selectCategoryById" parameterClass="int" resultClass="Category">
+    select
+      *
+    from CATEGORY
+    where id = #id#
+  </select>
+
+  <select id="selectCategoryByName" parameterClass="java.lang.String" resultClass="Category">
+    select
+      *
+    from CATEGORY
+    where name = #name#
+  </select>
+  
+  <insert id="insertCategory" parameterClass="Category">
+    insert into CATEGORY (
+      id, name, parentId, orderNumber, deleted
+    ) values (
+      #id#, #name#, #parentId#, #orderNumber#, #deleted#
+    )
+  </insert>
+
+  <update id="updateCategory" parameterClass="Category">
+    update CATEGORY set
+      name = #name#,
+      deleted = #deleted#,
+      orderNumber = #orderNumber#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteCategory" parameterClass="Category">
+    update CATEGORY set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

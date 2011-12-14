@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DocumentType">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="DocumentType" type="com.tdil.simon.data.model.DocumentType"/>
+  <typeAlias alias="DocumentTypeVO" type="com.tdil.simon.data.valueobjects.DocumentTypeVO"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllRootDocumentType" resultClass="DocumentType">
+    select *
+    from DOCUMENTTYPE
+    where parentId = 0
+    order by name
+  </select>
+  
+  <select id="selectAllDocumentTypeByParentId" parameterClass="int"  resultClass="DocumentType">
+    select *
+    from DOCUMENTTYPE
+    where parentId = #parentId#
+    order by name
+  </select>
+  
+  <select id="selectDocumentypeByNameAndParentId" parameterClass="java.util.Map" resultClass="DocumentType">
+    select
+      *
+    from DOCUMENTTYPE
+    where name = #name#
+    and parentId = #parentId#
+  </select>
+  
+  <select id="selectAllDocumentTypeNotDeleted" resultClass="DocumentTypeVO">
+    select DOCUMENTTYPE.id, DOCUMENTTYPE.name, DOCUMENTTYPE.parentId, DOCUMENTTYPE.deleted
+	FROM (
+	select DOCUMENTTYPE.*, DOCUMENTTYPE.NAME AS FIRST, '' as SECOND
+	from DOCUMENTTYPE
+	WHERE deleted = 0
+	and parentId = 0
+	UNION
+	select DOCUMENTSUBTYPE.*, DOCUMENTTYPE.NAME AS FIRST, DOCUMENTSUBTYPE.NAME AS SECOND
+	from (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0 and deleted = 0) DOCUMENTSUBTYPE, 
+	(SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE
+	WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id
+	order by FIRST, SECOND) DOCUMENTTYPE;
+  </select>
+
+  <select id="selectDocumentTypeById" parameterClass="int" resultClass="DocumentType">
+    select
+      *
+    from DOCUMENTTYPE
+    where id = #id#
+  </select>
+
+  <select id="selectDocumentTypeByName" parameterClass="java.lang.String" resultClass="DocumentType">
+    select
+      *
+    from DOCUMENTTYPE
+    where name = #name#
+  </select>
+  
+  <insert id="insertDocumentType" parameterClass="DocumentType">
+    insert into DOCUMENTTYPE (
+      id, name, parentId, orderNumber, deleted
+    ) values (
+      #id#, #name#, #parentId#, #orderNumber#, #deleted#
+    )
+  </insert>
+
+  <update id="updateDocumentType" parameterClass="DocumentType">
+    update DOCUMENTTYPE set
+      name = #name#,
+      orderNumber = #orderNumber#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteDocumentType" parameterClass="DocumentType">
+    update DOCUMENTTYPE set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

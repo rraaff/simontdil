@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Version">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Version" type="com.tdil.simon.data.model.Version"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllVersionsForDocument" parameterClass="int" resultClass="Version">
+    select *
+    from VERSION
+    where documentId = #id#
+    and spanishVersion = 1
+    order by number
+  </select>
+  
+  <select id="getLastVersionForDocument" parameterClass="int" resultClass="Version">
+    select *
+    from VERSION
+    where documentId = #id#
+    and deleted = 0
+    and spanishVersion = 1
+    and number = (select max(number) from VERSION where deleted = 0 and documentId = #id# and spanishVersion = 1)
+  </select>
+  
+   <select id="selectVersionForNegotiation" parameterClass="int" resultClass="Version">
+   select *
+    from VERSION
+    where documentId = #id#
+    and deleted = 0
+    and status = 'CONSOLIDATED'
+    and spanishVersion = 1
+    and number = (select max(number) from VERSION where deleted = 0 and status = 'CONSOLIDATED' and documentId = #id# and spanishVersion = 1)
+  </select>
+  
+  
+  <select id="selectRelevantVersions" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+   select VERSION.*, DOCUMENT.title as documentTitle, 
+   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
+   	DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName  
+    from VERSION, DOCUMENT, 
+    	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
+    where VERSION.documentId = DOCUMENT.id
+    and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+    and VERSION.deleted = 0
+    and VERSION.status != 'DRAFT'
+    and VERSION.spanishVersion = 1
+    and DOCUMENT.relevance > 1
+    and DOCUMENT.deleted = 0
+    and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
+    order by DOCUMENT.title
+  </select>
+  
+  <select id="selectRelevantVersionsForDelegate" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+   select VERSION.*, DOCUMENT.title as documentTitle, 
+   	DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
+   	DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName
+    from VERSION, DOCUMENT, 
+    	(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
+    where VERSION.documentId = DOCUMENT.id
+    and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+    and VERSION.deleted = 0
+    and VERSION.status != 'DRAFT'
+    and VERSION.spanishVersion = 1
+    and DOCUMENT.relevance > 1
+    and DOCUMENT.deleted = 0
+    AND DOCUMENT.documentSubTypeId IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+    )
+    and number = (select max(number) from VERSION where deleted = 0 and status != 'DRAFT' and documentId = DOCUMENT.id)
+    order by DOCUMENT.title
+  </select>
+  
+ <select id="selectVersionUnderNegotiation" resultClass="Version">
+    select
+      *
+   from VERSION
+   where deleted = 0
+   and status = 'IN_NEGOTIATION'
+   and spanishVersion = 1
+  </select>
+  
+  <select id="selectPostuguesVersionBySpanishId" resultClass="Version">
+    select
+      v2.*
+   from VERSION v1, VERSION v2
+   where v1.spanishVersion = 1
+   and v2.spanishVersion = 0
+   and v2.status = 'FINAL'
+   and v1.documentId = v2.documentId
+   and v1.number = v2.number
+   and v1.id = #id#
+  </select>
+  
+  <select id="selectPostuguesVersionAnyStatusBySpanishId" resultClass="Version">
+    select
+      v2.*
+   from VERSION v1, VERSION v2
+   where v1.spanishVersion = 1
+   and v2.spanishVersion = 0
+   and v1.documentId = v2.documentId
+   and v1.number = v2.number
+   and v1.id = #id#
+  </select>
+  
+  
+   <select id="selectVersionForWork" resultClass="Version">
+    select
+      *
+   from VERSION
+   where deleted = 0
+   and spanishVersion = 1
+   and status IN ('IN_NEGOTIATION', 'IN_SIGN')
+  </select>
+  
+  <select id="selectAllVersionNumbersForDocument" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.VersionNumberVO">
+    select VERSION.id, VERSION.number
+    from VERSION
+    where documentId = #id#
+    and spanishVersion = 1
+    and deleted = 0
+    and status != 'DRAFT'
+    order by number
+  </select>
+  
+  <select id="getVersionForDocumentAndNumber" parameterClass="java.util.Map" resultClass="Version">
+    select *
+   	from VERSION 
+   	WHERE documentId = #documentId#
+   	and number = #number#
+   	and spanishVersion = 1
+  </select>
+  
+  <select id="selectAllVersionsForDocumentNotDeleted" parameterClass="int" resultClass="Version">
+    select *
+   	from VERSION 
+   	WHERE deleted = 0
+   	AND documentId = #id#
+   	and spanishVersion = 1
+   	order by number
+  </select>
+  
+  <select id="selectVersionsVOForList" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+    select VERSION.*, DOCUMENT.title as documentTitle, 
+    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
+    DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as observationCount,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.addNewParagraph = 1
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
+   	from VERSION, DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
+   	WHERE VERSION.documentId = DOCUMENT.id
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+   	and VERSION.spanishVersion = 1
+   	order by DOCUMENT.title, VERSION.number DESC
+  </select>
+  
+  <select id="selectVersionsVOForDesigner" resultClass="com.tdil.simon.data.valueobjects.VersionForListVO">
+    select VERSION.*, DOCUMENT.title as documentTitle, 
+    DOCUMENT.documentDate as documentDate, DOCUMENT.topic as documentTopic, DOCUMENT.tag1 as documentTag1, DOCUMENT.tag2 as documentTag2, DOCUMENT.orderNumber as orderNumber,
+    DOCUMENT.relevance as documentRelevance, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as observationCount,
+    (SELECT count(1) 
+    	FROM OBSERVATION 
+    	WHERE OBSERVATION.privateObservation = 0 
+    	AND OBSERVATION.addNewParagraph = 1
+    	AND OBSERVATION.paragraphId IN (SELECT id FROM PARAGRAPH WHERE PARAGRAPH.versionID = VERSION.id)) as newParagraphCount
+   	from VERSION, DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE
+   	WHERE VERSION.documentId = DOCUMENT.id
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+   	and VERSION.spanishVersion = 1
+   	and VERSION.status IN ('CONSOLIDATED', 'FINAL')
+   	order by DOCUMENT.title, VERSION.number DESC
+  </select>
+  
+  
+  <select id="selectVersionById" parameterClass="int" resultClass="Version">
+    select
+      *
+    from VERSION
+    where id = #id#
+  </select>
+  
+  <select id="getMaxConsolidatedVersionFor" parameterClass="int" resultClass="int">
+    select
+      count(1)
+    from VERSION
+    where documentId = #id#
+    and spanishVersion = 1
+  </select>
+ 
+   <insert id="insertVersion" parameterClass="Version">
+    insert into VERSION (
+      id, documentId, number, name, description, creationDate, upToCommentDate, status, hasDraft, commentsEnabled, spanishVersion, designerText, deleted
+    ) values (
+      #id#, #documentId#, #number#, #name#, #description#, #creationDate#, #upToCommentDate#, #status#, #hasDraft#, #commentsEnabled#, #spanishVersion#, #designerText#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+  <update id="updateVersion" parameterClass="Version">
+    update VERSION set
+      documentId = #documentId#,
+		number = #number#,
+		name = #name#,
+		description = #description#,
+		creationDate = #creationDate#,
+		upToCommentDate = #upToCommentDate#,
+		status = #status#,
+		deleted = #deleted#, 
+		hasDraft = #hasDraft#,
+		commentsEnabled = #commentsEnabled#,
+		designerText = #designerText#
+    where
+      id = #id#
+  </update>
+
+  <update id="updateVersionStatus" parameterClass="Version">
+    update VERSION set
+      status = #status#
+    where
+      id = #id#
+  </update>
+
+  <update id="updateVersionUnderNegotiationToConsolidatedForDocument" parameterClass="int">
+    update VERSION set
+      status = 'CONSOLIDATED'
+    where documentId = #id#
+    and status = 'IN_NEGOTIATION'
+  </update>
+  
+    <update id="updateVersionUnderNegotiationToConsolidated">
+    update VERSION set
+      status = 'CONSOLIDATED'
+    where status IN ('IN_NEGOTIATION', 'IN_SIGN')
+  </update>
+  
+
+	<update id="reactivateVersion" parameterClass="Version">
+    update VERSION set
+      deleted = 0
+    where
+      id = #id#
+  </update> 
+  
+  <update id="blockComments" parameterClass="Version">
+    update VERSION set
+      commentsEnabled = 0
+    where
+      id = #id#
+  </update> 
+  
+  <update id="enableComments" parameterClass="Version">
+    update VERSION set
+      commentsEnabled = 1
+    where
+      id = #id#
+  </update> 
+ 
+  <update id="logDeleteVersion" parameterClass="Version">
+    update VERSION set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+
+</sqlMap>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="DocumentSubType">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="DocumentSubType" type="com.tdil.simon.data.model.DocumentSubType"/>
+  <typeAlias alias="DocumentSubTypeVO" type="com.tdil.simon.data.valueobjects.DocumentSubTypeVO"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllDocumentSubTypeByDocumentTypeId" parameterClass="int" resultClass="DocumentSubType">
+    select *
+    from DOCUMENTSUBTYPE
+    where documentTypeId = #documentTypeId#
+    order by name
+  </select>
+  
+  <select id="selectAllDocumentSubTypeNotDeleted" resultClass="DocumentSubTypeVO">
+    select DOCUMENTSUBTYPE.*, DOCUMENTTYPE.name as documentTypeName
+   	from DOCUMENTSUBTYPE, DOCUMENTTYPE
+   	WHERE DOCUMENTSUBTYPE.deleted = 0
+   	AND DOCUMENTTYPE.deleted = 0
+   	AND DOCUMENTSUBTYPE.documentTypeId = DOCUMENTTYPE.id
+   	order by DOCUMENTTYPE.name, DOCUMENTSUBTYPE.name 
+  </select>
+
+  <select id="selectDocumentSubTypeById" parameterClass="int" resultClass="DocumentSubType">
+    select
+      *
+    from DOCUMENTSUBTYPE
+    where id = #id#
+  </select>
+  <select id="selectDocumentSubTypeByNameAndDocumentTypeId" parameterClass="java.util.Map" resultClass="DocumentSubType">
+    select
+      *
+    from DOCUMENTSUBTYPE
+    where name = #name#
+    and documentTypeId = #documentTypeId#
+  </select>
+  
+  <insert id="insertDocumentSubType" parameterClass="DocumentSubType">
+    insert into DOCUMENTSUBTYPE (
+      id, name, documentTypeId, deleted
+    ) values (
+      #id#, #name#, #documentTypeId#, #deleted#
+    )
+  </insert>
+
+  <update id="updateDocumentSubType" parameterClass="DocumentSubType">
+    update DOCUMENTSUBTYPE set
+      name = #name#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteDocumentSubType" parameterClass="DocumentSubType">
+    update DOCUMENTSUBTYPE set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>
