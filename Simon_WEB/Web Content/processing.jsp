@@ -1,0 +1,47 @@
+<%@ page import="com.tdil.simon.web.ResourceBundleCache"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title><%=ResourceBundleCache.get("ventana", "titulo")%></title>
+<meta name="keywords" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="description" content="Al servicio de la Comunidad Iberoamericana" />
+<meta name="AUTHOR" content="That Day in London - Agencia Interactiva & Diseño" />
+<script type="text/javascript" src="./scripts/mootools-1.2.4-core-nc.js" ></script>
+<script type="text/javascript" src="./scripts/notimoo.js" ></script>
+<script src="scripts/simon.js" type="text/javascript"></script>
+<script src="scripts/menu.js" type="text/javascript"></script>
+
+<link rel="shortcut icon" href="http://segib.org/cumbres/wp-content/themes/segib/images/favicon.ico">
+<link href="styles/tdil.css" rel="stylesheet" type="text/css">
+<link href="styles/notimoo.css" rel="stylesheet" type="text/css">
+<style type="text/css">
+#content {
+	height:700px;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #808080;
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: #808080;
+}
+.article{
+	font-size: 20px;
+	line-height: 24px;	
+}
+</style>
+</head>
+<body>
+<div id="inSignLayer">
+	<div id="content">
+		<table width="95%" height="700" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFFFFF" align="center">
+			<tr>
+				<td align="center" valign="middle"><img src="./download.do?action=logo&fileId=others.splashSegib" width="500" height="500"><br><br><%=ResourceBundleCache.get("ventana", "actualizandoDatos")%>.</td>
+			</tr>
+		</table>
+	</div>
+</div>
+</body>
+</html>
