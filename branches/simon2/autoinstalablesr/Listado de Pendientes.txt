@@ -1,0 +1,23 @@
+[Queda para la próxima versión] Resource bundle de los js
+	moveto
+	simonflags
+
+banderitas y paises del plugin simonflags generadas desde la base.
+
+Agregar un build number que se pueda ver con el admin
+
+[Queda para la próxima versión] Poner componente de fecha en busqueda de observaciones
+
+[Queda para la próxima versión] Modificar editor para borrar todo lo tachadado con un solo click
+
+[Queda para la próxima versión] Esta comentada la parte de propuesta de parrafo en delegateNegotiation.jsp, deberia activarse?
+
+[Queda para la próxima versión] Los textos en el flash de firma debe ser parametros
+
+Alta de resource bundle
+
+Pantalla de test de envio de email
+
+Logos por idioma?
+
+Reflotar instalacion de cero (instalacion de cero).

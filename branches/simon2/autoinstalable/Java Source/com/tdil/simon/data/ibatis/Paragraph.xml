@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Paragraph">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Paragraph" type="com.tdil.simon.data.model.Paragraph"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllParagraphsForVersion" parameterClass="int" resultClass="Paragraph">
+    select *
+    from PARAGRAPH
+    where versionId = #id#
+    order by paragraphNumber
+  </select>
+  
+  <select id="selectAllParagraphsForVersionNotDeleted" parameterClass="int" resultClass="Paragraph">
+    select *
+   	from PARAGRAPH 
+   	WHERE deleted = 0
+   	AND versionId = #id#
+   	order by paragraphNumber
+  </select>
+  
+  <select id="selectParagraphById" parameterClass="int" resultClass="Paragraph">
+    select
+      *
+    from PARAGRAPH
+    where id = #id#
+  </select>
+  
+  <select id="selectParagraphByVersionAndNumber" parameterClass="java.util.Map" resultClass="Paragraph">
+    select
+      *
+    from PARAGRAPH
+    where versionId = #versionId#
+    and paragraphNumber = #paragraphNumber#
+  </select>
+ 
+   <insert id="insertParagraph" parameterClass="Paragraph">
+    insert into PARAGRAPH (
+      id, versionId, paragraphNumber, paragraphText, numberDetail, versionNumber, deleted
+    ) values (
+      #id#, #versionId#, #paragraphNumber#, #paragraphText#, #numberDetail#, #versionNumber#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+  <update id="updateParagraph" parameterClass="Paragraph">
+    update PARAGRAPH set
+      paragraphText = #paragraphText#,
+      deleted = #deleted#,
+      paragraphNumber = #paragraphNumber#,
+      numberDetail = #numberDetail#,
+      versionNumber = versionNumber + 1
+    where
+      id = #id#
+  </update>
+
+  <update id="logDeleteParagraph" parameterClass="Paragraph">
+    update PARAGRAPH set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+  <delete id="deleteParagraph" parameterClass="int">
+  	delete FROM PARAGRAPH where id = #id#
+  </delete>
+
+</sqlMap>

@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="ReferenceDocument">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="ReferenceDocument" type="com.tdil.simon.data.model.ReferenceDocument"/>
+  <typeAlias alias="ReferenceDocumentVO" type="com.tdil.simon.data.valueobjects.ReferenceDocumentVO"/>
+  
+  <resultMap class="ReferenceDocument" id="ReferenceDocumentWithDocument">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="subCategoryId" property="subCategoryId" />
+   <result column="title" property="title" />
+   <result column="fileName" property="fileName" />
+   <result column="extension" property="extension" />
+   <result column="contentType" property="contentType" />
+   <result column="orderNumber" property="orderNumber" />
+   <result column="document" property="document" jdbcType="BLOB"/>
+   </resultMap>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllReferenceDocuments" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted, 
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
+  </select>
+  
+  <select id="selectAllReferenceDocumentsNotDeleted" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    and REFERENCEDOCUMENT.deleted = 0
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
+  </select>
+  
+  <select id="selectAllReferenceDocumentsNotDeletedForUser" parameterClass="int" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+    from REFERENCEDOCUMENT, 
+    	(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+    where REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    and REFERENCEDOCUMENT.deleted = 0
+    AND CATEGORY.id IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'CATEGORY'
+    )
+    order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
+  </select>
+  
+  
+  <select id="selectNotDeletedReferenceDocumentForModeratorHome" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+   	from REFERENCEDOCUMENT, 
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+   	order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
+  </select>
+  
+  <select id="selectNotDeletedReferenceDocumentForModeratorHomeForUser"  parameterClass="int" resultClass="ReferenceDocumentVO">
+    select REFERENCEDOCUMENT.id, REFERENCEDOCUMENT.subCategoryId, REFERENCEDOCUMENT.title, REFERENCEDOCUMENT.fileName, 
+    	REFERENCEDOCUMENT.extension, REFERENCEDOCUMENT.contentType, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.deleted,
+    	CATEGORY.id as categoryId, CATEGORY.categoryName as categoryName, CATEGORY.subCategoryName as subCategoryName
+   	from REFERENCEDOCUMENT, 
+   		(select CATEGORY.id, CATEGORY.name as categoryName, '' as subCategoryName,
+   			CATEGORY.orderNumber as o1, -1 as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY
+		UNION
+		select SUBCATEGORY.id, CATEGORY.name as categoryName, SUBCATEGORY.name as subCategoryName,
+			CATEGORY.orderNumber as o1, SUBCATEGORY.orderNumber as o2
+		from (SELECT * FROM CATEGORY WHERE parentId = 0 and deleted = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0 and deleted = 0) SUBCATEGORY
+		WHERE SUBCATEGORY.parentId = CATEGORY.id) CATEGORY
+   	WHERE REFERENCEDOCUMENT.DELETED = 0
+   	AND REFERENCEDOCUMENT.subCategoryId = CATEGORY.id
+    AND CATEGORY.id IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'CATEGORY'
+    )
+   	order by CATEGORY.o1, CATEGORY.categoryName, CATEGORY.o2, CATEGORY.subCategoryName, REFERENCEDOCUMENT.orderNumber, REFERENCEDOCUMENT.title
+  </select>
+  
+  <select id="selectReferenceDocumentById" parameterClass="int" resultClass="ReferenceDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where id = #id#
+  </select>
+  
+  <select id="selectReferenceDocumentByIdWithDocument" parameterClass="int" resultMap="ReferenceDocumentWithDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where id = #id#
+  </select>
+  
+  <select id="selectReferenceDocumentByTitle" parameterClass="java.lang.String" resultClass="ReferenceDocument">
+    select
+      *
+    from REFERENCEDOCUMENT
+    where title = #title#
+  </select>
+ 
+  <insert id="insertReferenceDocument" parameterClass="ReferenceDocument">
+    insert into REFERENCEDOCUMENT (
+      id, subCategoryId, title, fileName, extension, contentType, document, orderNumber, deleted
+    ) values (
+      #id#, #subCategoryId#, #title#, #fileName#, #extension#, #contentType#, #document#, #orderNumber#, #deleted#
+    )
+    <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+  
+  
+  <update id="updateReferenceDocument" parameterClass="ReferenceDocument">
+    update REFERENCEDOCUMENT set
+    	subCategoryId = #subCategoryId#,
+      title = #title#,
+      fileName = #fileName#,
+      extension = #extension#,
+      deleted = #deleted#,
+      contentType = #contentType#,
+      orderNumber = #orderNumber#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="updateReferenceDocumentWithDocument" parameterClass="ReferenceDocument">
+    update REFERENCEDOCUMENT set
+    	subCategoryId = #subCategoryId#,
+      title = #title#,
+      fileName = #fileName#,
+      extension = #extension#,
+      deleted = #deleted#,
+      contentType = #contentType#,
+      document = #document#,
+      orderNumber = #orderNumber#
+    where
+      ID = #id#
+  </update>
+
+
+  <update id="logDeleteReferenceDocument" parameterClass="ReferenceDocument">
+    update REFERENCEDOCUMENT set
+      deleted = 1
+    where
+      ID = #id#
+  </update>
+
+</sqlMap>

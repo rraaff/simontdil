@@ -1,0 +1,15 @@
+drop table DEPLOYED_SCRIPTS;
+delete from SYSPROPERTIES where propKey IN ('simon.mailserver', 'simon.mayorVersion', 'simon.minorVersion');
+delete from RESOURCEBUNDLE where rbKey IN ('servidorDeEmail');
+delete from RESOURCEBUNDLE where rbContext = 'botones';
+delete from RESOURCEBUNDLE where rbContext= 'changePassword' and rbKey = 'titulo';
+delete from RESOURCEBUNDLE where rbContext= 'login' and rbKey = 'titulo';
+delete from RESOURCEBUNDLE where rbContext= 'resourceBundle' and rbKey = 'lenguage';
+delete from RESOURCEBUNDLE where rbContext= 'resourceBundle' and rbKey = 'ayuda';
+delete from RESOURCEBUNDLE where rbContext= 'login' and rbKey = 'lenguage';
+delete from RESOURCEBUNDLE where rbContext= 'createDocument', and rbKey = 'textoInicialParrafoIdiomaAlternativo';
+delete from RESOURCEBUNDLE where rbLanguage != 'castellano';
+ALTER TABLE RESOURCEBUNDLE DROP rbLanguage;
+ALTER TABLE COUNTRY DROP language;
+drop table DOCUMENTTYPE;
+commit;

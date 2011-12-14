@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="SubCategory">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="SubCategory" type="com.tdil.simon.data.model.SubCategory"/>
+  <typeAlias alias="SubCategoryVO" type="com.tdil.simon.data.valueobjects.SubCategoryVO"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllSubCategoryByCategoryId" parameterClass="int" resultClass="SubCategory">
+    select *
+    from SUBCATEGORY
+    where categoryId = #categoryId#
+    order by name
+  </select>
+  
+  <select id="selectAllSubCategoryNotDeleted" resultClass="SubCategoryVO">
+    select SUBCATEGORY.*, CATEGORY.name as categoryName
+   	from SUBCATEGORY, CATEGORY
+   	WHERE SUBCATEGORY.deleted = 0
+   	AND CATEGORY.deleted = 0
+   	AND SUBCATEGORY.categoryId = CATEGORY.id
+   	order by CATEGORY.name, SUBCATEGORY.name 
+  </select>
+
+  <select id="selectSubCategoryById" parameterClass="int" resultClass="SubCategory">
+    select
+      *
+    from SUBCATEGORY
+    where id = #id#
+  </select>
+
+  <select id="selectSubCategoryByNameAnCategoryId" parameterClass="java.util.Map" resultClass="SubCategory">
+    select
+      *
+    from SUBCATEGORY
+    where name = #name#
+    and categoryId = #categoryId#
+  </select>
+  
+  <insert id="insertSubCategory" parameterClass="SubCategory">
+    insert into SUBCATEGORY (
+      id, categoryId, name, deleted
+    ) values (
+      #id#, #categoryId#, #name#, #deleted#
+    )
+  </insert>
+
+  <update id="updateSubCategory" parameterClass="SubCategory">
+    update SUBCATEGORY set
+      name = #name#,
+      deleted = #deleted#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="logDeleteSubCategory" parameterClass="SubCategory">
+    update SUBCATEGORY set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

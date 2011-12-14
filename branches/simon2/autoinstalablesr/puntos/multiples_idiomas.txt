@@ -1,0 +1,49 @@
+Modificar tabla resource bundle agregando el idioma
+	Como manejaria esta modificacion? Podria meter en sysproperty la version de simon
+	y en base a eso correr scripts al levantar el mismo. Como manejaria los errores de upgrade?.
+Cambiar archivo de resource bundle
+	1) formato actual: marcos
+	2) agregar idiomas: pablo o alguien mas
+Agregar seleccion de idioma en el login
+	1) Guardar en la session
+	2) Agregar un filtro con un thread local
+	3) Cambiar el resource bundle cache para que use el ThreadLocal
+	No se persistira, es decir, si un usuario se logueo un dia, la proxima vez que se loguee debera volver a elegir el idioma.
+	Si desea cambiarlo, debera desloguearse y volver a loguearse. 
+Modificar pantalla de edicion de resource bundle
+	1) Mostrar el idioma en la tabla
+	2) Filtrar por idioma
+	3) Poder dejar el contexto vacio
+	4) Verificar que si no se hace cambio no se haga la llamada ajax
+	5) Postear el idioma para tocar el que corresponde
+
+Meter tambien una sysproperty con el mail server y su correspondiente pantalla de edicion.
+
+Dudas:
+Que pasaria con la pantalla de login, en que idioma se mostraria?
+Tener en cuenta que en esa pagina aun no se eligio el idioma.
+
+Cuales serian los idiomas?
+Cuales serian los idiomas alternativos de estos idiomas?
+
+Imagenes con texto...hay que arreglarlas, ahora si se va a notar.
+No se esta mostrando el error del login, ver otros que puedan faltar.
+
+Faltantes
+Como mostraria un texto que le falte a un idioma?
+Como sabria un usuario que tiene que agregar traducciones?
+Esto pasaria si se permite agregar idiomas y se actualiza una version de simon que agrega resource bundles.
+Los idiomas que hayan sido agregados van a carecer de las traducciones agregadas en la version.
+Una opcion seria que el usuario pueda bajarse un file con los faltantes y subirlos.
+La otra seria que post agregado de resource bundle se creen las rows faltantes con alguna particularidad para que el usuario
+las pueda identificar y editar
+Esto no pasaria si el usuario no puede crear idiomas, ya que los mismos estarian fijos dentro de simon.
+
+Extra
+Poder bajar/subir idiomas, files completos
+	subir seria modificacion masiva
+	bajar seria bajarse un idioma completo para tocarlo y subirlo despues 
+Poder agregar idiomas importando (que pasaria si no importa todos los resource bundle?)
+	Se podria dar error y obligar a que suba un archivo completo o nada.
+Poder borrar idiomas
+	Que pasaria si quiero borrar un idioma que esta siendo usado?

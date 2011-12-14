@@ -1,0 +1,9 @@
+Desinstalación
+
+Para desinstalar Simón, se deben seguir los siguientes pasos.
+
+Ejecutar los siguientes comandos:
+  sudo apt-get remove sun-java6-jre sun-java6-jdk
+  sudo apt-get autoremove mysql-server-5.1
+
+Eliminar el directorio de instalación, por ejemplo, /usr/local/simon

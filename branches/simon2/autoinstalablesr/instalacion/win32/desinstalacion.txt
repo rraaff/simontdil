@@ -1,0 +1,15 @@
+Desinstalación
+
+Para desinstalar Simón, se deben seguir los siguientes pasos.
+
+1) Ejecutar los siguientes comandos para eliminar el servicio de MySQL
+  net stop MySQL
+  sc delete MySQL
+
+2) Ir al Panel de Control >> Agregar y eliminar programas, y eliminar:
+  Java DB 10.5.3.0
+  Java(TM) 6 Update 21
+  Java(TM) SE Development Kit 6 Update 21
+  MySQL Server 5.5
+
+3) Eliminar el directorio de instalación, por ejemplo, c:/simon

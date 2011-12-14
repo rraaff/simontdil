@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="GroupPermission">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="GroupPermission" type="com.tdil.simon.data.model.GroupPermission"/>
+  <typeAlias alias="CategoryPermissionVO" type="com.tdil.simon.data.valueobjects.CategoryPermissionVO"/>
+  <typeAlias alias="DocumentTypePermissionVO" type="com.tdil.simon.data.valueobjects.DocumentTypePermissionVO"/>
+  
+  <select id="selectGroupPermissionForUser" parameterClass="int" resultClass="GroupPermission">
+ 	 SELECT GROUPPERMISSION.*
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+  </select>
+  
+  <select id="selectCategoryPermissionForGroupAndCategory" parameterClass="java.util.Map" resultClass="GroupPermission">
+  	select GROUPPERMISSION.*
+   	from GROUPPERMISSION
+   	WHERE GROUPPERMISSION.groupId = #userGroupId#
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
+   	AND GROUPPERMISSION.objectId = #categoryId#
+  </select>
+  
+   <select id="selectDocumentPermissionForGroupAndDocumentType" parameterClass="java.util.Map" resultClass="GroupPermission">
+  	select GROUPPERMISSION.*
+   	from GROUPPERMISSION
+   	WHERE GROUPPERMISSION.groupId = #userGroupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+   	AND GROUPPERMISSION.objectId = #documentTypeId#
+  </select>
+  
+  <select id="selectCategoryPermission" parameterClass="int" resultClass="CategoryPermissionVO">
+   	select GROUPPERMISSION.*, CATEGORY.name as categoryName
+   	from GROUPPERMISSION, (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
+   	AND GROUPPERMISSION.objectId = CATEGORY.id
+   	UNION
+    select GROUPPERMISSION.*, Concat(CATEGORY.name, ' > ', SUBCATEGORY.name) as categoryName
+   	from GROUPPERMISSION, (SELECT * FROM CATEGORY WHERE parentId = 0) CATEGORY, (SELECT * FROM CATEGORY WHERE parentId != 0) SUBCATEGORY
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'CATEGORY'
+   	AND GROUPPERMISSION.objectId = SUBCATEGORY.id
+   	and SUBCATEGORY.parentId = CATEGORY.id
+   	order by categoryName
+  </select>
+  
+  <select id="selectDocumentTypePermission" parameterClass="int" resultClass="DocumentTypePermissionVO">
+  	select GROUPPERMISSION.*, DOCUMENTTYPE.name as documentTypeName
+   	from GROUPPERMISSION, (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+   	AND GROUPPERMISSION.objectId = DOCUMENTTYPE.id
+   	UNION
+    select GROUPPERMISSION.*, Concat(DOCUMENTTYPE.name, ' > ', DOCUMENTSUBTYPE.name) as documentTypeName
+   	from GROUPPERMISSION, (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0) DOCUMENTSUBTYPE
+   	WHERE GROUPPERMISSION.groupId = #groupId#
+   	AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+   	AND GROUPPERMISSION.objectId = DOCUMENTSUBTYPE.id
+   	and DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id
+   	order by documentTypeName
+  </select>
+
+  <insert id="insertGroupPermission" parameterClass="GroupPermission">
+    insert into GROUPPERMISSION (
+      id, groupId, objectId, objectType, deleted
+    ) values (
+      #id#, #groupId#, #objectId#, #objectType#, #deleted#
+    )
+  </insert>
+  
+  <update id="deleteGroupPermission" parameterClass="GroupPermission">
+    delete from GROUPPERMISSION
+    where
+      id = #id#
+  </update>
+  
+</sqlMap>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Logo">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Logo" type="com.tdil.simon.data.model.Logo"/>
+  
+  <resultMap class="Logo" id="LogoWithLogoData">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="logoKey" property="logoKey" />
+   <result column="logoData" property="logoData" jdbcType="BLOB"/>
+   </resultMap>
+  
+   <select id="selectAllLogos" resultClass="Logo">
+    select id, logoKey, deleted
+    from LOGO
+  </select>
+  
+  <select id="selectLogoByKey" parameterClass="java.lang.String" resultMap="LogoWithLogoData">
+    select
+      *
+    from LOGO
+    where logoKey = #logoKey#
+  </select>
+  
+  <insert id="insertLogo" parameterClass="Logo">
+    insert into LOGO (
+      id, logoKey, logoData, deleted
+    ) values (
+      #id#, #logoKey#, #logoData#, #deleted#
+    )
+    <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+  
+  <update id="updateLogo" parameterClass="Logo">
+    update LOGO set
+    	logoData = #logoData#
+    where
+      logoKey = #logoKey#
+  </update>
+
+</sqlMap>

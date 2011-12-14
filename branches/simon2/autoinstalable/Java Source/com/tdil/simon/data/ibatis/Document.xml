@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Document">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Document" type="com.tdil.simon.data.model.Document"/>
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllDocuments" resultClass="Document">
+    select *
+    from DOCUMENT
+    order by title
+  </select>
+  
+  <select id="selectAllDocumentsNotDeleted" resultClass="Document">
+    select *
+   	from DOCUMENT 
+   	WHERE deleted = 0
+   	order by title
+  </select>
+  
+  <select id="selectNotDeletedNotRelevantDocuments" resultClass="com.tdil.simon.data.valueobjects.DocumentVO">
+    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
+    LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
+   	from DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
+   			DOCUMENTTYPE.orderNumber as o1, -1 as o2
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0 and deleted = 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
+   	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
+   	WHERE DOCUMENT.deleted = 0
+   	AND DOCUMENT.relevance = 0
+   	AND DOCUMENT.id = LAST_VERSIONS.documentId
+   	and DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+   	AND EXISTS (SELECT * 
+   				FROM VERSION 
+   				WHERE VERSION.documentId = DOCUMENT.id 
+   				AND VERSION.deleted = 0
+   				AND VERSION.status != 'DRAFT')
+   	order by DOCUMENTTYPE.o1, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.o2, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.orderNumber, DOCUMENT.title
+  </select>
+  
+  <select id="selectNotDeletedNotRelevantDocumentsUsingTypes" parameterClass="int" resultClass="com.tdil.simon.data.valueobjects.DocumentVO">
+    select DOCUMENT.*, DOCUMENTTYPE.id as documentTypeId, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.documentSubTypeName,
+    LAST_VERSIONS.number as lastVersionNumber, LAST_VERSIONS.name as lastVersionName
+   	from DOCUMENT, 
+   		(select DOCUMENTTYPE.id, DOCUMENTTYPE.name as documentTypeName, '' as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, -1 as o2
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE
+		UNION
+		select DOCUMENTSUBTYPE.id, DOCUMENTTYPE.name as documentTypeName, DOCUMENTSUBTYPE.name as documentSubTypeName,
+			DOCUMENTTYPE.orderNumber as o1, DOCUMENTSUBTYPE.orderNumber as o2
+		from (SELECT * FROM DOCUMENTTYPE WHERE parentId = 0 and deleted = 0) DOCUMENTTYPE, (SELECT * FROM DOCUMENTTYPE WHERE parentId != 0 and deleted = 0) DOCUMENTSUBTYPE
+		WHERE DOCUMENTSUBTYPE.parentId = DOCUMENTTYPE.id) DOCUMENTTYPE,
+   	(select V1.* from VERSION V1 WHERE V1.status != 'DRAFT' AND V1.id = (SELECT MAX(V2.id) from VERSION V2 where V2.status != 'DRAFT' AND V1.documentId = V2.documentId)) LAST_VERSIONS
+   	WHERE DOCUMENT.deleted = 0
+   	AND DOCUMENT.relevance = 0
+   	AND DOCUMENT.id = LAST_VERSIONS.documentId
+   	AND DOCUMENT.documentSubTypeId = DOCUMENTTYPE.id
+    AND DOCUMENT.documentSubTypeId IN (
+    	SELECT GROUPPERMISSION.objectId
+		FROM GROUPPERMISSION, USERGROUP, GROUPMEMBER
+		WHERE GROUPMEMBER.systemUserId = #systemUserId#
+		AND GROUPMEMBER.groupId = USERGROUP.id
+		AND USERGROUP.id = GROUPPERMISSION.groupId
+		AND GROUPPERMISSION.objectType = 'DOCUMENT_TYPE'
+    )
+    AND EXISTS (
+    	SELECT * 
+   		FROM VERSION 
+   		WHERE VERSION.documentId = DOCUMENT.id 
+   		AND VERSION.deleted = 0
+   		AND VERSION.status != 'DRAFT')
+   	order by DOCUMENTTYPE.o1, DOCUMENTTYPE.documentTypeName, DOCUMENTTYPE.o2, DOCUMENTTYPE.documentSubTypeName, DOCUMENT.orderNumber, DOCUMENT.title
+  </select>
+  
+  <select id="getDocumentUnderWork" resultClass="Document">
+    select *
+   	from DOCUMENT 
+   	WHERE DOCUMENT.id IN (SELECT documentId FROM VERSION where VERSION.status IN ('IN_NEGOTIATION', 'IN_SIGN'))
+  </select>
+    
+  <select id="selectNotDeletedDocumentWithConsolidatedVersions" resultClass="Document">
+    select *
+   	from DOCUMENT 
+   	WHERE DELETED = 0
+   	and EXISTS (SELECT * 
+   				FROM VERSION 
+   				WHERE VERSION.documentId = DOCUMENT.id 
+   				AND VERSION.deleted = 0
+   				AND VERSION.status = 'CONSOLIDATED')
+   	order by title
+  </select>
+  <select id="selectDocumentById" parameterClass="int" resultClass="Document">
+    select
+      *
+    from DOCUMENT
+    where id = #id#
+  </select>
+
+    <select id="selectDocumentForNegotiation" resultClass="Document">
+    select
+      DOCUMENT.*
+    from DOCUMENT
+    where DOCUMENT.principal = 1
+    and DOCUMENT.deleted = 0
+    and EXISTS (select * 
+    			from VERSION  
+    			where VERSION.documentId = DOCUMENT.ID
+    			and VERSION.status = 'CONSOLIDATED'
+			    and VERSION.deleted = 0)
+  </select>
+  
+  <insert id="insertDocument" parameterClass="Document">
+    insert into DOCUMENT (
+      id, title, introduction, principal, documentSubTypeId, relevance, documentDate, topic, tag1, tag2, orderNumber, deleted
+    ) values (
+      #id#, #title#, #introduction#,#principal#,#documentSubTypeId#, #relevance#, #documentDate#, #topic#, #tag1#, #tag2#, #orderNumber#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+  <update id="updateDocument" parameterClass="Document">
+    update DOCUMENT set
+      title= #title#, 
+	introduction = #introduction#,
+	principal= #principal#,
+	documentSubTypeId = #documentSubTypeId#, 
+	documentDate= #documentDate#, 
+	topic = #topic#, 
+	tag1 = #tag1#, 
+	tag2 = #tag2#,
+	orderNumber = #orderNumber#,
+	deleted = #deleted#
+    where
+      id = #id#
+  </update>
+  
+  <update id="updateDocumentRelevance" parameterClass="java.util.Map">
+    update DOCUMENT set
+      relevance= #relevance#
+    where
+      id = #id#
+  </update>
+  
+  <update id="removeAllPrincipal">
+    update DOCUMENT set
+      principal = 0
+    where
+      principal = 1
+  </update>
+  
+  <update id="updateAllAsNotPrincipal" parameterClass="int">
+    update DOCUMENT set
+      principal = 0
+    where principal = 1
+    and documentSubTypeId = #documentSubTypeId#
+  </update>
+
+  <update id="logDeleteDocument" parameterClass="Document">
+    update DOCUMENT set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+
+</sqlMap>
