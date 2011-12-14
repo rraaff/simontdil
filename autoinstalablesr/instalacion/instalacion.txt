@@ -1,0 +1,42 @@
+Instalación de Simón
+
+Se proveen dos instaladores, uno para windows 32 y otro para linux (ubuntu/debian).
+
+Instalación en Windows
+
+La instalación en Windows se ejecuta mediante el bat que se encuentra en win32/instalar.bat. Se deberá abrir una ventana de comando y ejecutar el bat desde el directorio win32.
+
+La instalación será completamente automática, y usará parámetros definidos al comienzo del archivo, los cuales pueden ser modificados (por ejemplo, la clave del usuario root de mysql).
+El parámetro dest_drive identifica el drive de instalación, es decir, una sola letra: C por ejemplo.
+Al finalizar deja en el directorio de instalación c:/simon un archivo con datos de cómo iniciar TOMCAT.
+
+TOMCAT
+La instalación por defecto instalará Simón en la ruta c:/simon
+-	La clave del usuario root de mysql es root
+-	La base de datos para Simón es SIMON
+-	El usuario y la clave es SIMON_USER
+-	TOMCAT quedará instalado en c:/simon/apache-tomcat-6.0.32
+-	El usuario Administrador del sistema Simón es Admin y su clave es Admin
+
+////////////////////////////////////////////////////////////////////////
+
+
+Instalación en Linux
+
+La instalación en Linux se ejecutará mediante el sh que se encuentra en linux/instalar.sh y deberá ser ejecutada por un usuario administrador (ya que muchas de los comandos se ejecutan con sudo).
+
+Se debe abrir una terminal y ejecutar el sh desde el directorio linux.
+
+La instalación de java y mysql requiere que el usuario acepte la instalación de los mismos (escribiendo Y).
+Adicionalmente la instalación de mysql requiere que el usuario ingrese la clave del usuario root, el cual deberá volver a ser ingresado cuando el instalador lo requiera, mediante la pregunta Ingrese la clave del usuario root de mysql.
+
+Se usan parámetros definidos después de la parte que dice Parámetros que pueden ser modificados.
+El parámetro dest_drive identifica el path de instalación, por defecto es /usr/local.
+Al igual que en la versión Windows, dichos parámetros pueden ser modificados.
+Al finalizar deja en el directorio de instalación /usr/local/simon un archivo con datos de como levantar TOMCAT.
+
+La configuración por defecto instalará Simón en el path /usr/local//simon.
+-	La base de datos para Simón es SIMON
+-	El usuario y la clave es SIMON_USER
+-	TOMCAT quedará instalado en /usr/local/simon/apache-tomcat-6.0.32
+-	El usuario de Simón es Admin y su clave es Admin

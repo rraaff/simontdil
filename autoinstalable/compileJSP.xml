@@ -1,0 +1,101 @@
+<project name="compileJSP" basedir="." default="all">
+	<description>Compiles the JSP project</description>
+
+	<property name="workspace" value="../" />
+	<property name="webapp.path" value="./Web Content"/>
+	<property name="tomcat.home" value="/home/mgodoy/icarus/tomcat"/>
+
+	<path id="all.lib.classpath">
+		<fileset dir="${workspace}/EnvironmentLibraries/lib" includes="**/*.jar" />
+	</path>
+
+	<taskdef resource="net/sf/ant4eclipse/antlib.xml">
+		<classpath>
+			<pathelement path="${workspace}/Simon_Resources/jars/ant4eclipse-0.4.0.jar" />
+			<pathelement path="${workspace}/Simon_Resources/jars/ant-junit.jar" />
+			<pathelement path="${workspace}/Simon_Resources/jars/junit-3.8.1.jar" />
+		</classpath>
+	</taskdef>
+	<taskdef resource="net/sf/antcontrib/antlib.xml" classpath="${workspace}/Simon_Resources/jars/ant-contrib.jar" />
+
+	<target name="jspc">
+		<taskdef classname="org.apache.jasper.JspC" name="jasper2">
+			<classpath id="jspc.classpath">
+				<pathelement location="${java.home}/../lib/tools.jar" />
+				<fileset dir="${tomcat.home}/server/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${tomcat.home}/common/lib">
+					<include name="*.jar" />
+				</fileset>
+				<fileset dir="${webapp.path}/WEB-INF/lib/">
+					<include name="*.jar" />
+				</fileset>
+			</classpath>
+		</taskdef>
+
+		<jasper2 
+			validateXml="false" 
+			uriroot="${webapp.path}" 
+			webXmlFragment="${webapp.path}/WEB-INF/generated_web.xml" 
+			outputDir="${webapp.path}/WEB-INF/src" 
+			failonerror="true" 
+			verbose="0" 
+			erroronusebeaninvalidclassattribute="false">
+		</jasper2>
+	</target>
+
+	<target name="compile">
+		<getEclipseClasspath property="build.classpath" workspace="${workspace}" projectName="Simon_WEB" />
+
+		<javac 
+			destdir="${webapp.path}/WEB-INF/classes" 
+			optimize="off" 
+			debug="on" 
+			failonerror="true" 
+			verbose="true" 
+			srcdir="${webapp.path}/WEB-INF/src"
+			fork="true"
+			memorymaximumsize="128m"
+			excludes="**/*.smap">
+			
+			<classpath>
+				<pathelement location="${webapp.path}/WEB-INF/classes" />
+				<fileset dir="${webapp.path}/WEB-INF/lib">
+					<include name="*.jar" />
+				</fileset>
+				<pathelement location="${tomcat.home}/common/classes" />
+				<fileset dir="${tomcat.home}/common/lib">
+					<include name="*.jar" />
+				</fileset>
+				<pathelement location="${tomcat.home}/shared/classes" />
+				<fileset dir="${tomcat.home}/shared/lib">
+					<include name="*.jar" />
+				</fileset>
+				<path path="${build.classpath}"/>
+				<path path="${build.classpath2}"/>
+				<path path="${build.classpath3}"/>
+			</classpath>
+			
+			<include name="**" />
+			<exclude name="tags/**" />
+			<exclude name="**/includes/*.java"/>
+			<exclude name="**/modules/*.java"/>
+		</javac>
+	</target>
+	
+	<target name="cleanUP">
+		<delete dir="${webapp.path}/WEB-INF/src"/>
+		<delete file="${webapp.path}/WEB-INF/generated_web.xml"/>
+		<delete dir="${webapp.path}/WEB-INF/classes/org"/>
+	</target>
+	<target name="cleanUP2">
+		<delete dir="${webapp.path}/WEB-INF/src"/>
+		<delete file="${webapp.path}/WEB-INF/generated_web.xml"/>
+		<delete dir="${webapp.path}/WEB-INF/classes/org"/>
+	</target>
+
+	<target name="all" depends="cleanUP,jspc,compile,cleanUP2">
+	</target>
+
+</project>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Country">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Country" type="com.tdil.simon.data.model.Country"/>
+
+   <resultMap class="Country" id="CountryWithFlag">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="name" property="name" />
+   <result column="host" property="host" />
+   <result column="language" property="language" />
+   <result column="flag" property="flag" jdbcType="BLOB"/>
+   </resultMap>
+
+
+  <!-- Select with no parameters. -->
+  <select id="selectAllCountries" resultClass="Country">
+    select id, name, host, language, deleted
+    from COUNTRY
+    order by name
+  </select>
+  
+  <select id="selectAllCountriesNotDeleted" resultClass="Country">
+    select id, name, host, language, deleted
+   	from COUNTRY 
+   	WHERE DELETED = 0
+   	order by name
+  </select>
+  
+  <select id="selectAllCountriesVO" resultClass="com.tdil.simon.data.valueobjects.CountryVO">
+    select COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted,
+      (SELECT count(1) FROM SYSTEMUSER WHERE SYSTEMUSER.deleted = 0 AND SYSTEMUSER.countryId = COUNTRY.id) as userCount
+   	from COUNTRY
+   	order by COUNTRY.name
+  </select>
+  
+  <select id="selectCountryHost" resultClass="Country">
+    select
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
+    from COUNTRY
+    where HOST = 1
+    and deleted = 0
+  </select>
+  
+  <select id="selectCountryByName" parameterClass="java.lang.String" resultClass="Country">
+    select
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
+    from COUNTRY
+    where name = #name#
+  </select>
+  
+  <select id="selectCountryById" parameterClass="int" resultClass="Country">
+    select
+      COUNTRY.id, COUNTRY.name, COUNTRY.host, COUNTRY.language, COUNTRY.deleted
+    from COUNTRY
+    where id = #id#
+  </select>
+  
+  <select id="selectCountryByIdWithFlag" parameterClass="int" resultMap="CountryWithFlag">
+    select
+      *
+    from COUNTRY
+    where id = #id#
+  </select>
+ 
+  <insert id="insertCountry" parameterClass="Country">
+    insert into COUNTRY (
+      id, name, flag, host, language, deleted
+    ) values (
+      #id#, #name#, #flag#, #host#, #language#, #deleted#
+    )
+   <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+
+  <update id="updateCountry" parameterClass="Country">
+    update COUNTRY set
+      name = #name#,
+      language = #language#,
+      deleted = #deleted#
+    where
+      id = #id#
+  </update>
+  
+  <update id="updateCountryWithFlag" parameterClass="Country">
+    update COUNTRY set
+      name = #name#,
+      flag = #flag#,
+      language = #language#,
+      deleted = #deleted#
+    where
+      id = #id#
+  </update>
+  
+  <update id="logDeleteCountry" parameterClass="Country">
+    update COUNTRY set
+      deleted = 1
+    where
+      id = #id#
+  </update>
+
+</sqlMap>
