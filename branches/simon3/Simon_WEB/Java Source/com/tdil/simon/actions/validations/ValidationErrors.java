@@ -93,4 +93,6 @@ public interface ValidationErrors {
 	
 	// USerGroup
 	String USER_GROUP_ALREADY_EXISTS = "USER_GROUP_ALREADY_EXISTS";
+	
+	String INVALID_ATT_TYPE = "INVALID_ATT_TYPE";
 }
