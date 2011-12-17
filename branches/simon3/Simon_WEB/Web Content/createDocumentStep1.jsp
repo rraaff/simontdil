@@ -32,12 +32,7 @@
 								<td align="right" width="192"><%=ResourceBundleCache.get("createDocument", "tituloDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="401" align="left">
-									<logic:equal name="CreateDocumentForm" property="portugues" value="false">
-										<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" />
-									</logic:equal>
-									<logic:equal name="CreateDocumentForm" property="portugues" value="true">
-										<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect" disabled="true"/>
-									</logic:equal>
+									<html:text name="CreateDocumentForm" property="title" styleClass="textfield_effect"/><html:errors property="title" />
 								</td>
 							</tr>
 							<tr>
@@ -172,13 +167,6 @@ $$('input.slimpicker').each( function(el){
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
 							
-							<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
-								<tr>
-									<td colspan="4">
-										<html:textarea name="CreateDocumentForm" property="designerText" styleClass="textfield_effect_area"/><html:errors property="designerText" />
-									</td>
-								</tr>
-							</logic:equal>
 							<tr>
 								<td colspan="3" height="11"><img src="images/null.gif" width="1" height="11"></td>
 							</tr>
@@ -202,20 +190,6 @@ $$('input.slimpicker').each( function(el){
 		</td>
 	</tr>
 </table>
-<logic:equal name="CreateDocumentForm" property="portuguesOrDesigner" value="true">
-<script type="text/javascript">
-		//<![CDATA[
-			// Replace the <textarea id="editor1"> with an CKEditor instance.
-			var editor = CKEDITOR.replace( 'designerText',
-				{
-					// Defines a simpler toolbar to be used in this sample.
-					// Note that we have added out "MyButton" button here.
-					toolbar : [ ['Bold', 'Italic', 'Underline', 'Strike','-'] ,['TextColor','BGColor']],
-					height:"120", width:"960"
-					
-				});
-</script>
-</logic:equal>
 </html:form>
 </td>
 <%@ include file="includes/rightContent.jsp" %>

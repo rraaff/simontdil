@@ -22,12 +22,6 @@ public enum UserTypeValidation {
 			return user.isAssistant();
 		}
 	},
-	TRANSLATOR {
-		@Override
-		public boolean isValid(SystemUser user) {
-			return user.isTranslator();
-		}
-	},
 	DELEGATE {
 		@Override
 		public boolean isValid(SystemUser user) {
@@ -38,12 +32,6 @@ public enum UserTypeValidation {
 		@Override
 		public boolean isValid(SystemUser user) {
 			return user.isDelegate() && user.isCanSign();
-		}
-	},
-	DESIGNER {
-		@Override
-		public boolean isValid(SystemUser user) {
-			return user.isDesigner();
 		}
 	},
 	ANONYMOUS {

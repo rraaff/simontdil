@@ -139,7 +139,6 @@ public class DelegateABMForm extends TransactionalValidationForm implements ABMF
 		user.setDelegate(true);
 		user.setAdministrator(false);
 		user.setModerator(false);
-		user.setDesigner(false);
 		user.setCanSign(this.isCanSign());
 		user.setJob(this.job);
 //		user.setCountryDesc(this.); TODO hablar con pablo

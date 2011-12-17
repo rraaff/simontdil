@@ -61,9 +61,7 @@
       <forward name="negotiation" redirect="true" path="/goToDelegateNegotiation.st"/>
       <forward name="signShow" redirect="true" path="/goToSignShow.st"/>
       <forward name="initChangePassword" path="/initChangePassword.st"/>
-      <forward name="designer" path="/goToListDocumentForDesign.st"/>
       <forward name="assistant" path="/goToAssistantHome.st"/>
-      <forward name="translator" path="/goToTranslatorHome.st"/>
     </action>
     <action path="/initNegotiation" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.InitNegotiationAction" scope="session">
       <forward name="failure" path="/moderatorHome.jsp"/>
@@ -93,7 +91,6 @@
       <forward name="save" path="/previewDocument.jsp"/>
       <forward name="editParagraphs" path="/createDocumentStepParagraph.jsp"/>
       <forward name="goHome" path="/goToModeratorHome.st"/>
-      <forward name="designerHome" path="/goToListDocumentForDesign.st"/>
     </action>
     <action path="/consolidateDocument" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.ConsolidateDocumentAction" scope="session">
       <forward name="save" path="/goToModeratorHome.st"/>
@@ -104,9 +101,6 @@
       <forward name="continue" path="/listDocumentsForModerator.jsp"/>
     </action>
     <action path="/editVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.EditVersionAction" scope="session">
-      <forward name="continue" path="/createDocumentStep1.jsp"/>
-    </action>
-    <action path="/editPortuguesVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.moderator.EditPortuguesVersionAction" scope="session">
       <forward name="continue" path="/createDocumentStep1.jsp"/>
     </action>
     <action path="/requestPassword" name="RequestPaswwordForm" type="com.tdil.simon.struts.actions.RequestPasswordAction" scope="request">
@@ -264,14 +258,6 @@
     <action path="/initChangePassword" name="ChangePassword" type="com.tdil.simon.struts.actions.InitChangePasswordAction" scope="request">
       <forward name="continue" path="/changePassword.jsp"/>
     </action>
-    <action path="/designerList" name="ListDocumentsForDesign" type="com.tdil.simon.struts.actions.designer.DesignerListAction" scope="session">
-    </action>
-    <action path="/goToListDocumentForDesign" name="ListDocumentsForDesign" type="com.tdil.simon.struts.actions.designer.GoToListDocumentForDesignAction" scope="session">
-      <forward name="continue" path="/listDocumentsForDesigner.jsp"/>
-    </action>
-    <action path="/designVersion" name="CreateDocumentForm" type="com.tdil.simon.struts.actions.designer.DesignVersionAction" scope="session">
-      <forward name="continue" path="/createDocumentStep1.jsp"/>
-    </action>
     <action path="/getPublicSiteStatus" type="com.tdil.simon.struts.actions.GetPublicSiteStatus" scope="request">
     </action>
     <action path="/goToViewVersionPopup" name="ViewVersionPopup" type="com.tdil.simon.struts.actions.moderator.GoToViewVersionPopupAction" scope="session">
@@ -289,14 +275,7 @@
     <action path="/goToAssistantHome" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.GoToAsisstantHome" scope="session">
       <forward name="continue" path="/assistantHome.jsp"/>
     </action>
-    <action path="/goToTranslatorHome" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.GoToTranslatorHome" scope="session">
-      <forward name="continue" path="/translatorHome.jsp"/>
-    </action>
     <action path="/addPrivateObservationAction" name="AssistantHome" type="com.tdil.simon.struts.actions.assistant.AddPrivateObservationAction" scope="session">
-    </action>
-    <action path="/addTranslatorObservationAction" name="TranslatorHome" type="com.tdil.simon.struts.actions.translator.AddTranslationObservationAction" scope="session">
-    </action>
-    <action path="/getTranslatorObservationAction" type="com.tdil.simon.struts.actions.translator.GetTranslationObservationAction" scope="session">
     </action>
     <action path="/editEmail" name="NotificationEmail" type="com.tdil.simon.struts.actions.moderator.EditEmailNotificationAction" scope="session">
       <forward name="continue" path="/notificationEmail.jsp"/>

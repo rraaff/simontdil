@@ -41,4 +41,5 @@
   <sqlMap resource="com/tdil/simon/data/ibatis/SubCategory.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/GroupPermission.xml"/>
   <sqlMap resource="com/tdil/simon/data/ibatis/GroupMember.xml"/>
+  <sqlMap resource="com/tdil/simon/data/ibatis/Attachment.xml"/>
 </sqlMapConfig>

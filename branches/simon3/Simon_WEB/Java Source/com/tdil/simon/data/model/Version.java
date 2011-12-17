@@ -23,9 +23,6 @@ public class Version extends PersistentObject {
 	private String status;
 	private boolean hasDraft = false;
 	private boolean commentsEnabled = true;
-	private boolean spanishVersion = true;
-	
-	private String designerText;
 	
 	public int getDocumentId() {
 		return documentId;
@@ -108,17 +105,4 @@ public class Version extends PersistentObject {
 	public void setCommentsEnabled(boolean commentsEnabled) {
 		this.commentsEnabled = commentsEnabled;
 	}
-	public boolean isSpanishVersion() {
-		return spanishVersion;
-	}
-	public void setSpanishVersion(boolean spanishVersion) {
-		this.spanishVersion = spanishVersion;
-	}
-	public String getDesignerText() {
-		return designerText;
-	}
-	public void setDesignerText(String designerText) {
-		this.designerText = designerText;
-	}
-
 }

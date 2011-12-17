@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE sqlMap      
+    PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"      
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="Attachment">
+
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <typeAlias alias="Attachment" type="com.tdil.simon.data.model.Attachment"/>
+  
+  <resultMap class="Attachment" id="AttachmentWithData">
+   <result column="id" property="id" />
+   <result column="deleted" property="deleted" />
+   <result column="ownerId" property="ownerId" />
+   <result column="ownerType" property="ownerType" />
+   <result column="title" property="title" />
+   <result column="fileName" property="fileName" />
+   <result column="extension" property="extension" />
+   <result column="contentType" property="contentType" />
+   <result column="data" property="data" jdbcType="BLOB"/>
+   </resultMap>
+  
+   <select id="selectAttachmentsList" parameterClass="java.util.Map" resultClass="Attachment">
+    select id, ownerId, ownerType, title, fileName, extension, contentType, deleted
+    from ATTACHMENT
+    where ATTACHMENT.ownerId = #ownerId#
+    AND ATTACHMENT.ownerType = #ownerType#
+    order by ATTACHMENT.title ASC
+  </select>
+  
+  <select id="selectAttachmentById" parameterClass="int" resultClass="Attachment">
+    select
+      id, ownerId, ownerType, title, fileName, extension, contentType, deleted
+    from ATTACHMENT
+    where id = #id#
+  </select>
+  
+  <select id="selectAttachmentByIdWithData" parameterClass="int" resultMap="AttachmentWithData">
+    select
+      *
+    from ATTACHMENT
+    where id = #id#
+  </select>
+  
+  <insert id="insertAttachment" parameterClass="Attachment">
+    insert into ATTACHMENT (
+      id, ownerId, ownerType, title, fileName, extension, contentType, data, deleted
+    ) values (
+      #id#, #ownerId#, #ownerType#, #title#, #fileName#, #extension#, #contentType#, #data#, #deleted#
+    )
+    <selectKey resultClass="int" keyProperty="id">
+     SELECT LAST_INSERT_ID() AS id
+   </selectKey>
+  </insert>
+  
+  
+  <update id="updateAttachment" parameterClass="Attachment">
+    update ATTACHMENT set
+      title = #title#
+    where
+      ID = #id#
+  </update>
+  
+  <update id="updateAttachmentWithData" parameterClass="Attachment">
+    update ATTACHMENT set
+      title = #title#,
+      fileName = #fileName#,
+      extension = #extension#,
+      contentType = #contentType#,
+      data = #data#
+    where
+      ID = #id#
+  </update>
+
+</sqlMap>

@@ -48,11 +48,7 @@ input.date {
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<tr>
 							<td rowspan="2">
-								<% if (!isAdministrator && !isModerator && isDesigner) { %>
-									<html:link action="/goToListDocumentForDesign" ><img src="./download.do?action=logo&fileId=header.logo" border="0"></html:link>
-								<% } else { %>
-									<img src="./download.do?action=logo&fileId=header.logo" border="0">
-								<% } %>
+								<img src="./download.do?action=logo&fileId=header.logo" border="0">
 							</td>
 							<td width="200" rowspan="2" align="left"><%=ResourceBundleCache.get("header", "sitioModerador")%>: <b><%=com.tdil.simon.data.model.Site.getMODERATOR_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioDelegados")%>: <b><%=com.tdil.simon.data.model.Site.getDELEGATE_SITE().getTranslatedStatus()%></b><br><%=ResourceBundleCache.get("header", "sitioPublico")%>: <b><%=com.tdil.simon.data.model.Site.getPUBLIC_SITE().getTranslatedStatus()%></b></td>
 							<td width="200" align="right"><%=ResourceBundleCache.get("header", "usuario")%>: <span class="userLogged"><%= user.getName() %></span></td>

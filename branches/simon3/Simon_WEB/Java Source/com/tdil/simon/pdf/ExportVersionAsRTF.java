@@ -54,11 +54,6 @@ public class ExportVersionAsRTF {
 		// generate the body
 		buf.append("<body>");
 		buf.append("<h3>").append(version.getDocument().getTitle()).append("</h3>");
-		String designerText = version.getVersion().getDesignerText();
-		if (designerText == null) {
-			designerText = "";
-		}
-		buf.append("<h4>").append(designerText).append("</h4>");
 		List<Paragraph> introduction = filterIntroduction(version.getParagraphs());
 		buf.append("<h4>"+ResourceBundleCache.get("print", "preambulo")+"</h4>");
 		for (Paragraph p : introduction) {
@@ -72,11 +67,7 @@ public class ExportVersionAsRTF {
 		if (Version.IN_SIGN.equals(version.getVersion().getStatus()) || 
 				Version.FINAL.equals(version.getVersion().getStatus())) {
 			List signatures ;
-			if (version.getVersion().isSpanishVersion()) {
-				signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
-			} else {
-				signatures = SignatureDAO.selectSignaturesForPortugues(version.getDocument().getId(), version.getVersion().getNumber());
-			}
+			signatures = SignatureDAO.selectSignaturesFor(version.getVersion().getId());
 			buf.append("<table cols=\"150 300pt\" border=\"0\">");
 			for (Object signObj : signatures) {
 				SignatureVO signatureVO = (SignatureVO)signObj;

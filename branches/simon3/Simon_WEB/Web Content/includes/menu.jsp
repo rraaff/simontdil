@@ -60,20 +60,6 @@
 						</ul>
 					</li>
 					<% } %>
-					<% if (isDesigner) { %>
-					<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "diseniador")%></a>
-						<ul>
-							<li><html:link action="/goToListDocumentForDesign" ><%=ResourceBundleCache.get("menu", "homeDiseniador")%></html:link></li>
-						</ul>
-					</li>
-					<% } %>
-					<% if (isTranslator) { %>
-					<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "traductor")%></a>
-						<ul>
-							<li><html:link action="/goToTranslatorHome" ><%=ResourceBundleCache.get("menu", "homeTraductor")%></html:link></li>
-						</ul>
-					</li>
-					<% } %>
 					<% if (isAsisstant) { %>
 					<li><a class="trigger" href="#"><%=ResourceBundleCache.get("menu", "asistente")%></a>
 						<ul>

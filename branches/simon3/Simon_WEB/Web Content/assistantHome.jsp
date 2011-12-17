@@ -137,7 +137,7 @@ if ( dw_scrollObj.isSupported() ) {
 	timer = setInterval("getDelegateSiteStatus()",5000);
 
 </script>
-<%if (isAdministrator || isDesigner) { %>
+<%if (isAdministrator) { %>
 <%@ include file="includes/menu.jsp" %>
 <% } %>
 <%@ include file="includes/leftContent.jsp" %>

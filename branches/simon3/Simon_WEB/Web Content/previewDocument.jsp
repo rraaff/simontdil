@@ -101,33 +101,12 @@ if ( dw_scrollObj.isSupported() ) {
 								</html:submit>
 								<!-- Si no esta en negociacion -->
 								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="false">
-									<!-- Si no esta en disenio -->
-									<logic:equal name="CreateDocumentForm" property="designer" value="false">
-										<!-- Si no es portugues -->
-										<logic:equal name="CreateDocumentForm" property="portugues" value="false">
-											<html:submit property="operation">
-												<%=ResourceBundleCache.get(getServletInfo(), "grabarBorrador")%>
-											</html:submit>
-											<html:submit property="operation">
-												<%=ResourceBundleCache.get(getServletInfo(), "consolidar")%>
-											</html:submit>
-										</logic:equal>
-										<!-- Si es portugues -->
-										<logic:equal name="CreateDocumentForm" property="portugues" value="true">
-											<html:submit property="operation">
-												<%=ResourceBundleCache.get(getServletInfo(), "grabarBorrador")%>
-											</html:submit>
-											<html:submit property="operation">
-												<%=ResourceBundleCache.get(getServletInfo(), "grabarIdiomaAlternativo")%>
-											</html:submit>
-										</logic:equal>
-									</logic:equal>
-									<!-- Si esta en disenio -->
-									<logic:equal name="CreateDocumentForm" property="designer" value="true">
-										<html:submit property="operation">
-											<%=ResourceBundleCache.get(getServletInfo(), "grabarDisenio")%>
-										</html:submit>
-									</logic:equal>
+									<html:submit property="operation">
+										<%=ResourceBundleCache.get(getServletInfo(), "grabarBorrador")%>
+									</html:submit>
+									<html:submit property="operation">
+										<%=ResourceBundleCache.get(getServletInfo(), "consolidar")%>
+									</html:submit>
 								</logic:equal>
 								<!-- Si esta en negociacion -->
 								<logic:equal name="CreateDocumentForm" property="isInNegotiation" value="true">

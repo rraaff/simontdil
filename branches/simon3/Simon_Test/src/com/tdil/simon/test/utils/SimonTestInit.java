@@ -7,6 +7,7 @@ import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.test.AllTest;
 import com.tdil.simon.test.SimonTest;
 import com.tdil.simon.test.smtp.SMTPServer;
+import com.tdil.simon.web.SystemConfig;
 
 public class SimonTestInit {
 
@@ -16,6 +17,7 @@ public class SimonTestInit {
 		if (!initialized) {
 			initDatabaseConnection();
 			initTestProperties();
+			SystemConfig.init();
 			SMTPServer.getSigleIntance();
 			initialized = true;
 		}

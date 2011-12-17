@@ -34,9 +34,7 @@ public class SystemUser extends PersistentObject implements Serializable{
 	private boolean delegate = false;
 	
 	private boolean canSign = false;
-	private boolean designer = false;
 	private boolean assistant = false;
-	private boolean translator = false;
 	
 	private boolean passwordResetRequest = false;
 	private boolean temporaryPassword = false;
@@ -95,15 +93,6 @@ public class SystemUser extends PersistentObject implements Serializable{
 	public void setCanSign(boolean canSign) {
 		this.canSign = canSign;
 	}
-
-	public boolean isDesigner() {
-		return designer;
-	}
-
-	public void setDesigner(boolean designer) {
-		this.designer = designer;
-	}
-
 
 	public String getUsername() {
 		return username;
@@ -175,14 +164,6 @@ public class SystemUser extends PersistentObject implements Serializable{
 
 	public void setAssistant(boolean assistant) {
 		this.assistant = assistant;
-	}
-
-	public boolean isTranslator() {
-		return translator;
-	}
-
-	public void setTranslator(boolean translator) {
-		this.translator = translator;
 	}
 
 	public UserPermissionCache getPermissionCache() {

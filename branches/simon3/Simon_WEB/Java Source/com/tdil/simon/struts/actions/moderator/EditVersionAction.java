@@ -20,7 +20,7 @@ import com.tdil.simon.utils.NegotiationUtils;
 
 public class EditVersionAction extends SimonAction implements TransactionalActionWithValue {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER};
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR};
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

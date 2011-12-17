@@ -27,7 +27,6 @@ public class TestNegotiationDelegate extends SimonTest {
 			for (int i = 0; i < 3; i++) {
 				delegates.add(SystemUserFactory.getDelegate("del" + i));
 			}
-			SystemUser translator = SystemUserFactory.getTranslatorActive();
 			// login
 			BrowserUtils.open("login.jsp");
 			BrowserUtils.waitUntilPage("jsp-login");
