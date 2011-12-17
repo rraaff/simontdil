@@ -29,12 +29,10 @@ CREATE  TABLE `SYSTEMUSER` (
   `moderator` INT NULL ,
   `delegate` INT NULL ,
   `canSign` INT NULL ,
-  `designer` INT NULL ,
   `passwordResetRequest` INT NULL ,
   `temporaryPassword` INT NULL ,
   `canProposeParagraph` INT NULL ,
   `assistant` INT NULL ,
-  `translator` INT NULL ,
   `canComment` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) ,
@@ -67,8 +65,6 @@ CREATE  TABLE `VERSION` (
   `hasDraft` INT NULL ,
   `deleted` INT NULL ,
   `commentsEnabled` INT NULL ,
-  `spanishVersion` INT NULL ,
-  `designerText` MEDIUMTEXT NULL ,
   PRIMARY KEY (`id`) ,
   INDEX `document` (`documentId` ASC) );
 /
@@ -224,3 +220,16 @@ CREATE  TABLE `DOCUMENTSUBTYPE` (
   `documentTypeId` INT NULL ,
   `deleted` INT NULL ,
   PRIMARY KEY (`id`) );
+/
+CREATE  TABLE `ATTACHMENT` (
+  `id` INT NOT NULL AUTO_INCREMENT ,
+  `ownerId` INT NOT NULL ,
+  `ownerType` VARCHAR(255) NOT NULL ,
+  `title` VARCHAR(255) NULL ,
+  `fileName` VARCHAR(100) NULL ,
+  `extension` VARCHAR(10) NULL ,
+  `contentType` VARCHAR(100) NULL ,
+  `data` MEDIUMBLOB NULL ,
+  `deleted` INT NULL ,
+  PRIMARY KEY (`id`), 
+  INDEX `ATT_IX_00` (`ownerId` ASC, `ownerType` ASC));

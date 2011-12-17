@@ -36,7 +36,6 @@
     where SIGNATURE.versionId = VERSION.id
     AND VERSION.documentId = #docID#
     AND VERSION.number = #versionNumber#
-    AND VERSION.spanishVersion = 1
     AND SIGNATURE.userId = SYSTEMUSER.id
     AND SYSTEMUSER.countryId = COUNTRY.id
     order by COUNTRY.name ASC

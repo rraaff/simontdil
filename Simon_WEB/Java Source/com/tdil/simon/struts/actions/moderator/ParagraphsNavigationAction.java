@@ -24,7 +24,7 @@ import com.tdil.simon.web.ResourceBundleCache;
 
 public class ParagraphsNavigationAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR};
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {

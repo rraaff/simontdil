@@ -37,25 +37,11 @@ public class UserVO extends SystemUser {
 			result.append(ResourceBundleCache.get("usuario", "moderador"));
 			insertSeparator = true;
 		}
-		if (this.isDesigner()) {
-			if (insertSeparator) {
-				result.append(", ");
-			}
-			result.append(ResourceBundleCache.get("usuario", "diseniador"));
-			insertSeparator = true;
-		}
 		if (this.isAssistant()) {
 			if (insertSeparator) {
 				result.append(", ");
 			}
 			result.append(ResourceBundleCache.get("usuario", "asistente"));
-			insertSeparator = true;
-		}
-		if (this.isTranslator()) {
-			if (insertSeparator) {
-				result.append(", ");
-			}
-			result.append(ResourceBundleCache.get("usuario", "traductor"));
 			insertSeparator = true;
 		}
 		return result.toString();

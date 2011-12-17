@@ -34,26 +34,6 @@ public class SystemUserFactory {
 		return sysUser;
 	}
 	
-	public static SystemUser getTranslatorActive() throws SQLException {
-		IBatisManager.beginTransaction();
-		// Create
-		SystemUser sysUser = SystemUserDAO.getUser("tran_act");
-		if (sysUser == null) {
-			Country c = CountryDAO.getCountryHost();
-			sysUser = new SystemUser();
-			sysUser.setName("tran_act");
-			sysUser.setTranslator(true);
-			sysUser.setCountryId(c.getId());
-			sysUser.setCountryDesc(c.getName());
-			sysUser.setUsername("tran_act");
-			sysUser.setPassword(CryptoUtils.getHashedValue("tran_act"));
-			sysUser.setDeleted(false);
-			SystemUserDAO.insertUser(sysUser);
-		}
-		IBatisManager.commitTransaction();
-		return sysUser;
-	}
-	
 	public static SystemUser getDelegate(String name) throws SQLException {
 		IBatisManager.beginTransaction();
 		// Create

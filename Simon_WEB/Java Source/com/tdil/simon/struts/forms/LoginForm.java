@@ -90,8 +90,8 @@ public class LoginForm extends ActionForm {
 				return;
 			}
 		} else {
-			if (!user.isAdministrator() && !user.isDesigner()) {
-				if (user.isAssistant() || user.isTranslator()) {
+			if (!user.isAdministrator()) {
+				if (user.isAssistant()) {
 					if (Site.NORMAL.equals(Site.getDELEGATE_SITE().getStatus())) {
 						throw new ValidationException(new ValidationError(ValidationErrors.NOT_IN_NEGOTIATION));
 					}

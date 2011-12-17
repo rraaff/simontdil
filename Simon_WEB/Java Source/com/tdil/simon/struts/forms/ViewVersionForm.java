@@ -116,18 +116,12 @@ public class ViewVersionForm extends ActionForm {
 	public List<SpanishAndPortuguesParagraph> getParagraphs() {
 		List<SpanishAndPortuguesParagraph> result = new ArrayList<SpanishAndPortuguesParagraph>();
 		int spanishMax = version.getParagraphs().size();
-		int portuguesMax = portugues.getParagraphs().size();
-		for (int i = 0; i < Math.max(spanishMax, portuguesMax); i++) {
+		for (int i = 0; i < spanishMax; i++) {
 			SpanishAndPortuguesParagraph spanishAndPortuguesParagraph = new SpanishAndPortuguesParagraph();
 			if (i < spanishMax)  {
 				Paragraph spanishPar = version.getParagraphs().get(i);
 				spanishAndPortuguesParagraph.setParagraphNumberForDisplay(spanishPar.getParagraphNumberForDisplay());
-				spanishAndPortuguesParagraph.setSpanishVersion(spanishPar.getParagraphText());
-			}
-			if (i < portuguesMax) {
-				Paragraph portuguesPar = portugues.getParagraphs().get(i);
-				spanishAndPortuguesParagraph.setParagraphNumberForDisplay(portuguesPar.getParagraphNumberForDisplay());
-				spanishAndPortuguesParagraph.setPortuguesVersion(portuguesPar.getParagraphText());
+				spanishAndPortuguesParagraph.setVersion(spanishPar.getParagraphText());
 			}
 			result.add(spanishAndPortuguesParagraph);
 		}

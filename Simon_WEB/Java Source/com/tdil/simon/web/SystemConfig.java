@@ -95,6 +95,10 @@ public class SystemConfig {
 						if (!ref.exists()) {
 							FileUtils.forceMkdir(ref);
 						}
+						File att = new File(getAttachmentStore());
+						if (!att.exists()) {
+							FileUtils.forceMkdir(att);
+						}
 						File sign = new File(getSignatureStore());
 						if (!sign.exists()) {
 							FileUtils.forceMkdir(sign);
@@ -199,6 +203,10 @@ public class SystemConfig {
 	
 	public static String getReferenceDocumentStore() {
 		return tempPath + "/ref/";
+	}
+	
+	public static String getAttachmentStore() {
+		return tempPath + "/att/";
 	}
 	
 	public static String getSignatureStore() {

@@ -1,7 +1,5 @@
 package com.tdil.simon.test;
 
-import java.sql.SQLException;
-
 import com.tdil.simon.data.ibatis.IBatisManager;
 import com.tdil.simon.data.ibatis.SystemUserDAO;
 import com.tdil.simon.data.model.SystemUser;
@@ -67,27 +65,6 @@ public class TestSystemUserABM extends SimonTest {
 			assertNotNull(emailObj);
 			assertTrue(emailObj.getMessage().contains(systemUser.getPassword()));
 		}
-		// lleno datos para designer
-		{
-			BrowserUtils.setInput("name", RandomUtils.randomString("Designer"));
-			String username = RandomUtils.randomString("des");
-			BrowserUtils.setInput("username", username);
-			String email = RandomUtils.randomEmail("des", "domain.com");
-			BrowserUtils.setInput("email", email);
-			BrowserUtils.setSetChecked("designer", true);
-			BrowserUtils.clickButton("operation", "Create");
-
-			// assert de que esta
-			IBatisManager.beginTransaction();
-			SystemUser systemUser = SystemUserDAO.getUser(username);
-			assertNotNull(systemUser);
-			assertTrue(systemUser.isDesigner());
-			IBatisManager.endTransaction();
-			// espera por el email del usuario
-			Email emailObj = EmailUtils.getEmailTo(email);
-			assertNotNull(emailObj);
-			assertTrue(emailObj.getMessage().contains(systemUser.getPassword()));
-		}
 		// lleno datos para assistant
 		{
 			BrowserUtils.setInput("name", RandomUtils.randomString("Assistant"));
@@ -103,27 +80,6 @@ public class TestSystemUserABM extends SimonTest {
 			SystemUser systemUser = SystemUserDAO.getUser(username);
 			assertNotNull(systemUser);
 			assertTrue(systemUser.isAssistant());
-			IBatisManager.endTransaction();
-			// espera por el email del usuario
-			Email emailObj = EmailUtils.getEmailTo(email);
-			assertNotNull(emailObj);
-			assertTrue(emailObj.getMessage().contains(systemUser.getPassword()));
-		}
-		// lleno datos para translator
-		{
-			BrowserUtils.setInput("name", RandomUtils.randomString("translator"));
-			String username = RandomUtils.randomString("trans");
-			BrowserUtils.setInput("username", username);
-			String email = RandomUtils.randomEmail("translator", "domain.com");
-			BrowserUtils.setInput("email", email);
-			BrowserUtils.setSetChecked("translator", true);
-			BrowserUtils.clickButton("operation", "Create");
-
-			// assert de que esta
-			IBatisManager.beginTransaction();
-			SystemUser systemUser = SystemUserDAO.getUser(username);
-			assertNotNull(systemUser);
-			assertTrue(systemUser.isTranslator());
 			IBatisManager.endTransaction();
 			// espera por el email del usuario
 			Email emailObj = EmailUtils.getEmailTo(email);

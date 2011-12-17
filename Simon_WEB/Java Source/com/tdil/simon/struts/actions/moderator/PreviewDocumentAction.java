@@ -17,7 +17,7 @@ import com.tdil.simon.web.ResourceBundleCache;
 
 public class PreviewDocumentAction extends SimonAction {
 
-	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR, UserTypeValidation.DESIGNER };
+	private static final UserTypeValidation[] permissions = new UserTypeValidation[] { UserTypeValidation.MODERATOR};
 
 	@Override
 	protected UserTypeValidation[] getPermissions() {
@@ -33,48 +33,26 @@ public class PreviewDocumentAction extends SimonAction {
 			request.getSession().setAttribute("paragraphNegotiated", "true");
 			return mapping.findForward("editParagraphs");
 		}
-		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
 			createDocumentForm.setVersionStatus(Version.DRAFT);
 			createDocumentForm.save();
 			return mapping.findForward("save");
 		}
 		
-		if (createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarBorrador"))) {
-			createDocumentForm.setVersionStatus(Version.DRAFT);
-			createDocumentForm.save();
-			return mapping.findForward("save");
-		}
-
-		if (!createDocumentForm.isDesigner() && !createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarYContinuar"))) {
-			createDocumentForm.setVersionStatus(Version.IN_NEGOTIATION);
-			createDocumentForm.save();
-			return mapping.findForward("save");
-		}
-		if (createDocumentForm.isDesigner() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarDisenio"))) {
-			//createDocumentForm.setVersionStatus(Version.FINAL);
-			createDocumentForm.save();
-			return mapping.findForward("designerHome");
-		}
 		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "ponerEnFirma"))) {
 			createDocumentForm.setVersionStatus(Version.IN_SIGN);
 			createDocumentForm.save();
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
-		if (!createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "finalizar"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "finalizar"))) {
 			createDocumentForm.setVersionStatus(Version.FINAL);
 			createDocumentForm.save();
 			DelegateSiteCache.refresh();
 			return mapping.findForward("goHome");
 		}
 		
-		if (createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "grabarIdiomaAlternativo"))) {
-			createDocumentForm.setVersionStatus(Version.FINAL);
-			createDocumentForm.save();
-			return mapping.findForward("designerHome");
-		}
-		
-		if (!createDocumentForm.isPortugues() && StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "consolidar"))) {
+		if (StringUtils.equalsUnescaped(createDocumentForm.getOperation(),ResourceBundleCache.get(getServletInfo(), "consolidar"))) {
 			return mapping.findForward("consolidate");
 		}
 		return null;

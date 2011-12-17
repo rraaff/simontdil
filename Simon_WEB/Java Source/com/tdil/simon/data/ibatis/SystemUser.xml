@@ -24,12 +24,10 @@
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
 		SYSTEMUSER.canSign,
-		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.assistant,
-		SYSTEMUSER.translator,
 		SYSTEMUSER.canComment,
 		SYSTEMUSER.deleted,
 		COUNTRY.NAME as countryName
@@ -53,12 +51,10 @@
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
 		SYSTEMUSER.canSign,
-		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.assistant,
-		SYSTEMUSER.translator,
 		SYSTEMUSER.canComment,
 		SYSTEMUSER.deleted,
 		COUNTRY.NAME as countryName
@@ -82,7 +78,6 @@
 		SYSTEMUSER.moderator,
 		SYSTEMUSER.delegate,
 		SYSTEMUSER.canSign,
-		SYSTEMUSER.designer,
 		SYSTEMUSER.passwordResetRequest,
 		SYSTEMUSER.temporaryPassword,
 		SYSTEMUSER.canProposeParagraph,
@@ -108,7 +103,6 @@
 		SYSTEMUSER.canProposeParagraph,
 		SYSTEMUSER.canComment,
 		SYSTEMUSER.assistant,
-		SYSTEMUSER.translator
 		from SYSTEMUSER
 		WHERE SYSTEMUSER.DELETED = 0
 		AND SYSTEMUSER.delegate = 1
@@ -192,12 +186,12 @@
 	<insert id="insertUser" parameterClass="SystemUser">
 		insert into SYSTEMUSER (
 		id,username,password,name,email, job, countryDesc,
-		countryId,administrator,moderator,delegate,canSign,designer,passwordResetRequest,temporaryPassword,canProposeParagraph,
-		assistant, translator, canComment, deleted
+		countryId,administrator,moderator,delegate,canSign,passwordResetRequest,temporaryPassword,canProposeParagraph,
+		assistant, canComment, deleted
 		) values (
 		#id#,#username#,#password#,#name#,#email#,#job#,#countryDesc#,
-		#countryId#,#administrator#,#moderator#,#delegate#,#canSign#,#designer#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,
-		#assistant#, #translator#, #canComment#, #deleted#
+		#countryId#,#administrator#,#moderator#,#delegate#,#canSign#,#passwordResetRequest#,#temporaryPassword#,#canProposeParagraph#,
+		#assistant#, #canComment#, #deleted#
 		)
   </insert>
 
@@ -213,11 +207,9 @@
 		moderator =	#moderator#,
 		delegate = #delegate#,
 		canSign = #canSign#,
-		designer = #designer#,
 		passwordResetRequest = #passwordResetRequest#,
 		canProposeParagraph = #canProposeParagraph#,
 		assistant = #assistant#, 
-		translator = #translator#,
 		canComment = #canComment#,
 		deleted = #deleted#
 		where

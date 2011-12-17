@@ -11,7 +11,6 @@ import com.tdil.simon.actions.response.ValidationException;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Version;
 import com.tdil.simon.struts.forms.CreateDocumentForm;
-import com.tdil.simon.struts.forms.ViewVersionForm;
 import com.tdil.simon.test.factory.DocumentTypeFactory;
 import com.tdil.simon.test.utils.RandomUtils;
 

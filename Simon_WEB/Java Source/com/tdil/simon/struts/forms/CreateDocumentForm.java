@@ -27,17 +27,14 @@ import com.tdil.simon.actions.validations.ParagraphValidation;
 import com.tdil.simon.actions.validations.ValidationErrors;
 import com.tdil.simon.actions.validations.VersionValidation;
 import com.tdil.simon.data.ibatis.DocumentDAO;
-import com.tdil.simon.data.ibatis.DocumentSubTypeDAO;
 import com.tdil.simon.data.ibatis.DocumentTypeDAO;
 import com.tdil.simon.data.ibatis.ParagraphDAO;
 import com.tdil.simon.data.ibatis.SiteDAO;
 import com.tdil.simon.data.ibatis.VersionDAO;
 import com.tdil.simon.data.model.Document;
-import com.tdil.simon.data.model.DocumentType;
 import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.Site;
 import com.tdil.simon.data.model.Version;
-import com.tdil.simon.data.valueobjects.DocumentSubTypeVO;
 import com.tdil.simon.data.valueobjects.DocumentTypeVO;
 import com.tdil.simon.database.TransactionProvider;
 import com.tdil.simon.utils.LoggerProvider;
@@ -58,11 +55,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	// live preview
 	private boolean livePreview = false;
 
-	// designer
-	private boolean designer = false;
-	
-	// portugues
-	private boolean portugues = false;
 	private int introductoryParagraphs = 0;
 	private int textParagraphs = 0;
 	
@@ -115,8 +107,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	// Consolidation
 	private boolean consolidated = false;
 	private String consolidateText;
-	
-	private String designerText;
 	
 	private static List<MonthOption> allMonths;
 	private static List<DayOption> allDays;
@@ -175,7 +165,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		this.principal = false;
 		this.versionStatus = Version.DRAFT;
 		this.isInNegotiation = false;
-		this.portugues = false;
 		this.documentDate = null;
 		this.topic = null;
 		this.tag1 = null;
@@ -394,7 +383,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public Object executeInTransaction(ActionForm form) throws SQLException, ValidationException {
-		if (!this.isPortugues() && this.isPrincipal()) {
+		if (this.isPrincipal()) {
 			DocumentDAO.markNotPrincipal(this.getDocumentSubTypeId());
 		}
 		if (this.getDocumentId() == 0) {
@@ -416,7 +405,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			version.setStatus(this.getVersionStatus());
 			fillVersion(version);
 			version.setNumber(this.version);
-			version.setSpanishVersion(!this.isPortugues());
 			this.setVersionId(VersionDAO.insertVersion(version));
 			insertParagraphs();
 		} else {
@@ -568,7 +556,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		version.setDocumentId(this.getDocumentId());
 		version.setName(this.getVersionName());
 		version.setUpToCommentDate(null);
-		version.setDesignerText(this.getDesignerText());
 		if (this.consolidated) {
 			version.setStatus(Version.CONSOLIDATED);
 			version.setDescription(this.getConsolidateText());
@@ -681,7 +668,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	
 	public void initWith(int versionID) throws SQLException {
 		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
-		setPortugues(false);
 		Version version = VersionDAO.getVersion(versionID);
 		Document document = DocumentDAO.getDocument(version.getDocumentId());
 		this.documentId = document.getId();
@@ -703,7 +689,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 			}
 		}
 		this.versionStatus = version.getStatus();
-		this.designerText = version.getDesignerText();
 		this.title = document.getTitle();
 		this.documentDate = document.getDocumentDate();
 		this.topic = document.getTopic();
@@ -778,7 +763,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 	}
 	
 	public boolean getIsInNegotiation() {
-		return isInNegotiation && !this.isPortugues() && !this.isDesigner();
+		return isInNegotiation;
 	}
 
 	public void setInNegotiation(boolean isInNegotiation) {
@@ -921,105 +906,7 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 		paragraphIds[this.getParagraph()] = 0;
 		paragraphDetails[this.getParagraph()] = "";
 	}
-
-	public void initForPortuguesWith(int versionID) throws SQLException {
-		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
-		setPortugues(true);
-		setDesigner(false);
-		// con esta saco datos base
-		Version version = VersionDAO.getVersion(versionID);
-		this.paragraphStatus = new boolean[1000];
-		this.paragraphTexts = new String[1000];
-		String initial = ResourceBundleCache.get("createDocument", "textoInicialParrafoIdiomaAlternativo");
-		{
-			List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
-			for (Paragraph p : paragraphs) {
-				paragraphTexts[p.getParagraphNumber() - 1] = initial;
-				paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
-				if (p.getParagraphNumber() < Paragraph.INTRODUCTION_LIMIT) {
-					this.introductoryParagraphs = this.introductoryParagraphs + 1;
-				} else {
-					this.textParagraphs = this.textParagraphs + 1;
-				}
-			}
-		}
-		// Con esta hago la edicion si existe
-		Version portuguesVersion = VersionDAO.getPortuguesVersionAnyStatus(versionID);
-		// TODO mantendra el mismo doc? hablar con pablo
-		Document document = DocumentDAO.getDocument(version.getDocumentId());
-		this.documentId = document.getId();
-		this.setPrincipal(document.isPrincipal());
-		if (portuguesVersion != null) {
-			this.versionId = portuguesVersion.getId();
-			this.versionName = portuguesVersion.getName();
-			this.designerText = portuguesVersion.getDesignerText();
-		} else {
-			this.designerText = "";
-			this.versionId = 0;
-			this.versionName = "";
-		}
-		this.version = version.getNumber();
-		this.versionStatus = version.getStatus();
-		this.title = document.getTitle();
-		this.documentDate = document.getDocumentDate();
-		this.topic = document.getTopic();
-		this.tag1 = document.getTag1();
-		this.tag2 = document.getTag2();
-		this.orderNumber = String.valueOf(document.getOrderNumber());
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(version.getUpToCommentDate());
-		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentSubTypeId = document.getDocumentSubTypeId();
-		this.introduction= document.getIntroduction();
-		this.paragraph = 0;
-		this.paragraphIds = new int[1000];
-		if (portuguesVersion != null) {
-			List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(portuguesVersion.getId());
-			for (Paragraph p : paragraphs) {
-				paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
-				// Esto lo maneja la version en castellano paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
-				paragraphIds[p.getParagraphNumber() - 1] = p.getId();
-			}
-		}
-		this.consolidated = false;
-		this.consolidateText= null;
-	}
 	
-	public boolean getCanAddParagraph() {
-		return !this.isPortugues() && !this.isDesigner();
-	}
-	
-	public boolean getCanDeleteParagraph() {
-		return !this.isPortugues() && !this.isDesigner();
-	}
-	
-	public boolean getTypeReadOnly() {
-		return this.isPortugues() || this.isDesigner();
-	}
-	
-	public boolean getDateLimitReadOnly() {
-		return this.isPortugues() || this.isDesigner();
-	}
-	
-	public boolean getPrincipalReadOnly() {
-		return this.isPortugues() || this.isDesigner();
-	}
-
-	public boolean isPortugues() {
-		return portugues;
-	}
-	
-	public boolean isPortuguesOrDesigner() {
-		return this.isPortugues() || this.isDesigner();
-	}
-
-	public void setPortugues(boolean portugues) {
-		this.portugues = portugues;
-	}
-
 	public int getIntroductoryParagraphs() {
 		return introductoryParagraphs;
 	}
@@ -1034,64 +921,6 @@ public class CreateDocumentForm extends ActionForm implements TransactionalActio
 
 	public void setTextParagraphs(int textParagraphs) {
 		this.textParagraphs = textParagraphs;
-	}
-
-	public void initForDesignWith(int versionID) throws SQLException {
-		this.setAllDocumentSubType(DocumentTypeDAO.selectAllDocumentTypeNotDeleted());
-		setPortugues(false);
-		setDesigner(true);
-		Version version = VersionDAO.getVersion(versionID);
-		Document document = DocumentDAO.getDocument(version.getDocumentId());
-		this.documentId = document.getId();
-		this.setPrincipal(document.isPrincipal());
-		this.versionId = version.getId();
-		this.version = version.getNumber();
-		this.versionName = version.getName();
-		this.versionStatus = version.getStatus();
-		this.designerText = version.getDesignerText();
-		this.title = document.getTitle();
-		this.documentDate = document.getDocumentDate();
-		this.topic = document.getTopic();
-		this.tag1 = document.getTag1();
-		this.tag2 = document.getTag2();
-		this.orderNumber = String.valueOf(document.getOrderNumber());
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(version.getUpToCommentDate());
-		//this.limitObservationsDay= String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
-		//this.limitObservationsMonth= String.valueOf(cal.get(Calendar.MONTH) + 1);
-		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-		this.limitObservations = dateFormat.format(cal.getTime());
-		this.documentSubTypeId = document.getDocumentSubTypeId();
-		this.introduction= document.getIntroduction();
-		this.paragraph = 0;
-		this.paragraphTexts = new String[1000];
-		this.paragraphStatus = new boolean[1000];
-		this.paragraphIds = new int[1000];
-		List<Paragraph> paragraphs = ParagraphDAO.selectAllParagraphsFor(versionID);
-		for (Paragraph p : paragraphs) {
-			paragraphTexts[p.getParagraphNumber() - 1] = p.getParagraphText();
-			paragraphStatus[p.getParagraphNumber() - 1] = p.isDeleted();
-			paragraphIds[p.getParagraphNumber() - 1] = p.getId();
-			paragraphDetails[p.getParagraphNumber() - 1] = p.getNumberDetail();
-		}
-		this.consolidated = false;
-		this.consolidateText= null;
-	}
-
-	public boolean isDesigner() {
-		return designer;
-	}
-
-	public void setDesigner(boolean designer) {
-		this.designer = designer;
-	}
-
-	public String getDesignerText() {
-		return designerText;
-	}
-
-	public void setDesignerText(String designerText) {
-		this.designerText = designerText;
 	}
 
 	public String getDestination() {
