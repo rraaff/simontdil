@@ -76,18 +76,15 @@ public class GetDelegateSiteStatus extends AjaxSimonAction implements Transactio
 					result.put("paragraphComment", "");
 					result.put("paragraphText", "");
 					result.put("paragraphVersion", loggedUserForm.getParagraphVersion());
-					result.put("hasTranslation", DelegateSiteCache.getPortuguesParagrah() != null ? "true" : "false");
 				} else {
 					result.put("paragraphNumber", String.valueOf(paragraph.getParagraphNumber()));
 					result.put("paragraphComment", paragraph.getNumberDetail());
 					result.put("paragraphText", String.valueOf(paragraph.getParagraphText()));
 					result.put("paragraphVersion", String.valueOf(paragraph.getVersionNumber()));
-					result.put("hasTranslation", DelegateSiteCache.getPortuguesParagrah() != null ? "true" : "false");
 				}
 			} else {
 				result.put("paragraphNumber", "0");
 				result.put("paragraphComment", "");
-				result.put("hasTranslation", "false");
 			}
 			return result;
 		}

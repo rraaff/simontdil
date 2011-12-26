@@ -56,12 +56,7 @@
 							</tr>
 							<tr>
 								<td width="192" align="right">
-									<logic:equal name="CreateDocumentForm" property="principalReadOnly" value="false">
-										<html:checkbox name="CreateDocumentForm" property="principal"/><html:errors property="principal" />
-									</logic:equal>
-									<logic:equal name="CreateDocumentForm" property="principalReadOnly" value="true">
-										<html:checkbox name="CreateDocumentForm" property="principal" disabled="true"/>
-									</logic:equal>
+									<html:checkbox name="CreateDocumentForm" property="principal"/><html:errors property="principal" />
 									</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="301" align="left"><%=ResourceBundleCache.get("createDocument", "documentoPrincipal")%></td>
@@ -73,12 +68,7 @@
 								<td align="right"><%=ResourceBundleCache.get("createDocument", "limiteObservaciones")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td width="7">
-									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="false">
-										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker'/><html:errors property="upToCommentDate" />
-									</logic:equal>
-									<logic:equal name="CreateDocumentForm" property="dateLimitReadOnly" value="true">
-										<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker' disabled="true"/>
-									</logic:equal>
+									<html:text name="CreateDocumentForm" property="limitObservations" styleClass='slimpicker'/><html:errors property="upToCommentDate" />
 								</td>
 <script>
 document.forms['CreateDocumentForm'].elements['limitObservations'].alt = "{dayChars:3,dayNames:['<%=ResourceBundleCache.get("fecha", "domingo")%>', '<%=ResourceBundleCache.get("fecha", "lunes")%>', '<%=ResourceBundleCache.get("fecha", "martes")%>', '<%=ResourceBundleCache.get("fecha", "miercoles")%>', '<%=ResourceBundleCache.get("fecha", "jueves")%>', '<%=ResourceBundleCache.get("fecha", "viernes")%>', '<%=ResourceBundleCache.get("fecha", "sabado")%>'],format:'dd-mm-yyyy',startDay:1,yearOrder:'desc',monthNames:['<%=ResourceBundleCache.get("fecha", "enero")%>', '<%=ResourceBundleCache.get("fecha", "febrero")%>','<%=ResourceBundleCache.get("fecha", "marzo")%>', '<%=ResourceBundleCache.get("fecha", "abril")%>', '<%=ResourceBundleCache.get("fecha", "mayo")%>', '<%=ResourceBundleCache.get("fecha", "junio")%>','<%=ResourceBundleCache.get("fecha", "julio")%>','<%=ResourceBundleCache.get("fecha", "agosto")%>', '<%=ResourceBundleCache.get("fecha", "septiembre")%>', 	'<%=ResourceBundleCache.get("fecha", "octubre")%>',	'<%=ResourceBundleCache.get("fecha", "noviembre")%>', '<%=ResourceBundleCache.get("fecha", "diciembre")%>'],yearRange:1,yearStart:2011}";
@@ -97,7 +87,6 @@ $$('input.slimpicker').each( function(el){
 								<td align="right" valign="top"><%=ResourceBundleCache.get("createDocument", "tipoDocumento")%>:</td>
 								<td width="7"><img src="images/null.gif" width="7" height="1"></td>
 								<td align="left">
-								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="false">
 									<html:select name="CreateDocumentForm" property="documentSubTypeId" styleClass="textfield_effect">
 										<logic:iterate name="CreateDocumentForm" property="allDocumentSubType" id="iterSubCat"> 
 											<% com.tdil.simon.data.valueobjects.DocumentTypeVO sub = (com.tdil.simon.data.valueobjects.DocumentTypeVO)iterSubCat; %>
@@ -108,19 +97,6 @@ $$('input.slimpicker').each( function(el){
 											<% } %>
 										</logic:iterate>
 									</html:select><html:errors property="type" />
-								</logic:equal>
-								<logic:equal name="CreateDocumentForm" property="typeReadOnly" value="true">
-									<html:select name="CreateDocumentForm" property="documentSubTypeId" styleClass="textfield_effect" disabled="true">
-										<logic:iterate name="CreateDocumentForm" property="allDocumentSubType" id="iterSubCat"> 
-											<% com.tdil.simon.data.valueobjects.DocumentTypeVO sub = (com.tdil.simon.data.valueobjects.DocumentTypeVO)iterSubCat; %>
-											<% if (sub.getParentId() == 0) { %>
-												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>"><%=sub.getName()%></option>
-											<% } else { %>
-												<option <%=sub.getSelected() ? "selected" : "" %> value="<%=sub.getId()%>">&nbsp;&nbsp;&nbsp;<%=sub.getName()%></option>
-											<% } %>
-										</logic:iterate>
-									</html:select>
-								</logic:equal>
 								</td>
 							</tr>
 							<tr>

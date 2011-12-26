@@ -143,37 +143,6 @@ function openDocs(){
 		}
 	}
 	
-	function viewPortugues() {
-		var pVersion = '<bean:write name="DelegateNegotiationForm" property="versionVO.version.id" />';
-		var jsonRequest = new Request.JSON({url: '<html:rewrite page="/getTranslatorObservationAction.st"/>', 
-			onSuccess: function(json, responseText){
-				var result = json.result;
-				   if ('OK' == result) {
-				   	if (json.exists == 'true') {
-				   		//alert(json.translation);
-				   		box = new LightFace({ 
-				 			title: '<%=ResourceBundleCache.get(getServletInfo(), "traduccionDeParrafo")%>', 
-							width: 700,
-							height: 380,
-				  			content: json.translation,
-				 			buttons: [
-								{
-									title: '<%=ResourceBundleCache.get(getServletInfo(), "cerrarTraduccionDeParrafo")%>',
-									event: function() { this.close(); }
-								}
-							]
-				 		});
-				 		box.open();
-				   	} else {
-				   		// nothing to do
-				   	}
-				   } else {
-					// nothing to do
-				}
-			}
-		}).post({'pNumber':lastNumber, 'pVersion':pVersion})
-	}
-	
 	function getDelegateSiteStatus() {
 		if (!inProgress || retries > 60) {
 			retries = 0;
@@ -196,11 +165,6 @@ function openDocs(){
 			        	<% } %>
 			        } else {
 			        	if (sitestatus == 'IN_NEGOTIATION') {
-			        		if (json.hasTranslation == 'true') {
-			        			document.getElementById("viewPortugues").disabled = false;
-			        		} else {
-			        			document.getElementById("viewPortugues").disabled = true;
-			        		}
 			        		var paragraphNumber = json.paragraphNumber;
 			        		var paragraphComment = json.paragraphComment;
 			        		var paragraphText = json.paragraphText;
@@ -376,7 +340,7 @@ function openDocs(){
 							</tr -->
 							<% } %>
 							<tr>
-								<td height="30" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "abrirDocumentos")%>" id="openDocs" onClick="openDocs();"><img src="images/null.gif" width="10" height="1"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "verEnIdiomaAlternativo")%>" id="viewPortugues" disabled="true" onClick="viewPortugues();"></td>
+								<td height="30" align="center" valign="bottom"><input type="button" value="<%=ResourceBundleCache.get(getServletInfo(), "abrirDocumentos")%>" id="openDocs" onClick="openDocs();"></td>
 							</tr>
 						</table>
 						<!-- corte tabla template -->

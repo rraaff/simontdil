@@ -20,6 +20,7 @@ public class TestDelegateABM extends SimonTest {
 		BrowserUtils.waitUntilPage("jsp-login");
 		BrowserUtils.setInput("username", "Admin");
 		BrowserUtils.setInput("password", "Admin");
+		
 		BrowserUtils.execute("doOperationSubmit('LoginForm','login-ingresar')");
 		BrowserUtils.waitUntilPage("jsp-adminHome");
 		// ir a system user

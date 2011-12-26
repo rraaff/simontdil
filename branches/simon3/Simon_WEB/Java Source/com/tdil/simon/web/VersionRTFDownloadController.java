@@ -45,7 +45,7 @@ public class VersionRTFDownloadController extends HttpServlet {
 			return;
 		}
 		ViewVersionForm viewForm = (ViewVersionForm)session.getAttribute("downloadRTF");
-		final VersionVO version = viewForm.isShowSpanish() ? viewForm.getVersion() : viewForm.getPortugues();
+		final VersionVO version = viewForm.getVersion();
 		if (version == null) {
 			return;
 		}

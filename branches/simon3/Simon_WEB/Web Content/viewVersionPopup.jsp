@@ -113,7 +113,7 @@ dw_Event.add( window, 'load', dw_fontSizerDX.init );
 
 </script>
 </head>
-<body>
+<body id="jsp-<%=getServletInfo()%>">
 <!-- div id="content" style="height:530px; border-top-width: 1px; border-bottom-width: 1px; border-top-style: solid; border-bottom-style: solid; border-top-color: #808080; border-top-color: #808080;"  -->
 <%@ include file="includes/leftContent.jsp" %>
 <td width="100%">

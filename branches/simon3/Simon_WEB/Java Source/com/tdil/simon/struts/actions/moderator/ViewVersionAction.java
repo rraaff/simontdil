@@ -112,11 +112,6 @@ public class ViewVersionAction extends SimonAction implements TransactionalActio
 			return new ActionForward("/downloadPDF.do", true);
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersion", "verIdiomaDefault"))) {
-			viewForm.setShowSpanish(true);
-			return mapping.findForward("viewSingleVersion");
-		}
-		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersion", "verIdiomaAlternativo"))) {
-			viewForm.setShowSpanish(false);
 			return mapping.findForward("viewSingleVersion");
 		}
 		if (StringUtils.equalsUnescaped(viewForm.getOperation(),ResourceBundleCache.get("viewFinalVersionSingle", "bajarRtf"))) {
