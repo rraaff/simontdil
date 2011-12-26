@@ -32,7 +32,6 @@ public class DelegateSiteCache {
 	public static String delegateSiteStatus;
 	public static Document documentUnderWork;
 	public static Paragraph negotiatedParagraph;
-	public static Observation portuguesParagrah;
 
 
 	public static List<Paragraph> allParagraph;
@@ -52,7 +51,6 @@ public class DelegateSiteCache {
 						negotiatedParagraph = ParagraphDAO.getParagraph(Site.getDELEGATE_SITE().getDataId());
 						if (negotiatedParagraph != null) {
 							allParagraph = ParagraphDAO.selectNotDeletedParagraphsFor(negotiatedParagraph.getVersionId());
-							refreshPortuguesParagraph(negotiatedParagraph);
 						} else {
 							allParagraph = new ArrayList<Paragraph>();
 						}
@@ -140,16 +138,6 @@ public class DelegateSiteCache {
 		}
 	}
 	
-	private static void refreshPortuguesParagraph(Paragraph paragraph) throws SQLException {
-		portuguesParagrah = ObservationDAO.getPortuguesFor(paragraph.getId());
-	}
-	
-	public static synchronized void setPortuguesParagraphIfCurrent(Observation observation) throws SQLException {
-		if (negotiatedParagraph != null && negotiatedParagraph.getId() == observation.getParagraphId()) {
-			portuguesParagrah = observation;
-		}
-	}
-	
 	public static synchronized void livePreview(String pId, String pText) {
 		if (negotiatedParagraph != null && String.valueOf(negotiatedParagraph.getId()).equals(pId)) {
 			negotiatedParagraph.setVersionNumber(negotiatedParagraph.getVersionNumber() + 1);
@@ -212,7 +200,4 @@ public class DelegateSiteCache {
 		return allParagraph;
 	}
 	
-	public static synchronized Observation getPortuguesParagrah() {
-		return portuguesParagrah;
-	}
 }

@@ -33,8 +33,6 @@ public class ViewVersionForm extends ActionForm {
 	private SystemUser user;
 	private String operation;
 	private VersionVO version;
-	private boolean showSpanish = true;
-	private VersionVO portugues;
 	private List observations;
 	private List<SignatureVO> signatures = new ArrayList<SignatureVO>();
 
@@ -42,14 +40,6 @@ public class ViewVersionForm extends ActionForm {
 		return version;
 	}
 	
-	public boolean getHasTranslation() {
-		return this.getPortugues() != null;
-	}
-	
-	public boolean hasTranslation() {
-		return this.getPortugues() != null;
-	}
-
 	public void setVersion(VersionVO version) {
 		this.version = version;
 	}
@@ -92,25 +82,10 @@ public class ViewVersionForm extends ActionForm {
 		if (version.isFinal()) {
 			setSignatures(SignatureDAO.selectSignaturesFor(version.getId()));
 		}
-		
-		Version translated = VersionDAO.getPortuguesVersion(versionID);
-		if (translated != null) {
-			VersionVO portuguesVersionVO = new VersionVO();
-			portuguesVersionVO.setVersion(translated);
-			portuguesVersionVO.setParagraphs(ParagraphDAO.selectNotDeletedParagraphsFor(translated.getId()));
-			portuguesVersionVO.setDocument(versionVO.getDocument());
-			setPortugues(portuguesVersionVO);
-		} else {
-			setPortugues(null);
-		}
 	}
 	
 	public List<Paragraph> getSelectedLanguageParagraphs() {
-		if (this.isShowSpanish()) {
-			return version.getParagraphs();
-		} else {
-			return portugues.getParagraphs();
-		}
+		return version.getParagraphs();
 	}
 	
 	public List<SpanishAndPortuguesParagraph> getParagraphs() {
@@ -285,22 +260,6 @@ public class ViewVersionForm extends ActionForm {
 
 	public boolean isFinal() {
 		return this.getVersion().getVersion().isFinal();
-	}
-
-	public VersionVO getPortugues() {
-		return portugues;
-	}
-
-	public void setPortugues(VersionVO portugues) {
-		this.portugues = portugues;
-	}
-
-	public boolean isShowSpanish() {
-		return showSpanish;
-	}
-
-	public void setShowSpanish(boolean showSpanish) {
-		this.showSpanish = showSpanish;
 	}
 
 }

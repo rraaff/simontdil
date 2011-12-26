@@ -170,54 +170,26 @@
 							</logic:equal>
 							
 							<!-- Boton Add before -->
-							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 								<html:submit property="operation">
 									<%=ResourceBundleCache.get(getServletInfo(), "agregarAntes")%>
 								</html:submit>
-							</logic:equal>
-							<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
-								<html:submit property="operation" disabled="true">
-									<%=ResourceBundleCache.get(getServletInfo(), "agregarAntes")%>
-								</html:submit>
-							</logic:equal>
 							
 							<logic:equal name="CreateDocumentForm" property="last" value="true">
-								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 									<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "agregar")%>
 									</html:submit>
-								</logic:equal>
-								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
-									<html:submit property="operation" disabled="true">
-										<%=ResourceBundleCache.get(getServletInfo(), "agregar")%>
-									</html:submit>
-								</logic:equal>
 							</logic:equal>
 							
 							<logic:notEqual name="CreateDocumentForm" property="last" value="true">
-								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="true">
 									<html:submit property="operation">
 										<%=ResourceBundleCache.get(getServletInfo(), "agregarDespues")%>
 									</html:submit>
-								</logic:equal>
-								<logic:equal name="CreateDocumentForm" property="canAddParagraph" value="false">
-									<html:submit property="operation" disabled="true">
-										<%=ResourceBundleCache.get(getServletInfo(), "agregarDespues")%>
-									</html:submit>
-								</logic:equal>
 							</logic:notEqual>
 							
 							<!-- Boton delete -->
-							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="true">
 								<html:submit property="operation">
 									<%=ResourceBundleCache.get(getServletInfo(), "borrar")%>
 								</html:submit>
-							</logic:equal>
-							<logic:equal name="CreateDocumentForm" property="canDeleteParagraph" value="false">
-								<html:submit property="operation" disabled="true">
-									<%=ResourceBundleCache.get(getServletInfo(), "borrar")%>
-								</html:submit>
-							</logic:equal>
 							
 							</td>
 						</tr>

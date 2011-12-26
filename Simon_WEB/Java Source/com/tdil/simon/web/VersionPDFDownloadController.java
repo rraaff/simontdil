@@ -45,7 +45,7 @@ public class VersionPDFDownloadController extends HttpServlet {
 			return;
 		}
 		ViewVersionForm viewForm = (ViewVersionForm)session.getAttribute("downloadPDF");
-		final VersionVO version = viewForm.isShowSpanish() ? viewForm.getVersion() : viewForm.getPortugues();
+		final VersionVO version = viewForm.getVersion();
 		if (version == null) {
 			return;
 		}

@@ -242,20 +242,10 @@ if ( dw_scrollObj.isSupported() ) {
 					<tr>
 						<td align="center">
 							<% if (isDelegate) { %>
-								<logic:equal name="ViewVersion" property="hasTranslation" value="true">
-									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link page="/viewFinalVersion.jsp"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
-								</logic:equal>
-								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
 									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToDelegateHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
-								</logic:equal >
 							<% } %>
 							<% if (isModerator) { %>
-							<logic:equal name="ViewVersion" property="hasTranslation" value="true">
-									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link page="/viewFinalVersion.jsp"><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
-								</logic:equal>
-								<logic:equal name="ViewVersion" property="hasTranslation" value="false">
 									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goToModeratorHome" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","volver")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
-								</logic:equal >
 							<% } %>
 						</td>
 					</tr>

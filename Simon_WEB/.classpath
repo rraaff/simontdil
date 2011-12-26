@@ -32,7 +32,6 @@
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/xml-apis-xerces-2.9.1.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/jfor-0.7.2rc1.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/logkit-1.0.1.jar"/>
-	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/eclipse-core-runtime-20070801.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/nekohtml.jar"/>
 	<classpathentry kind="lib" path="Web Content/WEB-INF/lib/xercesImpl-2.8.0.jar"/>
 	<classpathentry kind="output" path="Web Content/WEB-INF/classes"/>

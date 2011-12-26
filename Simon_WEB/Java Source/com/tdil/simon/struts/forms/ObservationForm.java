@@ -1,14 +1,9 @@
 package com.tdil.simon.struts.forms;
 
-import java.sql.SQLException;
 import java.util.Date;
 
 import org.apache.struts.action.ActionForm;
 
-import com.tdil.simon.data.ibatis.ObservationDAO;
-import com.tdil.simon.data.ibatis.ParagraphDAO;
-import com.tdil.simon.data.model.Observation;
-import com.tdil.simon.data.model.Paragraph;
 import com.tdil.simon.data.model.SystemUser;
 
 public class ObservationForm extends ActionForm {
@@ -66,33 +61,5 @@ public class ObservationForm extends ActionForm {
 	}
 	public void setParagraphNumberForDiplay(String paragraphNumberForDiplay) {
 		this.paragraphNumberForDiplay = paragraphNumberForDiplay;
-	}
-	public void addUpdatePortugues() throws SQLException {
-		Integer versionId = Integer.valueOf(this.getVersionId());
-		Integer number = Integer.valueOf(this.getParagraphNumber());
-		String text = this.getParagraphText();
-		Paragraph paragraph = ParagraphDAO.getParagraph(versionId, number);
-		Observation observation = ObservationDAO.getPortuguesFor(paragraph.getId());
-		if (observation != null) {
-			observation.setObservationText(text);
-			ObservationDAO.updatePortuguesText(observation);
-		} else {
-			observation = new Observation();
-			observation.setParagraphId(paragraph.getId());
-			observation.setPrivateObservation(true);
-			observation.setAddNewParagraph(false);
-			observation.setUserId(this.getUser().getId());
-			observation.setObservationText(text);
-			observation.setPortuguesTranslation(true);
-			observation.setDeleted(false);
-			ObservationDAO.insertObservation(observation);
-		}
-	}
-	public Observation getPortuguesTranslation() throws SQLException {
-		Integer versionId = Integer.valueOf(this.getVersionId());
-		Integer number = Integer.valueOf(this.getParagraphNumber());
-		Paragraph paragraph = ParagraphDAO.getParagraph(versionId, number);
-		Observation observation = ObservationDAO.getPortuguesFor(paragraph.getId());
-		return observation;
 	}
 }
