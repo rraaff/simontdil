@@ -2,8 +2,8 @@ package com.tdil.simon.web;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -14,8 +14,8 @@ public class ResourceBundleCache {
 	
 	private static ThreadLocal<String> userLanguage = new ThreadLocal<String>();
 
-	private static ConcurrentMap<String, String> cache = new ConcurrentHashMap<String, String>();
-	// TODO arreglar con map de map map...
+	// Map<String language, Map<String contexto, Map<String vale, valor>>>
+	private static Map<String, Map<String, Map<String, String>>> cache = new ConcurrentHashMap<String, Map<String, Map<String, String>>>();
 
 	public static void setUserLanguage(String selectedLanguage) {
 		userLanguage.set(selectedLanguage);
@@ -33,24 +33,35 @@ public class ResourceBundleCache {
 	}
 	
 	public static String get(String context, String key) {
-		String result = cache.get(getCurrentLanguage() + "-" + context + "-" + key);
-		if (result != null) {
-			result = StringUtils.replace(result, "\"", "&apos;");
-			result = StringUtils.replace(result, "\'", "&apos;");
-			result = StringUtils.replace(result, "<", "&lt;");
-			result = StringUtils.replace(result, ">", "&gt;");
-		}
-		return result;
+		return cache.get(getCurrentLanguage()).get(context).get(key);
 	}
 	
 	public static void put(String lang, String context, String key, String value) {
-		cache.put(lang + "-" + context + "-" + key, value);
+		String valueToCache = value;
+		if (valueToCache != null) {
+			valueToCache = StringUtils.replace(valueToCache, "\"", "&apos;");
+			valueToCache = StringUtils.replace(valueToCache, "\'", "&apos;");
+			valueToCache = StringUtils.replace(valueToCache, "<", "&lt;");
+			valueToCache = StringUtils.replace(valueToCache, ">", "&gt;");
+		}
+		Map<String, Map<String, String>> contextMap = cache.get(lang);
+		if (contextMap == null) {
+			contextMap = new ConcurrentHashMap<String, Map<String,String>>();
+			cache.put(lang, contextMap);
+		}
+		Map<String, String> keyMap = contextMap.get(context);
+		if (keyMap == null) {
+			keyMap = new ConcurrentHashMap<String, String>();
+			contextMap.put(context, keyMap);
+		}
+		keyMap.put(key, valueToCache);
 	}
 	
 	public static void reload() throws SQLException {
 		List<ResourceBundle> resourceBundleList = ResourceBundleDAO.selectAll();
+		cache.clear();
 		for (ResourceBundle resourceBundle : resourceBundleList) {
-			cache.put(resourceBundle.getRbLanguage() + "-" + resourceBundle.getRbContext() + "-" + resourceBundle.getRbKey(), resourceBundle.getRbValue());
+			put(resourceBundle.getRbLanguage(), resourceBundle.getRbContext(), resourceBundle.getRbKey(), resourceBundle.getRbValue());
 		}
 	}
 }
