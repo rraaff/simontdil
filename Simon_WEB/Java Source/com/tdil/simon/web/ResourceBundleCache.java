@@ -1,8 +1,11 @@
 package com.tdil.simon.web;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.StringUtils;
@@ -36,9 +39,24 @@ public class ResourceBundleCache {
 		return cache.get(getCurrentLanguage()).get(context).get(key);
 	}
 	
+	public static String get(String context, String key, String lang) {
+		return cache.get(lang).get(context).get(key);
+	}
+	
+	public static List<String> getAllLanguages() {
+		List<String> result = new ArrayList<String>();
+		result.addAll(cache.keySet());
+		Collections.sort(result);
+		return result;
+	}
+	
 	public static void put(String lang, String context, String key, String value) {
+		put(cache, lang, context, key, value, true);
+	}
+	
+	public static void put(Map<String, Map<String, Map<String, String>>> cache, String lang, String context, String key, String value, boolean escape) {
 		String valueToCache = value;
-		if (valueToCache != null) {
+		if (valueToCache != null && escape) {
 			valueToCache = StringUtils.replace(valueToCache, "\"", "&apos;");
 			valueToCache = StringUtils.replace(valueToCache, "\'", "&apos;");
 			valueToCache = StringUtils.replace(valueToCache, "<", "&lt;");
@@ -61,7 +79,25 @@ public class ResourceBundleCache {
 		List<ResourceBundle> resourceBundleList = ResourceBundleDAO.selectAll();
 		cache.clear();
 		for (ResourceBundle resourceBundle : resourceBundleList) {
-			put(resourceBundle.getRbLanguage(), resourceBundle.getRbContext(), resourceBundle.getRbKey(), resourceBundle.getRbValue());
+			put(cache, resourceBundle.getRbLanguage(), resourceBundle.getRbContext(), resourceBundle.getRbKey(), resourceBundle.getRbValue(), true);
 		}
 	}
+	
+	public static Map<String, List<String>> getResourceBundleForExport() throws SQLException {
+		Map<String, List<String>> result = new TreeMap<String, List<String>>();
+		List<ResourceBundle> resourceBundleList = ResourceBundleDAO.selectAll();
+		int i = 0;
+		for (ResourceBundle resourceBundle : resourceBundleList) {
+			List<String> keys = result.get(resourceBundle.getRbContext());
+			if (keys == null) {
+				keys = new ArrayList<String>();
+				result.put(resourceBundle.getRbContext(), keys);
+			}
+			if (!keys.contains(resourceBundle.getRbKey())) {
+				keys.add(resourceBundle.getRbKey());
+			}
+		}
+		return result;
+	}
 }
+
