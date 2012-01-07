@@ -1,8 +1,10 @@
 package com.tdil.simon.utils;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -11,10 +13,13 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
+import com.tdil.simon.data.ibatis.ResourceBundleDAO;
+import com.tdil.simon.data.model.ResourceBundle;
 import com.tdil.simon.web.ResourceBundleCache;
 
-public class ExportResourceBundlesAsExcel {
+public class ImportExportResourceBundles {
 
 	public static void exportResourceBundlesAsExcel(OutputStream outputStream) throws IOException, SQLException {
 		HSSFWorkbook wb = new HSSFWorkbook();
@@ -35,7 +40,18 @@ public class ExportResourceBundlesAsExcel {
 		wb.write(outputStream);
 	}
 	
-	private static void createRow(HSSFSheet sheet, int position, String context, String key, List<String> allLanguages) {
+	public static void importResourceBundlesFromExcel(InputStream inputStream) throws IOException, SQLException {
+		ResourceBundleExcelData data = new ResourceBundleExcelData();
+		data.readFrom(inputStream);
+		// TODO validaciones???
+		List<ResourceBundle> rbs = data.getResourceBundles();
+		for (ResourceBundle rb : rbs) {
+			ResourceBundleDAO.merge(rb);
+		}
+	}
+
+	
+	public static void createRow(HSSFSheet sheet, int position, String context, String key, List<String> allLanguages) {
 		HSSFRow excelRow = sheet.createRow(position);
 		HSSFCell cell = excelRow.createCell((short) 0);
 		cell.setCellValue(context);
@@ -49,7 +65,7 @@ public class ExportResourceBundlesAsExcel {
 		}
 	}
 
-	private static void createHeader(HSSFSheet sheet, List<String> allLanguages) {
+	public static void createHeader(HSSFSheet sheet, List<String> allLanguages) {
 		HSSFRow excelRow = sheet.createRow(0);
 		HSSFCell cell = excelRow.createCell((short) 0);
 		cell.setCellValue("context");
