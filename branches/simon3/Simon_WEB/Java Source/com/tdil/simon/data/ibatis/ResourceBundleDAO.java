@@ -17,6 +17,15 @@ public class ResourceBundleDAO {
 		return (List<String>)IBatisManager.sqlMapper.queryForList("selectAvailableLanguage");
 	}
 	
+	public static void merge(ResourceBundle resourceBundle) throws SQLException {
+		ResourceBundle rb = ResourceBundleDAO.getResourceBundle(resourceBundle.getRbLanguage(), resourceBundle.getRbContext(), resourceBundle.getRbKey());
+		if (rb == null) {
+			ResourceBundleDAO.insertResourceBundle(resourceBundle);
+		} else {
+			updateResourceBundle(resourceBundle);
+		}
+	}
+	
 	public static void updateResourceBundle(ResourceBundle resourceBundle) throws SQLException {
 		IBatisManager.sqlMapper.update("updateResourceBundle", resourceBundle);
 	}
