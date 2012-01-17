@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.poifs.filesystem.POIFSFileSystem;
 
 import com.tdil.simon.data.ibatis.ResourceBundleDAO;
 import com.tdil.simon.data.model.ResourceBundle;
@@ -21,9 +19,8 @@ import com.tdil.simon.web.ResourceBundleCache;
 
 public class ImportExportResourceBundles {
 
-	public static void exportResourceBundlesAsExcel(OutputStream outputStream) throws IOException, SQLException {
+	public static void exportResourceBundlesAsExcel(OutputStream outputStream, List<String> allLanguages) throws IOException, SQLException {
 		HSSFWorkbook wb = new HSSFWorkbook();
-		List<String> allLanguages = ResourceBundleCache.getAllLanguages();
 		HSSFSheet sheet = wb.createSheet("Translations");
 		createHeader(sheet, allLanguages);
 		Map<String, List<String>> toExport = ResourceBundleCache.getResourceBundleForExport();

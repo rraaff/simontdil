@@ -36,13 +36,15 @@ public class TestResourceBundles extends SimonTest {
 					if (exported.exists()) {
 						FileUtils.forceDelete(exported);
 					}
-					ImportExportResourceBundles.exportResourceBundlesAsExcel(new FileOutputStream(System.getProperty("java.io.tmpdir") + "/" + "rb.xls"));					
+					List<String> english = new ArrayList<String>();
+					english.add("English");
+					ImportExportResourceBundles.exportResourceBundlesAsExcel(new FileOutputStream(System.getProperty("java.io.tmpdir") + "/" + "en_rb.xls"), english);					
 					// TODO asserts o algo asi
 					 
 					String newLang = RandomUtils.randomString("EqKey-");
 					
 					ResourceBundleExcelData rbData = new ResourceBundleExcelData();
-					rbData.readFrom(new FileInputStream(System.getProperty("java.io.tmpdir") + "/" + "rb.xls"));
+					rbData.readFrom(new FileInputStream(System.getProperty("java.io.tmpdir") + "/" + "en_rb.xls"));
 					
 					FileOutputStream fout = new FileOutputStream(System.getProperty("java.io.tmpdir") + "/" + "rbimportadd.xls");
 					writeExcelDataForImportAdd(newLang, rbData, fout);

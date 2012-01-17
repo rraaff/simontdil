@@ -40,7 +40,12 @@ public class ResourceBundleCache {
 	}
 	
 	public static String get(String context, String key, String lang) {
-		return cache.get(lang).get(context).get(key);
+		Map<String, String> map = cache.get(lang).get(context);
+		if (map != null) {
+			return map.get(key);
+		} else {
+			return "";
+		}
 	}
 	
 	public static List<String> getAllLanguages() {
