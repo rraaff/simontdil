@@ -60,6 +60,17 @@
 	</servlet-mapping>
 	
 	<servlet>
+		<servlet-name>DownloadLanguages</servlet-name>
+		<servlet-class>com.tdil.simon.web.DownloadLanguages</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>DownloadLanguages</servlet-name>
+		<url-pattern>/downloadLanguages.do</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
 		<servlet-name>action</servlet-name>
 		<servlet-class>org.apache.struts.action.ActionServlet</servlet-class>
 		<init-param>

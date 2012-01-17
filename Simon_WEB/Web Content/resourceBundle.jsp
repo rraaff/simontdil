@@ -137,7 +137,7 @@ function showErrorMessage() {
 							</tr>
 							<tr>
 								<td colspan="12" height="25" align="center">
-									<div style="height:400px; overflow:auto;">
+									<div style="height:380px; overflow:auto;">
 									<table width="100%" border="0">
 										<tr class="d1">
 											<td><%=ResourceBundleCache.get(getServletInfo(), "lenguage")%></td>
@@ -155,6 +155,11 @@ function showErrorMessage() {
 										</logic:iterate>
 									</table>
 									</div>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="12" align="center">
+									<%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonStart()%><html:link action="/goExportResourceBundle" ><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonMiddle("botones","exportar")%></html:link><%=com.tdil.simon.web.ButtonGenerator.getNoOPButtonEnd()%>
 								</td>
 							</tr>
 						</table>					
